@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "reframe",
+  "version": "0.0.1",
+  "description": "Collection of configurable React components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thinktopography/reframe.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Think Topography, Inc.",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/thinktopography/reframe/issues"
+  },
+  "homepage": "https://github.com/thinktopography/reframe#readme"
+}
