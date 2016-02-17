@@ -3,9 +3,10 @@
   "name": "reframe",
   "version": "0.0.1",
   "description": "Collection of configurable React components",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel -d lib/ src/"
   },
   "repository": {
     "type": "git",

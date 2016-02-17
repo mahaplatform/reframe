@@ -1,5 +1,5 @@
 export default class Reframe {
-  confirm() {
+  static confirm() {
     console.log("Congratulations, Reframe is working.")
   }
 }
