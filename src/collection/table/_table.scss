@@ -1,0 +1,46 @@
+#toggle-columns-modal {
+  ul {
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    height: 250px;
+  }
+  li {
+    list-style: none;
+  }
+  label {
+    padding: 5px;
+    display: block;
+    cursor: pointer;
+    &:hover {
+      background: #F9F9F9;
+    }
+  }
+  input {
+    margin-right: 5px;
+  }
+}
+.collection-table {
+  .ui.table {
+    margin-top: 0 !important;
+  }
+  tr {
+    td:last-child {
+      i {
+        cursor: pointer;
+      }
+    }
+  }
+  .row-leave {
+    opacity: 1;
+  }
+  .row-leave.row-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+}
+@media (max-width: 800px) {
+  .secondary {
+    display: none;
+  }
+}
