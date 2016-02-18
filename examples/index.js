@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
 
 import CollectionExamples from './collection/index.jsx'
+import FormExamples from './form/index.jsx'
 
 class Example extends React.Component {
   render() {
@@ -46,6 +47,7 @@ const routes = (
     <Route path="/" component={Example}>
       <IndexRoute component={Index} />
       <Route path="collections" component={CollectionExamples} />
+      <Route path="forms" component={FormExamples} />
     </Route>
   </Route>
 )
