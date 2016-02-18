@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Collection from 'src/collection'
+import Logger from 'src/utils/logger'
 
 const Actions = {
-  reload: () => {console.log("Clicked Reload")},
-  export: () => {console.log("Clicked Export")},
-  delete: id => {console.log("Clicked Delete", id)},
-  edit: id => {console.log("Clicked Edit", id)},
-  sort: col => {console.log("Clicked column header", col)},
-  chooseColumns: () => {console.log("Clicked column chooser")}
+  reload: () => {Logger.log("Clicked Reload")},
+  export: () => {Logger.log("Clicked Export")},
+  delete: id => {Logger.log("Clicked Delete", id)},
+  edit: id => {Logger.log("Clicked Edit", id)},
+  sort: col => {Logger.log("Clicked column header", col)},
+  chooseColumns: () => {Logger.log("Clicked column chooser")}
 }
 
 export default class CollectionExamples extends React.Component {
