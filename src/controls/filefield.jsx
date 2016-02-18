@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Resumable from 'resumablejs'
 import when from 'when'
 import Config from 'src/utils/config'
+import Logger from 'src/utils/logger'
 
 class FilePreview extends React.Component {
   render() {
@@ -163,7 +164,7 @@ export default class FileField extends React.Component {
       this.r.on('complete', () => resolve(fileResults))
       this.r.on('error', reject)
       this.r.on('fileSuccess', (_file, r) => {
-        console.log(_file, r)
+        Logger.log(_file, r)
         let resp = JSON.parse(r)
         let assetId = _.get(resp, 'asset_id', null) || _.get(resp, 'id', null)
         fileResults.push(assetId)
@@ -178,9 +179,9 @@ export default class FileField extends React.Component {
         return assetIds
       }
     })
-    .tap(console.log.bind(console))
+    .tap(Logger.log.bind(Logger))
     .catch(failure => {
-      console.error(failure)
+      Logger.error(failure)
     })
   }
 
@@ -193,18 +194,18 @@ export default class FileField extends React.Component {
   }
 
   onFileSuccess(file, serverResponse) {
-    console.log(file, serverResponse)
+    Logger.log(file, serverResponse)
   }
 
   onFileError(file, serverResponse) {
-    console.log(file, serverResponse)
+    Logger.log(file, serverResponse)
     this.setState({
       filesFailed: this.state.filesFailed.concat([file.uniqueIdentifier])
     })
   }
 
   onFileProgress(file) {
-    console.log(file.fileName, file.progress())
+    Logger.log(file.fileName, file.progress())
     $(this.refs.fileTable).find(`#${file.uniqueIdentifier}`).progress({percent: Math.floor(file.progress() * 100)})
     //this.forceUpdate()
   }

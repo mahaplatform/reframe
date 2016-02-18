@@ -3,6 +3,7 @@ import React from 'react'
 import Cell from './cell.jsx'
 import {Link} from 'react-router'
 import _ from 'lodash'
+import Logger from 'src/utils/logger'
 
 export default class Row extends React.Component {
 
@@ -81,7 +82,7 @@ export default class Row extends React.Component {
         var handlerFn = action.handler
       }
       else {
-        console.error(`NOTICE: Handlers for row actions must be a function or a string
+        Logger.error(`NOTICE: Handlers for row actions must be a function or a string
         matching the name of a known Flux action. Type ${typeof action.handler} given.`)
       }
       if(action.confirm === true) {
