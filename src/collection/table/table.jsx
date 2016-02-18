@@ -40,7 +40,7 @@ class Table extends React.Component {
   }
 
   componentWillUnmount() {
-    _.each(this.listeners, actionListener.removeActionListener.bind(actionListener))
+    //_.each(this.listeners, actionListener.removeActionListener.bind(actionListener))
   }
 
   handleSort(key) {

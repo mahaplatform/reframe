@@ -15,8 +15,8 @@ export default class ExportModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      availableFields: _(props.fields).filter(function(item, index) { return !_.include(props.visible, index) }).value(),
-      selectedFields: _(props.fields).filter(function(item, index) { return _.include(props.visible, index) }).value()
+      availableFields: _(props.fields).filter(function(item, index) { return !_.includes(props.visible, index) }).value(),
+      selectedFields: _(props.fields).filter(function(item, index) { return _.includes(props.visible, index) }).value()
     }
   }
 
