@@ -1,0 +1,13 @@
+.ui.form .ui.horizontal.segments {
+  .ui.segment:first-child { background: #FFF; }
+  .ui.segment:last-child {
+    flex: none !important;
+    background: #F9F9F9;
+    width: 300px !important;
+  }
+}
+.dateselect {
+  .dropdown {
+    min-width: 0 !important;
+  }
+}
