@@ -90,6 +90,7 @@ class Form extends React.Component {
             return (<Section
               {...section}
               borderless={this.props.borderless}
+              onFieldChange={this.props.onFieldChange}
               formId={this.props.id}
               ref={`section_${index}`}
               key={`section_${index}`} />

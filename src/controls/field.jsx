@@ -100,16 +100,15 @@ export default class Field extends React.Component {
           // Lookup a known field type if the type is a string
           if(_.isString(this.props.type)) {
             let Control = _.get(standardControls, this.props.type);
-            ;
             return (
-              <Control ref='control' {...this.props} onChange={this.handleChange.bind(this)}/>
+              <Control ref='control' {...this.props} onChange={this.props.onChange}/>
             )
           }
 
           // Use a supplied field type if there's an object given
           if(!_.isUndefined(this.props.type)) {
             let Field = this.props.type
-            return <Field {...this.props} ref='control' onChange={this.handleChange.bind(this)}/>
+            return <Field {...this.props} ref='control' onChange={this.props.onChange}/>
           }
         })()}
 
@@ -138,7 +137,7 @@ export default class Field extends React.Component {
     if(this.props.type !== 'fields') {
       //FormActions.change(this.props.formId, this.props.code, this.getValue())
     }
-    if(this.props.onChange) {
+    if(this.props.onChange && this.props.type !== 'fields') {
       this.props.onChange(this.props.code, this.getValue());
     }
   }

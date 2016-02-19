@@ -21,6 +21,8 @@ export default class FormExamples extends React.Component {
   getForm() {
     return {
       title: 'Here\'s a Form',
+      onFieldChange: (field, data) => Logger.info(field, data),
+      onSubmit: data => Logger.info(data),
       sections: [
         { fields: [
           { label: 'Name', type: "fields", required: true, fields: [
