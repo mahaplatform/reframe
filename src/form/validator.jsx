@@ -54,8 +54,8 @@ export default class ValidatedForm extends React.Component {
       {...this.props}
       ref="form"
       sections={this.bindFieldMessages(this.state.errors)}
-      onSubmit={::this.onSubmit}
-      onFieldChange={::this.onFieldChange}
+      onSubmit={this.onSubmit.bind(this)}
+      onFieldChange={this.onFieldChange.bind(this)}
       />)
   }
 

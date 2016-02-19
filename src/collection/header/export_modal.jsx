@@ -22,7 +22,7 @@ export default class ExportModal extends Component {
 
   render() {
     return(
-      <div className="ui dimmer modals visible active page transition" onClick={::this.cancel}>
+      <div className="ui dimmer modals visible active page transition" onClick={this.cancel.bind(this)}>
         <div ref="modal" className="ui small modal animating transition active" key="export_modal" style={this.getStyle()} onClick={e => e.stopPropagation()}>
           <div className="header">Export Data</div>
           <div className="content">
@@ -56,14 +56,14 @@ export default class ExportModal extends Component {
             </div>
           </div>
           <div className="actions">
-            <div className="ui negative button" onClick={::this.cancel}>Cancel</div>
+            <div className="ui negative button" onClick={this.cancel.bind(this)}>Cancel</div>
             <div className="ui positive dropdown button" ref="dropdown">
               <span className="text">Export</span>
               <i className="dropdown icon"></i>
               <div className="menu">
-                <div className="item" onClick={::this.exportCsv}>To CSV</div>
-                <div className="item" onClick={::this.exportTsv}>To TSV</div>
-                <div className="item" onClick={::this.exportXls}>To XLS</div>
+                <div className="item" onClick={this.exportCsv.bind(this)}>To CSV</div>
+                <div className="item" onClick={this.exportTsv.bind(this)}>To TSV</div>
+                <div className="item" onClick={this.exportXls.bind(this)}>To XLS</div>
               </div>
             </div>
           </div>
