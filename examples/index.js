@@ -4,6 +4,7 @@ import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
 
 import CollectionExamples from './collection/index.jsx'
 import FormExamples from './form/index.jsx'
+import ModalExamples from './modal/index.jsx'
 
 class Example extends React.Component {
   render() {
@@ -29,7 +30,7 @@ class ExampleLinks extends React.Component {
           <div className="ui pointing menu">
             <Link to="/collections" className="ui item" activeClass="active">Collections</Link>
             <Link to="/forms" className="ui item" activeClass="active">Forms</Link>
-            <Link to="/containers" className="ui item" activeClass="active">Containers</Link>
+            <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
             <Link to="/menus" className="ui item" activeClass="active">Menus</Link>
             <Link to="/tasks" className="ui item" activeClass="active">Tasks</Link>
           </div>
@@ -48,6 +49,7 @@ const routes = (
       <IndexRoute component={Index} />
       <Route path="collections" component={CollectionExamples} />
       <Route path="forms" component={FormExamples} />
+      <Route path="modals" component={ModalExamples} />
     </Route>
   </Route>
 )
