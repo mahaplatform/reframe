@@ -23,7 +23,7 @@ class Thead extends React.Component {
             if(_.includes(this.props.visible, index)) {
               let classes = (!column.primary) ? ['secondary'] : []
               if(column.key === this.props.sort.key) {
-                if(this.props.sort.order == 'descending') {
+                if(this.props.sort.order == 'descending' || this.props.sort.order == 'desc') {
                   classes.push('sorted descending')
                 } else  {
                   classes.push('sorted ascending')

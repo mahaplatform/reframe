@@ -8,7 +8,9 @@ const Actions = {
   export: () => {Logger.log("Clicked Export")},
   delete: id => {Logger.log("Clicked Delete", id)},
   edit: id => {Logger.log("Clicked Edit", id)},
-  sort: col => {Logger.log("Clicked column header", col)},
+  sort: col => {
+    Logger.log("Clicked column header", col)
+  },
   chooseColumns: () => {Logger.log("Clicked column chooser")}
 }
 
@@ -19,8 +21,19 @@ export default class CollectionExamples extends React.Component {
     this.state = {
       table: {
         view: 'table',
-        sort: { key: 'first_name', order: 'ascending' }
-      }
+        sort: { key: 'first_name', order: 'asc' }
+      },
+      records: [
+        { id: 1, first_name: "Bob", last_name: "Belcher" },
+        { id: 2, first_name: "Linda", last_name: "Belcher" },
+        { id: 3, first_name: "Tina", last_name: "Belcher" },
+        { id: 4, first_name: "Gene", last_name: "Belcher" },
+        { id: 5, first_name: "Louise", last_name: "Belcher" },
+        { id: 6, first_name: "Hugo", last_name: "Habercore" },
+        { id: 7, first_name: "Ron", last_name: "Lynch" },
+        { id: 10, first_name: "Calvin", last_name: "Fischoeder" },
+        { id: 11, first_name: "Felix", last_name: "Fischoeder" }
+      ]
     }
   }
 
@@ -40,17 +53,7 @@ export default class CollectionExamples extends React.Component {
         { label: 'First Name', key: 'first_name', primary: true, visible: true },
         { label: 'Last Name', key: 'last_name', primary: true, visible: true }
       ],
-      records: [
-        { id: 1, first_name: "Bob", last_name: "Belcher" },
-        { id: 2, first_name: "Linda", last_name: "Belcher" },
-        { id: 3, first_name: "Tina", last_name: "Belcher" },
-        { id: 4, first_name: "Gene", last_name: "Belcher" },
-        { id: 5, first_name: "Louise", last_name: "Belcher" },
-        { id: 6, first_name: "Hugo", last_name: "Habercore" },
-        { id: 7, first_name: "Ron", last_name: "Lynch" },
-        { id: 10, first_name: "Calvin", last_name: "Fischoeder" },
-        { id: 11, first_name: "Felix", last_name: "Fischoeder" }
-      ],
+      records: this.getSortedRecords(),
       sort: this.state.table.sort,
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: Actions.reload },
@@ -60,9 +63,25 @@ export default class CollectionExamples extends React.Component {
         { key: 'delete', icon: 'times', label: 'delete', handler: Actions.delete },
         { key: 'edit', icon: 'times', label: 'edit', handler: Actions.edit }
       ],
-      onClickColumnHeader: Actions.sort,
+      onClickColumnHeader: col => {
+        Logger.log("Clicked column header", col)
+        if(col === this.state.table.sort.key) {
+          const order = this.state.table.sort.order === 'asc' ? 'desc' : 'asc'
+          const key = this.state.table.sort.key
+          this.setState({table: {...this.state.table, sort: {key, order}}})
+        }
+        else {
+          const order = 'asc'
+          const key = col
+          this.setState({table: {...this.state.table, sort: {key, order}}})
+        }
+      },
       onClickColumnChooser: Actions.chooseColumns
     }
+  }
+
+  getSortedRecords() {
+    return _.orderBy(this.state.records, [this.state.table.sort.key], [this.state.table.sort.order])
   }
 }
 
