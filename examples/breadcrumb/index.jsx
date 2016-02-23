@@ -6,9 +6,6 @@ import Logger from 'src/utils/logger'
 export default class FormExamples extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      modalEnabled: false
-    }
   }
 
   render() {
