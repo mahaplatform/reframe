@@ -14,7 +14,7 @@ export default class FormExamples extends React.Component {
   render() {
     return (
       <div>
-        <h1>Forms</h1>
+        <h1>Modals</h1>
         <button className="ui large primary button" onClick={this.showModal.bind(this)}>Show Modal</button>
 
         {this.state.modalEnabled ? this.getModal() : null}
