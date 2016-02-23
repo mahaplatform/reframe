@@ -6,7 +6,7 @@
   "main": "lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "babel -d lib/ src/"
+    "compile": "babel -d lib/ src/; sass -Cq --scss --compass --sourcemap=none src/reframe.scss lib/reframe.css"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/thinktopography/reframe#readme",
   "devDependencies": {
-    "babel": "^6.5.2",
+    "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-plugin-transform-class-properties": "^6.5.2",
     "babel-plugin-transform-object-rest-spread": "^6.5.0",
