@@ -7,6 +7,7 @@ import FormExamples from './form/index.jsx'
 import ModalExamples from './modal/index.jsx'
 import BreadcrumbExamples from './breadcrumb/index.jsx'
 import DetailExamples from './details/index.jsx'
+import FetchContainerExamples from './containers/fetch.jsx'
 
 class Example extends React.Component {
   render() {
@@ -35,7 +36,13 @@ class ExampleLinks extends React.Component {
             <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
             <Link to="/breadcrumbs" className="ui item" activeClass="active">Breadcrumbs</Link>
             <Link to="/details" className="ui item" activeClass="active">Details</Link>
-            <Link to="/tasks" className="ui item" activeClass="active">Tasks</Link>
+            <div className="ui dropdown item" activeClass="active">
+              Containers
+              <i className="dropdown icon"></i>
+              <div className="menu">
+                <Link to="/containers/fetch" className="item">Fetch</Link>
+              </div>
+            </div>
           </div>
           <div className="segment">
             {this.props.children}
@@ -55,8 +62,13 @@ const routes = (
       <Route path="modals" component={ModalExamples} />
       <Route path="breadcrumbs" component={BreadcrumbExamples} />
       <Route path="details" component={DetailExamples} />
+      <Route path="containers/fetch" component={FetchContainerExamples} />
     </Route>
   </Route>
 )
+
+window.React = React
+window.ReactDOM = ReactDOM
+window._ = _
 
 ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('examples'))
