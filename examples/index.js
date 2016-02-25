@@ -72,3 +72,5 @@ window.ReactDOM = ReactDOM
 window._ = _
 
 ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('examples'))
+
+$('.dropdown').dropdown()
