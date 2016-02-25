@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Row from "./row.jsx";
+import Row from './row.js';
 import _ from 'lodash'
 
 class Tbody extends React.Component {
