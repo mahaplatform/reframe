@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import BatchActions from './batch_actions.jsx'
-import CollectionActions from './collection_actions.jsx'
+import BatchActions from './batch_actions.js'
+import CollectionActions from './collection_actions.js'
 import _ from 'lodash'
 
 class Header extends React.Component {

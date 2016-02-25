@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Section from '../controls/section.jsx'
+import Section from '../controls/section.js'
 import _ from 'lodash'
 import when from 'when'
 let whenKeys = require('when/keys')

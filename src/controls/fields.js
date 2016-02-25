@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Field from './field.jsx'
+import Field from './field.js'
 import _ from 'lodash'
 
 class Fields extends React.Component {

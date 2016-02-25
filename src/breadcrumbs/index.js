@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Breadcrumb from './breadcrumb.jsx'
+import Breadcrumb from './breadcrumb.js'
 
 class Breadcrumbs extends React.Component {
 

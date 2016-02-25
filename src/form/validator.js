@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Validator from 'src/utils/validator'
 import when from 'when'
 import Logger from 'src/utils/logger'
-import Form from './form.jsx'
+import Form from './form.js'
 
 export default class ValidatedForm extends React.Component {
   static defaultProps = {

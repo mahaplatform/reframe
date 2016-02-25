@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Header from './header/header.jsx'
-import Table from './table/table.jsx'
-import Card from './card/cards.jsx'
+import Header from './header/header.js'
+import Table from './table/table.js'
+import Card from './card/cards.js'
 import _ from 'lodash'
 
 export default class Collection extends React.Component {

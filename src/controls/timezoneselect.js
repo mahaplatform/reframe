@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Select from './select.jsx'
+import Select from './select.js'
 
 class Timezoneselect extends React.Component {
 

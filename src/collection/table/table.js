@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Thead from './thead.jsx'
-import Tbody from './tbody.jsx'
+import Thead from './thead.js'
+import Tbody from './tbody.js'
 import _ from 'lodash'
 
 class Table extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import Card from './card.jsx'
+import Card from './card.js'
 
 class Cards extends React.Component {
 

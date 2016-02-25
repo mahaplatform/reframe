@@ -1,13 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Select from './select.jsx'
+import Select from './select.js'
 
-class NumberSelect extends React.Component {
+class MonthSelect extends React.Component {
 
   static propTypes = {
     code: React.PropTypes.string,
-    start: React.PropTypes.number.isRequired,
-    end: React.PropTypes.number.isRequired,
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     defaultValue: React.PropTypes.string
@@ -20,20 +18,25 @@ class NumberSelect extends React.Component {
     defaultValue: ''
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {value: props.defaultValue || null}
+  }
+
   render() {
+    let months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     let options = [];
-    let start = parseInt(this.props.start)
-    let end = parseInt(this.props.end)
-    if(start < end) {
-      for(var i = start; i <= end; i++) {
-        let value = (this.props.zeroPad) ? ('0' + parseInt(i)).slice (-2) : i
-        options.push({key: value, value: value})
+    for(var i in months) {
+      let m = ('0' + (parseInt(i)+1)).slice (-2)
+      let month = months[i];
+      if(this.props.show == 'both') {
+        var value = `${month} (${m})`
+      } else if(this.props.include == 'number') {
+        var value = m
+      } else {
+        var value = month
       }
-    } else {
-      for(var i = start; i >= end; i--) {
-        let value = (this.props.zeroPad) ? ('0' + parseInt(i)).slice (-2) : i
-        options.push({key: value, value: value})
-      }
+      options.push({key: m, value: value});
     }
     return <Select {...this.props} options={options} ref="control" />
   }
@@ -56,4 +59,4 @@ class NumberSelect extends React.Component {
 
 }
 
-export default NumberSelect
+export default MonthSelect

@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import MonthSelect from './monthselect.jsx'
-import NumberSelect from './numberselect.jsx'
+import MonthSelect from './monthselect.js'
+import NumberSelect from './numberselect.js'
 import moment from 'moment'
 import SemanticClasses from 'src/utils/semantic_classes'
 
