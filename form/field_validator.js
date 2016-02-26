@@ -16,7 +16,7 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _validator = require('src/utils/validator');
+var _validator = require('../utils/validator');
 
 var _validator2 = _interopRequireDefault(_validator);
 
@@ -24,7 +24,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _field = require('components/controls/field.js');
+var _field = require('../controls/field.js');
 
 var _field2 = _interopRequireDefault(_field);
 

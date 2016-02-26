@@ -20,7 +20,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _validator = require('src/utils/validator');
+var _validator = require('../utils/validator');
 
 var _validator2 = _interopRequireDefault(_validator);
 
@@ -28,13 +28,13 @@ var _when = require('when');
 
 var _when2 = _interopRequireDefault(_when);
 
-var _logger = require('src/utils/logger');
+var _logger = require('../utils/logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 
-var _form = require('./form.js');
+var _index = require('./index.js');
 
-var _form2 = _interopRequireDefault(_form);
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -90,7 +90,7 @@ var ValidatedForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_form2.default, _extends({}, this.props, {
+      return _react2.default.createElement(_index2.default, _extends({}, this.props, {
         ref: 'form',
         sections: this.bindFieldMessages(this.state.errors),
         onSubmit: this.onSubmit.bind(this),
