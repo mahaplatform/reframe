@@ -28,7 +28,7 @@ var _keys = require('when/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _api = require('src/api');
+var _api = require('../../api');
 
 var _api2 = _interopRequireDefault(_api);
 

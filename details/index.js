@@ -16,7 +16,7 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _format = require('src/format');
+var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
