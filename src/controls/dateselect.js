@@ -4,7 +4,7 @@ import _ from 'lodash'
 import MonthSelect from './monthselect.js'
 import NumberSelect from './numberselect.js'
 import moment from 'moment'
-import SemanticClasses from 'src/utils/semantic_classes'
+import SemanticClasses from '../utils/semantic_classes'
 
 const IGNORED = Symbol('Ignored')
 

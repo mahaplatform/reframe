@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {diceroll} from 'utils/random'
+import {diceroll} from './random'
 
 /**
  * Global caching utility

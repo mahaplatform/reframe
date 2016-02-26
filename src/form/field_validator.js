@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Validator from 'src/utils/validator'
+import Validator from '../utils/validator'
 import _ from 'lodash'
-import Field from 'components/controls/field.js'
+import Field from '../controls/field.js'
 
 const EMPTY = Symbol()
 const VALID = Symbol()

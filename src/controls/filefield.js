@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Resumable from 'resumablejs'
 import when from 'when'
-import Config from 'src/utils/config'
-import Logger from 'src/utils/logger'
+import Config from '../utils/config'
+import Logger from '../utils/logger'
 
 class FilePreview extends React.Component {
   render() {
