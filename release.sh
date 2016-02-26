@@ -3,7 +3,7 @@ mkdir _release
 git clone -b release git@github.com:thinktopography/reframe _release
 cd _release
 cp -f ../package.json ./package.json
-babel -d ./ ../src/
+../node_modules/babel-cli/bin/babel.js -d ./ ../src/
 sass -Cq --scss --compass --sourcemap=none ../src/reframe.scss ./reframe.css
 
 VER=`cat package.json | sed -n 's/.*"version": "\(.*\)".*/\1/p'`
