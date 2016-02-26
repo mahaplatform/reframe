@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import when from 'when'
 import whenKeys from 'when/keys'
-import API from 'src/api'
+import API from '../../api'
 
 const UNINITIALIZED = 'uninitialized'
 const AWAITING      = 'awaiting'

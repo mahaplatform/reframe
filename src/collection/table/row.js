@@ -3,7 +3,7 @@ import React from 'react'
 import Cell from './cell.js'
 import {Link} from 'react-router'
 import _ from 'lodash'
-import Logger from 'src/utils/logger'
+import Logger from '../../utils/logger'
 
 export default class Row extends React.Component {
 
