@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+export NODE_PATH=../src/
+export NODE_ENV=production
 mkdir _release
 git clone -b release git@github.com:thinktopography/reframe _release
 cd _release
