@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 export NODE_PATH=../src/
 export NODE_ENV=development
-mkdir _release
+mkdir _cycle
 git clone -b cycle git@github.com:thinktopography/reframe _cycle
 cd _cycle
 cp -f ../package.json ./package.json
