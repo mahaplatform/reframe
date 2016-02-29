@@ -32,7 +32,7 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _semantic_classes = require('utils/semantic_classes');
+var _semantic_classes = require('../utils/semantic_classes');
 
 var _semantic_classes2 = _interopRequireDefault(_semantic_classes);
 

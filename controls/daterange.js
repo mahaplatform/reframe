@@ -22,7 +22,7 @@ var _select = require('./select.js');
 
 var _select2 = _interopRequireDefault(_select);
 
-var _quickdate = require('utils/quickdate');
+var _quickdate = require('../utils/quickdate');
 
 var _quickdate2 = _interopRequireDefault(_quickdate);
 
