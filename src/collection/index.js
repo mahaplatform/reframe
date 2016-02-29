@@ -56,7 +56,8 @@ export default class Collection extends React.Component {
     onCheck: _.noop,
     onCheckAll: _.noop,
     onClickColumnHeader: _.noop,
-    onClickColumnChooser: _.noop
+    onClickColumnChooser: _.noop,
+    sort: { key: '', order: 'desc' }
   }
 
   constructor(props) {
