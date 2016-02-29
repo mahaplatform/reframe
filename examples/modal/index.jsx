@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ModalWindow from 'src/modal/window'
-import Logger from 'src/utils/logger'
+import ModalWindow from 'modal/window'
+import Logger from 'utils/logger'
 
 export default class FormExamples extends React.Component {
   constructor(props) {

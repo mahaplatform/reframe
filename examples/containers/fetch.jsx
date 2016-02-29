@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import FetchContainer from 'src/containers/fetch'
+import FetchContainer from 'containers/fetch'
 import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
-import Details from 'src/details'
-import Logger from 'src/utils/logger'
-import {clientFactory} from 'src/api'
+import Details from 'details'
+import Logger from 'utils/logger'
+import {clientFactory} from 'api'
 
 const exampleClient = clientFactory({ defaultRequest: { mixin: { withCredentials: false } } })
 

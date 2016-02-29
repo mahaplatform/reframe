@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Breadcrumbs from 'src/breadcrumbs'
-import Logger from 'src/utils/logger'
+import Breadcrumbs from 'breadcrumbs'
+import Logger from 'utils/logger'
 
 export default class FormExamples extends React.Component {
   constructor(props) {

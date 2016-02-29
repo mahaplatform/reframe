@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Collection from 'lib/collection'
-import Logger from 'lib/utils/logger'
+import Collection from 'collection'
+import Logger from 'utils/logger'
 
 const Actions = {
   reload: () => {Logger.log("Clicked Reload")},

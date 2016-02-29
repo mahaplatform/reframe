@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Details from 'src/details'
-import Logger from 'src/utils/logger'
+import Details from 'details'
+import Logger from 'utils/logger'
 
 export default class FormExamples extends React.Component {
   constructor(props) {
