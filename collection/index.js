@@ -196,6 +196,7 @@ Collection.defaultProps = {
   onCheck: _lodash2.default.noop,
   onCheckAll: _lodash2.default.noop,
   onClickColumnHeader: _lodash2.default.noop,
-  onClickColumnChooser: _lodash2.default.noop
+  onClickColumnChooser: _lodash2.default.noop,
+  sort: { key: '', order: 'desc' }
 };
 exports.default = Collection;
