@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import Select from './select.js'
-import Quickdate from 'utils/quickdate'
+import Quickdate from '../utils/quickdate'
 import Datefield from './datefield.js'
 
 export default class DateRange extends React.Component {
