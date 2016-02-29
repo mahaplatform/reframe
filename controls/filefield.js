@@ -22,11 +22,11 @@ var _when = require('when');
 
 var _when2 = _interopRequireDefault(_when);
 
-var _config = require('../utils/config');
+var _config = require('utils/config');
 
 var _config2 = _interopRequireDefault(_config);
 
-var _logger = require('../utils/logger');
+var _logger = require('utils/logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 
