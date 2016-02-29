@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export NODE_PATH=`pwd`
+export NODE_PATH=./src/
 export NODE_ENV=development
 
 trap 'kill %1' SIGINT
