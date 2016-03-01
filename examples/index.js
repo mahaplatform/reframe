@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
 
 import CollectionExamples from './collection/index.jsx'
+import FetchCollectionExamples from './collection/fetch.jsx'
 import FormExamples from './form/index.jsx'
 import ModalExamples from './modal/index.jsx'
 import BreadcrumbExamples from './breadcrumb/index.jsx'
@@ -31,7 +32,14 @@ class ExampleLinks extends React.Component {
       <div className="ui padded one column grid">
         <div className="column">
           <div className="ui pointing menu">
-            <Link to="/collections" className="ui item" activeClass="active">Collections</Link>
+            <div className="ui dropdown item" activeClass="active">
+              Collections
+              <i className="dropdown icon"></i>
+              <div className="menu">
+                <Link to="/collections/standard" className="item">Standard</Link>
+                <Link to="/collections/fetch" className="item">Fetch</Link>
+              </div>
+            </div>
             <Link to="/forms" className="ui item" activeClass="active">Forms</Link>
             <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
             <Link to="/breadcrumbs" className="ui item" activeClass="active">Breadcrumbs</Link>
@@ -57,7 +65,8 @@ const routes = (
   <Route component={ExampleLinks}>
     <Route path="/" component={Example}>
       <IndexRoute component={Index} />
-      <Route path="collections" component={CollectionExamples} />
+      <Route path="collections/standard" component={CollectionExamples} />
+      <Route path="collections/fetch" component={FetchCollectionExamples} />
       <Route path="forms" component={FormExamples} />
       <Route path="modals" component={ModalExamples} />
       <Route path="breadcrumbs" component={BreadcrumbExamples} />
