@@ -90,3 +90,10 @@ crashlytics-build.properties
 ## Package Managers:
 
 node_modules/
+
+# Examples
+
+examples/examples.js
+examples/*.map
+examples/*.css
+.sass-cache/
