@@ -45,15 +45,17 @@
 #toggle-columns-modal input {
   margin-right: 5px; }
 
-.collection-table .ui.table {
-  margin-top: 0 !important; }
-.collection-table tr td:last-child i {
-  cursor: pointer; }
-.collection-table .row-leave {
-  opacity: 1; }
-.collection-table .row-leave.row-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in; }
+.collection-table {
+  position: relative; }
+  .collection-table .ui.table {
+    margin-top: 0 !important; }
+  .collection-table tr td:last-child i {
+    cursor: pointer; }
+  .collection-table .row-leave {
+    opacity: 1; }
+  .collection-table .row-leave.row-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in; }
 
 @media (max-width: 800px) {
   .secondary {

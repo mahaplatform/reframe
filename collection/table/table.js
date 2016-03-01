@@ -54,24 +54,41 @@ var Table = function (_React$Component) {
   _createClass(Table, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
-        { className: 'collection-table' },
+        { className: 'ui basic section collection-table' },
         _react2.default.createElement(
           'table',
           { className: 'ui unstackable compact striped table sortable' },
           _react2.default.createElement(_thead2.default, _extends({}, this.props, this.state)),
           _react2.default.createElement(_tbody2.default, _extends({}, this.props, this.state))
-        )
+        ),
+        function () {
+          if (_this2.props.status === 'LOADING') {
+            return _react2.default.createElement(
+              'div',
+              { className: 'ui active inverted dimmer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'ui text loader' },
+                'Loading'
+              )
+            );
+          } else {
+            return null;
+          }
+        }()
       );
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       var selfTrigger = function selfTrigger(fn) {
-        var self = _this2;
+        var self = _this3;
         return _lodash2.default.wrap(fn, function (ffn) {
           for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             args[_key - 1] = arguments[_key];

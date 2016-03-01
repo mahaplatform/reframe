@@ -76,15 +76,15 @@ var Collection = function (_React$Component) {
         _react2.default.createElement(ActiveView, _extends({}, this.props, this.state, this.context)),
         function () {
           if (_this2.props.status === 'LOADING') {
-            return _react2.default.createElement('div', { className: 'ui active centered inline loader' });
+            return null; // <div className="ui active centered inline loader"></div>
           } else if (_this2.props.status === 'ERROR') {
-            return _react2.default.createElement(
-              'div',
-              { className: 'ui red segment' },
-              _react2.default.createElement('i', { className: 'warning circle icon' }),
-              ' Error loading records'
-            );
-          }
+              return _react2.default.createElement(
+                'div',
+                { className: 'ui red segment' },
+                _react2.default.createElement('i', { className: 'warning circle icon' }),
+                ' Error loading records'
+              );
+            }
         }()
       );
     }
@@ -197,6 +197,7 @@ Collection.defaultProps = {
   onCheckAll: _lodash2.default.noop,
   onClickColumnHeader: _lodash2.default.noop,
   onClickColumnChooser: _lodash2.default.noop,
-  sort: { key: '', order: 'desc' }
+  sort: { key: '', order: 'desc' },
+  empty: "No records found."
 };
 exports.default = Collection;
