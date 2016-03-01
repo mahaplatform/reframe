@@ -57,7 +57,8 @@ export default class Collection extends React.Component {
     onCheckAll: _.noop,
     onClickColumnHeader: _.noop,
     onClickColumnChooser: _.noop,
-    sort: { key: '', order: 'desc' }
+    sort: { key: '', order: 'desc' },
+    empty: "No records found."
   }
 
   constructor(props) {
@@ -80,7 +81,7 @@ export default class Collection extends React.Component {
         <ActiveView {...this.props} {...this.state} {...this.context} />
         {(() => {
           if(this.props.status === 'LOADING') {
-            return <div className="ui active centered inline loader"></div>
+            return null // <div className="ui active centered inline loader"></div>
           } else if(this.props.status === 'ERROR') {
             return <div className="ui red segment"><i className="warning circle icon" /> Error loading records</div>
           }

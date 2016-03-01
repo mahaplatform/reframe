@@ -14,11 +14,23 @@ class Table extends React.Component {
 
   render() {
     return(
-      <div className="collection-table">
+      <div className="ui basic section collection-table">
         <table className="ui unstackable compact striped table sortable">
           <Thead {...this.props} {...this.state} />
           <Tbody {...this.props} {...this.state} />
         </table>
+        {(() => {
+          if(this.props.status === 'LOADING') {
+            return (
+              <div className="ui active inverted dimmer">
+                <div className="ui text loader">Loading</div>
+              </div>
+            )
+          }
+          else {
+            return null
+          }
+        })()}
       </div>
     )
   }
