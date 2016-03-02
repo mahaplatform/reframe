@@ -22,6 +22,8 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,6 +61,8 @@ var Format = function (_React$Component) {
         Content = Check;
       } else if (this.props.format == 'capitalize') {
         Content = Capitalize;
+      } else if (this.props.format == 'email') {
+        Content = Email;
       } else if (this.props.format == 'raw') {
         Content = Raw;
       } else if (this.props.value === '') {
@@ -132,6 +136,14 @@ var Capitalize = function Capitalize(props) {
     'span',
     null,
     props.value.toUpperCase()
+  );
+};
+
+var Email = function Email(props) {
+  return _react2.default.createElement(
+    _reactRouter.Link,
+    { to: 'mailto:' + props.value },
+    props.value
   );
 };
 
