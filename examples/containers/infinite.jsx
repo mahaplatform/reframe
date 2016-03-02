@@ -7,7 +7,9 @@ import _ from 'lodash'
 import when from 'when'
 import faker from 'faker'
 
+// A function to generate some phony data for each page
 const fakeRecords = page => {
+  // Create an array of fake records
   const records = _.map(
     _.range((page - 1) * 25 + 1, (page - 1) * 25 + 25), i => {
       return {
@@ -21,7 +23,7 @@ const fakeRecords = page => {
 
   page = parseInt(page, 10)
 
-
+  // Generate the link metadata depending on what page we're on
   let links = {}
   if ( page === 1 ) {
     links.self = `/api/data?page=${page}`
@@ -46,6 +48,7 @@ const fakeRecords = page => {
   }
 }
 
+// This is a phony API client for the purposes of demonstration.
 const fakeApiClient = ({method, path, params}) => {
   return {
     entity: () => when(fakeRecords(params.page || 1)).delay(1500)
@@ -53,35 +56,26 @@ const fakeApiClient = ({method, path, params}) => {
 }
 
 export default class FetchExamples extends React.Component {
-  constructor(props) {
-    super(props)
-    this.exampleClient = fakeApiClient
-  }
 
   render() {
     return (
       <div>
         <h1>Infinite Container</h1>
-
-        <InfiniteContainer endpoint="/api/data" client={this.exampleClient} injectAs="records">
+        {/* An example of using the container to inject an array of resolved records page by page */}
+        <InfiniteContainer endpoint="/api/data" client={fakeApiClient} injectAs="records">
           <PeopleList />
         </InfiniteContainer>
       </div>
     )
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
 }
 
+// A component with a table to present data, plus an example of how to check for loading states
 const PeopleList = props => {
   const people = props.records || []
   return (
-    <LoadingContainer content={props.records} useLoader>
+    <LoadingContainer content={props.records} useLoader isLoading={props.status === 'awaiting'}>
       <EmptyState>
         <h1>No People.</h1>
       </EmptyState>
