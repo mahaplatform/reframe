@@ -52,7 +52,6 @@
     "resumablejs": "^1.0.2",
     "snax": "zerilliworks/snax#v0.4.6",
     "validator": "^4.9.0",
-    "watchify": "^3.7.0",
     "when": "^3.7.7"
   }
 }
