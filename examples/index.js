@@ -6,6 +6,7 @@ import CollectionExamples from './collection/index.jsx'
 import FetchCollectionExamples from './collection/fetch.jsx'
 import FormExamples from './form/index.jsx'
 import ModalExamples from './modal/index.jsx'
+import TasksExamples from './tasks/index.jsx'
 import BreadcrumbExamples from './breadcrumb/index.jsx'
 import DetailExamples from './details/index.jsx'
 import FetchContainerExamples from './containers/fetch.jsx'
@@ -44,6 +45,7 @@ class ExampleLinks extends React.Component {
             <Link to="/forms" className="ui item" activeClass="active">Forms</Link>
             <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
             <Link to="/breadcrumbs" className="ui item" activeClass="active">Breadcrumbs</Link>
+            <Link to="/tasks" className="ui item" activeClass="active">Tasks</Link>
             <Link to="/details" className="ui item" activeClass="active">Details</Link>
             <div className="ui dropdown item" activeClass="active">
               Containers
@@ -72,6 +74,7 @@ const routes = (
       <Route path="forms" component={FormExamples} />
       <Route path="modals" component={ModalExamples} />
       <Route path="breadcrumbs" component={BreadcrumbExamples} />
+      <Route path="tasks" component={TasksExamples} />
       <Route path="details" component={DetailExamples} />
       <Route path="containers/fetch" component={FetchContainerExamples} />
       <Route path="containers/infinite" component={InfiniteContainerExamples} />
