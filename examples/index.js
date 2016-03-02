@@ -36,7 +36,7 @@ class ExampleLinks extends React.Component {
       <div className="ui padded one column grid">
         <div className="column">
           <Menu menu={this.getMenu()} />
-          <div className="segment">
+          <div className="segment" style={{marginTop: 40}}>
             {this.props.children}
           </div>
         </div>
