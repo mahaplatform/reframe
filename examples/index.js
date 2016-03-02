@@ -4,6 +4,7 @@ import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
 
 import CollectionExamples from './collection/index.jsx'
 import FetchCollectionExamples from './collection/fetch.jsx'
+import MenuExamples from './menu/index.jsx'
 import FormExamples from './form/index.jsx'
 import ModalExamples from './modal/index.jsx'
 import TasksExamples from './tasks/index.jsx'
@@ -42,6 +43,7 @@ class ExampleLinks extends React.Component {
                 <Link to="/collections/fetch" className="item">Fetch</Link>
               </div>
             </div>
+            <Link to="/menus" className="ui item" activeClass="active">Menus</Link>
             <Link to="/forms" className="ui item" activeClass="active">Forms</Link>
             <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
             <Link to="/breadcrumbs" className="ui item" activeClass="active">Breadcrumbs</Link>
@@ -71,6 +73,7 @@ const routes = (
       <IndexRoute component={Index} />
       <Route path="collections/standard" component={CollectionExamples} />
       <Route path="collections/fetch" component={FetchCollectionExamples} />
+      <Route path="menus" component={MenuExamples} />
       <Route path="forms" component={FormExamples} />
       <Route path="modals" component={ModalExamples} />
       <Route path="breadcrumbs" component={BreadcrumbExamples} />
