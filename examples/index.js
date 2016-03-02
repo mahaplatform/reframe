@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
+import Menu from 'menu'
 
 import CollectionExamples from './collection/index.jsx'
 import FetchCollectionExamples from './collection/fetch.jsx'
@@ -34,37 +35,47 @@ class ExampleLinks extends React.Component {
     return (
       <div className="ui padded one column grid">
         <div className="column">
-          <div className="ui pointing menu">
-            <div className="ui dropdown item" activeClass="active">
-              Collections
-              <i className="dropdown icon"></i>
-              <div className="menu">
-                <Link to="/collections/standard" className="item">Standard</Link>
-                <Link to="/collections/fetch" className="item">Fetch</Link>
-              </div>
-            </div>
-            <Link to="/menus" className="ui item" activeClass="active">Menus</Link>
-            <Link to="/forms" className="ui item" activeClass="active">Forms</Link>
-            <Link to="/modals" className="ui item" activeClass="active">Modals</Link>
-            <Link to="/breadcrumbs" className="ui item" activeClass="active">Breadcrumbs</Link>
-            <Link to="/tasks" className="ui item" activeClass="active">Tasks</Link>
-            <Link to="/details" className="ui item" activeClass="active">Details</Link>
-            <div className="ui dropdown item" activeClass="active">
-              Containers
-              <i className="dropdown icon"></i>
-              <div className="menu">
-                <Link to="/containers/fetch" className="item">Fetch</Link>
-                <Link to="/containers/infinite" className="item">Infinite</Link>
-              </div>
-            </div>
-          </div>
-          <div className="segment">
+          <Menu menu={this.getMenu()} />
+          <div className="segment" style={{marginTop: 40}}>
             {this.props.children}
           </div>
         </div>
       </div>
     )
   }
+
+  getMenu() {
+    return {
+      left: [
+        {
+          label: 'Collections',
+          items: [
+            {label: 'Standard', route: '/collections/standard'},
+            {label: 'Fetch', route: '/collections/fetch'},
+          ]
+        },
+        {
+          label: 'Containers',
+          items: [
+            {label: 'Fetch', route: '/containers/fetch'},
+            {label: 'Infinite', route: '/containers/infinite'},
+          ]
+        },
+        {
+          label: 'Basic',
+          items: [
+            {label: 'Forms', route: '/forms'},
+            {label: 'Modals', route: '/modals'},
+            {label: 'Breadcrumbs', route: '/breadcrumbs'},
+            {label: 'Tasks', route: '/tasks'},
+            {label: 'Details', route: '/details'}
+          ]
+        },
+
+      ]
+    }
+  }
+
 }
 
 const routes = (
