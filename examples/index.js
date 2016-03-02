@@ -9,6 +9,7 @@ import ModalExamples from './modal/index.jsx'
 import BreadcrumbExamples from './breadcrumb/index.jsx'
 import DetailExamples from './details/index.jsx'
 import FetchContainerExamples from './containers/fetch.jsx'
+import InfiniteContainerExamples from './containers/infinite.jsx'
 
 class Example extends React.Component {
   render() {
@@ -49,6 +50,7 @@ class ExampleLinks extends React.Component {
               <i className="dropdown icon"></i>
               <div className="menu">
                 <Link to="/containers/fetch" className="item">Fetch</Link>
+                <Link to="/containers/infinite" className="item">Infinite</Link>
               </div>
             </div>
           </div>
@@ -72,6 +74,7 @@ const routes = (
       <Route path="breadcrumbs" component={BreadcrumbExamples} />
       <Route path="details" component={DetailExamples} />
       <Route path="containers/fetch" component={FetchContainerExamples} />
+      <Route path="containers/infinite" component={InfiniteContainerExamples} />
     </Route>
   </Route>
 )
@@ -80,6 +83,6 @@ window.React = React
 window.ReactDOM = ReactDOM
 window._ = _
 
-ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('examples'))
+ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('app-container'))
 
 $('.dropdown').dropdown()
