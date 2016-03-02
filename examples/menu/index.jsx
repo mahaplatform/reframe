@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Menu from 'menu'
 import Logger from 'utils/logger'
 
-export default class FormExamples extends React.Component {
+export default class MenuExamples extends React.Component {
   constructor(props) {
     super(props)
   }
