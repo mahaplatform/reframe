@@ -4,5 +4,5 @@ export NODE_ENV=development
 
 trap 'kill %1' SIGINT
   ./node_modules/http-server/bin/http-server -p 8080 \
-& ./node_modules/watchify/bin/cmd.js ./examples/index.js -v --debug -t [babelify] -o './node_modules/exorcist/bin/exorcist.js ./examples/examples.js.map > ./examples/examples.js' \
+& ./node_modules/watchify/bin/cmd.js ./examples/index.js -v --debug -t [babelify] -o ./examples/examples.js \
 & sass --scss --compass --watch --sourcemap=auto src/reframe.scss:examples/reframe.css
