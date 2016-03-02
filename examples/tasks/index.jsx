@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import tasks from 'tasks'
+import Tasks from 'tasks'
 
 export default class TasksExamples extends React.Component {
 
@@ -9,9 +9,8 @@ export default class TasksExamples extends React.Component {
     return (
       <div>
         <h1>Tasks</h1>
-
         <div className="ui top attached segment">
-          <Tasks tasks=getTasks() />
+          <Tasks tasks={this.getTasks()} />
         </div>
       </div>
     )

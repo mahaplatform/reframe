@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Task from './task.jsx'
+import Task from './task.js'
 
 class Tasks extends React.Component {
 
