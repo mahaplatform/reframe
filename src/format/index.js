@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import moment from 'moment'
+import {Link} from 'react-router'
 
 class Format extends React.Component {
 
@@ -23,6 +24,8 @@ class Format extends React.Component {
       Content = Check
     } else if(this.props.format == 'capitalize') {
       Content = Capitalize
+    } else if(this.props.format == 'email') {
+      Content = Email
     } else if(this.props.format == 'raw') {
       Content = Raw
     } else if(this.props.value === '') {
@@ -71,6 +74,10 @@ var DateTime = (props) => {
 
 var Capitalize = (props) => {
   return <span>{props.value.toUpperCase()}</span>
+}
+
+var Email = (props) => {
+  return <Link to={`mailto:${props.value}`}>{props.value}</Link>
 }
 
 export default Format
