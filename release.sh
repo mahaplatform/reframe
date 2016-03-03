@@ -16,7 +16,7 @@ fi
 
 git add .
 git commit -m "Release $VER" -e
-git tag ${VER}
+git tag "$VER"
 git push
 cd ../
 rm -rf _release
