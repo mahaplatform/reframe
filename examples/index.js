@@ -3,16 +3,17 @@ import ReactDOM from 'react-dom'
 import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
 import Menu from 'menu'
 
-import CollectionExamples from './collection/index.jsx'
-import FetchCollectionExamples from './collection/fetch.jsx'
-import MenuExamples from './menu/index.jsx'
-import FormExamples from './form/index.jsx'
-import ModalExamples from './modal/index.jsx'
-import TasksExamples from './tasks/index.jsx'
-import BreadcrumbExamples from './breadcrumb/index.jsx'
-import DetailExamples from './details/index.jsx'
-import FetchContainerExamples from './containers/fetch.jsx'
-import InfiniteContainerExamples from './containers/infinite.jsx'
+import CollectionExample from './collection/index.jsx'
+import FetchCollectionExample from './collection/fetch.jsx'
+import MenuExample from './menu/index.jsx'
+import FormExample from './form/index.jsx'
+import ModalExample from './modal/index.jsx'
+import TasksExample from './tasks/index.jsx'
+import BreadcrumbExample from './breadcrumb/index.jsx'
+import DetailExample from './details/index.jsx'
+import FetchContainerExample from './containers/fetch.jsx'
+import InfiniteContainerExample from './containers/infinite.jsx'
+import TabbedPaneExample from './panes/tabbed.jsx'
 
 class Example extends React.Component {
   render() {
@@ -62,6 +63,12 @@ class ExampleLinks extends React.Component {
           ]
         },
         {
+          label: 'Panes',
+          items: [
+            {label: 'Tabbed', route: '/panes/tabbed'},
+          ]
+        },
+        {
           label: 'Basic',
           items: [
             {label: 'Forms', route: '/forms'},
@@ -82,16 +89,22 @@ const routes = (
   <Route component={ExampleLinks}>
     <Route path="/" component={Example}>
       <IndexRoute component={Index} />
-      <Route path="collections/standard" component={CollectionExamples} />
-      <Route path="collections/fetch" component={FetchCollectionExamples} />
-      <Route path="menus" component={MenuExamples} />
-      <Route path="forms" component={FormExamples} />
-      <Route path="modals" component={ModalExamples} />
-      <Route path="breadcrumbs" component={BreadcrumbExamples} />
-      <Route path="tasks" component={TasksExamples} />
-      <Route path="details" component={DetailExamples} />
-      <Route path="containers/fetch" component={FetchContainerExamples} />
-      <Route path="containers/infinite" component={InfiniteContainerExamples} />
+      <Route path="collections/standard" component={CollectionExample} />
+      <Route path="collections/fetch" component={FetchCollectionExample} />
+      <Route path="menus" component={MenuExample} />
+      <Route path="forms" component={FormExample} />
+      <Route path="modals" component={ModalExample} />
+      <Route path="breadcrumbs" component={BreadcrumbExample} />
+      <Route path="tasks" component={TasksExample} />
+      <Route path="details" component={DetailExample} />
+      <Route path="containers/fetch" component={FetchContainerExample} />
+      <Route path="containers/infinite" component={InfiniteContainerExample} />
+      <Route path="panes/tabbed" component={TabbedPaneExample}>
+        <IndexRoute component={TabbedPaneExample.One} />
+        <Route path="one" component={TabbedPaneExample.One} />
+        <Route path="two" component={TabbedPaneExample.Two} />
+        <Route path="three" component={TabbedPaneExample.Three} />
+      </Route>
     </Route>
   </Route>
 )
