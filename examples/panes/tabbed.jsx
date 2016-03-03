@@ -8,7 +8,7 @@ class Tabbed extends React.Component {
     return (
       <div>
         <h1>Tabbed Pane</h1>
-        <TabbedPane tabs={this.getTabs()} inner={this.props.children} {...this.props} />
+        {React.cloneElement(this.props.children, {tabs: this.getTabs(), ...this.props})}
       </div>
     )
   }
@@ -24,15 +24,28 @@ class Tabbed extends React.Component {
 }
 
 Tabbed.One = (props) => {
-  return <div>One</div>
+  return (
+    <TabbedPane tabs={props.tabs} location={props.location}>
+      One
+    </TabbedPane>
+  )
 }
 
 Tabbed.Two = (props) => {
-  return <div>Two</div>
+  return (
+    <TabbedPane tabs={props.tabs} location={props.location}>
+      Two
+    </TabbedPane>
+  )
 }
 
 Tabbed.Three = (props) => {
-  return <div>Three</div>
+  console.log(props);
+  return (
+    <TabbedPane tabs={props.tabs} location={props.location}>
+      Three
+    </TabbedPane>
+  )
 }
 
 export default Tabbed
