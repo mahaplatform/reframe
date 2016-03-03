@@ -15,7 +15,7 @@ class Tabbed extends React.Component {
            })}
         </div>
         <div className="ui bottom attached active tab segment">
-          {React.cloneElement(this.props.inner, {...this.props})}
+          {this.props.children}
         </div>
       </div>
     )
