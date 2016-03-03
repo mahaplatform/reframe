@@ -12,19 +12,22 @@ export default class FormExamples extends React.Component {
     return (
       <div>
         <h1>Details</h1>
-        <Details title="Sharks" properties={this.getDetails()}/>
+        <Details details={this.getDetails()}/>
       </div>
     )
   }
 
   getDetails() {
-    return [
-     { label: 'kingdom', value: 'Animalia' },
-     { label: 'phylum', value: 'Chordata' },
-     { label: 'class', value: 'Chondrichthyes' },
-     { label: 'subclass', value: 'Elasmobranchii' },
-     { label: 'superorder', value: 'Selachimorpha' }
-    ]
+    return {
+      title: 'Sharks',
+      properties: [
+        {label: 'kingdom', value: 'Animalia'},
+        {label: 'phylum', value: 'Chordata'},
+        {label: 'class', value: 'Chondrichthyes'},
+        {label: 'subclass', value: 'Elasmobranchii'},
+        {label: 'superorder', value: 'Selachimorpha'}
+      ]
+    }
   }
 
 }
