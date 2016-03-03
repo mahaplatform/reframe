@@ -7,6 +7,7 @@ cd _release
 cp -f ../package.json ./package.json
 ../node_modules/babel-cli/bin/babel.js -d ./ ../src/
 sass -Cq --scss --compass --sourcemap=none ../src/reframe.scss ./reframe.css
+cp ./reframe.css ./reframe.scss
 
 VER=`cat package.json | sed -n 's/.*"version": "\(.*\)".*/\1/p'`
 
