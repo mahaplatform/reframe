@@ -18,6 +18,14 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _numeral = require('numeral');
+
+var _numeral2 = _interopRequireDefault(_numeral);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -111,7 +119,7 @@ var PriceCell = function PriceCell(props) {
   return _react2.default.createElement(
     'span',
     null,
-    numeral(_lodash2.default.get(props, props.column.key)).format('$0,0.00')
+    (0, _numeral2.default)(_lodash2.default.get(props, props.column.key)).format('$0,0.00')
   );
 };
 
@@ -120,7 +128,7 @@ var DateCell = function DateCell(props) {
   return _react2.default.createElement(
     'span',
     null,
-    value ? moment(new Date(value)).format('MM/DD/YY') : ''
+    value ? (0, _moment2.default)(new Date(value)).format('MM/DD/YY') : ''
   );
 };
 
@@ -129,7 +137,7 @@ var DateTimeCell = function DateTimeCell(props) {
   return _react2.default.createElement(
     'span',
     null,
-    value ? moment(new Date(value)).format('MM/DD/YY @ hh:mm A') : ''
+    value ? (0, _moment2.default)(new Date(value)).format('MM/DD/YY @ hh:mm A') : ''
   );
 };
 
