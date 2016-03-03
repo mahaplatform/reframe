@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 import _ from 'lodash'
+import moment from 'moment'
+import numeral from 'numeral'
 
 class Cell extends React.Component {
 
