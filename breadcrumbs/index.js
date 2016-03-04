@@ -40,7 +40,7 @@ var Breadcrumbs = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'ui breadcrumb' },
+        { className: 'ui small breadcrumb' },
         this.props.breadcrumbs.map(function (item, index) {
           return _react2.default.createElement(_breadcrumb2.default, { item: item, key: 'breadcrumb_' + index });
         })

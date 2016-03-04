@@ -41,14 +41,14 @@ var Breadcrumb = function (_React$Component) {
           'span',
           { className: '.item-item' },
           _react2.default.createElement(
-            'div',
-            { className: 'divider' },
-            ' / '
-          ),
-          _react2.default.createElement(
             _reactRouter.Link,
             { to: this.props.item.route, className: 'item' },
             this.props.item.label
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'divider' },
+            ' / '
           )
         );
       } else if (this.props.item.link) {
@@ -56,25 +56,20 @@ var Breadcrumb = function (_React$Component) {
           'span',
           { className: '.item-item' },
           _react2.default.createElement(
-            'div',
-            { className: 'divider' },
-            ' / '
-          ),
-          _react2.default.createElement(
             _reactRouter.Link,
             { to: this.props.item.link, className: 'item' },
             this.props.item.label
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'divider' },
+            ' / '
           )
         );
       } else {
         return _react2.default.createElement(
           'span',
           { className: '.item-item' },
-          _react2.default.createElement(
-            'div',
-            { className: 'divider' },
-            ' / '
-          ),
           _react2.default.createElement(
             'div',
             { className: 'active section' },
