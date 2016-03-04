@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Event from './event.js'
 import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
 
-class Comments extends React.Component {
+class Feed extends React.Component {
 
   static propTypes = {
     records: React.PropTypes.array,
@@ -33,4 +33,4 @@ class Comments extends React.Component {
 
 }
 
-export default Comments
+export default Feed
