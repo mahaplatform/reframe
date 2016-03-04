@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Comment from './comment.js'
 import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
+import InfiniteContainer from '../containers/infinite'
 
 class Comments extends React.Component {
 
@@ -33,4 +34,17 @@ class Comments extends React.Component {
 
 }
 
-export default Comments
+export default class CommentsWrapper extends React.Component {
+  render() {
+    if(this.props.endpoint) {
+      return (
+        <InfiniteContainer endpoint={this.props.endpoint} injectAs="records">
+          <Comments {...this.props} />
+        </InfiniteContainer>
+      )
+    }
+    else {
+      return <Comments {...this.props} records={this.props.data || this.props.records} />
+    }
+  }
+}
