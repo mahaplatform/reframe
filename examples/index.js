@@ -6,6 +6,7 @@ import Menu from 'menu'
 import CollectionExample from './collection/index.jsx'
 import FetchCollectionExample from './collection/fetch.jsx'
 import FeedExample from './feed/index.jsx'
+import CommentsExample from './comments/index.jsx'
 import MenuExample from './menu/index.jsx'
 import FormExample from './form/index.jsx'
 import ModalExample from './modal/index.jsx'
@@ -72,6 +73,7 @@ class ExampleLinks extends React.Component {
         {
           label: 'Basic',
           items: [
+            {label: 'Comments', route: '/comments'},
             {label: 'Feed', route: '/feed'},
             {label: 'Forms', route: '/forms'},
             {label: 'Modals', route: '/modals'},
@@ -95,6 +97,7 @@ const routes = (
       <Route path="collections/fetch" component={FetchCollectionExample} />
       <Route path="feed" component={FeedExample} />
       <Route path="menus" component={MenuExample} />
+      <Route path="comments" component={CommentsExample} />
       <Route path="forms" component={FormExample} />
       <Route path="modals" component={ModalExample} />
       <Route path="breadcrumbs" component={BreadcrumbExample} />
