@@ -16,7 +16,7 @@ class Comments extends React.Component {
 
   render() {
     return (
-      <LoadingContainer content={this.props.records} useLoader isLoading={this.props.status === 'awaiting'}>
+      <LoadingContainer content={this.props.records} useLoader>
         <EmptyState>
           <p>{this.props.empty}</p>
         </EmptyState>
