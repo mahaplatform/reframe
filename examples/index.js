@@ -5,6 +5,7 @@ import Menu from 'menu'
 
 import CollectionExample from './collection/index.jsx'
 import FetchCollectionExample from './collection/fetch.jsx'
+import FeedExample from './feed/index.jsx'
 import MenuExample from './menu/index.jsx'
 import FormExample from './form/index.jsx'
 import ModalExample from './modal/index.jsx'
