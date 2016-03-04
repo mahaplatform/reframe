@@ -15,8 +15,8 @@ export default class FormExamples extends React.Component {
 
         <div className="ui top attached segment">
           <Breadcrumbs breadcrumbs={[
-            { label: 'Animals' },
-            { label: 'Sharks' },
+            { label: 'Animals', route: '/one' },
+            { label: 'Sharks', route: '/two' },
             { label: 'Food' }
           ]}/>
           <h2>Hello?</h2>
