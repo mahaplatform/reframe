@@ -20,6 +20,10 @@ var _index = require('./index.js');
 
 var _index2 = _interopRequireDefault(_index);
 
+var _loading = require('snax/lib/containers/loading');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 var _table_reducer = require('./reducers/table_reducer');
 
 var _table_reducer2 = _interopRequireDefault(_table_reducer);
@@ -58,7 +62,12 @@ var SuperCollection = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuperCollection).call(this, props));
 
-    _this.store = _this.context.store || createDefaultStore(id);
+    _this.state = {
+      view: 'table',
+      sort: { key: 'id', order: 'asc' },
+      columnChooserVisible: false,
+      filtersVisible: false
+    };
     return _this;
   }
 
@@ -67,9 +76,14 @@ var SuperCollection = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         InfiniteContainer,
-        { endpoint: '/api/data', client: this.props.client, injectAs: 'records' },
-        _react2.default.createElement(_index2.default, _extends({}, this.props, this.getCallbacks(), this.getSort()))
+        { endpoint: this.props.endpoint, client: this.props.client, injectAs: 'records' },
+        _react2.default.createElement(LoadingCollection, this.getCollectionProps())
       );
+    }
+  }, {
+    key: 'getCollectionProps',
+    value: function getCollectionProps() {
+      return _extends({}, this.getCallbacks());
     }
   }, {
     key: 'getCallbacks',
@@ -90,14 +104,10 @@ var SuperCollection = function (_React$Component) {
     value: function getSort() {}
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.unlisten = store.subscribe(this.forceUpdate.bind(this));
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.unlisten();
-    }
+    value: function componentWillUnmount() {}
   }]);
 
   return SuperCollection;
@@ -111,3 +121,22 @@ SuperCollection.defaultProps = {
   client: new _api2.default()
 };
 exports.default = SuperCollection;
+
+
+var LoadingCollection = function LoadingCollection(props) {
+  return _react2.default.createElement(
+    _loading2.default,
+    null,
+    _react2.default.createElement(
+      _loading.EmptyState,
+      null,
+      _react2.default.createElement(_index2.default, { records: [], empty: 'There are no records.' })
+    ),
+    _react2.default.createElement(
+      _loading.PresentState,
+      null,
+      _react2.default.createElement(_index2.default, props),
+      !props.isAtEnd ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
+    )
+  );
+};

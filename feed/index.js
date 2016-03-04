@@ -24,6 +24,10 @@ var _loading = require('snax/lib/containers/loading');
 
 var _loading2 = _interopRequireDefault(_loading);
 
+var _infinite = require('../containers/infinite');
+
+var _infinite2 = _interopRequireDefault(_infinite);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81,4 +85,32 @@ Feed.propTypes = {
 Feed.defaultProps = {
   empty: "No records found."
 };
-exports.default = Feed;
+
+var FeedWrapper = function (_React$Component2) {
+  _inherits(FeedWrapper, _React$Component2);
+
+  function FeedWrapper() {
+    _classCallCheck(this, FeedWrapper);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(FeedWrapper).apply(this, arguments));
+  }
+
+  _createClass(FeedWrapper, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.endpoint) {
+        return _react2.default.createElement(
+          _infinite2.default,
+          { endpoint: this.props.endpoint, injectAs: 'records' },
+          _react2.default.createElement(Feed, this.props)
+        );
+      } else {
+        return _react2.default.createElement(Feed, _extends({}, this.props, { records: this.props.data || this.props.records }));
+      }
+    }
+  }]);
+
+  return FeedWrapper;
+}(_react2.default.Component);
+
+exports.default = FeedWrapper;

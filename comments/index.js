@@ -24,6 +24,10 @@ var _loading = require('snax/lib/containers/loading');
 
 var _loading2 = _interopRequireDefault(_loading);
 
+var _infinite = require('../containers/infinite');
+
+var _infinite2 = _interopRequireDefault(_infinite);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81,4 +85,32 @@ Comments.propTypes = {
 Comments.defaultProps = {
   empty: "No records found."
 };
-exports.default = Comments;
+
+var CommentsWrapper = function (_React$Component2) {
+  _inherits(CommentsWrapper, _React$Component2);
+
+  function CommentsWrapper() {
+    _classCallCheck(this, CommentsWrapper);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(CommentsWrapper).apply(this, arguments));
+  }
+
+  _createClass(CommentsWrapper, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.endpoint) {
+        return _react2.default.createElement(
+          _infinite2.default,
+          { endpoint: this.props.endpoint, injectAs: 'records' },
+          _react2.default.createElement(Comments, this.props)
+        );
+      } else {
+        return _react2.default.createElement(Comments, _extends({}, this.props, { records: this.props.data || this.props.records }));
+      }
+    }
+  }]);
+
+  return CommentsWrapper;
+}(_react2.default.Component);
+
+exports.default = CommentsWrapper;
