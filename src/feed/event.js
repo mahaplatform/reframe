@@ -30,18 +30,9 @@ class Event extends React.Component {
   }
 
   render() {
-    var description = '<a href="'+this.props.subject.link+'">'+this.props.subject.text+'</a> '
-    description += this.props.story
-    if(this.props.object1) {
-      let replacement = 'the '+this.props.object1.entity+' ';
-      replacement += (this.props.object1.link) ? '<a href="'+this.props.object1.link+'">'+this.props.object1.text+'</a>' : this.props.object1.text;
-      description = description.replace('{object1}', replacement)
-    }
-    if(this.props.object2) {
-      let replacement = 'the '+this.props.object2.entity+' ';
-      replacement += (this.props.object2.link) ? '<a href="'+this.props.object2.link+'">'+this.props.object2.text+'</a>' : this.props.object2.text;
-      description = description.replace('{object2}', replacement)
-    }
+    var description = `<a href="${this.props.subject.link}">${this.props.subject.text}</a> ${this.props.story}`;
+    description = this._replace(description, 'object1', this.props.object1);
+    description = this._replace(description, 'object2', this.props.object2);
     return (
       <div className="event">
         <div className="label">
@@ -53,6 +44,15 @@ class Event extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _replace(description, key, object) {
+    if(object) {
+      let replacement = `the ${object.entity} `;
+      replacement += (object.link) ? `<a href="${object.link}">${object.text}</a>` : object.text;
+      description = description.replace(`{${key}}`, replacement)
+    }
+    return description;
   }
 
 }

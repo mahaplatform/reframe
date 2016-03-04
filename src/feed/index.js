@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Event from './event.js'
-import _ from 'lodash'
+import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
 
 class Comments extends React.Component {
 
@@ -15,17 +15,20 @@ class Comments extends React.Component {
   }
 
   render() {
-    if(_.isEmpty(this.props.records)) {
-      return <p>{this.props.empty}</p>
-    } else {
-      return (
-        <div className="ui feed">
-          { this.props.records.map((record, index) => {
-            return <Event {...record} key={`event_${index}`} />
-          })}
-        </div>
-      )
-    }
+    return (
+      <LoadingContainer content={this.props.records} useLoader isLoading={this.props.status === 'awaiting'}>
+        <EmptyState>
+          <p>{this.props.empty}</p>
+        </EmptyState>
+        <PresentState>
+          <div className="ui feed">
+            { this.props.records.map((record, index) => {
+              return <Event {...record} key={`event_${index}`} />
+            })}
+          </div>
+        </PresentState>
+      </LoadingContainer>
+    )
   }
 
 }
