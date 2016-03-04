@@ -13,7 +13,7 @@ class Breadcrumbs extends React.Component {
 
   render() {
     return (
-      <div className="ui breadcrumb">
+      <div className="ui small breadcrumb">
         { this.props.breadcrumbs.map((item, index) => {
           return <Breadcrumb item={item} key={`breadcrumb_${index}`} />
         })}
