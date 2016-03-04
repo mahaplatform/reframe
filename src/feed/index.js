@@ -19,10 +19,12 @@ class Comments extends React.Component {
       return <p>{this.props.empty}</p>
     } else {
       return (
-        <div className="ui feed">
-          { this.props.records.map((record, index) => {
-            return <Event {...record} key={`event_${index}`} />
-          })}
+        <div className="ui segment">
+          <div className="ui feed">
+            { this.props.records.map((record, index) => {
+              return <Event {...record} key={`event_${index}`} />
+            })}
+          </div>
         </div>
       )
     }
