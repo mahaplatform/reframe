@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Event from './event.js'
 import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
+import InfiniteContainer from '../containers/infinite'
 
 class Feed extends React.Component {
 
@@ -33,4 +34,18 @@ class Feed extends React.Component {
 
 }
 
-export default Feed
+export default class FeedWrapper extends React.Component {
+  render() {
+    if(this.props.endpoint) {
+      return (
+        <InfiniteContainer endpoint={this.props.endpoint} injectAs="records">
+          <Feed {...this.props} />
+        </InfiniteContainer>
+      )
+    }
+    else {
+      return <Feed {...this.props} records={this.props.data || this.props.records} />
+    }
+  }
+}
+
