@@ -18,13 +18,13 @@ class Event extends React.Component {
   }
 
   render() {
-    var description = '<a href="'+this.props.subject.link+'">'+this.props.subject.full_name+'</a> '
+    var description = '<a href="'+this.props.subject.link+'">'+this.props.subject.text+'</a> '
     description = description + this.props.story
     if(this.props.object1) {
-      description = description.replace('{object1}', this.props.object1.description+' <a href="'+this.props.object1.link+'">'+this.props.object1.text+'</a>')
+      description = description.replace('{object1}', 'the '+this.props.object1.description+' <a href="'+this.props.object1.link+'">'+this.props.object1.text+'</a>')
     }
     if(this.props.object2) {
-      description = description.replace('{object2}', this.props.object2.description+' <a href="'+this.props.object2.link+'">'+this.props.object2.text+'</a>')
+      description = description.replace('{object2}', 'the '+this.props.object2.description+' <a href="'+this.props.object2.link+'">'+this.props.object2.text+'</a>')
     }
     return (
       <div className="event">
