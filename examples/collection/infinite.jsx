@@ -10,11 +10,11 @@ const Actions = {
   edit: id => {Logger.log("Clicked Edit", id)}
 }
 
-export default class SuperCollectionExamples extends React.Component {
+export default class InfiniteCollectionExamples extends React.Component {
   render() {
     return (
       <div>
-        <h1>Super Collection</h1>
+        <h1>Infinite Collection</h1>
         <InfiniteCollection {...this.getTable()} />
       </div>
     )
