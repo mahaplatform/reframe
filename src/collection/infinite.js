@@ -23,7 +23,8 @@ export default class InfiniteCollection extends React.Component {
     this.state = {
       view: 'table',
       sort: props.sort || { key: 'id', order: 'asc' },
-      filters: {}
+      filters: {},
+      showFilters: false
     }
   }
 
@@ -52,7 +53,9 @@ export default class InfiniteCollection extends React.Component {
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) },
         ...this.props.collectionActions
       ],
-      sort: this.state.sort
+      sort: this.state.sort,
+      filterValues: this.state.filters,
+      showFilters: this.state.showFilters
     }
   }
 
@@ -74,7 +77,9 @@ export default class InfiniteCollection extends React.Component {
       onFilterChange: filters => {
         this.setState({filters})
         _.defer(()=>this.refs.container.reset())
-      }
+      },
+      onShowFilters: () => this.setState({showFilters: true}),
+      onHideFilters: () => this.setState({showFilters: false})
     }
   }
 
@@ -92,19 +97,27 @@ export default class InfiniteCollection extends React.Component {
   }
 
   refresh() {
-    this.refs.container.reset()
+    _.defer(()=>this.refs.container.reset())
   }
 }
 
 const LoadingCollection = props => {
   return (
-    <LoadingContainer>
+    <LoadingContainer content={props.status === 'ready' ? props.records : undefined} isLoading={props.status === 'awaiting'}>
+      <LoadingState>
+        <div>
+          <Collection {...props} records={[]} empty="Loading..." />
+          <div className="ui active centered inline loader"></div>
+        </div>
+      </LoadingState>
       <EmptyState>
         <Collection {...props} records={[]} empty="There are no records." />
       </EmptyState>
       <PresentState>
-        <Collection {...props} />
-        { !props.isAtEnd ? <div className="ui active centered inline loader"></div> : null }
+        <div>
+          <Collection {...props} />
+          { !props.isAtEnd ? <div className="ui active centered inline loader"></div> : null }
+        </div>
       </PresentState>
     </LoadingContainer>
   )
