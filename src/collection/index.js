@@ -59,9 +59,13 @@ export default class Collection extends React.Component {
     onClickColumnHeader: _.noop,
     onClickColumnChooser: _.noop,
     onFilterChange: _.noop,
+    onShowFilters: _.noop,
+    onHideFilters: _.noop,
     sort: { key: '', order: 'desc' },
     empty: "No records found.",
-    filters: []
+    filters: [],
+    filterValues: {},
+    showFilters: false
   }
 
   constructor(props) {

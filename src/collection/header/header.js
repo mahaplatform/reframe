@@ -14,7 +14,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showFilters: false
+      showFilters: props.showFilters
     }
   }
 
@@ -66,10 +66,12 @@ class Header extends React.Component {
 
   showFilters() {
     this.setState({showFilters: true})
+    this.props.onShowFilters()
   }
 
   hideFilters() {
     this.setState({showFilters: false})
+    this.props.onHideFilters()
   }
 
   clearFilters() {
@@ -106,6 +108,10 @@ class Header extends React.Component {
 
   handleView(type) {
     this.props.onSetView(type)
+  }
+
+  componentDidMount() {
+    this.refs.filter_form.fill(this.props.filterValues)
   }
 
 }
