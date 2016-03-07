@@ -45,6 +45,10 @@ class Menu extends React.Component {
     )
   }
 
+  componentDidMount() {
+    $(this.refs.menu).find(".dropdown").dropdown({on: 'click'})
+  }
+
   componentDidUpdate() {
     $(this.refs.menu).find(".dropdown").dropdown({on: 'click'})
   }
