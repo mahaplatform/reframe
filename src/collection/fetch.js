@@ -77,17 +77,6 @@ export default class FetchCollection extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log(nextProps)
-    //if (nextProps.options != this.props.options || nextProps.endpoint != this.props.endpoint) {
-    //  const dataPromise = this.buildRequest()
-    //    .then(data => this.setState({resolvedData: data, asyncStatus: 'COMPLETE'}))
-    //    .catch(error => this.setState({asyncStatus: 'ERROR', resolvedData: null}))
-    //  this.setState({asyncStatus: 'AWAITING', dataPromise})
-    //}
-    //if(nextProps.promise !== this.props.promise) {
-    //
-    //}
-
     const dataPromise = this.buildRequest()
       .then(data => this.setState({resolvedData: data, asyncStatus: 'COMPLETE'}))
       .catch(error => this.setState({asyncStatus: 'ERROR', resolvedData: null}))
