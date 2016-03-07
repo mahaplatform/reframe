@@ -217,6 +217,10 @@ class Form extends React.Component {
     this.setState({errors})
   }
 
+  fill(data) {
+    this.onFill([this.props.id, data])
+  }
+
   onFill([id, data]) {
     console.log('Filling', id, data)
     if(this.props.id === id) {
