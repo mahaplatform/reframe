@@ -15,6 +15,7 @@ export default class Collection extends React.Component {
       visible: React.PropTypes.bool,
       cell: React.PropTypes.component
     })).isRequired,
+    filters: React.PropTypes.arrayOf(React.PropTypes.object),
     empty: React.PropTypes.string.isRequired,
     records: React.PropTypes.array,
     views: React.PropTypes.arrayOf(React.PropTypes.string),
@@ -57,8 +58,10 @@ export default class Collection extends React.Component {
     onCheckAll: _.noop,
     onClickColumnHeader: _.noop,
     onClickColumnChooser: _.noop,
+    onFilterChange: _.noop,
     sort: { key: '', order: 'desc' },
-    empty: "No records found."
+    empty: "No records found.",
+    filters: []
   }
 
   constructor(props) {

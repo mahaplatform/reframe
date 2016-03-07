@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom'
 import BatchActions from './batch_actions.js'
 import CollectionActions from './collection_actions.js'
 import _ from 'lodash'
+import Form from '../../form'
 
 class Header extends React.Component {
 
   static defaultProps = {
     onSetView: _.noop
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      showFilters: false
+    }
   }
 
   render() {
@@ -22,7 +30,7 @@ class Header extends React.Component {
             })()}
           </div>
           <div className="twelve wide column right aligned" ref="collectionActions">
-            {(this.props.collectionActions) ? <CollectionActions {...this.props} /> : ''}
+            {(this.props.collectionActions) ? <CollectionActions collectionActions={this.getCollectionActions()} /> : ''}
             {(() => {
               if(this.props.views && this.props.views.length > 1) {
                 let viewOptions = []
@@ -41,8 +49,59 @@ class Header extends React.Component {
             })()}
           </div>
         </div>
+        {this.renderFilters()}
       </div>
     )
+  }
+
+  getCollectionActions() {
+    // Merge in an action to show filters if filters are specified
+    if(this.props.filters) {
+      return [
+        { key: 'filter', icon: 'filter', label: 'Filter', handler: this.showFilters.bind(this) },
+        ...this.props.collectionActions
+      ]
+    }
+  }
+
+  showFilters() {
+    this.setState({showFilters: true})
+  }
+
+  hideFilters() {
+    this.setState({showFilters: false})
+  }
+
+  clearFilters() {
+    this.refs.filter_form.onClear("collection_filter_form")
+    this.handleFilter({})
+  }
+
+  renderFilters() {
+    const shouldShow = this.state.showFilters && this.props.filters && true
+    const visibility = shouldShow ? 'visible' : 'collapse'
+    const display = shouldShow ? 'block' : 'none'
+    return (
+      <div style={{visibility, display}}>
+        <Form
+          ref="filter_form"
+          id="collection_filter_form"
+          style={{marginBottom: 12}}
+          sections={[{fields: this.props.filters}]}
+          onSubmit={this.handleFilter.bind(this)}
+          onCancel={this.hideFilters.bind(this)}
+          buttons={[
+            {type: 'submit', label: 'Filter'},
+            {type: 'cancel', label: 'Close'},
+            {color: 'neutral', label: 'Clear', action: this.clearFilters.bind(this)}
+          ]}
+        />
+      </div>)
+  }
+
+  handleFilter(filterData) {
+    const compactedFilters = _.omitBy(filterData, _.isNull)
+    this.props.onFilterChange(compactedFilters)
   }
 
   handleView(type) {

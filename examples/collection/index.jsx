@@ -21,7 +21,8 @@ export default class CollectionExamples extends React.Component {
     this.state = {
       table: {
         view: 'table',
-        sort: { key: 'first_name', order: 'asc' }
+        sort: { key: 'first_name', order: 'asc' },
+        filters: {},
       },
       records: [
         { id: 1, first_name: "Bob", last_name: "Belcher" },
@@ -63,6 +64,10 @@ export default class CollectionExamples extends React.Component {
         { key: 'delete', icon: 'times', label: 'delete', handler: Actions.delete },
         { key: 'edit', icon: 'times', label: 'edit', handler: Actions.edit }
       ],
+      filters: [
+        { code: 'first_name', placeholder: 'First Name', type: 'textfield' },
+        { code: 'last_name', placeholder: 'Last Name', type: 'textfield' }
+      ],
       onClickColumnHeader: col => {
         Logger.log("Clicked column header", col)
         if(col === this.state.table.sort.key) {
@@ -76,12 +81,19 @@ export default class CollectionExamples extends React.Component {
           this.setState({table: {...this.state.table, sort: {key, order}}})
         }
       },
-      onClickColumnChooser: Actions.chooseColumns
+      onClickColumnChooser: Actions.chooseColumns,
+      onFilterChange: filters => {
+        console.log("Set filters:", filters)
+        this.setState({table: {...this.state.table, filters}})
+      }
     }
   }
 
   getSortedRecords() {
-    return _.orderBy(this.state.records, [this.state.table.sort.key], [this.state.table.sort.order])
+    return _(this.state.records)
+      .filter(this.state.table.filters || _.constant(true))
+      .orderBy([this.state.table.sort.key], [this.state.table.sort.order])
+      .value()
   }
 }
 
