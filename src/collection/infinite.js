@@ -103,22 +103,9 @@ export default class InfiniteCollection extends React.Component {
 
 const LoadingCollection = props => {
   return (
-    <LoadingContainer content={props.status === 'ready' ? props.records : undefined} isLoading={props.status === 'awaiting'}>
-      <LoadingState>
-        <div>
-          <Collection {...props} records={[]} empty="Loading..." />
-          <div className="ui active centered inline loader"></div>
-        </div>
-      </LoadingState>
-      <EmptyState>
-        <Collection {...props} records={[]} empty="There are no records." />
-      </EmptyState>
-      <PresentState>
-        <div>
-          <Collection {...props} />
-          { !props.isAtEnd ? <div className="ui active centered inline loader"></div> : null }
-        </div>
-      </PresentState>
-    </LoadingContainer>
+    <div>
+      <Collection {...props} />
+      { props.status === 'awaiting' ? <div className="ui active centered inline loader"></div> : null }
+    </div>
   )
 }
