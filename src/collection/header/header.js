@@ -89,7 +89,7 @@ class Header extends React.Component {
           ref="filter_form"
           id="collection_filter_form"
           style={{marginBottom: 12}}
-          sections={[{fields: this.props.filters}]}
+          sections={[{fields: this.getFilterFields()}]}
           onFieldChange={_.debounce(() => this.refs.filter_form.doSubmit("collection_filter_form"), 300)}
           onSubmit={this.handleFilter.bind(this)}
           onCancel={this.hideFilters.bind(this)}
@@ -102,6 +102,19 @@ class Header extends React.Component {
       </div>)
   }
 
+  getFilterFields() {
+    return _(this.props.filters)
+      .chunk(2)
+      .map(fields => {
+        if(fields.length > 1) {
+          return { type: 'fields', fields}
+        }
+        else {
+          return _.head(fields)
+        }
+      })
+      .value()
+  }
 
   handleFilter(filterData) {
     const compactedFilters = _.omitBy(filterData, _.isNull)
