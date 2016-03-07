@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SuperCollection from 'collection/super'
+import InfiniteCollection from 'collection/infinite'
 import Logger from 'utils/logger'
 
 const Actions = {
@@ -15,28 +15,30 @@ export default class SuperCollectionExamples extends React.Component {
     return (
       <div>
         <h1>Super Collection</h1>
-        <SuperCollection {...this.getCollection()} />
+        <InfiniteCollection {...this.getTable()} />
       </div>
     )
   }
 
   getTable() {
     return {
+      endpoint: "/examples/data.json",
       columns: [
         { label: 'ID', key: 'id', primary: false, visible: false, cell: 'id' },
         { label: 'First Name', key: 'first_name', primary: true, visible: true },
         { label: 'Last Name', key: 'last_name', primary: true, visible: true }
       ],
-      records: this.getSortedRecords(),
-      sort: this.state.table.sort,
+      filters: [
+        { code: 'first_name', placeholder: 'First Name', type: 'textfield' },
+        { code: 'last_name', placeholder: 'Last Name', type: 'textfield' }
+      ],
       collectionActions: [
-        { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: Actions.reload },
         { key: 'export', icon: 'download', label: 'Export', handler: Actions.export }
       ],
       recordActions: [
         { key: 'delete', icon: 'times', label: 'delete', handler: Actions.delete },
         { key: 'edit', icon: 'times', label: 'edit', handler: Actions.edit }
-      ],
+      ]
     }
   }
 }
