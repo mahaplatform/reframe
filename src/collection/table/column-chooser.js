@@ -32,8 +32,8 @@ export default class ColumnChooser extends React.Component {
         <div className="scrolling menu">
           { _.map(this.props.availableColumns, (col, i) => {
             return (
-              <div className="item" onClick={e => this.chooseColumn(e, col.index, !this.isColumnVisible(col.index))}>
-                <input className="ui inline left floated checkbox" type="checkbox" checked={this.isColumnVisible(col.index)}/>
+              <div className="item" onClick={e => this.chooseColumn(e, i, !this.isColumnVisible(i))}>
+                <input className="ui inline left floated checkbox" type="checkbox" checked={this.isColumnVisible(i)}/>
                 {col.label}
               </div>
             )
