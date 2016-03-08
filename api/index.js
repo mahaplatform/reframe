@@ -244,9 +244,7 @@ _.extend(API.prototype, {
 
     // Alias of this.delete()
     return this.delete(resource, params);
-  },
-
-  setDefaults: setDefaults
+  }
 });
 
 API.Resource = function (resource, resourceDef) {
@@ -375,5 +373,7 @@ API.Autopage = function (resource) {
     }
   };
 };
+
+API.setDefaults = setDefaults;
 
 exports.default = API;
