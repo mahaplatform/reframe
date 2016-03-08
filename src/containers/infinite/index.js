@@ -226,6 +226,19 @@ export default class InfiniteContainer extends React.Component {
     const className = this.props.className
     return React.createElement(this.props.element, { className }, ...mappedChildren)
   }
+
+  reset() {
+    this.setState({
+      status: AWAITING,
+      endpointData: [],
+      propsData: null,
+      message: null,
+      nextPage: null,
+      isAtEnd: false
+    })
+    this.makeRequest(this.props.endpoint)
+  }
+
 }
 
 //export {PresentState, LoadingState, EmptyState, ErrorState} from 'snax/containers/loading'

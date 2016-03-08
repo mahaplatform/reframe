@@ -15,6 +15,7 @@ export default class Collection extends React.Component {
       visible: React.PropTypes.bool,
       cell: React.PropTypes.component
     })).isRequired,
+    filters: React.PropTypes.arrayOf(React.PropTypes.object),
     empty: React.PropTypes.string.isRequired,
     records: React.PropTypes.array,
     views: React.PropTypes.arrayOf(React.PropTypes.string),
@@ -57,14 +58,28 @@ export default class Collection extends React.Component {
     onCheckAll: _.noop,
     onClickColumnHeader: _.noop,
     onClickColumnChooser: _.noop,
+    onFilterChange: _.noop,
+    onShowFilters: _.noop,
+    onHideFilters: _.noop,
     sort: { key: '', order: 'desc' },
-    empty: "No records found."
+    empty: "No records found.",
+    filters: [],
+    filterValues: {},
+    showFilters: false
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      visible: _.map(_.filter(_.each(props.columns, function(column, index) { column.index = index; return column; }), {visible: true}), 'index'),
+      visible: _.map(
+        _.filter(
+          _.each(props.columns, function(column, index) {
+            column.index = index;
+            return column;
+          }),
+          {visible: true}
+        ), 'index'
+      ),
       view: props.views ? _.first(props.views) : 'table',
       checkAll: false,
       checked: []
@@ -78,7 +93,7 @@ export default class Collection extends React.Component {
     return (
       <div className="collection">
         { shouldShowHeader ? <Header {...this.props} {...this.state} /> : '' }
-        <ActiveView {...this.props} {...this.state} {...this.context} />
+        <ActiveView {...this.props} {...this.state} {...this.context} onChooseColumn={this.onChooseColumn.bind(this)} />
         {(() => {
           if(this.props.status === 'LOADING') {
             return null // <div className="ui active centered inline loader"></div>
@@ -91,26 +106,19 @@ export default class Collection extends React.Component {
   }
 
   componentDidMount() {
-    let selfTrigger = (fn) => {
-      var self = this;
-      return _.wrap(fn, (ffn, ...args) => {
-        if(_.isArray(args[0])) {
-          args[0][0] === self.props.componentId ? ffn.bind(self)(..._.drop(args[0], 1)) : _.noop
-        }
-        else {
-          args[0] === self.props.componentId ? ffn.bind(self)(..._.drop(args, 1)) : _.noop
-        }
-      })
-    }
 
-    //this.listeners.push(actionListener.addActionListener(CollectionActions.SET_VIEW, selfTrigger(this.handleSetView)))
-    //this.listeners.push(actionListener.addActionListener(CollectionActions.TOGGLE_VISIBILITY, selfTrigger(this.handleToggleVisibility)))
-    //this.listeners.push(actionListener.addActionListener(CollectionActions.CHECK, selfTrigger(this.handleCheck)))
-    //this.listeners.push(actionListener.addActionListener(CollectionActions.CHECK_ALL, selfTrigger(this.handleCheckAll)))
   }
 
   componentWillUnmount() {
-    //_.each(this.listeners, actionListener.removeActionListener.bind(actionListener))
+  }
+
+  onChooseColumn(key, visible) {
+    if(visible) {
+      this.setState({visible: _.union(this.state.visible, [key])})
+    }
+    else {
+      this.setState({visible: _.difference(this.state.visible, [key])})
+    }
   }
 
   handleSetView(view) {

@@ -1,13 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
+import ColumnChooser from './column-chooser'
 
 class Thead extends React.Component {
 
   static defaultProps = {
     onSort: _.noop,
     onCheckAll: _.noop,
-    onClickColumns: _.noop
+    onClickColumns: _.noop,
+    onChooseColumn: _.noop
   }
 
   render() {
@@ -32,10 +34,29 @@ class Thead extends React.Component {
               return <th key={`column_${index}`} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
             }
           })}
-          <th className="collapsing primary center aligned"><i className="ui columns icon" onClick={this.handleColumns.bind(this)} /></th>
+          <th className="collapsing primary center aligned">
+            <div className="ui top right pointing dropdown" ref="columns_dropdown">
+              <i className="ui columns icon" onClick={this.handleColumns.bind(this)} />
+              <ColumnChooser availableColumns={this.props.columns} visibleColumns={this.props.visible} onChooseColumn={this.onChooseColumn.bind(this)}/>
+            </div>
+          </th>
         </tr>
       </thead>
     )
+  }
+
+  componentDidMount() {
+    $(this.refs.columns_dropdown).dropdown({
+      action: 'nothing'
+    })
+  }
+
+  componentWillUnmount() {
+    $(this.refs.columns_dropdown).dropdown('destroy')
+  }
+
+  onChooseColumn(key, visible) {
+    this.props.onChooseColumn(key, visible)
   }
 
   handleCheckAll() {

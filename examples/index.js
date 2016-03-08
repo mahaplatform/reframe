@@ -7,6 +7,7 @@ import CollectionExample from './collection/index.jsx'
 import FetchCollectionExample from './collection/fetch.jsx'
 import FeedExample from './feed/index.jsx'
 import CommentsExample from './comments/index.jsx'
+import InfiniteCollectionExample from './collection/infinite.jsx'
 import MenuExample from './menu/index.jsx'
 import FormExample from './form/index.jsx'
 import ModalExample from './modal/index.jsx'
@@ -55,19 +56,20 @@ class ExampleLinks extends React.Component {
           items: [
             {label: 'Standard', route: '/collections/standard'},
             {label: 'Fetch', route: '/collections/fetch'},
+            {label: 'Infinite', route: '/collections/infinite'}
           ]
         },
         {
           label: 'Containers',
           items: [
             {label: 'Fetch', route: '/containers/fetch'},
-            {label: 'Infinite', route: '/containers/infinite'},
+            {label: 'Infinite', route: '/containers/infinite'}
           ]
         },
         {
           label: 'Panes',
           items: [
-            {label: 'Tabbed', route: '/panes/tabbed'},
+            {label: 'Tabbed', route: '/panes/tabbed'}
           ]
         },
         {
@@ -81,7 +83,7 @@ class ExampleLinks extends React.Component {
             {label: 'Tasks', route: '/tasks'},
             {label: 'Details', route: '/details'}
           ]
-        },
+        }
 
       ]
     }
@@ -96,6 +98,7 @@ const routes = (
       <Route path="collections/standard" component={CollectionExample} />
       <Route path="collections/fetch" component={FetchCollectionExample} />
       <Route path="feed" component={FeedExample} />
+      <Route path="collections/infinite" component={InfiniteCollectionExample} />
       <Route path="menus" component={MenuExample} />
       <Route path="comments" component={CommentsExample} />
       <Route path="forms" component={FormExample} />

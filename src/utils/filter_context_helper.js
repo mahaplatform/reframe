@@ -97,7 +97,7 @@ export class FilterContextEnhancer {
 
     let reduc = _(this.fc)
       .pick(['fields', 'skip', 'limit'])
-      .omit(emptyValues)
+      .omitBy(emptyValues)
       .mapKeys((val, key) => {
         return _.snakeCase(key);
       })
