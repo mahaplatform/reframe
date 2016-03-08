@@ -106,7 +106,7 @@ let clientDefaults = {
   resource: null
 }
 
-export function setDefaults(defaults) {
+function setDefaults(defaults) {
   _.merge(clientDefaults, defaults)
 }
 
@@ -214,7 +214,9 @@ _.extend(API.prototype, {
   destroy: function(resource, params={}) {
     // Alias of this.delete()
     return this.delete(resource, params);
-  }
+  },
+
+  setDefaults
 });
 
 API.Resource = function (resource, resourceDef) {
