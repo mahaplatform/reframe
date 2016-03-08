@@ -1,6 +1,6 @@
 import FilterContext from './filter_context.js'
 import _ from 'lodash'
-import history from 'utils/history'
+import history from './history'
 
 export default class FilterContextHelper {
   static wrap(FC) {

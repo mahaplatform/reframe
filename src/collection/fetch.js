@@ -5,9 +5,9 @@ import LoadingContainer, { LoadingState, PresentState, EmptyState } from 'snax/l
 import CoreAPI from '../api'
 import _ from 'lodash'
 import when from 'when'
-import FilterContext from 'utils/filter_context'
-import FilterContextHelper from 'utils/filter_context_helper'
-import Logger from 'utils/logger'
+import FilterContext from '../utils/filter_context'
+import FilterContextHelper from '../utils/filter_context_helper'
+import Logger from '../utils/logger'
 
 export default class FetchCollection extends React.Component {
   static propTypes = {
