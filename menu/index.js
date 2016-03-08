@@ -72,6 +72,11 @@ var Menu = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $(this.refs.menu).find(".dropdown").dropdown({ on: 'click' });
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       $(this.refs.menu).find(".dropdown").dropdown({ on: 'click' });
