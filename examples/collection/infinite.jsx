@@ -24,16 +24,14 @@ export default class InfiniteCollectionExamples extends React.Component {
     return {
       endpoint: "/examples/data.json",
       columns: [
-        { label: 'ID', key: 'id', primary: false, visible: false, cell: 'id' },
         { label: 'First Name', key: 'first_name', primary: true, visible: true },
-        { label: 'Last Name', key: 'last_name', primary: true, visible: true }
+        { label: 'Last Name', key: 'last_name', primary: true, visible: true },
+        { label: 'ID', key: 'id', primary: false, visible: false, cell: 'id' }
       ],
       filters: [
-        { code: 'first_name', placeholder: 'First Name', type: 'textfield' },
-        { code: 'last_name', placeholder: 'Last Name', type: 'textfield' }
-      ],
-      collectionActions: [
-        { key: 'export', icon: 'download', label: 'Export', handler: Actions.export }
+        { code: 'id', label: 'ID', type: 'textfield' },
+        { code: 'first_name', label: 'First Name', type: 'textfield' },
+        { code: 'last_name', label: 'Last Name', type: 'textfield' }
       ],
       recordActions: [
         { key: 'delete', icon: 'times', label: 'delete', handler: Actions.delete },

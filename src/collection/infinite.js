@@ -7,6 +7,7 @@ import { uid } from '../utils/random'
 import FilterContext from '../utils/filter_context'
 import FilterContextHelper from '../utils/filter_context_helper'
 import {clientFactory} from '../api'
+import ExportModal from './export-modal'
 
 export default class InfiniteCollection extends React.Component {
   static contextTypes = {
@@ -15,7 +16,8 @@ export default class InfiniteCollection extends React.Component {
 
   static defaultProps = {
     id: uid(),
-    client: clientFactory()
+    client: clientFactory(),
+    collectionActions: []
   }
 
   constructor(props) {
@@ -24,15 +26,24 @@ export default class InfiniteCollection extends React.Component {
       view: 'table',
       sort: props.sort || { key: 'id', order: 'asc' },
       filters: {},
-      showFilters: false
+      showFilters: false,
+      showExporter: false
     }
   }
 
   render() {
+    const modalOptions = {
+      onAccept: this.export.bind(this),
+      onCancel: this.closeExporter.bind(this),
+      fields: this.props.columns
+    }
     return (
-      <InfiniteContainer ref="container" {...this.getContainerOptions()}>
-        <LoadingCollection {...this.getCollectionProps()} />
-      </InfiniteContainer>
+      <div>
+        <InfiniteContainer ref="container" {...this.getContainerOptions()}>
+          <LoadingCollection {...this.getCollectionProps()} />
+        </InfiniteContainer>
+        { this.state.showExporter ? <ExportModal {...modalOptions} /> : null }
+      </div>
     )
   }
 
@@ -51,6 +62,7 @@ export default class InfiniteCollection extends React.Component {
       ...this.getCallbacks(),
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) },
+        { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) },
         ...this.props.collectionActions
       ],
       sort: this.state.sort,
@@ -90,14 +102,20 @@ export default class InfiniteCollection extends React.Component {
     return parameters
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   refresh() {
     _.defer(()=>this.refs.container.reset())
+  }
+
+  export(fields) {
+
+  }
+
+  openExporter() {
+    this.setState({showExporter: true})
+  }
+
+  closeExporter() {
+    this.setState({showExporter: false})
   }
 }
 
