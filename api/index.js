@@ -111,6 +111,10 @@ var clientDefaults = {
   resource: null
 };
 
+function setDefaults(defaults) {
+  _.merge(clientDefaults, defaults);
+}
+
 function clientFactory(args) {
   var _$merge = _.merge(_.clone(clientDefaults), args);
 
@@ -240,7 +244,9 @@ _.extend(API.prototype, {
 
     // Alias of this.delete()
     return this.delete(resource, params);
-  }
+  },
+
+  setDefaults: setDefaults
 });
 
 API.Resource = function (resource, resourceDef) {
