@@ -20,6 +20,8 @@ export default class Collection extends React.Component {
     records: React.PropTypes.array,
     views: React.PropTypes.arrayOf(React.PropTypes.string),
     card: React.PropTypes.component,
+    recordCount: React.PropTypes.number,
+    entity: React.PropTypes.arrayOf(React.PropTypes.string),
     sort: React.PropTypes.shape({
       key: React.PropTypes.string,
       order: React.PropTypes.oneOf(['ascending','descending'])
@@ -63,6 +65,8 @@ export default class Collection extends React.Component {
     onHideFilters: _.noop,
     sort: { key: '', order: 'desc' },
     empty: "No records found.",
+    entity: ['record', 'records'],
+    recordCount: null,
     filters: [],
     filterValues: {},
     showFilters: false
