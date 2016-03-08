@@ -33,9 +33,9 @@ export default class InfiniteCollection extends React.Component {
 
   render() {
     const modalOptions = {
-      onAccept: this.export.bind(this),
       onCancel: this.closeExporter.bind(this),
-      fields: this.props.columns
+      fields: this.props.columns,
+      exportUrl: this.props.endpoint
     }
     return (
       <div>
@@ -104,10 +104,6 @@ export default class InfiniteCollection extends React.Component {
 
   refresh() {
     _.defer(()=>this.refs.container.reset())
-  }
-
-  export(fields) {
-
   }
 
   openExporter() {

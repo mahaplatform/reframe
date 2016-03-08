@@ -31,7 +31,7 @@ export default class ExportModal extends React.Component {
                 return (
                   <div className="inline field">
                     <div className="ui checkbox">
-                      <input type="checkbox" tabIndex={index} className="hidden" defaultChecked={true}/>
+                      <input type="checkbox" tabIndex={index} className="hidden" value={field.key} defaultChecked={true}/>
                       <label>{field.label}</label>
                     </div>
                   </div>
@@ -43,7 +43,7 @@ export default class ExportModal extends React.Component {
                 return (
                   <div className="inline field">
                     <div className="ui checkbox">
-                      <input type="checkbox" tabIndex={index} className="hidden" defaultChecked={true}/>
+                      <input type="checkbox" tabIndex={index} className="hidden" value={field.key} defaultChecked={true}/>
                       <label>{field.label}</label>
                     </div>
                   </div>
@@ -57,9 +57,9 @@ export default class ExportModal extends React.Component {
           <div className="ui positive dropdown button" ref="export_dropdown">
             Export As... <i className="dropdown icon"/>
             <div className="menu">
-              <div className="item"><i className="file excel outline icon"/> Excel Spreadsheet</div>
-              <div className="item"><i className="table icon"/> CSV</div>
-              <div className="item"><i className="table icon"/> TSV</div>
+              <div className="item" data-value="excel"><i className="file excel outline icon"/> Excel Spreadsheet</div>
+              <div className="item" data-value="csv"><i className="table icon"/> CSV</div>
+              <div className="item" data-value="tsv"><i className="table icon"/> TSV</div>
             </div>
           </div>
         </div>
@@ -67,9 +67,45 @@ export default class ExportModal extends React.Component {
     )
   }
 
+  getFields() {
+    return $(this.refs.field_selector)
+      .find('input:checked')
+      .map((index, element) => {
+        return $(element).val()
+      })
+      .toArray()
+      .join(',')
+  }
+
+  exportXls() {
+    window.location = `${this.props.exportUrl}.xls?fields=${this.getFields()}`
+  }
+
+  exportCsv() {
+    window.location = `${this.props.exportUrl}.xls?fields=${this.getFields()}`
+  }
+
+  exportTsv() {
+    window.location = `${this.props.exportUrl}.xls?fields=${this.getFields()}`
+  }
+
   componentDidMount() {
     $(this.refs.field_selector).find('.checkbox').checkbox()
-    $(this.refs.export_dropdown).dropdown()
+    $(this.refs.export_dropdown).dropdown({
+      action: (text, val) => {
+        switch (val) {
+          case 'excel':
+            this.exportXls()
+            break
+          case 'csv':
+            this.exportCsv()
+            break
+          case 'tsv':
+            this.exportTsv()
+            break
+        }
+      }
+    })
   }
 
   componentWillUnmount() {
