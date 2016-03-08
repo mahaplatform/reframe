@@ -21,33 +21,36 @@ class Header extends React.Component {
   render() {
     return(
       <div className="collection-header">
-        <div className="ui stackable mobile vertically padded reversed grid">
-          <div className="four wide column">
-            {(() => {
-              if(this.props.batchActions && !_.isEmpty(this.props.batchActions)) {
-                return <BatchActions {...this.props} />
-              }
-            })()}
+        <div className="ui menu">
+          {this.renderRecordCount()}
+          {(() => {
+            if(this.props.batchActions && !_.isEmpty(this.props.batchActions)) {
+              return <BatchActions {...this.props} />
+            }
+          })()}
+          <div className="right menu">
+            {_.map(this.getCollectionActions(), (action, index) => {
+              let classes=['icon']
+              classes.push(action.icon)
+              return <a key={`collection_action_${index}`} data-content={action.tip} className="item" onClick={action.handler}><i className={classes.join(' ')} /></a>
+            })}
           </div>
-          <div className="twelve wide column right aligned" ref="collectionActions">
-            {(this.props.collectionActions) ? <CollectionActions collectionActions={this.getCollectionActions()} /> : ''}
-            {(() => {
-              if(this.props.views && this.props.views.length > 1) {
-                let viewOptions = []
-                if(_.includes(this.props.views, 'table')) {
-                  viewOptions.push(<a data-content="View as Table" className={this.props.view == 'table' ? 'popup icon item active' : 'popup icon item'}  onClick={this.handleView.bind(this, 'table')}><i className="fa fa-list icon" /></a>)
-                }
-                if(_.includes(this.props.views, 'card')) {
-                  viewOptions.push(<a data-content="View as Cards" className={this.props.view == 'card' ? 'popup icon item active' : 'popup icon item'} onClick={this.handleView.bind(this, 'card')}><i className="fa fa-th icon" /></a>)
-                }
-                return (
-                  <div className="ui icon compact menu collection-header-views">
-                    {viewOptions.map(opt => opt)}
-                  </div>
-                )
+          {(() => {
+            if(this.props.views && this.props.views.length > 1) {
+              let viewOptions = []
+              if(_.includes(this.props.views, 'table')) {
+                viewOptions.push(<a data-content="View as Table" className={this.props.view == 'table' ? 'popup icon item active' : 'popup icon item'}  onClick={this.handleView.bind(this, 'table')}><i className="fa fa-list icon" /></a>)
               }
-            })()}
-          </div>
+              if(_.includes(this.props.views, 'card')) {
+                viewOptions.push(<a data-content="View as Cards" className={this.props.view == 'card' ? 'popup icon item active' : 'popup icon item'} onClick={this.handleView.bind(this, 'card')}><i className="fa fa-th icon" /></a>)
+              }
+              return (
+                <div className="ui icon compact menu collection-header-views">
+                  {viewOptions.map(opt => opt)}
+                </div>
+              )
+            }
+          })()}
         </div>
         {this.renderFilters()}
       </div>
@@ -58,9 +61,29 @@ class Header extends React.Component {
     // Merge in an action to show filters if filters are specified
     if(this.props.filters) {
       return [
-        { key: 'filter', icon: 'filter', label: 'Filter', handler: this.showFilters.bind(this) },
+        { key: 'filter', icon: 'filter', label: 'Filter', handler: this.toggleFilters.bind(this) },
         ...this.props.collectionActions
       ]
+    }
+  }
+
+  renderRecordCount() {
+    if (this.props.recordCount !== null) {
+      const inflection = (this.props.recordCount > 0 ? this.props.entity[1] : this.props.entity[0])
+      return (
+        <div className="item">
+          <h4>{this.props.recordCount} {inflection}</h4>
+        </div>
+      )
+    }
+  }
+
+  toggleFilters() {
+    if(this.state.showFilters) {
+      this.hideFilters()
+    }
+    else {
+      this.showFilters()
     }
   }
 

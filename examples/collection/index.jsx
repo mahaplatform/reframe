@@ -56,6 +56,7 @@ export default class CollectionExamples extends React.Component {
       ],
       records: this.getSortedRecords(),
       sort: this.state.table.sort,
+      recordCount: 11,
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: Actions.reload },
         { key: 'export', icon: 'download', label: 'Export', handler: Actions.export }

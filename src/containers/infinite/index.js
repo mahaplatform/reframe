@@ -54,7 +54,8 @@ export default class InfiniteContainer extends React.Component {
       propsData: null,
       message: null,
       nextPage: null,
-      isAtEnd: false
+      isAtEnd: false,
+      totalRecords: 0
     }
 
     this.api = new API(props.client)
@@ -117,6 +118,7 @@ export default class InfiniteContainer extends React.Component {
               {
                 status: READY,
                 endpointData: [ ...this.state.endpointData, ...endpointData.records ],
+                totalRecords: endpointData.total_records,
                 propsData,
                 nextPage
               }
@@ -127,6 +129,7 @@ export default class InfiniteContainer extends React.Component {
               {
                 status: READY,
                 endpointData: [ ...this.state.endpointData, ...endpointData.records ],
+                totalRecords: endpointData.total_records,
                 propsData,
                 nextPage,
                 isAtEnd: true
@@ -182,7 +185,8 @@ export default class InfiniteContainer extends React.Component {
   render() {
     let finalProps = {
       status: this.state.status,
-      isAtEnd: this.state.isAtEnd
+      isAtEnd: this.state.isAtEnd,
+      totalRecords: this.state.totalRecords
     }
 
     if ( this.state.endpointData ) {

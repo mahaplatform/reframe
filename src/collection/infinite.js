@@ -118,7 +118,7 @@ export default class InfiniteCollection extends React.Component {
 const LoadingCollection = props => {
   return (
     <div>
-      <Collection {...props} />
+      <Collection {...props} recordCount={props.totalRecords || 0} />
       { props.status === 'awaiting' ? <div className="ui active centered inline loader"></div> : null }
     </div>
   )

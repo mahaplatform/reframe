@@ -6,7 +6,7 @@ class BatchActions extends React.Component {
 
   render() {
     return (
-      <div className="ui selection dropdown" ref="batchActions">
+      <div className="ui selection dropdown item" ref="batchActions">
         <i className="dropdown icon" />
         <div className="default text">With Selected</div>
         <div className="menu">
