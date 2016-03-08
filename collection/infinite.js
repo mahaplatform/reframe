@@ -24,23 +24,31 @@ var _loading = require('snax/lib/containers/loading');
 
 var _loading2 = _interopRequireDefault(_loading);
 
-var _table_reducer = require('./reducers/table_reducer');
+var _infinite = require('../containers/infinite');
 
-var _table_reducer2 = _interopRequireDefault(_table_reducer);
-
-var _table_actions = require('./actions/table_actions');
-
-var _table_actions2 = _interopRequireDefault(_table_actions);
+var _infinite2 = _interopRequireDefault(_infinite);
 
 var _random = require('../utils/random');
 
-var _redux = require('redux');
+var _filter_context = require('../utils/filter_context');
+
+var _filter_context2 = _interopRequireDefault(_filter_context);
+
+var _filter_context_helper = require('../utils/filter_context_helper');
+
+var _filter_context_helper2 = _interopRequireDefault(_filter_context_helper);
 
 var _api = require('../api');
 
-var _api2 = _interopRequireDefault(_api);
+var _exportModal = require('./export-modal');
+
+var _exportModal2 = _interopRequireDefault(_exportModal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -48,42 +56,62 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function createDefaultStore(id) {
-  return (0, _redux.createStore)((0, _redux.combineReducers)({
-    tables: _table_reducer2.default
-  }));
-}
+var InfiniteCollection = function (_React$Component) {
+  _inherits(InfiniteCollection, _React$Component);
 
-var SuperCollection = function (_React$Component) {
-  _inherits(SuperCollection, _React$Component);
+  function InfiniteCollection(props) {
+    _classCallCheck(this, InfiniteCollection);
 
-  function SuperCollection(props) {
-    _classCallCheck(this, SuperCollection);
-
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SuperCollection).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InfiniteCollection).call(this, props));
 
     _this.state = {
       view: 'table',
-      sort: { key: 'id', order: 'asc' },
-      columnChooserVisible: false,
-      filtersVisible: false
+      sort: props.sort || { key: 'id', order: 'asc' },
+      filters: {},
+      showFilters: false,
+      showExporter: false
     };
     return _this;
   }
 
-  _createClass(SuperCollection, [{
+  _createClass(InfiniteCollection, [{
     key: 'render',
     value: function render() {
+      var modalOptions = {
+        onCancel: this.closeExporter.bind(this),
+        fields: this.props.columns,
+        exportUrl: this.props.endpoint
+      };
       return _react2.default.createElement(
-        InfiniteContainer,
-        { endpoint: this.props.endpoint, client: this.props.client, injectAs: 'records' },
-        _react2.default.createElement(LoadingCollection, this.getCollectionProps())
+        'div',
+        null,
+        _react2.default.createElement(
+          _infinite2.default,
+          _extends({ ref: 'container' }, this.getContainerOptions()),
+          _react2.default.createElement(LoadingCollection, this.getCollectionProps())
+        ),
+        this.state.showExporter ? _react2.default.createElement(_exportModal2.default, modalOptions) : null
       );
+    }
+  }, {
+    key: 'getContainerOptions',
+    value: function getContainerOptions() {
+      return {
+        endpoint: this.props.endpoint,
+        endpointOptions: this.getQuery(),
+        client: this.props.client,
+        injectAs: "records"
+      };
     }
   }, {
     key: 'getCollectionProps',
     value: function getCollectionProps() {
-      return _extends({}, this.getCallbacks());
+      return _extends({}, this.props, this.getCallbacks(), {
+        collectionActions: [{ key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) }, { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) }].concat(_toConsumableArray(this.props.collectionActions)),
+        sort: this.state.sort,
+        filterValues: this.state.filters,
+        showFilters: this.state.showFilters
+      });
     }
   }, {
     key: 'getCallbacks',
@@ -92,51 +120,81 @@ var SuperCollection = function (_React$Component) {
 
       return {
         onClickColumnHeader: function onClickColumnHeader(col) {
-          _this2.store.dispatch(_table_actions2.default.setReverse(_this2.props.id, col));
+          if (col === _this2.state.sort.key) {
+            var order = _this2.state.sort.order === 'asc' ? 'desc' : 'asc';
+            var key = _this2.state.sort.key;
+            _this2.setState({ sort: { key: key, order: order } });
+          } else {
+            var order = 'asc';
+            var key = col;
+            _this2.setState({ sort: { key: key, order: order } });
+          }
+          _.defer(function () {
+            return _this2.refs.container.reset();
+          });
         },
-        onClickColumnChooser: function onClickColumnChooser() {
-          _this2.store.dispatch(_table_actions2.default.showColumnChooser(_this2.props.id));
+        onFilterChange: function onFilterChange(filters) {
+          _this2.setState({ filters: filters });
+          _.defer(function () {
+            return _this2.refs.container.reset();
+          });
+        },
+        onShowFilters: function onShowFilters() {
+          return _this2.setState({ showFilters: true });
+        },
+        onHideFilters: function onHideFilters() {
+          return _this2.setState({ showFilters: false });
         }
       };
     }
   }, {
-    key: 'getSort',
-    value: function getSort() {}
+    key: 'getQuery',
+    value: function getQuery() {
+      var sort = _defineProperty({}, this.state.sort.key, this.state.sort.order);
+      var query = this.state.filters;
+      var parameters = _filter_context_helper2.default.toQueryParams(new _filter_context2.default({ sort: sort, query: query }));
+      return parameters;
+    }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {}
+    key: 'refresh',
+    value: function refresh() {
+      var _this3 = this;
+
+      _.defer(function () {
+        return _this3.refs.container.reset();
+      });
+    }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {}
+    key: 'openExporter',
+    value: function openExporter() {
+      this.setState({ showExporter: true });
+    }
+  }, {
+    key: 'closeExporter',
+    value: function closeExporter() {
+      this.setState({ showExporter: false });
+    }
   }]);
 
-  return SuperCollection;
+  return InfiniteCollection;
 }(_react2.default.Component);
 
-SuperCollection.contextTypes = {
+InfiniteCollection.contextTypes = {
   store: _react2.default.PropTypes.object
 };
-SuperCollection.defaultProps = {
+InfiniteCollection.defaultProps = {
   id: (0, _random.uid)(),
-  client: new _api2.default()
+  client: (0, _api.clientFactory)(),
+  collectionActions: []
 };
-exports.default = SuperCollection;
+exports.default = InfiniteCollection;
 
 
 var LoadingCollection = function LoadingCollection(props) {
   return _react2.default.createElement(
-    _loading2.default,
+    'div',
     null,
-    _react2.default.createElement(
-      _loading.EmptyState,
-      null,
-      _react2.default.createElement(_index2.default, { records: [], empty: 'There are no records.' })
-    ),
-    _react2.default.createElement(
-      _loading.PresentState,
-      null,
-      _react2.default.createElement(_index2.default, props),
-      !props.isAtEnd ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
-    )
+    _react2.default.createElement(_index2.default, props),
+    props.status === 'awaiting' ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
   );
 };

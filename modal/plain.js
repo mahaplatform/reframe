@@ -7,15 +7,6 @@ exports.PlainWindow = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _plain = require('./plain.js');
-
-Object.defineProperty(exports, 'PlainWindow', {
-  enumerable: true,
-  get: function get() {
-    return _plain.PlainWindow;
-  }
-});
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -34,13 +25,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var noop = function noop() {};
 
-var Window = function (_React$Component) {
-  _inherits(Window, _React$Component);
+var PlainWindow = exports.PlainWindow = function (_React$Component) {
+  _inherits(PlainWindow, _React$Component);
 
-  function Window(props) {
-    _classCallCheck(this, Window);
+  function PlainWindow(props) {
+    _classCallCheck(this, PlainWindow);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Window).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PlainWindow).call(this, props));
 
     _this.state = {
       top: 0
@@ -48,7 +39,7 @@ var Window = function (_React$Component) {
     return _this;
   }
 
-  _createClass(Window, [{
+  _createClass(PlainWindow, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -60,38 +51,9 @@ var Window = function (_React$Component) {
           { ref: 'modalWindow', style: { marginTop: this.state.top },
             className: 'ui small modal animating transition active', key: 'collection_confirmation' },
           this.props.closeable ? _react2.default.createElement('i', { className: 'close icon', onClick: this.props.onClose }) : null,
-          _react2.default.createElement(
-            'div',
-            { className: 'header' },
-            this.props.title
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'content' },
-            this.props.children
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'actions' },
-            _.map(this.getButtons(), function (button) {
-              return _react2.default.createElement(
-                'div',
-                { className: 'ui ' + button.color + ' button', onClick: button.handler },
-                button.label
-              );
-            })
-          )
+          this.props.children
         )
       );
-    }
-  }, {
-    key: 'getButtons',
-    value: function getButtons() {
-      if (!this.props.buttons) {
-        return [{ color: 'positive', handler: this.props.onApprove, label: this.props.approveButtonLabel }, { color: 'negative', handler: this.props.onCancel, label: this.props.cancelButtonLabel }];
-      } else {
-        return this.props.buttons;
-      }
     }
   }, {
     key: 'dimmerClick',
@@ -107,19 +69,15 @@ var Window = function (_React$Component) {
     }
   }]);
 
-  return Window;
+  return PlainWindow;
 }(_react2.default.Component);
 
-Window.propTypes = {
+PlainWindow.propTypes = {
   title: _react2.default.PropTypes.string.isRequired
 };
-Window.defaultProps = {
+PlainWindow.defaultProps = {
   onApprove: noop,
   onCancel: noop,
   onClose: noop,
-  closeable: true,
-  cancelButtonLabel: 'Cancel',
-  approveButtonLabel: 'Continue',
-  customBody: false
+  closeable: true
 };
-exports.default = Window;

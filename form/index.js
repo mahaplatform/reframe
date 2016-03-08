@@ -269,6 +269,11 @@ var Form = function (_React$Component) {
       this.setState({ errors: errors });
     }
   }, {
+    key: 'fill',
+    value: function fill(data) {
+      this.onFill([this.props.id, data]);
+    }
+  }, {
     key: 'onFill',
     value: function onFill(_ref2) {
       var _this4 = this;

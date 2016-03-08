@@ -18,6 +18,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _columnChooser = require('./column-chooser');
+
+var _columnChooser2 = _interopRequireDefault(_columnChooser);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75,10 +79,32 @@ var Thead = function (_React$Component) {
           _react2.default.createElement(
             'th',
             { className: 'collapsing primary center aligned' },
-            _react2.default.createElement('i', { className: 'ui columns icon', onClick: this.handleColumns.bind(this) })
+            _react2.default.createElement(
+              'div',
+              { className: 'ui top right pointing dropdown', ref: 'columns_dropdown' },
+              _react2.default.createElement('i', { className: 'ui columns icon', onClick: this.handleColumns.bind(this) }),
+              _react2.default.createElement(_columnChooser2.default, { availableColumns: this.props.columns, visibleColumns: this.props.visible, onChooseColumn: this.onChooseColumn.bind(this) })
+            )
           )
         )
       );
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $(this.refs.columns_dropdown).dropdown({
+        action: 'nothing'
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      $(this.refs.columns_dropdown).dropdown('destroy');
+    }
+  }, {
+    key: 'onChooseColumn',
+    value: function onChooseColumn(key, visible) {
+      this.props.onChooseColumn(key, visible);
     }
   }, {
     key: 'handleCheckAll',
@@ -104,6 +130,7 @@ var Thead = function (_React$Component) {
 Thead.defaultProps = {
   onSort: _lodash2.default.noop,
   onCheckAll: _lodash2.default.noop,
-  onClickColumns: _lodash2.default.noop
+  onClickColumns: _lodash2.default.noop,
+  onChooseColumn: _lodash2.default.noop
 };
 exports.default = Thead;

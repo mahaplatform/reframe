@@ -136,17 +136,6 @@ var FetchCollection = function (_React$Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      //console.log(nextProps)
-      //if (nextProps.options != this.props.options || nextProps.endpoint != this.props.endpoint) {
-      //  const dataPromise = this.buildRequest()
-      //    .then(data => this.setState({resolvedData: data, asyncStatus: 'COMPLETE'}))
-      //    .catch(error => this.setState({asyncStatus: 'ERROR', resolvedData: null}))
-      //  this.setState({asyncStatus: 'AWAITING', dataPromise})
-      //}
-      //if(nextProps.promise !== this.props.promise) {
-      //
-      //}
-
       var dataPromise = this.buildRequest().then(function (data) {
         return _this3.setState({ resolvedData: data, asyncStatus: 'COMPLETE' });
       }).catch(function (error) {

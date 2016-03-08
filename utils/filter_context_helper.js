@@ -140,7 +140,7 @@ var FilterContextEnhancer = exports.FilterContextEnhancer = function () {
         }
       }
 
-      var reduc = (0, _lodash2.default)(this.fc).pick(['fields', 'skip', 'limit']).omit(emptyValues).mapKeys(function (val, key) {
+      var reduc = (0, _lodash2.default)(this.fc).pick(['fields', 'skip', 'limit']).omitBy(emptyValues).mapKeys(function (val, key) {
         return _lodash2.default.snakeCase(key);
       }).merge(qp).value();
 

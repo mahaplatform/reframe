@@ -34,8 +34,6 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -52,7 +50,8 @@ var Collection = function (_React$Component) {
 
     _this.state = {
       visible: _lodash2.default.map(_lodash2.default.filter(_lodash2.default.each(props.columns, function (column, index) {
-        column.index = index;return column;
+        column.index = index;
+        return column;
       }), { visible: true }), 'index'),
       view: props.views ? _lodash2.default.first(props.views) : 'table',
       checkAll: false,
@@ -73,7 +72,7 @@ var Collection = function (_React$Component) {
         'div',
         { className: 'collection' },
         shouldShowHeader ? _react2.default.createElement(_header2.default, _extends({}, this.props, this.state)) : '',
-        _react2.default.createElement(ActiveView, _extends({}, this.props, this.state, this.context)),
+        _react2.default.createElement(ActiveView, _extends({}, this.props, this.state, this.context, { onChooseColumn: this.onChooseColumn.bind(this) })),
         function () {
           if (_this2.props.status === 'LOADING') {
             return null; // <div className="ui active centered inline loader"></div>
@@ -90,33 +89,18 @@ var Collection = function (_React$Component) {
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this3 = this;
-
-      var selfTrigger = function selfTrigger(fn) {
-        var self = _this3;
-        return _lodash2.default.wrap(fn, function (ffn) {
-          for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-
-          if (_lodash2.default.isArray(args[0])) {
-            args[0][0] === self.props.componentId ? ffn.bind(self).apply(undefined, _toConsumableArray(_lodash2.default.drop(args[0], 1))) : _lodash2.default.noop;
-          } else {
-            args[0] === self.props.componentId ? ffn.bind(self).apply(undefined, _toConsumableArray(_lodash2.default.drop(args, 1))) : _lodash2.default.noop;
-          }
-        });
-      };
-
-      //this.listeners.push(actionListener.addActionListener(CollectionActions.SET_VIEW, selfTrigger(this.handleSetView)))
-      //this.listeners.push(actionListener.addActionListener(CollectionActions.TOGGLE_VISIBILITY, selfTrigger(this.handleToggleVisibility)))
-      //this.listeners.push(actionListener.addActionListener(CollectionActions.CHECK, selfTrigger(this.handleCheck)))
-      //this.listeners.push(actionListener.addActionListener(CollectionActions.CHECK_ALL, selfTrigger(this.handleCheckAll)))
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      //_.each(this.listeners, actionListener.removeActionListener.bind(actionListener))
+    value: function componentWillUnmount() {}
+  }, {
+    key: 'onChooseColumn',
+    value: function onChooseColumn(key, visible) {
+      if (visible) {
+        this.setState({ visible: _lodash2.default.union(this.state.visible, [key]) });
+      } else {
+        this.setState({ visible: _lodash2.default.difference(this.state.visible, [key]) });
+      }
     }
   }, {
     key: 'handleSetView',
@@ -165,6 +149,7 @@ Collection.propTypes = {
     visible: _react2.default.PropTypes.bool,
     cell: _react2.default.PropTypes.component
   })).isRequired,
+  filters: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object),
   empty: _react2.default.PropTypes.string.isRequired,
   records: _react2.default.PropTypes.array,
   views: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
@@ -197,7 +182,13 @@ Collection.defaultProps = {
   onCheckAll: _lodash2.default.noop,
   onClickColumnHeader: _lodash2.default.noop,
   onClickColumnChooser: _lodash2.default.noop,
+  onFilterChange: _lodash2.default.noop,
+  onShowFilters: _lodash2.default.noop,
+  onHideFilters: _lodash2.default.noop,
   sort: { key: '', order: 'desc' },
-  empty: "No records found."
+  empty: "No records found.",
+  filters: [],
+  filterValues: {},
+  showFilters: false
 };
 exports.default = Collection;

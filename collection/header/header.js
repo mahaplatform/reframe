@@ -26,7 +26,13 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _form = require('../../form');
+
+var _form2 = _interopRequireDefault(_form);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37,10 +43,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Header = function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+
+    _this.state = {
+      showFilters: props.showFilters
+    };
+    return _this;
   }
 
   _createClass(Header, [{
@@ -66,7 +77,7 @@ var Header = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'twelve wide column right aligned', ref: 'collectionActions' },
-            this.props.collectionActions ? _react2.default.createElement(_collection_actions2.default, this.props) : '',
+            this.props.collectionActions ? _react2.default.createElement(_collection_actions2.default, { collectionActions: this.getCollectionActions() }) : '',
             function () {
               if (_this2.props.views && _this2.props.views.length > 1) {
                 var viewOptions = [];
@@ -94,13 +105,89 @@ var Header = function (_React$Component) {
               }
             }()
           )
-        )
+        ),
+        this.renderFilters()
       );
+    }
+  }, {
+    key: 'getCollectionActions',
+    value: function getCollectionActions() {
+      // Merge in an action to show filters if filters are specified
+      if (this.props.filters) {
+        return [{ key: 'filter', icon: 'filter', label: 'Filter', handler: this.showFilters.bind(this) }].concat(_toConsumableArray(this.props.collectionActions));
+      }
+    }
+  }, {
+    key: 'showFilters',
+    value: function showFilters() {
+      this.setState({ showFilters: true });
+      this.props.onShowFilters();
+    }
+  }, {
+    key: 'hideFilters',
+    value: function hideFilters() {
+      this.setState({ showFilters: false });
+      this.props.onHideFilters();
+    }
+  }, {
+    key: 'clearFilters',
+    value: function clearFilters() {
+      this.refs.filter_form.onClear("collection_filter_form");
+      this.handleFilter({});
+    }
+  }, {
+    key: 'renderFilters',
+    value: function renderFilters() {
+      var _this3 = this;
+
+      var shouldShow = this.state.showFilters && this.props.filters && true;
+      var visibility = shouldShow ? 'visible' : 'collapse';
+      var display = shouldShow ? 'block' : 'none';
+      return _react2.default.createElement(
+        'div',
+        { style: { visibility: visibility, display: display } },
+        _react2.default.createElement(_form2.default, {
+          ref: 'filter_form',
+          id: 'collection_filter_form',
+          style: { marginBottom: 12 },
+          sections: [{ fields: this.getFilterFields() }],
+          onFieldChange: _lodash2.default.debounce(function () {
+            return _this3.refs.filter_form.doSubmit("collection_filter_form");
+          }, 300),
+          onSubmit: this.handleFilter.bind(this),
+          onCancel: this.hideFilters.bind(this),
+          buttons: [
+          //{type: 'submit', label: 'Filter'},
+          { type: 'cancel', label: 'Close' }, { color: 'neutral', label: 'Clear', action: this.clearFilters.bind(this) }]
+        })
+      );
+    }
+  }, {
+    key: 'getFilterFields',
+    value: function getFilterFields() {
+      return (0, _lodash2.default)(this.props.filters).chunk(2).map(function (fields) {
+        if (fields.length > 1) {
+          return { type: 'fields', fields: fields };
+        } else {
+          return _lodash2.default.head(fields);
+        }
+      }).value();
+    }
+  }, {
+    key: 'handleFilter',
+    value: function handleFilter(filterData) {
+      var compactedFilters = _lodash2.default.omitBy(filterData, _lodash2.default.isNull);
+      this.props.onFilterChange(compactedFilters);
     }
   }, {
     key: 'handleView',
     value: function handleView(type) {
       this.props.onSetView(type);
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.refs.filter_form.fill(this.props.filterValues);
     }
   }]);
 

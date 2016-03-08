@@ -232,6 +232,19 @@ var InfiniteContainer = function (_React$Component) {
       var className = this.props.className;
       return _react2.default.createElement.apply(_react2.default, [this.props.element, { className: className }].concat(_toConsumableArray(mappedChildren)));
     }
+  }, {
+    key: 'reset',
+    value: function reset() {
+      this.setState({
+        status: AWAITING,
+        endpointData: [],
+        propsData: null,
+        message: null,
+        nextPage: null,
+        isAtEnd: false
+      });
+      this.makeRequest(this.props.endpoint);
+    }
   }]);
 
   return InfiniteContainer;
