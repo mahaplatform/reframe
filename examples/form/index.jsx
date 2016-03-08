@@ -25,6 +25,10 @@ export default class FormExamples extends React.Component {
       onSubmit: data => Logger.info(data),
       sections: [
         { fields: [
+          { type: "fields", fields: [
+            { code: "date", label: 'Date', type: "datefield", placeholder: 'Date' },
+            { code: "time", label: 'Time', type: "timefield", placeholder: 'Time' }
+          ]},
           { label: 'Name', type: "fields", required: true, fields: [
             { code: "first_name", type: "textfield", placeholder: 'First Name', required: true },
             { code: "last_name", type: "textfield", placeholder: 'Last Name', required: true }
@@ -39,7 +43,7 @@ export default class FormExamples extends React.Component {
             { code: "city", type: "textfield", placeholder: 'City' },
             { code: "state", type: "stateselect", placeholder: 'State', abbreviations: true },
             { code: "zip", type: "textfield", placeholder: 'Zip' },
-          ]}
+          ]},
         ]}
       ]
     }
