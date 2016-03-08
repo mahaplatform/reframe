@@ -36,15 +36,15 @@ var _when = require('when');
 
 var _when2 = _interopRequireDefault(_when);
 
-var _filter_context = require('utils/filter_context');
+var _filter_context = require('../utils/filter_context');
 
 var _filter_context2 = _interopRequireDefault(_filter_context);
 
-var _filter_context_helper = require('utils/filter_context_helper');
+var _filter_context_helper = require('../utils/filter_context_helper');
 
 var _filter_context_helper2 = _interopRequireDefault(_filter_context_helper);
 
-var _logger = require('utils/logger');
+var _logger = require('../utils/logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 

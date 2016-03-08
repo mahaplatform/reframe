@@ -15,7 +15,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _history = require('utils/history');
+var _history = require('./history');
 
 var _history2 = _interopRequireDefault(_history);
 
