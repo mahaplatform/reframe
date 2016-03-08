@@ -40,7 +40,7 @@ var BatchActions = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'ui selection dropdown', ref: 'batchActions' },
+        { className: 'ui selection dropdown item', ref: 'batchActions' },
         _react2.default.createElement('i', { className: 'dropdown icon' }),
         _react2.default.createElement(
           'div',

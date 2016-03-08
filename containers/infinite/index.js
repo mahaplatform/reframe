@@ -77,7 +77,8 @@ var InfiniteContainer = function (_React$Component) {
       propsData: null,
       message: null,
       nextPage: null,
-      isAtEnd: false
+      isAtEnd: false,
+      totalRecords: 0
     };
 
     _this.api = new _api2.default(props.client);
@@ -128,6 +129,7 @@ var InfiniteContainer = function (_React$Component) {
           _this2.setState({
             status: READY,
             endpointData: [].concat(_toConsumableArray(_this2.state.endpointData), _toConsumableArray(endpointData.records)),
+            totalRecords: endpointData.total_records,
             propsData: propsData,
             nextPage: nextPage
           });
@@ -135,6 +137,7 @@ var InfiniteContainer = function (_React$Component) {
           _this2.setState({
             status: READY,
             endpointData: [].concat(_toConsumableArray(_this2.state.endpointData), _toConsumableArray(endpointData.records)),
+            totalRecords: endpointData.total_records,
             propsData: propsData,
             nextPage: nextPage,
             isAtEnd: true
@@ -191,7 +194,8 @@ var InfiniteContainer = function (_React$Component) {
 
       var finalProps = {
         status: this.state.status,
-        isAtEnd: this.state.isAtEnd
+        isAtEnd: this.state.isAtEnd,
+        totalRecords: this.state.totalRecords
       };
 
       if (this.state.endpointData) {

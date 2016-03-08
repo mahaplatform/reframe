@@ -64,47 +64,52 @@ var Header = function (_React$Component) {
         { className: 'collection-header' },
         _react2.default.createElement(
           'div',
-          { className: 'ui stackable mobile vertically padded reversed grid' },
+          { className: 'ui menu' },
+          this.renderRecordCount(),
+          function () {
+            if (_this2.props.batchActions && !_lodash2.default.isEmpty(_this2.props.batchActions)) {
+              return _react2.default.createElement(_batch_actions2.default, _this2.props);
+            }
+          }(),
           _react2.default.createElement(
             'div',
-            { className: 'four wide column' },
-            function () {
-              if (_this2.props.batchActions && !_lodash2.default.isEmpty(_this2.props.batchActions)) {
-                return _react2.default.createElement(_batch_actions2.default, _this2.props);
-              }
-            }()
+            { className: 'right menu' },
+            _lodash2.default.map(this.getCollectionActions(), function (action, index) {
+              var classes = ['icon'];
+              classes.push(action.icon);
+              return _react2.default.createElement(
+                'a',
+                { key: 'collection_action_' + index, 'data-content': action.tip, className: 'item', onClick: action.handler },
+                _react2.default.createElement('i', { className: classes.join(' ') })
+              );
+            })
           ),
-          _react2.default.createElement(
-            'div',
-            { className: 'twelve wide column right aligned', ref: 'collectionActions' },
-            this.props.collectionActions ? _react2.default.createElement(_collection_actions2.default, { collectionActions: this.getCollectionActions() }) : '',
-            function () {
-              if (_this2.props.views && _this2.props.views.length > 1) {
-                var viewOptions = [];
-                if (_lodash2.default.includes(_this2.props.views, 'table')) {
-                  viewOptions.push(_react2.default.createElement(
-                    'a',
-                    { 'data-content': 'View as Table', className: _this2.props.view == 'table' ? 'popup icon item active' : 'popup icon item', onClick: _this2.handleView.bind(_this2, 'table') },
-                    _react2.default.createElement('i', { className: 'fa fa-list icon' })
-                  ));
-                }
-                if (_lodash2.default.includes(_this2.props.views, 'card')) {
-                  viewOptions.push(_react2.default.createElement(
-                    'a',
-                    { 'data-content': 'View as Cards', className: _this2.props.view == 'card' ? 'popup icon item active' : 'popup icon item', onClick: _this2.handleView.bind(_this2, 'card') },
-                    _react2.default.createElement('i', { className: 'fa fa-th icon' })
-                  ));
-                }
-                return _react2.default.createElement(
-                  'div',
-                  { className: 'ui icon compact menu collection-header-views' },
-                  viewOptions.map(function (opt) {
-                    return opt;
-                  })
-                );
+          function () {
+            if (_this2.props.views && _this2.props.views.length > 1) {
+              var viewOptions = [];
+              if (_lodash2.default.includes(_this2.props.views, 'table')) {
+                viewOptions.push(_react2.default.createElement(
+                  'a',
+                  { 'data-content': 'View as Table', className: _this2.props.view == 'table' ? 'popup icon item active' : 'popup icon item', onClick: _this2.handleView.bind(_this2, 'table') },
+                  _react2.default.createElement('i', { className: 'fa fa-list icon' })
+                ));
               }
-            }()
-          )
+              if (_lodash2.default.includes(_this2.props.views, 'card')) {
+                viewOptions.push(_react2.default.createElement(
+                  'a',
+                  { 'data-content': 'View as Cards', className: _this2.props.view == 'card' ? 'popup icon item active' : 'popup icon item', onClick: _this2.handleView.bind(_this2, 'card') },
+                  _react2.default.createElement('i', { className: 'fa fa-th icon' })
+                ));
+              }
+              return _react2.default.createElement(
+                'div',
+                { className: 'ui icon compact menu collection-header-views' },
+                viewOptions.map(function (opt) {
+                  return opt;
+                })
+              );
+            }
+          }()
         ),
         this.renderFilters()
       );
@@ -114,7 +119,34 @@ var Header = function (_React$Component) {
     value: function getCollectionActions() {
       // Merge in an action to show filters if filters are specified
       if (this.props.filters) {
-        return [{ key: 'filter', icon: 'filter', label: 'Filter', handler: this.showFilters.bind(this) }].concat(_toConsumableArray(this.props.collectionActions));
+        return [{ key: 'filter', icon: 'filter', label: 'Filter', handler: this.toggleFilters.bind(this) }].concat(_toConsumableArray(this.props.collectionActions));
+      }
+    }
+  }, {
+    key: 'renderRecordCount',
+    value: function renderRecordCount() {
+      if (this.props.recordCount !== null) {
+        var inflection = this.props.recordCount > 0 ? this.props.entity[1] : this.props.entity[0];
+        return _react2.default.createElement(
+          'div',
+          { className: 'item' },
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.props.recordCount,
+            ' ',
+            inflection
+          )
+        );
+      }
+    }
+  }, {
+    key: 'toggleFilters',
+    value: function toggleFilters() {
+      if (this.state.showFilters) {
+        this.hideFilters();
+      } else {
+        this.showFilters();
       }
     }
   }, {

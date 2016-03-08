@@ -194,7 +194,7 @@ var LoadingCollection = function LoadingCollection(props) {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_index2.default, props),
+    _react2.default.createElement(_index2.default, _extends({}, props, { recordCount: props.totalRecords || 0 })),
     props.status === 'awaiting' ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
   );
 };

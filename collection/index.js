@@ -154,6 +154,8 @@ Collection.propTypes = {
   records: _react2.default.PropTypes.array,
   views: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
   card: _react2.default.PropTypes.component,
+  recordCount: _react2.default.PropTypes.number,
+  entity: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string),
   sort: _react2.default.PropTypes.shape({
     key: _react2.default.PropTypes.string,
     order: _react2.default.PropTypes.oneOf(['ascending', 'descending'])
@@ -187,6 +189,8 @@ Collection.defaultProps = {
   onHideFilters: _lodash2.default.noop,
   sort: { key: '', order: 'desc' },
   empty: "No records found.",
+  entity: ['record', 'records'],
+  recordCount: null,
   filters: [],
   filterValues: {},
   showFilters: false
