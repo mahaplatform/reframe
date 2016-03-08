@@ -104,6 +104,10 @@ var _timezoneselect = require('./timezoneselect.js');
 
 var _timezoneselect2 = _interopRequireDefault(_timezoneselect);
 
+var _timefield = require('./timefield.js');
+
+var _timefield2 = _interopRequireDefault(_timefield);
+
 var _urlfield = require('./urlfield.js');
 
 var _urlfield2 = _interopRequireDefault(_urlfield);
@@ -147,6 +151,7 @@ var standardControls = {
   'textarea': _textarea2.default,
   'textfield': _textfield2.default,
   'timezoneselect': _timezoneselect2.default,
+  'timefield': _timefield2.default,
   'urlfield': _urlfield2.default
 };
 
