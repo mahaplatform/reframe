@@ -23,6 +23,7 @@ import StateSelect from './stateselect.js'
 import TextArea from './textarea.js'
 import TextField from './textfield.js'
 import TimezoneSelect from './timezoneselect.js'
+import Timefield from './timefield.js'
 import UrlField from './urlfield.js'
 
 import _ from 'lodash';
@@ -53,6 +54,7 @@ const standardControls = {
   'textarea': TextArea,
   'textfield': TextField,
   'timezoneselect': TimezoneSelect,
+  'timefield': Timefield,
   'urlfield': UrlField
 };
 
