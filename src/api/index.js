@@ -93,7 +93,7 @@ let _defaultRequest = require('rest/interceptor/defaultRequest');
 // This is our API version
 const apiVersion = 1;
 
-const clientDefaults = {
+let clientDefaults = {
   mimeType: `application/json`,
   errorCode: 404,
   pathPrefix: '',
@@ -104,6 +104,10 @@ const clientDefaults = {
     mixin: { withCredentials: true }
   },
   resource: null
+}
+
+export function setDefaults(defaults) {
+  _.merge(clientDefaults, defaults)
 }
 
 export function clientFactory(args) {
