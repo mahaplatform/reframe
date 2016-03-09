@@ -169,7 +169,7 @@ var InfiniteContainer = function (_React$Component) {
     key: 'handleScroll',
     value: function handleScroll() {
       var windowHeight = window.innerHeight;
-      var documentHeight = parseInt(getComputedStyle(document.getElementById(this.props.documentSelector)).height.split('px')[0]);
+      var documentHeight = parseInt(getComputedStyle(document.body).height.split('px')[0]);
       var topOfView = window.pageYOffset;
       var bottomOfView = topOfView + windowHeight;
       var distanceFromBottom = documentHeight - bottomOfView;
