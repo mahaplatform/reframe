@@ -81,7 +81,7 @@ var InfiniteContainer = function (_React$Component) {
       totalRecords: 0
     };
 
-    _this.api = new _api2.default(props.client);
+    _this.api = new _api2.default(props.client || undefined);
 
     _this.onTerminate = _lodash2.default.once(function () {
       _this.forceUpdate();

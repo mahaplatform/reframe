@@ -38,8 +38,6 @@ var _filter_context_helper = require('../utils/filter_context_helper');
 
 var _filter_context_helper2 = _interopRequireDefault(_filter_context_helper);
 
-var _api = require('../api');
-
 var _exportModal = require('./export-modal');
 
 var _exportModal2 = _interopRequireDefault(_exportModal);
@@ -184,7 +182,7 @@ InfiniteCollection.contextTypes = {
 };
 InfiniteCollection.defaultProps = {
   id: (0, _random.uid)(),
-  client: (0, _api.clientFactory)(),
+  client: null,
   collectionActions: []
 };
 exports.default = InfiniteCollection;

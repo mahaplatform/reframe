@@ -71,6 +71,8 @@ var FetchCollection = function (_React$Component) {
       dataPromise: (0, _when2.default)([]) || props.promise,
       resolvedData: undefined
     };
+
+    _this.client = _this.props.client || new _api2.default();
     return _this;
   }
 
@@ -82,7 +84,7 @@ var FetchCollection = function (_React$Component) {
       } else {
         var sort = _defineProperty({}, this.props.sort.key, this.props.sort.order);
         var parameters = _filter_context_helper2.default.toQueryParams(new _filter_context2.default({ sort: sort }));
-        return this.props.client.loadJSON(this.props.endpoint, _extends({}, this.props.options, parameters)).tap(function (response) {
+        return this.client.loadJSON(this.props.endpoint, _extends({}, this.props.options, parameters)).tap(function (response) {
           return _logger2.default.info(response);
         }).then(function (response) {
           return response.records;
@@ -156,6 +158,6 @@ FetchCollection.propTypes = {
   client: _react2.default.PropTypes.object
 };
 FetchCollection.defaultProps = {
-  client: new _api2.default()
+  client: null
 };
 exports.default = FetchCollection;
