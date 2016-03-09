@@ -161,7 +161,7 @@ export default class InfiniteContainer extends React.Component {
   handleScroll() {
     let windowHeight = window.innerHeight;
     let documentHeight = parseInt(
-      getComputedStyle(document.getElementById(this.props.documentSelector))
+      getComputedStyle(document.body)
         .height
         .split('px')[ 0 ]
     )
