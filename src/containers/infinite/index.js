@@ -58,7 +58,7 @@ export default class InfiniteContainer extends React.Component {
       totalRecords: 0
     }
 
-    this.api = new API(props.client)
+    this.api = new API(props.client || undefined)
 
     this.onTerminate = _.once(() => {
       this.forceUpdate()

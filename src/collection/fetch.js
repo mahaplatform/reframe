@@ -19,7 +19,7 @@ export default class FetchCollection extends React.Component {
   }
 
   static defaultProps = {
-    client: new CoreAPI()
+    client: null
   }
 
   constructor(props) {
@@ -30,6 +30,8 @@ export default class FetchCollection extends React.Component {
       dataPromise: when([]) || props.promise,
       resolvedData: undefined
     }
+
+    this.client = this.props.client || new CoreAPI()
   }
 
   buildRequest() {
@@ -39,7 +41,7 @@ export default class FetchCollection extends React.Component {
     else {
       const sort = {[this.props.sort.key]: this.props.sort.order}
       const parameters = FilterContextHelper.toQueryParams(new FilterContext({sort}))
-      return this.props.client.loadJSON(this.props.endpoint, {...this.props.options, ...parameters})
+      return this.client.loadJSON(this.props.endpoint, {...this.props.options, ...parameters})
         .tap(response => Logger.info(response))
         .then(response => response.records)
     }

@@ -6,7 +6,6 @@ import InfiniteContainer from '../containers/infinite'
 import { uid } from '../utils/random'
 import FilterContext from '../utils/filter_context'
 import FilterContextHelper from '../utils/filter_context_helper'
-import {clientFactory} from '../api'
 import ExportModal from './export-modal'
 
 export default class InfiniteCollection extends React.Component {
@@ -16,7 +15,7 @@ export default class InfiniteCollection extends React.Component {
 
   static defaultProps = {
     id: uid(),
-    client: clientFactory(),
+    client: null,
     collectionActions: []
   }
 
