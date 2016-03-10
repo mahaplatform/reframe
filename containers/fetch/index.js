@@ -88,8 +88,6 @@ var FetchContainer = function (_React$Component) {
   _createClass(FetchContainer, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var finalProps = {};
 
       if (this.state.endpointData) {
@@ -98,21 +96,9 @@ var FetchContainer = function (_React$Component) {
 
         if (this.props.single) {
           if (this.props.flatten) {
-            _lodash2.default.assign(finalProps, _lodash2.default.toPairs(this.state.endpointData).map(function (_ref3) {
-              var _ref4 = _slicedToArray(_ref3, 2);
-
-              var key = _ref4[0];
-              var val = _ref4[1];
-              return _this2.props.mapper(val, key);
-            }).fromPairs().value());
+            _lodash2.default.assign(finalProps, _lodash2.default.transform(this.state.endpointData, this.props.transformer, this.props.transformAccumulator));
           } else {
-            _lodash2.default.assign(finalProps, _defineProperty({}, this.props.injectAs, _lodash2.default.toPairs(this.state.endpointData).map(function (_ref5) {
-              var _ref6 = _slicedToArray(_ref5, 2);
-
-              var key = _ref6[0];
-              var val = _ref6[1];
-              return _this2.props.mapper(val, key);
-            }).fromPairs().value()));
+            _lodash2.default.assign(finalProps, _defineProperty({}, this.props.injectAs, _lodash2.default.transform(this.state.endpointData, this.props.transformer, this.props.transformAccumulator)));
           }
         } else {
           _lodash2.default.assign(finalProps, _defineProperty({}, this.props.injectAs, _lodash2.default.map(this.state.endpointData, this.props.mapper)));
@@ -154,7 +140,10 @@ FetchContainer.defaultProps = {
   single: false,
   blocking: false,
   mapper: _lodash2.default.identity,
-  transformer: _lodash2.default.identity,
+  transformer: function transformer(a, v, k) {
+    return _lodash2.default.set(a, k, v);
+  },
+  transformAccumulator: {},
   element: 'div',
   client: undefined, // Causes API to use default client
   flatten: false,
