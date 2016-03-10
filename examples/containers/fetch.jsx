@@ -23,8 +23,8 @@ export default class FetchExamples extends React.Component {
         </div>
         <div className="ui attached segment">
           <FetchContainer endpoint="https://api.github.com/orgs/reactjs" client={exampleClient} blocking
-                          injectAs="properties" mapper={(value, label) => { return {label, value} }}>
-            <Details title="Organization Details" />
+                          injectAs="properties" single>
+            <RepoDetails/>
           </FetchContainer>
         </div>
         <div className="ui bottom attached segment">
@@ -35,7 +35,11 @@ export default class FetchExamples extends React.Component {
       </div>
     )
   }
+}
 
+const RepoDetails = props => {
+  const details = _.map(props.properties, (v, k) => { return {label: k, value: v}})
+  return <Details details={{title: "Organization Details", properties: details}} />
 }
 
 const RepoList = props => {

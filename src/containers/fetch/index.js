@@ -28,7 +28,8 @@ export default class FetchContainer extends React.Component {
     single: false,
     blocking: false,
     mapper: _.identity,
-    transformer: _.identity,
+    transformer: (a, v, k) => _.set(a, k, v),
+    transformAccumulator: {},
     element: 'div',
     client: undefined, // Causes API to use default client
     flatten: false,
@@ -71,20 +72,14 @@ export default class FetchContainer extends React.Component {
         if ( this.props.flatten ) {
           _.assign(
             finalProps,
-            _.toPairs(this.state.endpointData)
-              .map(([key, val]) => this.props.mapper(val, key))
-              .fromPairs()
-              .value()
+            _.transform(this.state.endpointData, this.props.transformer, this.props.transformAccumulator)
           )
         }
         else {
           _.assign(
             finalProps,
             {
-              [this.props.injectAs]: _.toPairs(this.state.endpointData)
-                .map(([key, val]) => this.props.mapper(val, key))
-                .fromPairs()
-                .value()
+              [this.props.injectAs]: _.transform(this.state.endpointData, this.props.transformer, this.props.transformAccumulator)
             }
           )
         }
