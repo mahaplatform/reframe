@@ -45,7 +45,8 @@ var Button = function (_React$Component) {
         _react2.default.createElement(
           'button',
           { onClick: this.handleClick.bind(this), className: this.getButtonClass() },
-          this.props.text
+          this.props.text,
+          _react2.default.createElement('i', { className: 'ui ' + this.props.icon + ' icon' })
         )
       );
     }
@@ -69,6 +70,13 @@ var Button = function (_React$Component) {
       }
       if (this.props.inverted) {
         baseClasses.push('inverted');
+      }
+      if (this.props.float) {
+        baseClasses.push(this.props.float);
+        baseClasses.push('floated');
+      }
+      if (this.props.circular) {
+        baseClasses.push('circular');
       }
       return baseClasses.join(' ');
     }
@@ -115,8 +123,10 @@ Button.defaultProps = {
   label: null,
   labelIcon: null,
   labelDirection: null,
+  float: null,
   cursor: 'pointer',
   basic: false,
-  inverted: false
+  inverted: false,
+  circular: false
 };
 exports.default = Button;

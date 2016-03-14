@@ -26,9 +26,9 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _form = require('../../form');
+var _filters = require('../filters');
 
-var _form2 = _interopRequireDefault(_form);
+var _filters2 = _interopRequireDefault(_filters);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -164,46 +164,43 @@ var Header = function (_React$Component) {
   }, {
     key: 'clearFilters',
     value: function clearFilters() {
-      this.refs.filter_form.onClear("collection_filter_form");
+      //this.refs.filter_form.onClear("collection_filter_form")
       this.handleFilter({});
     }
   }, {
     key: 'renderFilters',
     value: function renderFilters() {
-      var _this3 = this;
-
       var shouldShow = this.state.showFilters && this.props.filters && true;
       var visibility = shouldShow ? 'visible' : 'collapse';
       var display = shouldShow ? 'block' : 'none';
-      return _react2.default.createElement(
-        'div',
-        { style: { visibility: visibility, display: display } },
-        _react2.default.createElement(_form2.default, {
-          ref: 'filter_form',
-          id: 'collection_filter_form',
-          style: { marginBottom: 12 },
-          sections: [{ fields: this.getFilterFields() }],
-          onFieldChange: _lodash2.default.debounce(function () {
-            return _this3.refs.filter_form.doSubmit("collection_filter_form");
-          }, 300),
-          onSubmit: this.handleFilter.bind(this),
-          onCancel: this.hideFilters.bind(this),
-          buttons: [
-          //{type: 'submit', label: 'Filter'},
-          { type: 'cancel', label: 'Close' }, { color: 'neutral', label: 'Clear', action: this.clearFilters.bind(this) }]
-        })
-      );
+      return _react2.default.createElement(_filters2.default, {
+        ref: 'filter_form',
+        visibility: visibility,
+        display: display,
+        fields: this.getFilterFields(),
+        onClear: this.clearFilters.bind(this),
+        onFilter: this.handleFilter.bind(this) });
     }
   }, {
     key: 'getFilterFields',
     value: function getFilterFields() {
-      return (0, _lodash2.default)(this.props.filters).chunk(2).map(function (fields) {
+      var filterFields = (0, _lodash2.default)(this.props.filters).chunk(2).map(function (fields) {
         if (fields.length > 1) {
           return { type: 'fields', fields: fields };
         } else {
           return _lodash2.default.head(fields);
         }
       }).value();
+
+      return [{
+        code: '_close',
+        type: 'button',
+        float: 'right',
+        basic: true,
+        circular: true,
+        icon: 'x',
+        onPress: this.hideFilters.bind(this)
+      }].concat(_toConsumableArray(filterFields));
     }
   }, {
     key: 'handleFilter',

@@ -38,7 +38,8 @@ var Select = function (_React$Component) {
 
     _this.NO_SELECTION = 'EMPTY_' + Math.floor(Math.random() * 999999).toString(36);
     _this.state = {
-      value: ''
+      value: '',
+      mounted: false
     };
     _this.deferredSetValue = undefined;
     return _this;
@@ -100,6 +101,7 @@ var Select = function (_React$Component) {
         onChange: this.handleChange.bind(this)
       });
       $(this.refs.control).attr('tabIndex', 0);
+      this.setState({ mounted: true });
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -111,6 +113,14 @@ var Select = function (_React$Component) {
           return _this3.setValue(_this3.deferredSetValue || _this3.props.defaultValue || null);
         });
       }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      $(this.refs.control).dropdown('destroy');
+      $(this.refs.control).dropdown({
+        onChange: this.handleChange.bind(this)
+      });
     }
   }, {
     key: 'getValue',

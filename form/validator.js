@@ -32,9 +32,9 @@ var _logger = require('../utils/logger');
 
 var _logger2 = _interopRequireDefault(_logger);
 
-var _index = require('./index.js');
+var _core = require('./core.js');
 
-var _index2 = _interopRequireDefault(_index);
+var _core2 = _interopRequireDefault(_core);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -90,7 +90,7 @@ var ValidatedForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_index2.default, _extends({}, this.props, {
+      return _react2.default.createElement(_core2.default, _extends({}, this.props, {
         ref: 'form',
         sections: this.bindFieldMessages(this.state.errors),
         onSubmit: this.onSubmit.bind(this),
