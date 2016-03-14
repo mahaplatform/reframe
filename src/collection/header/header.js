@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import BatchActions from './batch_actions.js'
 import CollectionActions from './collection_actions.js'
 import _ from 'lodash'
-import Form from '../../form'
+import Filters from '../filters'
+
 
 class Header extends React.Component {
 
@@ -98,7 +99,7 @@ class Header extends React.Component {
   }
 
   clearFilters() {
-    this.refs.filter_form.onClear("collection_filter_form")
+    //this.refs.filter_form.onClear("collection_filter_form")
     this.handleFilter({})
   }
 
@@ -106,27 +107,18 @@ class Header extends React.Component {
     const shouldShow = this.state.showFilters && this.props.filters && true
     const visibility = shouldShow ? 'visible' : 'collapse'
     const display = shouldShow ? 'block' : 'none'
-    return (
-      <div style={{visibility, display}}>
-        <Form
-          ref="filter_form"
-          id="collection_filter_form"
-          style={{marginBottom: 12}}
-          sections={[{fields: this.getFilterFields()}]}
-          onFieldChange={_.debounce(() => this.refs.filter_form.doSubmit("collection_filter_form"), 300)}
-          onSubmit={this.handleFilter.bind(this)}
-          onCancel={this.hideFilters.bind(this)}
-          buttons={[
-            //{type: 'submit', label: 'Filter'},
-            {type: 'cancel', label: 'Close'},
-            {color: 'neutral', label: 'Clear', action: this.clearFilters.bind(this)}
-          ]}
-        />
-      </div>)
+    return (<Filters
+      ref="filter_form"
+      visibility={visibility}
+      display={display}
+      fields={this.getFilterFields()}
+      onClear={this.clearFilters.bind(this)}
+      onFilter={this.handleFilter.bind(this)} />
+    )
   }
 
   getFilterFields() {
-    return _(this.props.filters)
+    const filterFields = _(this.props.filters)
       .chunk(2)
       .map(fields => {
         if(fields.length > 1) {
@@ -137,6 +129,19 @@ class Header extends React.Component {
         }
       })
       .value()
+
+    return [
+      {
+        code: '_close',
+        type: 'button',
+        float: 'right',
+        basic: true,
+        circular: true,
+        icon: 'x',
+        onPress: this.hideFilters.bind(this)
+      },
+      ...filterFields
+    ]
   }
 
   handleFilter(filterData) {
