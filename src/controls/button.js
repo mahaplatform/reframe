@@ -12,9 +12,11 @@ export default class Button extends React.Component {
     label: null,
     labelIcon: null,
     labelDirection: null,
+    float: null,
     cursor: 'pointer',
     basic: false,
-    inverted: false
+    inverted: false,
+    circular: false
   }
 
   constructor(props) {
@@ -27,6 +29,7 @@ export default class Button extends React.Component {
       <div className="field">
         <button onClick={this.handleClick.bind(this)} className={this.getButtonClass()}>
           {this.props.text}
+          <i className={`ui ${this.props.icon} icon`} />
         </button>
       </div>
     )
@@ -49,6 +52,13 @@ export default class Button extends React.Component {
     }
     if(this.props.inverted) {
       baseClasses.push('inverted')
+    }
+    if(this.props.float) {
+      baseClasses.push(this.props.float)
+      baseClasses.push('floated')
+    }
+    if(this.props.circular) {
+      baseClasses.push('circular')
     }
     return baseClasses.join(' ')
   }
