@@ -14,7 +14,7 @@ export default class Quickdate {
       // Get the point in time that's relative to the anchor date, then
       // get the beginning and end of the defined period
       let relativeTime = moment(_.reduce(deltas, (time, delta) => {
-        time[delta[0]].apply(time, _.rest(delta))
+        time[delta[0]].apply(time, _.tail(delta))
         return time
       }, moment(anchorDate)))
 
@@ -28,7 +28,7 @@ export default class Quickdate {
       const deltas = _.map(qdSegments, this.parseSegment)
 
       let relativeTime = moment(_.reduce(deltas, (time, delta) => {
-        time[delta[0]].apply(time, _.rest(delta))
+        time[delta[0]].apply(time, _.tail(delta))
         return time
       }, moment(anchorDate)))
 
