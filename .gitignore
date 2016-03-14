@@ -97,3 +97,6 @@ examples/examples.js
 examples/*.map
 examples/*.css
 .sass-cache/
+
+# Releases
+_release/
