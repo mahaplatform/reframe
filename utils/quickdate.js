@@ -38,7 +38,7 @@ var Quickdate = function () {
         // Get the point in time that's relative to the anchor date, then
         // get the beginning and end of the defined period
         var relativeTime = (0, _moment2.default)(_lodash2.default.reduce(deltas, function (time, delta) {
-          time[delta[0]].apply(time, _lodash2.default.rest(delta));
+          time[delta[0]].apply(time, _lodash2.default.tail(delta));
           return time;
         }, (0, _moment2.default)(anchorDate)));
 
@@ -50,7 +50,7 @@ var Quickdate = function () {
         var deltas = _lodash2.default.map(qdSegments, this.parseSegment);
 
         var relativeTime = (0, _moment2.default)(_lodash2.default.reduce(deltas, function (time, delta) {
-          time[delta[0]].apply(time, _lodash2.default.rest(delta));
+          time[delta[0]].apply(time, _lodash2.default.tail(delta));
           return time;
         }, (0, _moment2.default)(anchorDate)));
 
