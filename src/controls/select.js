@@ -25,7 +25,8 @@ class Select extends React.Component {
     super(props)
     this.NO_SELECTION     = `EMPTY_${Math.floor(Math.random() * 999999).toString(36)}`
     this.state            = {
-      value: ''
+      value: '',
+      mounted: false
     }
     this.deferredSetValue = undefined
   }
@@ -69,12 +70,20 @@ class Select extends React.Component {
       onChange: this.handleChange.bind(this)
     })
     $(this.refs.control).attr('tabIndex', 0)
+    this.setState({mounted: true})
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.asyncStatus !== this.props.asyncStatus && nextProps.asyncStatus !== 'AWAITING') {
       _.defer(() => this.setValue(this.deferredSetValue || this.props.defaultValue || null))
     }
+  }
+
+  componentDidUpdate() {
+    $(this.refs.control).dropdown('destroy')
+    $(this.refs.control).dropdown({
+      onChange: this.handleChange.bind(this)
+    })
   }
 
   getValue() {
