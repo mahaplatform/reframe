@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import InfiniteCollection from 'collection/infinite'
 import Logger from 'utils/logger'
+import Config from 'utils/config'
 
 const Actions = {
   reload: () => {Logger.log("Clicked Reload")},
@@ -9,6 +10,8 @@ const Actions = {
   delete: id => {Logger.log("Clicked Delete", id)},
   edit: id => {Logger.log("Clicked Edit", id)}
 }
+
+Config.set('collections.exporter.urlPrefix', 'http://api.localhost:8080/')
 
 export default class InfiniteCollectionExamples extends React.Component {
   render() {

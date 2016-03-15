@@ -7,6 +7,7 @@ import { uid } from '../utils/random'
 import FilterContext from '../utils/filter_context'
 import FilterContextHelper from '../utils/filter_context_helper'
 import ExportModal from './export-modal'
+import Config from '../utils/config'
 
 export default class InfiniteCollection extends React.Component {
   static contextTypes = {
@@ -31,10 +32,11 @@ export default class InfiniteCollection extends React.Component {
   }
 
   render() {
+    const exportUrlPrefix = Config.get('collections.exporter.urlPrefix', '')
     const modalOptions = {
       onCancel: this.closeExporter.bind(this),
       fields: this.props.columns,
-      exportUrl: this.props.endpoint
+      exportUrl: this.props.exportUrl || `${exportUrlPrefix}/${this.props.endpoint}`.replace(/([^:])\/+/gi, '$1/')
     }
     return (
       <div>
