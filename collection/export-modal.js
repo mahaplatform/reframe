@@ -177,17 +177,17 @@ var ExportModal = function (_React$Component) {
   }, {
     key: 'exportXls',
     value: function exportXls() {
-      window.location = this.props.exportUrl + '.xls?fields=' + this.getFields();
+      window.location = this.props.exportUrl + '.xlsx?fields=' + this.getFields();
     }
   }, {
     key: 'exportCsv',
     value: function exportCsv() {
-      window.location = this.props.exportUrl + '.xls?fields=' + this.getFields();
+      window.location = this.props.exportUrl + '.csv?fields=' + this.getFields();
     }
   }, {
     key: 'exportTsv',
     value: function exportTsv() {
-      window.location = this.props.exportUrl + '.xls?fields=' + this.getFields();
+      window.location = this.props.exportUrl + '.tsv?fields=' + this.getFields();
     }
   }, {
     key: 'componentDidMount',

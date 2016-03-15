@@ -42,6 +42,10 @@ var _exportModal = require('./export-modal');
 
 var _exportModal2 = _interopRequireDefault(_exportModal);
 
+var _config = require('../utils/config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -75,10 +79,11 @@ var InfiniteCollection = function (_React$Component) {
   _createClass(InfiniteCollection, [{
     key: 'render',
     value: function render() {
+      var exportUrlPrefix = _config2.default.get('collections.exporter.urlPrefix', '');
       var modalOptions = {
         onCancel: this.closeExporter.bind(this),
         fields: this.props.columns,
-        exportUrl: this.props.endpoint
+        exportUrl: this.props.exportUrl || (exportUrlPrefix + '/' + this.props.endpoint).replace(/([^:])\/+/gi, '$1/')
       };
       return _react2.default.createElement(
         'div',
