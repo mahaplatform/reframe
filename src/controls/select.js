@@ -81,8 +81,8 @@ class Select extends React.Component {
   }
 
   componentDidUpdate() {
-    //$(this.refs.control).dropdown('destroy')
-    //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
+    $(this.refs.control).dropdown('destroy')
+    $(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
   }
 
   getValue() {
