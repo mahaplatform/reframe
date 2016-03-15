@@ -57,7 +57,7 @@ var Select = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { ref: 'control', className: cssClass },
-        _react2.default.createElement('input', { type: 'hidden', name: this.props.code }),
+        _react2.default.createElement('input', { type: 'hidden', name: this.props.code, onChange: this.handleChange.bind(this) }),
         _react2.default.createElement('i', { className: 'dropdown icon' }),
         this.props.placeholder ? _react2.default.createElement(
           'div',
@@ -92,16 +92,17 @@ var Select = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      $(this.refs.control).dropdown({
+        onChange: this.handleChange.bind(this)
+      });
       if (!this.props.allowBlank && !this.props.defaultValue) {
         $(this.refs.control).dropdown('set selected', _lodash2.default.get(_lodash2.default.first(this.props.options), 'key', null));
       } else {
         $(this.refs.control).dropdown('set selected', this.props.defaultValue);
       }
-      $(this.refs.control).dropdown({
-        onChange: this.handleChange.bind(this)
-      });
+      //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
       $(this.refs.control).attr('tabIndex', 0);
-      this.setState({ mounted: true });
+      //this.setState({mounted: true})
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -117,10 +118,8 @@ var Select = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      $(this.refs.control).dropdown('destroy');
-      $(this.refs.control).dropdown({
-        onChange: this.handleChange.bind(this)
-      });
+      //$(this.refs.control).dropdown('destroy')
+      //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
     }
   }, {
     key: 'getValue',

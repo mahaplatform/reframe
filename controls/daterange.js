@@ -85,12 +85,12 @@ var DateRange = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'field' },
-          _react2.default.createElement(_datefield2.default, { ref: 'start_date_field', name: 'start_date_field', placeholder: 'Start Date' })
+          _react2.default.createElement(_datefield2.default, { ref: 'start_date_field', name: 'start_date_field', placeholder: 'Start Date', onChange: this.handleCustomDateChange.bind(this) })
         ),
         _react2.default.createElement(
           'div',
           { className: 'field' },
-          _react2.default.createElement(_datefield2.default, { ref: 'end_date_field', name: 'end_date_field', placeholder: 'End Date' })
+          _react2.default.createElement(_datefield2.default, { ref: 'end_date_field', name: 'end_date_field', placeholder: 'End Date', onChange: this.handleCustomDateChange.bind(this) })
         )
       );
     }
@@ -104,6 +104,12 @@ var DateRange = function (_React$Component) {
         this.setState({ customRange: false });
         var dates = _quickdate2.default.parse(range);
       }
+      this.props.onChange(this.props.code, this.getValue());
+    }
+  }, {
+    key: 'handleCustomDateChange',
+    value: function handleCustomDateChange() {
+      this.props.onChange(this.props.code, this.getValue());
     }
   }, {
     key: 'getValue',
@@ -154,7 +160,7 @@ var DateRange = function (_React$Component) {
   }, {
     key: 'dateOptions',
     value: function dateOptions() {
-      return [{ key: "@Y", value: "This Year" }, { key: "#-1Y", value: "Last Year" }, { key: "@Q", value: "This Quarter" }, { key: "#-1Q", value: "Last Quarter" }, { key: "@M", value: "This Month" }, { key: "#-1M", value: "Last Month" }, { key: "@w", value: "This Week" }, { key: "#-1W", value: "Last Week" }, { key: "@y", value: "Year to Date" }, { key: "-10Y", value: "Life to Date" }, { key: "-30d", value: "Last 30 Days" }, { key: "-60d", value: "Last 60 Days" }, { key: "custom", value: "Custom" }];
+      return [{ key: "#@Y", value: "This Year" }, { key: "#-1Y", value: "Last Year" }, { key: "#@Q", value: "This Quarter" }, { key: "#-1Q", value: "Last Quarter" }, { key: "#@M", value: "This Month" }, { key: "#-1M", value: "Last Month" }, { key: "#@w", value: "This Week" }, { key: "#-1W", value: "Last Week" }, { key: "@y", value: "Year to Date" }, { key: "-10Y", value: "Life to Date" }, { key: "-30d", value: "Last 30 Days" }, { key: "-60d", value: "Last 60 Days" }, { key: "custom", value: "Custom" }];
     }
   }]);
 
