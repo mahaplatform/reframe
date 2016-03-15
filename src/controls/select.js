@@ -38,7 +38,7 @@ class Select extends React.Component {
     }
     return (
       <div ref="control" className={cssClass}>
-        <input type="hidden" name={this.props.code}/>
+        <input type="hidden" name={this.props.code} onChange={this.handleChange.bind(this)} />
         <i className="dropdown icon"/>
         {(this.props.placeholder) ? <div className="default text" key="selection_default">{this.props.placeholder}</div> : <div className="text" key="selection_text"></div>}
         {((elem) => {
@@ -60,17 +60,18 @@ class Select extends React.Component {
   }
 
   componentDidMount() {
+    $(this.refs.control).dropdown({
+      onChange: this.handleChange.bind(this)
+    })
     if (!this.props.allowBlank && !this.props.defaultValue) {
       $(this.refs.control).dropdown('set selected', _.get(_.first(this.props.options), 'key', null));
     }
     else {
       $(this.refs.control).dropdown('set selected', this.props.defaultValue);
     }
-    $(this.refs.control).dropdown({
-      onChange: this.handleChange.bind(this)
-    })
+    //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
     $(this.refs.control).attr('tabIndex', 0)
-    this.setState({mounted: true})
+    //this.setState({mounted: true})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,10 +81,8 @@ class Select extends React.Component {
   }
 
   componentDidUpdate() {
-    $(this.refs.control).dropdown('destroy')
-    $(this.refs.control).dropdown({
-      onChange: this.handleChange.bind(this)
-    })
+    //$(this.refs.control).dropdown('destroy')
+    //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
   }
 
   getValue() {
