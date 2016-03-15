@@ -42,8 +42,9 @@ export default class FormExamples extends React.Component {
           { type: "fields", fields: [
             { code: "city", type: "textfield", placeholder: 'City' },
             { code: "state", type: "stateselect", placeholder: 'State', abbreviations: true },
-            { code: "zip", type: "textfield", placeholder: 'Zip' },
+            { code: "zip", type: "textfield", placeholder: 'Zip' }
           ]},
+          { code: 'date_range', type: 'daterange', label: 'Date Range' }
         ]}
       ]
     }
