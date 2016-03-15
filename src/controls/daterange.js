@@ -53,10 +53,10 @@ export default class DateRange extends React.Component {
     return (
       <div className="two fields" style={style}>
         <div className="field">
-          <Datefield ref="start_date_field" name="start_date_field" placeholder="Start Date"/>
+          <Datefield ref="start_date_field" name="start_date_field" placeholder="Start Date" onChange={this.handleCustomDateChange.bind(this)}/>
         </div>
         <div className="field">
-          <Datefield ref="end_date_field" name="end_date_field" placeholder="End Date"/>
+          <Datefield ref="end_date_field" name="end_date_field" placeholder="End Date" onChange={this.handleCustomDateChange.bind(this)} />
         </div>
       </div>
     )
@@ -71,6 +71,11 @@ export default class DateRange extends React.Component {
       this.setState({customRange: false})
       let dates = Quickdate.parse(range)
     }
+    this.props.onChange(this.props.code, this.getValue())
+  }
+
+  handleCustomDateChange() {
+    this.props.onChange(this.props.code, this.getValue())
   }
 
   getValue() {
@@ -121,13 +126,13 @@ export default class DateRange extends React.Component {
 
   dateOptions() {
     return [
-      {key: "@Y", value: "This Year"},
+      {key: "#@Y", value: "This Year"},
       {key: "#-1Y", value: "Last Year"},
-      {key: "@Q", value: "This Quarter"},
+      {key: "#@Q", value: "This Quarter"},
       {key: "#-1Q", value: "Last Quarter"},
-      {key: "@M", value: "This Month"},
+      {key: "#@M", value: "This Month"},
       {key: "#-1M", value: "Last Month"},
-      {key: "@w", value: "This Week"},
+      {key: "#@w", value: "This Week"},
       {key: "#-1W", value: "Last Week"},
       {key: "@y", value: "Year to Date"},
       {key: "-10Y", value: "Life to Date"},
