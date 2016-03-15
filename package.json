@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "reframe",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "Collection of configurable React components",
   "main": "lib",
   "scripts": {
