@@ -118,8 +118,8 @@ var Select = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      //$(this.refs.control).dropdown('destroy')
-      //$(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
+      $(this.refs.control).dropdown('destroy');
+      $(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
     }
   }, {
     key: 'getValue',
