@@ -122,6 +122,16 @@ window.React = React
 window.ReactDOM = ReactDOM
 window._ = _
 
-ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('app-container'))
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+ready(() => {
+  ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('app-container'))
+})
 
 $('.dropdown').dropdown()
