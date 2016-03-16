@@ -97,7 +97,7 @@ export default class Field extends React.Component {
     return (
       <div className={className.join(' ')} data-field-code={this.props.code}>
         {(this.props.label && !_.includes(['checkbox'], this.props.type)) ? <label>{this.props.label}</label> : ''}
-        <span style={{marginBottom: 6, display: 'block'}}>{(this.props.instructions) ? this.props.instructions : ''}</span>
+        {this.props.instructions ? <span className="instructions">{this.props.instructions}</span> : null}
         {(() => {
           // Lookup a known field type if the type is a string
           if(_.isString(this.props.type)) {
