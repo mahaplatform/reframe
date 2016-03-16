@@ -207,11 +207,11 @@ var Field = function (_React$Component) {
           null,
           this.props.label
         ) : '',
-        _react2.default.createElement(
+        this.props.instructions ? _react2.default.createElement(
           'span',
-          { style: { marginBottom: 6, display: 'block' } },
-          this.props.instructions ? this.props.instructions : ''
-        ),
+          { className: 'instructions' },
+          this.props.instructions
+        ) : null,
         function () {
           // Lookup a known field type if the type is a string
           if (_lodash2.default.isString(_this2.props.type)) {

@@ -125,14 +125,21 @@ var Header = function (_React$Component) {
   }, {
     key: 'renderRecordCount',
     value: function renderRecordCount() {
-      if (this.props.recordCount !== null) {
-        var inflection = this.props.recordCount > 0 ? this.props.entity[1] : this.props.entity[0];
+      if (this.props.status === 'LOADING') {
         return _react2.default.createElement(
           'div',
-          { className: 'item' },
+          { className: 'borderless item' },
+          _react2.default.createElement('div', { className: 'ui active small inline loader' })
+        );
+      }
+      if (this.props.recordCount !== null) {
+        var inflection = this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0];
+        return _react2.default.createElement(
+          'div',
+          { className: 'borderless item' },
           _react2.default.createElement(
             'h4',
-            null,
+            { className: 'ui grey header' },
             this.props.recordCount,
             ' ',
             inflection

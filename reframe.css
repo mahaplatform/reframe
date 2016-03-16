@@ -70,6 +70,10 @@ table .actions {
 .dateselect .dropdown {
   min-width: 0 !important; }
 
+span.instructions {
+  display: block;
+  margin-bottom: 6px; }
+
 .details {
   overflow: hidden;
   margin-bottom: 1em;
