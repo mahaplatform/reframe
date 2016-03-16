@@ -63,7 +63,7 @@ var ColumnChooser = function (_React$Component) {
               { className: 'item', onClick: function onClick(e) {
                   return _this2.chooseColumn(e, i, !_this2.isColumnVisible(i));
                 } },
-              _react2.default.createElement('input', { className: 'ui inline left floated checkbox', type: 'checkbox', checked: _this2.isColumnVisible(i) }),
+              _this2.isColumnVisible(i) ? _react2.default.createElement('i', { className: 'toggle on icon' }) : _react2.default.createElement('i', { className: 'toggle off icon' }),
               col.label
             );
           })
