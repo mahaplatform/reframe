@@ -194,10 +194,14 @@ exports.default = InfiniteCollection;
 
 
 var LoadingCollection = function LoadingCollection(props) {
+  var statusMappings = {
+    'awaiting': 'LOADING'
+  };
+  var tableStatus = _.get(statusMappings, props.status, 'READY');
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_index2.default, _extends({}, props, { recordCount: props.totalRecords || 0 })),
+    _react2.default.createElement(_index2.default, _extends({}, props, { recordCount: props.totalRecords || 0, status: tableStatus })),
     props.status === 'awaiting' ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
   );
 };
