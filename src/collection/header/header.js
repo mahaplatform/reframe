@@ -69,11 +69,18 @@ class Header extends React.Component {
   }
 
   renderRecordCount() {
+    if(this.props.status === 'LOADING') {
+      return (
+        <div className="borderless item">
+          <div className="ui active small inline loader"></div>
+        </div>
+      )
+    }
     if (this.props.recordCount !== null) {
       const inflection = (this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0])
       return (
         <div className="borderless item">
-          <h4>{this.props.recordCount} {inflection}</h4>
+          <h4 className="ui grey header">{this.props.recordCount} {inflection}</h4>
         </div>
       )
     }
