@@ -70,7 +70,7 @@ class Header extends React.Component {
 
   renderRecordCount() {
     if (this.props.recordCount !== null) {
-      const inflection = (this.props.recordCount > 0 ? this.props.entity[1] : this.props.entity[0])
+      const inflection = (this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0])
       return (
         <div className="item">
           <h4>{this.props.recordCount} {inflection}</h4>
