@@ -60,11 +60,14 @@ class Header extends React.Component {
 
   getCollectionActions() {
     // Merge in an action to show filters if filters are specified
-    if(this.props.filters) {
+    if(!_.isEmpty(this.props.filters)) {
       return [
         { key: 'filter', icon: 'filter', label: 'Filter', handler: this.toggleFilters.bind(this) },
         ...this.props.collectionActions
       ]
+    }
+    else {
+      return this.props.collectionActions
     }
   }
 
@@ -125,7 +128,7 @@ class Header extends React.Component {
   }
 
   getFilterFields() {
-    const filterFields = _(this.props.filters)
+    return _(this.props.filters)
       .chunk(2)
       .map(fields => {
         if(fields.length > 1) {
@@ -136,19 +139,6 @@ class Header extends React.Component {
         }
       })
       .value()
-
-    return [
-      {
-        code: '_close',
-        type: 'button',
-        float: 'right',
-        basic: true,
-        circular: true,
-        icon: 'x',
-        onPress: this.hideFilters.bind(this)
-      },
-      ...filterFields
-    ]
   }
 
   handleFilter(filterData) {
