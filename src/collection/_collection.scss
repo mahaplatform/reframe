@@ -2,3 +2,12 @@
 @import "header/header";
 @import "card/card";
 @import "table/table";
+
+.available, .selected {
+  h3 { background-color: #CCC; border: 1px solid #CCC; padding: 5px; font-size: 12px; line-height: 18px; margin: 0; border-bottom: none; }
+  ul {
+    width: 100%; margin: 0; padding: 5px; border: 1px solid #CCC; height: 320px; overflow-y: scroll;
+    li { list-style: none; border: 1px solid #CCC; background-color: #EEE; margin: 0 0 5px; padding: 5px 10px; cursor: move; border-radius: 5px; }
+    li:last-child { margin: 0; }
+  }
+}

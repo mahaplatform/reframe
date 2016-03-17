@@ -21,34 +21,40 @@ export default class ExportModal extends React.Component {
         return _.map(col, ([f]) => f)
       })
       .value()
+
+
+    const [selectedFields, availableFields] = _.partition(this.props.fields, f => f.visible)
+
     return (
       <PlainWindow {...modalOptions}>
-        <div className="content">
-          <h2>Select Fields to Export</h2>
-          <div ref="field_selector" className="ui two column grid form">
-            <div className="column">
-              {_.map(colA, (field, index) => {
-                return (
-                  <div className="inline field">
-                    <div className="ui checkbox">
-                      <input type="checkbox" tabIndex={index} className="hidden" value={field.key} defaultChecked={true}/>
-                      <label>{field.label}</label>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-            <div className="column">
-              {_.map(colB, (field, index) => {
-                return (
-                  <div className="inline field">
-                    <div className="ui checkbox">
-                      <input type="checkbox" tabIndex={index} className="hidden" value={field.key} defaultChecked={true}/>
-                      <label>{field.label}</label>
-                    </div>
-                  </div>
-                )
-              })}
+        <div className="content" ref="exporter">
+          <h2>Export Data</h2>
+          <div className="ui grid">
+            <div className="two column row">
+              <div className="column available">
+                <h3>Available Fields</h3>
+                <ul ref="available">
+                  {_.map(availableFields, (field, index) => {
+                    return (
+                      <li data-name={field.key}>
+                        {field.label}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+              <div className="column selected">
+                <h3>Selected Fields</h3>
+                <ul ref="selected">
+                  {_.map(selectedFields, (field, index) => {
+                    return (
+                      <li data-name={field.key}>
+                        {field.label}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -68,10 +74,10 @@ export default class ExportModal extends React.Component {
   }
 
   getFields() {
-    return $(this.refs.field_selector)
-      .find('input:checked')
+    return $(this.refs.selected)
+      .find('li')
       .map((index, element) => {
-        return $(element).val()
+        return $(element).data('name')
       })
       .toArray()
       .join(',')
@@ -90,7 +96,7 @@ export default class ExportModal extends React.Component {
   }
 
   componentDidMount() {
-    $(this.refs.field_selector).find('.checkbox').checkbox()
+    $(this.refs.exporter).find('ul').sortable({ connectWith: '.ui-sortable', items: 'li', containment: $('.grid') }).disableSelection()
     $(this.refs.export_dropdown).dropdown({
       action: (text, val) => {
         switch (val) {
