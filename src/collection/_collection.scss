@@ -2,6 +2,7 @@
 @import "header/header";
 @import "card/card";
 @import "table/table";
+@import "compass/css3";
 
 .available, .selected {
   h3 { background-color: #CCC; border: 1px solid #CCC; padding: 5px; font-size: 12px; line-height: 18px; margin: 0; border-bottom: none; }
@@ -9,5 +10,46 @@
     width: 100%; margin: 0; padding: 5px; border: 1px solid #CCC; height: 320px; overflow-y: scroll;
     li { list-style: none; border: 1px solid #CCC; background-color: #EEE; margin: 0 0 5px; padding: 5px 10px; cursor: move; border-radius: 5px; }
     li:last-child { margin: 0; }
+  }
+}
+
+.collection {
+  .collection-header {
+    & > .menu {
+      margin: 0;
+      @include border-radius(.28571429rem .28571429rem 0 0);
+      background: #000;
+      h4
+      { font-weight: normal; color: #FFF !important; }
+      a:before
+      { background: #666; }
+      i
+      { color: #FFF; }
+    }
+    div[data-field-code="_close"]
+    { display: none !important; }
+    .segments
+    { @include border-radius(0); border-top: none; border-bottom: none; }
+    .segment
+    { background-color: #f3f4f5; }
+    form
+    { max-width: none !important; margin-bottom: 0 !important; }
+    .field {
+      label
+      { float: left; width: 70px; line-height: 35px; margin: 0; }
+      label + *
+      { width: calc(100% - 70px) !important; }
+      label + div
+      { display: inline-block; }
+    }
+    .secondary
+    { display: none; }
+    .circular
+    { border-color: transparent !important; }
+  }
+  table {
+    @include border-radius(0 0 .28571429rem .28571429rem);
+    thead th
+    { @include border-radius(0 !important); }
   }
 }
