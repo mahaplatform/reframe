@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import moment from 'moment'
+import numeral from 'numeral'
 import {Link} from 'react-router'
 
 class Format extends React.Component {
