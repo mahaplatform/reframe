@@ -98,7 +98,13 @@ var DateRange = function (_React$Component) {
     key: 'handleSelectDateRange',
     value: function handleSelectDateRange() {
       var range = this.refs.range_field.getValue();
-      if (range === 'custom') {
+      if (range == null) {
+        this.setState({
+          customRange: false,
+          start_date: null,
+          end_date: null
+        });
+      } else if (range === 'custom') {
         this.setState({ customRange: true });
       } else {
         this.setState({ customRange: false });

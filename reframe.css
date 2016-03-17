@@ -86,6 +86,54 @@ table .actions {
   .available ul li:last-child, .selected ul li:last-child {
     margin: 0; }
 
+.collection .collection-header > .menu {
+  margin: 0;
+  -moz-border-radius: 0.28571rem 0.28571rem 0 0;
+  -webkit-border-radius: 0.28571rem;
+  border-radius: 0.28571rem 0.28571rem 0 0;
+  background: #000; }
+  .collection .collection-header > .menu h4 {
+    font-weight: normal;
+    color: #FFF !important; }
+  .collection .collection-header > .menu a:before {
+    background: #666; }
+  .collection .collection-header > .menu i {
+    color: #FFF; }
+.collection .collection-header div[data-field-code="_close"] {
+  display: none !important; }
+.collection .collection-header .segments {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border-top: none;
+  border-bottom: none; }
+.collection .collection-header .segment {
+  background-color: #f3f4f5; }
+.collection .collection-header form {
+  max-width: none !important;
+  margin-bottom: 0 !important; }
+.collection .collection-header .field label {
+  float: left;
+  width: 70px;
+  line-height: 35px;
+  margin: 0; }
+.collection .collection-header .field label + * {
+  width: calc(100% - 70px) !important; }
+.collection .collection-header .field label + div {
+  display: inline-block; }
+.collection .collection-header .secondary {
+  display: none; }
+.collection .collection-header .circular {
+  border-color: transparent !important; }
+.collection table {
+  -moz-border-radius: 0 0 0.28571rem 0.28571rem;
+  -webkit-border-radius: 0;
+  border-radius: 0 0 0.28571rem 0.28571rem; }
+  .collection table thead th {
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0;
+    border-radius: 0 !important; }
+
 .ui.form .ui.horizontal.segments .ui.segment:first-child {
   background: #FFF; }
 .ui.form .ui.horizontal.segments .ui.segment:last-child {

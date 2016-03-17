@@ -118,8 +118,10 @@ var Header = function (_React$Component) {
     key: 'getCollectionActions',
     value: function getCollectionActions() {
       // Merge in an action to show filters if filters are specified
-      if (this.props.filters) {
+      if (!_lodash2.default.isEmpty(this.props.filters)) {
         return [{ key: 'filter', icon: 'filter', label: 'Filter', handler: this.toggleFilters.bind(this) }].concat(_toConsumableArray(this.props.collectionActions));
+      } else {
+        return this.props.collectionActions;
       }
     }
   }, {
@@ -191,23 +193,13 @@ var Header = function (_React$Component) {
   }, {
     key: 'getFilterFields',
     value: function getFilterFields() {
-      var filterFields = (0, _lodash2.default)(this.props.filters).chunk(2).map(function (fields) {
+      return (0, _lodash2.default)(this.props.filters).chunk(2).map(function (fields) {
         if (fields.length > 1) {
           return { type: 'fields', fields: fields };
         } else {
           return _lodash2.default.head(fields);
         }
       }).value();
-
-      return [{
-        code: '_close',
-        type: 'button',
-        float: 'right',
-        basic: true,
-        circular: true,
-        icon: 'x',
-        onPress: this.hideFilters.bind(this)
-      }].concat(_toConsumableArray(filterFields));
     }
   }, {
     key: 'handleFilter',
