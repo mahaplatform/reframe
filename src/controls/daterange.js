@@ -64,7 +64,14 @@ export default class DateRange extends React.Component {
 
   handleSelectDateRange() {
     let range = this.refs.range_field.getValue()
-    if (range === 'custom') {
+    if(range == null) {
+      this.setState({
+        customRange: false,
+        start_date : null,
+        end_date   : null
+      })
+    }
+    else if (range === 'custom') {
       this.setState({customRange: true})
     }
     else {
