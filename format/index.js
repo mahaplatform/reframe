@@ -22,6 +22,10 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _numeral = require('numeral');
+
+var _numeral2 = _interopRequireDefault(_numeral);
+
 var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -111,7 +115,7 @@ var Price = function Price(props) {
   return _react2.default.createElement(
     'span',
     null,
-    numeral(props.value).format('$0,0.00')
+    (0, _numeral2.default)(props.value).format('$0,0.00')
   );
 };
 
