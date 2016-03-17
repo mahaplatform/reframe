@@ -72,59 +72,73 @@ var ExportModal = function (_React$Component) {
       var colA = _$map$partition$map$v2[0];
       var colB = _$map$partition$map$v2[1];
 
+      var _$partition = _lodash2.default.partition(this.props.fields, function (f) {
+        return f.visible;
+      });
+
+      var _$partition2 = _slicedToArray(_$partition, 2);
+
+      var selectedFields = _$partition2[0];
+      var availableFields = _$partition2[1];
+
+
       return _react2.default.createElement(
         _window.PlainWindow,
         modalOptions,
         _react2.default.createElement(
           'div',
-          { className: 'content' },
+          { className: 'content', ref: 'exporter' },
           _react2.default.createElement(
             'h2',
             null,
-            'Select Fields to Export'
+            'Export Data'
           ),
           _react2.default.createElement(
             'div',
-            { ref: 'field_selector', className: 'ui two column grid form' },
+            { className: 'ui grid' },
             _react2.default.createElement(
               'div',
-              { className: 'column' },
-              _lodash2.default.map(colA, function (field, index) {
-                return _react2.default.createElement(
-                  'div',
-                  { className: 'inline field' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'ui checkbox' },
-                    _react2.default.createElement('input', { type: 'checkbox', tabIndex: index, className: 'hidden', value: field.key, defaultChecked: true }),
-                    _react2.default.createElement(
-                      'label',
-                      null,
+              { className: 'two column row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'column available' },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Available Fields'
+                ),
+                _react2.default.createElement(
+                  'ul',
+                  { ref: 'available' },
+                  _lodash2.default.map(availableFields, function (field, index) {
+                    return _react2.default.createElement(
+                      'li',
+                      { 'data-name': field.key },
                       field.label
-                    )
-                  )
-                );
-              })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'column' },
-              _lodash2.default.map(colB, function (field, index) {
-                return _react2.default.createElement(
-                  'div',
-                  { className: 'inline field' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'ui checkbox' },
-                    _react2.default.createElement('input', { type: 'checkbox', tabIndex: index, className: 'hidden', value: field.key, defaultChecked: true }),
-                    _react2.default.createElement(
-                      'label',
-                      null,
+                    );
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'column selected' },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Selected Fields'
+                ),
+                _react2.default.createElement(
+                  'ul',
+                  { ref: 'selected' },
+                  _lodash2.default.map(selectedFields, function (field, index) {
+                    return _react2.default.createElement(
+                      'li',
+                      { 'data-name': field.key },
                       field.label
-                    )
-                  )
-                );
-              })
+                    );
+                  })
+                )
+              )
             )
           )
         ),
@@ -170,8 +184,8 @@ var ExportModal = function (_React$Component) {
   }, {
     key: 'getFields',
     value: function getFields() {
-      return $(this.refs.field_selector).find('input:checked').map(function (index, element) {
-        return $(element).val();
+      return $(this.refs.selected).find('li').map(function (index, element) {
+        return $(element).data('name');
       }).toArray().join(',');
     }
   }, {
@@ -194,7 +208,7 @@ var ExportModal = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      $(this.refs.field_selector).find('.checkbox').checkbox();
+      $(this.refs.exporter).find('ul').sortable({ connectWith: '.ui-sortable', items: 'li', containment: $('.grid') }).disableSelection();
       $(this.refs.export_dropdown).dropdown({
         action: function action(text, val) {
           switch (val) {

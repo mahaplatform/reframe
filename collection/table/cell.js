@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _reactDom = require('react-dom');
@@ -25,6 +27,10 @@ var _moment2 = _interopRequireDefault(_moment);
 var _numeral = require('numeral');
 
 var _numeral2 = _interopRequireDefault(_numeral);
+
+var _format = require('../../format');
+
+var _format2 = _interopRequireDefault(_format);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,100 +59,32 @@ var Cell = function (_React$Component) {
       if (this.props.column.aligned && _lodash2.default.includes(['left', 'center', 'right'], this.props.column.aligned)) {
         classes.push(this.props.column.aligned + ' aligned');
       }
-      var Content = DefaultCell;
       if (this.props.column.cell == 'id') {
         classes.push('collapsing center aligned');
       } else if (this.props.column.cell == 'status') {
-        Content = StatusCell;
         classes.push('collapsing');
       } else if (this.props.column.cell == 'price') {
-        Content = PriceCell;
         classes.push('collapsing right aligned');
       } else if (this.props.column.cell == 'date') {
-        Content = DateCell;
         classes.push('collapsing right aligned');
       } else if (this.props.column.cell == 'datetime') {
-        Content = DateTimeCell;
         classes.push('collapsing right aligned');
       } else if (this.props.column.cell == 'check_times') {
-        Content = CheckTimesCell;
         classes.push('collapsing center aligned');
       } else if (this.props.column.cell == 'check') {
-        Content = CheckCell;
         classes.push('collapsing center aligned');
-      } else if (this.props.column.cell == 'capitalize') {
-        Content = CapitalizeCell;
-      } else if (this.props.column.cell) {
-        Content = this.props.column.cell;
       }
+      var value = _lodash2.default.get(this.props, this.props.column.key);
+      var format = this.props.column.cell;
       return _react2.default.createElement(
         'td',
         { className: classes.join(' ') },
-        _react2.default.createElement(Content, this.props)
+        _react2.default.createElement(_format2.default, _extends({}, this.props, { format: format, value: value }))
       );
     }
   }]);
 
   return Cell;
 }(_react2.default.Component);
-
-var DefaultCell = function DefaultCell(props) {
-  return _react2.default.createElement(
-    'span',
-    null,
-    _lodash2.default.get(props, props.column.key)
-  );
-};
-
-var StatusCell = function StatusCell(props) {
-  var status = _lodash2.default.get(props, props.column.key);
-  return _react2.default.createElement(
-    'span',
-    { className: status.toLowerCase() },
-    status.toUpperCase()
-  );
-};
-
-var CheckTimesCell = function CheckTimesCell(props) {
-  return _lodash2.default.get(props, props.column.key) ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('i', { className: 'icon red times' });
-};
-
-var CheckCell = function CheckCell(props) {
-  return _lodash2.default.get(props, props.column.key) ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('span', null);
-};
-
-var PriceCell = function PriceCell(props) {
-  return _react2.default.createElement(
-    'span',
-    null,
-    (0, _numeral2.default)(_lodash2.default.get(props, props.column.key)).format('$0,0.00')
-  );
-};
-
-var DateCell = function DateCell(props) {
-  var value = _lodash2.default.get(props, props.column.key);
-  return _react2.default.createElement(
-    'span',
-    null,
-    value ? (0, _moment2.default)(new Date(value)).format('MM/DD/YY') : ''
-  );
-};
-
-var DateTimeCell = function DateTimeCell(props) {
-  var value = _lodash2.default.get(props, props.column.key);
-  return _react2.default.createElement(
-    'span',
-    null,
-    value ? (0, _moment2.default)(new Date(value)).format('MM/DD/YY @ hh:mm A') : ''
-  );
-};
-
-var CapitalizeCell = function CapitalizeCell(props) {
-  return _react2.default.createElement(
-    'span',
-    null,
-    _lodash2.default.get(props, props.column.key).toUpperCase()
-  );
-};
 
 exports.default = Cell;

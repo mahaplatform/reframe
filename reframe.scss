@@ -60,6 +60,32 @@ table .actions {
 @media (max-width: 800px) {
   .secondary {
     display: none; } }
+.available h3, .selected h3 {
+  background-color: #CCC;
+  border: 1px solid #CCC;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0;
+  border-bottom: none; }
+.available ul, .selected ul {
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #CCC;
+  height: 320px;
+  overflow-y: scroll; }
+  .available ul li, .selected ul li {
+    list-style: none;
+    border: 1px solid #CCC;
+    background-color: #EEE;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    cursor: move;
+    border-radius: 5px; }
+  .available ul li:last-child, .selected ul li:last-child {
+    margin: 0; }
+
 .ui.form .ui.horizontal.segments .ui.segment:first-child {
   background: #FFF; }
 .ui.form .ui.horizontal.segments .ui.segment:last-child {
