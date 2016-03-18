@@ -4,6 +4,7 @@ import Header from './header/header.js'
 import Table from './table/table.js'
 import Card from './card/cards.js'
 import _ from 'lodash'
+import localForage from 'localforage'
 
 export default class Collection extends React.Component {
 
@@ -110,18 +111,24 @@ export default class Collection extends React.Component {
   }
 
   componentDidMount() {
-
+    const visibility = this.loadVisibility()
+    if(visibility) {
+      this.setState({visible: visibility})
+    }
   }
 
   componentWillUnmount() {
+    this.saveVisibility()
   }
 
   onChooseColumn(key, visible) {
     if(visible) {
       this.setState({visible: _.union(this.state.visible, [key])})
+      this.saveVisibility(_.union(this.state.visible, [key]))
     }
     else {
       this.setState({visible: _.difference(this.state.visible, [key])})
+      this.saveVisibility(_.difference(this.state.visible, [key]))
     }
   }
 
@@ -153,6 +160,22 @@ export default class Collection extends React.Component {
 
   handleToggleVisibility(visible) {
     this.setState({ visible: visible })
+  }
+
+  saveVisibility(data) {
+    if(window.sessionStorage) {
+      window.sessionStorage.setItem(`collections.${this.props.id}.visibility`, JSON.stringify(data || this.state.visible))
+    }
+  }
+
+  loadVisibility() {
+    if(window.sessionStorage) {
+      const visibility = window.sessionStorage.getItem(`collections.${this.props.id}.visibility`)
+      return visibility ? JSON.parse(visibility) : null
+    }
+    else {
+      return null
+    }
   }
 
 }

@@ -25,6 +25,7 @@ export default class InfiniteCollectionExamples extends React.Component {
 
   getTable() {
     return {
+      id: "infinite_test_collection",
       endpoint: "/examples/data.json",
       columns: [
         { label: 'First Name', key: 'first_name', primary: true, visible: true },

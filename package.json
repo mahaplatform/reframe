@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "history": "^2.0.0",
+    "localforage": "^1.4.0",
     "lodash": "^4.5.0",
     "moment": "^2.11.2",
     "numeral": "^1.5.3",
