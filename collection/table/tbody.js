@@ -46,10 +46,11 @@ var Tbody = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      if (_lodash2.default.isEmpty(this.props.records) && this.props.status !== 'LOADING') {
-        var colspan = this.props.columns.length;
-        colspan += !_lodash2.default.isEmpty(this.props.batchActions) ? 1 : 0;
-        colspan += !_lodash2.default.isEmpty(this.props.recordActions) ? 1 : 0;
+      var isLoading = this.props.status === 'LOADING' || this.props.status === 'SYNCING';
+      var colspan = this.props.columns.length;
+      colspan += !_lodash2.default.isEmpty(this.props.batchActions) ? 1 : 0;
+      colspan += !_lodash2.default.isEmpty(this.props.recordActions) ? 1 : 0;
+      if (_lodash2.default.isEmpty(this.props.records) && !isLoading) {
         return _react2.default.createElement(
           'tbody',
           { ref: 'tbody' },
@@ -60,6 +61,20 @@ var Tbody = function (_React$Component) {
               'td',
               { colSpan: colspan, className: 'center aligned' },
               this.props.empty
+            )
+          )
+        );
+      } else if (isLoading) {
+        return _react2.default.createElement(
+          'tbody',
+          { ref: 'tbody' },
+          _react2.default.createElement(
+            'tr',
+            null,
+            _react2.default.createElement(
+              'td',
+              { colSpan: colspan, className: 'center aligned' },
+              _react2.default.createElement('div', { className: 'ui active centered inline loader' })
             )
           )
         );

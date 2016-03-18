@@ -127,7 +127,7 @@ var Header = function (_React$Component) {
   }, {
     key: 'renderRecordCount',
     value: function renderRecordCount() {
-      if (this.props.status === 'LOADING') {
+      if (this.props.status === 'SYNCING') {
         return _react2.default.createElement(
           'div',
           { className: 'borderless item' },

@@ -195,13 +195,17 @@ exports.default = InfiniteCollection;
 
 var LoadingCollection = function LoadingCollection(props) {
   var statusMappings = {
-    'awaiting': 'LOADING'
+    'awaiting': 'SYNCING'
   };
   var tableStatus = _.get(statusMappings, props.status, 'READY');
   return _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(_index2.default, _extends({}, props, { recordCount: props.totalRecords || 0, status: tableStatus })),
-    props.status === 'awaiting' ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
+    _react2.default.createElement(
+      'div',
+      { className: 'ui basic segment' },
+      !props.isAtEnd && !_.isEmpty(props.records) ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
+    )
   );
 };

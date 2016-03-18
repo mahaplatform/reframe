@@ -32,6 +32,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _localforage = require('localforage');
+
+var _localforage2 = _interopRequireDefault(_localforage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -89,17 +93,26 @@ var Collection = function (_React$Component) {
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var visibility = this.loadVisibility();
+      if (visibility) {
+        this.setState({ visible: visibility });
+      }
+    }
   }, {
     key: 'componentWillUnmount',
-    value: function componentWillUnmount() {}
+    value: function componentWillUnmount() {
+      this.saveVisibility();
+    }
   }, {
     key: 'onChooseColumn',
     value: function onChooseColumn(key, visible) {
       if (visible) {
         this.setState({ visible: _lodash2.default.union(this.state.visible, [key]) });
+        this.saveVisibility(_lodash2.default.union(this.state.visible, [key]));
       } else {
         this.setState({ visible: _lodash2.default.difference(this.state.visible, [key]) });
+        this.saveVisibility(_lodash2.default.difference(this.state.visible, [key]));
       }
     }
   }, {
@@ -135,6 +148,23 @@ var Collection = function (_React$Component) {
     key: 'handleToggleVisibility',
     value: function handleToggleVisibility(visible) {
       this.setState({ visible: visible });
+    }
+  }, {
+    key: 'saveVisibility',
+    value: function saveVisibility(data) {
+      if (window.sessionStorage) {
+        window.sessionStorage.setItem('collections.' + this.props.id + '.visibility', JSON.stringify(data || this.state.visible));
+      }
+    }
+  }, {
+    key: 'loadVisibility',
+    value: function loadVisibility() {
+      if (window.sessionStorage) {
+        var visibility = window.sessionStorage.getItem('collections.' + this.props.id + '.visibility');
+        return visibility ? JSON.parse(visibility) : null;
+      } else {
+        return null;
+      }
     }
   }]);
 
