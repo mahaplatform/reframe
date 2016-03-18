@@ -72,7 +72,7 @@ class Header extends React.Component {
   }
 
   renderRecordCount() {
-    if(this.props.status === 'LOADING') {
+    if(this.props.status === 'SYNCING') {
       return (
         <div className="borderless item">
           <div className="ui active small inline loader"></div>

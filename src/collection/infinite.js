@@ -118,13 +118,15 @@ export default class InfiniteCollection extends React.Component {
 
 const LoadingCollection = props => {
   const statusMappings = {
-    'awaiting': 'LOADING'
+    'awaiting': 'SYNCING'
   }
   const tableStatus = _.get(statusMappings, props.status, 'READY')
   return (
     <div>
       <Collection {...props} recordCount={props.totalRecords || 0} status={tableStatus}/>
-      { props.status === 'awaiting' ? <div className="ui active centered inline loader"></div> : null }
+      <div className="ui basic segment">
+        { (!props.isAtEnd && !_.isEmpty(props.records))  ? <div className="ui active centered inline loader"></div> : null }
+      </div>
     </div>
   )
 }

@@ -6,11 +6,11 @@ import _ from 'lodash'
 class Tbody extends React.Component {
 
   render() {
-
-    if(_.isEmpty(this.props.records) && this.props.status !== 'LOADING') {
-      let colspan = this.props.columns.length
-      colspan += (!_.isEmpty(this.props.batchActions)) ? 1 : 0
-      colspan += (!_.isEmpty(this.props.recordActions)) ? 1 : 0
+    const isLoading = this.props.status === 'LOADING' || this.props.status === 'SYNCING'
+    let colspan = this.props.columns.length
+    colspan += (!_.isEmpty(this.props.batchActions)) ? 1 : 0
+    colspan += (!_.isEmpty(this.props.recordActions)) ? 1 : 0
+    if(_.isEmpty(this.props.records) && !isLoading) {
       return(
         <tbody ref="tbody">
           <tr>
@@ -20,7 +20,19 @@ class Tbody extends React.Component {
           </tr>
         </tbody>
       )
-    } else {
+    }
+    else if(isLoading) {
+      return (
+        <tbody ref="tbody">
+          <tr>
+            <td colSpan={colspan} className="center aligned">
+              <div className="ui active centered inline loader"></div>
+            </td>
+          </tr>
+        </tbody>
+      )
+    }
+    else {
       return (
         <tbody ref="tbody">
           { this.props.records.map((record, index) => {
