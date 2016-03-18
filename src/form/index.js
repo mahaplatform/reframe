@@ -1,3 +1,5 @@
-import CoreForm from './core'
+import OmniForm from './omni'
 
-export default CoreForm
+export default OmniForm
+
+export * from './core'
