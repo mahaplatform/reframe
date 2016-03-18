@@ -26,7 +26,7 @@ export default class FetchContainer extends React.Component {
   static defaultProps = {
     endpointOptions: {},
     single: false,
-    blocking: false,
+    blocking: true,
     mapper: _.identity,
     transformer: (a, v, k) => _.set(a, k, v),
     transformAccumulator: {},
