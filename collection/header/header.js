@@ -127,12 +127,8 @@ var Header = function (_React$Component) {
   }, {
     key: 'renderRecordCount',
     value: function renderRecordCount() {
-      if (this.props.status === 'SYNCING') {
-        return _react2.default.createElement(
-          'div',
-          { className: 'borderless item' },
-          _react2.default.createElement('div', { className: 'ui active small inline loader' })
-        );
+      if (this.props.status === 'SYNCING' || this.props.status === 'LOADING') {
+        return _react2.default.createElement('div', { className: 'borderless item' });
       }
       if (this.props.recordCount !== null) {
         var inflection = this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0];

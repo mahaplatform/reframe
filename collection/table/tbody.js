@@ -47,10 +47,11 @@ var Tbody = function (_React$Component) {
       var _this2 = this;
 
       var isLoading = this.props.status === 'LOADING' || this.props.status === 'SYNCING';
+      var isEmpty = _lodash2.default.isEmpty(this.props.records);
       var colspan = this.props.columns.length;
       colspan += !_lodash2.default.isEmpty(this.props.batchActions) ? 1 : 0;
       colspan += !_lodash2.default.isEmpty(this.props.recordActions) ? 1 : 0;
-      if (_lodash2.default.isEmpty(this.props.records) && !isLoading) {
+      if (isEmpty && !isLoading) {
         return _react2.default.createElement(
           'tbody',
           { ref: 'tbody' },
@@ -64,7 +65,7 @@ var Tbody = function (_React$Component) {
             )
           )
         );
-      } else if (isLoading) {
+      } else if (isEmpty && isLoading) {
         return _react2.default.createElement(
           'tbody',
           { ref: 'tbody' },
