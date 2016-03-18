@@ -7,10 +7,11 @@ class Tbody extends React.Component {
 
   render() {
     const isLoading = this.props.status === 'LOADING' || this.props.status === 'SYNCING'
+    const isEmpty = _.isEmpty(this.props.records)
     let colspan = this.props.columns.length
     colspan += (!_.isEmpty(this.props.batchActions)) ? 1 : 0
     colspan += (!_.isEmpty(this.props.recordActions)) ? 1 : 0
-    if(_.isEmpty(this.props.records) && !isLoading) {
+    if(isEmpty && !isLoading) {
       return(
         <tbody ref="tbody">
           <tr>
@@ -21,7 +22,7 @@ class Tbody extends React.Component {
         </tbody>
       )
     }
-    else if(isLoading) {
+    else if(isEmpty && isLoading) {
       return (
         <tbody ref="tbody">
           <tr>
