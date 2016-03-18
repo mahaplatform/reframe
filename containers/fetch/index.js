@@ -138,7 +138,7 @@ FetchContainer.propTypes = {
 FetchContainer.defaultProps = {
   endpointOptions: {},
   single: false,
-  blocking: false,
+  blocking: true,
   mapper: _lodash2.default.identity,
   transformer: function transformer(a, v, k) {
     return _lodash2.default.set(a, k, v);
