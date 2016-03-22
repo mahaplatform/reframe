@@ -37,7 +37,7 @@ export default class Row extends React.Component {
                         var to = compiled(this.props.record);
                         return <div key={`action_${index}`} className="item"><Link to={to}>{action.label}</Link></div>
                       } else {
-                        return <div key={`action_${index}`} onClick={this.handleAction.bind(this, action, this.props.record.id)} className="item">{action.label}</div>
+                        return <div key={`action_${index}`} onClick={this.handleAction.bind(this, action, this.props.record.id, this.props.record)} className="item">{action.label}</div>
                       }
                     })}
                   </div>
