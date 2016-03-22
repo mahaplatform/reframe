@@ -73,7 +73,7 @@ export default class Row extends React.Component {
     this.props.onDelete(id)
   }
 
-  handleAction(action, id) {
+  handleAction(action, id, data) {
     if(action.handler) {
       if(_.isString(action.handler)) {
         var handlerFn = this.props.actions[action.handler]
@@ -87,10 +87,10 @@ export default class Row extends React.Component {
       }
       if(action.confirm === true) {
         ModalActions.openModal(this.props.componentId, (props) => {
-          return <ConfirmModal onApprove={_.bind(handlerFn, handlerFn, id)} {...props} />
+          return <ConfirmModal onApprove={_.bind(handlerFn, handlerFn, id, data)} {...props} />
         })
       } else {
-        _.defer(handlerFn, id)
+        _.defer(handlerFn, id, data)
       }
     }
   }

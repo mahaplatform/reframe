@@ -105,10 +105,7 @@ export default class InfiniteCollection extends React.Component {
       if(action.redirect) {
         return {
           ...action,
-          handler: id => {
-            debugger
-            this.context.history.push(_.template(action.redirect)({id}))
-          }
+          handler: (id, data) => this.context.history.push(_.template(action.redirect)(data))
         }
       }
       else {
