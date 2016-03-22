@@ -66,7 +66,7 @@ export default class Collection extends React.Component {
     onHideFilters: _.noop,
     sort: { key: '', order: 'desc' },
     empty: "No records found.",
-    entity: ['record', 'records'],
+    entity: 'record',
     recordCount: null,
     filters: [],
     filterValues: {},

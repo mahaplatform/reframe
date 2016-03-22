@@ -4,6 +4,7 @@ import BatchActions from './batch_actions.js'
 import CollectionActions from './collection_actions.js'
 import _ from 'lodash'
 import Filters from '../filters'
+import pluralize from 'pluralize'
 
 
 class Header extends React.Component {
@@ -72,16 +73,24 @@ class Header extends React.Component {
   }
 
   renderRecordCount() {
-    if(this.props.status === 'SYNCING' || this.props.status === 'LOADING') {
+    const {status, recordCount, entity} = this.props
+
+    if(status === 'SYNCING' || status === 'LOADING') {
       return (
         <div className="borderless item"/>
       )
     }
-    if (this.props.recordCount !== null) {
-      const inflection = (this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0])
+    if (recordCount !== null) {
+      let inflection
+      if(_.isArray(entity)) {
+        inflection = (recordCount !== 1 ? entity[1] : entity[0])
+      }
+      else {
+        inflection = (recordCount !== 1 ? pluralize.plural(entity) : pluralize.singular(entity))
+      }
       return (
         <div className="borderless item">
-          <h4 className="ui grey header">{this.props.recordCount} {inflection}</h4>
+          <h4 className="ui grey header">{recordCount} {inflection}</h4>
         </div>
       )
     }
