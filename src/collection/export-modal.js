@@ -59,7 +59,7 @@ export default class ExportModal extends React.Component {
           </div>
         </div>
         <div className="actions">
-          <div className="ui negative button">Cancel</div>
+          <div className="ui negative button" onClick={this.props.onCancel}>Cancel</div>
           <div className="ui positive dropdown button" ref="export_dropdown">
             Export As... <i className="dropdown icon"/>
             <div className="menu">
