@@ -147,7 +147,7 @@ var ExportModal = function (_React$Component) {
           { className: 'actions' },
           _react2.default.createElement(
             'div',
-            { className: 'ui negative button' },
+            { className: 'ui negative button', onClick: this.props.onCancel },
             'Cancel'
           ),
           _react2.default.createElement(

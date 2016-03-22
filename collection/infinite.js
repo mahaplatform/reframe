@@ -20,10 +20,6 @@ var _index = require('./index.js');
 
 var _index2 = _interopRequireDefault(_index);
 
-var _loading = require('snax/lib/containers/loading');
-
-var _loading2 = _interopRequireDefault(_loading);
-
 var _infinite = require('../containers/infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
@@ -45,6 +41,10 @@ var _exportModal2 = _interopRequireDefault(_exportModal);
 var _config = require('../utils/config');
 
 var _config2 = _interopRequireDefault(_config);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -111,6 +111,7 @@ var InfiniteCollection = function (_React$Component) {
     value: function getCollectionProps() {
       return _extends({}, this.props, this.getCallbacks(), {
         collectionActions: [{ key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) }, { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) }].concat(_toConsumableArray(this.props.collectionActions)),
+        recordActions: this.getRecordActions(),
         sort: this.state.sort,
         filterValues: this.state.filters,
         showFilters: this.state.showFilters
@@ -132,13 +133,13 @@ var InfiniteCollection = function (_React$Component) {
             var key = col;
             _this2.setState({ sort: { key: key, order: order } });
           }
-          _.defer(function () {
+          _lodash2.default.defer(function () {
             return _this2.refs.container.reset();
           });
         },
         onFilterChange: function onFilterChange(filters) {
           _this2.setState({ filters: filters });
-          _.defer(function () {
+          _lodash2.default.defer(function () {
             return _this2.refs.container.reset();
           });
         },
@@ -151,6 +152,23 @@ var InfiniteCollection = function (_React$Component) {
       };
     }
   }, {
+    key: 'getRecordActions',
+    value: function getRecordActions() {
+      var _this3 = this;
+
+      return _lodash2.default.map(this.props.recordActions, function (action) {
+        if (action.redirect) {
+          return _extends({}, action, {
+            handler: function handler(id, data) {
+              return _this3.context.history.push(_lodash2.default.template(action.redirect)(data));
+            }
+          });
+        } else {
+          return action;
+        }
+      });
+    }
+  }, {
     key: 'getQuery',
     value: function getQuery() {
       var sort = _defineProperty({}, this.state.sort.key, this.state.sort.order);
@@ -161,10 +179,10 @@ var InfiniteCollection = function (_React$Component) {
   }, {
     key: 'refresh',
     value: function refresh() {
-      var _this3 = this;
+      var _this4 = this;
 
-      _.defer(function () {
-        return _this3.refs.container.reset();
+      _lodash2.default.defer(function () {
+        return _this4.refs.container.reset();
       });
     }
   }, {
@@ -183,12 +201,15 @@ var InfiniteCollection = function (_React$Component) {
 }(_react2.default.Component);
 
 InfiniteCollection.contextTypes = {
-  store: _react2.default.PropTypes.object
+  store: _react2.default.PropTypes.object,
+  history: _react2.default.PropTypes.object
 };
 InfiniteCollection.defaultProps = {
   id: (0, _random.uid)(),
   client: null,
-  collectionActions: []
+  collectionActions: [],
+  autoActions: true
+
 };
 exports.default = InfiniteCollection;
 
@@ -197,7 +218,7 @@ var LoadingCollection = function LoadingCollection(props) {
   var statusMappings = {
     'awaiting': 'SYNCING'
   };
-  var tableStatus = _.get(statusMappings, props.status, 'READY');
+  var tableStatus = _lodash2.default.get(statusMappings, props.status, 'READY');
   return _react2.default.createElement(
     'div',
     null,
@@ -205,7 +226,7 @@ var LoadingCollection = function LoadingCollection(props) {
     _react2.default.createElement(
       'div',
       { className: 'ui basic segment' },
-      !props.isAtEnd && !_.isEmpty(props.records) ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
+      !props.isAtEnd && !_lodash2.default.isEmpty(props.records) ? _react2.default.createElement('div', { className: 'ui active centered inline loader' }) : null
     )
   );
 };

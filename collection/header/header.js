@@ -30,6 +30,10 @@ var _filters = require('../filters');
 
 var _filters2 = _interopRequireDefault(_filters);
 
+var _pluralize = require('pluralize');
+
+var _pluralize2 = _interopRequireDefault(_pluralize);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -127,18 +131,29 @@ var Header = function (_React$Component) {
   }, {
     key: 'renderRecordCount',
     value: function renderRecordCount() {
-      if (this.props.status === 'SYNCING' || this.props.status === 'LOADING') {
+      var _props = this.props;
+      var status = _props.status;
+      var recordCount = _props.recordCount;
+      var entity = _props.entity;
+
+
+      if (status === 'SYNCING' || status === 'LOADING') {
         return _react2.default.createElement('div', { className: 'borderless item' });
       }
-      if (this.props.recordCount !== null) {
-        var inflection = this.props.recordCount !== 1 ? this.props.entity[1] : this.props.entity[0];
+      if (recordCount !== null) {
+        var inflection = undefined;
+        if (_lodash2.default.isArray(entity)) {
+          inflection = recordCount !== 1 ? entity[1] : entity[0];
+        } else {
+          inflection = recordCount !== 1 ? _pluralize2.default.plural(entity) : _pluralize2.default.singular(entity);
+        }
         return _react2.default.createElement(
           'div',
           { className: 'borderless item' },
           _react2.default.createElement(
             'h4',
             { className: 'ui grey header' },
-            this.props.recordCount,
+            recordCount,
             ' ',
             inflection
           )

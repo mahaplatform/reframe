@@ -219,7 +219,7 @@ Collection.defaultProps = {
   onHideFilters: _lodash2.default.noop,
   sort: { key: '', order: 'desc' },
   empty: "No records found.",
-  entity: ['record', 'records'],
+  entity: 'record',
   recordCount: null,
   filters: [],
   filterValues: {},

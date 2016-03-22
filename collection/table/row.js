@@ -111,7 +111,7 @@ var Row = function (_React$Component) {
                     } else {
                       return _react2.default.createElement(
                         'div',
-                        { key: 'action_' + index, onClick: _this2.handleAction.bind(_this2, action, _this2.props.record.id), className: 'item' },
+                        { key: 'action_' + index, onClick: _this2.handleAction.bind(_this2, action, _this2.props.record.id, _this2.props.record), className: 'item' },
                         action.label
                       );
                     }
@@ -157,7 +157,7 @@ var Row = function (_React$Component) {
     }
   }, {
     key: 'handleAction',
-    value: function handleAction(action, id) {
+    value: function handleAction(action, id, data) {
       if (action.handler) {
         if (_lodash2.default.isString(action.handler)) {
           var handlerFn = this.props.actions[action.handler];
@@ -168,10 +168,10 @@ var Row = function (_React$Component) {
         }
         if (action.confirm === true) {
           ModalActions.openModal(this.props.componentId, function (props) {
-            return _react2.default.createElement(ConfirmModal, _extends({ onApprove: _lodash2.default.bind(handlerFn, handlerFn, id) }, props));
+            return _react2.default.createElement(ConfirmModal, _extends({ onApprove: _lodash2.default.bind(handlerFn, handlerFn, id, data) }, props));
           });
         } else {
-          _lodash2.default.defer(handlerFn, id);
+          _lodash2.default.defer(handlerFn, id, data);
         }
       }
     }
