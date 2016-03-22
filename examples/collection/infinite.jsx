@@ -92,7 +92,7 @@ export default class InfiniteCollectionExamples extends React.Component {
       ],
       recordActions: [
         { key: 'delete', icon: 'times', label: 'delete', handler: Actions.delete },
-        { key: 'edit', icon: 'times', label: 'edit', handler: Actions.edit }
+        { key: 'edit', icon: 'times', label: 'edit', redirect: '/collections/infinite/${id}' }
       ]
     }
   }

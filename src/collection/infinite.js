@@ -1,23 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Collection from './index.js'
-import LoadingContainer, { LoadingState, PresentState, EmptyState } from 'snax/lib/containers/loading'
 import InfiniteContainer from '../containers/infinite'
 import { uid } from '../utils/random'
 import FilterContext from '../utils/filter_context'
 import FilterContextHelper from '../utils/filter_context_helper'
 import ExportModal from './export-modal'
 import Config from '../utils/config'
+import _ from 'lodash'
 
 export default class InfiniteCollection extends React.Component {
   static contextTypes = {
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    history: React.PropTypes.object
   }
 
   static defaultProps = {
     id: uid(),
     client: null,
-    collectionActions: []
+    collectionActions: [],
+    autoActions: true
+
   }
 
   constructor(props) {
@@ -66,6 +69,7 @@ export default class InfiniteCollection extends React.Component {
         { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) },
         ...this.props.collectionActions
       ],
+      recordActions: this.getRecordActions(),
       sort: this.state.sort,
       filterValues: this.state.filters,
       showFilters: this.state.showFilters
@@ -94,6 +98,23 @@ export default class InfiniteCollection extends React.Component {
       onShowFilters: () => this.setState({showFilters: true}),
       onHideFilters: () => this.setState({showFilters: false})
     }
+  }
+
+  getRecordActions() {
+    return _.map(this.props.recordActions, action => {
+      if(action.redirect) {
+        return {
+          ...action,
+          handler: id => {
+            debugger
+            this.context.history.push(_.template(action.redirect)({id}))
+          }
+        }
+      }
+      else {
+        return action
+      }
+    })
   }
 
   getQuery() {
