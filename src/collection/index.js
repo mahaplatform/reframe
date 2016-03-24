@@ -114,10 +114,11 @@ export default class Collection extends React.Component {
   }
 
   componentDidMount() {
-    const visibility = this.loadVisibility()
-    if(visibility) {
-      this.setState({visible: visibility})
-    }
+    this.loadVisibility(vis => {
+      if(vis) {
+        this.setState({visible: vis})
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -166,18 +167,16 @@ export default class Collection extends React.Component {
   }
 
   saveVisibility(data) {
-    if(this.props.saveVisibility && window.sessionStorage) {
-      window.sessionStorage.setItem(`collections.${this.props.id}.visibility`, JSON.stringify(data || this.state.visible))
+    if(this.props.saveVisibility) {
+      localForage.setItem(`collections.${this.props.id}.visibility`, data || this.state.visible)
     }
   }
 
-  loadVisibility() {
-    if(this.props.saveVisibility && window.sessionStorage) {
-      const visibility = window.sessionStorage.getItem(`collections.${this.props.id}.visibility`)
-      return visibility ? JSON.parse(visibility) : null
-    }
-    else {
-      return null
+  loadVisibility(cb) {
+    if(this.props.saveVisibility) {
+      localForage.getItem(`collections.${this.props.id}.visibility`, (err, val) => {
+        err ? cb(null) : cb(val)
+      })
     }
   }
 
