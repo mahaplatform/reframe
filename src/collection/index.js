@@ -9,6 +9,7 @@ import localForage from 'localforage'
 export default class Collection extends React.Component {
 
   static propTypes = {
+    id: React.PropTypes.string,
     columns: React.PropTypes.arrayOf(React.PropTypes.shape({
       key: React.PropTypes.string.isRequired,
       label: React.PropTypes.string.isRequired,
@@ -27,6 +28,7 @@ export default class Collection extends React.Component {
       key: React.PropTypes.string,
       order: React.PropTypes.oneOf(['ascending','descending'])
     }).isRequired,
+    saveVisibility: React.PropTypes.bool,
     collectionActions: React.PropTypes.arrayOf(React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.shape({
@@ -70,7 +72,8 @@ export default class Collection extends React.Component {
     recordCount: null,
     filters: [],
     filterValues: {},
-    showFilters: false
+    showFilters: false,
+    saveVisibility: false
   }
 
   constructor(props) {
@@ -163,13 +166,13 @@ export default class Collection extends React.Component {
   }
 
   saveVisibility(data) {
-    if(window.sessionStorage) {
+    if(this.props.saveVisibility && window.sessionStorage) {
       window.sessionStorage.setItem(`collections.${this.props.id}.visibility`, JSON.stringify(data || this.state.visible))
     }
   }
 
   loadVisibility() {
-    if(window.sessionStorage) {
+    if(this.props.saveVisibility && window.sessionStorage) {
       const visibility = window.sessionStorage.getItem(`collections.${this.props.id}.visibility`)
       return visibility ? JSON.parse(visibility) : null
     }

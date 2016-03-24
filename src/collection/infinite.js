@@ -16,11 +16,9 @@ export default class InfiniteCollection extends React.Component {
   }
 
   static defaultProps = {
-    id: uid(),
     client: null,
     collectionActions: [],
     autoActions: true
-
   }
 
   constructor(props) {
@@ -32,6 +30,7 @@ export default class InfiniteCollection extends React.Component {
       showFilters: false,
       showExporter: false
     }
+    this.id = props.id || uid()
   }
 
   render() {
@@ -64,6 +63,8 @@ export default class InfiniteCollection extends React.Component {
     return {
       ...this.props,
       ...this.getCallbacks(),
+      id: this.id,
+      saveVisibility: !!this.props.id,  // Only save visibility when an ID is set manually
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) },
         { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) },
