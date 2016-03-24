@@ -52,7 +52,7 @@ export default class CollectionExamples extends React.Component {
       columns: [
         { label: 'ID', key: 'id', primary: false, visible: false, cell: 'id' },
         { label: 'First Name', key: 'first_name', primary: true, visible: true },
-        { label: 'Last Name', key: 'last_name', primary: true, visible: true }
+        { label: 'Last Name', key: 'last_name', primary: false, visible: true }
       ],
       records: this.getSortedRecords(),
       sort: this.state.table.sort,

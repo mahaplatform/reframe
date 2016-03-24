@@ -83,7 +83,7 @@ export default class InfiniteCollectionExamples extends React.Component {
         { label: 'ID', key: 'id', primary: false, visible: false, cell: 'id' },
         { label: 'First Name', key: 'first_name', primary: true, visible: true },
         { label: 'Last Name', key: 'last_name', primary: true, visible: true },
-        { label: 'Email', key: 'email', primary: true, visible: true }
+        { label: 'Email', key: 'email', primary: false, visible: true }
       ],
       filters: [
         { code: 'id', label: 'ID', type: 'textfield' },
