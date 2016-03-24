@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "reframe",
-  "version": "0.15.14",
+  "version": "0.15.16",
   "description": "Collection of configurable React components",
   "main": "lib",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Notice: no test specified\" && exit 0",
     "compile": "babel -d lib/ src/; sass -Cq --scss --compass --sourcemap=none src/reframe.scss lib/reframe.css"
   },
   "repository": {
@@ -33,7 +33,10 @@
     "faker": "^3.0.1",
     "http-server": "^0.9.0",
     "mocha": "^2.4.5",
+    "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.1",
     "sinon": "^1.17.3",
     "watchify": "^3.7.0"
   },

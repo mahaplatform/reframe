@@ -171,7 +171,7 @@ var OmniForm = function (_React$Component) {
       var errors = _errResponse$entity.errors;
       var message = _errResponse$entity.message;
 
-      var formMessage = undefined;
+      var formMessage = void 0;
       switch (code) {
         case 422:
           formMessage = {

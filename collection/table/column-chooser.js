@@ -45,6 +45,8 @@ var ColumnChooser = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var availableColumns = this.props.availableColumns;
+
       return _react2.default.createElement(
         'div',
         { className: 'left menu' },
@@ -57,8 +59,8 @@ var ColumnChooser = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'scrolling menu' },
-          _lodash2.default.map(this.props.availableColumns, function (col, i) {
-            return _react2.default.createElement(
+          _lodash2.default.map(availableColumns, function (col, i) {
+            if (col.primary) return null;else return _react2.default.createElement(
               'div',
               { className: 'item', onClick: function onClick(e) {
                   return _this2.chooseColumn(e, i, !_this2.isColumnVisible(i));

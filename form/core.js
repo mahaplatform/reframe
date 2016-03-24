@@ -204,7 +204,7 @@ var Form = function (_React$Component) {
           // Check to see if this is a composite component
           if (field.type.composite) {
             // If there is a composite configuration specified, use that to map the fields
-            var dv = undefined;
+            var dv = void 0;
             if (field.composite) {
               dv = _lodash2.default.mapValues(field.composite, function (prefillKey) {
                 return _lodash2.default.get(prefills, prefillKey);

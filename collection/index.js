@@ -94,10 +94,13 @@ var Collection = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var visibility = this.loadVisibility();
-      if (visibility) {
-        this.setState({ visible: visibility });
-      }
+      var _this3 = this;
+
+      this.loadVisibility(function (vis) {
+        if (vis) {
+          _this3.setState({ visible: vis });
+        }
+      });
     }
   }, {
     key: 'componentWillUnmount',
@@ -152,18 +155,17 @@ var Collection = function (_React$Component) {
   }, {
     key: 'saveVisibility',
     value: function saveVisibility(data) {
-      if (window.sessionStorage) {
-        window.sessionStorage.setItem('collections.' + this.props.id + '.visibility', JSON.stringify(data || this.state.visible));
+      if (this.props.saveVisibility) {
+        _localforage2.default.setItem('collections.' + this.props.id + '.visibility', data || this.state.visible);
       }
     }
   }, {
     key: 'loadVisibility',
-    value: function loadVisibility() {
-      if (window.sessionStorage) {
-        var visibility = window.sessionStorage.getItem('collections.' + this.props.id + '.visibility');
-        return visibility ? JSON.parse(visibility) : null;
-      } else {
-        return null;
+    value: function loadVisibility(cb) {
+      if (this.props.saveVisibility) {
+        _localforage2.default.getItem('collections.' + this.props.id + '.visibility', function (err, val) {
+          err ? cb(null) : cb(val);
+        });
       }
     }
   }]);
@@ -172,6 +174,7 @@ var Collection = function (_React$Component) {
 }(_react2.default.Component);
 
 Collection.propTypes = {
+  id: _react2.default.PropTypes.string,
   columns: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
     key: _react2.default.PropTypes.string.isRequired,
     label: _react2.default.PropTypes.string.isRequired,
@@ -190,6 +193,7 @@ Collection.propTypes = {
     key: _react2.default.PropTypes.string,
     order: _react2.default.PropTypes.oneOf(['ascending', 'descending'])
   }).isRequired,
+  saveVisibility: _react2.default.PropTypes.bool,
   collectionActions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.shape({
     label: _react2.default.PropTypes.string.isRequired,
     handler: _react2.default.PropTypes.element,
@@ -223,6 +227,7 @@ Collection.defaultProps = {
   recordCount: null,
   filters: [],
   filterValues: {},
-  showFilters: false
+  showFilters: false,
+  saveVisibility: false
 };
 exports.default = Collection;

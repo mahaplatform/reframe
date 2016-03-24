@@ -73,6 +73,7 @@ var InfiniteCollection = function (_React$Component) {
       showFilters: false,
       showExporter: false
     };
+    _this.id = props.id || (0, _random.uid)();
     return _this;
   }
 
@@ -110,6 +111,8 @@ var InfiniteCollection = function (_React$Component) {
     key: 'getCollectionProps',
     value: function getCollectionProps() {
       return _extends({}, this.props, this.getCallbacks(), {
+        id: this.id,
+        saveVisibility: !!this.props.id, // Only save visibility when an ID is set manually
         collectionActions: [{ key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) }, { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) }].concat(_toConsumableArray(this.props.collectionActions)),
         recordActions: this.getRecordActions(),
         sort: this.state.sort,
@@ -129,9 +132,9 @@ var InfiniteCollection = function (_React$Component) {
             var key = _this2.state.sort.key;
             _this2.setState({ sort: { key: key, order: order } });
           } else {
-            var order = 'asc';
-            var key = col;
-            _this2.setState({ sort: { key: key, order: order } });
+            var _order = 'asc';
+            var _key = col;
+            _this2.setState({ sort: { key: _key, order: _order } });
           }
           _lodash2.default.defer(function () {
             return _this2.refs.container.reset();
@@ -205,11 +208,9 @@ InfiniteCollection.contextTypes = {
   history: _react2.default.PropTypes.object
 };
 InfiniteCollection.defaultProps = {
-  id: (0, _random.uid)(),
   client: null,
   collectionActions: [],
   autoActions: true
-
 };
 exports.default = InfiniteCollection;
 
