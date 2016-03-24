@@ -23,8 +23,7 @@ export default class ColumnChooser extends React.Component {
   }
 
   render() {
-    let availableColumns = _.reject(this.props.availableColumns, c => c.primary)
-
+    const {availableColumns} = this.props
     return (
       <div className="left menu" >
         <div className="header">
@@ -33,12 +32,15 @@ export default class ColumnChooser extends React.Component {
         </div>
         <div className="scrolling menu">
           { _.map(availableColumns, (col, i) => {
-            return (
-              <div className="item" onClick={e => this.chooseColumn(e, i, !this.isColumnVisible(i))}>
-                {this.isColumnVisible(i) ? <i className="toggle on icon"/> : <i className="toggle off icon"/>}
-                {col.label}
-              </div>
-            )
+            if(col.primary)
+              return null
+            else
+              return (
+                <div className="item" onClick={e => this.chooseColumn(e, i, !this.isColumnVisible(i))}>
+                  {this.isColumnVisible(i) ? <i className="toggle on icon"/> : <i className="toggle off icon"/>}
+                  {col.label}
+                </div>
+              )
           })}
         </div>
       </div>
