@@ -26,7 +26,8 @@ export default class FileField extends React.Component {
     defaultValue: React.PropTypes.string,
     query: React.PropTypes.object,
     mode: React.PropTypes.oneOf('single', 'multi'),
-    target: React.PropTypes.string
+    target: React.PropTypes.string,
+    eager: React.PropTypes.bool
   }
 
   static defaultProps = {
@@ -36,7 +37,8 @@ export default class FileField extends React.Component {
     defaultValue: '',
     query: {},
     mode: 'single',
-    target: '/admin/chunks'
+    target: '/admin/chunks',
+    eager: true
   }
 
   constructor(props) {
@@ -51,11 +53,14 @@ export default class FileField extends React.Component {
         status: 'WAITING',
         filesComplete: []
       },
-      preview: props.defaultValue
+      preview: props.defaultValue,
+      uploadInProgress: false,
+      uploadComplete: false,
+      uploadFailed: false
     }
 
     this.r = new Resumable({
-      target: Config.get('api') + props.target,
+      target: Config.get('api.pathPrefix') + props.target,
       query: props.query,
       withCredentials: true,
       maxFiles: (props.mode === 'single' ? 1 : props.maxFiles),
@@ -76,11 +81,31 @@ export default class FileField extends React.Component {
   }
 
   render() {
+    const allFilesFailed = this.r.files.length > 0 && this.state.filesFailed.length === this.r.files.length
+
     if (this.props.mode === 'single') {
+      if(allFilesFailed) {
+        return (
+          <div>
+            <div className="ui small header">Uploading failed.</div>
+            <div className="ui red labeled icon button" onClick={this.retry.bind(this)}>
+              <i className="refresh icon"></i>
+              Retry
+            </div>
+            <div ref="reBrowseButton" className="ui green labeled icon button">
+              <i className="folder icon"></i>
+              Choose Files...
+            </div>
+          </div>
+        )
+      }
+      if(this.state.uploadInProgress) {
+        return <FileProgress/>
+      }
       if(this.r.files.length > 0) {
         return(
           <div>
-            <div ref="browseButton" className="ui green labeled icon button" onClick={this.clearFiles()}>
+            <div ref="browseButton" className="ui green labeled icon button" onClick={this.clearFiles.bind(this)}>
               <i className="folder icon"></i>
               {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
             </div>
@@ -155,10 +180,21 @@ export default class FileField extends React.Component {
     while(this.r.files.length > 1) {
       r.files[0].cancel()
     }
+    this.setState({filesFailed: []})
+  }
+
+  clearAndChoose() {
+    this.clearFiles()
+  }
+
+  retry() {
+    _.forEach(this.r.files, f => f.retry())
+    this.setState({filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false})
   }
 
   beginUpload() {
     const single = this.props.mode === 'single'
+    this.setState({uploadInProgress: true})
     this.rPromise = when.promise((resolve, reject) => {
       let fileResults = []
       this.r.on('complete', () => resolve(fileResults))
@@ -171,6 +207,7 @@ export default class FileField extends React.Component {
       })
       this.r.upload()
     })
+    .tap(() => this.setState({uploadInProgress: false, uploadComplete: true}))
     .then(assetIds => {
       if(single) {
         return assetIds[0]
@@ -191,6 +228,9 @@ export default class FileField extends React.Component {
 
   onFileAdded(_file) {
     this.forceUpdate()
+    if(this.props.mode === 'single' && this.props.eager) {
+      this.beginUpload()
+    }
   }
 
   onFileSuccess(file, serverResponse) {
@@ -199,15 +239,24 @@ export default class FileField extends React.Component {
 
   onFileError(file, serverResponse) {
     Logger.log(file, serverResponse)
+    const newFailures = this.state.filesFailed.concat([file.uniqueIdentifier])
     this.setState({
-      filesFailed: this.state.filesFailed.concat([file.uniqueIdentifier])
+      filesFailed: newFailures
     })
+
+    if(newFailures.length === this.r.files.length) {
+      this.r.assignBrowse(this.refs.reBrowseButton)
+    }
   }
 
   onFileProgress(file) {
     Logger.log(file.fileName, file.progress())
     $(this.refs.fileTable).find(`#${file.uniqueIdentifier}`).progress({percent: Math.floor(file.progress() * 100)})
-    //this.forceUpdate()
+    if(this.state.uploadInProgress) {
+      $(".file.progress").progress({
+        percent: Math.ceil(this.getOverallProgress() * 100)
+      })
+    }
   }
 
   onFileRetry(_file) {
@@ -260,7 +309,10 @@ export default class FileField extends React.Component {
   }
 
   getValue() {
-    this.beginUpload()
+    // Only begin the upload here if there is no upload in progress and an upload has not already completed
+    if(!this.state.uploadInProgress && !this.state.uploadComplete) {
+      this.beginUpload()
+    }
     return this.rPromise
   }
 
@@ -271,4 +323,13 @@ export default class FileField extends React.Component {
   getReference() {
     return {[this.props.code]: this}
   }
+}
+
+const FileProgress = props => {
+  return (
+    <div className="ui tiny green indicating file progress">
+      <div className="bar"/>
+      <div className="label">Uploading</div>
+    </div>
+  )
 }
