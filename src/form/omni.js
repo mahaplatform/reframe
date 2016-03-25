@@ -22,7 +22,9 @@ export default class OmniForm extends React.Component {
   static defaultProps = {
     method: 'get',
     onSubmit: _.noop,
-    onFieldChange: _.noop
+    onFieldChange: _.noop,
+    onError: _.noop,
+    onValidationFail: _.noop
   }
 
   constructor(props) {
