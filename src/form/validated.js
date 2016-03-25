@@ -95,7 +95,7 @@ export default class ValidatedForm extends React.Component {
           let validatorFunction = _.get(this.state.validators, code, () => '');
           return _.first(validatorFunction(value).errors) || '';
         })
-        .omit(_.isEmpty)
+        .omitBy(_.isEmpty)
         .value();
 
       if (_.isEmpty(errors)) {
@@ -151,5 +151,17 @@ export default class ValidatedForm extends React.Component {
 
   onFieldChange(code, value) {
     this.props.onFieldChange(code, value)
+  }
+
+  fill(...args) {
+    this.refs.form.fill(...args)
+  }
+
+  doSubmit(...args) {
+    this.refs.form.doSubmit(...args)
+  }
+
+  onClear(...args) {
+    this.refs.form.onClear(...args)
   }
 }
