@@ -140,7 +140,7 @@ var OmniForm = function (_React$Component) {
         onSubmit: function onSubmit(data) {
           if (self.props.action) {
             self.setState({ submitting: true, pendingData: _lodash2.default.cloneDeep(data) });
-            self.api[self.props.mode](self.props.action, data).then(function (response) {
+            self.api[self.props.method](self.props.action, data).then(function (response) {
               return self.handleAPIResponse(response);
             }).catch(function (errResponse) {
               return self.handleAPIError(errResponse);
@@ -171,7 +171,7 @@ var OmniForm = function (_React$Component) {
       var errors = _errResponse$entity.errors;
       var message = _errResponse$entity.message;
 
-      var formMessage = void 0;
+      var formMessage = undefined;
       switch (code) {
         case 422:
           formMessage = {
@@ -261,10 +261,10 @@ var OmniForm = function (_React$Component) {
 OmniForm.propTypes = {
   endpoint: _react2.default.PropTypes.string,
   action: _react2.default.PropTypes.string.constructor,
-  mode: _react2.default.PropTypes.oneOf('post', 'put', 'patch', 'get')
+  method: _react2.default.PropTypes.oneOf('post', 'put', 'patch', 'get')
 };
 OmniForm.defaultProps = {
-  mode: 'get',
+  method: 'get',
   onSubmit: _lodash2.default.noop,
   onFieldChange: _lodash2.default.noop
 };

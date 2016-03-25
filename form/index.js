@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _core = require('./core');
 
-Object.keys(_core).forEach(function (key) {
-  if (key === "default") return;
-  Object.defineProperty(exports, key, {
+for (let _key in _core) {
+  if (_key === "default") continue;
+  Object.defineProperty(exports, _key, {
     enumerable: true,
-    get: function get() {
-      return _core[key];
+    get: function () {
+      return _core[_key];
     }
   });
-});
+}
 
 var _omni = require('./omni');
 
