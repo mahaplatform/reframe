@@ -24,9 +24,13 @@ var _loading = require('snax/lib/containers/loading');
 
 var _loading2 = _interopRequireDefault(_loading);
 
-var _core = require('./core.js');
+var _core = require('./core');
 
 var _core2 = _interopRequireDefault(_core);
+
+var _validated = require('./validated');
+
+var _validated2 = _interopRequireDefault(_validated);
 
 var _api = require('../api');
 
@@ -83,7 +87,7 @@ var OmniForm = function (_React$Component) {
   _createClass(OmniForm, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_core2.default, _extends({ ref: 'innerForm' }, this.applyProps(), this.attachCallbacks()));
+      return _react2.default.createElement(_validated2.default, _extends({ ref: 'innerForm' }, this.applyProps(), this.attachCallbacks()));
     }
   }, {
     key: 'componentDidMount',
