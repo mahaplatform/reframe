@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import LoadingContainer, {LoadingState, PresentState, ErrorState} from 'snax/lib/containers/loading'
-import CoreForm from './core.js'
+import CoreForm from './core'
+import ValidatedForm from './validated'
 import API from '../api'
 import when from 'when'
 import whenKeys from 'when/keys'
@@ -41,7 +42,7 @@ export default class OmniForm extends React.Component {
 
   render() {
     return (
-      <CoreForm ref="innerForm" {...this.applyProps()} {...this.attachCallbacks()} />
+      <ValidatedForm ref="innerForm" {...this.applyProps()} {...this.attachCallbacks()} />
     )
   }
 
