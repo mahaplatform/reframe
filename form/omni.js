@@ -270,6 +270,8 @@ OmniForm.propTypes = {
 OmniForm.defaultProps = {
   method: 'get',
   onSubmit: _lodash2.default.noop,
-  onFieldChange: _lodash2.default.noop
+  onFieldChange: _lodash2.default.noop,
+  onError: _lodash2.default.noop,
+  onValidationFail: _lodash2.default.noop
 };
 exports.default = OmniForm;
