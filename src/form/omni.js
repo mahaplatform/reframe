@@ -15,11 +15,11 @@ export default class OmniForm extends React.Component {
   static propTypes = {
     endpoint: React.PropTypes.string,
     action: React.PropTypes.string.constructor,
-    mode: React.PropTypes.oneOf('post', 'put', 'patch', 'get')
+    method: React.PropTypes.oneOf('post', 'put', 'patch', 'get')
   }
 
   static defaultProps = {
-    mode: 'get',
+    method: 'get',
     onSubmit: _.noop,
     onFieldChange: _.noop
   }
@@ -87,7 +87,7 @@ export default class OmniForm extends React.Component {
       onSubmit(data) {
         if(self.props.action) {
           self.setState({submitting: true, pendingData: _.cloneDeep(data)})
-          self.api[self.props.mode](self.props.action, data)
+          self.api[self.props.method](self.props.action, data)
             .then(response => self.handleAPIResponse(response))
             .catch(errResponse => self.handleAPIError(errResponse))
             .finally(() => self.setState({submitting: false, pendingData: {}}))
