@@ -10,7 +10,7 @@ import whenKeys from 'when/keys'
 import whenSequence from 'when/sequence'
 import {uid} from '../utils/random'
 
-const isAsync = f => f.async || _.has(f, 'endpoint')
+const isAsync = f => f.async || (_.has(f, 'endpoint') && f.async !== false)
 
 export default class OmniForm extends React.Component {
   static propTypes = {

@@ -102,6 +102,19 @@ export default class FileField extends React.Component {
       if(this.state.uploadInProgress) {
         return <FileProgress/>
       }
+      if(this.state.uploadComplete) {
+        return (
+          <div>
+            <div className="ui green labeled disabled icon button">
+              <i className="folder icon"></i>
+              Complete
+            </div>
+            <div className="ui small basic circular icon button" onClick={this.clearFiles()}>
+              <i className="x icon"></i>
+            </div>
+          </div>
+        )
+      }
       if(this.r.files.length > 0) {
         return(
           <div>
@@ -180,7 +193,8 @@ export default class FileField extends React.Component {
     while(this.r.files.length > 1) {
       r.files[0].cancel()
     }
-    this.setState({filesFailed: []})
+    this.setState({filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false})
+    this.rPromise = null
   }
 
   clearAndChoose() {
@@ -194,7 +208,7 @@ export default class FileField extends React.Component {
 
   beginUpload() {
     const single = this.props.mode === 'single'
-    this.setState({uploadInProgress: true})
+    this.setState({filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false})
     this.rPromise = when.promise((resolve, reject) => {
       let fileResults = []
       this.r.on('complete', () => resolve(fileResults))
