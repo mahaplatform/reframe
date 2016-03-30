@@ -11,7 +11,9 @@ export default class ValidatedForm extends React.Component {
     onSubmit: _.noop,
     onValidationFail: _.noop,
     onFieldChange: _.noop,
-    externalErrors: {}
+    externalErrors: {},
+    scrollToErrors: true,
+    formContainer: 'body'
   }
 
   constructor(props) {
@@ -104,6 +106,12 @@ export default class ValidatedForm extends React.Component {
       }
       else {
         // There are errors, validation failed. fire relevant failure events.
+        if(this.props.scrollToErrors) {
+          const errorCode = _(errors).keys().first()
+          const parentTop = $(`[data-field-code="${errorCode}"]`).parent().position().top
+          const errorTop = parentTop + $(`[data-field-code="${errorCode}"]`).position().top
+          $(this.props.formContainer).animate({ scrollTop: `${errorTop}px` })
+        }
         this.props.onValidationFail(errors)
       }
 
