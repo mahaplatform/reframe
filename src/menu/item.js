@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Link} from 'react-router'
+import {IndexLink} from 'react-router'
 
 class MenuItem extends React.Component {
 
@@ -38,9 +38,9 @@ class MenuItem extends React.Component {
       return <a onClick={this.props.item.handler} className="item">{this.props.item.label}</a>
     } else if(this.props.item.route) {
       if(this.props.item.label) {
-        return <Link to={this.props.item.route} className="item">{this.props.item.label}</Link>
+        return <IndexLink to={this.props.item.route} className="item">{this.props.item.label}</IndexLink>
       } else  if(this.props.item.image) {
-        return <Link to={this.props.item.route} className="item"><img src={this.props.item.image} className="ui image" /></Link>
+        return <IndexLink to={this.props.item.route} className="item"><img src={this.props.item.image} className="ui image" /></IndexLink>
       }
     } else if(this.props.item.url) {
       if(this.props.item.label) {
