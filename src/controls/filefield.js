@@ -1,21 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Resumable from 'resumablejs'
+require('when/monitor/console');
 import when from 'when'
+import whenSequence from 'when/sequence'
+import whenPipeline from 'when/pipeline'
 import Config from '../utils/config'
 import Logger from '../utils/logger'
-
-class FilePreview extends React.Component {
-  render() {
-    const url = Config.get('api') + `/admin/assets/${this.props.id}/preview`
-    if(this.props.id) {
-      return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className="ui tiny rounded image"/>
-    }
-    else {
-      return null
-    }
-  }
-}
+import API from '../api'
 
 export default class FileField extends React.Component {
 
@@ -38,6 +30,7 @@ export default class FileField extends React.Component {
     query: {},
     mode: 'single',
     target: '/admin/chunks',
+    assetPath: '/admin/assets',
     eager: true
   }
 
@@ -56,6 +49,7 @@ export default class FileField extends React.Component {
       preview: props.defaultValue,
       uploadInProgress: false,
       uploadComplete: false,
+      uploadProcessing: false,
       uploadFailed: false
     }
 
@@ -65,6 +59,8 @@ export default class FileField extends React.Component {
       withCredentials: true,
       maxFiles: (props.mode === 'single' ? 1 : props.maxFiles),
     });
+
+    this.api = new API()
 
     this.isResumableSupported = this.r.support;
 
@@ -84,7 +80,7 @@ export default class FileField extends React.Component {
     const allFilesFailed = this.r.files.length > 0 && this.state.filesFailed.length === this.r.files.length
 
     if (this.props.mode === 'single') {
-      if(allFilesFailed) {
+      if(allFilesFailed || this.state.uploadFailed) {
         return (
           <div>
             <div className="ui small header">Uploading failed.</div>
@@ -99,17 +95,18 @@ export default class FileField extends React.Component {
           </div>
         )
       }
-      if(this.state.uploadInProgress) {
-        return <FileProgress/>
+      if(this.state.uploadInProgress || this.state.uploadProcessing) {
+        return <FileProgress progress={this.getOverallProgress()}/>
       }
       if(this.state.uploadComplete) {
         return (
           <div>
+            <FilePreview id={this.state.preview}/>
             <div className="ui green labeled disabled icon button">
               <i className="folder icon"></i>
-              Complete
+              {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
             </div>
-            <div className="ui small basic circular icon button" onClick={this.clearFiles()}>
+            <div className="ui small basic circular icon button" onClick={this.clearFiles.bind(this)}>
               <i className="x icon"></i>
             </div>
           </div>
@@ -207,21 +204,45 @@ export default class FileField extends React.Component {
   }
 
   beginUpload() {
+    // Start the upload only if some files have been added
+    if(_.isEmpty(this.r.files)) {
+      this.rPromise = when(null)
+      return
+    }
     const single = this.props.mode === 'single'
     this.setState({filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false})
-    this.rPromise = when.promise((resolve, reject) => {
-      let fileResults = []
-      this.r.on('complete', () => resolve(fileResults))
-      this.r.on('error', reject)
-      this.r.on('fileSuccess', (_file, r) => {
-        Logger.log(_file, r)
-        let resp = JSON.parse(r)
-        let assetId = _.get(resp, 'asset_id', null) || _.get(resp, 'id', null)
-        fileResults.push(assetId)
-      })
-      this.r.upload()
-    })
-    .tap(() => this.setState({uploadInProgress: false, uploadComplete: true}))
+    const uploadPromise = () => {
+      return when.promise((resolve, reject) => {
+          let fileResults = []
+          this.r.on('complete', () => resolve(fileResults))
+          this.r.on('error', reject)
+          this.r.on('fileSuccess', (_file, r) => {
+            Logger.log(_file, r)
+            let resp = JSON.parse(r)
+            let assetId = _.get(resp, 'asset_id', null) || _.get(resp, 'id', null)
+            fileResults.push(assetId)
+          })
+          this.r.upload()
+        })
+        .tap(() => this.setState({uploadInProgress: false, uploadProcessing: true}))
+        .tap(Logger.log.bind(Logger))
+    }
+
+  const processPromise = ids => {
+    Logger.log("Processing...", ids)
+    return whenSequence(
+      _.map(
+        ids,
+        i => {
+          return () => this.api.patch(`${this.props.assetPath}/${i}/process`)
+        }
+      ))
+      .then(() => ids)
+    }
+
+  this.rPromise = whenPipeline([uploadPromise, processPromise])
+    .tap(ids => Logger.log("Uploading and Processing complete", ids))
+    .tap(ids => this.setState({preview: _.first(ids)}))
     .then(assetIds => {
       if(single) {
         return assetIds[0]
@@ -230,8 +251,10 @@ export default class FileField extends React.Component {
         return assetIds
       }
     })
+    .tap(() => this.setState({uploadProcessing: false, uploadComplete: true}))
     .tap(Logger.log.bind(Logger))
     .catch(failure => {
+      this.setState({uploadProcessing: false, uploadComplete: false, uploadInProgress: false, uploadFailed: true})
       Logger.error(failure)
     })
   }
@@ -271,6 +294,7 @@ export default class FileField extends React.Component {
         percent: Math.ceil(this.getOverallProgress() * 100)
       })
     }
+    this.forceUpdate()
   }
 
   onFileRetry(_file) {
@@ -339,11 +363,24 @@ export default class FileField extends React.Component {
   }
 }
 
-const FileProgress = props => {
+const FileProgress = ({progress}) => {
   return (
     <div className="ui tiny green indicating file progress">
       <div className="bar"/>
-      <div className="label">Uploading</div>
+
+      <div className="label">{ progress == 1 ?  <span><div className="ui mini active inline loader"></div> Processing</span> : "Uploading" }</div>
     </div>
   )
+}
+
+class FilePreview extends React.Component {
+  render() {
+    const url = Config.get('api.pathPrefix') + `/admin/assets/${this.props.id}/preview`
+    if(this.props.id) {
+      return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className="ui tiny rounded image"/>
+    }
+    else {
+      return null
+    }
+  }
 }
