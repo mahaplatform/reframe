@@ -23,6 +23,7 @@ export default class FormExamples extends React.Component {
       title: 'Here\'s a Form',
       onFieldChange: (field, data) => Logger.info(field, data),
       onSubmit: data => Logger.info(data),
+      redirect: '/forms/success',
       sections: [
         { fields: [
           { type: "fields", fields: [

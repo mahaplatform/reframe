@@ -10,6 +10,7 @@ import CommentsExample from './comments/index.jsx'
 import InfiniteCollectionExample from './collection/infinite.jsx'
 import MenuExample from './menu/index.jsx'
 import FormExample from './form/index.jsx'
+import FormSuccessPage from './form/success.jsx'
 import ModalExample from './modal/index.jsx'
 import TasksExample from './tasks/index.jsx'
 import BreadcrumbExample from './breadcrumb/index.jsx'
@@ -102,6 +103,7 @@ const routes = (
       <Route path="menus" component={MenuExample} />
       <Route path="comments" component={CommentsExample} />
       <Route path="forms" component={FormExample} />
+      <Route path="forms/success" component={FormSuccessPage} />
       <Route path="modals" component={ModalExample} />
       <Route path="breadcrumbs" component={BreadcrumbExample} />
       <Route path="tasks" component={TasksExample} />

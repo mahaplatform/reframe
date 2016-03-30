@@ -16,7 +16,8 @@ export default class OmniForm extends React.Component {
   static propTypes = {
     endpoint: React.PropTypes.string,
     action: React.PropTypes.string.constructor,
-    method: React.PropTypes.oneOf('post', 'put', 'patch', 'get')
+    method: React.PropTypes.oneOf('post', 'put', 'patch', 'get'),
+    redirect: React.PropTypes.string
   }
 
   static defaultProps = {
@@ -24,7 +25,12 @@ export default class OmniForm extends React.Component {
     onSubmit: _.noop,
     onFieldChange: _.noop,
     onError: _.noop,
-    onValidationFail: _.noop
+    onValidationFail: _.noop,
+    redirect: null
+  }
+
+  static contextTypes = {
+    history: React.PropTypes.object
   }
 
   constructor(props) {
@@ -92,16 +98,28 @@ export default class OmniForm extends React.Component {
           self.setState({submitting: true, pendingData: _.cloneDeep(data)})
           self.api[self.props.method](self.props.action, data)
             .then(response => self.handleAPIResponse(response))
+            .then(() => self.doRedirect())
             .catch(errResponse => self.handleAPIError(errResponse))
             .finally(() => self.setState({submitting: false, pendingData: {}}))
         }
         else {
           self.props.onSubmit(data)
+          self.doRedirect()
         }
       },
       onFieldChange(...args) {
         self.props.onFieldChange(...args)
       }
+    }
+  }
+
+  applyProps() {
+    return {
+      loading: this.state.loading || this.state.submitting,
+      externalErrors: this.state.errors,
+      sections: this.mapSections(),
+      ...this.state.message,
+      ..._.omit(this.props, ['mode', 'action', 'endpoint', 'onSubmit', 'onFieldChange'])
     }
   }
 
@@ -134,13 +152,9 @@ export default class OmniForm extends React.Component {
     this.props.onError({code, errors, message})
   }
 
-  applyProps() {
-    return {
-      loading: this.state.loading || this.state.submitting,
-      externalErrors: this.state.errors,
-      sections: this.mapSections(),
-      ...this.state.message,
-      ..._.omit(this.props, ['mode', 'action', 'endpoint', 'onSubmit', 'onFieldChange'])
+  doRedirect() {
+    if(this.props.redirect && this.context.history) {
+      this.context.history.push(this.props.redirect)
     }
   }
 
