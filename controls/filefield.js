@@ -480,8 +480,8 @@ FileField.defaultProps = {
   defaultValue: '',
   query: {},
   mode: 'single',
-  target: '/admin/chunks',
-  assetPath: '/admin/assets',
+  target: _config2.default.get('app.paths.asset_chunks', '/admin/assets/chunks'),
+  assetPath: _config2.default.get('app.paths.assets', '/admin/assets'),
   eager: true
 };
 exports.default = FileField;
