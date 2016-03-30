@@ -82,11 +82,14 @@ var FileField = function (_React$Component2) {
         status: 'WAITING',
         filesComplete: []
       },
-      preview: props.defaultValue
+      preview: props.defaultValue,
+      uploadInProgress: false,
+      uploadComplete: false,
+      uploadFailed: false
     };
 
     _this2.r = new _resumablejs2.default({
-      target: _config2.default.get('api') + props.target,
+      target: _config2.default.get('api.pathPrefix') + props.target,
       query: props.query,
       withCredentials: true,
       maxFiles: props.mode === 'single' ? 1 : props.maxFiles
@@ -112,14 +115,59 @@ var FileField = function (_React$Component2) {
     value: function render() {
       var _this3 = this;
 
+      var allFilesFailed = this.r.files.length > 0 && this.state.filesFailed.length === this.r.files.length;
+
       if (this.props.mode === 'single') {
+        if (allFilesFailed) {
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'div',
+              { className: 'ui small header' },
+              'Uploading failed.'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'ui red labeled icon button', onClick: this.retry.bind(this) },
+              _react2.default.createElement('i', { className: 'refresh icon' }),
+              'Retry'
+            ),
+            _react2.default.createElement(
+              'div',
+              { ref: 'reBrowseButton', className: 'ui green labeled icon button' },
+              _react2.default.createElement('i', { className: 'folder icon' }),
+              'Choose Files...'
+            )
+          );
+        }
+        if (this.state.uploadInProgress) {
+          return _react2.default.createElement(FileProgress, null);
+        }
+        if (this.state.uploadComplete) {
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'div',
+              { className: 'ui green labeled disabled icon button' },
+              _react2.default.createElement('i', { className: 'folder icon' }),
+              'Complete'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'ui small basic circular icon button', onClick: this.clearFiles() },
+              _react2.default.createElement('i', { className: 'x icon' })
+            )
+          );
+        }
         if (this.r.files.length > 0) {
           return _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
               'div',
-              { ref: 'browseButton', className: 'ui green labeled icon button', onClick: this.clearFiles() },
+              { ref: 'browseButton', className: 'ui green labeled icon button', onClick: this.clearFiles.bind(this) },
               _react2.default.createElement('i', { className: 'folder icon' }),
               this.r.files[0].fileName,
               ' (',
@@ -219,6 +267,21 @@ var FileField = function (_React$Component2) {
       while (this.r.files.length > 1) {
         r.files[0].cancel();
       }
+      this.setState({ filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false });
+      this.rPromise = null;
+    }
+  }, {
+    key: 'clearAndChoose',
+    value: function clearAndChoose() {
+      this.clearFiles();
+    }
+  }, {
+    key: 'retry',
+    value: function retry() {
+      _.forEach(this.r.files, function (f) {
+        return f.retry();
+      });
+      this.setState({ filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false });
     }
   }, {
     key: 'beginUpload',
@@ -226,6 +289,7 @@ var FileField = function (_React$Component2) {
       var _this4 = this;
 
       var single = this.props.mode === 'single';
+      this.setState({ filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false });
       this.rPromise = _when2.default.promise(function (resolve, reject) {
         var fileResults = [];
         _this4.r.on('complete', function () {
@@ -239,6 +303,8 @@ var FileField = function (_React$Component2) {
           fileResults.push(assetId);
         });
         _this4.r.upload();
+      }).tap(function () {
+        return _this4.setState({ uploadInProgress: false, uploadComplete: true });
       }).then(function (assetIds) {
         if (single) {
           return assetIds[0];
@@ -258,6 +324,9 @@ var FileField = function (_React$Component2) {
     key: 'onFileAdded',
     value: function onFileAdded(_file) {
       this.forceUpdate();
+      if (this.props.mode === 'single' && this.props.eager) {
+        this.beginUpload();
+      }
     }
   }, {
     key: 'onFileSuccess',
@@ -268,16 +337,25 @@ var FileField = function (_React$Component2) {
     key: 'onFileError',
     value: function onFileError(file, serverResponse) {
       _logger2.default.log(file, serverResponse);
+      var newFailures = this.state.filesFailed.concat([file.uniqueIdentifier]);
       this.setState({
-        filesFailed: this.state.filesFailed.concat([file.uniqueIdentifier])
+        filesFailed: newFailures
       });
+
+      if (newFailures.length === this.r.files.length) {
+        this.r.assignBrowse(this.refs.reBrowseButton);
+      }
     }
   }, {
     key: 'onFileProgress',
     value: function onFileProgress(file) {
       _logger2.default.log(file.fileName, file.progress());
       $(this.refs.fileTable).find('#' + file.uniqueIdentifier).progress({ percent: Math.floor(file.progress() * 100) });
-      //this.forceUpdate()
+      if (this.state.uploadInProgress) {
+        $(".file.progress").progress({
+          percent: Math.ceil(this.getOverallProgress() * 100)
+        });
+      }
     }
   }, {
     key: 'onFileRetry',
@@ -339,7 +417,10 @@ var FileField = function (_React$Component2) {
   }, {
     key: 'getValue',
     value: function getValue() {
-      this.beginUpload();
+      // Only begin the upload here if there is no upload in progress and an upload has not already completed
+      if (!this.state.uploadInProgress && !this.state.uploadComplete) {
+        this.beginUpload();
+      }
       return this.rPromise;
     }
   }, {
@@ -364,7 +445,8 @@ FileField.propTypes = {
   defaultValue: _react2.default.PropTypes.string,
   query: _react2.default.PropTypes.object,
   mode: _react2.default.PropTypes.oneOf('single', 'multi'),
-  target: _react2.default.PropTypes.string
+  target: _react2.default.PropTypes.string,
+  eager: _react2.default.PropTypes.bool
 };
 FileField.defaultProps = {
   code: null,
@@ -373,6 +455,21 @@ FileField.defaultProps = {
   defaultValue: '',
   query: {},
   mode: 'single',
-  target: '/admin/chunks'
+  target: '/admin/chunks',
+  eager: true
 };
 exports.default = FileField;
+
+
+var FileProgress = function FileProgress(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'ui tiny green indicating file progress' },
+    _react2.default.createElement('div', { className: 'bar' }),
+    _react2.default.createElement(
+      'div',
+      { className: 'label' },
+      'Uploading'
+    )
+  );
+};

@@ -42,6 +42,12 @@ var Task = function (_React$Component) {
           { onClick: this.props.task.handler, activeClassName: 'active', className: 'item' },
           this.props.task.label
         );
+      } else if (this.props.task.url) {
+        return _react2.default.createElement(
+          'a',
+          { href: this.props.task.url, activeClassName: 'active', className: 'item' },
+          this.props.task.label
+        );
       } else if (this.props.task.route) {
         return _react2.default.createElement(
           _reactRouter.IndexLink,

@@ -18,6 +18,8 @@ var _livetime = require('./livetime.js');
 
 var _livetime2 = _interopRequireDefault(_livetime);
 
+var _reactRouter = require('react-router');
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -42,9 +44,10 @@ var Event = function (_React$Component) {
   _createClass(Event, [{
     key: 'render',
     value: function render() {
-      var description = '<a href="' + this.props.subject.link + '">' + this.props.subject.text + '</a> ' + this.props.story;
+      var description = ' ' + this.props.story;
       description = this._replace(description, 'object1', this.props.object1);
       description = this._replace(description, 'object2', this.props.object2);
+      var photo = this.props.subject.photo || '/images/photo.jpg';
       return _react2.default.createElement(
         'div',
         { className: 'event' },
@@ -63,7 +66,17 @@ var Event = function (_React$Component) {
             ' on ',
             (0, _moment2.default)(this.props.created_at).format('dddd, MMM D, YYYY @ h:mm A')
           ),
-          _react2.default.createElement('div', { className: 'summary', dangerouslySetInnerHTML: { __html: description } })
+          _react2.default.createElement(
+            'div',
+            { className: 'summary' },
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: this.props.subject.link },
+              this.props.subject.text
+            ),
+            ' ',
+            _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: description } })
+          )
         )
       );
     }

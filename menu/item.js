@@ -67,13 +67,13 @@ var MenuItem = function (_React$Component) {
       } else if (this.props.item.route) {
         if (this.props.item.label) {
           return _react2.default.createElement(
-            _reactRouter.Link,
+            _reactRouter.IndexLink,
             { to: this.props.item.route, className: 'item' },
             this.props.item.label
           );
         } else if (this.props.item.image) {
           return _react2.default.createElement(
-            _reactRouter.Link,
+            _reactRouter.IndexLink,
             { to: this.props.item.route, className: 'item' },
             _react2.default.createElement('img', { src: this.props.item.image, className: 'ui image' })
           );
