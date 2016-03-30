@@ -146,6 +146,8 @@ var OmniForm = function (_React$Component) {
             self.setState({ submitting: true, pendingData: _lodash2.default.cloneDeep(data) });
             self.api[self.props.method](self.props.action, data).then(function (response) {
               return self.handleAPIResponse(response);
+            }).then(function () {
+              return self.doRedirect();
             }).catch(function (errResponse) {
               return self.handleAPIError(errResponse);
             }).finally(function () {
@@ -153,6 +155,7 @@ var OmniForm = function (_React$Component) {
             });
           } else {
             self.props.onSubmit(data);
+            self.doRedirect();
           }
         },
         onFieldChange: function onFieldChange() {
@@ -161,6 +164,15 @@ var OmniForm = function (_React$Component) {
           (_self$props = self.props).onFieldChange.apply(_self$props, arguments);
         }
       };
+    }
+  }, {
+    key: 'applyProps',
+    value: function applyProps() {
+      return _extends({
+        loading: this.state.loading || this.state.submitting,
+        externalErrors: this.state.errors,
+        sections: this.mapSections()
+      }, this.state.message, _lodash2.default.omit(this.props, ['mode', 'action', 'endpoint', 'onSubmit', 'onFieldChange']));
     }
   }, {
     key: 'handleAPIResponse',
@@ -198,13 +210,11 @@ var OmniForm = function (_React$Component) {
       this.props.onError({ code: code, errors: errors, message: message });
     }
   }, {
-    key: 'applyProps',
-    value: function applyProps() {
-      return _extends({
-        loading: this.state.loading || this.state.submitting,
-        externalErrors: this.state.errors,
-        sections: this.mapSections()
-      }, this.state.message, _lodash2.default.omit(this.props, ['mode', 'action', 'endpoint', 'onSubmit', 'onFieldChange']));
+    key: 'doRedirect',
+    value: function doRedirect() {
+      if (this.props.redirect && this.context.history) {
+        this.context.history.push(this.props.redirect);
+      }
     }
   }, {
     key: 'mapSections',
@@ -265,13 +275,18 @@ var OmniForm = function (_React$Component) {
 OmniForm.propTypes = {
   endpoint: _react2.default.PropTypes.string,
   action: _react2.default.PropTypes.string.constructor,
-  method: _react2.default.PropTypes.oneOf('post', 'put', 'patch', 'get')
+  method: _react2.default.PropTypes.oneOf('post', 'put', 'patch', 'get'),
+  redirect: _react2.default.PropTypes.string
 };
 OmniForm.defaultProps = {
   method: 'get',
   onSubmit: _lodash2.default.noop,
   onFieldChange: _lodash2.default.noop,
   onError: _lodash2.default.noop,
-  onValidationFail: _lodash2.default.noop
+  onValidationFail: _lodash2.default.noop,
+  redirect: null
+};
+OmniForm.contextTypes = {
+  history: _react2.default.PropTypes.object
 };
 exports.default = OmniForm;
