@@ -29,8 +29,8 @@ export default class FileField extends React.Component {
     defaultValue: '',
     query: {},
     mode: 'single',
-    target: '/admin/chunks',
-    assetPath: '/admin/assets',
+    target: Config.get('app.paths.asset_chunks', '/admin/assets/chunks'),
+    assetPath: Config.get('app.paths.assets', '/admin/assets'),
     eager: true
   }
 
