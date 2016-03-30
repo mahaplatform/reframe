@@ -146,6 +146,12 @@ var ValidatedForm = function (_React$Component) {
           _this2.props.onSubmit(data);
         } else {
           // There are errors, validation failed. fire relevant failure events.
+          if (_this2.props.scrollToErrors) {
+            var errorCode = (0, _lodash2.default)(errors).keys().first();
+            var parentTop = $('[data-field-code="' + errorCode + '"]').parent().position().top;
+            var errorTop = parentTop + $('[data-field-code="' + errorCode + '"]').position().top;
+            $(_this2.props.formContainer).animate({ scrollTop: errorTop + 'px' });
+          }
           _this2.props.onValidationFail(errors);
         }
 
@@ -226,6 +232,8 @@ ValidatedForm.defaultProps = {
   onSubmit: _lodash2.default.noop,
   onValidationFail: _lodash2.default.noop,
   onFieldChange: _lodash2.default.noop,
-  externalErrors: {}
+  externalErrors: {},
+  scrollToErrors: true,
+  formContainer: 'body'
 };
 exports.default = ValidatedForm;
