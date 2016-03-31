@@ -18,6 +18,7 @@ import DetailExample from './details/index.jsx'
 import FetchContainerExample from './containers/fetch.jsx'
 import InfiniteContainerExample from './containers/infinite.jsx'
 import TabbedPaneExample from './panes/tabbed.jsx'
+import TypeaheadExample from './ui/typeahead.jsx'
 
 class Example extends React.Component {
   render() {
@@ -84,6 +85,12 @@ class ExampleLinks extends React.Component {
             {label: 'Tasks', route: '/tasks'},
             {label: 'Details', route: '/details'}
           ]
+        },
+        {
+          label: 'UI',
+          items: [
+            {label: 'Typeahead', route: '/ui/typeahead'}
+          ]
         }
 
       ]
@@ -116,6 +123,7 @@ const routes = (
         <Route path="two" component={TabbedPaneExample.Two} />
         <Route path="three" component={TabbedPaneExample.Three} />
       </Route>
+      <Route path="ui/typeahead" component={TypeaheadExample}/>
     </Route>
   </Route>
 )
