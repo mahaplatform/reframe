@@ -8,6 +8,7 @@ import whenPipeline from 'when/pipeline'
 import Config from '../utils/config'
 import Logger from '../utils/logger'
 import API from '../api'
+import {uid} from '../utils/random'
 
 export default class FileField extends React.Component {
 
@@ -57,7 +58,7 @@ export default class FileField extends React.Component {
       target: Config.get('api.pathPrefix') + props.target,
       query: props.query,
       withCredentials: true,
-      maxFiles: (props.mode === 'single' ? 1 : props.maxFiles),
+      maxFiles: (props.mode === 'single' ? 1 : props.maxFiles)
     });
 
     this.api = new API()
@@ -82,7 +83,7 @@ export default class FileField extends React.Component {
     if (this.props.mode === 'single') {
       if(allFilesFailed || this.state.uploadFailed) {
         return (
-          <div>
+          <div ref="wrapper">
             <div className="ui small header">Uploading failed.</div>
             <div className="ui red labeled icon button" onClick={this.retry.bind(this)}>
               <i className="refresh icon"></i>
@@ -96,11 +97,15 @@ export default class FileField extends React.Component {
         )
       }
       if(this.state.uploadInProgress || this.state.uploadProcessing) {
-        return <FileProgress progress={this.getOverallProgress()}/>
+        return (
+          <div ref="wrapper">
+            <FileProgress progress={this.getOverallProgress()}/>
+          </div>
+        )
       }
       if(this.state.uploadComplete) {
         return (
-          <div>
+          <div ref="wrapper">
             <FilePreview id={this.state.preview}/>
             <div className="ui green labeled disabled icon button">
               <i className="folder icon"></i>
@@ -114,7 +119,7 @@ export default class FileField extends React.Component {
       }
       if(this.r.files.length > 0) {
         return(
-          <div>
+          <div ref="wrapper">
             <div ref="browseButton" className="ui green labeled icon button" onClick={this.clearFiles.bind(this)}>
               <i className="folder icon"></i>
               {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
@@ -124,7 +129,7 @@ export default class FileField extends React.Component {
       }
       else {
         return (
-          <div>
+          <div ref="wrapper">
             <FilePreview id={this.state.preview}/>
             <div ref="browseButton" className="ui blue labeled icon button">
               <i className="folder icon"></i>
@@ -136,7 +141,7 @@ export default class FileField extends React.Component {
     }
     else {
       return (
-        <div className="ui relaxed stacking grid">
+        <div className="ui relaxed stacking grid" ref="wrapper">
           <div className="column admin-sidebar">
             <div ref="dropzone" className="ui basic segment">
               <h3 className="ui center aligned icon header">
@@ -290,7 +295,7 @@ export default class FileField extends React.Component {
     Logger.log(file.fileName, file.progress())
     $(this.refs.fileTable).find(`#${file.uniqueIdentifier}`).progress({percent: Math.floor(file.progress() * 100)})
     if(this.state.uploadInProgress) {
-      $(".file.progress").progress({
+      $(this.refs.wrapper).find(".file.progress").progress({
         percent: Math.ceil(this.getOverallProgress() * 100)
       })
     }
