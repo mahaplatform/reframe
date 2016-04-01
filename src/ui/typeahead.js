@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import API from 'api'
+import API from '../api'
 
 export default class Typeahead extends React.Component {
 
