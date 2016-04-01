@@ -153,7 +153,7 @@ export const TypeaheadEmptyResult = props => {
 
 export const TypeaheadDefaultResult = ({onClick = _.noop, result}) => {
   return (
-    <div className="item" onClick={_.partial(onClick, result)}>
+    <div className="item" onClick={onClick}>
       <div className="title">{result.title || result.name || result.first_name
         ? `${result.first_name} ${result.last_name}`
         : null || result.label || result.id}</div>
@@ -180,7 +180,7 @@ export class TypeaheadResultList extends React.Component {
     const {results, itemComponent, onChooseResult} = this.props
     return (
       <div className="ui typeahead results">
-        {_.map(results, result => React.createElement(itemComponent, { result, onClick: onChooseResult }))}
+        {_.map(results, result => React.createElement(itemComponent, { result, onClick: _.partial(onChooseResult, result)}))}
       </div>
     )
   }

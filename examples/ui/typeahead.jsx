@@ -4,11 +4,12 @@ import Typeahead from 'ui/typeahead'
 import Logger from 'utils/logger'
 
 // You can specify custom item renderers for the typeahead results.
-// They receive a single prop, called "result", which contains all
-// the data from that result item.
-const TypeaheadItem = ({result}) => {
+// They receive two props: "result", which contains all
+// the data from that result item; and "onClick" which is to be
+// called when the item is selected.
+const TypeaheadItem = ({result, onClick}) => {
   return (
-    <div class="item">
+    <div class="item" onClick={onClick}>
       <div className="title"><i className="ui user icon"></i><em>{result.first_name} {result.last_name}</em></div>
     </div>
   )
