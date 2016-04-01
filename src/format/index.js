@@ -50,7 +50,7 @@ var Empty = (props) => {
 }
 
 var Status = (props) => {
-  return <span className={props.value.toLowerCase()}>{props.value.toUpperCase()}</span>
+  return (props.value) ? <span className={props.value.toLowerCase()}>{props.value.toUpperCase()}</span> : <span />
 }
 
 var CheckTimes = (props) => {
