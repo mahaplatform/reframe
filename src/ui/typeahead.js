@@ -113,6 +113,16 @@ export default class Typeahead extends React.Component {
       .catch(error => this.setState({ errorLoadingResults: true }))
   }
 
+  clear() {
+    this.setState({
+      queryCounter:        this.state.queryCounter + 1,
+      isLoadingResults:    false,
+      errorLoadingResults: false,
+      results:             [],
+      searchValue:         ''
+    })
+  }
+
 }
 
 export const TypeaheadInput = props => {
