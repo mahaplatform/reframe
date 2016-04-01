@@ -21,7 +21,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _api = require('api');
+var _api = require('../api');
 
 var _api2 = _interopRequireDefault(_api);
 
