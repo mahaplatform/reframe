@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 export NODE_PATH=../src/
 export NODE_ENV=production
-mkdir _release
+
+if ! mkdir _release; then
+  echo "The _release directory already exists. Please move or delete it to build a release."
+  exit 1
+fi
+
 git clone -b release git@github.com:thinktopography/reframe _release
 cd _release
 cp -f ../package.json ./package.json
