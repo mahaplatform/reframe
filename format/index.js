@@ -96,11 +96,11 @@ var Empty = function Empty(props) {
 };
 
 var Status = function Status(props) {
-  return _react2.default.createElement(
+  return props.value ? _react2.default.createElement(
     'span',
     { className: props.value.toLowerCase() },
     props.value.toUpperCase()
-  );
+  ) : _react2.default.createElement('span', null);
 };
 
 var CheckTimes = function CheckTimes(props) {

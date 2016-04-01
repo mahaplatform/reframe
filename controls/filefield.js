@@ -42,6 +42,8 @@ var _api = require('../api');
 
 var _api2 = _interopRequireDefault(_api);
 
+var _random = require('../utils/random');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -114,7 +116,7 @@ var FileField = function (_React$Component) {
         if (allFilesFailed || this.state.uploadFailed) {
           return _react2.default.createElement(
             'div',
-            null,
+            { ref: 'wrapper' },
             _react2.default.createElement(
               'div',
               { className: 'ui small header' },
@@ -135,12 +137,16 @@ var FileField = function (_React$Component) {
           );
         }
         if (this.state.uploadInProgress || this.state.uploadProcessing) {
-          return _react2.default.createElement(FileProgress, { progress: this.getOverallProgress() });
+          return _react2.default.createElement(
+            'div',
+            { ref: 'wrapper' },
+            _react2.default.createElement(FileProgress, { progress: this.getOverallProgress() })
+          );
         }
         if (this.state.uploadComplete) {
           return _react2.default.createElement(
             'div',
-            null,
+            { ref: 'wrapper' },
             _react2.default.createElement(FilePreview, { id: this.state.preview }),
             _react2.default.createElement(
               'div',
@@ -161,7 +167,7 @@ var FileField = function (_React$Component) {
         if (this.r.files.length > 0) {
           return _react2.default.createElement(
             'div',
-            null,
+            { ref: 'wrapper' },
             _react2.default.createElement(
               'div',
               { ref: 'browseButton', className: 'ui green labeled icon button', onClick: this.clearFiles.bind(this) },
@@ -175,7 +181,7 @@ var FileField = function (_React$Component) {
         } else {
           return _react2.default.createElement(
             'div',
-            null,
+            { ref: 'wrapper' },
             _react2.default.createElement(FilePreview, { id: this.state.preview }),
             _react2.default.createElement(
               'div',
@@ -188,7 +194,7 @@ var FileField = function (_React$Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'ui relaxed stacking grid' },
+          { className: 'ui relaxed stacking grid', ref: 'wrapper' },
           _react2.default.createElement(
             'div',
             { className: 'column admin-sidebar' },
@@ -376,7 +382,7 @@ var FileField = function (_React$Component) {
       _logger2.default.log(file.fileName, file.progress());
       $(this.refs.fileTable).find('#' + file.uniqueIdentifier).progress({ percent: Math.floor(file.progress() * 100) });
       if (this.state.uploadInProgress) {
-        $(".file.progress").progress({
+        $(this.refs.wrapper).find(".file.progress").progress({
           percent: Math.ceil(this.getOverallProgress() * 100)
         });
       }
