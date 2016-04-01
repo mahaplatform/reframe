@@ -70,7 +70,7 @@ var Typeahead = function (_React$Component) {
           if (_this2.state.isLoadingResults && _lodash2.default.isEmpty(_this2.state.results)) {
             return _react2.default.createElement(TypeaheadResultLoader, null);
           } else if (_this2.state.results.length > 0) {
-            return _react2.default.createElement(TypeaheadResultList, { results: _this2.state.results, onChooseResult: _this2.props.onChooseResult });
+            return _react2.default.createElement(TypeaheadResultList, { results: _this2.state.results, onChooseResult: _this2.props.onChooseResult, itemComponent: _this2.props.itemComponent });
           } else if (_this2.state.searchValue.length >= 1) {
             return _react2.default.createElement(TypeaheadEmptyResult, null);
           } else {
@@ -158,7 +158,8 @@ Typeahead.propTypes = {
   query: _react2.default.PropTypes.string,
   resultField: _react2.default.PropTypes.string,
   client: _react2.default.PropTypes.function,
-  requestThrottle: _react2.default.PropTypes.number
+  requestThrottle: _react2.default.PropTypes.number,
+  itemComponent: _react2.default.PropTypes.element
 };
 Typeahead.defaultProps = {
   onChange: _lodash2.default.noop,
@@ -207,7 +208,7 @@ var TypeaheadDefaultResult = exports.TypeaheadDefaultResult = function Typeahead
 
   return _react2.default.createElement(
     'div',
-    { className: 'ui typeahead result item', onClick: _lodash2.default.partial(onClick, result) },
+    { className: 'item', onClick: onClick },
     _react2.default.createElement(
       'div',
       { className: 'title' },
@@ -242,7 +243,7 @@ var TypeaheadResultList = exports.TypeaheadResultList = function (_React$Compone
         'div',
         { className: 'ui typeahead results' },
         _lodash2.default.map(results, function (result) {
-          return _react2.default.createElement(itemComponent, { result: result, onClick: onChooseResult });
+          return _react2.default.createElement(itemComponent, { result: result, onClick: _lodash2.default.partial(onChooseResult, result) });
         })
       );
     }
