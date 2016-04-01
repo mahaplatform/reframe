@@ -14,7 +14,8 @@ export default class Typeahead extends React.Component {
     query:           React.PropTypes.string,
     resultField:     React.PropTypes.string,
     client:          React.PropTypes.function,
-    requestThrottle: React.PropTypes.number
+    requestThrottle: React.PropTypes.number,
+    itemComponent:   React.PropTypes.element
   }
 
   static defaultProps = {
@@ -51,7 +52,7 @@ export default class Typeahead extends React.Component {
             return <TypeaheadResultLoader />
           }
           else if (this.state.results.length > 0) {
-            return <TypeaheadResultList results={this.state.results} onChooseResult={this.props.onChooseResult}/>
+            return <TypeaheadResultList results={this.state.results} onChooseResult={this.props.onChooseResult} itemComponent={this.props.itemComponent}/>
           }
           else if (this.state.searchValue.length >= 1) {
             return <TypeaheadEmptyResult />
@@ -152,7 +153,7 @@ export const TypeaheadEmptyResult = props => {
 
 export const TypeaheadDefaultResult = ({onClick = _.noop, result}) => {
   return (
-    <div className="ui typeahead result item" onClick={_.partial(onClick, result)}>
+    <div className="item" onClick={_.partial(onClick, result)}>
       <div className="title">{result.title || result.name || result.first_name
         ? `${result.first_name} ${result.last_name}`
         : null || result.label || result.id}</div>
