@@ -133,6 +133,17 @@ var Typeahead = function (_React$Component) {
         return _this4.setState({ errorLoadingResults: true });
       });
     }
+  }, {
+    key: 'clear',
+    value: function clear() {
+      this.setState({
+        queryCounter: this.state.queryCounter + 1,
+        isLoadingResults: false,
+        errorLoadingResults: false,
+        results: [],
+        searchValue: ''
+      });
+    }
   }]);
 
   return Typeahead;

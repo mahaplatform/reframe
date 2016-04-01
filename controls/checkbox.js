@@ -63,12 +63,17 @@ var Checkbox = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       $(this.refs.control).checkbox();
-      if (this.props.defaultValue === true || this.props.defaultValue === 1) {
+      if (this.props.defaultValue === true || this.props.defaultValue === 1 || this.props.defaultChecked === true || this.props.defaultChecked === 1) {
         $(this.refs.checkbox_ui).checkbox('set checked');
       } else {
         $(this.refs.checkbox_ui).checkbox('set unchecked');
       }
-      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange() {
+      this.props.onChange(this.props.code, this.getValue());
     }
   }, {
     key: 'getValue',
@@ -84,14 +89,14 @@ var Checkbox = function (_React$Component) {
       } else {
         $(this.refs.checkbox_ui).checkbox('set unchecked');
       }
-      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
     }
   }, {
     key: 'clearField',
     value: function clearField() {
       $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _.noop);
       $(this.refs.checkbox_ui).checkbox('set unchecked');
-      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
     }
   }, {
     key: 'getReference',
