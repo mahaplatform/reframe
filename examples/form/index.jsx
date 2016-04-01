@@ -45,7 +45,11 @@ export default class FormExamples extends React.Component {
             { code: "state", type: "stateselect", placeholder: 'State', abbreviations: true },
             { code: "zip", type: "textfield", placeholder: 'Zip' }
           ]},
-          { code: 'date_range', type: 'daterange', label: 'Date Range' }
+          { code: 'date_range', type: 'daterange', label: 'Date Range' },
+          { type: 'fields', fields: [
+            { code: 'first_cb', label: 'First Checkbox', type: 'checkbox' },
+            { code: 'second_cb', label: 'Second Checkbox', type: 'checkbox' }
+          ]}
         ]}
       ]
     }

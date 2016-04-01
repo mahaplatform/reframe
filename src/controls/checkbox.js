@@ -29,13 +29,17 @@ class Checkbox extends React.Component {
 
   componentDidMount() {
     $(this.refs.control).checkbox()
-    if(this.props.defaultValue === true || this.props.defaultValue === 1) {
+    if(this.props.defaultValue === true || this.props.defaultValue === 1 || this.props.defaultChecked === true || this.props.defaultChecked === 1) {
       $(this.refs.checkbox_ui).checkbox('set checked')
     }
     else {
       $(this.refs.checkbox_ui).checkbox('set unchecked')
     }
-    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
+  }
+
+  handleChange() {
+    this.props.onChange(this.props.code, this.getValue())
   }
 
   getValue() {
@@ -50,13 +54,13 @@ class Checkbox extends React.Component {
     else {
       $(this.refs.checkbox_ui).checkbox('set unchecked')
     }
-    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
   }
 
   clearField() {
     $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _.noop);
     $(this.refs.checkbox_ui).checkbox('set unchecked')
-    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.props.onChange);
+    $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
   }
 
   getReference() {
