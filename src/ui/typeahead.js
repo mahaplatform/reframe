@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import API from '../api'
+import {objectToQueryString} from '../utils/query'
 
 export default class Typeahead extends React.Component {
 
@@ -12,6 +13,7 @@ export default class Typeahead extends React.Component {
     defaultValue:    React.PropTypes.string,
     endpoint:        React.PropTypes.string,
     query:           React.PropTypes.string,
+    extraQueries:    React.PropTypes.object,
     resultField:     React.PropTypes.string,
     client:          React.PropTypes.function,
     requestThrottle: React.PropTypes.number,
@@ -22,6 +24,7 @@ export default class Typeahead extends React.Component {
     onChange:        _.noop,
     onChooseResult:  _.noop,
     query:           'q',
+    extraQueries:    {},
     resultField:     'results',
     requestThrottle: 500
   }
@@ -89,7 +92,8 @@ export default class Typeahead extends React.Component {
   }
 
   onInputChange() {
-    const {searchValue} = this.state
+    const {searchValue, queryCounter} = this.state
+    const {endpoint, query, extraQueries, resultField} = this.props
 
     if (_.isEmpty(searchValue)) {
       this.setState({
@@ -101,14 +105,17 @@ export default class Typeahead extends React.Component {
       return
     }
 
-    const queryId = this.state.queryCounter + 1
+    const requestQueryString = objectToQueryString({...extraQueries, [query]: searchValue})
+    const queryId = queryCounter + 1
+
     this.setState({ queryCounter: queryId, errorLoadingResults: false })
-    this.api.loadJSON(`${this.props.endpoint}?${this.props.query}=${encodeURIComponent(searchValue)}`)
+
+    this.api.loadJSON(endpoint + requestQueryString)
       .then(response => {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
         if (this.state.queryCounter == queryId) {
-          this.setState({ results: response[this.props.resultField] || [], isLoadingResults: false })
+          this.setState({ results: response[resultField] || [], isLoadingResults: false })
         }
       })
       .catch(error => this.setState({ errorLoadingResults: true }))

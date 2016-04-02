@@ -25,7 +25,8 @@ export default class TypeaheadExamples extends React.Component {
       <div>
         <h1>Typeahead</h1>
         <Typeahead ref="control" endpoint="/examples/data.json" resultField="records"
-                   onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}/>
+                   onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
+                   extraQueries={{foo: "bar"}} />
       </div>
     )
   }
