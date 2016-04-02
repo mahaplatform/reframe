@@ -25,7 +25,11 @@ var _api = require('../api');
 
 var _api2 = _interopRequireDefault(_api);
 
+var _query = require('../utils/query');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -108,7 +112,14 @@ var Typeahead = function (_React$Component) {
     value: function onInputChange() {
       var _this4 = this;
 
-      var searchValue = this.state.searchValue;
+      var _state = this.state;
+      var searchValue = _state.searchValue;
+      var queryCounter = _state.queryCounter;
+      var _props = this.props;
+      var endpoint = _props.endpoint;
+      var query = _props.query;
+      var extraQueries = _props.extraQueries;
+      var resultField = _props.resultField;
 
 
       if (_lodash2.default.isEmpty(searchValue)) {
@@ -121,13 +132,16 @@ var Typeahead = function (_React$Component) {
         return;
       }
 
-      var queryId = this.state.queryCounter + 1;
+      var requestQueryString = (0, _query.objectToQueryString)(_extends({}, extraQueries, _defineProperty({}, query, searchValue)));
+      var queryId = queryCounter + 1;
+
       this.setState({ queryCounter: queryId, errorLoadingResults: false });
-      this.api.loadJSON(this.props.endpoint + '?' + this.props.query + '=' + encodeURIComponent(searchValue)).then(function (response) {
+
+      this.api.loadJSON(endpoint + requestQueryString).then(function (response) {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
         if (_this4.state.queryCounter == queryId) {
-          _this4.setState({ results: response[_this4.props.resultField] || [], isLoadingResults: false });
+          _this4.setState({ results: response[resultField] || [], isLoadingResults: false });
         }
       }).catch(function (error) {
         return _this4.setState({ errorLoadingResults: true });
@@ -156,6 +170,7 @@ Typeahead.propTypes = {
   defaultValue: _react2.default.PropTypes.string,
   endpoint: _react2.default.PropTypes.string,
   query: _react2.default.PropTypes.string,
+  extraQueries: _react2.default.PropTypes.object,
   resultField: _react2.default.PropTypes.string,
   client: _react2.default.PropTypes.function,
   requestThrottle: _react2.default.PropTypes.number,
@@ -165,6 +180,7 @@ Typeahead.defaultProps = {
   onChange: _lodash2.default.noop,
   onChooseResult: _lodash2.default.noop,
   query: 'q',
+  extraQueries: {},
   resultField: 'results',
   requestThrottle: 500
 };
@@ -234,10 +250,10 @@ var TypeaheadResultList = exports.TypeaheadResultList = function (_React$Compone
   _createClass(TypeaheadResultList, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var results = _props.results;
-      var itemComponent = _props.itemComponent;
-      var onChooseResult = _props.onChooseResult;
+      var _props2 = this.props;
+      var results = _props2.results;
+      var itemComponent = _props2.itemComponent;
+      var onChooseResult = _props2.onChooseResult;
 
       return _react2.default.createElement(
         'div',
