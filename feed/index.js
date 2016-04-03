@@ -65,7 +65,7 @@ var Feed = function (_React$Component) {
           null,
           _react2.default.createElement(
             'div',
-            { className: 'ui feed' },
+            { className: 'feed' },
             this.props.records.map(function (record, index) {
               return _react2.default.createElement(_event2.default, _extends({}, record, { key: 'event_' + index }));
             })

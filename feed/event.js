@@ -53,7 +53,7 @@ var Event = function (_React$Component) {
         { className: 'event' },
         _react2.default.createElement(
           'div',
-          { className: 'label' },
+          { className: 'image' },
           _react2.default.createElement('img', { src: this.props.subject.photo })
         ),
         _react2.default.createElement(

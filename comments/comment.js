@@ -42,8 +42,8 @@ var Comment = function (_React$Component) {
         'div',
         { className: 'comment' },
         _react2.default.createElement(
-          'a',
-          { className: 'avatar' },
+          'div',
+          { className: 'image' },
           _react2.default.createElement('img', { src: this.props.user.photo })
         ),
         _react2.default.createElement(

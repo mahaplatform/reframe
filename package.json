@@ -1,13 +1,12 @@
 {
   "private": true,
   "name": "reframe",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "description": "Collection of configurable React components",
   "main": "lib",
   "scripts": {
     "test": "echo \"Notice: no test specified\" && exit 0",
-    "compile": "babel -d lib/ src/; sass -Cq --scss --compass --sourcemap=none src/reframe.scss lib/reframe.css",
-    "release": "./release.sh"
+    "compile": "babel -d lib/ src/; sass -Cq --scss --compass --sourcemap=none src/reframe.scss lib/reframe.css"
   },
   "repository": {
     "type": "git",

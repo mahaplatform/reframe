@@ -66,9 +66,14 @@ var Typeahead = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var klasses = ['typeahead'];
+      klasses.push(true ? 'top' : 'bottom');
+      if (this.state.results.length > 0) {
+        klasses.push('active');
+      }
       return _react2.default.createElement(
         'div',
-        { className: 'typeahead' },
+        { className: klasses.join(' ') },
         _react2.default.createElement(TypeaheadInput, _extends({}, this.attachInputCallbacks(), { value: this.state.searchValue })),
         function () {
           if (_this2.state.isLoadingResults && _lodash2.default.isEmpty(_this2.state.results)) {

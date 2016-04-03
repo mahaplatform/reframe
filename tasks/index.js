@@ -43,7 +43,7 @@ var Tasks = function (_React$Component) {
         { className: 'tasks' },
         _react2.default.createElement(
           'div',
-          { className: 'ui vertical pointing menu fluid' },
+          { className: 'ui vertical menu fluid' },
           this.props.tasks.map(function (task, index) {
             return _react2.default.createElement(_task2.default, { key: 'task_' + index, task: task });
           })

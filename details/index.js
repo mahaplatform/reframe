@@ -42,43 +42,29 @@ var Detail = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var total = this.props.details.properties.length;
-      var half = Math.ceil(total / 2);
-      var left = this.props.details.properties.splice(0, half);
-      var right = this.props.details.properties.splice(0, half);
-      if (total % 2 == 1) {
-        right.push({ label: '&nbsp;', value: null });
-      }
       return _react2.default.createElement(
         'div',
         { className: 'details' },
         _react2.default.createElement(
-          'div',
-          { className: 'details-header' },
-          this.props.details.title
-        ),
-        [left, right].map(function (collection, index1) {
-          return _react2.default.createElement(
-            'table',
-            { className: 'ui small unstackable definition table', key: 'detail_column_' + index1 },
-            _react2.default.createElement(
-              'tbody',
-              null,
-              collection.map(function (property, index2) {
-                return _react2.default.createElement(
-                  'tr',
-                  { key: 'detail_column_' + index1 + '_row_' + index2 },
-                  _react2.default.createElement('td', { dangerouslySetInnerHTML: { __html: property.label } }),
-                  _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_format2.default, _extends({}, _this2.props, { format: property.format, value: property.value }))
-                  )
-                );
-              })
-            )
-          );
-        })
+          'table',
+          { className: 'ui small unstackable definition table' },
+          _react2.default.createElement(
+            'tbody',
+            null,
+            this.props.details.properties.map(function (property, index) {
+              return _react2.default.createElement(
+                'tr',
+                { key: 'detail_' + index },
+                _react2.default.createElement('td', { dangerouslySetInnerHTML: { __html: property.label } }),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_format2.default, _extends({}, _this2.props, { format: property.format, value: property.value }))
+                )
+              );
+            })
+          )
+        )
       );
     }
   }]);
@@ -88,7 +74,6 @@ var Detail = function (_React$Component) {
 
 Detail.propTypes = {
   details: _react2.default.PropTypes.shape({
-    title: _react2.default.PropTypes.string,
     properties: _react2.default.PropTypes.array
   })
 };
