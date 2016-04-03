@@ -36,29 +36,35 @@
   }
 }
 
+
 .collection {
   .collection-header {
     & > .menu {
       margin: 0;
       @include border-radius(.28571429rem .28571429rem 0 0);
-      background: #000;
+      background-color: #E8E9EA;
+      border-bottom: none !important;
       h4 {
         font-weight: normal;
-        color: #FFF !important;
+        color: #000 !important;
+      }
+      a.item {
+        padding: 0.7em;
       }
       a:before {
+        width: 0 !important;
         background: #666;
       }
       i {
-        color: #FFF;
+        color: #666;
       }
     }
     div[data-field-code="_close"] {
       display: none !important;
     }
     .segments {
+      border-top: 1px solid #e4e5e5 !important;
       @include border-radius(0);
-      border-top: none;
       border-bottom: none;
     }
     .segment {
@@ -93,6 +99,15 @@
     @include border-radius(0 0 .28571429rem .28571429rem);
     thead th {
       @include border-radius(0 !important);
+    }
+    td {
+      color: #6d787c;
+    }
+    img {
+      width: 24px;
+      height: 24px;
+      float: left;
+      margin: 0 10px 0 0;
     }
   }
 }

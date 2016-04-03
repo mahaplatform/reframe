@@ -19,9 +19,9 @@ class Comment extends React.Component {
   render() {
     return (
       <div className="comment">
-        <a className="avatar">
+        <div className="image">
           <img src={this.props.user.photo} />
-        </a>
+        </div>
         <div className="content">
           <a className="author">{this.props.user.full_name}</a>
           <div className="metadata">

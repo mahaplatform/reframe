@@ -22,7 +22,7 @@ class Feed extends React.Component {
           <p>{this.props.empty}</p>
         </EmptyState>
         <PresentState>
-          <div className="ui feed">
+          <div className="feed">
             { this.props.records.map((record, index) => {
               return <Event {...record} key={`event_${index}`} />
             })}

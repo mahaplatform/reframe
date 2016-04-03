@@ -23,7 +23,9 @@ export default class FormExamples extends React.Component {
     return (
       <div>
         <h1>Feed</h1>
-        <Feed records={this.state.records} />
+        <div className="ui top attached segment">
+          <Feed records={this.state.records} />
+        </div>
       </div>
     )
   }

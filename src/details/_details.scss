@@ -1,41 +1,25 @@
 @import "compass/css3/border-radius";
 
 .details {
-  overflow: hidden;
   margin-bottom: 1em;
   @include border-radius(.30769231rem .30769231rem 0 0);
-  .details-header {
-    @include border-radius(.30769231rem .30769231rem 0 0);
-    background: #000;
-    color: #FFF;
-    padding: 12px 15px;
-  }
   .ui.table {
     @include border-radius(0 !important);
     margin: 0;
-    tr td:first-child {
-      width: 200px;
-    }
-  }
-}
-
-@media (max-width: 960px) {
-  .details {
-    .ui.table {
-      width: 100% !important;
-      &:first-of-type {
-        border-bottom: none !important;
+    width: 100% !important;
+    float: none !important;
+    tr {
+      td {
+        border: none !important;
+        vertical-align: top;
+        padding: 6px 8px;
       }
-    }
-  }
-}
-@media (min-width: 961px) {
-  .details {
-    .ui.table {
-      float: left;
-      width: 50% !important;;
-      &:last-of-type {
-        border-left: none !important;
+      td:first-child {
+        background-color: #F2F4F5;
+        width: 125px;
+      }
+      td:last-child {
+        color: #888;
       }
     }
   }

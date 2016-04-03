@@ -43,8 +43,13 @@ export default class Typeahead extends React.Component {
   }
 
   render() {
+    let klasses = ['typeahead']
+    klasses.push((true) ? 'top' : 'bottom')
+    if(this.state.results.length > 0) {
+      klasses.push('active')
+    }
     return (
-      <div className="typeahead">
+      <div className={klasses.join(' ')}>
         <TypeaheadInput {...this.attachInputCallbacks()} value={this.state.searchValue}/>
         {(() => {
           if (this.state.isLoadingResults && _.isEmpty(this.state.results)) {

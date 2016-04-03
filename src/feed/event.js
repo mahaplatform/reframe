@@ -37,7 +37,7 @@ class Event extends React.Component {
     let photo = this.props.subject.photo || '/images/photo.jpg'
     return (
       <div className="event">
-        <div className="label">
+        <div className="image">
           <img src={this.props.subject.photo} />
         </div>
         <div className="content">
