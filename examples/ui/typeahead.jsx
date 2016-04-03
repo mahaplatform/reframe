@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom'
 import Typeahead from 'ui/typeahead'
 import Logger from 'utils/logger'
 
+// You can specify custom item renderers for the typeahead results.
+// They receive two props: "result", which contains all
+// the data from that result item; and "onClick" which is to be
+// called when the item is selected.
+const TypeaheadItem = ({result, onClick}) => {
+  return (
+    <div class="item" onClick={onClick}>
+      <div className="title"><i className="ui user icon"></i><em>{result.first_name} {result.last_name}</em></div>
+    </div>
+  )
+}
+
 export default class TypeaheadExamples extends React.Component {
   constructor(props) {
     super(props)
@@ -12,13 +24,16 @@ export default class TypeaheadExamples extends React.Component {
     return (
       <div>
         <h1>Typeahead</h1>
-        <Typeahead endpoint="/examples/data.json" resultField="records" onChooseResult={this.onChoose.bind(this)}/>
+        <Typeahead ref="control" endpoint="/examples/data.json" resultField="records"
+                   onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
+                   extraQueries={{foo: "bar"}} />
       </div>
     )
   }
 
   onChoose(item) {
     Logger.log(`Chose item ${item.id}`)
+    this.refs.control.clear()
   }
 
 }
