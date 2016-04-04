@@ -216,7 +216,7 @@ var TypeaheadEmptyResult = exports.TypeaheadEmptyResult = function TypeaheadEmpt
     { className: 'ui typeahead results' },
     _react2.default.createElement(
       'div',
-      { className: 'item' },
+      { className: 'empty' },
       'No Results'
     )
   );
