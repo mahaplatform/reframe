@@ -131,8 +131,9 @@ export default class FileField extends React.Component {
               <i className="folder icon"></i>
               {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
             </div>
-            <div className="ui small basic circular icon button" onClick={this.clearFiles.bind(this)}>
+            <div ref="clearButton" className="ui red labeled icon button" onClick={this.clearFiles.bind(this)}>
               <i className="x icon"></i>
+              Remove File
             </div>
           </div>
         )
