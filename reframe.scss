@@ -242,7 +242,7 @@ span.instructions {
 
 .typeahead {
   position: relative;
-  display: inline-block; }
+  display: block; }
   .typeahead.active.top input {
     -moz-border-radius: 0.28571rem 0.28571rem 0 0;
     -webkit-border-radius: 0.28571rem;
@@ -262,6 +262,8 @@ span.instructions {
     -moz-border-radius: 0.28571rem 0.28571rem 0 0;
     -webkit-border-radius: 0.28571rem;
     border-radius: 0.28571rem 0.28571rem 0 0; }
+  .typeahead .ui.input {
+    width: 100%; }
   .typeahead .results {
     position: absolute;
     left: 0;
@@ -275,9 +277,9 @@ span.instructions {
     border: 1px solid #85b7d9;
     border-top: none;
     z-index: 16; }
-    .typeahead .results .result {
+    .typeahead .results .item {
       width: 100%;
       padding: .7em 1.14285714em;
       cursor: pointer; }
-      .typeahead .results .result:hover {
+      .typeahead .results .item:hover {
         background-color: #F0F0F0; }

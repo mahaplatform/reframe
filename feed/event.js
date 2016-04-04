@@ -54,7 +54,7 @@ var Event = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'image' },
-          _react2.default.createElement('img', { src: this.props.subject.photo })
+          _react2.default.createElement('img', { src: photo })
         ),
         _react2.default.createElement(
           'div',

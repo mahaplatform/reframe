@@ -38,13 +38,14 @@ var Comment = function (_React$Component) {
   _createClass(Comment, [{
     key: 'render',
     value: function render() {
+      var photo = this.props.user.photo || '/images/photo.jpg';
       return _react2.default.createElement(
         'div',
         { className: 'comment' },
         _react2.default.createElement(
           'div',
           { className: 'image' },
-          _react2.default.createElement('img', { src: this.props.user.photo })
+          _react2.default.createElement('img', { src: photo })
         ),
         _react2.default.createElement(
           'div',
