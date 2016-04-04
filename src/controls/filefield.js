@@ -55,12 +55,7 @@ export default class FileField extends React.Component {
       fileExists: !!props.defaultValue
     }
 
-    this.r = new Resumable({
-      target: Config.get('api.pathPrefix') + props.target,
-      query: props.query,
-      withCredentials: true,
-      maxFiles: (props.mode === 'single' ? 1 : props.maxFiles)
-    });
+    this.constructResumable(props)
 
     this.api = new API()
 
@@ -68,6 +63,16 @@ export default class FileField extends React.Component {
 
     // Return an asset ID if the field is already filled
     this.rPromise = when(this.props.defaultValue)
+
+  }
+
+  constructResumable(props) {
+    this.r = new Resumable({
+      target: Config.get('api.pathPrefix') + props.target,
+      query: props.query,
+      withCredentials: true,
+      maxFiles: (props.mode === 'single' ? 1 : props.maxFiles)
+    });
 
     this.r.on('fileAdded', this.onFileAdded.bind(this))
     this.r.on('fileProgress', this.onFileProgress.bind(this))
@@ -81,11 +86,20 @@ export default class FileField extends React.Component {
     this.r.on('error', this.onError.bind(this))
   }
 
+  mountResumable() {
+    this.r.assignBrowse(this.refs.browseButton)
+
+    if (this.props.mode === 'multi') {
+      this.r.assignDrop(this.refs.dropzone)
+    }
+  }
+
   render() {
     const allFilesFailed = this.r.files.length > 0 && this.state.filesFailed.length === this.r.files.length
 
     if (this.props.mode === 'single') {
       if(allFilesFailed || this.state.uploadFailed) {
+        // Show failure state
         return (
           <div ref="wrapper">
             <div className="ui small header">Uploading failed.</div>
@@ -101,6 +115,7 @@ export default class FileField extends React.Component {
         )
       }
       if(this.state.uploadInProgress || this.state.uploadProcessing) {
+        // Show progress state
         return (
           <div ref="wrapper">
             <FileProgress progress={this.getOverallProgress()}/>
@@ -108,6 +123,7 @@ export default class FileField extends React.Component {
         )
       }
       if(this.state.uploadComplete) {
+        // Show finished state
         return (
           <div ref="wrapper">
             <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
@@ -121,23 +137,29 @@ export default class FileField extends React.Component {
           </div>
         )
       }
-      if(this.r.files.length > 0) {
-        return(
-          <div ref="wrapper">
-            <div ref="browseButton" className="ui green labeled icon button" onClick={this.clearFiles.bind(this)}>
-              <i className="folder icon"></i>
-              {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
-            </div>
-          </div>
-        )
-      }
-      else {
+      if(this.state.fileExists) {
+        // Show preview when a defaultValue is set
         return (
           <div ref="wrapper">
             <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
             <div ref="browseButton" className="ui blue labeled icon button">
               <i className="folder icon"></i>
-              Add File
+              Change File
+            </div>
+            <div ref="clearButton" className="ui red labeled icon button" onClick={this.clearFiles.bind(this)}>
+              <i className="x icon"></i>
+              Remove File
+            </div>
+          </div>
+        )
+      }
+      else {
+        // Show an empty chooser
+        return (
+          <div ref="wrapper">
+            <div ref="browseButton" className="ui green labeled icon button">
+              <i className="folder icon"></i>
+              Choose File...
             </div>
           </div>
         )
@@ -184,11 +206,7 @@ export default class FileField extends React.Component {
   }
 
   componentDidMount() {
-    this.r.assignBrowse(this.refs.browseButton)
-
-    if (this.props.mode === 'multi') {
-      this.r.assignDrop(this.refs.dropzone)
-    }
+    this.mountResumable()
   }
 
   componentDidUpdate() {
@@ -199,8 +217,12 @@ export default class FileField extends React.Component {
     while(this.r.files.length > 1) {
       r.files[0].cancel()
     }
-    this.setState({filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false})
     this.rPromise = null
+    delete this.r
+    this.constructResumable(this.props)
+    _.defer(() => this.mountResumable())
+    this.setState({filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false, fileExists: false, preview: null})
+    this.forceUpdate()
   }
 
   clearAndChoose() {
@@ -384,10 +406,10 @@ const FileProgress = ({progress}) => {
 
 class FilePreview extends React.Component {
   render() {
-    const {assetPath, id} = this.props,
-          url = Config.get('api.pathPrefix') + `${assetPath}/${id}/preview`
+    const {assetPath, id, size = 'medium'} = this.props
+    const url = Config.get('api.pathPrefix') + `${assetPath}/${id}/preview`
     if(id) {
-      return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className="ui tiny rounded image"/>
+      return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className={`ui ${size} rounded image`}/>
     }
     else {
       return null
