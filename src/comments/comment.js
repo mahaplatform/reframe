@@ -17,10 +17,11 @@ class Comment extends React.Component {
   }
 
   render() {
+    let photo = this.props.user.photo || '/images/photo.jpg'
     return (
       <div className="comment">
         <div className="image">
-          <img src={this.props.user.photo} />
+          <img src={photo} />
         </div>
         <div className="content">
           <a className="author">{this.props.user.full_name}</a>

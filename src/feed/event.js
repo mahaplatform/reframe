@@ -38,7 +38,7 @@ class Event extends React.Component {
     return (
       <div className="event">
         <div className="image">
-          <img src={this.props.subject.photo} />
+          <img src={photo} />
         </div>
         <div className="content">
           <div className="date"><LiveTime time={this.props.created_at} /> on {moment(this.props.created_at).format('dddd, MMM D, YYYY @ h:mm A')}</div>
