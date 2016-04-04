@@ -37,6 +37,11 @@
     border: 1px solid #85b7d9;
     border-top: none;
     z-index: 16;
+    .empty {
+      width: 100%;
+      padding: .7em 1.14285714em;
+      color: #AAA;
+    }
     .item {
       width: 100%;
       padding: .7em 1.14285714em;
@@ -45,5 +50,6 @@
         background-color: #F0F0F0;
       }
     }
+
   }
 }
