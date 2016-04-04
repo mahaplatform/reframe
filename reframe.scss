@@ -277,11 +277,13 @@ span.instructions {
     border: 1px solid #85b7d9;
     border-top: none;
     z-index: 16; }
-    .typeahead .results .empty,
+    .typeahead .results .empty {
+      width: 100%;
+      padding: .7em 1.14285714em;
+      color: #AAA; }
     .typeahead .results .item {
       width: 100%;
-      padding: .7em 1.14285714em; }
-    .typeahead .results .item {
+      padding: .7em 1.14285714em;
       cursor: pointer; }
       .typeahead .results .item:hover {
         background-color: #F0F0F0; }
