@@ -49,7 +49,8 @@ export default class FormExamples extends React.Component {
           { type: 'fields', fields: [
             { code: 'first_cb', label: 'First Checkbox', type: 'checkbox' },
             { code: 'second_cb', label: 'Second Checkbox', type: 'checkbox' }
-          ]}
+          ]},
+          { code: 'file_uploader', type: 'filefield', target: '/example/api/upload', defaultValue: 1, assetPath: '/examples/assets' }
         ]}
       ]
     }

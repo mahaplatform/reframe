@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, IndexRoute, Route, Link, hashHistory} from 'react-router'
-import Menu from 'menu'
+import Menu from '../src/menu'
+import Config from '../src/utils/config'
+import API from '../src/api'
 
 import CollectionExample from './collection/index.jsx'
 import FetchCollectionExample from './collection/fetch.jsx'
@@ -19,6 +21,9 @@ import FetchContainerExample from './containers/fetch.jsx'
 import InfiniteContainerExample from './containers/infinite.jsx'
 import TabbedPaneExample from './panes/tabbed.jsx'
 import TypeaheadExample from './ui/typeahead.jsx'
+
+Config.set('api.pathPrefix', '')
+API.setDefaults(Config.get('api'))
 
 class Example extends React.Component {
   render() {

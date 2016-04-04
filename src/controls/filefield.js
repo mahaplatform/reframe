@@ -51,7 +51,8 @@ export default class FileField extends React.Component {
       uploadInProgress: false,
       uploadComplete: false,
       uploadProcessing: false,
-      uploadFailed: false
+      uploadFailed: false,
+      fileExists: !!props.defaultValue
     }
 
     this.r = new Resumable({
@@ -64,6 +65,9 @@ export default class FileField extends React.Component {
     this.api = new API()
 
     this.isResumableSupported = this.r.support;
+
+    // Return an asset ID if the field is already filled
+    this.rPromise = when(this.props.defaultValue)
 
     this.r.on('fileAdded', this.onFileAdded.bind(this))
     this.r.on('fileProgress', this.onFileProgress.bind(this))
@@ -106,7 +110,7 @@ export default class FileField extends React.Component {
       if(this.state.uploadComplete) {
         return (
           <div ref="wrapper">
-            <FilePreview id={this.state.preview}/>
+            <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
             <div className="ui green labeled disabled icon button">
               <i className="folder icon"></i>
               {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
@@ -130,7 +134,7 @@ export default class FileField extends React.Component {
       else {
         return (
           <div ref="wrapper">
-            <FilePreview id={this.state.preview}/>
+            <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
             <div ref="browseButton" className="ui blue labeled icon button">
               <i className="folder icon"></i>
               Add File
@@ -353,7 +357,7 @@ export default class FileField extends React.Component {
 
   getValue() {
     // Only begin the upload here if there is no upload in progress and an upload has not already completed
-    if(!this.state.uploadInProgress && !this.state.uploadComplete) {
+    if(!this.state.fileExists && !this.state.uploadInProgress && !this.state.uploadComplete) {
       this.beginUpload()
     }
     return this.rPromise
@@ -380,8 +384,9 @@ const FileProgress = ({progress}) => {
 
 class FilePreview extends React.Component {
   render() {
-    const url = Config.get('api.pathPrefix') + `/admin/assets/${this.props.id}/preview`
-    if(this.props.id) {
+    const {assetPath, id} = this.props,
+          url = Config.get('api.pathPrefix') + `${assetPath}/${id}/preview`
+    if(id) {
       return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className="ui tiny rounded image"/>
     }
     else {
