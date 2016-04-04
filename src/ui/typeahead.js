@@ -158,7 +158,7 @@ export const TypeaheadResultLoader = props => {
 export const TypeaheadEmptyResult = props => {
   return (
     <div className="ui typeahead results">
-      <div className="item">No Results</div>
+      <div className="empty">No Results</div>
     </div>
   )
 }

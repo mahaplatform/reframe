@@ -9,7 +9,7 @@ import Logger from 'utils/logger'
 // called when the item is selected.
 const TypeaheadItem = ({result, onClick}) => {
   return (
-    <div class="item" onClick={onClick}>
+    <div className="item" onClick={onClick}>
       <div className="title"><i className="ui user icon"></i><em>{result.first_name} {result.last_name}</em></div>
     </div>
   )
