@@ -43,7 +43,7 @@ export default class Button extends React.Component {
   getButtonClass() {
     let baseClasses = ['ui', 'button']
     if(this.props.icon) {
-      baseClasses.push('icon')
+      baseClasses.push('labeled icon')
     }
     baseClasses.push(this.props.color)
     baseClasses.push(this.props.size)
