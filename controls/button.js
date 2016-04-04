@@ -61,7 +61,7 @@ var Button = function (_React$Component) {
     value: function getButtonClass() {
       var baseClasses = ['ui', 'button'];
       if (this.props.icon) {
-        baseClasses.push('icon');
+        baseClasses.push('labeled icon');
       }
       baseClasses.push(this.props.color);
       baseClasses.push(this.props.size);
