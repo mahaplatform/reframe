@@ -287,3 +287,22 @@ span.instructions {
       cursor: pointer; }
       .typeahead .results .item:hover {
         background-color: #F0F0F0; }
+  .typeahead.selected.result {
+    width: 100%;
+    -moz-border-radius: 0.28571rem;
+    -webkit-border-radius: 0.28571rem;
+    border-radius: 0.28571rem;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    padding: 10px; }
+    .typeahead.selected.result .close.button {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 3em;
+      padding: 1em; }
+      .typeahead.selected.result .close.button i {
+        position: absolute;
+        top: 50%;
+        margin-top: -10px; }

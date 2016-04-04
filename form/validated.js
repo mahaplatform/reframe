@@ -94,7 +94,8 @@ var ValidatedForm = function (_React$Component) {
         ref: 'form',
         sections: this.bindFieldMessages(this.state.errors),
         onSubmit: this.onSubmit.bind(this),
-        onFieldChange: this.onFieldChange.bind(this)
+        onFieldChange: this.onFieldChange.bind(this),
+        asyncPassthrough: true
       }));
     }
   }, {

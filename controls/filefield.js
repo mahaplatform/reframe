@@ -78,34 +78,53 @@ var FileField = function (_React$Component) {
       uploadInProgress: false,
       uploadComplete: false,
       uploadProcessing: false,
-      uploadFailed: false
+      uploadFailed: false,
+      fileExists: !!props.defaultValue
     };
 
-    _this.r = new _resumablejs2.default({
-      target: _config2.default.get('api.pathPrefix') + props.target,
-      query: props.query,
-      withCredentials: true,
-      maxFiles: props.mode === 'single' ? 1 : props.maxFiles
-    });
+    _this.constructResumable(props);
 
     _this.api = new _api2.default();
 
     _this.isResumableSupported = _this.r.support;
 
-    _this.r.on('fileAdded', _this.onFileAdded.bind(_this));
-    _this.r.on('fileProgress', _this.onFileProgress.bind(_this));
-    _this.r.on('fileError', _this.onFileError.bind(_this));
-    _this.r.on('fileSuccess', _this.onFileSuccess.bind(_this));
-    _this.r.on('fileRetry', _this.onFileRetry.bind(_this));
+    // Return an asset ID if the field is already filled
+    _this.rPromise = (0, _when2.default)(_this.props.defaultValue);
 
-    _this.r.on('complete', _this.onComplete.bind(_this));
-    _this.r.on('pause', _this.onPause.bind(_this));
-    _this.r.on('cancel', _this.onCancel.bind(_this));
-    _this.r.on('error', _this.onError.bind(_this));
     return _this;
   }
 
   _createClass(FileField, [{
+    key: 'constructResumable',
+    value: function constructResumable(props) {
+      this.r = new _resumablejs2.default({
+        target: _config2.default.get('api.pathPrefix') + props.target,
+        query: props.query,
+        withCredentials: true,
+        maxFiles: props.mode === 'single' ? 1 : props.maxFiles
+      });
+
+      this.r.on('fileAdded', this.onFileAdded.bind(this));
+      this.r.on('fileProgress', this.onFileProgress.bind(this));
+      this.r.on('fileError', this.onFileError.bind(this));
+      this.r.on('fileSuccess', this.onFileSuccess.bind(this));
+      this.r.on('fileRetry', this.onFileRetry.bind(this));
+
+      this.r.on('complete', this.onComplete.bind(this));
+      this.r.on('pause', this.onPause.bind(this));
+      this.r.on('cancel', this.onCancel.bind(this));
+      this.r.on('error', this.onError.bind(this));
+    }
+  }, {
+    key: 'mountResumable',
+    value: function mountResumable() {
+      this.r.assignBrowse(this.refs.browseButton);
+
+      if (this.props.mode === 'multi') {
+        this.r.assignDrop(this.refs.dropzone);
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -114,6 +133,7 @@ var FileField = function (_React$Component) {
 
       if (this.props.mode === 'single') {
         if (allFilesFailed || this.state.uploadFailed) {
+          // Show failure state
           return _react2.default.createElement(
             'div',
             { ref: 'wrapper' },
@@ -137,6 +157,7 @@ var FileField = function (_React$Component) {
           );
         }
         if (this.state.uploadInProgress || this.state.uploadProcessing) {
+          // Show progress state
           return _react2.default.createElement(
             'div',
             { ref: 'wrapper' },
@@ -144,10 +165,11 @@ var FileField = function (_React$Component) {
           );
         }
         if (this.state.uploadComplete) {
+          // Show finished state
           return _react2.default.createElement(
             'div',
             { ref: 'wrapper' },
-            _react2.default.createElement(FilePreview, { id: this.state.preview }),
+            _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath }),
             _react2.default.createElement(
               'div',
               { className: 'ui green labeled disabled icon button' },
@@ -159,35 +181,41 @@ var FileField = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'ui small basic circular icon button', onClick: this.clearFiles.bind(this) },
-              _react2.default.createElement('i', { className: 'x icon' })
+              { ref: 'clearButton', className: 'ui red labeled icon button', onClick: this.clearFiles.bind(this) },
+              _react2.default.createElement('i', { className: 'x icon' }),
+              'Remove File'
             )
           );
         }
-        if (this.r.files.length > 0) {
+        if (this.state.fileExists) {
+          // Show preview when a defaultValue is set
           return _react2.default.createElement(
             'div',
             { ref: 'wrapper' },
-            _react2.default.createElement(
-              'div',
-              { ref: 'browseButton', className: 'ui green labeled icon button', onClick: this.clearFiles.bind(this) },
-              _react2.default.createElement('i', { className: 'folder icon' }),
-              this.r.files[0].fileName,
-              ' (',
-              this.formatSize(this.r.files[0].size),
-              ')'
-            )
-          );
-        } else {
-          return _react2.default.createElement(
-            'div',
-            { ref: 'wrapper' },
-            _react2.default.createElement(FilePreview, { id: this.state.preview }),
+            _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath }),
             _react2.default.createElement(
               'div',
               { ref: 'browseButton', className: 'ui blue labeled icon button' },
               _react2.default.createElement('i', { className: 'folder icon' }),
-              'Add File'
+              'Change File'
+            ),
+            _react2.default.createElement(
+              'div',
+              { ref: 'clearButton', className: 'ui red labeled icon button', onClick: this.clearFiles.bind(this) },
+              _react2.default.createElement('i', { className: 'x icon' }),
+              'Remove File'
+            )
+          );
+        } else {
+          // Show an empty chooser
+          return _react2.default.createElement(
+            'div',
+            { ref: 'wrapper' },
+            _react2.default.createElement(
+              'div',
+              { ref: 'browseButton', className: 'ui green labeled icon button' },
+              _react2.default.createElement('i', { className: 'folder icon' }),
+              'Choose File...'
             )
           );
         }
@@ -255,11 +283,7 @@ var FileField = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.r.assignBrowse(this.refs.browseButton);
-
-      if (this.props.mode === 'multi') {
-        this.r.assignDrop(this.refs.dropzone);
-      }
+      this.mountResumable();
     }
   }, {
     key: 'componentDidUpdate',
@@ -267,11 +291,19 @@ var FileField = function (_React$Component) {
   }, {
     key: 'clearFiles',
     value: function clearFiles() {
+      var _this3 = this;
+
       while (this.r.files.length > 1) {
         r.files[0].cancel();
       }
-      this.setState({ filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false });
       this.rPromise = null;
+      delete this.r;
+      this.constructResumable(this.props);
+      _.defer(function () {
+        return _this3.mountResumable();
+      });
+      this.setState({ filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false, fileExists: false, preview: null });
+      this.forceUpdate();
     }
   }, {
     key: 'clearAndChoose',
@@ -289,7 +321,7 @@ var FileField = function (_React$Component) {
   }, {
     key: 'beginUpload',
     value: function beginUpload() {
-      var _this3 = this;
+      var _this4 = this;
 
       // Start the upload only if some files have been added
       if (_.isEmpty(this.r.files)) {
@@ -301,19 +333,19 @@ var FileField = function (_React$Component) {
       var uploadPromise = function uploadPromise() {
         return _when2.default.promise(function (resolve, reject) {
           var fileResults = [];
-          _this3.r.on('complete', function () {
+          _this4.r.on('complete', function () {
             return resolve(fileResults);
           });
-          _this3.r.on('error', reject);
-          _this3.r.on('fileSuccess', function (_file, r) {
+          _this4.r.on('error', reject);
+          _this4.r.on('fileSuccess', function (_file, r) {
             _logger2.default.log(_file, r);
             var resp = JSON.parse(r);
             var assetId = _.get(resp, 'asset_id', null) || _.get(resp, 'id', null);
             fileResults.push(assetId);
           });
-          _this3.r.upload();
+          _this4.r.upload();
         }).tap(function () {
-          return _this3.setState({ uploadInProgress: false, uploadProcessing: true });
+          return _this4.setState({ uploadInProgress: false, uploadProcessing: true });
         }).tap(_logger2.default.log.bind(_logger2.default));
       };
 
@@ -321,7 +353,7 @@ var FileField = function (_React$Component) {
         _logger2.default.log("Processing...", ids);
         return (0, _sequence2.default)(_.map(ids, function (i) {
           return function () {
-            return _this3.api.patch(_this3.props.assetPath + '/' + i + '/process');
+            return _this4.api.patch(_this4.props.assetPath + '/' + i + '/process');
           };
         })).then(function () {
           return ids;
@@ -331,7 +363,7 @@ var FileField = function (_React$Component) {
       this.rPromise = (0, _pipeline2.default)([uploadPromise, processPromise]).tap(function (ids) {
         return _logger2.default.log("Uploading and Processing complete", ids);
       }).tap(function (ids) {
-        return _this3.setState({ preview: _.first(ids) });
+        return _this4.setState({ preview: _.first(ids) });
       }).then(function (assetIds) {
         if (single) {
           return assetIds[0];
@@ -339,9 +371,9 @@ var FileField = function (_React$Component) {
           return assetIds;
         }
       }).tap(function () {
-        return _this3.setState({ uploadProcessing: false, uploadComplete: true });
+        return _this4.setState({ uploadProcessing: false, uploadComplete: true });
       }).tap(_logger2.default.log.bind(_logger2.default)).catch(function (failure) {
-        _this3.setState({ uploadProcessing: false, uploadComplete: false, uploadInProgress: false, uploadFailed: true });
+        _this4.setState({ uploadProcessing: false, uploadComplete: false, uploadInProgress: false, uploadFailed: true });
         _logger2.default.error(failure);
       });
     }
@@ -449,7 +481,7 @@ var FileField = function (_React$Component) {
     key: 'getValue',
     value: function getValue() {
       // Only begin the upload here if there is no upload in progress and an upload has not already completed
-      if (!this.state.uploadInProgress && !this.state.uploadComplete) {
+      if (!this.state.fileExists && !this.state.uploadInProgress && !this.state.uploadComplete) {
         this.beginUpload();
       }
       return this.rPromise;
@@ -525,9 +557,15 @@ var FilePreview = function (_React$Component2) {
   _createClass(FilePreview, [{
     key: 'render',
     value: function render() {
-      var url = _config2.default.get('api.pathPrefix') + ('/admin/assets/' + this.props.id + '/preview');
-      if (this.props.id) {
-        return _react2.default.createElement('img', { style: { marginBottom: 8 }, src: url, alt: 'Image Preview', className: 'ui tiny rounded image' });
+      var _props = this.props;
+      var assetPath = _props.assetPath;
+      var id = _props.id;
+      var _props$size = _props.size;
+      var size = _props$size === undefined ? 'medium' : _props$size;
+
+      var url = _config2.default.get('api.pathPrefix') + (assetPath + '/' + id + '/preview');
+      if (id) {
+        return _react2.default.createElement('img', { style: { marginBottom: 8 }, src: url, alt: 'Image Preview', className: 'ui ' + size + ' rounded image' });
       } else {
         return null;
       }
