@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import _ from 'lodash'
-import API from '../api'
-import {objectToQueryString} from '../utils/query'
+import API from '../../api'
+import {objectToQueryString} from '../../utils/query'
 
 export default class Typeahead extends React.Component {
 
@@ -54,7 +54,7 @@ export default class Typeahead extends React.Component {
     }
     return (
       <div className={klasses.join(' ')}>
-        <TypeaheadInput {...this.attachInputCallbacks()} value={this.state.searchValue}/>
+        <TypeaheadInput {...this.attachInputCallbacks()} value={this.state.searchValue} placeholder={this.props.placeholder}/>
         {(() => {
           if (this.state.isLoadingResults && _.isEmpty(this.state.results)) {
             return <TypeaheadResultLoader />

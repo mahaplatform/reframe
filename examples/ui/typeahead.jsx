@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Typeahead from 'ui/typeahead'
+import SelectableTypeahead from 'ui/typeahead/selectable'
 import Logger from 'utils/logger'
 
 // You can specify custom item renderers for the typeahead results.
@@ -23,10 +24,14 @@ export default class TypeaheadExamples extends React.Component {
   render() {
     return (
       <div>
-        <h1>Typeahead</h1>
+        <h1>Standard Typeahead</h1>
         <Typeahead ref="control" endpoint="/examples/data.json" resultField="records"
                    onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
-                   extraQueries={{foo: "bar"}} />
+                   extraQueries={{foo: "bar"}} placeholder="Choose a person..."/>
+        <h1>Selectable Typeahead</h1>
+        <SelectableTypeahead ref="selectable_control" endpoint="/examples/data.json" resultField="records"
+                   onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
+                   extraQueries={{foo: "bar"}} placeholder="Choose a person..."/>
       </div>
     )
   }
