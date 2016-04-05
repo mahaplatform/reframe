@@ -518,7 +518,9 @@ var FileField = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      this.setState({ preview: value });
+      if (value !== null) {
+        this.setState({ preview: value, fileExists: true });
+      }
     }
   }, {
     key: 'getReference',
