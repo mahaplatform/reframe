@@ -192,6 +192,10 @@ span.instructions {
   display: block;
   margin-bottom: 6px; }
 
+.filefield-preview .image {
+  height: 290px;
+  overflow: hidden; }
+
 .details {
   margin-bottom: 1em;
   -moz-border-radius: 0.30769rem 0.30769rem 0 0;

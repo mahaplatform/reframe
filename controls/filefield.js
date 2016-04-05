@@ -168,22 +168,46 @@ var FileField = function (_React$Component) {
           // Show finished state
           return _react2.default.createElement(
             'div',
-            { ref: 'wrapper' },
-            _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath }),
+            { className: 'filefield-preview' },
             _react2.default.createElement(
               'div',
-              { className: 'ui green labeled disabled icon button' },
-              _react2.default.createElement('i', { className: 'folder icon' }),
-              this.r.files[0].fileName,
-              ' (',
-              this.formatSize(this.r.files[0].size),
-              ')'
-            ),
-            _react2.default.createElement(
-              'div',
-              { ref: 'clearButton', className: 'ui red labeled icon button', onClick: this.clearFiles.bind(this) },
-              _react2.default.createElement('i', { className: 'x icon' }),
-              'Remove File'
+              { className: 'ui card', ref: 'wrapper' },
+              _react2.default.createElement(
+                'div',
+                { className: 'content' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'right floated meta' },
+                  ' ',
+                  this.formatSize(this.r.files[0].size)
+                ),
+                this.r.files[0].fileName
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'image' },
+                _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'extra content' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'ui two buttons' },
+                  _react2.default.createElement(
+                    'div',
+                    { ref: 'browseButton', className: 'ui green button' },
+                    _react2.default.createElement('i', { className: 'folder icon' }),
+                    'Change'
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { ref: 'clearButton', className: 'ui red button', onClick: this.clearFiles.bind(this) },
+                    _react2.default.createElement('i', { className: 'x icon' }),
+                    ' Remove'
+                  )
+                )
+              )
             )
           );
         }
@@ -191,19 +215,35 @@ var FileField = function (_React$Component) {
           // Show preview when a defaultValue is set
           return _react2.default.createElement(
             'div',
-            { ref: 'wrapper' },
-            _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath }),
+            { className: 'filefield-preview' },
             _react2.default.createElement(
               'div',
-              { ref: 'browseButton', className: 'ui blue labeled icon button' },
-              _react2.default.createElement('i', { className: 'folder icon' }),
-              'Change File'
-            ),
-            _react2.default.createElement(
-              'div',
-              { ref: 'clearButton', className: 'ui red labeled icon button', onClick: this.clearFiles.bind(this) },
-              _react2.default.createElement('i', { className: 'x icon' }),
-              'Remove File'
+              { className: 'ui card', ref: 'wrapper' },
+              _react2.default.createElement(
+                'div',
+                { className: 'image' },
+                _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'extra content' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'ui two buttons' },
+                  _react2.default.createElement(
+                    'div',
+                    { ref: 'browseButton', className: 'ui green button' },
+                    _react2.default.createElement('i', { className: 'folder icon' }),
+                    'Change'
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { ref: 'clearButton', className: 'ui red button', onClick: this.clearFiles.bind(this) },
+                    _react2.default.createElement('i', { className: 'x icon' }),
+                    ' Remove'
+                  )
+                )
+              )
             )
           );
         } else {

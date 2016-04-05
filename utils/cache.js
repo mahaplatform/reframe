@@ -54,7 +54,7 @@ var Cache = function () {
       var _expire = _store$valueIndex._expire;
       var data = _store$valueIndex.data;
 
-      var result = void 0;
+      var result = undefined;
 
       if (_expire === Infinity) {
         result = data;
