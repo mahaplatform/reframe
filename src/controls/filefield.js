@@ -404,8 +404,8 @@ const FileProgress = ({progress}) => {
     <div className="filefield-preview">
       <div className="ui card" ref="wrapper">
         <div className="image">
-          <div class="ui active inverted dimmer">
-            <div class="ui text loader">Processing</div>
+          <div className="ui active inverted dimmer">
+            <div className="ui text loader">Processing</div>
           </div>
         </div>
         <div className="extra content">
