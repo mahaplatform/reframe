@@ -223,7 +223,7 @@ var FileField = function (_React$Component) {
                     'div',
                     { ref: 'browseButton', className: 'ui green button' },
                     _react2.default.createElement('i', { className: 'folder icon' }),
-                    'Change'
+                    ' Change'
                   ),
                   _react2.default.createElement(
                     'div',
@@ -566,7 +566,7 @@ var FileProgress = function FileProgress(_ref2) {
         { className: 'ui card' },
         _react2.default.createElement(
           'div',
-          { className: 'image' },
+          { className: 'image loader' },
           _react2.default.createElement(
             'div',
             { className: 'ui active inverted dimmer' },
@@ -582,7 +582,7 @@ var FileProgress = function FileProgress(_ref2) {
           { className: 'extra content' },
           _react2.default.createElement(
             'div',
-            { className: 'ui two buttons' },
+            { className: 'ui two mini buttons' },
             _react2.default.createElement(
               'div',
               { className: 'ui disabled green button' },
@@ -633,7 +633,7 @@ var FilePreview = function (_React$Component2) {
 
       var url = _config2.default.get('api.pathPrefix') + (assetPath + '/' + id + '/preview');
       if (id) {
-        return _react2.default.createElement('img', { style: { marginBottom: 8 }, src: url, alt: 'Image Preview', className: 'ui ' + size + ' rounded image' });
+        return _react2.default.createElement('img', { src: url, alt: 'Image Preview' });
       } else {
         return null;
       }
