@@ -168,10 +168,10 @@ var FileField = function (_React$Component) {
           // Show finished state
           return _react2.default.createElement(
             'div',
-            { className: 'filefield-preview' },
+            { className: 'filefield-preview', ref: 'wrapper' },
             _react2.default.createElement(
               'div',
-              { className: 'ui card', ref: 'wrapper' },
+              { className: 'ui card' },
               _react2.default.createElement(
                 'div',
                 { className: 'image' },
@@ -204,10 +204,10 @@ var FileField = function (_React$Component) {
           // Show preview when a defaultValue is set
           return _react2.default.createElement(
             'div',
-            { className: 'filefield-preview' },
+            { className: 'filefield-preview', ref: 'wrapper' },
             _react2.default.createElement(
               'div',
-              { className: 'ui card', ref: 'wrapper' },
+              { className: 'ui card' },
               _react2.default.createElement(
                 'div',
                 { className: 'image' },
@@ -560,7 +560,7 @@ var FileProgress = function FileProgress(_ref2) {
   if (progress == 1) {
     return _react2.default.createElement(
       'div',
-      { className: 'filefield-preview' },
+      { className: 'filefield-preview', ref: 'wrapper' },
       _react2.default.createElement(
         'div',
         { className: 'ui card' },
@@ -582,7 +582,7 @@ var FileProgress = function FileProgress(_ref2) {
           { className: 'extra content' },
           _react2.default.createElement(
             'div',
-            { className: 'ui two mini buttons' },
+            { className: 'ui two buttons' },
             _react2.default.createElement(
               'div',
               { className: 'ui disabled green button' },
