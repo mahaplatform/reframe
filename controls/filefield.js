@@ -560,7 +560,7 @@ var FileProgress = function FileProgress(_ref2) {
   if (progress == 1) {
     return _react2.default.createElement(
       'div',
-      { className: 'filefield-preview', ref: 'wrapper' },
+      { className: 'filefield-preview' },
       _react2.default.createElement(
         'div',
         { className: 'ui card' },
