@@ -187,7 +187,7 @@ var FileField = function (_React$Component) {
                     'div',
                     { ref: 'browseButton', className: 'ui green button' },
                     _react2.default.createElement('i', { className: 'folder icon' }),
-                    ' Change'
+                    'Change'
                   ),
                   _react2.default.createElement(
                     'div',
@@ -223,7 +223,7 @@ var FileField = function (_React$Component) {
                     'div',
                     { ref: 'browseButton', className: 'ui green button' },
                     _react2.default.createElement('i', { className: 'folder icon' }),
-                    ' Change'
+                    'Change'
                   ),
                   _react2.default.createElement(
                     'div',
@@ -557,47 +557,60 @@ exports.default = FileField;
 var FileProgress = function FileProgress(_ref2) {
   var progress = _ref2.progress;
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'filefield-preview' },
-    _react2.default.createElement(
+  if (progress == 1) {
+    return _react2.default.createElement(
       'div',
-      { className: 'ui card', ref: 'wrapper' },
+      { className: 'filefield-preview' },
       _react2.default.createElement(
         'div',
-        { className: 'image' },
+        { className: 'ui card' },
         _react2.default.createElement(
           'div',
-          { className: 'ui active inverted dimmer' },
+          { className: 'image' },
           _react2.default.createElement(
             'div',
-            { className: 'ui text loader' },
-            'Processing'
+            { className: 'ui active inverted dimmer' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui text loader' },
+              'Processing'
+            )
           )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'extra content' },
+        ),
         _react2.default.createElement(
           'div',
-          { className: 'ui two buttons' },
+          { className: 'extra content' },
           _react2.default.createElement(
             'div',
-            { ref: 'browseButton', className: 'ui disabled green button' },
-            _react2.default.createElement('i', { className: 'folder icon' }),
-            ' Change'
-          ),
-          _react2.default.createElement(
-            'div',
-            { ref: 'clearButton', className: 'ui disabled red button' },
-            _react2.default.createElement('i', { className: 'x icon' }),
-            ' Remove'
+            { className: 'ui two buttons' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui disabled green button' },
+              _react2.default.createElement('i', { className: 'folder icon' }),
+              ' Change'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'ui disabled red button' },
+              _react2.default.createElement('i', { className: 'x icon' }),
+              ' Remove'
+            )
           )
         )
       )
-    )
-  );
+    );
+  } else {
+    return _react2.default.createElement(
+      'div',
+      { className: 'ui tiny green indicating file progress' },
+      _react2.default.createElement('div', { className: 'bar' }),
+      _react2.default.createElement(
+        'div',
+        { className: 'label' },
+        'Uploading'
+      )
+    );
+  }
 };
 
 var FilePreview = function (_React$Component2) {
