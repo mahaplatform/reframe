@@ -568,10 +568,10 @@ var FileProgress = function FileProgress(_ref2) {
         { className: 'image' },
         _react2.default.createElement(
           'div',
-          { 'class': 'ui active inverted dimmer' },
+          { className: 'ui active inverted dimmer' },
           _react2.default.createElement(
             'div',
-            { 'class': 'ui text loader' },
+            { className: 'ui text loader' },
             'Processing'
           )
         )
