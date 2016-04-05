@@ -125,15 +125,21 @@ export default class FileField extends React.Component {
       if(this.state.uploadComplete) {
         // Show finished state
         return (
-          <div ref="wrapper">
-            <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
-            <div className="ui green labeled disabled icon button">
-              <i className="folder icon"></i>
-              {this.r.files[0].fileName} ({this.formatSize(this.r.files[0].size)})
-            </div>
-            <div ref="clearButton" className="ui red labeled icon button" onClick={this.clearFiles.bind(this)}>
-              <i className="x icon"></i>
-              Remove File
+          <div className="filefield-preview">
+            <div className="ui card" ref="wrapper">
+              <div className="content">
+                <div className="right floated meta"> {this.formatSize(this.r.files[0].size)}</div>
+                {this.r.files[0].fileName}
+              </div>
+              <div className="image">
+                <FilePreview id={this.state.preview} assetPath={this.props.assetPath} />
+              </div>
+              <div className="extra content">
+                <div className="ui two buttons">
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
+                  <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
+                </div>
+              </div>
             </div>
           </div>
         )
@@ -141,15 +147,17 @@ export default class FileField extends React.Component {
       if(this.state.fileExists) {
         // Show preview when a defaultValue is set
         return (
-          <div ref="wrapper">
-            <FilePreview id={this.state.preview} assetPath={this.props.assetPath}/>
-            <div ref="browseButton" className="ui blue labeled icon button">
-              <i className="folder icon"></i>
-              Change File
-            </div>
-            <div ref="clearButton" className="ui red labeled icon button" onClick={this.clearFiles.bind(this)}>
-              <i className="x icon"></i>
-              Remove File
+          <div className="filefield-preview">
+            <div className="ui card" ref="wrapper">
+              <div className="image">
+                <FilePreview id={this.state.preview} assetPath={this.props.assetPath} />
+              </div>
+              <div className="extra content">
+                <div className="ui two buttons">
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
+                  <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
+                </div>
+              </div>
             </div>
           </div>
         )

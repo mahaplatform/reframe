@@ -16,3 +16,9 @@ span.instructions {
   display: block;
   margin-bottom: 6px;
 }
+.filefield-preview {
+  .image {
+    height: 290px;
+    overflow: hidden;
+  }
+}
