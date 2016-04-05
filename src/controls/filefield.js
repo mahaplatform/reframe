@@ -401,27 +401,20 @@ export default class FileField extends React.Component {
 
 const FileProgress = ({progress}) => {
   return (
-  <div className="filefield-preview">
-    <div className="ui card" ref="wrapper">
-      <div className="image">
-        <div class="ui active inverted dimmer">
-          <div class="ui text loader">Processing</div>
+    <div className="filefield-preview">
+      <div className="ui card" ref="wrapper">
+        <div className="image">
+          <div class="ui active inverted dimmer">
+            <div class="ui text loader">Processing</div>
+          </div>
+        </div>
+        <div className="extra content">
+          <div className="ui two buttons">
+            <div ref="browseButton" className="ui disabled green button"><i className="folder icon"></i> Change</div>
+            <div ref="clearButton" className="ui disabled red button"><i className="x icon"></i> Remove</div>
+          </div>
         </div>
       </div>
-      <div className="extra content">
-        <div className="ui two buttons">
-          <div ref="browseButton" className="ui disabled green button"><i className="folder icon"></i> Change</div>
-          <div ref="clearButton" className="ui disabled red button"><i className="x icon"></i> Remove</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-    <div className="ui tiny green indicating file progress">
-      <div className="bar"/>
-
-      <div className="label">{ progress == 1 ?  <span><div className="ui mini active inline loader"></div> Processing</span> : "Uploading" }</div>
     </div>
   )
 }
