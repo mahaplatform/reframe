@@ -132,7 +132,7 @@ export default class FileField extends React.Component {
               </div>
               <div className="extra content">
                 <div className="ui two buttons">
-                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i> Change</div>
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
                   <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default class FileField extends React.Component {
               </div>
               <div className="extra content">
                 <div className="ui two buttons">
-                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i> Change</div>
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
                   <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
                 </div>
               </div>
@@ -400,23 +400,32 @@ export default class FileField extends React.Component {
 }
 
 const FileProgress = ({progress}) => {
-  return (
-    <div className="filefield-preview">
-      <div className="ui card" ref="wrapper">
-        <div className="image">
-          <div className="ui active inverted dimmer">
-            <div className="ui text loader">Processing</div>
+  if(progress == 1) {
+    return (
+      <div className="filefield-preview">
+        <div className="ui card">
+          <div className="image">
+            <div className="ui active inverted dimmer">
+              <div className="ui text loader">Processing</div>
+            </div>
           </div>
-        </div>
-        <div className="extra content">
-          <div className="ui two buttons">
-            <div ref="browseButton" className="ui disabled green button"><i className="folder icon"></i> Change</div>
-            <div ref="clearButton" className="ui disabled red button"><i className="x icon"></i> Remove</div>
+          <div className="extra content">
+            <div className="ui two buttons">
+              <div className="ui disabled green button"><i className="folder icon"></i> Change</div>
+              <div className="ui disabled red button"><i className="x icon"></i> Remove</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else  {
+    return (
+      <div className="ui tiny green indicating file progress">
+        <div className="bar"/>
+        <div className="label">Uploading</div>
+      </div>
+    )
+  }
 }
 
 class FilePreview extends React.Component {
