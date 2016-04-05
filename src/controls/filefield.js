@@ -402,7 +402,7 @@ export default class FileField extends React.Component {
 const FileProgress = ({progress}) => {
   if(progress == 1) {
     return (
-      <div className="filefield-preview" ref="wrapper">
+      <div className="filefield-preview">
         <div className="ui card">
           <div className="image loader">
             <div className="ui active inverted dimmer">
