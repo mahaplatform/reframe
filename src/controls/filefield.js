@@ -127,16 +127,12 @@ export default class FileField extends React.Component {
         return (
           <div className="filefield-preview">
             <div className="ui card" ref="wrapper">
-              <div className="content">
-                <div className="right floated meta"> {this.formatSize(this.r.files[0].size)}</div>
-                {this.r.files[0].fileName}
-              </div>
               <div className="image">
                 <FilePreview id={this.state.preview} assetPath={this.props.assetPath} />
               </div>
               <div className="extra content">
                 <div className="ui two buttons">
-                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i> Change</div>
                   <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
                 </div>
               </div>
@@ -154,7 +150,7 @@ export default class FileField extends React.Component {
               </div>
               <div className="extra content">
                 <div className="ui two buttons">
-                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i> Change</div>
                   <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
                 </div>
               </div>
@@ -405,6 +401,23 @@ export default class FileField extends React.Component {
 
 const FileProgress = ({progress}) => {
   return (
+  <div className="filefield-preview">
+    <div className="ui card" ref="wrapper">
+      <div className="image">
+        <div class="ui active inverted dimmer">
+          <div class="ui text loader">Processing</div>
+        </div>
+      </div>
+      <div className="extra content">
+        <div className="ui two buttons">
+          <div ref="browseButton" className="ui disabled green button"><i className="folder icon"></i> Change</div>
+          <div ref="clearButton" className="ui disabled red button"><i className="x icon"></i> Remove</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     <div className="ui tiny green indicating file progress">
       <div className="bar"/>
 
