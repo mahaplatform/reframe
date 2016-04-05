@@ -174,17 +174,6 @@ var FileField = function (_React$Component) {
               { className: 'ui card', ref: 'wrapper' },
               _react2.default.createElement(
                 'div',
-                { className: 'content' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'right floated meta' },
-                  ' ',
-                  this.formatSize(this.r.files[0].size)
-                ),
-                this.r.files[0].fileName
-              ),
-              _react2.default.createElement(
-                'div',
                 { className: 'image' },
                 _react2.default.createElement(FilePreview, { id: this.state.preview, assetPath: this.props.assetPath })
               ),
@@ -198,7 +187,7 @@ var FileField = function (_React$Component) {
                     'div',
                     { ref: 'browseButton', className: 'ui green button' },
                     _react2.default.createElement('i', { className: 'folder icon' }),
-                    'Change'
+                    ' Change'
                   ),
                   _react2.default.createElement(
                     'div',
@@ -234,7 +223,7 @@ var FileField = function (_React$Component) {
                     'div',
                     { ref: 'browseButton', className: 'ui green button' },
                     _react2.default.createElement('i', { className: 'folder icon' }),
-                    'Change'
+                    ' Change'
                   ),
                   _react2.default.createElement(
                     'div',
@@ -570,17 +559,43 @@ var FileProgress = function FileProgress(_ref2) {
 
   return _react2.default.createElement(
     'div',
-    { className: 'ui tiny green indicating file progress' },
-    _react2.default.createElement('div', { className: 'bar' }),
+    { className: 'filefield-preview' },
     _react2.default.createElement(
       'div',
-      { className: 'label' },
-      progress == 1 ? _react2.default.createElement(
-        'span',
-        null,
-        _react2.default.createElement('div', { className: 'ui mini active inline loader' }),
-        ' Processing'
-      ) : "Uploading"
+      { className: 'ui card', ref: 'wrapper' },
+      _react2.default.createElement(
+        'div',
+        { className: 'image' },
+        _react2.default.createElement(
+          'div',
+          { 'class': 'ui active inverted dimmer' },
+          _react2.default.createElement(
+            'div',
+            { 'class': 'ui text loader' },
+            'Processing'
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'extra content' },
+        _react2.default.createElement(
+          'div',
+          { className: 'ui two buttons' },
+          _react2.default.createElement(
+            'div',
+            { ref: 'browseButton', className: 'ui disabled green button' },
+            _react2.default.createElement('i', { className: 'folder icon' }),
+            ' Change'
+          ),
+          _react2.default.createElement(
+            'div',
+            { ref: 'clearButton', className: 'ui disabled red button' },
+            _react2.default.createElement('i', { className: 'x icon' }),
+            ' Remove'
+          )
+        )
+      )
     )
   );
 };
