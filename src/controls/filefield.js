@@ -125,8 +125,8 @@ export default class FileField extends React.Component {
       if(this.state.uploadComplete) {
         // Show finished state
         return (
-          <div className="filefield-preview">
-            <div className="ui card" ref="wrapper">
+          <div className="filefield-preview" ref="wrapper">
+            <div className="ui card">
               <div className="image">
                 <FilePreview id={this.state.preview} assetPath={this.props.assetPath} />
               </div>
@@ -143,8 +143,8 @@ export default class FileField extends React.Component {
       if(this.state.fileExists) {
         // Show preview when a defaultValue is set
         return (
-          <div className="filefield-preview">
-            <div className="ui card" ref="wrapper">
+          <div className="filefield-preview" ref="wrapper">
+            <div className="ui card">
               <div className="image">
                 <FilePreview id={this.state.preview} assetPath={this.props.assetPath} />
               </div>
@@ -402,7 +402,7 @@ export default class FileField extends React.Component {
 const FileProgress = ({progress}) => {
   if(progress == 1) {
     return (
-      <div className="filefield-preview">
+      <div className="filefield-preview" ref="wrapper">
         <div className="ui card">
           <div className="image loader">
             <div className="ui active inverted dimmer">
@@ -410,7 +410,7 @@ const FileProgress = ({progress}) => {
             </div>
           </div>
           <div className="extra content">
-            <div className="ui two mini buttons">
+            <div className="ui two buttons">
               <div className="ui disabled green button"><i className="folder icon"></i> Change</div>
               <div className="ui disabled red button"><i className="x icon"></i> Remove</div>
             </div>
