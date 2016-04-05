@@ -150,7 +150,7 @@ export default class FileField extends React.Component {
               </div>
               <div className="extra content">
                 <div className="ui two buttons">
-                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i>Change</div>
+                  <div ref="browseButton" className="ui green button"><i className="folder icon"></i> Change</div>
                   <div ref="clearButton" className="ui red button" onClick={this.clearFiles.bind(this)}><i className="x icon"></i> Remove</div>
                 </div>
               </div>
@@ -404,13 +404,13 @@ const FileProgress = ({progress}) => {
     return (
       <div className="filefield-preview">
         <div className="ui card">
-          <div className="image">
+          <div className="image loader">
             <div className="ui active inverted dimmer">
               <div className="ui text loader">Processing</div>
             </div>
           </div>
           <div className="extra content">
-            <div className="ui two buttons">
+            <div className="ui two mini buttons">
               <div className="ui disabled green button"><i className="folder icon"></i> Change</div>
               <div className="ui disabled red button"><i className="x icon"></i> Remove</div>
             </div>
@@ -433,7 +433,7 @@ class FilePreview extends React.Component {
     const {assetPath, id, size = 'medium'} = this.props
     const url = Config.get('api.pathPrefix') + `${assetPath}/${id}/preview`
     if(id) {
-      return <img style={{marginBottom: 8}} src={url} alt="Image Preview" className={`ui ${size} rounded image`}/>
+      return <img src={url} alt="Image Preview" />
     }
     else {
       return null

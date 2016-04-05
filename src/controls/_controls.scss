@@ -6,6 +6,7 @@
     width: 300px !important;
   }
 }
+
 .dateselect {
   .dropdown {
     min-width: 0 !important;
@@ -16,11 +17,14 @@ span.instructions {
   display: block;
   margin-bottom: 6px;
 }
+
 .filefield-preview {
   width: 250px;
-  .image {
-    width: 250px;
+  .loader {
     height: 250px;
+  }
+  .image {
+    width: 100%;
     overflow: hidden;
   }
 }
