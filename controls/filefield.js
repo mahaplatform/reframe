@@ -325,7 +325,7 @@ var FileField = function (_React$Component) {
       while (this.r.files.length > 1) {
         r.files[0].cancel();
       }
-      this.rPromise = null;
+      this.rPromise = (0, _when2.default)(null);
       delete this.r;
       this.constructResumable(this.props);
       _.defer(function () {
@@ -401,6 +401,8 @@ var FileField = function (_React$Component) {
         }
       }).tap(function () {
         return _this4.setState({ uploadProcessing: false, uploadComplete: true });
+      }).tap(function () {
+        return _this4.mountResumable();
       }).tap(_logger2.default.log.bind(_logger2.default)).catch(function (failure) {
         _this4.setState({ uploadProcessing: false, uploadComplete: false, uploadInProgress: false, uploadFailed: true });
         _logger2.default.error(failure);
