@@ -192,6 +192,9 @@ span.instructions {
   display: block;
   margin-bottom: 6px; }
 
+.filefield-uploading {
+  width: 250px; }
+
 .filefield-preview {
   width: 250px; }
   .filefield-preview .loader {
