@@ -391,7 +391,9 @@ export default class FileField extends React.Component {
   }
 
   setValue(value) {
-    this.setState({preview: value})
+    if(value !== null) {
+      this.setState({preview: value, fileExists: true})
+    }
   }
 
   getReference() {
