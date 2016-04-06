@@ -610,7 +610,7 @@ var FileProgress = function FileProgress(_ref2) {
         { className: 'ui segment' },
         _react2.default.createElement(
           'div',
-          { className: 'ui green indicating file progress' },
+          { className: 'ui green file progress' },
           _react2.default.createElement('div', { className: 'bar' })
         )
       )
