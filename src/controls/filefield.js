@@ -420,9 +420,10 @@ const FileProgress = ({progress}) => {
     )
   } else  {
     return (
-      <div className="ui tiny green indicating file progress">
-        <div className="bar"/>
-        <div className="label">Uploading</div>
+      <div class="ui segment">
+        <div className="ui green indicating file progress">
+          <div className="bar"/>
+        </div>
       </div>
     )
   }
