@@ -244,7 +244,7 @@ span.instructions {
       font-size: 1em;
       color: rgba(0, 0, 0, 0.87); }
 
-.ui.form .ui.segments .ui.segment:first-child {
+.ui.form .ui.segments .ui.segment.inverted:first-child {
   background-color: #E8E9EA;
   color: #000; }
 

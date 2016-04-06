@@ -604,12 +604,11 @@ var FileProgress = function FileProgress(_ref2) {
   } else {
     return _react2.default.createElement(
       'div',
-      { className: 'ui tiny green indicating file progress' },
-      _react2.default.createElement('div', { className: 'bar' }),
+      { 'class': 'ui segment' },
       _react2.default.createElement(
         'div',
-        { className: 'label' },
-        'Uploading'
+        { className: 'ui green indicating file progress' },
+        _react2.default.createElement('div', { className: 'bar' })
       )
     );
   }
