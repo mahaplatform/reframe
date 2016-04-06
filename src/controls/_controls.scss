@@ -20,6 +20,9 @@ span.instructions {
 
 .filefield-uploading {
   width: 250px;
+  .ui.progress {
+    margin: 0 !important;
+  }
 }
 .filefield-preview {
   width: 250px;
