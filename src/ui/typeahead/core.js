@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import API from '../../api'
 import {objectToQueryString} from '../../utils/query'
+import {swallow} from '../../utils/events'
 
 export default class Typeahead extends React.Component {
 
@@ -58,7 +59,13 @@ export default class Typeahead extends React.Component {
 
     return (
       <div className={classes.join(' ')}>
-        <TypeaheadInput {...this.attachInputCallbacks()} value={searchValue} placeholder={placeholder}/>
+        <div className="ui input">
+          <input type="text"
+                 ref="input"
+                 value={searchValue}
+                 {...this.attachInputCallbacks()}
+                 placeholder={placeholder} />
+        </div>
         {(() => {
           if (isLoadingResults && _.isEmpty(results)) {
             return <TypeaheadResultLoader />
@@ -79,11 +86,17 @@ export default class Typeahead extends React.Component {
   }
 
   componentDidMount() {
-
+    const component = this
+    this.closeListener = e => {
+      if(e.target !== component.refs.input){
+        component.hideResults()
+      }
+    }
+    document.addEventListener('click', this.closeListener)
   }
 
   componentWillUnmount() {
-
+    document.removeEventListener('click', this.closeListener)
   }
 
   attachInputCallbacks() {
@@ -92,7 +105,7 @@ export default class Typeahead extends React.Component {
         this.setState({ focused: true, showResults: true })
       },
       onBlur:   () => {
-        this.setState({ focused: false, showResults: false })
+        // this.setState({ focused: false })
       },
       onChange: (event) => {
         this.setState({ searchValue: event.target.value, isLoadingResults: true })
@@ -151,19 +164,6 @@ export default class Typeahead extends React.Component {
 
 }
 
-export const TypeaheadInput = props => {
-  return (
-    <div className="ui input">
-      <input type="text"
-             value={props.value}
-             onChange={props.onChange}
-             onFocus={props.onFocus}
-             onBlur={props.onBlur}
-             placeholder={props.placeholder} />
-    </div>
-  )
-}
-
 export const TypeaheadResultLoader = props => {
   return (
     <div className="ui typeahead results">
@@ -208,10 +208,15 @@ export class TypeaheadResultList extends React.Component {
 
   render() {
     const { results, itemComponent, onChooseResult } = this.props
+    const clickHandler = (r, e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      onChooseResult(r)
+    }
     return (
       <div className="ui typeahead results">
         {_.map(results,
-          result => React.createElement(itemComponent, { result, onClick: _.partial(onChooseResult, result) }))}
+          result => React.createElement(itemComponent, { result, onClick: _.partial(clickHandler, result) }))}
       </div>
     )
   }
