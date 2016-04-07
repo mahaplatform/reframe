@@ -48,7 +48,7 @@
       width: 100%;
       padding: .7em 1.14285714em;
       cursor: pointer;
-      color: rgba(0,0,0,0.87);
+      color: rgba(0,0,0,0.87) !important;
       &:hover {
         background-color: #F0F0F0;
       }
