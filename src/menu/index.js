@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MenuItem from './item.js'
+import Search from './search.js'
 
 class Menu extends React.Component {
 
@@ -12,6 +13,8 @@ class Menu extends React.Component {
   }
 
   static defaultProps = {
+    searchEndpoint: '/admin/search',
+    searchQueryParam: 'q'
   }
 
   render() {
@@ -26,6 +29,15 @@ class Menu extends React.Component {
                     return <MenuItem key={`left_menu_item_${index}`} item={item} onClick={this.handleItemClick}/>
                   })}
                 </div>
+              )
+            }
+          })()}
+          {(() => {
+            if(this.props.menu.search) {
+              return (
+                <Search
+                  endpoint={this.props.searchEndpoint}
+                  query={this.props.searchQueryParam} />
               )
             }
           })()}
