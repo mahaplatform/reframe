@@ -62,7 +62,7 @@ export class CategoryResultList extends React.Component {
           return [
             <div className="category divider">{name}</div>,
             ..._.map(group, item => {
-              return React.createElement(itemComponent, { result: item, onClick: _.partial(clickHandler, item) })
+              return React.createElement(itemComponent, { type: name, result: item, onClick: _.partial(clickHandler, item) })
             })
           ]
         })}
