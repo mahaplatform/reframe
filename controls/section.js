@@ -31,10 +31,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Section = function (_React$Component) {
   _inherits(Section, _React$Component);
 
-  function Section() {
+  function Section(props) {
     _classCallCheck(this, Section);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Section).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Section).call(this, props));
+
+    _this.state = {
+      collapsed: _this.props.collapsing
+    };
+    return _this;
   }
 
   _createClass(Section, [{
@@ -42,7 +47,11 @@ var Section = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var segmentClass = this.props.borderless ? 'ui basic segment' : 'ui segment';
+      var segmentClass = this.props.borderless ? ['ui', 'basic', 'segment'] : ['ui', 'segment'];
+      if (this.props.collapsing) {
+        segmentClass.push('collapsing');
+        segmentClass.push(this.state.collapsed ? 'collapsed' : 'expanded');
+      }
       if (this.props.notes) {
         var Notes = this.props.notes;
         return _react2.default.createElement(
@@ -50,41 +59,73 @@ var Section = function (_React$Component) {
           { className: 'ui horizontal segments' },
           _react2.default.createElement(
             'div',
-            { className: segmentClass },
-            this.props.instructions ? this.props.instructions : '',
-            this.props.label ? _react2.default.createElement(
-              'label',
-              null,
-              this.props.label
-            ) : '',
+            { className: segmentClass.join(' ') },
+            function () {
+              if (_this2.props.label) {
+                return _react2.default.createElement(
+                  'h4',
+                  { className: 'ui header' },
+                  _this2.props.label
+                );
+              }
+            }(),
+            function () {
+              if (_this2.props.instructions) {
+                return _this2.props.instructions;
+              }
+            }(),
             this.props.fields.map(function (field, index) {
-              return _react2.default.createElement(_field2.default, _extends({ formId: _this2.props.formId }, field, { onChange: _this2.props.onFieldChange,
+              return _react2.default.createElement(_field2.default, _extends({ formId: _this2.props.formId }, field, {
+                onChange: _this2.props.onFieldChange,
                 ref: 'field_' + field.code,
                 key: 'field_' + index }));
             })
           ),
           _react2.default.createElement(
             'div',
-            { className: segmentClass },
+            { className: segmentClass.join(' ') },
             _react2.default.createElement(Notes, null)
           )
         );
       } else {
         return _react2.default.createElement(
           'div',
-          { className: segmentClass },
-          this.props.instructions ? this.props.instructions : '',
-          this.props.label ? _react2.default.createElement(
-            'label',
-            null,
-            this.props.label
-          ) : '',
-          this.props.fields.map(function (field, index) {
-            return _react2.default.createElement(_field2.default, _extends({ formId: _this2.props.formId }, field, { onChange: _this2.props.onFieldChange,
-              ref: 'field_' + index, key: 'field_' + index }));
-          })
+          { className: segmentClass.join(' ') },
+          function () {
+            if (_this2.props.label) {
+              return _react2.default.createElement(
+                'h4',
+                { className: 'ui header', onClick: _this2.toggle.bind(_this2) },
+                _this2.props.label
+              );
+            }
+          }(),
+          function () {
+            if (!_this2.props.collapsing || _this2.props.collapsing && !_this2.state.collapsed) {
+              return _react2.default.createElement(
+                'div',
+                { className: 'section' },
+                function () {
+                  if (_this2.props.instructions) {
+                    return _this2.props.instructions;
+                  }
+                }(),
+                _this2.props.fields.map(function (field, index) {
+                  return _react2.default.createElement(_field2.default, _extends({ formId: _this2.props.formId }, field, {
+                    onChange: _this2.props.onFieldChange,
+                    ref: 'field_' + index,
+                    key: 'field_' + index }));
+                })
+              );
+            }
+          }()
         );
       }
+    }
+  }, {
+    key: 'toggle',
+    value: function toggle() {
+      this.setState({ collapsed: !this.state.collapsed });
     }
   }, {
     key: 'getValue',
@@ -122,4 +163,7 @@ var Section = function (_React$Component) {
   return Section;
 }(_react2.default.Component);
 
+Section.defaultProps = {
+  collapsing: false
+};
 exports.default = Section;

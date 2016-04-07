@@ -77,7 +77,7 @@ var Form = function (_React$Component) {
 
       var title = this.props.title ? _react2.default.createElement(
         'div',
-        { className: 'ui segment' },
+        { className: 'ui inverted segment' },
         this.props.title
       ) : null;
       var label;
@@ -204,7 +204,7 @@ var Form = function (_React$Component) {
           // Check to see if this is a composite component
           if (field.type.composite) {
             // If there is a composite configuration specified, use that to map the fields
-            var dv = void 0;
+            var dv = undefined;
             if (field.composite) {
               dv = _lodash2.default.mapValues(field.composite, function (prefillKey) {
                 return _lodash2.default.get(prefills, prefillKey);
