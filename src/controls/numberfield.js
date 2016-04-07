@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import numeral from 'numeral'
 
 class Numberfield extends React.Component {
 
@@ -15,6 +16,7 @@ class Numberfield extends React.Component {
     disabled    : false,
     placeholder : '',
     defaultValue: '',
+    format      : null,
     onChange    : () => {}
   }
 
@@ -24,11 +26,20 @@ class Numberfield extends React.Component {
   }
 
   render() {
-    return <input value={this.state.value} ref="control" autoComplete="off" onChange={this.handleChange.bind(this)} type="text" name={this.props.code} id={this.props.code} placeholder={this.props.placeholder} />
+    return <input value={this.state.value} ref="control" autoComplete="off" onChange={this.handleChange.bind(this)} onBlur={this.handleBlur.bind(this)} type="text" name={this.props.code} id={this.props.code} placeholder={this.props.placeholder} />
   }
 
   handleChange(event) {
-    let value = event.target.value.replace(/[^\d+]/g, '')
+    let value = event.target.value.replace(/[^\d\.+]/g, '')
+    this.setValue(value)
+    this.props.onChange(this.props.code, value)
+  }
+
+  handleBlur(event) {
+    let value = event.target.value.replace(/[^\d\.+]/g, '')
+    if(this.props.format && !_.isEmpty(value)) {
+      value = numeral(value).format(this.props.format)
+    }
     this.setValue(value)
     this.props.onChange(this.props.code, value)
   }

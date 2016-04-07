@@ -36,6 +36,7 @@ export default class FormExamples extends React.Component {
           ]},
           { code: "email", label: 'Email', type: "emailfield", placeholder: 'Email', required: true },
           { code: "phone", label: 'Phone', type: "textfield", placeholder: 'XXX-XXX-XXXX', required: true },
+          { code: "number", label: 'Number', type: "numberfield", placeholder: 'XXX-XXX-XXXX', required: true, format: '0.00' },
         ]},
         { label: 'Section 2', collapsing: true, fields: [
           { code: "residence_id", label: 'Residence', type: "select", placeholder: 'Residence', options: [{key:1,value:"farm/rural"}, {key:2,value:"town of less than 10,000"}, {key:3,value:"town of 10,000 - 50,000"}, {key:4,value:"suburbs of more than 50,000"}, {key:5,value:"city of more than 50,000"}] },
