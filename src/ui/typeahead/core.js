@@ -188,9 +188,9 @@ export const TypeaheadEmptyResult = props => {
 export const TypeaheadDefaultResult = ({ onClick = _.noop, result }) => {
   return (
     <div className="item" onClick={onClick}>
-      <div className="title">{result.title || result.name || result.first_name
+      <div className="title">{result.title || result.name || (result.first_name
         ? `${result.first_name} ${result.last_name}`
-        : null || result.label || result.id}</div>
+        : null) || result.label || result.id}</div>
       <div className="description">{result.description || result.details}</div>
     </div>
   )
