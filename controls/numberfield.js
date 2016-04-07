@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _numeral = require('numeral');
+
+var _numeral2 = _interopRequireDefault(_numeral);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -39,12 +43,22 @@ var Numberfield = function (_React$Component) {
   _createClass(Numberfield, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', { value: this.state.value, ref: 'control', autoComplete: 'off', onChange: this.handleChange.bind(this), type: 'text', name: this.props.code, id: this.props.code, placeholder: this.props.placeholder });
+      return _react2.default.createElement('input', { value: this.state.value, ref: 'control', autoComplete: 'off', onChange: this.handleChange.bind(this), onBlur: this.handleBlur.bind(this), type: 'text', name: this.props.code, id: this.props.code, placeholder: this.props.placeholder });
     }
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
-      var value = event.target.value.replace(/[^\d+]/g, '');
+      var value = event.target.value.replace(/[^\d\.+]/g, '');
+      this.setValue(value);
+      this.props.onChange(this.props.code, value);
+    }
+  }, {
+    key: 'handleBlur',
+    value: function handleBlur(event) {
+      var value = event.target.value.replace(/[^\d\.+]/g, '');
+      if (this.props.format && !_.isEmpty(value)) {
+        value = (0, _numeral2.default)(value).format(this.props.format);
+      }
       this.setValue(value);
       this.props.onChange(this.props.code, value);
     }
@@ -84,6 +98,7 @@ Numberfield.defaultProps = {
   disabled: false,
   placeholder: '',
   defaultValue: '',
+  format: null,
   onChange: function onChange() {}
 };
 exports.default = Numberfield;
