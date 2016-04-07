@@ -7,20 +7,23 @@ class Emailfield extends React.Component {
     code: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
-    defaultValue: React.PropTypes.string
+    defaultValue: React.PropTypes.string,
+    trim: React.PropTypes.bool
   }
 
   static defaultProps = {
-    code: null,
-    disabled: false,
-    placeholder: '',
-    defaultValue: '',
-    onChange: () => {}
+    code         : null,
+    disabled     : false,
+    placeholder  : '',
+    defaultValue : '',
+    trim         : true,
+    onChange     : () => {}
   }
 
   constructor(props) {
     super(props)
-    this.state = {value: props.defaultValue || null}
+    let value = _.toString(props.defaultValue)
+    this.state = { value: this.formatValue(value) }
   }
 
   render() {
@@ -29,6 +32,7 @@ class Emailfield extends React.Component {
         value={this.state.value}
         ref="control"
         type="text"
+        onBlur={this.handleBlur.bind(this)}
         onChange={this.handleChange.bind(this)}
         name={this.props.code}
         id={this.props.code}
@@ -37,6 +41,11 @@ class Emailfield extends React.Component {
   }
 
   handleChange(event) {
+    this.setState({value: event.target.value})
+    this.props.onChange(this.props.code, event.target.value)
+  }
+
+  handleBlur(event) {
     this.setValue(event.target.value)
     this.props.onChange(this.props.code, event.target.value)
   }
@@ -46,7 +55,7 @@ class Emailfield extends React.Component {
   }
 
   setValue(value) {
-    this.setState({value})
+    this.setState({value: this.formatValue(value)})
   }
 
   clearField() {
@@ -55,6 +64,11 @@ class Emailfield extends React.Component {
 
   getReference() {
     return {[this.props.code]: this}
+  }
+
+  formatValue(value) {
+    if(this.props.trim) { value = value.trim() }
+    return value
   }
 
 }

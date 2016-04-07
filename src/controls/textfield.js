@@ -7,27 +7,43 @@ class Textfield extends React.Component {
     code: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
-    defaultValue: React.PropTypes.string
+    defaultValue: React.PropTypes.string,
+    trim: React.PropTypes.bool
   }
 
   static defaultProps = {
-    code        : null,
-    disabled    : false,
-    placeholder : '',
-    defaultValue: '',
-    onChange    : () => {}
+    code         : null,
+    disabled     : false,
+    placeholder  : '',
+    defaultValue : '',
+    trim         : true,
+    onChange     : () => {}
   }
 
   constructor(props) {
     super(props)
-    this.state = {value: props.defaultValue || null}
+    let value = _.toString(props.defaultValue)
+    this.state = { value: this.formatValue(value) }
   }
 
   render() {
-    return <input value={this.state.value} ref="control" autoComplete="off" onChange={this.handleChange.bind(this)} type="text" name={this.props.code} id={this.props.code} placeholder={this.props.placeholder} />
+    return <input value={this.state.value}
+                  ref="control"
+                  autoComplete="off"
+                  onChange={this.handleChange.bind(this)}
+                  onBlur={this.handleBlur.bind(this)}
+                  type="text"
+                  name={this.props.code}
+                  id={this.props.code}
+                  placeholder={this.props.placeholder} />
   }
 
   handleChange(event) {
+    this.setState({value: event.target.value})
+    this.props.onChange(this.props.code, event.target.value)
+  }
+
+  handleBlur(event) {
     this.setValue(event.target.value)
     this.props.onChange(this.props.code, event.target.value)
   }
@@ -37,7 +53,7 @@ class Textfield extends React.Component {
   }
 
   setValue(value) {
-    this.setState({value})
+    this.setState({value: this.formatValue(value)})
   }
 
   clearField() {
@@ -46,6 +62,11 @@ class Textfield extends React.Component {
 
   getReference() {
     return {[this.props.code]: this}
+  }
+
+  formatValue(value) {
+    if(this.props.trim) { value = value.trim() }
+    return value
   }
 
 }
