@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import API from '../../api'
 import {objectToQueryString} from '../../utils/query'
-import {swallow} from '../../utils/events'
 
 export default class Typeahead extends React.Component {
 
@@ -17,7 +16,8 @@ export default class Typeahead extends React.Component {
     resultField:     React.PropTypes.string,
     client:          React.PropTypes.function,
     requestThrottle: React.PropTypes.number,
-    itemComponent:   React.PropTypes.element
+    itemComponent:   React.PropTypes.element,
+    listComponent:   React.PropTypes.element
   }
 
   static defaultProps = {
@@ -26,7 +26,8 @@ export default class Typeahead extends React.Component {
     query:           'q',
     extraQueries:    {},
     resultField:     'results',
-    requestThrottle: 500
+    requestThrottle: 500,
+    listComponent:   TypeaheadResultList
   }
 
   constructor(props) {
@@ -57,6 +58,8 @@ export default class Typeahead extends React.Component {
       classes.push('active')
     }
 
+    const ListComponent = this.props.listComponent || TypeaheadResultList
+
     return (
       <div className={classes.join(' ')}>
         <div className="ui input">
@@ -70,9 +73,9 @@ export default class Typeahead extends React.Component {
           if (isLoadingResults && _.isEmpty(results)) {
             return <TypeaheadResultLoader />
           }
-          else if (showResults && results.length > 0) {
-            return <TypeaheadResultList results={results} onChooseResult={onChooseResult}
-                                        itemComponent={itemComponent}/>
+          else if (showResults && !_.isEmpty(results)) {
+            return <ListComponent results={results} onChooseResult={onChooseResult}
+                                  itemComponent={itemComponent} />
           }
           else if (showResults && searchValue.length >= 1) {
             return <TypeaheadEmptyResult />
@@ -86,9 +89,9 @@ export default class Typeahead extends React.Component {
   }
 
   componentDidMount() {
-    const component = this
+    const component    = this
     this.closeListener = e => {
-      if(e.target !== component.refs.input){
+      if (e.target !== component.refs.input) {
         component.hideResults()
       }
     }
@@ -139,7 +142,8 @@ export default class Typeahead extends React.Component {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
         if (this.state.queryCounter == queryId) {
-          this.setState({ results: response[resultField] || [], isLoadingResults: false, showResults: true })
+          const newResults = resultField ? response[resultField] : response
+          this.setState({ results: newResults || [], isLoadingResults: false, showResults: true })
         }
       })
       .catch(error => this.setState({ errorLoadingResults: true, showResults: true }))
