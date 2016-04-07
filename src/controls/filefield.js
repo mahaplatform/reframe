@@ -222,7 +222,7 @@ export default class FileField extends React.Component {
     while(this.r.files.length > 1) {
       r.files[0].cancel()
     }
-    this.rPromise = null
+    this.rPromise = when(null)
     delete this.r
     this.constructResumable(this.props)
     _.defer(() => this.mountResumable())
@@ -288,6 +288,7 @@ export default class FileField extends React.Component {
       }
     })
     .tap(() => this.setState({uploadProcessing: false, uploadComplete: true}))
+    .tap(() => this.mountResumable())
     .tap(Logger.log.bind(Logger))
     .catch(failure => {
       this.setState({uploadProcessing: false, uploadComplete: false, uploadInProgress: false, uploadFailed: true})
