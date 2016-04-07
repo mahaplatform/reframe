@@ -31,6 +31,10 @@ export default class TypeaheadExamples extends React.Component {
         <Typeahead selectable ref="selectable_control" endpoint="/examples/data.json" resultField="records"
                    onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
                    extraQueries={{foo: "bar"}} placeholder="Choose a person..."/>
+        <h1>Category Typeahead</h1>
+        <Typeahead categories ref="selectable_control" endpoint="/examples/data_categories.json"
+                   onChooseResult={this.onChoose.bind(this)} itemComponent={TypeaheadItem}
+                   extraQueries={{foo: "bar"}} placeholder="Choose a person..."/>
       </div>
     )
   }
