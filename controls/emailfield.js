@@ -32,7 +32,8 @@ var Emailfield = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Emailfield).call(this, props));
 
-    _this.state = { value: props.defaultValue || null };
+    var value = _.toString(props.defaultValue);
+    _this.state = { value: _this.formatValue(value) };
     return _this;
   }
 
@@ -43,6 +44,7 @@ var Emailfield = function (_React$Component) {
         value: this.state.value,
         ref: 'control',
         type: 'text',
+        onBlur: this.handleBlur.bind(this),
         onChange: this.handleChange.bind(this),
         name: this.props.code,
         id: this.props.code,
@@ -51,6 +53,12 @@ var Emailfield = function (_React$Component) {
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
+      this.setState({ value: event.target.value });
+      this.props.onChange(this.props.code, event.target.value);
+    }
+  }, {
+    key: 'handleBlur',
+    value: function handleBlur(event) {
       this.setValue(event.target.value);
       this.props.onChange(this.props.code, event.target.value);
     }
@@ -62,7 +70,7 @@ var Emailfield = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      this.setState({ value: value });
+      this.setState({ value: this.formatValue(value) });
     }
   }, {
     key: 'clearField',
@@ -74,6 +82,14 @@ var Emailfield = function (_React$Component) {
     value: function getReference() {
       return _defineProperty({}, this.props.code, this);
     }
+  }, {
+    key: 'formatValue',
+    value: function formatValue(value) {
+      if (this.props.trim) {
+        value = value.trim();
+      }
+      return value;
+    }
   }]);
 
   return Emailfield;
@@ -83,13 +99,15 @@ Emailfield.propTypes = {
   code: _react2.default.PropTypes.string,
   disabled: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string
+  defaultValue: _react2.default.PropTypes.string,
+  trim: _react2.default.PropTypes.bool
 };
 Emailfield.defaultProps = {
   code: null,
   disabled: false,
   placeholder: '',
   defaultValue: '',
+  trim: true,
   onChange: function onChange() {}
 };
 exports.default = Emailfield;

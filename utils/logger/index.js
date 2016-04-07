@@ -23,7 +23,7 @@ var Logger = function () {
     value: function notice() {
       var _console;
 
-      if (Logger.trap()) (_console = console).notice.apply(_console, arguments);
+      if (Logger.trap()) (_console = console).debug.apply(_console, arguments);
     }
   }, {
     key: 'info',

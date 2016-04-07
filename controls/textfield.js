@@ -32,18 +32,33 @@ var Textfield = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Textfield).call(this, props));
 
-    _this.state = { value: props.defaultValue || null };
+    var value = _.toString(props.defaultValue);
+    _this.state = { value: _this.formatValue(value) };
     return _this;
   }
 
   _createClass(Textfield, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', { value: this.state.value, ref: 'control', autoComplete: 'off', onChange: this.handleChange.bind(this), type: 'text', name: this.props.code, id: this.props.code, placeholder: this.props.placeholder });
+      return _react2.default.createElement('input', { value: this.state.value,
+        ref: 'control',
+        autoComplete: 'off',
+        onChange: this.handleChange.bind(this),
+        onBlur: this.handleBlur.bind(this),
+        type: 'text',
+        name: this.props.code,
+        id: this.props.code,
+        placeholder: this.props.placeholder });
     }
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
+      this.setState({ value: event.target.value });
+      this.props.onChange(this.props.code, event.target.value);
+    }
+  }, {
+    key: 'handleBlur',
+    value: function handleBlur(event) {
       this.setValue(event.target.value);
       this.props.onChange(this.props.code, event.target.value);
     }
@@ -55,7 +70,7 @@ var Textfield = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      this.setState({ value: value });
+      this.setState({ value: this.formatValue(value) });
     }
   }, {
     key: 'clearField',
@@ -67,6 +82,14 @@ var Textfield = function (_React$Component) {
     value: function getReference() {
       return _defineProperty({}, this.props.code, this);
     }
+  }, {
+    key: 'formatValue',
+    value: function formatValue(value) {
+      if (this.props.trim) {
+        value = value.trim();
+      }
+      return value;
+    }
   }]);
 
   return Textfield;
@@ -76,13 +99,15 @@ Textfield.propTypes = {
   code: _react2.default.PropTypes.string,
   disabled: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string
+  defaultValue: _react2.default.PropTypes.string,
+  trim: _react2.default.PropTypes.bool
 };
 Textfield.defaultProps = {
   code: null,
   disabled: false,
   placeholder: '',
   defaultValue: '',
+  trim: true,
   onChange: function onChange() {}
 };
 exports.default = Textfield;

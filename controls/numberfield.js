@@ -18,6 +18,10 @@ var _numeral = require('numeral');
 
 var _numeral2 = _interopRequireDefault(_numeral);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36,29 +40,34 @@ var Numberfield = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Numberfield).call(this, props));
 
-    _this.state = { value: props.defaultValue || null };
+    var value = _lodash2.default.toString(props.defaultValue);
+    _this.state = { value: _this.formatValue(value) };
     return _this;
   }
 
   _createClass(Numberfield, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', { value: this.state.value, ref: 'control', autoComplete: 'off', onChange: this.handleChange.bind(this), onBlur: this.handleBlur.bind(this), type: 'text', name: this.props.code, id: this.props.code, placeholder: this.props.placeholder });
+      return _react2.default.createElement('input', { value: this.state.value,
+        ref: 'control',
+        autoComplete: 'off',
+        onChange: this.handleChange.bind(this),
+        onBlur: this.handleBlur.bind(this),
+        type: 'text', name: this.props.code,
+        id: this.props.code,
+        placeholder: this.props.placeholder });
     }
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
       var value = event.target.value.replace(/[^\d\.+]/g, '');
-      this.setValue(value);
+      this.setState({ value: value });
       this.props.onChange(this.props.code, value);
     }
   }, {
     key: 'handleBlur',
     value: function handleBlur(event) {
       var value = event.target.value.replace(/[^\d\.+]/g, '');
-      if (this.props.format && !_.isEmpty(value)) {
-        value = (0, _numeral2.default)(value).format(this.props.format);
-      }
       this.setValue(value);
       this.props.onChange(this.props.code, value);
     }
@@ -70,7 +79,7 @@ var Numberfield = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      this.setState({ value: value });
+      this.setState({ value: this.formatValue(value) });
     }
   }, {
     key: 'clearField',
@@ -82,6 +91,17 @@ var Numberfield = function (_React$Component) {
     value: function getReference() {
       return _defineProperty({}, this.props.code, this);
     }
+  }, {
+    key: 'formatValue',
+    value: function formatValue(value) {
+      if (this.props.trim) {
+        value = value.trim();
+      }
+      if (this.props.format != null && !_lodash2.default.isEmpty(value)) {
+        value = (0, _numeral2.default)(value).format(this.props.format);
+      }
+      return value;
+    }
   }]);
 
   return Numberfield;
@@ -91,7 +111,8 @@ Numberfield.propTypes = {
   code: _react2.default.PropTypes.string,
   disabled: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string
+  defaultValue: _react2.default.PropTypes.string,
+  trim: _react2.default.PropTypes.bool
 };
 Numberfield.defaultProps = {
   code: null,
@@ -99,6 +120,7 @@ Numberfield.defaultProps = {
   placeholder: '',
   defaultValue: '',
   format: null,
+  trim: true,
   onChange: function onChange() {}
 };
 exports.default = Numberfield;

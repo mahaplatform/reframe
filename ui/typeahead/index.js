@@ -51,6 +51,11 @@ var PolymorphicTypeahead = function (_React$Component) {
     value: function clear() {
       this.refs.t.clear();
     }
+  }, {
+    key: 'hideResults',
+    value: function hideResults() {
+      this.refs.t.hideResults();
+    }
   }]);
 
   return PolymorphicTypeahead;
