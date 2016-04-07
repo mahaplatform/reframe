@@ -4,22 +4,46 @@ import Field from './field.js'
 
 class Section extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      collapsed: this.props.collapsing
+    }
+  }
+
+  static defaultProps = {
+    collapsing: false
+  }
+
   render() {
-    let segmentClass = this.props.borderless ? 'ui basic segment' : 'ui segment'
+    let segmentClass = this.props.borderless ? ['ui','basic','segment'] : ['ui','segment']
+    if(this.props.collapsing) {
+      segmentClass.push('collapsing')
+      segmentClass.push((this.state.collapsed) ? 'collapsed' : 'expanded')
+    }
     if (this.props.notes) {
       var Notes = this.props.notes
       return (
         <div className="ui horizontal segments">
-          <div className={segmentClass}>
-            {(this.props.instructions) ? this.props.instructions : ''}
-            {(this.props.label) ? <label>{this.props.label}</label> : ''}
+          <div className={segmentClass.join(' ')}>
+            {(() => {
+              if(this.props.label) {
+                return <h4 className="ui header">{this.props.label}</h4>
+              }
+            })()}
+            {(() => {
+              if(this.props.instructions) {
+                return this.props.instructions
+              }
+            })()}
             { this.props.fields.map((field, index) => {
-              return (<Field formId={this.props.formId} {...field} onChange={this.props.onFieldChange}
-                             ref={`field_${field.code}`}
-                             key={`field_${index}`}/>)
+              return <Field formId={this.props.formId} {...field}
+                            onChange={this.props.onFieldChange}
+                            ref={`field_${field.code}`}
+                            key={`field_${index}`}/>
             })}
           </div>
-          <div className={segmentClass}>
+          <div className={segmentClass.join(' ')}>
             <Notes />
           </div>
         </div>
@@ -27,16 +51,38 @@ class Section extends React.Component {
     }
     else {
       return (
-        <div className={segmentClass}>
-          {(this.props.instructions) ? this.props.instructions : ''}
-          {(this.props.label) ? <label>{this.props.label}</label> : ''}
-          { this.props.fields.map((field, index) => {
-            return (<Field formId={this.props.formId} {...field} onChange={this.props.onFieldChange}
-                          ref={`field_${index}`} key={`field_${index}`}/>)
-          })}
+        <div className={segmentClass.join(' ')}>
+          {(() => {
+            if(this.props.label) {
+              return <h4 className="ui header" onClick={this.toggle.bind(this)}>{this.props.label}</h4>
+            }
+          })()}
+          {(() => {
+            if(!this.props.collapsing || (this.props.collapsing && !this.state.collapsed)) {
+              return (
+                <div className="section">
+                  {(() => {
+                    if(this.props.instructions) {
+                      return this.props.instructions
+                    }
+                  })()}
+                  { this.props.fields.map((field, index) => {
+                    return <Field formId={this.props.formId} {...field}
+                    onChange={this.props.onFieldChange}
+                    ref={`field_${index}`}
+                    key={`field_${index}`}/>
+                  })}
+                </div>
+              )
+            }
+          })()}
         </div>
       )
     }
+  }
+
+  toggle() {
+    this.setState({collapsed: !this.state.collapsed})
   }
 
   getValue() {

@@ -424,9 +424,10 @@ const FileProgress = ({progress}) => {
     return (
       <div className="filefield-uploading">
         <div className="ui segment">
-          <div className="ui green file progress">
+          <div className="ui file progress">
             <div className="bar"/>
           </div>
+          <div className="label">Uploading</div>
         </div>
       </div>
     )

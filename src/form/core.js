@@ -65,7 +65,7 @@ class Form extends React.Component {
   }
 
   render() {
-    var title = (this.props.title) ? <div className="ui segment">{this.props.title}</div> : null
+    var title = (this.props.title) ? <div className="ui inverted segment">{this.props.title}</div> : null
     var label;
     if(this.props.label) {
       label = (
