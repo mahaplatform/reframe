@@ -37,6 +37,8 @@
     border: 1px solid #85b7d9;
     border-top: none;
     z-index: 16;
+    max-height: 70vh;
+    overflow: scroll;
     .empty {
       width: 100%;
       padding: .7em 1.14285714em;
@@ -46,6 +48,7 @@
       width: 100%;
       padding: .7em 1.14285714em;
       cursor: pointer;
+      color: rgba(0,0,0,0.87);
       &:hover {
         background-color: #F0F0F0;
       }
@@ -59,7 +62,7 @@
       font-size: 0.8em;
       font-weight: bold;
       text-transform: uppercase;
-      font-color: #333;
+      color: #333;
     }
   }
 
