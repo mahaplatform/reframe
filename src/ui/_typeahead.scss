@@ -50,6 +50,17 @@
         background-color: #F0F0F0;
       }
     }
+    .divider {
+      width: 100%;
+      padding: 6px 14px;
+      background-color: #DDDDDD;
+    }
+    .category.divider {
+      font-size: 0.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-color: #333;
+    }
   }
 
   &.selected.result {
