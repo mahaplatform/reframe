@@ -15,4 +15,8 @@ export default class PolymorphicTypeahead extends React.Component {
   clear() {
     this.refs.t.clear()
   }
+
+  hideResults() {
+    this.refs.t.hideResults()
+  }
 }

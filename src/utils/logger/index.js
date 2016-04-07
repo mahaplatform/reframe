@@ -6,7 +6,7 @@ export default class Logger {
 
   static notice(...args) {
     if(Logger.trap())
-      console.notice(...args)
+      console.debug(...args)
   }
 
   static info(...args) {

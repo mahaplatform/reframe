@@ -1,8 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import API from '../../api'
 import {objectToQueryString} from '../../utils/query'
+import {swallow} from '../../utils/events'
 
 export default class Typeahead extends React.Component {
 
@@ -38,7 +38,8 @@ export default class Typeahead extends React.Component {
       focused:             false,
       resultCursor:        -1,
       queryCounter:        0,
-      errorLoadingResults: false
+      errorLoadingResults: false,
+      showResults:         false
     }
 
     this.inputChangeHandler = _.throttle(this.onInputChange.bind(this), this.props.requestThrottle, { leading: false })
@@ -47,22 +48,33 @@ export default class Typeahead extends React.Component {
   }
 
   render() {
-    let klasses = ['typeahead']
-    klasses.push((true) ? 'top' : 'bottom')
-    if(this.state.results.length > 0) {
-      klasses.push('active')
+    const { results, searchValue, isLoadingResults, showResults } = this.state
+    const { placeholder, itemComponent, onChooseResult } = this.props
+
+    let classes = ['typeahead']
+    classes.push((true) ? 'top' : 'bottom')
+    if (showResults && results.length > 0) {
+      classes.push('active')
     }
+
     return (
-      <div className={klasses.join(' ')}>
-        <TypeaheadInput {...this.attachInputCallbacks()} value={this.state.searchValue} placeholder={this.props.placeholder}/>
+      <div className={classes.join(' ')}>
+        <div className="ui input">
+          <input type="text"
+                 ref="input"
+                 value={searchValue}
+                 {...this.attachInputCallbacks()}
+                 placeholder={placeholder} />
+        </div>
         {(() => {
-          if (this.state.isLoadingResults && _.isEmpty(this.state.results)) {
+          if (isLoadingResults && _.isEmpty(results)) {
             return <TypeaheadResultLoader />
           }
-          else if (this.state.results.length > 0) {
-            return <TypeaheadResultList results={this.state.results} onChooseResult={this.props.onChooseResult} itemComponent={this.props.itemComponent}/>
+          else if (showResults && results.length > 0) {
+            return <TypeaheadResultList results={results} onChooseResult={onChooseResult}
+                                        itemComponent={itemComponent}/>
           }
-          else if (this.state.searchValue.length >= 1) {
+          else if (showResults && searchValue.length >= 1) {
             return <TypeaheadEmptyResult />
           }
           else {
@@ -74,20 +86,26 @@ export default class Typeahead extends React.Component {
   }
 
   componentDidMount() {
-
+    const component = this
+    this.closeListener = e => {
+      if(e.target !== component.refs.input){
+        component.hideResults()
+      }
+    }
+    document.addEventListener('click', this.closeListener)
   }
 
   componentWillUnmount() {
-
+    document.removeEventListener('click', this.closeListener)
   }
 
   attachInputCallbacks() {
     return {
       onFocus:  () => {
-        this.setState({ focused: true })
+        this.setState({ focused: true, showResults: true })
       },
       onBlur:   () => {
-        this.setState({ focused: false })
+        // this.setState({ focused: false })
       },
       onChange: (event) => {
         this.setState({ searchValue: event.target.value, isLoadingResults: true })
@@ -97,21 +115,22 @@ export default class Typeahead extends React.Component {
   }
 
   onInputChange() {
-    const {searchValue, queryCounter} = this.state
-    const {endpoint, query, extraQueries, resultField} = this.props
+    const { searchValue, queryCounter } = this.state
+    const { endpoint, query, extraQueries, resultField } = this.props
 
     if (_.isEmpty(searchValue)) {
       this.setState({
         queryCounter:        this.state.queryCounter + 1,
         isLoadingResults:    false,
         errorLoadingResults: false,
+        showResults:         false,
         results:             []
       })
       return
     }
 
-    const requestQueryString = objectToQueryString({...extraQueries, [query]: searchValue})
-    const queryId = queryCounter + 1
+    const requestQueryString = objectToQueryString({ ...extraQueries, [query]: searchValue })
+    const queryId            = queryCounter + 1
 
     this.setState({ queryCounter: queryId, errorLoadingResults: false })
 
@@ -120,10 +139,10 @@ export default class Typeahead extends React.Component {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
         if (this.state.queryCounter == queryId) {
-          this.setState({ results: response[resultField] || [], isLoadingResults: false })
+          this.setState({ results: response[resultField] || [], isLoadingResults: false, showResults: true })
         }
       })
-      .catch(error => this.setState({ errorLoadingResults: true }))
+      .catch(error => this.setState({ errorLoadingResults: true, showResults: true }))
   }
 
   clear() {
@@ -132,18 +151,17 @@ export default class Typeahead extends React.Component {
       isLoadingResults:    false,
       errorLoadingResults: false,
       results:             [],
-      searchValue:         ''
+      searchValue:         '',
+      showResults:         false
     })
   }
 
-}
+  hideResults() {
+    this.setState({
+      showResults: false
+    })
+  }
 
-export const TypeaheadInput = props => {
-  return (
-    <div className="ui input">
-      <input type="text" value={props.value} onChange={props.onChange} placeholder={props.placeholder}/>
-    </div>
-  )
 }
 
 export const TypeaheadResultLoader = props => {
@@ -163,7 +181,7 @@ export const TypeaheadEmptyResult = props => {
   )
 }
 
-export const TypeaheadDefaultResult = ({onClick = _.noop, result}) => {
+export const TypeaheadDefaultResult = ({ onClick = _.noop, result }) => {
   return (
     <div className="item" onClick={onClick}>
       <div className="title">{result.title || result.name || result.first_name
@@ -189,10 +207,16 @@ export class TypeaheadResultList extends React.Component {
   }
 
   render() {
-    const {results, itemComponent, onChooseResult} = this.props
+    const { results, itemComponent, onChooseResult } = this.props
+    const clickHandler = (r, e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      onChooseResult(r)
+    }
     return (
       <div className="ui typeahead results">
-        {_.map(results, result => React.createElement(itemComponent, { result, onClick: _.partial(onChooseResult, result)}))}
+        {_.map(results,
+          result => React.createElement(itemComponent, { result, onClick: _.partial(clickHandler, result) }))}
       </div>
     )
   }

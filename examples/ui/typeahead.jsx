@@ -36,7 +36,7 @@ export default class TypeaheadExamples extends React.Component {
   }
 
   onChoose(item) {
-    Logger.log(`Chose item ${item.id}`)
+    console.log(`Chose item ${item.id}`)
     this.refs.control.clear()
   }
 
