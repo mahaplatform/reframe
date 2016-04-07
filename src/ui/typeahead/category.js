@@ -18,11 +18,20 @@ export default class CategoryTypeahead extends React.Component {
   render() {
     const ListComponent = this.props.listComponent || CategoryResultList
     return (
-      <Typeahead 
+      <Typeahead
         {...this.props}
+        ref="typeahead"
         listComponent={ListComponent}
         resultField={null} />
     )
+  }
+
+  clear() {
+    this.refs.typeahead.clear()
+  }
+
+  hideResults() {
+    this.refs.typeahead.hideResults()
   }
 }
 
