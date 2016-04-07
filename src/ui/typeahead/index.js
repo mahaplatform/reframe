@@ -24,3 +24,5 @@ export default class PolymorphicTypeahead extends React.Component {
     this.refs.t.hideResults()
   }
 }
+
+export {TypeaheadDefaultResult, TypeaheadEmptyResult, TypeaheadResultList, TypeaheadResultLoader} from './core'
