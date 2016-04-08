@@ -23,8 +23,6 @@ var _api2 = _interopRequireDefault(_api);
 
 var _query = require('../../utils/query');
 
-var _events = require('../../utils/events');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -80,6 +78,8 @@ var Typeahead = function (_React$Component) {
         classes.push('active');
       }
 
+      var ListComponent = this.props.listComponent || TypeaheadResultList;
+
       return _react2.default.createElement(
         'div',
         { className: classes.join(' ') },
@@ -95,8 +95,8 @@ var Typeahead = function (_React$Component) {
         function () {
           if (isLoadingResults && _lodash2.default.isEmpty(results)) {
             return _react2.default.createElement(TypeaheadResultLoader, null);
-          } else if (showResults && results.length > 0) {
-            return _react2.default.createElement(TypeaheadResultList, { results: results, onChooseResult: onChooseResult,
+          } else if (showResults && !_lodash2.default.isEmpty(results)) {
+            return _react2.default.createElement(ListComponent, { results: results, onChooseResult: onChooseResult,
               itemComponent: itemComponent });
           } else if (showResults && searchValue.length >= 1) {
             return _react2.default.createElement(TypeaheadEmptyResult, null);
@@ -175,7 +175,8 @@ var Typeahead = function (_React$Component) {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
         if (_this3.state.queryCounter == queryId) {
-          _this3.setState({ results: response[resultField] || [], isLoadingResults: false, showResults: true });
+          var newResults = resultField ? response[resultField] : response;
+          _this3.setState({ results: newResults || [], isLoadingResults: false, showResults: true });
         }
       }).catch(function (error) {
         return _this3.setState({ errorLoadingResults: true, showResults: true });
@@ -216,7 +217,8 @@ Typeahead.propTypes = {
   resultField: _react2.default.PropTypes.string,
   client: _react2.default.PropTypes.function,
   requestThrottle: _react2.default.PropTypes.number,
-  itemComponent: _react2.default.PropTypes.element
+  itemComponent: _react2.default.PropTypes.element,
+  listComponent: _react2.default.PropTypes.element
 };
 Typeahead.defaultProps = {
   onChange: _lodash2.default.noop,
@@ -224,7 +226,8 @@ Typeahead.defaultProps = {
   query: 'q',
   extraQueries: {},
   resultField: 'results',
-  requestThrottle: 500
+  requestThrottle: 500,
+  listComponent: TypeaheadResultList
 };
 exports.default = Typeahead;
 var TypeaheadResultLoader = exports.TypeaheadResultLoader = function TypeaheadResultLoader(props) {
@@ -262,7 +265,7 @@ var TypeaheadDefaultResult = exports.TypeaheadDefaultResult = function Typeahead
     _react2.default.createElement(
       'div',
       { className: 'title' },
-      result.title || result.name || result.first_name ? result.first_name + ' ' + result.last_name : null || result.label || result.id
+      result.title || result.name || (result.first_name ? result.first_name + ' ' + result.last_name : null) || result.label || result.id
     ),
     _react2.default.createElement(
       'div',

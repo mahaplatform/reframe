@@ -127,7 +127,7 @@ var ValidatedForm = function (_React$Component) {
     value: function onSubmit(fieldValues) {
       var _this2 = this;
 
-      (0, _when2.default)(fieldValues).then(function (data) {
+      fieldValues.then(function (data) {
         // Do all the validations. Call the parent onSubmit callback if they pass.
         _logger2.default.log('Validating', data);
         var fieldRefs = _this2.refs.form.flattenRefs();
@@ -144,6 +144,9 @@ var ValidatedForm = function (_React$Component) {
 
         if (_lodash2.default.isEmpty(errors)) {
           // There are no errors, validation passed. Fire relevant success events
+          if (_this2.props.asyncPassthrough) {
+            _this2.props.onSubmit(fieldValues);
+          }
           _this2.props.onSubmit(data);
         } else {
           // There are errors, validation failed. fire relevant failure events.

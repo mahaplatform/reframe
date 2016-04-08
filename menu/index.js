@@ -18,6 +18,10 @@ var _item = require('./item.js');
 
 var _item2 = _interopRequireDefault(_item);
 
+var _search = require('./search.js');
+
+var _search2 = _interopRequireDefault(_search);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58,6 +62,15 @@ var Menu = function (_React$Component) {
             }
           }(),
           function () {
+            if (_this2.props.menu.search) {
+              return _react2.default.createElement(_search2.default, {
+                endpoint: _this2.props.menu.searchEndpoint,
+                query: _this2.props.menu.searchQueryParam,
+                itemComponent: _this2.props.menu.searchResultComponent,
+                routes: _this2.props.menu.searchRoutes });
+            }
+          }(),
+          function () {
             if (_this2.props.menu.right) {
               return _react2.default.createElement(
                 'div',
@@ -92,5 +105,8 @@ Menu.propTypes = {
     right: _react2.default.PropTypes.array
   })
 };
-Menu.defaultProps = {};
+Menu.defaultProps = {
+  searchEndpoint: '/admin/search',
+  searchQueryParam: 'q'
+};
 exports.default = Menu;

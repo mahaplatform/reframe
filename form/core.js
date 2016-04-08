@@ -30,6 +30,10 @@ var _when = require('when');
 
 var _when2 = _interopRequireDefault(_when);
 
+var _logger = require('../utils/logger');
+
+var _logger2 = _interopRequireDefault(_logger);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -224,6 +228,7 @@ var Form = function (_React$Component) {
     key: 'onSubmit',
     value: function onSubmit(e) {
       e.preventDefault();
+      _logger2.default.log('Submitting Form ID ' + this.props.id);
       if (this.state.frozen) {
         return;
       }
@@ -231,7 +236,7 @@ var Form = function (_React$Component) {
       if (this.props.asyncPassthrough) {
         this.props.onSubmit(formData);
       } else {
-        formData.tap(console.log.bind(console)).then(this.props.onSubmit);
+        formData.tap(_logger2.default.log.bind(_logger2.default)).then(this.props.onSubmit);
       }
     }
   }, {
