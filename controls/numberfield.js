@@ -94,11 +94,13 @@ var Numberfield = function (_React$Component) {
   }, {
     key: 'formatValue',
     value: function formatValue(value) {
-      if (this.props.trim) {
-        value = value.trim();
-      }
-      if (this.props.format != null && !_lodash2.default.isEmpty(value)) {
-        value = (0, _numeral2.default)(value).format(this.props.format);
+      if (!_lodash2.default.isEmpty(value)) {
+        if (this.props.trim) {
+          value = value.trim();
+        }
+        if (this.props.format != null) {
+          value = (0, _numeral2.default)(value).format(this.props.format);
+        }
       }
       return value;
     }

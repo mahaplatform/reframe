@@ -13,25 +13,25 @@ var _core = require('./core');
 
 Object.defineProperty(exports, 'TypeaheadDefaultResult', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _core.TypeaheadDefaultResult;
   }
 });
 Object.defineProperty(exports, 'TypeaheadEmptyResult', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _core.TypeaheadEmptyResult;
   }
 });
 Object.defineProperty(exports, 'TypeaheadResultList', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _core.TypeaheadResultList;
   }
 });
 Object.defineProperty(exports, 'TypeaheadResultLoader', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _core.TypeaheadResultLoader;
   }
 });

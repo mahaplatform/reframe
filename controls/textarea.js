@@ -32,7 +32,12 @@ var Textarea = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Textarea).call(this, props));
 
-    _this.state = { value: props.defaultValue || null };
+    if (props.html) {
+      _this.state = { value: props.defaultValue || null };
+    } else {
+      var value = _.toString(props.defaultValue);
+      _this.state = { value: _this.formatValue(value) };
+    }
     return _this;
   }
 
@@ -40,17 +45,16 @@ var Textarea = function (_React$Component) {
     key: 'render',
     value: function render() {
       if (this.props.html) {
-        return _react2.default.createElement('textarea', {
-          defaultValue: this.props.defaultValue,
+        return _react2.default.createElement('textarea', { defaultValue: this.props.defaultValue,
           ref: 'control',
           onChange: this.handleChange.bind(this),
           name: this.props.code,
           rows: this.props.rows,
           placeholder: this.props.placeholder });
       } else {
-        return _react2.default.createElement('textarea', {
-          value: this.state.value,
+        return _react2.default.createElement('textarea', { value: this.state.value,
           ref: 'control',
+          onBlur: this.handleBlur.bind(this),
           onChange: this.handleChange.bind(this),
           name: this.props.code,
           rows: this.props.rows,
@@ -73,9 +77,15 @@ var Textarea = function (_React$Component) {
       if (this.props.html) {
         this.props.onChange(this.props.code, event);
       } else {
-        this.setValue(event.target.value);
+        this.setState({ value: event.target.value });
         this.props.onChange(this.props.code, event.target.value);
       }
+    }
+  }, {
+    key: 'handleBlur',
+    value: function handleBlur(event) {
+      this.setValue(event.target.value);
+      this.props.onChange(this.props.code, event.target.value);
     }
   }, {
     key: 'getValue',
@@ -92,7 +102,7 @@ var Textarea = function (_React$Component) {
       if (this.props.html && value) {
         $(this.refs.control).redactor('code.set', value);
       } else {
-        this.setState({ value: value });
+        this.setState({ value: this.formatValue(value) });
       }
     }
   }, {
@@ -109,6 +119,16 @@ var Textarea = function (_React$Component) {
     value: function getReference() {
       return _defineProperty({}, this.props.code, this);
     }
+  }, {
+    key: 'formatValue',
+    value: function formatValue(value) {
+      if (!_.isEmpty(value)) {
+        if (this.props.trim) {
+          value = value.trim();
+        }
+      }
+      return value;
+    }
   }]);
 
   return Textarea;
@@ -119,7 +139,8 @@ Textarea.propTypes = {
   disabled: _react2.default.PropTypes.bool,
   html: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string
+  defaultValue: _react2.default.PropTypes.string,
+  trim: _react2.default.PropTypes.bool
 };
 Textarea.defaultProps = {
   code: null,
@@ -128,6 +149,7 @@ Textarea.defaultProps = {
   defaultValue: '',
   rows: 4,
   placeholder: '',
+  trim: true,
   onChange: function onChange() {}
 };
 exports.default = Textarea;

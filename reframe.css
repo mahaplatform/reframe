@@ -1,3 +1,10 @@
+html {
+  font-size: 13px; }
+
+body {
+  background: #F2F4F5;
+  font-size: 13px; }
+
 .breadcrumbs {
   background: #000;
   margin: 0;
@@ -188,9 +195,9 @@ table .actions {
   border-left: 5px solid #AAA; }
 .ui.form .ui.segment.collapsing.expanded .header:before {
   border-top: 5px solid #AAA; }
-.ui.form .ui.segment.collapsing .header {
+.ui.form .ui.segment.collapsing h4.ui.header {
   cursor: pointer; }
-  .ui.form .ui.segment.collapsing .header:before {
+  .ui.form .ui.segment.collapsing h4.ui.header:before {
     content: '';
     width: 1px;
     height: 1px;
@@ -275,6 +282,14 @@ span.instructions {
   background-color: #E8E9EA;
   color: #000; }
 
+.ui.menu .search {
+  background-color: #444 !important;
+  position: relative; }
+  .ui.menu .search .typeahead.top {
+    position: static; }
+  .ui.menu .search .typeahead.results {
+    top: 45px;
+    border: none; }
 .ui.menu .ui.search.item {
   flex-grow: 1;
   padding-top: 0;

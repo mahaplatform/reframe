@@ -85,8 +85,10 @@ var Emailfield = function (_React$Component) {
   }, {
     key: 'formatValue',
     value: function formatValue(value) {
-      if (this.props.trim) {
-        value = value.trim();
+      if (!_.isEmpty(value)) {
+        if (this.props.trim) {
+          value = value.trim();
+        }
       }
       return value;
     }
