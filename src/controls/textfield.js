@@ -65,7 +65,9 @@ class Textfield extends React.Component {
   }
 
   formatValue(value) {
-    if(this.props.trim) { value = value.trim() }
+    if(!_.isEmpty(value)) {
+      if(this.props.trim) { value = value.trim() }
+    }
     return value
   }
 

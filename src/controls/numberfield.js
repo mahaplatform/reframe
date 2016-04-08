@@ -69,8 +69,10 @@ class Numberfield extends React.Component {
   }
 
   formatValue(value) {
-    if(this.props.trim) { value = value.trim() }
-    if(this.props.format != null && !_.isEmpty(value)) { value = numeral(value).format(this.props.format) }
+    if(!_.isEmpty(value)) {
+      if(this.props.trim) { value = value.trim() }
+      if(this.props.format != null) { value = numeral(value).format(this.props.format) }
+    }
     return value
   }
 

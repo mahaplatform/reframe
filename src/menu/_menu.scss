@@ -1,4 +1,15 @@
 .ui.menu {
+  .search {
+    background-color: #444 !important;
+    position: relative;
+    .typeahead.top {
+      position: static;
+    }
+    .typeahead.results {
+      top: 45px;
+      border: none;
+    }
+  }
   .ui.search.item {
     flex-grow: 1;
     padding-top: 0;
