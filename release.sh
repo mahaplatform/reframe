@@ -9,6 +9,7 @@ fi
 
 git clone -b release git@github.com:thinktopography/reframe _release
 cd _release
+find . ! -name '.*' -maxdepth 1 -type d -exec rm -rf {} +
 cp -f ../package.json ./package.json
 if (../node_modules/babel-cli/bin/babel.js -d ./ ../src/); then
   sass -Cq --scss --compass --sourcemap=none ../src/reframe.scss ./reframe.css
