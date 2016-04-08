@@ -51,10 +51,10 @@ export class CategoryResultList extends React.Component {
 
   render() {
     const { results, itemComponent, onChooseResult } = this.props
-    const clickHandler = (r, e) => {
+    const clickHandler = (r, t, e) => {
       e.preventDefault()
       e.stopPropagation()
-      onChooseResult(r)
+      onChooseResult(r, t)
     }
     return (
       <div className="ui typeahead results">
@@ -62,7 +62,7 @@ export class CategoryResultList extends React.Component {
           return [
             <div className="category divider">{name}</div>,
             ..._.map(group, item => {
-              return React.createElement(itemComponent, { type: name, result: item, onClick: _.partial(clickHandler, item) })
+              return React.createElement(itemComponent, { type: name, result: item, onClick: _.partial(clickHandler, item, name) })
             })
           ]
         })}
