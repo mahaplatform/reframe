@@ -1,0 +1,32 @@
+.ui.menu {
+  .ui.search.item {
+    padding-top: 0;
+    padding-bottom: 0;
+    input {
+      border-radius: 0;
+      background-color: transparent;
+      color: white;
+      border: none;
+      &::-webkit-input-placeholder {
+        color: white;
+      }
+
+      &:-moz-placeholder { /* Firefox 18- */
+        color: white;
+      }
+
+      &::-moz-placeholder {  /* Firefox 19+ */
+        color: white;
+      }
+
+      &:-ms-input-placeholder {
+        color: white;
+      }
+
+      &:focus {
+        border: none;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  }
+}

@@ -32,7 +32,8 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <div className="ui search item">
+      <div className="ui transparent search item">
+        <i className="search icon"></i>
         <Typeahead
           ref="input"
           categories

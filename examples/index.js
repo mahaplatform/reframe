@@ -57,6 +57,7 @@ class ExampleLinks extends React.Component {
 
   getMenu() {
     return {
+      search: true,
       left: [
         {
           label: 'Collections',
