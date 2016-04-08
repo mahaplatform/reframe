@@ -36,8 +36,10 @@ class Menu extends React.Component {
             if(this.props.menu.search) {
               return (
                 <Search
-                  endpoint={this.props.searchEndpoint}
-                  query={this.props.searchQueryParam} />
+                  endpoint={this.props.menu.searchEndpoint}
+                  query={this.props.menu.searchQueryParam}
+                  itemComponent={this.props.menu.searchResultComponent}
+                  routes={this.props.menu.searchRoutes} />
               )
             }
           })()}
