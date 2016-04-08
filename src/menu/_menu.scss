@@ -1,7 +1,13 @@
 .ui.menu {
   .ui.search.item {
+    flex-grow: 1;
     padding-top: 0;
     padding-bottom: 0;
+
+    .typeahead {
+      width: 100%;
+    }
+
     input {
       border-radius: 0;
       background-color: transparent;
