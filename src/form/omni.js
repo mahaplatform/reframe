@@ -30,7 +30,8 @@ export default class OmniForm extends React.Component {
   }
 
   static contextTypes = {
-    history: React.PropTypes.object
+    history: React.PropTypes.object,
+    container: React.PropTypes.object
   }
 
   constructor(props) {
@@ -103,7 +104,7 @@ export default class OmniForm extends React.Component {
             .finally(() => self.setState({submitting: false, pendingData: {}}))
         }
         else {
-          self.props.onSubmit(data)
+          self.handleSubmitSuccess(data)
           self.doRedirect()
         }
       },
@@ -124,7 +125,7 @@ export default class OmniForm extends React.Component {
   }
 
   handleAPIResponse(repsonse) {
-    this.props.onSubmit(this.state.pendingData)
+    this.handleSubmitSuccess(this.state.pendingData)
   }
 
   handleAPIError(errResponse) {
@@ -150,6 +151,13 @@ export default class OmniForm extends React.Component {
     }
 
     this.props.onError({code, errors, message})
+  }
+
+  handleSubmitSuccess(data) {
+    this.props.onSubmit(data)
+    if(this.context.container) {
+      _.invoke(this.context.container, 'sync')
+    }
   }
 
   doRedirect() {
