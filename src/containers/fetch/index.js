@@ -37,6 +37,10 @@ export default class FetchContainer extends React.Component {
     injectAs: 'data'
   }
 
+  static childContextTypes = {
+    container: React.PropTypes.object
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -107,6 +111,14 @@ export default class FetchContainer extends React.Component {
 
   sync() {
     this.makeRequest()
+  }
+
+  getChildContext() {
+    return {
+      container: {
+        sync: this.sync.bind(this)
+      }
+    }
   }
 }
 
