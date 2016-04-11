@@ -154,7 +154,7 @@ var OmniForm = function (_React$Component) {
               return self.setState({ submitting: false, pendingData: {} });
             });
           } else {
-            self.props.onSubmit(data);
+            self.handleSubmitSuccess(data);
             self.doRedirect();
           }
         },
@@ -177,7 +177,7 @@ var OmniForm = function (_React$Component) {
   }, {
     key: 'handleAPIResponse',
     value: function handleAPIResponse(repsonse) {
-      this.props.onSubmit(this.state.pendingData);
+      this.handleSubmitSuccess(this.state.pendingData);
     }
   }, {
     key: 'handleAPIError',
@@ -208,6 +208,14 @@ var OmniForm = function (_React$Component) {
       }
 
       this.props.onError({ code: code, errors: errors, message: message });
+    }
+  }, {
+    key: 'handleSubmitSuccess',
+    value: function handleSubmitSuccess(data) {
+      this.props.onSubmit(data);
+      if (this.context.container) {
+        _lodash2.default.invoke(this.context.container, 'sync');
+      }
     }
   }, {
     key: 'doRedirect',
@@ -287,6 +295,7 @@ OmniForm.defaultProps = {
   redirect: null
 };
 OmniForm.contextTypes = {
-  history: _react2.default.PropTypes.object
+  history: _react2.default.PropTypes.object,
+  container: _react2.default.PropTypes.object
 };
 exports.default = OmniForm;
