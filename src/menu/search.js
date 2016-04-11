@@ -43,9 +43,14 @@ export default class Search extends React.Component {
           placeholder={this.props.placeholder}
           onChooseResult={this.chooseResult.bind(this)}
           itemComponent={this.props.itemComponent}
+          clearOnBlur
         />
       </div>
     )
+  }
+
+  clear() {
+    this.refs.input.clear()
   }
 
   chooseResult(result, type) {
