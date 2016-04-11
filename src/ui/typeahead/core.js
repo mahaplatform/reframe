@@ -17,7 +17,8 @@ export default class Typeahead extends React.Component {
     client:          React.PropTypes.function,
     requestThrottle: React.PropTypes.number,
     itemComponent:   React.PropTypes.element,
-    listComponent:   React.PropTypes.element
+    listComponent:   React.PropTypes.element,
+    clearOnBlur:     React.PropTypes.bool
   }
 
   static defaultProps = {
@@ -27,7 +28,8 @@ export default class Typeahead extends React.Component {
     extraQueries:    {},
     resultField:     'results',
     requestThrottle: 500,
-    listComponent:   TypeaheadResultList
+    listComponent:   TypeaheadResultList,
+    clearOnBlur:     false
   }
 
   constructor(props) {
@@ -92,7 +94,12 @@ export default class Typeahead extends React.Component {
     const component    = this
     this.closeListener = e => {
       if (e.target !== component.refs.input) {
-        component.hideResults()
+        if(this.props.clearOnBlur) {
+          component.clear()
+        }
+        else {
+          component.hideResults()
+        }
       }
     }
     document.addEventListener('click', this.closeListener)
