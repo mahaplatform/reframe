@@ -74,7 +74,7 @@ class Application extends React.Component {
   static mapDispatchToMessageProps(dispatch, ownProps) {
     return {
       onClose(id) {
-        dispatch(appActions.dismissFlashMessage(id))
+        dispatch(appActions.clearFlashMessages())
       }
     }
   }

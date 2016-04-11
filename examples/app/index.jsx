@@ -44,6 +44,16 @@ class ExampleApplication extends React.Component {
   }
 
   showMessage() {
-    this.context.session.showMessage("Well this is embarrassing.", 'error')
+    switch (Math.ceil(Math.random() * 3)) {
+      case 1:
+        this.context.session.showMessage("Well this is embarrassing.", 'error')
+        break
+      case 2:
+        this.context.session.showMessage("I thought you oughtta know.", 'info')
+        break
+      case 3:
+        this.context.session.showMessage("Congratulations.", 'success')
+        break
+    }
   }
 }

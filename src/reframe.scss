@@ -5,6 +5,8 @@ body {
   background: #F2F4F5;
   font-size: 13px;
 }
+
+@import "app/session";
 @import "breadcrumbs/breadcrumbs";
 @import "collection/collection";
 @import "comments/comments";
