@@ -7,6 +7,7 @@ import API from '../../api'
 
 const UNINITIALIZED = 'uninitialized'
 const AWAITING = 'awaiting'
+const SYNCING = 'syncing'
 const READY = 'ready'
 const ERROR = 'error'
 
@@ -47,6 +48,10 @@ export default class FetchContainer extends React.Component {
 
     this.api = new API(this.props.client)
 
+    this.makeRequest()
+  }
+
+  makeRequest() {
     const propsPromises = _(this.props)
       .omit([ 'className', 'endpoint', 'client', 'element', 'endpointOptions', 'children' ])
       .mapValues(p => when(p))
@@ -98,6 +103,10 @@ export default class FetchContainer extends React.Component {
 
     const className = this.props.className
     return React.createElement(this.props.element, { className }, ...mappedChildren)
+  }
+
+  sync() {
+    this.makeRequest()
   }
 }
 
