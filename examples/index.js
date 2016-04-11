@@ -5,6 +5,9 @@ import Menu from '../src/menu'
 import Config from '../src/utils/config'
 import API from '../src/api'
 
+require('when/monitor/console')
+
+import AppExample from './app/index.jsx'
 import CollectionExample from './collection/index.jsx'
 import FetchCollectionExample from './collection/fetch.jsx'
 import FeedExample from './feed/index.jsx'
@@ -72,7 +75,8 @@ class ExampleLinks extends React.Component {
           label: 'Containers',
           items: [
             {label: 'Fetch', route: '/containers/fetch'},
-            {label: 'Infinite', route: '/containers/infinite'}
+            {label: 'Infinite', route: '/containers/infinite'},
+            {label: 'App', route: '/containers/application'}
           ]
         },
         {
@@ -124,6 +128,7 @@ const routes = (
       <Route path="details" component={DetailExample} />
       <Route path="containers/fetch" component={FetchContainerExample} />
       <Route path="containers/infinite" component={InfiniteContainerExample} />
+      <Route path="containers/application" component={AppExample} />
       <Route path="panes/tabbed" component={TabbedPaneExample}>
         <IndexRoute component={TabbedPaneExample.One} />
         <Route path="one" component={TabbedPaneExample.One} />
