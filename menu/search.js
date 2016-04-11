@@ -63,9 +63,15 @@ var Search = function (_React$Component) {
           resultField: this.resultField,
           placeholder: this.props.placeholder,
           onChooseResult: this.chooseResult.bind(this),
-          itemComponent: this.props.itemComponent
+          itemComponent: this.props.itemComponent,
+          clearOnBlur: true
         })
       );
+    }
+  }, {
+    key: 'clear',
+    value: function clear() {
+      this.refs.input.clear();
     }
   }, {
     key: 'chooseResult',

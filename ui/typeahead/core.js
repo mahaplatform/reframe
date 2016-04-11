@@ -109,10 +109,16 @@ var Typeahead = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       var component = this;
       this.closeListener = function (e) {
         if (e.target !== component.refs.input) {
-          component.hideResults();
+          if (_this2.props.clearOnBlur) {
+            component.clear();
+          } else {
+            component.hideResults();
+          }
         }
       };
       document.addEventListener('click', this.closeListener);
@@ -125,25 +131,25 @@ var Typeahead = function (_React$Component) {
   }, {
     key: 'attachInputCallbacks',
     value: function attachInputCallbacks() {
-      var _this2 = this;
+      var _this3 = this;
 
       return {
         onFocus: function onFocus() {
-          _this2.setState({ focused: true, showResults: true });
+          _this3.setState({ focused: true, showResults: true });
         },
         onBlur: function onBlur() {
           // this.setState({ focused: false })
         },
         onChange: function onChange(event) {
-          _this2.setState({ searchValue: event.target.value, isLoadingResults: true });
-          _this2.inputChangeHandler();
+          _this3.setState({ searchValue: event.target.value, isLoadingResults: true });
+          _this3.inputChangeHandler();
         }
       };
     }
   }, {
     key: 'onInputChange',
     value: function onInputChange() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _state2 = this.state;
       var searchValue = _state2.searchValue;
@@ -174,12 +180,12 @@ var Typeahead = function (_React$Component) {
       this.api.loadJSON(endpoint + requestQueryString).then(function (response) {
         // Tracking the queryId ensures only the latest result is processed, in case multiple
         // requests arrive out of order.
-        if (_this3.state.queryCounter == queryId) {
+        if (_this4.state.queryCounter == queryId) {
           var newResults = resultField ? response[resultField] : response;
-          _this3.setState({ results: newResults || [], isLoadingResults: false, showResults: true });
+          _this4.setState({ results: newResults || [], isLoadingResults: false, showResults: true });
         }
       }).catch(function (error) {
-        return _this3.setState({ errorLoadingResults: true, showResults: true });
+        return _this4.setState({ errorLoadingResults: true, showResults: true });
       });
     }
   }, {
@@ -218,7 +224,8 @@ Typeahead.propTypes = {
   client: _react2.default.PropTypes.function,
   requestThrottle: _react2.default.PropTypes.number,
   itemComponent: _react2.default.PropTypes.element,
-  listComponent: _react2.default.PropTypes.element
+  listComponent: _react2.default.PropTypes.element,
+  clearOnBlur: _react2.default.PropTypes.bool
 };
 Typeahead.defaultProps = {
   onChange: _lodash2.default.noop,
@@ -227,7 +234,8 @@ Typeahead.defaultProps = {
   extraQueries: {},
   resultField: 'results',
   requestThrottle: 500,
-  listComponent: TypeaheadResultList
+  listComponent: TypeaheadResultList,
+  clearOnBlur: false
 };
 exports.default = Typeahead;
 var TypeaheadResultLoader = exports.TypeaheadResultLoader = function TypeaheadResultLoader(props) {

@@ -46,6 +46,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var UNINITIALIZED = 'uninitialized';
 var AWAITING = 'awaiting';
+var SYNCING = 'syncing';
 var READY = 'ready';
 var ERROR = 'error';
 
@@ -66,26 +67,33 @@ var FetchContainer = function (_React$Component) {
 
     _this.api = new _api2.default(_this.props.client);
 
-    var propsPromises = (0, _lodash2.default)(_this.props).omit(['className', 'endpoint', 'client', 'element', 'endpointOptions', 'children']).mapValues(function (p) {
-      return (0, _when2.default)(p);
-    }).value();
-
-    var endpointPromise = _this.api.loadJSON(_this.props.endpoint, _this.props.endpointOptions);
-    var propsPromiseObject = _keys2.default.all(propsPromises);
-
-    var attributesPromise = _when2.default.all([endpointPromise, propsPromiseObject]).then(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2);
-
-      var endpointData = _ref2[0];
-      var propsData = _ref2[1];
-      return _this.setState({ status: READY, endpointData: endpointData, propsData: propsData });
-    }).catch(function (e) {
-      return _this.setState({ status: ERROR, message: e });
-    }).finally(_lodash2.default.noop);
+    _this.makeRequest();
     return _this;
   }
 
   _createClass(FetchContainer, [{
+    key: 'makeRequest',
+    value: function makeRequest() {
+      var _this2 = this;
+
+      var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoint', 'client', 'element', 'endpointOptions', 'children']).mapValues(function (p) {
+        return (0, _when2.default)(p);
+      }).value();
+
+      var endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions);
+      var propsPromiseObject = _keys2.default.all(propsPromises);
+
+      var attributesPromise = _when2.default.all([endpointPromise, propsPromiseObject]).then(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2);
+
+        var endpointData = _ref2[0];
+        var propsData = _ref2[1];
+        return _this2.setState({ status: READY, endpointData: endpointData, propsData: propsData });
+      }).catch(function (e) {
+        return _this2.setState({ status: ERROR, message: e });
+      }).finally(_lodash2.default.noop);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var finalProps = {};
@@ -115,6 +123,20 @@ var FetchContainer = function (_React$Component) {
 
       var className = this.props.className;
       return _react2.default.createElement.apply(_react2.default, [this.props.element, { className: className }].concat(_toConsumableArray(mappedChildren)));
+    }
+  }, {
+    key: 'sync',
+    value: function sync() {
+      this.makeRequest();
+    }
+  }, {
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        container: {
+          sync: this.sync.bind(this)
+        }
+      };
     }
   }]);
 
@@ -148,5 +170,8 @@ FetchContainer.defaultProps = {
   client: undefined, // Causes API to use default client
   flatten: false,
   injectAs: 'data'
+};
+FetchContainer.childContextTypes = {
+  container: _react2.default.PropTypes.object
 };
 exports.default = FetchContainer;

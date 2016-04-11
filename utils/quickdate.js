@@ -46,18 +46,18 @@ var Quickdate = function () {
 
         return { start: (0, _moment2.default)(relativeTime).startOf(period), end: (0, _moment2.default)(relativeTime).endOf(period) };
       } else {
-        var qdSegments = this.getSegments(qdString);
-        var deltas = _lodash2.default.map(qdSegments, this.parseSegment);
+        var _qdSegments = this.getSegments(qdString);
+        var _deltas = _lodash2.default.map(_qdSegments, this.parseSegment);
 
-        var relativeTime = (0, _moment2.default)(_lodash2.default.reduce(deltas, function (time, delta) {
+        var _relativeTime = (0, _moment2.default)(_lodash2.default.reduce(_deltas, function (time, delta) {
           time[delta[0]].apply(time, _lodash2.default.tail(delta));
           return time;
         }, (0, _moment2.default)(anchorDate)));
 
-        if (relativeTime.isBefore(anchorDate)) {
-          return { start: relativeTime, end: anchorDate };
+        if (_relativeTime.isBefore(anchorDate)) {
+          return { start: _relativeTime, end: anchorDate };
         } else {
-          return { start: anchorDate, end: relativeTime };
+          return { start: anchorDate, end: _relativeTime };
         }
       }
     }
