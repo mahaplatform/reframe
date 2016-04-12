@@ -18,7 +18,6 @@ export default class AppExample extends React.Component {
 class ExampleApplication extends React.Component {
   static contextTypes = {
     config: React.PropTypes.object,
-    user: React.PropTypes.object,
     session: React.PropTypes.object
   }
 
@@ -26,9 +25,9 @@ class ExampleApplication extends React.Component {
     return (
       <div>
         <div className="user">
-          <h1>{this.context.user.name}</h1>
-          <img src={this.context.user.photo} alt="User Photo"/>
-          <p><i className="ui mail icon"></i>{this.context.user.email}</p>
+          <h1>{this.context.session.user.name}</h1>
+          <img src={this.context.session.user.photo} alt="User Photo"/>
+          <p><i className="ui mail icon"></i>{this.context.session.user.email}</p>
         </div>
         <div className="config">
           <p>Theme: {this.context.config.theme}</p>

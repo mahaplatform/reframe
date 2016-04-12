@@ -59,6 +59,7 @@ class Application extends React.Component {
     const store = this.store
     return {
       ...store.getState().session,
+      user: store.getState().user,
       showMessage(message, type = 'info') {
         store.dispatch(appActions.showFlashMessage(message, type))
       }
