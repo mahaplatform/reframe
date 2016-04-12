@@ -115,15 +115,28 @@ var Application = function (_React$Component) {
         showMessage: function showMessage(message) {
           var type = arguments.length <= 1 || arguments[1] === undefined ? 'info' : arguments[1];
 
-          store.dispatch(_appActions2.default.showFlashMessage(message, type));
+          _.defer(function () {
+            return store.dispatch(_appActions2.default.showFlashMessage(message, type));
+          });
         }
       });
+    }
+  }, {
+    key: 'handleHistoryTransition',
+    value: function handleHistoryTransition() {
+      this.store.dispatch(_appActions2.default.clearFlashMessages());
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.store.subscribe(this.onStoreUpdate.bind(this));
       this.store.dispatch(_appActions2.default.loadSession(this.props.endpoint));
+      this.unlistenToHistory = this.context.history.listen(_.throttle(this.handleHistoryTransition.bind(this), 200));
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.unlistenToHistory();
     }
   }, {
     key: 'onStoreUpdate',
@@ -151,6 +164,9 @@ var Application = function (_React$Component) {
   return Application;
 }(_react2.default.Component);
 
+Application.contextTypes = {
+  history: _react2.default.PropTypes.object
+};
 Application.childContextTypes = {
   session: _react2.default.PropTypes.object,
   config: _react2.default.PropTypes.object,
