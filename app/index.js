@@ -111,6 +111,7 @@ var Application = function (_React$Component) {
     value: function buildSessionObject() {
       var store = this.store;
       return _extends({}, store.getState().session, {
+        user: store.getState().user,
         showMessage: function showMessage(message) {
           var type = arguments.length <= 1 || arguments[1] === undefined ? 'info' : arguments[1];
 
@@ -141,7 +142,7 @@ var Application = function (_React$Component) {
     value: function mapDispatchToMessageProps(dispatch, ownProps) {
       return {
         onClose: function onClose(id) {
-          dispatch(_appActions2.default.dismissFlashMessage(id));
+          dispatch(_appActions2.default.clearFlashMessages());
         }
       };
     }

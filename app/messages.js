@@ -18,6 +18,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
+
+var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48,29 +52,33 @@ var Messages = function (_React$Component) {
       };
       return _react2.default.createElement(
         'div',
-        null,
-        (0, _lodash2.default)(this.props.messages).map(function (message) {
-          var color = colorClasses[message.messageType] || 'blue';
-          var bannerClass = 'ui inverted attached basic ' + color + ' center aligned segment';
-          return _react2.default.createElement(
-            'div',
-            { className: bannerClass, style: { top: -6, border: 'none' } },
-            _react2.default.createElement(
-              'b',
-              null,
-              message.messageBody
-            ),
-            _react2.default.createElement(
+        { className: 'session message container' },
+        _react2.default.createElement(
+          _reactAddonsCssTransitionGroup2.default,
+          { transitionName: 'session-message', transitionAppear: true, transitionAppearTimeout: 500, transitionEnterTimeout: 500, transitionLeaveTimeout: 300 },
+          (0, _lodash2.default)(this.props.messages).take(1).map(function (message) {
+            var color = colorClasses[message.messageType] || 'blue';
+            var bannerClass = 'ui inverted basic ' + color + ' center aligned segment session-message';
+            return _react2.default.createElement(
               'div',
-              { onClick: function onClick() {
-                  return _this2.props.onClose(message.id);
-                }, style: { float: 'right' }, className: 'right floated' },
-              ' ',
-              _react2.default.createElement('i', { className: 'x icon' }),
-              ' '
-            )
-          );
-        }).value()
+              { key: 'sessionMessage:' + message.id, className: bannerClass, style: { border: 'none' } },
+              _react2.default.createElement(
+                'b',
+                null,
+                message.messageBody
+              ),
+              _react2.default.createElement(
+                'div',
+                { onClick: function onClick() {
+                    return _this2.props.onClose(message.id);
+                  }, style: { float: 'right' }, className: 'right floated' },
+                ' ',
+                _react2.default.createElement('i', { className: 'x icon' }),
+                ' '
+              )
+            );
+          }).value()
+        )
       );
     }
   }]);
