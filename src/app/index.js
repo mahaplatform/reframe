@@ -14,6 +14,10 @@ class Application extends React.Component {
     this.store = createStore(appReducer, applyMiddleware(thunkMiddleware))
   }
 
+  static contextTypes = {
+    history: React.PropTypes.object
+  }
+
   static childContextTypes = {
     session: React.PropTypes.object,
     config: React.PropTypes.object,
@@ -61,7 +65,7 @@ class Application extends React.Component {
       ...store.getState().session,
       user: store.getState().user,
       showMessage(message, type = 'info') {
-        store.dispatch(appActions.showFlashMessage(message, type))
+        _.defer(() => store.dispatch(appActions.showFlashMessage(message, type)))
       }
     }
   }
@@ -80,9 +84,18 @@ class Application extends React.Component {
     }
   }
 
+  handleHistoryTransition() {
+    this.store.dispatch(appActions.clearFlashMessages())
+  }
+
   componentDidMount() {
     this.store.subscribe(this.onStoreUpdate.bind(this))
     this.store.dispatch(appActions.loadSession(this.props.endpoint))
+    this.unlistenToHistory = this.context.history.listen(_.throttle(this.handleHistoryTransition.bind(this), 200))
+  }
+
+  componentWillUnmount() {
+    this.unlistenToHistory()
   }
 
   onStoreUpdate() {
