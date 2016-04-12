@@ -54,7 +54,7 @@ var Menu = function (_React$Component) {
             if (_this2.props.menu.left) {
               return _react2.default.createElement(
                 'div',
-                { className: 'menu' },
+                { className: 'left menu' },
                 _this2.props.menu.left.map(function (item, index) {
                   return _react2.default.createElement(_item2.default, { key: 'left_menu_item_' + index, item: item, onClick: _this2.handleItemClick });
                 })

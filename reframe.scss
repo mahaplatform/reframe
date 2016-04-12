@@ -204,8 +204,8 @@ table .actions {
   .collection table td {
     color: #6d787c; }
   .collection table img {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     float: left;
     margin: 0 10px 0 0; }
 
@@ -242,14 +242,14 @@ table .actions {
     display: inline-block;
     border: 5px solid transparent;
     margin-right: 5px; }
-.ui.form .ui.segment .header {
+.ui.form .ui.segment h4.ui.header {
   background: #E8E9EA;
   margin: -15px;
   padding: 15px;
   border-top: 1px solid #FFF;
   font-weight: normal;
   font-size: 1em; }
-  .ui.form .ui.segment .header ~ .section {
+  .ui.form .ui.segment h4.ui.header ~ .section {
     margin-top: 30px; }
 
 .dateselect .dropdown {
@@ -319,13 +319,29 @@ span.instructions {
 .ui.form .ui.segments .ui.segment.inverted:first-child {
   background-color: #E8E9EA;
   color: #000; }
+.ui.form .grouped.fields {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 0.67861429em 1em;
+  -moz-border-radius: 0.28571rem;
+  -webkit-border-radius: 0.28571rem;
+  border-radius: 0.28571rem;
+  overflow: hidden; }
+  .ui.form .grouped.fields .field {
+    float: left;
+    clear: none !important;
+    width: 33%; }
 
-.ui.menu .search {
+.ui.menu .left img, .ui.menu .right img {
+  width: 20px;
+  height: 20px; }
+.ui.menu .right img {
+  margin-right: 10px; }
+.ui.menu .ui.search {
   background-color: #444 !important;
   position: relative; }
-  .ui.menu .search .typeahead.top {
+  .ui.menu .ui.search .typeahead.top {
     position: static; }
-  .ui.menu .search .typeahead.results {
+  .ui.menu .ui.search .typeahead.results {
     top: 45px;
     border: none; }
 .ui.menu .ui.search.item {
@@ -338,7 +354,7 @@ span.instructions {
     border-radius: 0;
     background-color: transparent;
     color: white;
-    border: none; }
+    border: none !important; }
     .ui.menu .ui.search.item input::-webkit-input-placeholder {
       color: white; }
     .ui.menu .ui.search.item input:-moz-placeholder {
@@ -350,8 +366,7 @@ span.instructions {
     .ui.menu .ui.search.item input:-ms-input-placeholder {
       color: white; }
     .ui.menu .ui.search.item input:focus {
-      border: none;
-      border-bottom: 1px solid #ddd; }
+      border: none; }
 
 .typeahead {
   position: relative;
