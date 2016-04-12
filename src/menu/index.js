@@ -24,7 +24,7 @@ class Menu extends React.Component {
           {(() => {
             if(this.props.menu.left) {
               return (
-                <div className="menu">
+                <div className="left menu">
                   { this.props.menu.left.map((item, index) => {
                     return <MenuItem key={`left_menu_item_${index}`} item={item} onClick={this.handleItemClick}/>
                   })}

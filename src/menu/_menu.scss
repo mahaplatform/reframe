@@ -1,5 +1,18 @@
+
+
 .ui.menu {
-  .search {
+  .left, .right {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .right {
+    img {
+      margin-right: 10px;
+    }
+  }
+  .ui.search {
     background-color: #444 !important;
     position: relative;
     .typeahead.top {
@@ -23,7 +36,7 @@
       border-radius: 0;
       background-color: transparent;
       color: white;
-      border: none;
+      border: none !important;
       &::-webkit-input-placeholder {
         color: white;
       }
@@ -39,10 +52,8 @@
       &:-ms-input-placeholder {
         color: white;
       }
-
       &:focus {
         border: none;
-        border-bottom: 1px solid #ddd;
       }
     }
   }
