@@ -6,6 +6,8 @@ import {connect} from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import appReducer from './appReducer'
 import Messages from './messages'
+import Config from '../utils/config'
+import _ from 'lodash'
 
 class Application extends React.Component {
 
@@ -27,7 +29,7 @@ class Application extends React.Component {
   getChildContext() {
     return {
       session: this.buildSessionObject(),
-      config: this.store.getState().config,
+      config: _.merge(Config.get('*'), this.store.getState().config),
       user: this.store.getState().user
     }
   }

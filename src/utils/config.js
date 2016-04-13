@@ -1,9 +1,7 @@
 import _ from 'lodash'
+import defaultConfig from '../config/defaults'
 
-const appDefaults = {
-}
-
-let globalConfig = {}
+let globalConfig = _.assign({}, _.cloneDeep(defaultConfig))
 
 export default class Config {
   static load(cfg) {
@@ -11,6 +9,9 @@ export default class Config {
   }
 
   static get(item, defaultValue) {
+    if(item === '*') {
+      return _.cloneDeep(globalConfig)
+    }
     return _.get(globalConfig, item, defaultValue)
   }
 
