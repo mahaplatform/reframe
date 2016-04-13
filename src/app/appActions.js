@@ -20,7 +20,7 @@ export const loadSession = (endpoint) => {
         console.log(data)
         dispatch({
           type: LOAD_SESSION,
-          ...data
+          session: data
         })
       })
       .then(() => dispatch({type: SHOW_APPLICATION}))

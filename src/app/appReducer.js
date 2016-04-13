@@ -24,7 +24,8 @@ const createReducer = (initialState, handlers) => {
 
 export default createReducer(initialState, {
 
-  [LOAD_SESSION](state, { session, config, user }) {
+  [LOAD_SESSION](state, { session }) {
+    const { config, user } = session
     return {
       ...state,
       session,

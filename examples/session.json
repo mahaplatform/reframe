@@ -4,10 +4,8 @@
     "name": "Howard Pearson",
     "email": "howard@exmaple.com"
   },
-  "session": {
-    "token": "163987d6e00edb",
-    "expiration": 1460395693720
-  },
+  "token": "163987d6e00edb",
+  "expiration": 1460395693720,
   "config": {
     "api": "admin",
     "theme": "orange"
