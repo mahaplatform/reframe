@@ -4,6 +4,7 @@ import _ from 'lodash'
 import when from 'when'
 import whenKeys from 'when/keys'
 import API from '../../api'
+import ErrorMessage from '../../ui/messages/error'
 
 const UNINITIALIZED = 'uninitialized'
 const AWAITING = 'awaiting'
@@ -17,7 +18,8 @@ export default class FetchContainer extends React.Component {
     blocking: PropTypes.bool,
     element: PropTypes.string,
     flatten: PropTypes.bool,
-    injectAs: PropTypes.string
+    allowFailures: PropTypes.bool,
+    errorComponent: PropTypes.node
   }
 
   static defaultProps = {
@@ -26,7 +28,8 @@ export default class FetchContainer extends React.Component {
     element: 'div',
     client: undefined, // Causes API to use default client
     flatten: false,
-    injectAs: 'data'
+    allowFailures: false,
+    errorComponent: null
   }
 
   static childContextTypes = {
@@ -48,14 +51,20 @@ export default class FetchContainer extends React.Component {
   }
 
   makeRequest() {
-    const {endpoints} = this.props
+    const {endpoints, allowFailures} = this.props
     const propsPromises = _(this.props)
       .omit([ 'className', 'endpoints', 'client', 'element', 'children' ])
       .mapValues(p => when(p))
       .value()
 
     const endpointPromises = _.mapValues(endpoints, e => this.api.loadJSON(_.get(e, 'url', e), _.get(e, 'options', {})))
-    const propsPromiseObject = whenKeys.all(_.merge(propsPromises, endpointPromises))
+    let propsPromiseObject
+    if(allowFailures) {
+      propsPromiseObject = whenKeys.settle(_.merge(propsPromises, endpointPromises))
+    }
+    else {
+      propsPromiseObject = whenKeys.all(_.merge(propsPromises, endpointPromises))
+    }
 
     propsPromiseObject.then(propsData => this.setState({status: READY, propsData}))
       .catch(e => this.setState({ status: ERROR, message: e }))
@@ -63,6 +72,9 @@ export default class FetchContainer extends React.Component {
   }
 
   render() {
+    if(this.state.status === ERROR) {
+      return this.props.errorComponent || <ErrorMessage message="There was a problem loading the data needed to show this page."/>
+    }
     let finalProps = _.assign({}, this.state.propsData)
     let mappedChildren = []
 
@@ -87,4 +99,3 @@ export default class FetchContainer extends React.Component {
   }
 }
 
-//export {PresentState, LoadingState, EmptyState, ErrorState} from 'snax/containers/loading'

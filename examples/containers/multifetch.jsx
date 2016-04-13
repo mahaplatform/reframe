@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MultiFetchContainer from 'containers/fetch/multi'
-import LoadingContainer, {PresentState, EmptyState} from 'snax/lib/containers/loading'
+import LoadingContainer, {PresentState, EmptyState, ErrorState} from 'containers/loading'
 import Details from 'details'
 import Logger from 'utils/logger'
 import {clientFactory} from 'api'
@@ -20,11 +20,19 @@ export default class MultiFetchExamples extends React.Component {
         <h1>Multi-Fetch Container</h1>
 
         <div className="ui top attached segment">
-          <h2>reactjs</h2>
+          <h2>reactjs organization</h2>
         </div>
         <MultiFetchContainer endpoints={this.getContainerEndpoints()} client={exampleClient}>
           <RepoInfo/>
         </MultiFetchContainer>
+        <div className="ui attached segment">
+          <h2>Handling Errors</h2>
+        </div>
+        <div className="ui attached segment">
+          <MultiFetchContainer endpoints={this.getFailingContainerEndpoints()} client={exampleClient}>
+            <RepoInfo/>
+          </MultiFetchContainer>
+        </div>
       </div>
     )
   }
@@ -33,6 +41,14 @@ export default class MultiFetchExamples extends React.Component {
     return {
       details: 'https://api.github.com/orgs/reactjs',
       repos: 'https://api.github.com/orgs/reactjs/repos'
+    }
+  }
+
+  getFailingContainerEndpoints() {
+    return {
+      details: 'https://api.github.com/orgs/reactjs',
+      repos: 'https://api.github.com/orgs/reactjs/repos',
+      bogus: '/non/existent'
     }
   }
 }
