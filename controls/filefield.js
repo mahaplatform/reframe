@@ -522,6 +522,7 @@ var FileField = function (_React$Component) {
     value: function setValue(value) {
       if (value !== null) {
         this.setState({ preview: value, fileExists: true });
+        this.rPromise = (0, _when2.default)(value);
       }
     }
   }, {
