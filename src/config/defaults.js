@@ -25,6 +25,7 @@ export default {
   ui: {
     messages: {
       error: {
+        colorClass: 'red',
         color: defaultPalette.red,
         backgroundColor: color(defaultPalette.red).lighten(0.5).hexString()
       }
