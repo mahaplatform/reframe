@@ -21,6 +21,7 @@ import TasksExample from './tasks/index.jsx'
 import BreadcrumbExample from './breadcrumb/index.jsx'
 import DetailExample from './details/index.jsx'
 import FetchContainerExample from './containers/fetch.jsx'
+import MultiFetchContainerExample from './containers/multifetch.jsx'
 import InfiniteContainerExample from './containers/infinite.jsx'
 import TabbedPaneExample from './panes/tabbed.jsx'
 import TypeaheadExample from './ui/typeahead.jsx'
@@ -75,6 +76,7 @@ class ExampleLinks extends React.Component {
           label: 'Containers',
           items: [
             {label: 'Fetch', route: '/containers/fetch'},
+            {label: 'Multi-Fetch', route: '/containers/multifetch'},
             {label: 'Infinite', route: '/containers/infinite'},
             {label: 'App', route: '/containers/application'}
           ]
@@ -116,8 +118,8 @@ const routes = (
       <IndexRoute component={Index} />
       <Route path="collections/standard" component={CollectionExample} />
       <Route path="collections/fetch" component={FetchCollectionExample} />
-      <Route path="feed" component={FeedExample} />
       <Route path="collections/infinite" component={InfiniteCollectionExample} />
+      <Route path="feed" component={FeedExample} />
       <Route path="menus" component={MenuExample} />
       <Route path="comments" component={CommentsExample} />
       <Route path="forms" component={FormExample} />
@@ -127,6 +129,7 @@ const routes = (
       <Route path="tasks" component={TasksExample} />
       <Route path="details" component={DetailExample} />
       <Route path="containers/fetch" component={FetchContainerExample} />
+      <Route path="containers/multifetch" component={MultiFetchContainerExample} />
       <Route path="containers/infinite" component={InfiniteContainerExample} />
       <Route path="containers/application" component={AppExample} />
       <Route path="panes/tabbed" component={TabbedPaneExample}>
