@@ -394,6 +394,7 @@ export default class FileField extends React.Component {
   setValue(value) {
     if(value !== null) {
       this.setState({preview: value, fileExists: true})
+      this.rPromise = when(value)
     }
   }
 
