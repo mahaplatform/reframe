@@ -16,4 +16,9 @@
       width: 33%;
     }
   }
+  .ui.segment.collapsing {
+    &.collapsed .section {
+      display: none;
+    }
+  }
 }

@@ -58,7 +58,7 @@ class Section extends React.Component {
             }
           })()}
           {(() => {
-            if(!this.props.collapsing || (this.props.collapsing && !this.state.collapsed)) {
+            if(true) {
               return (
                 <div className="section">
                   {(() => {
