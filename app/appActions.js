@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.dismissFlashMessage = exports.clearFlashMessages = exports.showErrorMessage = exports.showSuccessMessage = exports.showInfoMessage = exports.showFlashMessage = exports.loadSession = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _appActionTypes = require('./appActionTypes');
 
 var _keys = require('when/keys');
@@ -28,9 +26,10 @@ var loadSession = exports.loadSession = function loadSession(endpoint) {
       var data = _ref.data;
 
       console.log(data);
-      dispatch(_extends({
-        type: _appActionTypes.LOAD_SESSION
-      }, data));
+      dispatch({
+        type: _appActionTypes.LOAD_SESSION,
+        session: data
+      });
     }).then(function () {
       return dispatch({ type: _appActionTypes.SHOW_APPLICATION });
     }).catch(function (error) {

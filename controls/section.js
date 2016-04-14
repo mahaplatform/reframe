@@ -101,7 +101,7 @@ var Section = function (_React$Component) {
             }
           }(),
           function () {
-            if (!_this2.props.collapsing || _this2.props.collapsing && !_this2.state.collapsed) {
+            if (true) {
               return _react2.default.createElement(
                 'div',
                 { className: 'section' },

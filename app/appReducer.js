@@ -40,8 +40,8 @@ var createReducer = function createReducer(initialState, handlers) {
 
 exports.default = createReducer(initialState, (_createReducer = {}, _defineProperty(_createReducer, _appActionTypes.LOAD_SESSION, function (state, _ref) {
   var session = _ref.session;
-  var config = _ref.config;
-  var user = _ref.user;
+  var config = session.config;
+  var user = session.user;
 
   return _extends({}, state, {
     session: session,

@@ -10,13 +10,15 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _defaults = require('../config/defaults');
+
+var _defaults2 = _interopRequireDefault(_defaults);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var appDefaults = {};
-
-var globalConfig = {};
+var globalConfig = _lodash2.default.assign({}, _lodash2.default.cloneDeep(_defaults2.default));
 
 var Config = function () {
   function Config() {
@@ -31,6 +33,9 @@ var Config = function () {
   }, {
     key: 'get',
     value: function get(item, defaultValue) {
+      if (item === '*') {
+        return _lodash2.default.cloneDeep(globalConfig);
+      }
       return _lodash2.default.get(globalConfig, item, defaultValue);
     }
   }, {

@@ -36,6 +36,14 @@ var _messages = require('./messages');
 
 var _messages2 = _interopRequireDefault(_messages);
 
+var _config = require('../utils/config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61,7 +69,7 @@ var Application = function (_React$Component) {
     value: function getChildContext() {
       return {
         session: this.buildSessionObject(),
-        config: this.store.getState().config,
+        config: _lodash2.default.merge(_config2.default.get('*'), this.store.getState().config),
         user: this.store.getState().user
       };
     }
@@ -115,7 +123,7 @@ var Application = function (_React$Component) {
         showMessage: function showMessage(message) {
           var type = arguments.length <= 1 || arguments[1] === undefined ? 'info' : arguments[1];
 
-          _.defer(function () {
+          _lodash2.default.defer(function () {
             return store.dispatch(_appActions2.default.showFlashMessage(message, type));
           });
         }
@@ -131,7 +139,7 @@ var Application = function (_React$Component) {
     value: function componentDidMount() {
       this.store.subscribe(this.onStoreUpdate.bind(this));
       this.store.dispatch(_appActions2.default.loadSession(this.props.endpoint));
-      this.unlistenToHistory = this.context.history.listen(_.throttle(this.handleHistoryTransition.bind(this), 200));
+      this.unlistenToHistory = this.context.history.listen(_lodash2.default.throttle(this.handleHistoryTransition.bind(this), 200));
     }
   }, {
     key: 'componentWillUnmount',
