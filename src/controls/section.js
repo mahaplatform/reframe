@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Field from './field.js'
+import _ from 'lodash'
 
 class Section extends React.Component {
 

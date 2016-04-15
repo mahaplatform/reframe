@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import _ from 'lodash'
 
 class Textarea extends React.Component {
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Select from './select.js'
+import _ from 'lodash'
 
 class Stateselect extends React.Component {
 

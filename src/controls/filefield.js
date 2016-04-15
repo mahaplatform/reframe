@@ -9,6 +9,7 @@ import Config from '../utils/config'
 import Logger from '../utils/logger'
 import API from '../api'
 import {uid} from '../utils/random'
+import _ from 'lodash'
 
 export default class FileField extends React.Component {
 
