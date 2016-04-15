@@ -10,11 +10,6 @@
     padding: 0.67861429em 1em;
     @include border-radius(0.28571429rem);
     overflow: hidden;
-    .field {
-      float: left;
-      clear: none !important;
-      width: 33%;
-    }
   }
   .ui.segment.collapsing {
     &.collapsed .section {
