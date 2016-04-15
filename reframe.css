@@ -326,10 +326,6 @@ span.instructions {
   -webkit-border-radius: 0.28571rem;
   border-radius: 0.28571rem;
   overflow: hidden; }
-  .ui.form .grouped.fields .field {
-    float: left;
-    clear: none !important;
-    width: 33%; }
 .ui.form .ui.segment.collapsing.collapsed .section {
   display: none; }
 
