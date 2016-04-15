@@ -22,6 +22,11 @@ export default {
   theme: {
     palette: defaultPalette
   },
+  menu: {
+    search: {
+      urlInterpolate: /#{([\s\S]+?)}/g
+    }
+  },
   ui: {
     messages: {
       error: {
