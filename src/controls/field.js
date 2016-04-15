@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import _ from 'lodash'
 
 import Button from './button.js'
 import Checkbox from './checkbox.js'
