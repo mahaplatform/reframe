@@ -79,7 +79,7 @@ var Search = function (_React$Component) {
       _logger2.default.log(type, result);
       var route = _lodash2.default.get(this.props.routes, type, null);
       if (route) {
-        this.context.history.push(_lodash2.default.template(route)(result));
+        this.context.history.push(_lodash2.default.template(route, { interpolate: _config2.default.get('menu.search.urlInterpolate', _lodash2.default.templateSettings.interpolate) })(result));
       }
       this.refs.input.clear();
     }
