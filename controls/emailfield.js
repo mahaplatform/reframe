@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -32,7 +36,7 @@ var Emailfield = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Emailfield).call(this, props));
 
-    var value = _.toString(props.defaultValue);
+    var value = _lodash2.default.toString(props.defaultValue);
     _this.state = { value: _this.formatValue(value) };
     return _this;
   }
@@ -85,7 +89,7 @@ var Emailfield = function (_React$Component) {
   }, {
     key: 'formatValue',
     value: function formatValue(value) {
-      if (!_.isEmpty(value)) {
+      if (!_lodash2.default.isEmpty(value)) {
         if (this.props.trim) {
           value = value.trim();
         }

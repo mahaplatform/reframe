@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -89,8 +93,8 @@ var Checkboxes = function (_React$Component) {
       var _this3 = this;
 
       $(this.refs.control).find('.checkbox').checkbox('set unchecked');
-      if (_.isArray(value)) {
-        _.each(value, function (v) {
+      if (_lodash2.default.isArray(value)) {
+        _lodash2.default.each(value, function (v) {
           $(_this3.refs.control).find('.checkbox[data-value*=' + v + ']').checkbox('set checked');
         });
       } else {

@@ -20,6 +20,10 @@ var _field = require('./field.js');
 
 var _field2 = _interopRequireDefault(_field);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -130,10 +134,10 @@ var Section = function (_React$Component) {
   }, {
     key: 'getValue',
     value: function getValue() {
-      return _.reduce(this.refs, function (values, field) {
+      return _lodash2.default.reduce(this.refs, function (values, field) {
         var fieldValue = field.getValue();
-        if (_.isPlainObject(fieldValue)) {
-          _.assign(values, fieldValue);
+        if (_lodash2.default.isPlainObject(fieldValue)) {
+          _lodash2.default.assign(values, fieldValue);
         } else {
           values[field.props.code] = fieldValue;
         }
@@ -145,7 +149,7 @@ var Section = function (_React$Component) {
     value: function setValue(values) {
       var _this3 = this;
 
-      _.each(values, function (field, value) {
+      _lodash2.default.each(values, function (field, value) {
         _this3.refs['field_' + field].setValue(value);
       });
     }
@@ -154,8 +158,8 @@ var Section = function (_React$Component) {
     value: function clearField() {
       var _this4 = this;
 
-      _.each(values, function (field) {
-        _.result(_this4.refs['field_' + field], 'clear');
+      _lodash2.default.each(values, function (field) {
+        _lodash2.default.result(_this4.refs['field_' + field], 'clear');
       });
     }
   }]);

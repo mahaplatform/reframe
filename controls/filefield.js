@@ -44,6 +44,10 @@ var _api2 = _interopRequireDefault(_api);
 
 var _random = require('../utils/random');
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -290,7 +294,7 @@ var FileField = function (_React$Component) {
               { className: 'ui segment', ref: 'fileTable' },
               this.r.files.map(function (file) {
                 var progressClass = 'ui progress';
-                if (_.includes(_this2.state.filesFailed, file.uniqueIdentifier)) {
+                if (_lodash2.default.includes(_this2.state.filesFailed, file.uniqueIdentifier)) {
                   progressClass += ' error';
                 }
                 return _react2.default.createElement(
@@ -328,7 +332,7 @@ var FileField = function (_React$Component) {
       this.rPromise = (0, _when2.default)(null);
       delete this.r;
       this.constructResumable(this.props);
-      _.defer(function () {
+      _lodash2.default.defer(function () {
         return _this3.mountResumable();
       });
       this.setState({ filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false, fileExists: false, preview: null });
@@ -342,7 +346,7 @@ var FileField = function (_React$Component) {
   }, {
     key: 'retry',
     value: function retry() {
-      _.forEach(this.r.files, function (f) {
+      _lodash2.default.forEach(this.r.files, function (f) {
         return f.retry();
       });
       this.setState({ filesFailed: [], uploadInProgress: true, uploadComplete: false, uploadFailed: false });
@@ -353,7 +357,7 @@ var FileField = function (_React$Component) {
       var _this4 = this;
 
       // Start the upload only if some files have been added
-      if (_.isEmpty(this.r.files)) {
+      if (_lodash2.default.isEmpty(this.r.files)) {
         this.rPromise = (0, _when2.default)(null);
         return;
       }
@@ -369,7 +373,7 @@ var FileField = function (_React$Component) {
           _this4.r.on('fileSuccess', function (_file, r) {
             _logger2.default.log(_file, r);
             var resp = JSON.parse(r);
-            var assetId = _.get(resp, 'asset_id', null) || _.get(resp, 'id', null);
+            var assetId = _lodash2.default.get(resp, 'asset_id', null) || _lodash2.default.get(resp, 'id', null);
             fileResults.push(assetId);
           });
           _this4.r.upload();
@@ -380,7 +384,7 @@ var FileField = function (_React$Component) {
 
       var processPromise = function processPromise(ids) {
         _logger2.default.log("Processing...", ids);
-        return (0, _sequence2.default)(_.map(ids, function (i) {
+        return (0, _sequence2.default)(_lodash2.default.map(ids, function (i) {
           return function () {
             return _this4.api.patch(_this4.props.assetPath + '/' + i + '/process');
           };
@@ -392,7 +396,7 @@ var FileField = function (_React$Component) {
       this.rPromise = (0, _pipeline2.default)([uploadPromise, processPromise]).tap(function (ids) {
         return _logger2.default.log("Uploading and Processing complete", ids);
       }).tap(function (ids) {
-        return _this4.setState({ preview: _.first(ids) });
+        return _this4.setState({ preview: _lodash2.default.first(ids) });
       }).then(function (assetIds) {
         if (single) {
           return assetIds[0];
