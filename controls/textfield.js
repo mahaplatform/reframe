@@ -44,15 +44,36 @@ var Textfield = function (_React$Component) {
   _createClass(Textfield, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', { value: this.state.value,
-        ref: 'control',
-        autoComplete: 'off',
-        onChange: this.handleChange.bind(this),
-        onBlur: this.handleBlur.bind(this),
-        type: 'text',
-        name: this.props.code,
-        id: this.props.code,
-        placeholder: this.props.placeholder });
+      if (this.props.prefix) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'ui labeled input' },
+          _react2.default.createElement(
+            'div',
+            { className: 'ui label' },
+            this.props.prefix
+          ),
+          _react2.default.createElement('input', { value: this.state.value,
+            ref: 'control',
+            autoComplete: 'off',
+            onChange: this.handleChange.bind(this),
+            onBlur: this.handleBlur.bind(this),
+            type: 'text',
+            name: this.props.code,
+            id: this.props.code,
+            placeholder: this.props.placeholder })
+        );
+      } else {
+        return _react2.default.createElement('input', { value: this.state.value,
+          ref: 'control',
+          autoComplete: 'off',
+          onChange: this.handleChange.bind(this),
+          onBlur: this.handleBlur.bind(this),
+          type: 'text',
+          name: this.props.code,
+          id: this.props.code,
+          placeholder: this.props.placeholder });
+      }
     }
   }, {
     key: 'handleChange',
@@ -103,6 +124,7 @@ var Textfield = function (_React$Component) {
 
 Textfield.propTypes = {
   code: _react2.default.PropTypes.string,
+  prefix: _react2.default.PropTypes.string,
   disabled: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
   defaultValue: _react2.default.PropTypes.string,
