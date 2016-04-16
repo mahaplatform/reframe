@@ -6,6 +6,7 @@ class Textfield extends React.Component {
 
   static propTypes = {
     code: React.PropTypes.string,
+    prefix: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     defaultValue: React.PropTypes.string,
@@ -28,15 +29,30 @@ class Textfield extends React.Component {
   }
 
   render() {
-    return <input value={this.state.value}
-                  ref="control"
-                  autoComplete="off"
-                  onChange={this.handleChange.bind(this)}
-                  onBlur={this.handleBlur.bind(this)}
-                  type="text"
-                  name={this.props.code}
-                  id={this.props.code}
-                  placeholder={this.props.placeholder} />
+    if(this.props.prefix) {
+      return <div className="ui labeled input">
+               <div className="ui label">{this.props.prefix}</div>
+               <input value={this.state.value}
+                      ref="control"
+                      autoComplete="off"
+                      onChange={this.handleChange.bind(this)}
+                      onBlur={this.handleBlur.bind(this)}
+                      type="text"
+                      name={this.props.code}
+                      id={this.props.code}
+                      placeholder={this.props.placeholder} />
+      </div>
+    } else {
+      return <input value={this.state.value}
+                    ref="control"
+                    autoComplete="off"
+                    onChange={this.handleChange.bind(this)}
+                    onBlur={this.handleBlur.bind(this)}
+                    type="text"
+                    name={this.props.code}
+                    id={this.props.code}
+                    placeholder={this.props.placeholder} />
+    }
   }
 
   handleChange(event) {

@@ -37,6 +37,7 @@ export default class FormExamples extends React.Component {
           { code: "email", label: 'Email', type: "emailfield", placeholder: 'Email', required: true },
           { code: "phone", label: 'Phone', type: "textfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "number", label: 'Number', type: "numberfield", placeholder: 'XXX-XXX-XXXX', required: true },
+          { code: "url", label: 'URL', type: "textfield", placeholder: 'path', prefix: 'http://mysite.com/', required: true },
         ]},
         { label: 'Textareas', fields: [
           { code: 'simple', label: 'Simple Textarea', type: 'textarea' },
