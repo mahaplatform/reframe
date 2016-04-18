@@ -146,8 +146,8 @@ var OmniForm = function (_React$Component) {
             self.setState({ submitting: true, pendingData: _lodash2.default.cloneDeep(data) });
             self.api[self.props.method](self.props.action, data).then(function (response) {
               return self.handleAPIResponse(response);
-            }).then(function () {
-              return self.doRedirect();
+            }).then(function (response) {
+              return self.doRedirect(response);
             }).catch(function (errResponse) {
               return self.handleAPIError(errResponse);
             }).finally(function () {
@@ -176,8 +176,9 @@ var OmniForm = function (_React$Component) {
     }
   }, {
     key: 'handleAPIResponse',
-    value: function handleAPIResponse(repsonse) {
+    value: function handleAPIResponse(response) {
       this.handleSubmitSuccess(this.state.pendingData);
+      return response;
     }
   }, {
     key: 'handleAPIError',
@@ -219,9 +220,11 @@ var OmniForm = function (_React$Component) {
     }
   }, {
     key: 'doRedirect',
-    value: function doRedirect() {
+    value: function doRedirect(response) {
       if (this.props.redirect && this.context.history) {
-        this.context.history.push(this.props.redirect);
+        var compiled = _lodash2.default.template(this.props.redirect, { interpolate: /#{([\s\S]+?)}/g });
+        var redirect = compiled(response.entity);
+        this.context.history.push(redirect);
       }
     }
   }, {

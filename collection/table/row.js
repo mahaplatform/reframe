@@ -97,7 +97,7 @@ var Row = function (_React$Component) {
                         'Delete'
                       );
                     } else if (action.route) {
-                      var compiled = _lodash2.default.template(action.route);
+                      var compiled = _lodash2.default.template(action.route, { interpolate: /#{([\s\S]+?)}/g });
                       var to = compiled(_this2.props.record);
                       return _react2.default.createElement(
                         'div',
