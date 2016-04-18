@@ -99,7 +99,7 @@ export default class OmniForm extends React.Component {
           self.setState({submitting: true, pendingData: _.cloneDeep(data)})
           self.api[self.props.method](self.props.action, data)
             .then(response => self.handleAPIResponse(response))
-            .then(() => self.doRedirect())
+            .then(response => self.doRedirect(response))
             .catch(errResponse => self.handleAPIError(errResponse))
             .finally(() => self.setState({submitting: false, pendingData: {}}))
         }
@@ -124,8 +124,9 @@ export default class OmniForm extends React.Component {
     }
   }
 
-  handleAPIResponse(repsonse) {
+  handleAPIResponse(response) {
     this.handleSubmitSuccess(this.state.pendingData)
+    return response
   }
 
   handleAPIError(errResponse) {
@@ -160,9 +161,11 @@ export default class OmniForm extends React.Component {
     }
   }
 
-  doRedirect() {
+  doRedirect(response) {
     if(this.props.redirect && this.context.history) {
-      this.context.history.push(this.props.redirect)
+      var compiled = _.template(this.props.redirect, { interpolate: /#{([\s\S]+?)}/g });
+      var redirect = compiled(response.entity);
+      this.context.history.push(redirect)
     }
   }
 

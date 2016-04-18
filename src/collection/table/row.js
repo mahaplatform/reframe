@@ -33,7 +33,7 @@ export default class Row extends React.Component {
                       } else if(action.action == 'delete') {
                         return <div key={`action_${index}`} onClick={this.handleDelete.bind(this, this.props.record.id)} className="item">Delete</div>
                       } else if(action.route) {
-                        var compiled = _.template(action.route);
+                        var compiled = _.template(action.route, { interpolate: /#{([\s\S]+?)}/g });
                         var to = compiled(this.props.record);
                         return <div key={`action_${index}`} className="item"><Link to={to}>{action.label}</Link></div>
                       } else {
