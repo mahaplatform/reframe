@@ -120,6 +120,15 @@ var FileField = function (_React$Component) {
       this.r.on('error', this.onError.bind(this));
     }
   }, {
+    key: 'destroyResumable',
+    value: function destroyResumable() {
+      while (this.r.files.length > 1) {
+        r.files[0].cancel();
+      }
+      this.rPromise = (0, _when2.default)(null);
+      delete this.r;
+    }
+  }, {
     key: 'mountResumable',
     value: function mountResumable() {
       this.r.assignBrowse(this.refs.browseButton);
@@ -323,25 +332,18 @@ var FileField = function (_React$Component) {
     value: function componentDidUpdate() {}
   }, {
     key: 'clearFiles',
-    value: function clearFiles() {
+    value: function clearFiles(e) {
       var _this3 = this;
 
-      while (this.r.files.length > 1) {
-        r.files[0].cancel();
-      }
-      this.rPromise = (0, _when2.default)(null);
-      delete this.r;
+      e.preventDefault();
+      e.stopPropagation();
+      this.destroyResumable();
       this.constructResumable(this.props);
       _lodash2.default.defer(function () {
         return _this3.mountResumable();
       });
       this.setState({ filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false, fileExists: false, preview: null });
       this.forceUpdate();
-    }
-  }, {
-    key: 'clearAndChoose',
-    value: function clearAndChoose() {
-      this.clearFiles();
     }
   }, {
     key: 'retry',

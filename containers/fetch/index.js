@@ -44,6 +44,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// States for asynchronous loading
 var UNINITIALIZED = 'uninitialized';
 var AWAITING = 'awaiting';
 var SYNCING = 'syncing';
@@ -76,11 +77,21 @@ var FetchContainer = function (_React$Component) {
     value: function makeRequest() {
       var _this2 = this;
 
+      var _props = this.props;
+      var endpoint = _props.endpoint;
+      var endpointOptions = _props.endpointOptions;
+      var responseField = _props.responseField;
+
+
       var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoint', 'client', 'element', 'endpointOptions', 'children']).mapValues(function (p) {
         return (0, _when2.default)(p);
       }).value();
 
-      var endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions);
+      var pluckResult = function pluckResult(r) {
+        return responseField ? r[responseField] : r;
+      };
+
+      var endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions).then(pluckResult);
       var propsPromiseObject = _keys2.default.all(propsPromises);
 
       var attributesPromise = _when2.default.all([endpointPromise, propsPromiseObject]).then(function (_ref) {
@@ -155,7 +166,8 @@ FetchContainer.propTypes = {
   transformer: _react2.default.PropTypes.func,
   element: _react2.default.PropTypes.string,
   flatten: _react2.default.PropTypes.bool,
-  injectAs: _react2.default.PropTypes.string
+  injectAs: _react2.default.PropTypes.string,
+  responseField: _react2.default.PropTypes.string
 };
 FetchContainer.defaultProps = {
   endpointOptions: {},
@@ -169,7 +181,8 @@ FetchContainer.defaultProps = {
   element: 'div',
   client: undefined, // Causes API to use default client
   flatten: false,
-  injectAs: 'data'
+  injectAs: 'data',
+  responseField: null
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object

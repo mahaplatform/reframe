@@ -188,7 +188,7 @@ var OmniForm = function (_React$Component) {
       var errors = _errResponse$entity.errors;
       var message = _errResponse$entity.message;
 
-      var formMessage = undefined;
+      var formMessage = void 0;
       switch (code) {
         case 422:
           formMessage = {
@@ -267,9 +267,8 @@ var OmniForm = function (_React$Component) {
       var asyncFieldsPromises = (0, _lodash2.default)(this.props.sections).chain().map('fields').flatten().map(function (f) {
         return f.fields || f;
       }).flatten().filter(isAsync).transform(function (acc, f) {
-        acc[f.code] = _this5.api.loadJSON(f.endpoint).then(function (_ref2) {
-          var records = _ref2.records;
-
+        acc[f.code] = _this5.api.loadJSON(f.endpoint).then(function (response) {
+          var records = response.records || response;
           return _lodash2.default.map(records, function (r) {
             return { key: r[f.value], value: r[f.text] };
           });

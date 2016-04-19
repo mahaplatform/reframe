@@ -65,7 +65,7 @@ var LoadingContainer = _react2.default.createClass({
       }
     }
 
-    var isEmpty = undefined;
+    var isEmpty = void 0;
 
     if (_lodash2.default.isBoolean(this.props.content)) {
       isEmpty = !this.props.content;

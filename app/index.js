@@ -70,7 +70,8 @@ var Application = function (_React$Component) {
       return {
         session: this.buildSessionObject(),
         config: _lodash2.default.merge(_config2.default.get('*'), this.store.getState().config),
-        user: this.store.getState().user
+        user: this.store.getState().user,
+        appContainer: this
       };
     }
   }, {
@@ -118,6 +119,7 @@ var Application = function (_React$Component) {
     key: 'buildSessionObject',
     value: function buildSessionObject() {
       var store = this.store;
+      var props = this.props;
       return _extends({}, store.getState().session, {
         user: store.getState().user,
         showMessage: function showMessage(message) {
@@ -126,6 +128,9 @@ var Application = function (_React$Component) {
           _lodash2.default.defer(function () {
             return store.dispatch(_appActions2.default.showFlashMessage(message, type));
           });
+        },
+        sync: function sync() {
+          store.dispatch(_appActions2.default.loadSession(props.endpoint));
         }
       });
     }

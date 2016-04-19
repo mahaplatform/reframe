@@ -92,10 +92,10 @@ var Dateselect = function (_React$Component) {
 
       var anyNull = (0, _lodash2.default)(value).values().reject(function (v) {
         return v === IGNORED;
-      }).any(_lodash2.default.isNull);
+      }).some(_lodash2.default.isNull);
       var allNull = (0, _lodash2.default)(value).values().reject(function (v) {
         return v === IGNORED;
-      }).all(_lodash2.default.isNull);
+      }).every(_lodash2.default.isNull);
 
       if (allNull) {
         return null;
