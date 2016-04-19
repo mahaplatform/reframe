@@ -63,8 +63,8 @@ export default class Dateselect extends React.Component {
       years: _.result(this, 'refs.year.getValue', IGNORED)
     }
 
-    const anyNull = _(value).values().reject(v => v === IGNORED).any(_.isNull)
-    const allNull = _(value).values().reject(v => v === IGNORED).all(_.isNull)
+    const anyNull = _(value).values().reject(v => v === IGNORED).some(_.isNull)
+    const allNull = _(value).values().reject(v => v === IGNORED).every(_.isNull)
 
     if(allNull) {
       return null
