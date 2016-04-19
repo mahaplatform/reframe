@@ -30,8 +30,7 @@ class Application extends React.Component {
     return {
       session: this.buildSessionObject(),
       config: _.merge(Config.get('*'), this.store.getState().config),
-      user: this.store.getState().user,
-      appContainer: this
+      user: this.store.getState().user
     }
   }
 
