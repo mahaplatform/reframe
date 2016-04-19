@@ -21,6 +21,7 @@ class Application extends React.Component {
   }
 
   static childContextTypes = {
+    appContainer: React.PropTypes.object,
     session: React.PropTypes.object,
     config: React.PropTypes.object,
     user: React.PropTypes.object
@@ -30,7 +31,8 @@ class Application extends React.Component {
     return {
       session: this.buildSessionObject(),
       config: _.merge(Config.get('*'), this.store.getState().config),
-      user: this.store.getState().user
+      user: this.store.getState().user,
+      appContainer: this
     }
   }
 
@@ -102,6 +104,10 @@ class Application extends React.Component {
 
   onStoreUpdate() {
     this.forceUpdate()
+  }
+
+  sync() {
+    this.store.dispatch(appActions.loadSession(this.props.endpoint))
   }
 
 }
