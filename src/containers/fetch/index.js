@@ -5,6 +5,7 @@ import when from 'when'
 import whenKeys from 'when/keys'
 import API from '../../api'
 
+// States for asynchronous loading
 const UNINITIALIZED = 'uninitialized'
 const AWAITING = 'awaiting'
 const SYNCING = 'syncing'
@@ -21,7 +22,8 @@ export default class FetchContainer extends React.Component {
     transformer: React.PropTypes.func,
     element: React.PropTypes.string,
     flatten: React.PropTypes.bool,
-    injectAs: React.PropTypes.string
+    injectAs: React.PropTypes.string,
+    responseField: React.PropTypes.string
   }
 
   static defaultProps = {
@@ -34,7 +36,8 @@ export default class FetchContainer extends React.Component {
     element: 'div',
     client: undefined, // Causes API to use default client
     flatten: false,
-    injectAs: 'data'
+    injectAs: 'data',
+    responseField: null
   }
 
   static childContextTypes = {
@@ -56,12 +59,17 @@ export default class FetchContainer extends React.Component {
   }
 
   makeRequest() {
+    const {endpoint, endpointOptions, responseField} = this.props
+
     const propsPromises = _(this.props)
       .omit([ 'className', 'endpoint', 'client', 'element', 'endpointOptions', 'children' ])
       .mapValues(p => when(p))
       .value()
 
+    const pluckResult = r => responseField ? r[ responseField ] : r
+
     const endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions)
+      .then(pluckResult)
     const propsPromiseObject = whenKeys.all(propsPromises)
 
     const attributesPromise = when.all([ endpointPromise, propsPromiseObject ])
