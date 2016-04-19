@@ -70,8 +70,7 @@ var Application = function (_React$Component) {
       return {
         session: this.buildSessionObject(),
         config: _lodash2.default.merge(_config2.default.get('*'), this.store.getState().config),
-        user: this.store.getState().user,
-        appContainer: this
+        user: this.store.getState().user
       };
     }
   }, {
