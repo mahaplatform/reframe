@@ -55,7 +55,8 @@ export default class InfiniteCollection extends React.Component {
       endpoint: this.props.endpoint,
       endpointOptions: this.getQuery(),
       client: this.props.client,
-      injectAs: "records"
+      injectAs: "records",
+      autoSync: false
     }
   }
 
@@ -142,7 +143,7 @@ const LoadingCollection = props => {
   const tableStatus = _.get(statusMappings, props.status, 'READY')
   return (
     <div>
-      <Collection {...props} recordCount={props.totalRecords || 0} status={tableStatus} autoSync={false}/>
+      <Collection {...props} recordCount={props.totalRecords || 0} status={tableStatus} />
       <div className="ui basic segment">
         { (!props.isAtEnd && !_.isEmpty(props.records))  ? <div className="ui active centered inline loader"></div> : null }
       </div>

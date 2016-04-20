@@ -24,7 +24,7 @@ export default class FetchContainer extends React.Component {
     flatten: React.PropTypes.bool,
     injectAs: React.PropTypes.string,
     responseField: React.PropTypes.string,
-    autoSync: PropTypes.bool
+    autoSync: React.PropTypes.bool
   }
 
   static defaultProps = {

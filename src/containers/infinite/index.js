@@ -27,7 +27,7 @@ export default class InfiniteContainer extends React.Component {
     getNextPageUrl: React.PropTypes.function,
     documentSelector: React.PropTypes.string,
     bottomThreshold: React.PropTypes.number,
-    autoSync: PropTypes.bool
+    autoSync: React.PropTypes.bool
   }
 
   static defaultProps = {
