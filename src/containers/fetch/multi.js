@@ -100,7 +100,8 @@ export default class FetchContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Reset state and sync when a new endpoint or options are passed
-    if(nextProps.endpoints !== this.props.endpoints) {
+    const isNotEqual = _.negate(_.isEqual)
+    if(isNotEqual(nextProps.endpoints, this.props.endpoints)) {
       this.setState({
         status: AWAITING,
         endpointData: null,
