@@ -47,11 +47,11 @@ export default class FetchContainer extends React.Component {
 
     this.api = new API(this.props.client)
 
-    this.makeRequest()
+    this.makeRequest(props.endpoints)
   }
 
-  makeRequest() {
-    const {endpoints, allowFailures} = this.props
+  makeRequest(endpoints) {
+    const {allowFailures} = this.props
     const propsPromises = _(this.props)
       .omit([ 'className', 'endpoints', 'client', 'element', 'children' ])
       .mapValues(p => when(p))
@@ -87,7 +87,7 @@ export default class FetchContainer extends React.Component {
   }
 
   sync() {
-    this.makeRequest()
+    this.makeRequest(this.props.endpoints)
   }
 
   getChildContext() {
@@ -97,17 +97,17 @@ export default class FetchContainer extends React.Component {
       }
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     // Reset state and sync when a new endpoint or options are passed
-    if(nextProps.endpoint !== this.props.endpoint) {
+    if(nextProps.endpoints !== this.props.endpoints) {
       this.setState({
         status: AWAITING,
         endpointData: null,
         propsData: null,
         message: null
       })
-      this.sync()
+      this.makeRequest(nextProps.endpoints)
     }
   }
 }

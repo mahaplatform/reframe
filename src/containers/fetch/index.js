@@ -55,11 +55,11 @@ export default class FetchContainer extends React.Component {
 
     this.api = new API(this.props.client)
 
-    this.makeRequest()
+    this.makeRequest(props.endpoint, props.endpointOptions)
   }
 
-  makeRequest() {
-    const {endpoint, endpointOptions, responseField} = this.props
+  makeRequest(endpoint, endpointOptions) {
+    const {responseField} = this.props
 
     const propsPromises = _(this.props)
       .omit([ 'className', 'endpoint', 'client', 'element', 'endpointOptions', 'children' ])
@@ -68,7 +68,7 @@ export default class FetchContainer extends React.Component {
 
     const pluckResult = r => responseField ? r[ responseField ] : r
 
-    const endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions)
+    const endpointPromise = this.api.loadJSON(endpoint, endpointOptions)
       .then(pluckResult)
     const propsPromiseObject = whenKeys.all(propsPromises)
 
@@ -118,7 +118,7 @@ export default class FetchContainer extends React.Component {
   }
 
   sync() {
-    this.makeRequest()
+    this.makeRequest(this.props.endpoint, this.props.endpointOptions)
   }
 
   getChildContext() {
@@ -138,7 +138,7 @@ export default class FetchContainer extends React.Component {
         propsData: null,
         message: null
       })
-      this.sync()
+      this.makeRequest(nextProps.endpoint, nextProps.endpointOptions)
     }
   }
 }

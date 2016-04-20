@@ -243,9 +243,9 @@ export default class InfiniteContainer extends React.Component {
     this.makeRequest(this.props.endpoint)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     // Reset state and sync when a new endpoint or options are passed
-    if(nextProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== nextProps.endpointOptions) {
+    if(prevProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== prevProps.endpointOptions) {
       this.reset()
     }
   }
