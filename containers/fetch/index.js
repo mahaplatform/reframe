@@ -68,19 +68,16 @@ var FetchContainer = function (_React$Component) {
 
     _this.api = new _api2.default(_this.props.client);
 
-    _this.makeRequest();
+    _this.makeRequest(props.endpoint, props.endpointOptions);
     return _this;
   }
 
   _createClass(FetchContainer, [{
     key: 'makeRequest',
-    value: function makeRequest() {
+    value: function makeRequest(endpoint, endpointOptions) {
       var _this2 = this;
 
-      var _props = this.props;
-      var endpoint = _props.endpoint;
-      var endpointOptions = _props.endpointOptions;
-      var responseField = _props.responseField;
+      var responseField = this.props.responseField;
 
 
       var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoint', 'client', 'element', 'endpointOptions', 'children']).mapValues(function (p) {
@@ -91,7 +88,7 @@ var FetchContainer = function (_React$Component) {
         return responseField ? r[responseField] : r;
       };
 
-      var endpointPromise = this.api.loadJSON(this.props.endpoint, this.props.endpointOptions).then(pluckResult);
+      var endpointPromise = this.api.loadJSON(endpoint, endpointOptions).then(pluckResult);
       var propsPromiseObject = _keys2.default.all(propsPromises);
 
       var attributesPromise = _when2.default.all([endpointPromise, propsPromiseObject]).then(function (_ref) {
@@ -138,7 +135,7 @@ var FetchContainer = function (_React$Component) {
   }, {
     key: 'sync',
     value: function sync() {
-      this.makeRequest();
+      this.makeRequest(this.props.endpoint, this.props.endpointOptions);
     }
   }, {
     key: 'getChildContext',
@@ -148,6 +145,20 @@ var FetchContainer = function (_React$Component) {
           sync: this.sync.bind(this)
         }
       };
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // Reset state and sync when a new endpoint or options are passed
+      if (nextProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== nextProps.endpointOptions) {
+        this.setState({
+          status: AWAITING,
+          endpointData: null,
+          propsData: null,
+          message: null
+        });
+        this.makeRequest(nextProps.endpoint, nextProps.endpointOptions);
+      }
     }
   }]);
 

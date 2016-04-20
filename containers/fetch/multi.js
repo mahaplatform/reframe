@@ -67,18 +67,16 @@ var FetchContainer = function (_React$Component) {
 
     _this.api = new _api2.default(_this.props.client);
 
-    _this.makeRequest();
+    _this.makeRequest(props.endpoints);
     return _this;
   }
 
   _createClass(FetchContainer, [{
     key: 'makeRequest',
-    value: function makeRequest() {
+    value: function makeRequest(endpoints) {
       var _this2 = this;
 
-      var _props = this.props;
-      var endpoints = _props.endpoints;
-      var allowFailures = _props.allowFailures;
+      var allowFailures = this.props.allowFailures;
 
       var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoints', 'client', 'element', 'children']).mapValues(function (p) {
         return (0, _when2.default)(p);
@@ -121,7 +119,7 @@ var FetchContainer = function (_React$Component) {
   }, {
     key: 'sync',
     value: function sync() {
-      this.makeRequest();
+      this.makeRequest(this.props.endpoints);
     }
   }, {
     key: 'getChildContext',
@@ -131,6 +129,21 @@ var FetchContainer = function (_React$Component) {
           sync: this.sync.bind(this)
         }
       };
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // Reset state and sync when a new endpoint or options are passed
+      var isNotEqual = _lodash2.default.negate(_lodash2.default.isEqual);
+      if (isNotEqual(nextProps.endpoints, this.props.endpoints)) {
+        this.setState({
+          status: AWAITING,
+          endpointData: null,
+          propsData: null,
+          message: null
+        });
+        this.makeRequest(nextProps.endpoints);
+      }
     }
   }]);
 

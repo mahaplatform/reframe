@@ -249,6 +249,14 @@ var InfiniteContainer = function (_React$Component) {
       });
       this.makeRequest(this.props.endpoint);
     }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      // Reset state and sync when a new endpoint or options are passed
+      if (prevProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== prevProps.endpointOptions) {
+        this.reset();
+      }
+    }
   }]);
 
   return InfiniteContainer;
