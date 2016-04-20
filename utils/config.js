@@ -28,6 +28,11 @@ var Config = function () {
   _createClass(Config, null, [{
     key: 'load',
     value: function load(cfg) {
+      globalConfig = _lodash2.default.merge(globalConfig, _lodash2.default.cloneDeep(cfg));
+    }
+  }, {
+    key: 'overwrite',
+    value: function overwrite(cfg) {
       globalConfig = _lodash2.default.cloneDeep(cfg);
     }
   }, {
