@@ -97,5 +97,18 @@ export default class FetchContainer extends React.Component {
       }
     }
   }
+  
+  componentWillReceiveProps(nextProps) {
+    // Reset state and sync when a new endpoint or options are passed
+    if(nextProps.endpoint !== this.props.endpoint) {
+      this.setState({
+        status: AWAITING,
+        endpointData: null,
+        propsData: null,
+        message: null
+      })
+      this.sync()
+    }
+  }
 }
 

@@ -243,6 +243,13 @@ export default class InfiniteContainer extends React.Component {
     this.makeRequest(this.props.endpoint)
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Reset state and sync when a new endpoint or options are passed
+    if(nextProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== nextProps.endpointOptions) {
+      this.reset()
+    }
+  }
+
 }
 
 //export {PresentState, LoadingState, EmptyState, ErrorState} from 'snax/containers/loading'
