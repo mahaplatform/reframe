@@ -87,6 +87,14 @@ export default class FileField extends React.Component {
     this.r.on('error', this.onError.bind(this))
   }
 
+  destroyResumable() {
+    while(this.r.files.length > 1) {
+      r.files[0].cancel()
+    }
+    this.rPromise = when(null)
+    delete this.r
+  }
+
   mountResumable() {
     this.r.assignBrowse(this.refs.browseButton)
 
@@ -219,20 +227,14 @@ export default class FileField extends React.Component {
 
   }
 
-  clearFiles() {
-    while(this.r.files.length > 1) {
-      r.files[0].cancel()
-    }
-    this.rPromise = when(null)
-    delete this.r
+  clearFiles(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    this.destroyResumable()
     this.constructResumable(this.props)
     _.defer(() => this.mountResumable())
     this.setState({filesFailed: [], uploadComplete: false, uploadInProgress: false, uploadFailed: false, fileExists: false, preview: null})
     this.forceUpdate()
-  }
-
-  clearAndChoose() {
-    this.clearFiles()
   }
 
   retry() {
