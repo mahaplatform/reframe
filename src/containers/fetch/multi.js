@@ -19,7 +19,8 @@ export default class FetchContainer extends React.Component {
     element: PropTypes.string,
     flatten: PropTypes.bool,
     allowFailures: PropTypes.bool,
-    errorComponent: PropTypes.node
+    errorComponent: PropTypes.node,
+    autoSync: PropTypes.bool
   }
 
   static defaultProps = {
@@ -29,7 +30,8 @@ export default class FetchContainer extends React.Component {
     client: undefined, // Causes API to use default client
     flatten: false,
     allowFailures: false,
-    errorComponent: null
+    errorComponent: null,
+    autoSync: true
   }
 
   static childContextTypes = {
@@ -102,6 +104,7 @@ export default class FetchContainer extends React.Component {
     // Reset state and sync when a new endpoint or options are passed
     const isNotEqual = _.negate(_.isEqual)
     if(isNotEqual(nextProps.endpoints, this.props.endpoints)) {
+      if(!this.props.autoSync) return;
       this.setState({
         status: AWAITING,
         endpointData: null,

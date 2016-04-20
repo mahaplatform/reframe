@@ -142,7 +142,7 @@ const LoadingCollection = props => {
   const tableStatus = _.get(statusMappings, props.status, 'READY')
   return (
     <div>
-      <Collection {...props} recordCount={props.totalRecords || 0} status={tableStatus}/>
+      <Collection {...props} recordCount={props.totalRecords || 0} status={tableStatus} autoSync={false}/>
       <div className="ui basic segment">
         { (!props.isAtEnd && !_.isEmpty(props.records))  ? <div className="ui active centered inline loader"></div> : null }
       </div>

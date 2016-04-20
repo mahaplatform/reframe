@@ -23,7 +23,8 @@ export default class FetchContainer extends React.Component {
     element: React.PropTypes.string,
     flatten: React.PropTypes.bool,
     injectAs: React.PropTypes.string,
-    responseField: React.PropTypes.string
+    responseField: React.PropTypes.string,
+    autoSync: PropTypes.bool
   }
 
   static defaultProps = {
@@ -37,7 +38,8 @@ export default class FetchContainer extends React.Component {
     client: undefined, // Causes API to use default client
     flatten: false,
     injectAs: 'data',
-    responseField: null
+    responseField: null,
+    autoSync: true
   }
 
   static childContextTypes = {
@@ -132,6 +134,7 @@ export default class FetchContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     // Reset state and sync when a new endpoint or options are passed
     if(nextProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== nextProps.endpointOptions) {
+      if(!this.props.autoSync) return;
       this.setState({
         status: AWAITING,
         endpointData: null,

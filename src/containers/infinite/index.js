@@ -26,7 +26,8 @@ export default class InfiniteContainer extends React.Component {
     injectAs: React.PropTypes.string,
     getNextPageUrl: React.PropTypes.function,
     documentSelector: React.PropTypes.string,
-    bottomThreshold: React.PropTypes.number
+    bottomThreshold: React.PropTypes.number,
+    autoSync: PropTypes.bool
   }
 
   static defaultProps = {
@@ -42,7 +43,8 @@ export default class InfiniteContainer extends React.Component {
     getNextPageUrl: ({links}) => links.next || null,
     documentSelector: 'app-container',
     bottomThreshold: 300,
-    onTerminate: _.noop
+    onTerminate: _.noop,
+    autoSync: true
   }
 
 
@@ -245,6 +247,7 @@ export default class InfiniteContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Reset state and sync when a new endpoint or options are passed
+    if(!this.props.autoSync) return;
     if(prevProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== prevProps.endpointOptions) {
       this.reset()
     }
