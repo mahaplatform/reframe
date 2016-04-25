@@ -32,7 +32,7 @@ class Select extends React.Component {
   }
 
   render() {
-    let cssClass = 'ui selection dropdown';
+    let cssClass = 'ui search selection dropdown';
     if (this.props.asyncStatus === 'AWAITING') {
       cssClass += ' loading';
     }
