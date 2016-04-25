@@ -151,6 +151,7 @@ var FetchContainer = function (_React$Component) {
     value: function componentWillReceiveProps(nextProps) {
       // Reset state and sync when a new endpoint or options are passed
       if (nextProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== nextProps.endpointOptions) {
+        if (!this.props.autoSync) return;
         this.setState({
           status: AWAITING,
           endpointData: null,
@@ -178,7 +179,8 @@ FetchContainer.propTypes = {
   element: _react2.default.PropTypes.string,
   flatten: _react2.default.PropTypes.bool,
   injectAs: _react2.default.PropTypes.string,
-  responseField: _react2.default.PropTypes.string
+  responseField: _react2.default.PropTypes.string,
+  autoSync: _react2.default.PropTypes.bool
 };
 FetchContainer.defaultProps = {
   endpointOptions: {},
@@ -193,7 +195,8 @@ FetchContainer.defaultProps = {
   client: undefined, // Causes API to use default client
   flatten: false,
   injectAs: 'data',
-  responseField: null
+  responseField: null,
+  autoSync: true
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object

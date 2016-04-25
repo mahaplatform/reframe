@@ -253,6 +253,7 @@ var InfiniteContainer = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       // Reset state and sync when a new endpoint or options are passed
+      if (!this.props.autoSync) return;
       if (prevProps.endpoint !== this.props.endpoint || this.props.endpointOptions !== prevProps.endpointOptions) {
         this.reset();
       }
@@ -277,7 +278,8 @@ InfiniteContainer.propTypes = {
   injectAs: _react2.default.PropTypes.string,
   getNextPageUrl: _react2.default.PropTypes.function,
   documentSelector: _react2.default.PropTypes.string,
-  bottomThreshold: _react2.default.PropTypes.number
+  bottomThreshold: _react2.default.PropTypes.number,
+  autoSync: _react2.default.PropTypes.bool
 };
 InfiniteContainer.defaultProps = {
   endpointOptions: {},
@@ -295,6 +297,7 @@ InfiniteContainer.defaultProps = {
   },
   documentSelector: 'app-container',
   bottomThreshold: 300,
-  onTerminate: _lodash2.default.noop
+  onTerminate: _lodash2.default.noop,
+  autoSync: true
 };
 exports.default = InfiniteContainer;

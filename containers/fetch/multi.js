@@ -85,7 +85,7 @@ var FetchContainer = function (_React$Component) {
       var endpointPromises = _lodash2.default.mapValues(endpoints, function (e) {
         return _this2.api.loadJSON(_lodash2.default.get(e, 'url', e), _lodash2.default.get(e, 'options', {}));
       });
-      var propsPromiseObject = void 0;
+      var propsPromiseObject = undefined;
       if (allowFailures) {
         propsPromiseObject = _keys2.default.settle(_lodash2.default.merge(propsPromises, endpointPromises));
       } else {
@@ -136,6 +136,7 @@ var FetchContainer = function (_React$Component) {
       // Reset state and sync when a new endpoint or options are passed
       var isNotEqual = _lodash2.default.negate(_lodash2.default.isEqual);
       if (isNotEqual(nextProps.endpoints, this.props.endpoints)) {
+        if (!this.props.autoSync) return;
         this.setState({
           status: AWAITING,
           endpointData: null,
@@ -156,7 +157,8 @@ FetchContainer.propTypes = {
   element: _react.PropTypes.string,
   flatten: _react.PropTypes.bool,
   allowFailures: _react.PropTypes.bool,
-  errorComponent: _react.PropTypes.node
+  errorComponent: _react.PropTypes.node,
+  autoSync: _react.PropTypes.bool
 };
 FetchContainer.defaultProps = {
   single: false,
@@ -165,7 +167,8 @@ FetchContainer.defaultProps = {
   client: undefined, // Causes API to use default client
   flatten: false,
   allowFailures: false,
-  errorComponent: null
+  errorComponent: null,
+  autoSync: true
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object

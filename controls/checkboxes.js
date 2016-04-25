@@ -80,6 +80,13 @@ var Checkboxes = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      $(this.refs.control).find('.checkbox').checkbox({
+        onChange: this.handleChange.bind(this)
+      });
+    }
+  }, {
     key: 'getValue',
     value: function getValue() {
       var values = $(this.refs.control).find('.checkbox input:checked').toArray().map(function (cb) {

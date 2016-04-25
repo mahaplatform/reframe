@@ -75,6 +75,13 @@ var Radios = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      $(this.refs.control).find('.radio').checkbox({
+        onChange: this.handleChange.bind(this)
+      });
+    }
+  }, {
     key: 'getValue',
     value: function getValue() {
       return $(this.refs.control).find('.radio input:checked').val();
@@ -87,8 +94,8 @@ var Radios = function (_React$Component) {
     }
   }, {
     key: 'handleChange',
-    value: function handleChange(value) {
-      this.props.onChange(this.props.code, value);
+    value: function handleChange(event) {
+      this.props.onChange(this.props.code, this.getValue());
     }
   }, {
     key: 'clearField',
