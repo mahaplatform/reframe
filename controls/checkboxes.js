@@ -102,10 +102,10 @@ var Checkboxes = function (_React$Component) {
       $(this.refs.control).find('.checkbox').checkbox('set unchecked');
       if (_lodash2.default.isArray(value)) {
         _lodash2.default.each(value, function (v) {
-          $(_this3.refs.control).find('.checkbox[data-value*=' + v + ']').checkbox('set checked');
+          $(_this3.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
         });
       } else {
-        $(this.refs.control).find('.checkbox[data-value*=' + v + ']').checkbox('set checked');
+        $(this.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
       }
     }
   }, {

@@ -90,7 +90,7 @@ var Radios = function (_React$Component) {
     key: 'setValue',
     value: function setValue(value) {
       $(this.refs.control).find('.checkbox').checkbox('set unchecked');
-      $(this.refs.control).find('.checkbox[data-value*=' + value + ']').checkbox('set checked');
+      $(this.refs.control).find('.checkbox[data-value=' + value + ']').checkbox('set checked');
     }
   }, {
     key: 'handleChange',
