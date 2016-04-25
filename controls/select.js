@@ -50,7 +50,7 @@ var Select = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var cssClass = 'ui selection dropdown';
+      var cssClass = 'ui search selection dropdown';
       if (this.props.asyncStatus === 'AWAITING') {
         cssClass += ' loading';
       }
