@@ -41,6 +41,11 @@ class Checkboxes extends React.Component {
       onChange: this.handleChange.bind(this)
     })
   }
+  componentDidUpdate() {
+    $(this.refs.control).find('.checkbox').checkbox({
+      onChange: this.handleChange.bind(this)
+    })
+  }
 
   getValue() {
     let values = $(this.refs.control).find('.checkbox input:checked').toArray().map(cb => {

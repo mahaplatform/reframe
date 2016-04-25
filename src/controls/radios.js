@@ -54,6 +54,12 @@ class Radios extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    $(this.refs.control).find('.radio').checkbox({
+      onChange: this.handleChange.bind(this)
+    })
+  }
+
   getValue() {
     return $(this.refs.control).find('.radio input:checked').val()
   }
@@ -63,8 +69,8 @@ class Radios extends React.Component {
     $(this.refs.control).find(`.checkbox[data-value*=${value}]`).checkbox('set checked')
   }
 
-  handleChange(value) {
-    this.props.onChange(this.props.code, value)
+  handleChange(event) {
+    this.props.onChange(this.props.code, this.getValue())
   }
 
   clearField() {
