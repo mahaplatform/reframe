@@ -66,7 +66,7 @@ class Radios extends React.Component {
 
   setValue(value) {
     $(this.refs.control).find(`.checkbox`).checkbox('set unchecked')
-    $(this.refs.control).find(`.checkbox[data-value*=${value}]`).checkbox('set checked')
+    $(this.refs.control).find(`.checkbox[data-value=${value}]`).checkbox('set checked')
   }
 
   handleChange(event) {

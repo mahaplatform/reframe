@@ -58,11 +58,11 @@ class Checkboxes extends React.Component {
     $(this.refs.control).find(`.checkbox`).checkbox('set unchecked')
     if(_.isArray(value)) {
       _.each(value, v => {
-        $(this.refs.control).find(`.checkbox[data-value*=${v}]`).checkbox('set checked')
+        $(this.refs.control).find(`.checkbox[data-value=${v}]`).checkbox('set checked')
       })
     }
     else {
-      $(this.refs.control).find(`.checkbox[data-value*=${v}]`).checkbox('set checked')
+      $(this.refs.control).find(`.checkbox[data-value=${v}]`).checkbox('set checked')
     }
   }
 
