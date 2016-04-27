@@ -43,7 +43,7 @@ var Task = function (_React$Component) {
           this.props.task.label
         );
       } else if (this.props.task.url) {
-        var target = this.props.task.target && this.props.task.url == 'blank' ? '_blank' : '_self';
+        var target = this.props.task.target && this.props.task.target == 'blank' ? '_blank' : '_self';
         return _react2.default.createElement(
           'a',
           { href: this.props.task.url, target: target, activeClassName: 'active', className: 'item' },
