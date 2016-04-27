@@ -17,9 +17,7 @@ export default class CollectionFilters extends React.Component {
           sections={[{fields: this.props.fields}]}
           onFieldChange={_.debounce(() => this.refs.filter_form.submit(), 300)}
           onSubmit={this.props.onFilter}
-          buttons={[
-            {color: 'neutral', label: 'Clear', action: this.clear.bind(this)}
-          ]}
+          buttons={null}
         />
       </div>
     )
