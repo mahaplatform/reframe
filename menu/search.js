@@ -42,7 +42,7 @@ var Search = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Search).call(this, props));
 
-    _this.endpoint = props.endpoint || _config2.default.get('menu.search.p', '/search');
+    _this.endpoint = props.endpoint || _config2.default.get('menu.search.endpoint', '/search');
     _this.resultField = props.resultField || _config2.default.get('menu.search.resultField', 'results');
     _this.query = props.query || _config2.default.get('menu.search.queryParam', 'q');
     return _this;

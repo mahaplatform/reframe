@@ -64,10 +64,10 @@ var Menu = function (_React$Component) {
           function () {
             if (_this2.props.menu.search) {
               return _react2.default.createElement(_search2.default, {
-                endpoint: _this2.props.menu.searchEndpoint,
-                query: _this2.props.menu.searchQueryParam,
-                itemComponent: _this2.props.menu.searchResultComponent,
-                routes: _this2.props.menu.searchRoutes });
+                endpoint: _this2.props.menu.search.endpoint || '/admin/search',
+                query: _this2.props.menu.search.queryParam || q,
+                itemComponent: _this2.props.menu.search.resultComponent,
+                routes: _this2.props.menu.search.routes });
             }
           }(),
           function () {
@@ -102,11 +102,14 @@ var Menu = function (_React$Component) {
 Menu.propTypes = {
   menu: _react2.default.PropTypes.shape({
     left: _react2.default.PropTypes.array,
-    right: _react2.default.PropTypes.array
+    right: _react2.default.PropTypes.array,
+    search: _react2.default.PropTypes.object
   })
 };
 Menu.defaultProps = {
-  searchEndpoint: '/admin/search',
-  searchQueryParam: 'q'
+  search: {
+    endpoint: '/admin/search',
+    queryParam: 'q'
+  }
 };
 exports.default = Menu;
