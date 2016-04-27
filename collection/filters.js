@@ -52,7 +52,7 @@ var CollectionFilters = function (_React$Component) {
             return _this2.refs.filter_form.submit();
           }, 300),
           onSubmit: this.props.onFilter,
-          buttons: [{ color: 'neutral', label: 'Clear', action: this.clear.bind(this) }]
+          buttons: null
         })
       );
     }

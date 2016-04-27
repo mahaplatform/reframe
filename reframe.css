@@ -121,9 +121,6 @@ table .actions {
     opacity: 0.01;
     transition: opacity 300ms ease-in; }
 
-@media (max-width: 800px) {
-  .secondary {
-    display: none; } }
 .available h3, .selected h3 {
   background-color: #CCC;
   border: 1px solid #CCC;
