@@ -22,7 +22,7 @@ class Checkboxes extends React.Component {
           <div key={`option_${index}`} className="field">
             <div className={`ui checkbox`} data-value={option.key}>
               <input
-                defaultValue={this.props.defaultValue}
+                defaultValue={option.key}
                 className="hidden"
                 name={name}
                 type="checkbox"

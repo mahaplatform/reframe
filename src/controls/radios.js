@@ -34,7 +34,7 @@ class Radios extends React.Component {
             <div className="field" key={`option_${index}`}>
               <div className="ui radio checkbox" data-value={option.key}>
                 <input
-                  defaultValue={this.props.defaultValue}
+                  defaultValue={option.key}
                   className="hidden"
                   name={this.props.code}
                   type="radio"
