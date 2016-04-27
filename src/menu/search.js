@@ -25,7 +25,7 @@ export default class Search extends React.Component {
   constructor(props) {
     super(props)
 
-    this.endpoint = props.endpoint || Config.get('menu.search.p', '/search')
+    this.endpoint = props.endpoint || Config.get('menu.search.endpoint', '/search')
     this.resultField = props.resultField || Config.get('menu.search.resultField', 'results')
     this.query    = props.query || Config.get('menu.search.queryParam', 'q')
   }
