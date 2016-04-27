@@ -61,8 +61,9 @@ class ExampleLinks extends React.Component {
 
   getMenu() {
     return {
-      search: true,
-      searchEndpoint: '/examples/search.json',
+      search: {
+        endpoint: '/examples/search.json'
+      },
       left: [
         {
           label: 'Collections',

@@ -19,7 +19,6 @@ export default class MenuExamples extends React.Component {
 
   getMenu() {
     return {
-      search: false,
       left: [
         {
           image: 'http://lorempixel.com/24/24',

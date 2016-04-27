@@ -8,13 +8,16 @@ class Menu extends React.Component {
   static propTypes = {
     menu: React.PropTypes.shape({
       left: React.PropTypes.array,
-      right: React.PropTypes.array
+      right: React.PropTypes.array,
+      search: React.PropTypes.object
     })
   }
 
   static defaultProps = {
-    searchEndpoint: '/admin/search',
-    searchQueryParam: 'q'
+    search: {
+      endpoint: '/admin/search',
+      queryParam: 'q'
+    }
   }
 
   render() {
@@ -36,10 +39,10 @@ class Menu extends React.Component {
             if(this.props.menu.search) {
               return (
                 <Search
-                  endpoint={this.props.menu.searchEndpoint}
-                  query={this.props.menu.searchQueryParam}
-                  itemComponent={this.props.menu.searchResultComponent}
-                  routes={this.props.menu.searchRoutes} />
+                  endpoint={this.props.menu.search.endpoint || '/admin/search'}
+                  query={this.props.menu.search.queryParam || q}
+                  itemComponent={this.props.menu.search.resultComponent}
+                  routes={this.props.menu.search.routes} />
               )
             }
           })()}
