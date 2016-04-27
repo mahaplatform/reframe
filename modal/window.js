@@ -11,7 +11,7 @@ var _plain = require('./plain.js');
 
 Object.defineProperty(exports, 'PlainWindow', {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _plain.PlainWindow;
   }
 });

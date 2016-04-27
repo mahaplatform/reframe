@@ -142,6 +142,7 @@ var Select = function (_React$Component) {
     value: function handleChange(event) {
       if (this.getValue() === this.NO_SELECTION) {
         $(this.refs.control).dropdown('clear');
+        $(this.refs.control).find('.default.text').html(this.props.placeholder || '');
       }
       this.props.onChange(this.props.code, event);
       $(this.refs.control).find('.text > span').attr('data-reactid', null);
