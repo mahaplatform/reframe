@@ -52,7 +52,7 @@ var Radios = function (_React$Component) {
               'div',
               { className: 'ui radio checkbox', 'data-value': option.key },
               _react2.default.createElement('input', {
-                defaultValue: _this2.props.defaultValue,
+                defaultValue: option.key,
                 className: 'hidden',
                 name: _this2.props.code,
                 type: 'radio',

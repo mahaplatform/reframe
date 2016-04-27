@@ -43,8 +43,6 @@ var Checkboxes = function (_React$Component) {
   _createClass(Checkboxes, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var name = this.props.code + '[]';
       return _react2.default.createElement(
         'div',
@@ -57,7 +55,7 @@ var Checkboxes = function (_React$Component) {
               'div',
               { className: 'ui checkbox', 'data-value': option.key },
               _react2.default.createElement('input', {
-                defaultValue: _this2.props.defaultValue,
+                defaultValue: option.key,
                 className: 'hidden',
                 name: name,
                 type: 'checkbox',
@@ -97,12 +95,12 @@ var Checkboxes = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      var _this3 = this;
+      var _this2 = this;
 
       $(this.refs.control).find('.checkbox').checkbox('set unchecked');
       if (_lodash2.default.isArray(value)) {
         _lodash2.default.each(value, function (v) {
-          $(_this3.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
+          $(_this2.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
         });
       } else {
         $(this.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
