@@ -40,7 +40,7 @@ class Menu extends React.Component {
               return (
                 <Search
                   endpoint={this.props.menu.search.endpoint || '/admin/search'}
-                  query={this.props.menu.search.queryParam || q}
+                  query={this.props.menu.search.queryParam || 'q'}
                   itemComponent={this.props.menu.search.resultComponent}
                   routes={this.props.menu.search.routes} />
               )
