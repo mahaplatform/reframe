@@ -65,7 +65,7 @@ var Menu = function (_React$Component) {
             if (_this2.props.menu.search) {
               return _react2.default.createElement(_search2.default, {
                 endpoint: _this2.props.menu.search.endpoint || '/admin/search',
-                query: _this2.props.menu.search.queryParam || q,
+                query: _this2.props.menu.search.queryParam || 'q',
                 itemComponent: _this2.props.menu.search.resultComponent,
                 routes: _this2.props.menu.search.routes });
             }
