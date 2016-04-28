@@ -34,7 +34,7 @@ export default class InfiniteCollection extends React.Component {
   }
 
   render() {
-    const exportUrlPrefix = Config.get('collections.exporter.urlPrefix', '')
+    const exportUrlPrefix = Config.get('api.pathPrefix', '')
     const modalOptions = {
       onCancel: this.closeExporter.bind(this),
       fields: this.props.columns,
