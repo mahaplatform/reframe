@@ -208,7 +208,7 @@ export default class OmniForm extends React.Component {
           .then((response) => {
             const records = response.records || response
             return _.map(records, r => {
-              return {key: r[f.value], value: r[f.text]}
+              return {key: _.get(r, f.value), value: _.get(r, f.text)}
             })
           })
       }, {})
