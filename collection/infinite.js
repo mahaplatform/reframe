@@ -80,7 +80,7 @@ var InfiniteCollection = function (_React$Component) {
   _createClass(InfiniteCollection, [{
     key: 'render',
     value: function render() {
-      var exportUrlPrefix = _config2.default.get('collections.exporter.urlPrefix', '');
+      var exportUrlPrefix = _config2.default.get('api.pathPrefix', '');
       var modalOptions = {
         onCancel: this.closeExporter.bind(this),
         fields: this.props.columns,
