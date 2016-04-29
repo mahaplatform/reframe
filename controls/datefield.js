@@ -57,13 +57,15 @@ var Datefield = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd' });
+      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: function onSelect() {
+          $(this).change();
+        } });
       if (this.props.defaultValue) {
         _lodash2.default.defer(function () {
           return $(_this2.refs.control).datepicker('setDate', _this2.props.defaultValue);
         });
       }
-      $(this.refs.control).change(this.props.onChange);
+      $(this.refs.control).change();
     }
   }, {
     key: 'handleChange',
