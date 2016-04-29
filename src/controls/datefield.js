@@ -25,7 +25,14 @@ export default class Datefield extends React.Component {
   }
 
   render() {
-    return <input defaultValue={this.props.defaultValue} ref="control" autoComplete="off" type="text" name={this.props.code} id={this.props.code} placeholder={this.props.placeholder} />
+    return <input defaultValue={this.props.defaultValue}
+                  ref="control"
+                  autoComplete="off"
+                  type="text"
+                  onChange={this.handleChange.bind(this)}
+                  name={this.props.code}
+                  id={this.props.code}
+                  placeholder={this.props.placeholder} />
   }
 
   componentDidMount() {
@@ -34,6 +41,10 @@ export default class Datefield extends React.Component {
       _.defer(() => $(this.refs.control).datepicker('setDate', this.props.defaultValue))
     }
     $(this.refs.control).change(this.props.onChange)
+  }
+
+  handleChange(event) {
+    this.props.onChange(this.props.code, event.target.value)
   }
 
   getValue() {
