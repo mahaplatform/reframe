@@ -43,7 +43,14 @@ var Datefield = function (_React$Component) {
   _createClass(Datefield, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', { defaultValue: this.props.defaultValue, ref: 'control', autoComplete: 'off', type: 'text', name: this.props.code, id: this.props.code, placeholder: this.props.placeholder });
+      return _react2.default.createElement('input', { defaultValue: this.props.defaultValue,
+        ref: 'control',
+        autoComplete: 'off',
+        type: 'text',
+        onChange: this.handleChange.bind(this),
+        name: this.props.code,
+        id: this.props.code,
+        placeholder: this.props.placeholder });
     }
   }, {
     key: 'componentDidMount',
@@ -57,6 +64,11 @@ var Datefield = function (_React$Component) {
         });
       }
       $(this.refs.control).change(this.props.onChange);
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      this.props.onChange(this.props.code, event.target.value);
     }
   }, {
     key: 'getValue',

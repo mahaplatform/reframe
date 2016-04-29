@@ -188,7 +188,7 @@ var OmniForm = function (_React$Component) {
       var errors = _errResponse$entity.errors;
       var message = _errResponse$entity.message;
 
-      var formMessage = void 0;
+      var formMessage = undefined;
       switch (code) {
         case 422:
           formMessage = {
@@ -270,7 +270,7 @@ var OmniForm = function (_React$Component) {
         acc[f.code] = _this5.api.loadJSON(f.endpoint).then(function (response) {
           var records = response.records || response;
           return _lodash2.default.map(records, function (r) {
-            return { key: r[f.value], value: r[f.text] };
+            return { key: _lodash2.default.get(r, f.value), value: _lodash2.default.get(r, f.text) };
           });
         });
       }, {}).value();
