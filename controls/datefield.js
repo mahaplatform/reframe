@@ -47,7 +47,6 @@ var Datefield = function (_React$Component) {
         ref: 'control',
         autoComplete: 'off',
         type: 'text',
-        onChange: this.handleChange.bind(this),
         name: this.props.code,
         id: this.props.code,
         placeholder: this.props.placeholder });
@@ -57,20 +56,17 @@ var Datefield = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: function onSelect() {
-          $(this).change();
-        } });
+      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: this.handleChange });
       if (this.props.defaultValue) {
         _lodash2.default.defer(function () {
           return $(_this2.refs.control).datepicker('setDate', _this2.props.defaultValue);
         });
       }
-      $(this.refs.control).change();
     }
   }, {
     key: 'handleChange',
-    value: function handleChange(event) {
-      this.props.onChange(this.props.code, event.target.value);
+    value: function handleChange(value, object) {
+      this.props.onChange(this.props.code, value);
     }
   }, {
     key: 'getValue',
