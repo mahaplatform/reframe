@@ -56,7 +56,7 @@ var Datefield = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: this.handleChange });
+      $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: this.handleChange.bind(this) });
       if (this.props.defaultValue) {
         _lodash2.default.defer(function () {
           return $(_this2.refs.control).datepicker('setDate', _this2.props.defaultValue);
