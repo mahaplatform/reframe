@@ -29,22 +29,20 @@ export default class Datefield extends React.Component {
                   ref="control"
                   autoComplete="off"
                   type="text"
-                  onChange={this.handleChange.bind(this)}
                   name={this.props.code}
                   id={this.props.code}
                   placeholder={this.props.placeholder} />
   }
 
   componentDidMount() {
-    $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: function() { $(this).change(); } })
+    $(this.refs.control).datepicker({ dateFormat: 'yy-mm-dd', onSelect: this.handleChange })
     if(this.props.defaultValue) {
       _.defer(() => $(this.refs.control).datepicker('setDate', this.props.defaultValue))
     }
-    $(this.refs.control).change();
   }
 
-  handleChange(event) {
-    this.props.onChange(this.props.code, event.target.value)
+  handleChange(value, object) {
+    this.props.onChange(this.props.code, value)
   }
 
   getValue() {
