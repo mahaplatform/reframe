@@ -192,16 +192,19 @@ var ExportModal = function (_React$Component) {
     key: 'exportXls',
     value: function exportXls() {
       window.location = this.props.exportUrl + '.xlsx?fields=' + this.getFields();
+      if (this.props.autoClose) this.props.onCancel();
     }
   }, {
     key: 'exportCsv',
     value: function exportCsv() {
       window.location = this.props.exportUrl + '.csv?fields=' + this.getFields();
+      if (this.props.autoClose) this.props.onCancel();
     }
   }, {
     key: 'exportTsv',
     value: function exportTsv() {
       window.location = this.props.exportUrl + '.tsv?fields=' + this.getFields();
+      if (this.props.autoClose) this.props.onCancel();
     }
   }, {
     key: 'componentDidMount',
@@ -236,4 +239,7 @@ var ExportModal = function (_React$Component) {
   return ExportModal;
 }(_react2.default.Component);
 
+ExportModal.defaultProps = {
+  autoClose: true
+};
 exports.default = ExportModal;
