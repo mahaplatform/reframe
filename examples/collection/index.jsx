@@ -56,6 +56,7 @@ export default class CollectionExamples extends React.Component {
       ],
       records: this.getSortedRecords(),
       sort: this.state.table.sort,
+      rowClass: function(record) { return (record.id == 2) ? 'linda' : null },
       recordCount: 11,
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: Actions.reload },

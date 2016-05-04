@@ -8,8 +8,9 @@ import Logger from '../../utils/logger'
 export default class Row extends React.Component {
 
   render() {
+    let rowClass = (this.props.rowClass) ? this.props.rowClass(this.props.record) : null
     return (
-      <tr>
+      <tr className={rowClass}>
         {(() => {
           if(!_.isEmpty(this.props.batchActions)) {
             return <td><input type="checkbox" checked={this.props.isChecked} onChange={this.handleCheck.bind(this, this.props.record.id)} /></td>
