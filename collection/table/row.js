@@ -54,9 +54,10 @@ var Row = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var rowClass = this.props.rowClass ? this.props.rowClass(this.props.record) : null;
       return _react2.default.createElement(
         'tr',
-        null,
+        { className: rowClass },
         function () {
           if (!_lodash2.default.isEmpty(_this2.props.batchActions)) {
             return _react2.default.createElement(
