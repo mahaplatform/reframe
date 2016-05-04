@@ -4,6 +4,11 @@ import _ from 'lodash'
 import {PlainWindow} from '../modal/window'
 
 export default class ExportModal extends React.Component {
+
+  static defaultProps ={
+    autoClose: true
+  }
+
   render() {
     const modalOptions = {
       title: "Export Data",
@@ -85,14 +90,17 @@ export default class ExportModal extends React.Component {
 
   exportXls() {
     window.location = `${this.props.exportUrl}.xlsx?fields=${this.getFields()}`
+    if(this.props.autoClose) this.props.onCancel()
   }
 
   exportCsv() {
     window.location = `${this.props.exportUrl}.csv?fields=${this.getFields()}`
+    if(this.props.autoClose) this.props.onCancel()
   }
 
   exportTsv() {
     window.location = `${this.props.exportUrl}.tsv?fields=${this.getFields()}`
+    if(this.props.autoClose) this.props.onCancel()
   }
 
   componentDidMount() {
