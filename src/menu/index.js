@@ -24,7 +24,7 @@ class Menu extends React.Component {
       endpoint: '/admin/search',
       queryParam: 'q'
     },
-    breakpoint: 700
+    breakpoint: 800
   }
 
   constructor(props) {
