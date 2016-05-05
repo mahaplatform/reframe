@@ -58,3 +58,38 @@
     }
   }
 }
+
+.ui.mobile.menu {
+  height: 50px;
+
+  input {
+    font-size: 1.3rem;
+  }
+
+  .item {
+    font-size: 1.3rem;
+  }
+}
+
+.ui.sidebar {
+  visibility: visible;
+  transform: translateX(-100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  &.visible {
+    transform: translateX(0%);
+  }
+
+  .item {
+    font-size: 1.4rem;
+  }
+  .large.item {
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 1.7em;
+  }
+}

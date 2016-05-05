@@ -19,23 +19,21 @@ export default class Searchbar extends React.Component {
       handler: () => this.props.onClickMenuButton()
     }
     return (
-      <div className={this.props.menu.className}>
-        <div className="ui menu fixed inverted" ref="menu">
-          <div className="left menu">
-            <MenuItem key={`toggle_menu_button`} item={menuButton} onClick={this.props.onClickMenuButton} />
-          </div>
-          {(() => {
-            if(this.props.menu.search) {
-              return (
-                <Search
-                  endpoint={this.props.menu.search.endpoint || '/admin/search'}
-                  query={this.props.menu.search.queryParam || 'q'}
-                  itemComponent={this.props.menu.search.resultComponent}
-                  routes={this.props.menu.search.routes} />
-              )
-            }
-          })()}
+      <div className="ui mobile menu fixed inverted" ref="menu">
+        <div className="left menu">
+          <MenuItem key={`toggle_menu_button`} item={menuButton} onClick={this.props.onClickMenuButton} />
         </div>
+        {(() => {
+          if(this.props.menu.search) {
+            return (
+              <Search
+                endpoint={this.props.menu.search.endpoint || '/admin/search'}
+                query={this.props.menu.search.queryParam || 'q'}
+                itemComponent={this.props.menu.search.resultComponent}
+                routes={this.props.menu.search.routes} />
+            )
+          }
+        })()}
       </div>
     );
   }

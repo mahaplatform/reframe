@@ -1,17 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import MenuItem from './item.js'
-import Search from './search.js'
 import _ from 'lodash'
 
 export default class OffcanvasMenu extends React.Component {
+  static defaultProps = {
+    onClose: _.noop
+  }
+
   constructor(props) {
     super(props);
   }
 
   render() {
+    const closeButton = {
+      label: 'CLOSE',
+      icon: 'x',
+      handler: this.props.onClose
+    }
+
     return (
       <div className={`ui sidebar inverted vertical fluid ${this.props.visible ? 'visible' : ''} menu`} ref="menu">
+        <a className="large item">CLOSE <i className="x icon"></i></a>
         {_.map(this.props.menu.left, (item, index) => {
           return <MenuItem accordion key={`left_menu_item_${index}`} item={item} onClick={this.handleItemClick}/>
         })}
@@ -22,9 +32,7 @@ export default class OffcanvasMenu extends React.Component {
     )
   }
   
-  handleItemClick() {
-    
-  }
+  handleItemClick() {}
 
   componentDidMount() {
     $(this.refs.menu).find(".accordion").accordion({on: 'click'})
