@@ -1,7 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MenuItem from './item.js'
-import Search from './search.js'
+import _ from 'lodash'
+import TopbarMenu from './topbar'
+import OffcanvasMenu from './offcanvas'
+import Searchbar from './searchbar'
+import {matches} from '../utils/dom'
+
+const TOPBAR = Symbol("topbar mode")
+const OFFCANVAS = Symbol("offcanvas mode")
 
 class Menu extends React.Component {
 
@@ -17,57 +23,61 @@ class Menu extends React.Component {
     search: {
       endpoint: '/admin/search',
       queryParam: 'q'
-    }
+    },
+    breakpoint: 700
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = { displayMode: TOPBAR, visible: false }
+    _.defer(this.onViewportResize.bind(this))
   }
 
   render() {
-    return (
-      <div className={this.props.menu.className}>
-        <div className="ui menu fixed inverted" ref="menu">
-          {(() => {
-            if(this.props.menu.left) {
-              return (
-                <div className="left menu">
-                  { this.props.menu.left.map((item, index) => {
-                    return <MenuItem key={`left_menu_item_${index}`} item={item} onClick={this.handleItemClick}/>
-                  })}
-                </div>
-              )
-            }
-          })()}
-          {(() => {
-            if(this.props.menu.search) {
-              return (
-                <Search
-                  endpoint={this.props.menu.search.endpoint || '/admin/search'}
-                  query={this.props.menu.search.queryParam || 'q'}
-                  itemComponent={this.props.menu.search.resultComponent}
-                  routes={this.props.menu.search.routes} />
-              )
-            }
-          })()}
-          {(() => {
-            if(this.props.menu.right) {
-              return (
-                <div className="right menu">
-                   { this.props.menu.right.map((item, index) => {
-                      return <MenuItem key={`right_menu_item_${index}`} item={item} onClick={this.handleItemClick} />
-                   })}
-                </div>
-              )
-            }
-          })()}
-        </div>
-      </div>
-    )
+    switch (this.state.displayMode) {
+      case TOPBAR:
+        return <TopbarMenu {...this.props} ref="menu" />
+      case OFFCANVAS: 
+        return (
+          <div>
+            <Searchbar {...this.props} onClickMenuButton={this.toggleMenu.bind(this)} />
+            <OffcanvasMenu {...this.props} visible={this.state.visible} ref="menu" />
+          </div>
+        )
+    }
+      
   }
 
   componentDidMount() {
-    $(this.refs.menu).find(".dropdown").dropdown({on: 'click'})
+    this.resizeListener = _.throttle(this.onViewportResize.bind(this), 100)
+    this.closeListener = this.closeMenu.bind(this)
+    window.addEventListener('resize', this.resizeListener)
+    document.addEventListener('click', this.closeListener)
   }
 
-  componentDidUpdate() {
-    $(this.refs.menu).find(".dropdown").dropdown({on: 'click'})
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeListener)
+    document.removeEventListener('click', this.closeListener)
+  }
+
+  onViewportResize() {
+    let w = document.body.offsetWidth
+    if(w <= this.props.breakpoint) {
+      this.setState({ displayMode: OFFCANVAS })
+    }
+    else {
+      this.setState({ displayMode: TOPBAR })
+    }
+  }
+
+  toggleMenu() {
+    this.setState({visible: !this.state.visible})
+  }
+
+  closeMenu(event) {
+    if(matches(event.target, '.ui.sidebar *') && (matches(event.target, 'a.item') || matches(event.target, 'a.item *'))) {
+      this.setState({ visible: false })
+    }
   }
 
 }
