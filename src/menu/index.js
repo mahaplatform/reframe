@@ -41,7 +41,7 @@ class Menu extends React.Component {
         return (
           <div>
             <Searchbar {...this.props} onClickMenuButton={this.toggleMenu.bind(this)} />
-            <OffcanvasMenu {...this.props} visible={this.state.visible} ref="menu" />
+            <OffcanvasMenu {...this.props} visible={this.state.visible} onClose={this.closeMenu.bind(this)} ref="menu" />
           </div>
         )
     }

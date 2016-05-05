@@ -21,7 +21,7 @@ export default class OffcanvasMenu extends React.Component {
 
     return (
       <div className={`ui sidebar inverted vertical fluid ${this.props.visible ? 'visible' : ''} menu`} ref="menu">
-        <a className="large item">CLOSE <i className="x icon"></i></a>
+        <a className="large item" onClick={this.props.onClose}>CLOSE <i className="x icon"></i></a>
         {_.map(this.props.menu.left, (item, index) => {
           return <MenuItem accordion key={`left_menu_item_${index}`} item={item} onClick={this.handleItemClick}/>
         })}
