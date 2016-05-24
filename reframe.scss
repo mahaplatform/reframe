@@ -112,7 +112,8 @@ table .actions {
 .collection-table {
   position: relative; }
   .collection-table .ui.table {
-    margin-top: 0 !important; }
+    margin-top: 0 !important;
+    border-radius: 0 0 0.28571429rem 0.28571429rem; }
   .collection-table tr td:last-child i {
     cursor: pointer; }
   .collection-table .row-leave {
@@ -220,6 +221,8 @@ table .actions {
 .comment .content {
   margin-left: 3.5em; }
 
+.ui.form .field.hidden {
+  display: none; }
 .ui.form .ui.horizontal.segments .ui.segment:first-child {
   background: #FFF; }
 .ui.form .ui.horizontal.segments .ui.segment:last-child {
@@ -362,6 +365,39 @@ span.instructions {
       color: white; }
     .ui.menu .ui.search.item input:focus {
       border: none; }
+
+.ui.mobile.menu {
+  height: 50px; }
+  .ui.mobile.menu input {
+    font-size: 1.3rem; }
+  .ui.mobile.menu .item {
+    font-size: 1.3rem; }
+  .ui.mobile.menu .search.item .typeahead.results {
+    position: fixed;
+    margin-top: 6px;
+    width: 100%; }
+
+.ui.sidebar {
+  visibility: visible;
+  transform: translateX(-100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  -moz-transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* easeOutQuart */ }
+  .ui.sidebar.visible {
+    transform: translateX(0%); }
+  .ui.sidebar .item {
+    font-size: 1.4rem; }
+  .ui.sidebar .large.item {
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 1.7em; }
 
 .typeahead {
   position: relative;

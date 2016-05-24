@@ -36,32 +36,16 @@ var MenuItem = function (_React$Component) {
   _createClass(MenuItem, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var iconElement = this.props.item.icon ? _react2.default.createElement('i', { className: this.props.item.icon + ' icon' }) : null;
 
       if (this.props.item.items) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'ui dropdown item' },
-          function () {
-            if (_this2.props.item.image) {
-              return _react2.default.createElement('img', { src: _this2.props.item.image, className: 'ui image' });
-            }
-          }(),
-          this.props.item.label,
-          ' ',
-          _react2.default.createElement('i', { className: 'dropdown icon' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'menu' },
-            this.props.item.items.map(function (item, index) {
-              return _react2.default.createElement(MenuItem, { key: 'item_' + index, item: item });
-            })
-          )
-        );
+        if (this.props.accordion) return _react2.default.createElement(AccordionListItem, this.props.item);else return _react2.default.createElement(DropdownListItem, this.props.item);
       } else if (this.props.item.handler) {
         return _react2.default.createElement(
           'a',
           { onClick: this.props.item.handler, className: 'item' },
+          iconElement,
+          ' ',
           this.props.item.label
         );
       } else if (this.props.item.route) {
@@ -69,6 +53,8 @@ var MenuItem = function (_React$Component) {
           return _react2.default.createElement(
             _reactRouter.IndexLink,
             { to: this.props.item.route, className: 'item' },
+            iconElement,
+            ' ',
             this.props.item.label
           );
         } else if (this.props.item.image) {
@@ -83,6 +69,8 @@ var MenuItem = function (_React$Component) {
           return _react2.default.createElement(
             'a',
             { href: this.props.item.url, className: 'item' },
+            iconElement,
+            ' ',
             this.props.item.label
           );
         } else if (this.props.item.image) {
@@ -108,5 +96,105 @@ MenuItem.propTypes = {
     url: _react2.default.PropTypes.string
   })
 };
-MenuItem.defaultProps = {};
+MenuItem.defaultProps = {
+  accordion: false
+};
 exports.default = MenuItem;
+
+var DropdownListItem = function (_React$Component2) {
+  _inherits(DropdownListItem, _React$Component2);
+
+  function DropdownListItem(props) {
+    _classCallCheck(this, DropdownListItem);
+
+    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownListItem).call(this, props));
+
+    _this2.state = {};
+    return _this2;
+  }
+
+  _createClass(DropdownListItem, [{
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ui dropdown item' },
+        function () {
+          if (_this3.props.image) {
+            return _react2.default.createElement('img', { src: _this3.props.image, className: 'ui image' });
+          }
+        }(),
+        function () {
+          if (_this3.props.icon) {
+            return _react2.default.createElement('i', { className: _this3.props.icon + ' icon' });
+          }
+        }(),
+        this.props.label,
+        ' ',
+        _react2.default.createElement('i', { className: 'dropdown icon' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'menu' },
+          this.props.items.map(function (item, index) {
+            return _react2.default.createElement(MenuItem, { key: 'item_' + index, item: item });
+          })
+        )
+      );
+    }
+  }]);
+
+  return DropdownListItem;
+}(_react2.default.Component);
+
+var AccordionListItem = function (_React$Component3) {
+  _inherits(AccordionListItem, _React$Component3);
+
+  function AccordionListItem(props) {
+    _classCallCheck(this, AccordionListItem);
+
+    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(AccordionListItem).call(this, props));
+
+    _this4.state = {};
+    return _this4;
+  }
+
+  _createClass(AccordionListItem, [{
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ui inverted accordion item' },
+        _react2.default.createElement(
+          'div',
+          { className: 'title' },
+          function () {
+            if (_this5.props.image) {
+              return _react2.default.createElement('img', { src: _this5.props.image, className: 'ui image' });
+            }
+          }(),
+          function () {
+            if (_this5.props.icon) {
+              return _react2.default.createElement('i', { className: _this5.props.icon + ' icon' });
+            }
+          }(),
+          this.props.label,
+          ' ',
+          _react2.default.createElement('i', { className: 'dropdown icon' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'content' },
+          this.props.items.map(function (item, index) {
+            return _react2.default.createElement(MenuItem, { key: 'item_' + index, item: item });
+          })
+        )
+      );
+    }
+  }]);
+
+  return AccordionListItem;
+}(_react2.default.Component);

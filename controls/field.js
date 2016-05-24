@@ -199,6 +199,10 @@ var Field = function (_React$Component) {
       if (this.props.error) {
         className.push('error');
       }
+      if (!this.props.show) {
+        className.push('hidden');
+      }
+
       return _react2.default.createElement(
         'div',
         { className: className.join(' '), 'data-field-code': this.props.code },
@@ -311,6 +315,10 @@ Field.propTypes = {
   instructions: _react2.default.PropTypes.string,
   options: _react2.default.PropTypes.array,
   type: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element]),
-  error: _react2.default.PropTypes.string
+  error: _react2.default.PropTypes.string,
+  show: _react2.default.PropTypes.bool
+};
+Field.defaultProps = {
+  show: true
 };
 exports.default = Field;
