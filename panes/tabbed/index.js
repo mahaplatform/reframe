@@ -40,12 +40,19 @@ var Tabbed = function (_React$Component) {
     value: function render() {
       var activeRoute = _.find(this.props.tabs, { route: this.props.location.pathname });
       var active = !_.isUndefined(activeRoute) ? activeRoute.route : this.props.tabs[0].route;
+      var klass = ['ui', 'top', 'attached', 'tabular'];
+      if (this.props.even) {
+        var sizes = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+        klass = klass.concat(['fluid', sizes[this.props.tabs.length], 'item', 'menu']);
+      } else {
+        klass.push('menu');
+      }
       return _react2.default.createElement(
         'div',
         { className: 'pane' },
         _react2.default.createElement(
           'div',
-          { className: 'ui top attached tabular menu' },
+          { className: klass.join(' ') },
           this.props.tabs.map(function (tab, index) {
             return _react2.default.createElement(_tab2.default, { key: 'tab_' + index, tab: tab, active: tab.route == active });
           })
@@ -62,4 +69,14 @@ var Tabbed = function (_React$Component) {
   return Tabbed;
 }(_react2.default.Component);
 
+Tabbed.propTypes = {
+  tabs: _react2.default.PropTypes.array,
+  location: _react2.default.PropTypes.object,
+  even: _react2.default.PropTypes.bool
+};
+Tabbed.defaultProps = {
+  tabs: [],
+  location: null,
+  even: false
+};
 exports.default = Tabbed;
