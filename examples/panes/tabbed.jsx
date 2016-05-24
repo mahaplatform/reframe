@@ -25,7 +25,7 @@ class Tabbed extends React.Component {
 
 Tabbed.One = (props) => {
   return (
-    <TabbedPane tabs={props.tabs} location={props.location}>
+    <TabbedPane tabs={props.tabs} location={props.location} even={true}>
       One
     </TabbedPane>
   )
@@ -33,7 +33,7 @@ Tabbed.One = (props) => {
 
 Tabbed.Two = (props) => {
   return (
-    <TabbedPane tabs={props.tabs} location={props.location}>
+    <TabbedPane tabs={props.tabs} location={props.location} even={true}>
       Two
     </TabbedPane>
   )
@@ -42,7 +42,7 @@ Tabbed.Two = (props) => {
 Tabbed.Three = (props) => {
   console.log(props);
   return (
-    <TabbedPane tabs={props.tabs} location={props.location}>
+    <TabbedPane tabs={props.tabs} location={props.location} even={true}>
       Three
     </TabbedPane>
   )
