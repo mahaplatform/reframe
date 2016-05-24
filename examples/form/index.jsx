@@ -6,6 +6,10 @@ import Logger from 'utils/logger'
 export default class FormExamples extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      showHiddenField: false,
+      showDependentField: false
+    }
   }
 
   render() {
@@ -21,7 +25,12 @@ export default class FormExamples extends React.Component {
   getForm() {
     return {
       title: 'Here\'s a Form',
-      onFieldChange: (field, data) => Logger.info(field, data),
+      onFieldChange: (field, data) => {
+        Logger.info(field, data)
+        if(field === "visible_field") {
+          this.setState({showDependentField: /show/i.test(data)})
+        }
+      },
       onSubmit: data => Logger.info(data),
       redirect: '/forms/success',
       sections: [
@@ -44,7 +53,12 @@ export default class FormExamples extends React.Component {
         { label: 'Textareas', fields: [
           { code: 'simple', label: 'Simple Textarea', type: 'textarea' },
           { code: 'html', label: 'HTML Textarea', type: 'textarea', html: true }
-
+        ]},
+        { label: 'Visibility', fields: [
+          { code: 'visible_field', label: 'Visible Field', type: 'textfield', instructions: 'Type "show" to reveal an extra field', show: true },
+          { code: 'toggle_hidden_field', text: 'Toggle Hidden Field', type: 'button', onPress: this.toggleHiddenField.bind(this)},
+          { code: 'hidden_field', label: 'Hidden Field', type: 'textfield', show: this.state.showHiddenField },
+          { code: 'dependent_field', label: 'Dependent Field', type: 'textfield', show: this.state.showDependentField },
         ]},
         { label: 'Section 2', collapsing: true, fields: [
           { code: "residence_id", label: 'Residence', type: "select", placeholder: 'Residence', options: [{key:1,value:"farm/rural"}, {key:2,value:"town of less than 10,000"}, {key:3,value:"town of 10,000 - 50,000"}, {key:4,value:"suburbs of more than 50,000"}, {key:5,value:"city of more than 50,000"}] },
@@ -68,5 +82,9 @@ export default class FormExamples extends React.Component {
         ]}
       ]
     }
+  }
+
+  toggleHiddenField() {
+    this.setState({showHiddenField: !this.state.showHiddenField})
   }
 }

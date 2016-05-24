@@ -1,4 +1,9 @@
 .ui.form {
+
+  .field.hidden {
+    display: none;
+  }
+
   .ui.horizontal.segments {
     .ui.segment:first-child {
       background: #FFF;

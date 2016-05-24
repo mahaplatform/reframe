@@ -80,7 +80,12 @@ export default class Field extends React.Component {
     instructions: React.PropTypes.string,
     options: React.PropTypes.array,
     type: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
-    error: React.PropTypes.string
+    error: React.PropTypes.string,
+    show: React.PropTypes.bool
+  }
+
+  static defaultProps = {
+    show: true
   }
 
   render() {
@@ -94,6 +99,10 @@ export default class Field extends React.Component {
     if(this.props.error) {
       className.push('error')
     }
+    if(!this.props.show) {
+      className.push('hidden')
+    }
+
     return (
       <div className={className.join(' ')} data-field-code={this.props.code}>
         {(this.props.label && !_.includes(['checkbox'], this.props.type)) ? <label>{this.props.label}</label> : ''}
