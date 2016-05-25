@@ -12,7 +12,7 @@ export default class TopbarMenu extends React.Component {
   render() {
     return (
       <div className={this.props.menu.className}>
-        <div className="ui menu fixed inverted" ref="menu">
+        <div className="ui menu fixed inverted application-menu" ref="menu">
           {(() => {
             if(this.props.menu.left) {
               return (

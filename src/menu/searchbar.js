@@ -19,7 +19,7 @@ export default class Searchbar extends React.Component {
       handler: () => this.props.onClickMenuButton()
     }
     return (
-      <div className="ui mobile menu fixed inverted" ref="menu">
+      <div className="ui mobile menu fixed inverted application-menu" ref="menu">
         <div className="left menu">
           <MenuItem key={`toggle_menu_button`} item={menuButton} onClick={this.props.onClickMenuButton} />
         </div>
