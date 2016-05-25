@@ -71,7 +71,8 @@ var InfiniteCollection = function (_React$Component) {
       sort: props.sort || { key: 'id', order: 'asc' },
       filters: {},
       showFilters: false,
-      showExporter: false
+      showExporter: false,
+      sticky: false
     };
     _this.id = props.id || (0, _random.uid)();
     return _this;
@@ -113,6 +114,7 @@ var InfiniteCollection = function (_React$Component) {
     value: function getCollectionProps() {
       return _extends({}, this.props, this.getCallbacks(), {
         id: this.id,
+        sticky: this.state.sticky,
         saveVisibility: !!this.props.id, // Only save visibility when an ID is set manually
         collectionActions: [{ key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) }, { key: 'export', icon: 'download', label: 'Export', handler: this.openExporter.bind(this) }].concat(_toConsumableArray(this.props.collectionActions)),
         recordActions: this.getRecordActions(),
@@ -198,6 +200,34 @@ var InfiniteCollection = function (_React$Component) {
     key: 'closeExporter',
     value: function closeExporter() {
       this.setState({ showExporter: false });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.sticky) {
+        this.scrollHandler = _lodash2.default.throttle(this.handleScroll.bind(this), 100);
+        window.addEventListener('scroll', this.scrollHandler);
+      }
+    }
+  }, {
+    key: 'componentWillUmmount',
+    value: function componentWillUmmount() {
+      if (this.props.sticky) {
+        window.removeEventListener('scroll', this.scrollHandler);
+      }
+    }
+  }, {
+    key: 'handleScroll',
+    value: function handleScroll(e) {
+      var scrollTop = window.scrollY;
+      var tableTop = $('table[data-reframe-table-id=' + this.id + ']').offset().top;
+      var topBuffer = 38;
+
+      if (tableTop - topBuffer - scrollTop < 0 && this.state.sticky == false) {
+        this.setState({ sticky: true });
+      } else if (tableTop - topBuffer - scrollTop >= 0 && this.state.sticky == true) {
+        this.setState({ sticky: false });
+      }
     }
   }]);
 

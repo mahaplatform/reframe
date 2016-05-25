@@ -46,7 +46,9 @@ var Table = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Table).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      columnWidths: null // Start with them as unknown
+    };
     _this.listeners = [];
     return _this;
   }
@@ -61,8 +63,9 @@ var Table = function (_React$Component) {
         { className: 'ui basic section collection-table' },
         _react2.default.createElement(
           'table',
-          { className: 'ui unstackable compact striped table sortable' },
-          _react2.default.createElement(_thead2.default, _extends({}, this.props, this.state)),
+          { className: 'ui unstackable compact striped table sortable', 'data-reframe-table-id': this.props.id },
+          _react2.default.createElement(_thead2.default, _extends({}, this.props, this.state, { columnWidths: this.sampleColumnWidths() })),
+          this.props.sticky ? _react2.default.createElement(_thead2.default, _extends({ surrogate: true }, this.props, this.state, { columnWidths: this.sampleColumnWidths() })) : null,
           _react2.default.createElement(_tbody2.default, _extends({}, this.props, this.state))
         ),
         function () {
@@ -83,6 +86,14 @@ var Table = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.status !== prevProps.status || !_lodash2.default.isEqual(prevProps.visible, this.props.visible)) {
+        // Force a re-render to realign table headers after content loads and displays
+        this.forceUpdate();
+      }
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this3 = this;
@@ -101,11 +112,21 @@ var Table = function (_React$Component) {
           }
         });
       };
+      // If we're in sticky mode, keep an eye on the window size
+      this.resizeHandler = _lodash2.default.throttle(this.handleResize.bind(this), 300);
+      window.addEventListener('resize', this.resizeHandler);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      //_.each(this.listeners, actionListener.removeActionListener.bind(actionListener))
+      window.removeEventListener('resize', this.resizeHandler);
+    }
+  }, {
+    key: 'handleResize',
+    value: function handleResize(e) {
+      if (this.props.sticky) {
+        this.forceUpdate();
+      }
     }
   }, {
     key: 'handleSort',
@@ -113,6 +134,16 @@ var Table = function (_React$Component) {
       var order = key == this.state.sort.key && this.state.sort.order == 'ascending' ? 'descending' : 'ascending';
       this.setState({ sort: { key: key, order: order } });
       _lodash2.default.defer(_lodash2.default.partial(this.props.actions.sort, { key: key, order: order }));
+    }
+  }, {
+    key: 'sampleColumnWidths',
+    value: function sampleColumnWidths() {
+      // Aaaaaah this is so bad to just read the DOM like this, dip me in boiling oil and hear me scream
+      // but honestly this is easier than dealing with passing around information that is only available
+      // post-render. Doesn't fit well in the React hierarchy we've set up.
+      return $('table[data-reframe-table-id=' + this.props.id + ']').find('tbody tr').first().find('td').map(function (i, td) {
+        return $(td).outerWidth();
+      }).toArray();
     }
   }]);
 

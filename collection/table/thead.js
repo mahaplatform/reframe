@@ -44,9 +44,11 @@ var Thead = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var style = this.generateStyle();
+      var nthCell = -1;
       return _react2.default.createElement(
         'thead',
-        null,
+        { style: style.thead },
         _react2.default.createElement(
           'tr',
           null,
@@ -69,16 +71,17 @@ var Thead = function (_React$Component) {
                   classes.push('sorted ascending');
                 }
               }
+              nthCell++;
               return _react2.default.createElement(
                 'th',
-                { key: 'column_' + index, className: classes.join(' '), onClick: _this2.handleSort.bind(_this2, column.key) },
+                { key: 'column_' + index, style: style.th[nthCell] || {}, className: classes.join(' '), onClick: _this2.handleSort.bind(_this2, column.key) },
                 column.label
               );
             }
           }),
           _react2.default.createElement(
             'th',
-            { className: 'collapsing primary center aligned' },
+            { className: 'collapsing primary center aligned', style: _lodash2.default.last(style.th) || {} },
             _react2.default.createElement(
               'div',
               { className: 'ui top right pointing dropdown', ref: 'columns_dropdown' },
@@ -122,6 +125,36 @@ var Thead = function (_React$Component) {
     value: function handleSort(key) {
       this.props.onClickColumnHeader(key);
     }
+  }, {
+    key: 'generateStyle',
+    value: function generateStyle() {
+      var _props = this.props;
+      var sticky = _props.sticky;
+      var columnWidths = _props.columnWidths;
+      var surrogate = _props.surrogate;
+
+
+      if (sticky && !surrogate) {
+        return {
+          thead: {
+            position: 'fixed',
+            top: 37,
+            zIndex: 5000,
+            opacity: surrogate ? 0.0 : 1.0
+          },
+          th: _lodash2.default.map(columnWidths, function (w) {
+            return { width: w };
+          })
+        };
+      } else {
+        return {
+          thead: {
+            opacity: surrogate ? 0.0 : 1.0
+          },
+          th: []
+        };
+      }
+    }
   }]);
 
   return Thead;
@@ -131,6 +164,9 @@ Thead.defaultProps = {
   onSort: _lodash2.default.noop,
   onCheckAll: _lodash2.default.noop,
   onClickColumns: _lodash2.default.noop,
-  onChooseColumn: _lodash2.default.noop
+  onChooseColumn: _lodash2.default.noop,
+  sticky: false,
+  surrogate: false,
+  columnWidths: []
 };
 exports.default = Thead;

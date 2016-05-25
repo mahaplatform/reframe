@@ -18,10 +18,6 @@ var _batch_actions = require('./batch_actions.js');
 
 var _batch_actions2 = _interopRequireDefault(_batch_actions);
 
-var _collection_actions = require('./collection_actions.js');
-
-var _collection_actions2 = _interopRequireDefault(_collection_actions);
-
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);

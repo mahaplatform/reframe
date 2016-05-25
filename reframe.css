@@ -109,6 +109,10 @@ table .actions {
 #toggle-columns-modal input {
   margin-right: 5px; }
 
+.ui.sortable.table thead th.sorted,
+.ui.sortable.table thead th:hover {
+  background: #F3F3F3 !important; }
+
 .collection-table {
   position: relative; }
   .collection-table .ui.table {

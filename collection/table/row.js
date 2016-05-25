@@ -131,6 +131,11 @@ var Row = function (_React$Component) {
       );
     }
   }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(prevProps) {
+      return !_lodash2.default.isEqual(this.props, prevProps);
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       $(this.refs.itemMenu).dropdown();

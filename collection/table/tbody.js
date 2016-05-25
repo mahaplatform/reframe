@@ -90,6 +90,11 @@ var Tbody = function (_React$Component) {
         );
       }
     }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(prevProps) {
+      return !_lodash2.default.isEqual(this.props, prevProps);
+    }
   }]);
 
   return Tbody;
