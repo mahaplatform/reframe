@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import ColumnChooser from './column-chooser'
 
@@ -10,6 +9,7 @@ class Thead extends React.Component {
     onCheckAll: _.noop,
     onClickColumns: _.noop,
     onChooseColumn: _.noop,
+    onResetColumns: _.noop,
     sticky: false,
     surrogate: false,
     columnWidths: []
@@ -23,7 +23,11 @@ class Thead extends React.Component {
         <tr>
           {(() => {
             if(!_.isEmpty(this.props.batchActions)) {
-              return <th className="collapsing primary"><input ref="toggle" type="checkbox" checked={this.props.checkAll} onChange={this.handleCheckAll.bind(this)} /></th>
+              return (
+                <th className="collapsing primary">
+                  <input ref="toggle" type="checkbox" checked={this.props.checkAll} onChange={this.handleCheckAll.bind(this)} />
+                </th>
+              )
             }
           })()}
           { this.props.columns.map((column, index) => {
@@ -37,13 +41,16 @@ class Thead extends React.Component {
                 }
               }
               nthCell++
-              return <th key={`column_${index}`} style={style.th[nthCell] || {}} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
+              return (<th key={`column_${index}`} style={style.th[nthCell] || {}} className={classes.join(' ')}
+                         onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>)
             }
           })}
           <th className="collapsing primary center aligned" style={_.last(style.th) || {}}>
             <div className="ui top right pointing dropdown" ref="columns_dropdown">
               <i className="ui columns icon" onClick={this.handleColumns.bind(this)} />
-              <ColumnChooser availableColumns={this.props.columns} visibleColumns={this.props.visible} onChooseColumn={this.onChooseColumn.bind(this)}/>
+              <ColumnChooser availableColumns={this.props.columns} visibleColumns={this.props.visible}
+                             onChooseColumn={this.props.onChooseColumn}
+                             onResetColumns={this.props.onResetColumns}/>
             </div>
           </th>
         </tr>
@@ -59,10 +66,6 @@ class Thead extends React.Component {
 
   componentWillUnmount() {
     $(this.refs.columns_dropdown).dropdown('destroy')
-  }
-
-  onChooseColumn(key, visible) {
-    this.props.onChooseColumn(key, visible)
   }
 
   handleCheckAll() {

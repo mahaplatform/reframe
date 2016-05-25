@@ -7,11 +7,13 @@ export default class ColumnChooser extends React.Component {
   static propTypes = {
     availableColumns: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     visibleColumns: React.PropTypes.array.isRequired,
-    onChooseColumn: React.PropTypes.function
+    onChooseColumn: React.PropTypes.function,
+    onResetColumns: React.PropTypes.function
   }
 
   static defaultProps = {
-    onChooseColumn: _.noop
+    onChooseColumn: _.noop,
+    onResetColumns: _.noop
   }
 
   constructor(props) {
@@ -42,6 +44,10 @@ export default class ColumnChooser extends React.Component {
                 </div>
               )
           })}
+          <div className="item" onClick={e => this.resetColumns(e)}>
+            <i className="refresh icon"></i>
+            Reset Columns
+          </div>
         </div>
       </div>
     )
@@ -58,12 +64,16 @@ export default class ColumnChooser extends React.Component {
     this.props.onChooseColumn(key, visible)
   }
 
+  resetColumns(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    this.props.onResetColumns()
+  }
+
   onChangeSearch(e) {
     this.setState({searchString: e.target.value})
   }
 
-  getAvailableColumns() {
-
-  }
+  getAvailableColumns() {}
 
 }

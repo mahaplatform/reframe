@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Header from './header/header.js'
 import Table from './table/table.js'
 import Card from './card/cards.js'
@@ -103,7 +102,13 @@ export default class Collection extends React.Component {
     return (
       <div className="collection">
         { shouldShowHeader ? <Header {...this.props} {...this.state} /> : '' }
-        <ActiveView {...this.props} {...this.state} {...this.context} onChooseColumn={this.onChooseColumn.bind(this)} />
+        <ActiveView
+          {...this.props}
+          {...this.state}
+          {...this.context}
+          onChooseColumn={this.onChooseColumn.bind(this)}
+          onResetColumns={this.onResetColumns.bind(this)}
+        />
         {(() => {
           if(this.props.status === 'LOADING') {
             return null // <div className="ui active centered inline loader"></div>
@@ -136,6 +141,23 @@ export default class Collection extends React.Component {
       this.setState({visible: _.difference(this.state.visible, [key])})
       this.saveVisibility(_.difference(this.state.visible, [key]))
     }
+  }
+
+  onResetColumns() {
+    // Reset to default visibility options
+    this.setState({
+      visible: _.map(
+        _.filter(
+          _.each(this.props.columns, function(column, index) {
+            column.index = index;
+            return column;
+          }),
+          {visible: true}
+        ), 'index'
+      )
+    })
+    // Erase stored visibility state
+    this.clearVisibility()
   }
 
   handleSetView(view) {
@@ -180,6 +202,10 @@ export default class Collection extends React.Component {
         err ? cb(null) : cb(val)
       })
     }
+  }
+
+  clearVisibility(cb = _.noop) {
+    localForage.removeItem(`collections.${this.props.id}.visibility`, cb)
   }
 
 }
