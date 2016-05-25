@@ -29,7 +29,7 @@ export default class InfiniteCollection extends React.Component {
       filters: {},
       showFilters: false,
       showExporter: false,
-      sticky: false
+      sticky: true
     }
     this.id = props.id || uid()
   }
