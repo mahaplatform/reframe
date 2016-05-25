@@ -68,7 +68,15 @@ var ColumnChooser = function (_React$Component) {
               _this2.isColumnVisible(i) ? _react2.default.createElement('i', { className: 'toggle on icon' }) : _react2.default.createElement('i', { className: 'toggle off icon' }),
               col.label
             );
-          })
+          }),
+          _react2.default.createElement(
+            'div',
+            { className: 'item', onClick: function onClick(e) {
+                return _this2.resetColumns(e);
+              } },
+            _react2.default.createElement('i', { className: 'refresh icon' }),
+            'Reset Columns'
+          )
         )
       );
     }
@@ -86,6 +94,13 @@ var ColumnChooser = function (_React$Component) {
       this.props.onChooseColumn(key, visible);
     }
   }, {
+    key: 'resetColumns',
+    value: function resetColumns(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.props.onResetColumns();
+    }
+  }, {
     key: 'onChangeSearch',
     value: function onChangeSearch(e) {
       this.setState({ searchString: e.target.value });
@@ -101,9 +116,11 @@ var ColumnChooser = function (_React$Component) {
 ColumnChooser.propTypes = {
   availableColumns: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object).isRequired,
   visibleColumns: _react2.default.PropTypes.array.isRequired,
-  onChooseColumn: _react2.default.PropTypes.function
+  onChooseColumn: _react2.default.PropTypes.function,
+  onResetColumns: _react2.default.PropTypes.function
 };
 ColumnChooser.defaultProps = {
-  onChooseColumn: _lodash2.default.noop
+  onChooseColumn: _lodash2.default.noop,
+  onResetColumns: _lodash2.default.noop
 };
 exports.default = ColumnChooser;

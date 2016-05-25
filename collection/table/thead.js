@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -74,7 +70,8 @@ var Thead = function (_React$Component) {
               nthCell++;
               return _react2.default.createElement(
                 'th',
-                { key: 'column_' + index, style: style.th[nthCell] || {}, className: classes.join(' '), onClick: _this2.handleSort.bind(_this2, column.key) },
+                { key: 'column_' + index, style: style.th[nthCell] || {}, className: classes.join(' '),
+                  onClick: _this2.handleSort.bind(_this2, column.key) },
                 column.label
               );
             }
@@ -86,7 +83,9 @@ var Thead = function (_React$Component) {
               'div',
               { className: 'ui top right pointing dropdown', ref: 'columns_dropdown' },
               _react2.default.createElement('i', { className: 'ui columns icon', onClick: this.handleColumns.bind(this) }),
-              _react2.default.createElement(_columnChooser2.default, { availableColumns: this.props.columns, visibleColumns: this.props.visible, onChooseColumn: this.onChooseColumn.bind(this) })
+              _react2.default.createElement(_columnChooser2.default, { availableColumns: this.props.columns, visibleColumns: this.props.visible,
+                onChooseColumn: this.props.onChooseColumn,
+                onResetColumns: this.props.onResetColumns })
             )
           )
         )
@@ -103,11 +102,6 @@ var Thead = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       $(this.refs.columns_dropdown).dropdown('destroy');
-    }
-  }, {
-    key: 'onChooseColumn',
-    value: function onChooseColumn(key, visible) {
-      this.props.onChooseColumn(key, visible);
     }
   }, {
     key: 'handleCheckAll',
@@ -165,6 +159,7 @@ Thead.defaultProps = {
   onCheckAll: _lodash2.default.noop,
   onClickColumns: _lodash2.default.noop,
   onChooseColumn: _lodash2.default.noop,
+  onResetColumns: _lodash2.default.noop,
   sticky: false,
   surrogate: false,
   columnWidths: []

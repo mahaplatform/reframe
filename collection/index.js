@@ -12,10 +12,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _header = require('./header/header.js');
 
 var _header2 = _interopRequireDefault(_header);
@@ -76,7 +72,10 @@ var Collection = function (_React$Component) {
         'div',
         { className: 'collection' },
         shouldShowHeader ? _react2.default.createElement(_header2.default, _extends({}, this.props, this.state)) : '',
-        _react2.default.createElement(ActiveView, _extends({}, this.props, this.state, this.context, { onChooseColumn: this.onChooseColumn.bind(this) })),
+        _react2.default.createElement(ActiveView, _extends({}, this.props, this.state, this.context, {
+          onChooseColumn: this.onChooseColumn.bind(this),
+          onResetColumns: this.onResetColumns.bind(this)
+        })),
         function () {
           if (_this2.props.status === 'LOADING') {
             return null; // <div className="ui active centered inline loader"></div>
@@ -117,6 +116,19 @@ var Collection = function (_React$Component) {
         this.setState({ visible: _lodash2.default.difference(this.state.visible, [key]) });
         this.saveVisibility(_lodash2.default.difference(this.state.visible, [key]));
       }
+    }
+  }, {
+    key: 'onResetColumns',
+    value: function onResetColumns() {
+      // Reset to default visibility options
+      this.setState({
+        visible: _lodash2.default.map(_lodash2.default.filter(_lodash2.default.each(this.props.columns, function (column, index) {
+          column.index = index;
+          return column;
+        }), { visible: true }), 'index')
+      });
+      // Erase stored visibility state
+      this.clearVisibility();
     }
   }, {
     key: 'handleSetView',
@@ -167,6 +179,31 @@ var Collection = function (_React$Component) {
           err ? cb(null) : cb(val);
         });
       }
+    }
+  }, {
+    key: 'clearVisibility',
+    value: function clearVisibility() {
+      var cb = arguments.length <= 0 || arguments[0] === undefined ? _lodash2.default.noop : arguments[0];
+
+      _localforage2.default.removeItem('collections.' + this.props.id + '.visibility', cb);
+    }
+
+    //
+    // --- STATIC HELPER METHODS ---
+    //
+
+  }], [{
+    key: 'purgeVisibility',
+    value: function purgeVisibility() {
+      _localforage2.default.keys(function (err, keys) {
+        if (err) {
+          throw err;
+        }
+        (0, _lodash2.default)(keys).filter(RegExp.prototype.test.bind(/^collections.*visibility$/i)).forEach(function (k) {
+          return _localforage2.default.removeItem(k);
+        });
+        console.log("Purged cahced table visibility settings");
+      });
     }
   }]);
 
