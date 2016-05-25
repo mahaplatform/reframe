@@ -5,6 +5,10 @@ import Menu from '../src/menu'
 import Config from '../src/utils/config'
 import API from '../src/api'
 
+import Reframe, {Tools} from '../src/index.js'
+window.Reframe = Reframe
+window.ReframeTools = Tools
+
 require('when/monitor/console')
 
 import AppExample from './app/index.jsx'
