@@ -208,4 +208,19 @@ export default class Collection extends React.Component {
     localForage.removeItem(`collections.${this.props.id}.visibility`, cb)
   }
 
+
+  //
+  // --- STATIC HELPER METHODS ---
+  //
+
+  static purgeVisibility() {
+    localForage.keys((err, keys) => {
+        if(err) { throw err }
+        _(keys)
+          .filter(RegExp.prototype.test.bind(/^collections.*visibility$/i))
+          .forEach(k => localForage.removeItem(k))
+        console.log("Purged cahced table visibility settings")
+      })
+  }
+
 }
