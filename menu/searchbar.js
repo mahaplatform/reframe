@@ -55,7 +55,7 @@ var Searchbar = function (_React$Component) {
       };
       return _react2.default.createElement(
         'div',
-        { className: 'ui mobile menu fixed inverted', ref: 'menu' },
+        { className: 'ui mobile menu fixed inverted application-menu', ref: 'menu' },
         _react2.default.createElement(
           'div',
           { className: 'left menu' },

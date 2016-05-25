@@ -72,7 +72,7 @@ var InfiniteCollection = function (_React$Component) {
       filters: {},
       showFilters: false,
       showExporter: false,
-      sticky: true
+      sticky: false
     };
     _this.id = props.id || (0, _random.uid)();
     return _this;
@@ -219,9 +219,16 @@ var InfiniteCollection = function (_React$Component) {
   }, {
     key: 'handleScroll',
     value: function handleScroll(e) {
+      var windowHeight = window.innerHeight;
       var scrollTop = window.scrollY;
+      var tableHeight = $('table[data-reframe-table-id=' + this.id + ']').outerHeight();
       var tableTop = $('table[data-reframe-table-id=' + this.id + ']').offset().top;
-      var topBuffer = 38;
+      var topBuffer = $('.application-menu').first().outerHeight();
+
+      // Check to see if the whole table fits on screen, and exit if it does
+      if (tableHeight < windowHeight) {
+        this.setState({ sticky: false });
+      }
 
       if (tableTop - topBuffer - scrollTop < 0 && this.state.sticky == false) {
         this.setState({ sticky: true });
@@ -241,7 +248,8 @@ InfiniteCollection.contextTypes = {
 InfiniteCollection.defaultProps = {
   client: null,
   collectionActions: [],
-  autoActions: true
+  autoActions: true,
+  sticky: true
 };
 exports.default = InfiniteCollection;
 

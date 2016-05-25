@@ -52,7 +52,7 @@ var TopbarMenu = function (_React$Component) {
         { className: this.props.menu.className },
         _react2.default.createElement(
           'div',
-          { className: 'ui menu fixed inverted', ref: 'menu' },
+          { className: 'ui menu fixed inverted application-menu', ref: 'menu' },
           function () {
             if (_this2.props.menu.left) {
               return _react2.default.createElement(
