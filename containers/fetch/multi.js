@@ -76,23 +76,37 @@ var FetchContainer = function (_React$Component) {
     value: function makeRequest(endpoints) {
       var _this2 = this;
 
-      var allowFailures = this.props.allowFailures;
+      var _props = this.props;
+      var allowFailures = _props.allowFailures;
+      var unwrap = _props.unwrap;
 
-      var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoints', 'client', 'element', 'children']).mapValues(function (p) {
+      var propsPromises = (0, _lodash2.default)(this.props).omit(['className', 'endpoints', 'client', 'element', 'children', 'unwrap']).mapValues(function (p) {
         return (0, _when2.default)(p);
       }).value();
 
       var endpointPromises = _lodash2.default.mapValues(endpoints, function (e) {
         return _this2.api.loadJSON(_lodash2.default.get(e, 'url', e), _lodash2.default.get(e, 'options', {}));
       });
-      var propsPromiseObject = undefined;
+      var propsPromiseObject = void 0;
       if (allowFailures) {
         propsPromiseObject = _keys2.default.settle(_lodash2.default.merge(propsPromises, endpointPromises));
       } else {
         propsPromiseObject = _keys2.default.all(_lodash2.default.merge(propsPromises, endpointPromises));
       }
 
-      propsPromiseObject.then(function (propsData) {
+      function sniffWrappedResponse(resp) {
+        return _lodash2.default.isPlainObject(resp) && _lodash2.default.every(['total_records', 'records'], _lodash2.default.partial(_lodash2.default.has, resp));
+      }
+
+      propsPromiseObject.then(function (data) {
+        return _lodash2.default.mapValues(data, function (v, k) {
+          if (k in endpoints && sniffWrappedResponse(v)) {
+            return v.records;
+          } else {
+            return v;
+          }
+        });
+      }).then(function (propsData) {
         return _this2.setState({ status: READY, propsData: propsData });
       }).catch(function (e) {
         return _this2.setState({ status: ERROR, message: e });
@@ -158,7 +172,8 @@ FetchContainer.propTypes = {
   flatten: _react.PropTypes.bool,
   allowFailures: _react.PropTypes.bool,
   errorComponent: _react.PropTypes.node,
-  autoSync: _react.PropTypes.bool
+  autoSync: _react.PropTypes.bool,
+  unwrap: _react.PropTypes.bool
 };
 FetchContainer.defaultProps = {
   single: false,
@@ -168,7 +183,8 @@ FetchContainer.defaultProps = {
   flatten: false,
   allowFailures: false,
   errorComponent: null,
-  autoSync: true
+  autoSync: true,
+  unwrap: true
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object
