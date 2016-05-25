@@ -9,12 +9,16 @@ class Thead extends React.Component {
     onSort: _.noop,
     onCheckAll: _.noop,
     onClickColumns: _.noop,
-    onChooseColumn: _.noop
+    onChooseColumn: _.noop,
+    sticky: false,
+    surrogate: false,
+    columnWidths: []
   }
 
   render() {
+    let style = this.generateStyle()
     return(
-      <thead>
+      <thead style={style.thead}>
         <tr>
           {(() => {
             if(!_.isEmpty(this.props.batchActions)) {
@@ -31,10 +35,10 @@ class Thead extends React.Component {
                   classes.push('sorted ascending')
                 }
               }
-              return <th key={`column_${index}`} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
+              return <th key={`column_${index}`} style={style.th[index] || {}} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
             }
           })}
-          <th className="collapsing primary center aligned">
+          <th className="collapsing primary center aligned" style={_.last(style.th) || {}}>
             <div className="ui top right pointing dropdown" ref="columns_dropdown">
               <i className="ui columns icon" onClick={this.handleColumns.bind(this)} />
               <ColumnChooser availableColumns={this.props.columns} visibleColumns={this.props.visible} onChooseColumn={this.onChooseColumn.bind(this)}/>
@@ -70,6 +74,30 @@ class Thead extends React.Component {
 
   handleSort(key) {
     this.props.onClickColumnHeader(key)
+  }
+
+  generateStyle() {
+    let {sticky, columnWidths, surrogate} = this.props
+
+    if(sticky && !surrogate) {
+      return {
+        thead: {
+          position: 'fixed',
+          top: 37,
+          zIndex: 5000,
+          opacity: surrogate ? 0.0 : 1.0
+        },
+        th: _.map(columnWidths, w => ({width: w}))
+      }
+    }
+    else {
+      return {
+        thead: {
+          opacity: surrogate ? 0.0 : 1.0
+        },
+        th: []
+      }
+    }
   }
 
 }

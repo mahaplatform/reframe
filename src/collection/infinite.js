@@ -28,7 +28,8 @@ export default class InfiniteCollection extends React.Component {
       sort: props.sort || { key: 'id', order: 'asc' },
       filters: {},
       showFilters: false,
-      showExporter: false
+      showExporter: false,
+      sticky: false
     }
     this.id = props.id || uid()
   }
@@ -65,6 +66,7 @@ export default class InfiniteCollection extends React.Component {
       ...this.props,
       ...this.getCallbacks(),
       id: this.id,
+      sticky: this.state.sticky,
       saveVisibility: !!this.props.id,  // Only save visibility when an ID is set manually
       collectionActions: [
         { key: 'refresh', icon: 'refresh', label: 'Refresh', handler: this.refresh.bind(this) },
@@ -133,6 +135,32 @@ export default class InfiniteCollection extends React.Component {
 
   closeExporter() {
     this.setState({showExporter: false})
+  }
+
+  componentDidMount() {
+    if(this.props.sticky) {
+      this.scrollHandler = _.throttle(this.handleScroll.bind(this), 100)
+      window.addEventListener('scroll', this.scrollHandler)
+    }
+  }
+
+  componentWillUmmount() {
+    if(this.props.sticky) {
+      window.removeEventListener('scroll', this.scrollHandler)
+    }
+  }
+
+  handleScroll(e) {
+    let scrollTop = window.scrollY
+    let tableTop = $(`table[data-reframe-table-id=${this.id}]`).offset().top
+    let topBuffer = 38
+
+    if((tableTop - topBuffer - scrollTop < 0 ) && this.state.sticky == false) {
+      this.setState({sticky: true})
+    }
+    else if((tableTop - topBuffer - scrollTop >= 0 ) && this.state.sticky == true) {
+      this.setState({sticky: false})
+    }
   }
 }
 

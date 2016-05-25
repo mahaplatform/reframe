@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import BatchActions from './batch_actions.js'
-import CollectionActions from './collection_actions.js'
 import _ from 'lodash'
 import Filters from '../filters'
 import pluralize from 'pluralize'

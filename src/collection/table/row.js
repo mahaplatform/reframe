@@ -53,6 +53,10 @@ export default class Row extends React.Component {
     )
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   componentDidMount() {
     $(this.refs.itemMenu).dropdown()
   }

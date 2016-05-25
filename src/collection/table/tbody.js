@@ -45,6 +45,9 @@ class Tbody extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !_.isEqual(nextProps.records, this.props.records)
+  }
 }
 
 export default Tbody
