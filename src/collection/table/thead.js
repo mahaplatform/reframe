@@ -85,7 +85,7 @@ class Thead extends React.Component {
       return {
         thead: {
           position: 'fixed',
-          top: 37,
+          top: $('.application-menu').first().outerHeight(),
           zIndex: 5000,
           opacity: surrogate ? 0.0 : 1.0
         },

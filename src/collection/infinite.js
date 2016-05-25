@@ -153,7 +153,7 @@ export default class InfiniteCollection extends React.Component {
   handleScroll(e) {
     let scrollTop = window.scrollY
     let tableTop = $(`table[data-reframe-table-id=${this.id}]`).offset().top
-    let topBuffer = 38
+    let topBuffer = $('.application-menu').first().outerHeight()
 
     if((tableTop - topBuffer - scrollTop < 0 ) && this.state.sticky == false) {
       this.setState({sticky: true})
