@@ -18,7 +18,8 @@ export default class InfiniteCollection extends React.Component {
   static defaultProps = {
     client: null,
     collectionActions: [],
-    autoActions: true
+    autoActions: true,
+    sticky: true
   }
 
   constructor(props) {
@@ -29,7 +30,7 @@ export default class InfiniteCollection extends React.Component {
       filters: {},
       showFilters: false,
       showExporter: false,
-      sticky: true
+      sticky: false
     }
     this.id = props.id || uid()
   }
@@ -151,9 +152,16 @@ export default class InfiniteCollection extends React.Component {
   }
 
   handleScroll(e) {
+    let windowHeight = window.innerHeight
     let scrollTop = window.scrollY
+    let tableHeight = $(`table[data-reframe-table-id=${this.id}]`).outerHeight()
     let tableTop = $(`table[data-reframe-table-id=${this.id}]`).offset().top
     let topBuffer = $('.application-menu').first().outerHeight()
+
+    // Check to see if the whole table fits on screen, and exit if it does
+    if(tableHeight < windowHeight) {
+      this.setState({sticky: false})
+    }
 
     if((tableTop - topBuffer - scrollTop < 0 ) && this.state.sticky == false) {
       this.setState({sticky: true})
