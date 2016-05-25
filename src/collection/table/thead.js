@@ -17,6 +17,7 @@ class Thead extends React.Component {
 
   render() {
     let style = this.generateStyle()
+    var nthCell = -1
     return(
       <thead style={style.thead}>
         <tr>
@@ -35,7 +36,8 @@ class Thead extends React.Component {
                   classes.push('sorted ascending')
                 }
               }
-              return <th key={`column_${index}`} style={style.th[index] || {}} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
+              nthCell++
+              return <th key={`column_${index}`} style={style.th[nthCell] || {}} className={classes.join(' ')} onClick={this.handleSort.bind(this, column.key)}>{column.label}</th>
             }
           })}
           <th className="collapsing primary center aligned" style={_.last(style.th) || {}}>

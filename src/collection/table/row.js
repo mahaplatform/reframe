@@ -53,8 +53,8 @@ export default class Row extends React.Component {
     )
   }
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(prevProps) {
+    return !_.isEqual(this.props, prevProps);
   }
 
   componentDidMount() {

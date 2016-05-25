@@ -39,7 +39,7 @@ class Table extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.status !== prevProps.status) {
+    if(this.props.status !== prevProps.status || !_.isEqual(prevProps.visible, this.props.visible)) {
       // Force a re-render to realign table headers after content loads and displays
       this.forceUpdate()
     }
