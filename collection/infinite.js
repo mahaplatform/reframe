@@ -72,7 +72,7 @@ var InfiniteCollection = function (_React$Component) {
       filters: {},
       showFilters: false,
       showExporter: false,
-      sticky: false
+      sticky: true
     };
     _this.id = props.id || (0, _random.uid)();
     return _this;
