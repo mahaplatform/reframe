@@ -33,6 +33,15 @@ export default class MultiFetchExamples extends React.Component {
             <RepoInfo/>
           </MultiFetchContainer>
         </div>
+        <div className="ui attached segment">
+          <h2>Unwrapping</h2>
+          <p>The response is wrapped in an API structure, so it's automatically unwrapped by the FetchContainer</p>
+        </div>
+        <div className="ui attached segment">
+          <MultiFetchContainer endpoints={{test_data: '/examples/data.json'}} client={exampleClient}>
+            <NameList/>
+          </MultiFetchContainer>
+        </div>
       </div>
     )
   }
@@ -96,6 +105,39 @@ const RepoList = props => {
                   <td><a href={repo.html_url} target="_blank">{repo.html_url}</a></td>
                   <td>{repo.language}</td>
                   <td>{repo.stargazers_count}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </PresentState>
+    </LoadingContainer>
+  )
+}
+
+const NameList = props => {
+  const names = props.test_data || []
+  return (
+    <LoadingContainer content={props.test_data} useLoader>
+      <EmptyState>
+        <h1>No People</h1>
+      </EmptyState>
+      <PresentState>
+        <table className="ui very basic table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {names.map(person => {
+              return (
+                <tr>
+                  <td>{person.id}</td>
+                  <td>{person.first_name}</td>
+                  <td>{person.last_name}</td>
                 </tr>
               )
             })}

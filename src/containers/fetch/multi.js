@@ -20,7 +20,8 @@ export default class FetchContainer extends React.Component {
     flatten: PropTypes.bool,
     allowFailures: PropTypes.bool,
     errorComponent: PropTypes.node,
-    autoSync: PropTypes.bool
+    autoSync: PropTypes.bool,
+    unwrap: PropTypes.bool
   }
 
   static defaultProps = {
@@ -31,7 +32,8 @@ export default class FetchContainer extends React.Component {
     flatten: false,
     allowFailures: false,
     errorComponent: null,
-    autoSync: true
+    autoSync: true,
+    unwrap: true
   }
 
   static childContextTypes = {
@@ -53,13 +55,15 @@ export default class FetchContainer extends React.Component {
   }
 
   makeRequest(endpoints) {
-    const {allowFailures} = this.props
+    const {allowFailures, unwrap} = this.props
     const propsPromises = _(this.props)
-      .omit([ 'className', 'endpoints', 'client', 'element', 'children' ])
+      .omit([ 'className', 'endpoints', 'client', 'element', 'children', 'unwrap' ])
       .mapValues(p => when(p))
       .value()
 
-    const endpointPromises = _.mapValues(endpoints, e => this.api.loadJSON(_.get(e, 'url', e), _.get(e, 'options', {})))
+    const endpointPromises = _.mapValues(endpoints, e => {
+      return this.api.loadJSON(_.get(e, 'url', e), _.get(e, 'options', {}))
+    })
     let propsPromiseObject
     if(allowFailures) {
       propsPromiseObject = whenKeys.settle(_.merge(propsPromises, endpointPromises))
@@ -68,7 +72,22 @@ export default class FetchContainer extends React.Component {
       propsPromiseObject = whenKeys.all(_.merge(propsPromises, endpointPromises))
     }
 
-    propsPromiseObject.then(propsData => this.setState({status: READY, propsData}))
+    function sniffWrappedResponse(resp) {
+      return _.isPlainObject(resp) && _.every(['total_records', 'records'], _.partial(_.has, resp))
+    }
+
+    propsPromiseObject
+      .then(data => {
+        return _.mapValues(data, (v, k) => {
+          if(k in endpoints && sniffWrappedResponse(v)) {
+            return v.records
+          }
+          else {
+            return v
+          }
+        })
+      })
+      .then(propsData => this.setState({status: READY, propsData}))
       .catch(e => this.setState({ status: ERROR, message: e }))
       .finally(_.noop)
   }
