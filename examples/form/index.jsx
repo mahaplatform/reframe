@@ -47,7 +47,10 @@ export default class FormExamples extends React.Component {
           { code: "phone", label: 'Phone', type: "textfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "number", label: 'Number', type: "numberfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "url", label: 'URL', type: "textfield", placeholder: 'path', prefix: 'http://mysite.com/', required: true },
-          { code: "contact_ids", label: 'Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11], toggle: true},
+        ]},
+        {label: 'Checkboxes and Radios', fields: [
+          { code: "contact_ids", label: 'Contacts', type: "checkboxes", options: contactOptions, defaultValue: ["Bob", "Calvin", "Ron"], toggle: true},
+          { code: "contact_ids", label: 'Dynamic Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11], toggle: true},
           { code: "contact_id", label: 'Contact', type: "radios", endpoint: '/examples/data.json', value: 'id', text: 'first_name' }
         ]},
         { label: 'Textareas', fields: [
@@ -97,3 +100,42 @@ export default class FormExamples extends React.Component {
     this.setState({showHiddenField: !this.state.showHiddenField})
   }
 }
+
+let contactOptions = [
+  {
+    key: "Bob",
+    value: "Bob Belcher"
+  },
+  {
+    key: "Linda",
+    value: "Linda Belcher"
+  },
+  {
+    key: "Tina",
+    value: "Tina Belcher"
+  },
+  {
+    key: "Gene",
+    value: "Gene Belcher"
+  },
+  {
+    key: "Louise",
+    value: "Louise Belcher"
+  },
+  {
+    key: "Hugo",
+    value: "Hugo Habercore"
+  },
+  {
+    key: "Ron",
+    value: "Ron Lynch"
+  },
+  {
+    key: "Calvin",
+    value: "Calvin Fischoeder"
+  },
+  {
+    key: "Felix",
+    value: "Felix Fischoeder"
+  }
+]

@@ -44,6 +44,8 @@ class Checkboxes extends React.Component {
     $(this.refs.control).find('.checkbox').checkbox({
       onChange: this.handleChange.bind(this)
     })
+    // Apply default values
+    this.setValue(this.state.value)
   }
   componentDidUpdate(prevProps, prevState) {
     $(this.refs.control).find('.checkbox').checkbox({
