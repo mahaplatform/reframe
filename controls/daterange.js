@@ -121,20 +121,16 @@ var DateRange = function (_React$Component) {
     key: 'getValue',
     value: function getValue() {
       if (this.state.customRange) {
-        return {
-          start_date: this.refs.start_date_field.getValue(),
-          end_date: this.refs.end_date_field.getValue(),
-          range: this.refs.range_field.getValue()
-        };
+        var _ref;
+
+        return _ref = {}, _defineProperty(_ref, this.props.composite.start_date_field, this.refs.start_date_field.getValue()), _defineProperty(_ref, this.props.composite.end_date_field, this.refs.end_date_field.getValue()), _defineProperty(_ref, this.props.composite.range_field, this.refs.range_field.getValue()), _ref;
       } else {
         var range = this.refs.range_field.getValue();
         if (range) {
+          var _ref2;
+
           var dates = _quickdate2.default.parse(range);
-          return {
-            start_date: dates.start.format('YYYY-MM-DD'),
-            end_date: dates.end.format('YYYY-MM-DD'),
-            range: this.refs.range_field.getValue()
-          };
+          return _ref2 = {}, _defineProperty(_ref2, this.props.composite.start_date_field, dates.start.format('YYYY-MM-DD')), _defineProperty(_ref2, this.props.composite.end_date_field, dates.end.format('YYYY-MM-DD')), _defineProperty(_ref2, this.props.composite.range_field, this.refs.range_field.getValue()), _ref2;
         } else {
           return null;
         }
@@ -159,9 +155,9 @@ var DateRange = function (_React$Component) {
   }, {
     key: 'getReference',
     value: function getReference() {
-      var _ref;
+      var _ref3;
 
-      return _ref = {}, _defineProperty(_ref, this.props.composite.start_date_field, this), _defineProperty(_ref, this.props.composite.end_date_field, this), _defineProperty(_ref, this.props.composite.range_field, this), _ref;
+      return _ref3 = {}, _defineProperty(_ref3, this.props.composite.start_date_field, this), _defineProperty(_ref3, this.props.composite.end_date_field, this), _defineProperty(_ref3, this.props.composite.range_field, this), _ref3;
     }
   }, {
     key: 'dateOptions',

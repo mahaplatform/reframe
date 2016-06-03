@@ -44,9 +44,16 @@ var Checkboxes = function (_React$Component) {
     key: 'render',
     value: function render() {
       var name = this.props.code + '[]';
+      var toggle = this.props.toggle;
+      var toggleClasses = "ui basic small checkboxes toggle button";
       return _react2.default.createElement(
         'div',
         { className: 'grouped fields', ref: 'control' },
+        toggle ? _react2.default.createElement(
+          'div',
+          { className: toggleClasses, onClick: this.toggleAll.bind(this) },
+          'Toggle All'
+        ) : null,
         this.props.options.map(function (option, index) {
           return _react2.default.createElement(
             'div',
@@ -79,10 +86,16 @@ var Checkboxes = function (_React$Component) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
+    value: function componentDidUpdate(prevProps, prevState) {
       $(this.refs.control).find('.checkbox').checkbox({
         onChange: this.handleChange.bind(this)
       });
+
+      // If the options available have changed, reapply the selected values from
+      // the current state
+      if (!_lodash2.default.isEqual(prevProps.options, this.props.options)) {
+        this.setValue(this.state.value);
+      }
     }
   }, {
     key: 'getValue',
@@ -117,6 +130,19 @@ var Checkboxes = function (_React$Component) {
       $(this.refs.control).find('.checkbox').checkbox('set unchecked');
     }
   }, {
+    key: 'toggleAll',
+    value: function toggleAll() {
+      var val = this.getValue();
+      var opts = this.props.options;
+      if (val && val.length < opts.length) {
+        // Fill them all
+        $(this.refs.control).find('.checkbox').checkbox('set checked');
+      } else if (val.length === opts.length) {
+        // Clear them all
+        $(this.refs.control).find('.checkbox').checkbox('set unchecked');
+      }
+    }
+  }, {
     key: 'getReference',
     value: function getReference() {
       return _defineProperty({}, this.props.code, this);
@@ -128,6 +154,7 @@ var Checkboxes = function (_React$Component) {
 
 Checkboxes.defaultProps = {
   onChange: function onChange() {},
-  options: []
+  options: [],
+  toggle: false
 };
 exports.default = Checkboxes;
