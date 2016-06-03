@@ -83,6 +83,8 @@ var Checkboxes = function (_React$Component) {
       $(this.refs.control).find('.checkbox').checkbox({
         onChange: this.handleChange.bind(this)
       });
+      // Apply default values
+      this.setValue(this.state.value);
     }
   }, {
     key: 'componentDidUpdate',
