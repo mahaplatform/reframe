@@ -5,7 +5,8 @@ import _ from 'lodash'
 class Checkboxes extends React.Component {
   static defaultProps = {
     onChange: () => {},
-    options : []
+    options : [],
+    toggle: false
   }
 
   constructor(props) {
@@ -15,8 +16,11 @@ class Checkboxes extends React.Component {
 
   render() {
     var name = this.props.code + '[]'
+    var toggle = this.props.toggle
+    var toggleClasses = "ui basic small right floated checkboxes toggle button"
     return (
       <div className="grouped fields" ref="control">
+        { toggle ? <div className={toggleClasses} onClick={this.toggleAll.bind(this)}>Toggle All</div> : null}
         { this.props.options.map((option, index) => {
           return (
           <div key={`option_${index}`} className="field">
@@ -78,6 +82,19 @@ class Checkboxes extends React.Component {
 
   clearField() {
     $(this.refs.control).find(`.checkbox`).checkbox('set unchecked')
+  }
+
+  toggleAll() {
+    let val = this.getValue()
+    let opts = this.props.options
+    if(val && val.length < opts.length) {
+      // Fill them all
+      $(this.refs.control).find(`.checkbox`).checkbox('set checked')
+    }
+    else if (val.length === opts.length) {
+      // Clear them all
+      $(this.refs.control).find(`.checkbox`).checkbox('set unchecked')
+    }
   }
 
   getReference() {

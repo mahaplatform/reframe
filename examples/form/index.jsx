@@ -47,7 +47,7 @@ export default class FormExamples extends React.Component {
           { code: "phone", label: 'Phone', type: "textfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "number", label: 'Number', type: "numberfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "url", label: 'URL', type: "textfield", placeholder: 'path', prefix: 'http://mysite.com/', required: true },
-          { code: "contact_ids", label: 'Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11] },
+          { code: "contact_ids", label: 'Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11], toggle: true},
           { code: "contact_id", label: 'Contact', type: "radios", endpoint: '/examples/data.json', value: 'id', text: 'first_name' }
         ]},
         { label: 'Textareas', fields: [
