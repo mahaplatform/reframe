@@ -17,7 +17,7 @@ class Checkboxes extends React.Component {
   render() {
     var name = this.props.code + '[]'
     var toggle = this.props.toggle
-    var toggleClasses = "ui basic small right floated checkboxes toggle button"
+    var toggleClasses = "ui basic small checkboxes toggle button"
     return (
       <div className="grouped fields" ref="control">
         { toggle ? <div className={toggleClasses} onClick={this.toggleAll.bind(this)}>Toggle All</div> : null}
