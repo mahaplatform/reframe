@@ -47,7 +47,7 @@ export default class FormExamples extends React.Component {
           { code: "phone", label: 'Phone', type: "textfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "number", label: 'Number', type: "numberfield", placeholder: 'XXX-XXX-XXXX', required: true },
           { code: "url", label: 'URL', type: "textfield", placeholder: 'path', prefix: 'http://mysite.com/', required: true },
-          { code: "contact_ids", label: 'Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name' },
+          { code: "contact_ids", label: 'Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11] },
           { code: "contact_id", label: 'Contact', type: "radios", endpoint: '/examples/data.json', value: 'id', text: 'first_name' }
         ]},
         { label: 'Textareas', fields: [
@@ -56,7 +56,8 @@ export default class FormExamples extends React.Component {
         ]},
         {
           label: 'Date and Time', fields: [
-          { code: 'sample_date', label: 'Date Range', type: 'daterange', composite: {
+          { code: 'date_range_control', label: 'Date Range', type: 'daterange' },
+          { code: 'sample_date', label: 'Custom Date Range', type: 'daterange', composite: {
             start_date_field: 'sample_start_date',
             end_date_field  : 'sample_end_date',
             range_field     : 'sample_range'

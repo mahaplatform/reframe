@@ -41,10 +41,16 @@ class Checkboxes extends React.Component {
       onChange: this.handleChange.bind(this)
     })
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     $(this.refs.control).find('.checkbox').checkbox({
       onChange: this.handleChange.bind(this)
     })
+
+    // If the options available have changed, reapply the selected values from
+    // the current state
+    if(!_.isEqual(prevProps.options, this.props.options)) {
+      this.setValue(this.state.value)
+    }
   }
 
   getValue() {
