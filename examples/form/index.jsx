@@ -54,6 +54,14 @@ export default class FormExamples extends React.Component {
           { code: 'simple', label: 'Simple Textarea', type: 'textarea' },
           { code: 'html', label: 'HTML Textarea', type: 'textarea', html: true }
         ]},
+        {
+          label: 'Date and Time', fields: [
+          { code: 'sample_date', label: 'Date Range', type: 'daterange', composite: {
+            start_date_field: 'sample_start_date',
+            end_date_field  : 'sample_end_date',
+            range_field     : 'sample_range'
+          } }
+        ]},
         { label: 'Visibility', fields: [
           { code: 'visible_field', label: 'Visible Field', type: 'textfield', instructions: 'Type "show" to reveal an extra field', show: true },
           { code: 'toggle_hidden_field', text: 'Toggle Hidden Field', type: 'button', onPress: this.toggleHiddenField.bind(this)},

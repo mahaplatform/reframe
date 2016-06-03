@@ -88,9 +88,9 @@ export default class DateRange extends React.Component {
   getValue() {
     if (this.state.customRange) {
       return {
-        start_date: this.refs.start_date_field.getValue(),
-        end_date  : this.refs.end_date_field.getValue(),
-        range     : this.refs.range_field.getValue()
+        [this.props.composite.start_date_field] : this.refs.start_date_field.getValue(),
+        [this.props.composite.end_date_field]   : this.refs.end_date_field.getValue(),
+        [this.props.composite.range_field]      : this.refs.range_field.getValue()
       }
     }
     else {
@@ -98,9 +98,9 @@ export default class DateRange extends React.Component {
       if (range) {
         let dates = Quickdate.parse(range)
         return {
-          start_date: dates.start.format('YYYY-MM-DD'),
-          end_date  : dates.end.format('YYYY-MM-DD'),
-          range     : this.refs.range_field.getValue()
+          [this.props.composite.start_date_field]: dates.start.format('YYYY-MM-DD'),
+          [this.props.composite.end_date_field]  : dates.end.format('YYYY-MM-DD'),
+          [this.props.composite.range_field]     : this.refs.range_field.getValue()
         }
       }
       else {
