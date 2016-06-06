@@ -39,7 +39,8 @@ export default class FetchContainer extends React.Component {
     flatten: false,
     injectAs: 'data',
     responseField: null,
-    autoSync: true
+    autoSync: true,
+    syncLoading: false
   }
 
   static childContextTypes = {
@@ -81,7 +82,9 @@ export default class FetchContainer extends React.Component {
   }
 
   render() {
-    let finalProps = {}
+    let finalProps = {
+      status: this.state.status
+    }
 
     if ( this.state.endpointData ) {
 
@@ -121,6 +124,10 @@ export default class FetchContainer extends React.Component {
 
   sync() {
     this.makeRequest(this.props.endpoint, this.props.endpointOptions)
+    if(this.props.syncLoading) {
+      this.setState({status: AWAITING})
+      this.forceUpdate()
+    }
   }
 
   getChildContext() {
@@ -145,5 +152,3 @@ export default class FetchContainer extends React.Component {
     }
   }
 }
-
-//export {PresentState, LoadingState, EmptyState, ErrorState} from 'snax/containers/loading'
