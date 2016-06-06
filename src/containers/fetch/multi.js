@@ -33,7 +33,8 @@ export default class FetchContainer extends React.Component {
     allowFailures: false,
     errorComponent: null,
     autoSync: true,
-    unwrap: true
+    unwrap: true,
+    syncLoading: false
   }
 
   static childContextTypes = {
@@ -109,6 +110,10 @@ export default class FetchContainer extends React.Component {
 
   sync() {
     this.makeRequest(this.props.endpoints)
+    if(this.props.syncLoading) {
+      this.setState({status: AWAITING})
+      this.forceUpdate()
+    }
   }
 
   getChildContext() {
