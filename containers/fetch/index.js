@@ -104,7 +104,9 @@ var FetchContainer = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var finalProps = {};
+      var finalProps = {
+        status: this.state.status
+      };
 
       if (this.state.endpointData) {
 
@@ -136,6 +138,10 @@ var FetchContainer = function (_React$Component) {
     key: 'sync',
     value: function sync() {
       this.makeRequest(this.props.endpoint, this.props.endpointOptions);
+      if (this.props.syncLoading) {
+        this.setState({ status: AWAITING });
+        this.forceUpdate();
+      }
     }
   }, {
     key: 'getChildContext',
@@ -166,9 +172,6 @@ var FetchContainer = function (_React$Component) {
   return FetchContainer;
 }(_react2.default.Component);
 
-//export {PresentState, LoadingState, EmptyState, ErrorState} from 'snax/containers/loading'
-
-
 FetchContainer.propTypes = {
   endpoint: _react2.default.PropTypes.string.isRequired,
   endpointOptions: _react2.default.PropTypes.object.isRequired,
@@ -196,7 +199,8 @@ FetchContainer.defaultProps = {
   flatten: false,
   injectAs: 'data',
   responseField: null,
-  autoSync: true
+  autoSync: true,
+  syncLoading: false
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object

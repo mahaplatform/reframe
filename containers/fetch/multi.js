@@ -134,6 +134,10 @@ var FetchContainer = function (_React$Component) {
     key: 'sync',
     value: function sync() {
       this.makeRequest(this.props.endpoints);
+      if (this.props.syncLoading) {
+        this.setState({ status: AWAITING });
+        this.forceUpdate();
+      }
     }
   }, {
     key: 'getChildContext',
@@ -184,7 +188,8 @@ FetchContainer.defaultProps = {
   allowFailures: false,
   errorComponent: null,
   autoSync: true,
-  unwrap: true
+  unwrap: true,
+  syncLoading: false
 };
 FetchContainer.childContextTypes = {
   container: _react2.default.PropTypes.object
