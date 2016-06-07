@@ -95,6 +95,17 @@ var DateRange = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (this.props.defaultValue) {
+        _lodash2.default.forEach(this.props.defaultValue, function (v, k) {
+          _this2.setCompositeValue(k, v);
+        });
+      }
+    }
+  }, {
     key: 'handleSelectDateRange',
     value: function handleSelectDateRange() {
       var range = this.refs.range_field.getValue();
@@ -141,7 +152,7 @@ var DateRange = function (_React$Component) {
     value: function setCompositeValue(key, value) {
       var rComposite = _lodash2.default.invert(this.props.composite);
       this.refs[rComposite[key]].setValue(value);
-      if (rComposite[key] == 'range_field' && value == false) {
+      if (rComposite[key] == 'range_field' && (value == false || value == 'custom')) {
         this.setState({ customRange: true });
       }
     }
