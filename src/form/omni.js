@@ -51,7 +51,7 @@ export default class OmniForm extends React.Component {
 
   render() {
     return (
-      <ValidatedForm ref="innerForm" {...this.applyProps()} {...this.attachCallbacks()} />
+      <ValidatedForm id={this.id} ref="innerForm" {...this.applyProps()} {...this.attachCallbacks()} />
     )
   }
 
