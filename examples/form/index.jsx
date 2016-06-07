@@ -50,7 +50,7 @@ export default class FormExamples extends React.Component {
         ]},
         {label: 'Checkboxes and Radios', fields: [
           { code: "contact_ids", label: 'Contacts', type: "checkboxes", options: contactOptions, defaultValue: ["Bob", "Calvin", "Ron"], toggle: true},
-          { code: "contact_ids", label: 'Dynamic Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11], toggle: true},
+          { code: "dynamic_contact_ids", label: 'Dynamic Contacts', type: "checkboxes", endpoint: '/examples/data.json', value: 'id', text: 'first_name', defaultValue: [3, 6, 11], toggle: true},
           { code: "contact_id", label: 'Contact', type: "radios", endpoint: '/examples/data.json', value: 'id', text: 'first_name' }
         ]},
         { label: 'Textareas', fields: [
