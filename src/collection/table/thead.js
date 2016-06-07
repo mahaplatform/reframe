@@ -33,6 +33,9 @@ class Thead extends React.Component {
           { this.props.columns.map((column, index) => {
             if(_.includes(this.props.visible, index)) {
               let classes = (!column.primary) ? ['secondary'] : []
+              if(column.collapsing) {
+                classes.push('collapsing')
+              }
               if(column.key === this.props.sort.key) {
                 if(this.props.sort.order == 'descending' || this.props.sort.order == 'desc') {
                   classes.push('sorted descending')
