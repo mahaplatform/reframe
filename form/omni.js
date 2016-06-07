@@ -87,7 +87,7 @@ var OmniForm = function (_React$Component) {
   _createClass(OmniForm, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_validated2.default, _extends({ ref: 'innerForm' }, this.applyProps(), this.attachCallbacks()));
+      return _react2.default.createElement(_validated2.default, _extends({ id: this.id, ref: 'innerForm' }, this.applyProps(), this.attachCallbacks()));
     }
   }, {
     key: 'componentDidMount',
