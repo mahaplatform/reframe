@@ -143,6 +143,7 @@ var Checkboxes = function (_React$Component) {
         // Clear them all
         $(this.refs.control).find('.checkbox').checkbox('set unchecked');
       }
+      this.handleChange();
     }
   }, {
     key: 'getReference',
