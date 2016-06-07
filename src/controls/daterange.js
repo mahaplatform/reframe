@@ -62,6 +62,14 @@ export default class DateRange extends React.Component {
     )
   }
 
+  componentDidMount() {
+    if(this.props.defaultValue) {
+      _.forEach(this.props.defaultValue, (v, k) => {
+        this.setCompositeValue(k, v)
+      })
+    }
+  }
+
   handleSelectDateRange() {
     let range = this.refs.range_field.getValue()
     if(range == null) {
@@ -112,7 +120,7 @@ export default class DateRange extends React.Component {
   setCompositeValue(key, value) {
     let rComposite = _.invert(this.props.composite)
     this.refs[rComposite[key]].setValue(value)
-    if (rComposite[key] == 'range_field' && value == false) {
+    if (rComposite[key] == 'range_field' && (value == false || value == 'custom')) {
       this.setState({customRange: true})
     }
   }

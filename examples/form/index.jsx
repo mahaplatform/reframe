@@ -59,7 +59,11 @@ export default class FormExamples extends React.Component {
         ]},
         {
           label: 'Date and Time', fields: [
-          { code: 'date_range_control', label: 'Date Range', type: 'daterange' },
+          { code: 'date_range_control', label: 'Date Range', type: 'daterange', defaultValue: {
+            range: 'custom',
+            start_date: '2016-01-01',
+            end_date: '2016-05-01'
+          } },
           { code: 'sample_date', label: 'Custom Date Range', type: 'daterange', composite: {
             start_date_field: 'sample_start_date',
             end_date_field  : 'sample_end_date',
