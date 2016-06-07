@@ -60,6 +60,9 @@ var Thead = function (_React$Component) {
           this.props.columns.map(function (column, index) {
             if (_lodash2.default.includes(_this2.props.visible, index)) {
               var classes = !column.primary ? ['secondary'] : [];
+              if (column.collapsing) {
+                classes.push('collapsing');
+              }
               if (column.key === _this2.props.sort.key) {
                 if (_this2.props.sort.order == 'descending' || _this2.props.sort.order == 'desc') {
                   classes.push('sorted descending');
