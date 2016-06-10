@@ -118,7 +118,7 @@ var Checkboxes = function (_React$Component) {
           $(_this2.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
         });
       } else {
-        $(this.refs.control).find('.checkbox[data-value=' + v + ']').checkbox('set checked');
+        $(this.refs.control).find('.checkbox[data-value=' + value + ']').checkbox('set checked');
       }
     }
   }, {
