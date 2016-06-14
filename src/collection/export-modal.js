@@ -89,17 +89,17 @@ export default class ExportModal extends React.Component {
   }
 
   exportXls() {
-    window.location = `${this.props.exportUrl}.xlsx?fields=${this.getFields()}`
+    window.location = `${this.props.exportUrl}.xlsx?fields=${this.getFields()}&${this.props.query}`
     if(this.props.autoClose) this.props.onCancel()
   }
 
   exportCsv() {
-    window.location = `${this.props.exportUrl}.csv?fields=${this.getFields()}`
+    window.location = `${this.props.exportUrl}.csv?fields=${this.getFields()}&${this.props.query}`
     if(this.props.autoClose) this.props.onCancel()
   }
 
   exportTsv() {
-    window.location = `${this.props.exportUrl}.tsv?fields=${this.getFields()}`
+    window.location = `${this.props.exportUrl}.tsv?fields=${this.getFields()}&${this.props.query}`
     if(this.props.autoClose) this.props.onCancel()
   }
 

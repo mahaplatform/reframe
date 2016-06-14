@@ -40,6 +40,7 @@ export default class InfiniteCollection extends React.Component {
     const modalOptions = {
       onCancel: this.closeExporter.bind(this),
       fields: this.props.columns,
+      query: this.getQueryString(),
       exportUrl: this.props.exportUrl || `${exportUrlPrefix}/${this.props.endpoint}`.replace(/([^:])\/+/gi, '$1/')
     }
     return (
@@ -122,8 +123,13 @@ export default class InfiniteCollection extends React.Component {
   getQuery() {
     const sort = {[this.state.sort.key]: this.state.sort.order}
     const query = this.state.filters
-    const parameters = FilterContextHelper.toQueryParams(new FilterContext({sort, query}))
-    return parameters
+    return FilterContextHelper.toQueryParams(new FilterContext({ sort, query }))
+  }
+
+  getQueryString() {
+    const sort = {[this.state.sort.key]: this.state.sort.order}
+    const query = this.state.filters
+    return FilterContextHelper.toQueryString(new FilterContext({ sort, query }))
   }
 
   refresh() {
