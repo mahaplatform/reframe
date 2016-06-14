@@ -74,7 +74,7 @@ class Checkboxes extends React.Component {
       })
     }
     else {
-      $(this.refs.control).find(`.checkbox[data-value=${v}]`).checkbox('set checked')
+      $(this.refs.control).find(`.checkbox[data-value=${value}]`).checkbox('set checked')
     }
   }
 
