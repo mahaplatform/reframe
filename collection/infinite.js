@@ -85,6 +85,7 @@ var InfiniteCollection = function (_React$Component) {
       var modalOptions = {
         onCancel: this.closeExporter.bind(this),
         fields: this.props.columns,
+        query: this.getQueryString(),
         exportUrl: this.props.exportUrl || (exportUrlPrefix + '/' + this.props.endpoint).replace(/([^:])\/+/gi, '$1/')
       };
       return _react2.default.createElement(
@@ -135,9 +136,9 @@ var InfiniteCollection = function (_React$Component) {
             var key = _this2.state.sort.key;
             _this2.setState({ sort: { key: key, order: order } });
           } else {
-            var order = 'asc';
-            var key = col;
-            _this2.setState({ sort: { key: key, order: order } });
+            var _order = 'asc';
+            var _key = col;
+            _this2.setState({ sort: { key: _key, order: _order } });
           }
           _lodash2.default.defer(function () {
             return _this2.refs.container.reset();
@@ -179,8 +180,14 @@ var InfiniteCollection = function (_React$Component) {
     value: function getQuery() {
       var sort = _defineProperty({}, this.state.sort.key, this.state.sort.order);
       var query = this.state.filters;
-      var parameters = _filter_context_helper2.default.toQueryParams(new _filter_context2.default({ sort: sort, query: query }));
-      return parameters;
+      return _filter_context_helper2.default.toQueryParams(new _filter_context2.default({ sort: sort, query: query }));
+    }
+  }, {
+    key: 'getQueryString',
+    value: function getQueryString() {
+      var sort = _defineProperty({}, this.state.sort.key, this.state.sort.order);
+      var query = this.state.filters;
+      return _filter_context_helper2.default.toQueryString(new _filter_context2.default({ sort: sort, query: query }));
     }
   }, {
     key: 'refresh',

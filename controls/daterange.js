@@ -173,7 +173,7 @@ var DateRange = function (_React$Component) {
   }, {
     key: 'dateOptions',
     value: function dateOptions() {
-      return [{ key: "#@Y", value: "This Year" }, { key: "#-1Y", value: "Last Year" }, { key: "#@Q", value: "This Quarter" }, { key: "#-1Q", value: "Last Quarter" }, { key: "#@M", value: "This Month" }, { key: "#-1M", value: "Last Month" }, { key: "#@w", value: "This Week" }, { key: "#-1W", value: "Last Week" }, { key: "@y", value: "Year to Date" }, { key: "-10Y", value: "Life to Date" }, { key: "-30d", value: "Last 30 Days" }, { key: "-60d", value: "Last 60 Days" }, { key: "custom", value: "Custom" }];
+      return [{ key: "#@Y", value: "This Year" }, { key: "#-1Y", value: "Last Year" }, { key: "#@Q", value: "This Quarter" }, { key: "#-1Q", value: "Last Quarter" }, { key: "#@M", value: "This Month" }, { key: "#-1M", value: "Last Month" }, { key: "#@w", value: "This Week" }, { key: "#-1w", value: "Last Week" }, { key: "@y", value: "Year to Date" }, { key: "-10Y", value: "Life to Date" }, { key: "-30d", value: "Last 30 Days" }, { key: "-60d", value: "Last 60 Days" }, { key: "custom", value: "Custom" }];
     }
   }]);
 
