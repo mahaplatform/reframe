@@ -148,7 +148,7 @@ export default class DateRange extends React.Component {
       {key: "#@M", value: "This Month"},
       {key: "#-1M", value: "Last Month"},
       {key: "#@w", value: "This Week"},
-      {key: "#-1W", value: "Last Week"},
+      {key: "#-1w", value: "Last Week"},
       {key: "@y", value: "Year to Date"},
       {key: "-10Y", value: "Life to Date"},
       {key: "-30d", value: "Last 30 Days"},
