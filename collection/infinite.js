@@ -136,9 +136,9 @@ var InfiniteCollection = function (_React$Component) {
             var key = _this2.state.sort.key;
             _this2.setState({ sort: { key: key, order: order } });
           } else {
-            var _order = 'asc';
-            var _key = col;
-            _this2.setState({ sort: { key: _key, order: _order } });
+            var order = 'asc';
+            var key = col;
+            _this2.setState({ sort: { key: key, order: order } });
           }
           _lodash2.default.defer(function () {
             return _this2.refs.container.reset();

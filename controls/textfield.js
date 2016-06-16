@@ -44,15 +44,21 @@ var Textfield = function (_React$Component) {
   _createClass(Textfield, [{
     key: 'render',
     value: function render() {
-      if (this.props.prefix) {
+      var _this2 = this;
+
+      if (this.props.prefix || this.props.suffix) {
         return _react2.default.createElement(
           'div',
-          { className: 'ui labeled input' },
-          _react2.default.createElement(
-            'div',
-            { className: 'ui label' },
-            this.props.prefix
-          ),
+          { className: 'ui left right labeled input' },
+          function () {
+            if (_this2.props.prefix) {
+              return _react2.default.createElement(
+                'div',
+                { className: 'ui label' },
+                _this2.props.prefix
+              );
+            }
+          }(),
           _react2.default.createElement('input', { value: this.state.value,
             ref: 'control',
             autoComplete: 'off',
@@ -61,7 +67,16 @@ var Textfield = function (_React$Component) {
             type: 'text',
             name: this.props.code,
             id: this.props.code,
-            placeholder: this.props.placeholder })
+            placeholder: this.props.placeholder }),
+          function () {
+            if (_this2.props.suffix) {
+              return _react2.default.createElement(
+                'div',
+                { className: 'ui label' },
+                _this2.props.suffix
+              );
+            }
+          }()
         );
       } else {
         return _react2.default.createElement('input', { value: this.state.value,
@@ -125,6 +140,7 @@ var Textfield = function (_React$Component) {
 Textfield.propTypes = {
   code: _react2.default.PropTypes.string,
   prefix: _react2.default.PropTypes.string,
+  suffix: _react2.default.PropTypes.string,
   disabled: _react2.default.PropTypes.bool,
   placeholder: _react2.default.PropTypes.string,
   defaultValue: _react2.default.PropTypes.string,
@@ -132,6 +148,8 @@ Textfield.propTypes = {
 };
 Textfield.defaultProps = {
   code: null,
+  prefix: null,
+  suffix: null,
   disabled: false,
   placeholder: '',
   defaultValue: '',
