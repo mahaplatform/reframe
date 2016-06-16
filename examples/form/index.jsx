@@ -49,6 +49,8 @@ export default class FormExamples extends React.Component {
           { code: "prefix", label: 'Prefix', type: "textfield", placeholder: 'path', prefix: 'http://', required: true },
           { code: "suffix", label: 'Suffix', type: "textfield", placeholder: 'path', suffix: '.mysite.com', required: true },
           { code: "url", label: 'URL', type: "textfield", placeholder: 'path', prefix: 'http://', suffix: '.mysite.com', required: true },
+          { code: "cash", label: 'Cash', type: "textfield", placeholder: '0.00', prefix: '$', format: '0.00', required: true },
+          { code: "percent", label: 'Percent', type: "textfield", placeholder: '0.00', suffix: '%', format: '0.00', required: true },
         ]},
         {label: 'Checkboxes and Radios', fields: [
           { code: "contact_ids", label: 'Contacts', type: "checkboxes", options: contactOptions, defaultValue: ["Bob", "Calvin", "Ron"], toggle: true},
