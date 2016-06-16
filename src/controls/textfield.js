@@ -7,6 +7,7 @@ class Textfield extends React.Component {
   static propTypes = {
     code: React.PropTypes.string,
     prefix: React.PropTypes.string,
+    suffix: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     defaultValue: React.PropTypes.string,
@@ -15,6 +16,8 @@ class Textfield extends React.Component {
 
   static defaultProps = {
     code         : null,
+    prefix       : null,
+    suffix       : null,
     disabled     : false,
     placeholder  : '',
     defaultValue : '',
@@ -29,19 +32,30 @@ class Textfield extends React.Component {
   }
 
   render() {
-    if(this.props.prefix) {
-      return <div className="ui labeled input">
-               <div className="ui label">{this.props.prefix}</div>
-               <input value={this.state.value}
-                      ref="control"
-                      autoComplete="off"
-                      onChange={this.handleChange.bind(this)}
-                      onBlur={this.handleBlur.bind(this)}
-                      type="text"
-                      name={this.props.code}
-                      id={this.props.code}
-                      placeholder={this.props.placeholder} />
-      </div>
+    if(this.props.prefix || this.props.suffix) {
+      return (
+        <div className="ui left right labeled input">
+          {(() => {
+            if(this.props.prefix) {
+              return <div className="ui label">{this.props.prefix}</div>
+            }
+          })()}
+          <input value={this.state.value}
+                  ref="control"
+                  autoComplete="off"
+                  onChange={this.handleChange.bind(this)}
+                  onBlur={this.handleBlur.bind(this)}
+                  type="text"
+                  name={this.props.code}
+                  id={this.props.code}
+                  placeholder={this.props.placeholder} />
+          {(() => {
+            if(this.props.suffix) {
+              return <div className="ui label">{this.props.suffix}</div>
+            }
+          })()}
+        </div>
+      )
     } else {
       return <input value={this.state.value}
                     ref="control"
