@@ -42,7 +42,7 @@ class Numberfield extends React.Component {
               return <div className="ui label">{this.props.prefix}</div>
             }
           })()}
-          return <input value={this.state.value}
+          <input value={this.state.value}
                         ref="control"
                         autoComplete="off"
                         onChange={this.handleChange.bind(this)}
