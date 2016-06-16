@@ -63,7 +63,6 @@ var Numberfield = function (_React$Component) {
               );
             }
           }(),
-          'return ',
           _react2.default.createElement('input', { value: this.state.value,
             ref: 'control',
             autoComplete: 'off',
