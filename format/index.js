@@ -104,7 +104,7 @@ var Status = function Status(props) {
 };
 
 var CheckTimes = function CheckTimes(props) {
-  return props.value !== false && !_lodash2.default.isNull(props.value) || props.value === true ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('i', { className: 'icon red times' });
+  return props.value !== false && !_lodash2.default.isNull(props.value) || props.value === true ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('i', { className: 'icon red remove' });
 };
 
 var Check = function Check(props) {
