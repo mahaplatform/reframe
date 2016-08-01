@@ -10,13 +10,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _omni = require('../form/omni');
 
 var _omni2 = _interopRequireDefault(_omni);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48,7 +48,7 @@ var CollectionFilters = function (_React$Component) {
           id: 'collection_filter_form',
           style: { marginBottom: 12 },
           sections: [{ fields: this.props.fields }],
-          onFieldChange: _.debounce(function () {
+          onFieldChange: _lodash2.default.debounce(function () {
             return _this2.refs.filter_form.submit();
           }, 300),
           onSubmit: this.props.onFilter,

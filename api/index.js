@@ -79,7 +79,7 @@ var _ = require('lodash');
 var when = require('when');
 var pipeline = require('when/pipeline');
 
-// Provides automatic detection of MIME types. Detects JSON and converts to objects/arrays.
+// Provides automatic detection of MIME typefilter_forms. Detects JSON and converts to objects/arrays.
 // Documented at https://github.com/cujojs/rest/blob/master/docs/interceptors.md#mime-interceptor
 var _mime = require('rest/interceptor/mime');
 
