@@ -54,7 +54,7 @@ var Status = (props) => {
 }
 
 var CheckTimes = (props) => {
-  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <i className="icon red times" />
+  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <i className="icon red remove" />
 }
 
 var Check = (props) => {

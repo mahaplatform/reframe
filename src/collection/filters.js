@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Form from '../form/omni'
+import _ from 'lodash'
 
 export default class CollectionFilters extends React.Component {
   static defaultProps = {
