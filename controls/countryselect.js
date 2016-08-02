@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1527,7 +1531,7 @@ var Countryselect = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      $(this.refs.control).dropdown('setting', 'onChange', _.noop);
+      $(this.refs.control).dropdown('setting', 'onChange', _lodash2.default.noop);
       $(this.refs.control).dropdown('set selected', value);
       $(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
     }
@@ -1539,7 +1543,7 @@ var Countryselect = function (_React$Component) {
   }, {
     key: 'clearField',
     value: function clearField() {
-      $(this.refs.control).dropdown('setting', 'onChange', _.noop);
+      $(this.refs.control).dropdown('setting', 'onChange', _lodash2.default.noop);
       $(this.refs.control).dropdown('clear');
       $(this.refs.control).dropdown('setting', 'onChange', this.handleChange.bind(this));
     }

@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -83,7 +87,7 @@ var Checkbox = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _.noop);
+      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _lodash2.default.noop);
       if (value === 1 || value === true) {
         $(this.refs.checkbox_ui).checkbox('set checked');
       } else {
@@ -94,7 +98,7 @@ var Checkbox = function (_React$Component) {
   }, {
     key: 'clearField',
     value: function clearField() {
-      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _.noop);
+      $(this.refs.checkbox_ui).checkbox('setting', 'onChange', _lodash2.default.noop);
       $(this.refs.checkbox_ui).checkbox('set unchecked');
       $(this.refs.checkbox_ui).checkbox('setting', 'onChange', this.handleChange.bind(this));
     }

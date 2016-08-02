@@ -53,7 +53,7 @@ var BatchActions = function (_React$Component) {
           this.props.batchActions.map(function (action, index) {
             return _react2.default.createElement(
               'div',
-              { className: 'item', key: 'batch_action_' + index, onClick: acion.handler },
+              { className: 'item', key: 'batch_action_' + index, onClick: action.handler },
               action.label
             );
           })

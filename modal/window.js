@@ -24,6 +24,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73,7 +77,7 @@ var Window = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'actions' },
-            _.map(this.getButtons(), function (button) {
+            _lodash2.default.map(this.getButtons(), function (button) {
               return _react2.default.createElement(
                 'div',
                 { className: 'ui ' + button.color + ' button', onClick: button.handler },

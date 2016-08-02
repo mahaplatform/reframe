@@ -137,7 +137,7 @@ var Header = function (_React$Component) {
         return _react2.default.createElement('div', { className: 'borderless item' });
       }
       if (recordCount !== null) {
-        var inflection = undefined;
+        var inflection = void 0;
         if (_lodash2.default.isArray(entity)) {
           inflection = recordCount !== 1 ? entity[1] : entity[0];
         } else {

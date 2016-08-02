@@ -18,6 +18,10 @@ var _tab = require('./tab.js');
 
 var _tab2 = _interopRequireDefault(_tab);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38,8 +42,8 @@ var Tabbed = function (_React$Component) {
   _createClass(Tabbed, [{
     key: 'render',
     value: function render() {
-      var activeRoute = _.find(this.props.tabs, { route: this.props.location.pathname });
-      var active = !_.isUndefined(activeRoute) ? activeRoute.route : this.props.tabs[0].route;
+      var activeRoute = _lodash2.default.find(this.props.tabs, { route: this.props.location.pathname });
+      var active = !_lodash2.default.isUndefined(activeRoute) ? activeRoute.route : this.props.tabs[0].route;
       var klass = ['ui', 'top', 'attached', 'tabular'];
       if (this.props.even) {
         var sizes = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
