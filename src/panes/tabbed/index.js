@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Tab from './tab.js'
+import _ from 'lodash'
 
 class Tabbed extends React.Component {
 

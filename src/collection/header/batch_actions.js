@@ -11,7 +11,7 @@ class BatchActions extends React.Component {
         <div className="default text">With Selected</div>
         <div className="menu">
           { this.props.batchActions.map((action, index) => {
-            return <div className="item" key={`batch_action_${index}`} onClick={acion.handler}>{action.label}</div>
+            return <div className="item" key={`batch_action_${index}`} onClick={action.handler}>{action.label}</div>
           })}
         </div>
       </div>
