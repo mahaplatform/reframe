@@ -177,7 +177,7 @@ var OmniForm = function (_React$Component) {
   }, {
     key: 'handleAPIResponse',
     value: function handleAPIResponse(response) {
-      this.handleSubmitSuccess(this.state.pendingData);
+      this.handleSubmitSuccess(response);
       return response;
     }
   }, {
@@ -188,7 +188,7 @@ var OmniForm = function (_React$Component) {
       var errors = _errResponse$entity.errors;
       var message = _errResponse$entity.message;
 
-      var formMessage = void 0;
+      var formMessage = undefined;
       switch (code) {
         case 422:
           formMessage = {
