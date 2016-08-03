@@ -177,7 +177,7 @@ var OmniForm = function (_React$Component) {
   }, {
     key: 'handleAPIResponse',
     value: function handleAPIResponse(response) {
-      this.handleSubmitSuccess(response);
+      this.handleSubmitSuccess(response.entity);
       return response;
     }
   }, {
