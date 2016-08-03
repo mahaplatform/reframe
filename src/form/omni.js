@@ -125,7 +125,7 @@ export default class OmniForm extends React.Component {
   }
 
   handleAPIResponse(response) {
-    this.handleSubmitSuccess(response)
+    this.handleSubmitSuccess(response.entity)
     return response
   }
 
