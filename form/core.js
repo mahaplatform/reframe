@@ -110,7 +110,7 @@ var Form = function (_React$Component) {
           this.props.sections.map(function (section, index) {
             return _react2.default.createElement(_section2.default, _extends({}, section, {
               borderless: _this2.props.borderless,
-              onFieldChange: _this2.props.onFieldChange,
+              onFieldChange: _this2.onFieldChange.bind(_this2),
               formId: _this2.props.id,
               ref: 'section_' + index,
               key: 'section_' + index }));
@@ -310,30 +310,13 @@ var Form = function (_React$Component) {
     }
   }, {
     key: 'onFieldChange',
-    value: function onFieldChange(_ref4) {
+    value: function onFieldChange(code, value) {
       var _this5 = this;
 
-      var _ref5 = _slicedToArray(_ref4, 3);
-
-      var id = _ref5[0];
-      var code = _ref5[1];
-      var value = _ref5[2];
-
-      if (this.props.id === id) {
-        // If the value is an obect, flatten it and apply the children
-        if (_lodash2.default.isPlainObject(value)) {
-          (0, _lodash2.default)(value).pairs().each(function (_ref6) {
-            var _ref7 = _slicedToArray(_ref6, 2);
-
-            var code = _ref7[0];
-            var value = _ref7[1];
-
-            _this5.data = _lodash2.default.assign(_this5.data, _defineProperty({}, code, value));
-          });
-        }
-        this.data = _lodash2.default.assign(this.data, _defineProperty({}, code, value));
-      }
-      this.props.onFieldChange(code, value);
+      this.collectValues().then(function (data) {
+        _this5.props.onFieldChange(code, value);
+        _this5.props.onChange(data);
+      });
     }
   }, {
     key: 'transformFields',
@@ -394,8 +377,10 @@ Form.propTypes = {
   title: _react2.default.PropTypes.string,
   sections: _react2.default.PropTypes.array,
   buttons: _react2.default.PropTypes.array,
-  onSubmit: _react2.default.PropTypes.func,
+  onFieldChange: _react2.default.PropTypes.func,
+  onChange: _react2.default.PropTypes.func,
   onCancel: _react2.default.PropTypes.func,
+  onSubmit: _react2.default.PropTypes.func,
   unstyled: _react2.default.PropTypes.bool,
   borderless: _react2.default.PropTypes.bool,
   class: _react2.default.PropTypes.string,
@@ -409,13 +394,14 @@ Form.propTypes = {
 Form.defaultProps = {
   fields: [],
   buttons: [{ label: 'Save', type: 'submit' }],
-  onSubmit: _lodash2.default.noop,
+  onFieldChange: _lodash2.default.noop,
+  onChange: _lodash2.default.noop,
   onCancel: _lodash2.default.noop,
+  onSubmit: _lodash2.default.noop,
   unstyled: false,
   borderless: false,
   loading: false,
   messageType: 'normal',
-  onFieldChange: _lodash2.default.noop,
   asyncPassthrough: false,
   id: Symbol(),
   class: '',
