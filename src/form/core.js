@@ -16,8 +16,10 @@ class Form extends React.Component {
     title: React.PropTypes.string,
     sections: React.PropTypes.array,
     buttons: React.PropTypes.array,
-    onSubmit: React.PropTypes.func,
+    onFieldChange: React.PropTypes.func,
+    onChange: React.PropTypes.func,
     onCancel: React.PropTypes.func,
+    onSubmit: React.PropTypes.func,
     unstyled: React.PropTypes.bool,
     borderless: React.PropTypes.bool,
     class: React.PropTypes.string,
@@ -32,13 +34,14 @@ class Form extends React.Component {
   static defaultProps = {
     fields: [],
     buttons: [{ label: 'Save', type: 'submit' }],
-    onSubmit: _.noop,
+    onFieldChange: _.noop,
+    onChange: _.noop,
     onCancel: _.noop,
+    onSubmit: _.noop,
     unstyled: false,
     borderless: false,
     loading: false,
     messageType: 'normal',
-    onFieldChange: _.noop,
     asyncPassthrough: false,
     id: Symbol(),
     class: '',
@@ -90,7 +93,7 @@ class Form extends React.Component {
             return (<Section
               {...section}
               borderless={this.props.borderless}
-              onFieldChange={this.props.onFieldChange}
+              onFieldChange={this.onFieldChange.bind(this)}
               formId={this.props.id}
               ref={`section_${index}`}
               key={`section_${index}`} />
@@ -246,17 +249,12 @@ class Form extends React.Component {
     }
   }
 
-  onFieldChange([id, code, value]) {
-    if(this.props.id === id) {
-      // If the value is an obect, flatten it and apply the children
-      if(_.isPlainObject(value)) {
-        _(value).pairs().each(([code, value]) => {
-          this.data = _.assign(this.data, {[code]: value})
-        })
-      }
-      this.data = _.assign(this.data, {[code]: value})
-    }
-    this.props.onFieldChange(code, value)
+  onFieldChange(code, value) {
+    this.collectValues()
+      .then((data) => {
+        this.props.onFieldChange(code, value)
+        this.props.onChange(data)
+      })
   }
 
   transformFields(sections, transformer) {
