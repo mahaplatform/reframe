@@ -162,10 +162,10 @@ export default class OmniForm extends React.Component {
   }
 
   doRedirect(response) {
-    if(this.props.redirect && this.context.history) {
+    if(this.props.redirect && this.context.router) {
       var compiled = _.template(this.props.redirect, { interpolate: /#{([\s\S]+?)}/g });
       var redirect = compiled(response.entity);
-      this.context.history.push(redirect)
+      this.context.router.push(redirect)
     }
   }
 

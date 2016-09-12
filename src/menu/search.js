@@ -57,7 +57,7 @@ export default class Search extends React.Component {
     Logger.log(type, result)
     const route = _.get(this.props.routes, type, null)
     if(route) {
-      this.context.history.push(_.template(route, {interpolate: Config.get('menu.search.urlInterpolate', _.templateSettings.interpolate)})(result))
+      this.context.router.push(_.template(route, {interpolate: Config.get('menu.search.urlInterpolate', _.templateSettings.interpolate)})(result))
     }
     this.refs.input.clear()
   }
