@@ -1,18 +1,6 @@
-html {
-  font-size: 13px;
-}
-body {
-  background: #F2F4F5;
-  font-size: 13px;
-}
-
-@import "app/session";
-@import "breadcrumbs/breadcrumbs";
-@import "collection/collection";
-@import "comments/comments";
-@import "controls/controls";
-@import "details/details";
-@import "feed/feed";
-@import "form/form";
-@import "menu/menu";
-@import "ui/typeahead";
+@import "./breadcrumbs/breadcrumbs.scss";
+@import "./collection/collection.scss";
+@import "./controls/controls.scss";
+@import "./form/form.scss";
+@import "./tabs/tabs.scss";
+@import "./tasks/tasks.scss";

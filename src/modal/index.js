@@ -1,35 +1,39 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import _ from 'lodash'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { connect } from 'react-redux'
+import Index from './components/index'
 
-export default class Modal extends React.Component {
-  constructor(props) {
-    super(props)
-    this.currentModalRef = null;
+class Modal extends React.Component {
+
+  static propTypes = {
+    title: React.PropTypes.string,
+    open: React.PropTypes.bool
+  }
+
+  static defaultProps = {
+    title: 'Modal Window',
+    open: false
   }
 
   render() {
-    let M = this.props.currentModal;
-    let sub = this.props.modalSubscriber;
-    let cfg = this.props.modalConfig;
+    const { children } = this.props
     return (
-      <ReactCSSTransitionGroup
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={30000}
-        transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionName={ {
-          enter: 'scale-transition-in',
-          enterActive: '',
-          appear: 'scale-transition-in',
-          appearActive: '',
-          leave: 'scale-transition-out',
-          leaveActive: ''
-        } }
-        component="div">
-        {M ? <M key="MODAL_WINDOW_K" subscriber={sub} {...cfg} /> : <div key="MODAL_WINDOW_K"></div>}
-      </ReactCSSTransitionGroup>
+      <Index>
+        {children}
+      </Index>
     )
   }
+
 }
+
+const mapStateToProps = (state, props) => state.reframe.modal
+
+const mapDispatchToProps = (dispatch) => ({
+  onSetDefaults(data) {
+    dispatch(actions.setDefaults(data))
+  },
+  onLoadForm(endpoint) {
+    dispatch(actions.loadForm(endpoint))
+  },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal)

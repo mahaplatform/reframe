@@ -1,0 +1,17 @@
+// @flow
+
+export const UPDATE_DATA: string = 'form/UPDATE_DATA'
+export const FETCH_SECTIONS_REQUEST: string = 'form/FETCH_SECTIONS_REQUEST'
+export const FETCH_SECTIONS_SUCCESS: string = 'form/FETCH_SECTIONS_SUCCESS'
+export const FETCH_SECTIONS_FAILURE: string = 'form/FETCH_SECTIONS_FAILURE'
+export const SET_SECTIONS: string = 'form/SET_SECTIONS'
+export const FETCH_DATA_REQUEST: string = 'form/FETCH_DATA_REQUEST'
+export const FETCH_DATA_SUCCESS: string = 'form/FETCH_DATA_SUCCESS'
+export const FETCH_DATA_FAILURE: string = 'form/FETCH_DATA_FAILURE'
+export const SET_DATA: string = 'form/SET_DATA'
+export const SET_READY: string = 'form/SET_READY'
+export const VALIDATE_FORM: string = 'form/VALIDATE_FORM'
+export const SUBMIT_REQUEST: string = 'form/SUBMIT_REQUEST'
+export const SUBMIT_SUCCESS: string = 'form/SUBMIT_SUCCESS'
+export const SUBMIT_FAILURE: string = 'form/SUBMIT_FAILURE'
+export const RESET_FORM: string = 'form/RESET_FORM'

@@ -1,0 +1,37 @@
+.filefield {
+  &.ready .browse {
+    display: inline-block;
+  }
+  .browse {
+    display: none;
+  }
+  .segments {
+    display: block;
+    position: relative;
+    width: 250px;
+    .dropdown.button {
+      visibility: hidden;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      z-index: 10;
+    }
+    &:hover {
+      .dropdown.button {
+        visibility: visible;
+      }
+    }
+    h4, p {
+      margin-bottom: 0;
+    }
+    p {
+      color: #BBB;
+    }
+  }
+  .image {
+    padding: 0;
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.ui.form {
+  margin-bottom: 20px;
+  & > .ui.segments {
+    @include box-shadow(none);
+    .ui.segment.inverted:first-child {
+      background-color: #E8E9EA;
+      color: #000;
+    }
+    & > .ui.segment {
+      padding: 0;
+      & > h4 {
+        background-color: #EEE;
+        padding: 1em;
+        margin: 0;
+      }
+      .section > .field {
+        margin-bottom: 1.8em;
+        & > label {
+          margin-bottom: 0;
+        }
+      }
+      .instructions {
+        color: #AAAAAA;
+        margin-bottom: .3em;
+        p {
+          color: #AAAAAA;
+          font-size: 1em;
+          line-height: 1.8em;
+        }
+      }
+      .section,
+      &.form-buttons {
+        padding: 1em;
+      }
+      &.collapsing {
+        cursor: pointer;
+        &.collapsed .section {
+          display: none;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    margin-bottom: 50px;
+    .ui.form-buttons {
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0;
+      right: 0;
+      top: auto !important;
+    }
+    & > .ui.segments {
+      border: none;
+    }
+  }
+}

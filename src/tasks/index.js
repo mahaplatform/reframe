@@ -1,21 +1,27 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Task from './task.js'
+import Component from '../component'
+import Tasks from './tasks'
 
-class Tasks extends React.Component {
+class Index extends React.Component {
+
+  static propTypes = {
+    tasks: React.PropTypes.arrayOf(React.PropTypes.shape({
+      label: React.PropTypes.string
+    }))
+  }
+
+  static defaultProps = {
+    tasks: []
+  }
 
   render() {
-    return (
-      <div className="tasks">
-        <div className="ui vertical menu fluid">
-          { this.props.tasks.map((task, index) => {
-            return <Task key={`task_${index}`} task={task} />
-          })}
-        </div>
-      </div>
-    )
+    return <Tasks {...this.props} />
   }
 
 }
 
-export default Tasks
+const validation = {
+  required: ['id', 'tasks']
+}
+
+export default Component(validation, 'tasks', 'id')(Tasks)

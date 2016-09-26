@@ -1,0 +1,239 @@
+@import "compass/css3/transition";
+@import "compass/css3/box-shadow";
+
+.collection {
+  border: 1px solid #DDD;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  &.expanded {
+    .collection-filter {
+      flex: 0 0 300px;
+      border-right: 1px solid #DDD;
+    }
+    @media only screen and (min-width: 768px) {
+      .collection-filter {
+        flex: 0 0 300px;
+      }
+    }
+    @media only screen and (max-width: 767px) {
+      .collection-filter {
+        flex: 0 0 calc(100% - 50px);
+      }
+    }
+  }
+  .collection-filter {
+    @include transition(flex 0.25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    flex: 0 0 0;
+    overflow: hidden;
+    background-color: #F0F0F0;
+  }
+  .collection-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .collection-toolbar {
+    border-bottom: 1px solid #DDD;
+    background-color: #F9F9F9;
+    flex: 0 0 59px;
+    padding: 10px;
+    z-index: 1;
+    .collection-layouts {
+      .menu {
+        margin-left: 10px;
+      }
+    }
+    input[type="checkbox"] {
+      margin-right: 15px;
+    }
+    @media only screen and (min-width: 768px) {
+      &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+      }
+      .collection-batch-actions {
+        float: left;
+      }
+      .collection-layouts {
+        float: right;
+      }
+    }
+    @media only screen and (max-width: 767px) {
+      .collection-layouts {
+        .menu:first-child {
+          float: left;
+        }
+        .menu:last-child {
+          float: right;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 767px) {
+    .collection-toolbar {
+      .collection-batch-actions {
+        display: none;
+      }
+    }
+  }
+  .collection-data {
+    @include transition(left 0.25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    background-color: #FFF;
+    flex: 1;
+    overflow-y: scroll;
+    z-index: 0;
+  }
+  .table {
+    table {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      @include border-radius(0);
+      thead {
+        tr {
+          th {
+            position: relative;
+            background-color: #F9F9F9;
+            &.sortable {
+              cursor: pointer;
+              &:hover {
+                background-color: #F0F0F0;
+              }
+              &.sorting {
+                background-color: #F0F0F0;
+              }
+              i {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: #AAA;
+              }
+            }
+            &:not(:last-child) {
+              border-right: 1px solid #DDD;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          &:hover {
+            th, td {
+              background-color: #F9F9F9 !important;
+            }
+          }
+          &.positive {
+            th, td {
+              background-color: rgb(252, 255, 225);
+            }
+          }
+        }
+        a {
+          display: block;
+          height: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+      @media only screen and (max-width: 600px) {
+        td,th {
+          &:not(.primary) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .cards {
+    .card {
+      padding: 1rem;
+      float: left;
+      .segment {
+        padding: 0;
+        position: relative;
+        &.positive {
+          background-color: rgb(252, 255, 225);
+        }
+        img {
+          width: 100%;
+        }
+        &:hover {
+          @include box-shadow(0 0 12px rgba(0, 0, 0, 0.3));
+        }
+        .dropdown.button {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+        }
+        .content {
+          padding: 1em;
+          overflow: hidden;
+          h4 {
+            margin: 0;
+            font-size: 1em;
+            line-height: 1.4em;
+          }
+          p {
+            font-size: .9em;
+            color: #AAA;
+          }
+        }
+        .select {
+          border-top: 1px solid #CCC;
+          text-align: center;
+          padding: 5px;
+          background: #EEEEEE;
+        }
+        @media only screen and (max-width: 767px) {
+          .select {
+            display: none;
+          }
+        }
+        @media only screen and (min-width: 768px) {
+          &:hover {
+            .dropdown.button {
+              visibility: visible;
+            }
+          }
+          .dropdown.button {
+            visibility: hidden;
+          }
+        }
+      }
+    }
+    @media only screen and (min-width: 1240px) {
+      .card {
+        width: calc(100% / 6);
+      }
+    }
+    @media only screen and (min-width: 1024px) and (max-width: 1239px) {
+      .card {
+        width: calc(100% / 5);
+      }
+    }
+    @media only screen and (min-width: 800px) and (max-width: 1023px) {
+      .card {
+        width: calc(100% / 4);
+      }
+    }
+    @media only screen and (min-width: 600px) and (max-width: 799px) {
+      .card {
+        width: calc(100% / 3);
+      }
+    }
+    @media only screen and (min-width: 320px) and (max-width: 599px) {
+      .card {
+        width: calc(100%);
+      }
+    }
+  }
+}

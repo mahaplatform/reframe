@@ -1,25 +1,18 @@
 import _ from 'lodash'
-import defaultConfig from '../config/defaults'
 
-let globalConfig = _.assign({}, _.cloneDeep(defaultConfig))
+class Config {
 
-export default class Config {
-  static load(cfg) {
-    globalConfig = _.merge(globalConfig, _.cloneDeep(cfg))
+  constructor(config) {
+    this.config = config[process.env.NODE_ENV]
   }
 
-  static overwrite(cfg) {
-    globalConfig = _.cloneDeep(cfg)
+  get(key) {
+    return _.get(this.config, key)
   }
 
-  static get(item, defaultValue) {
-    if(item === '*') {
-      return _.cloneDeep(globalConfig)
-    }
-    return _.get(globalConfig, item, defaultValue)
-  }
-
-  static set(path, item) {
-    _.set(globalConfig, path, item)
-  }
 }
+
+// const configurations = require('../../../../../config/config')
+// const config = new Config(configurations)
+//
+// export default config

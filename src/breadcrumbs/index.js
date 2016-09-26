@@ -1,26 +1,42 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Breadcrumb from './breadcrumb.js'
+import _ from 'lodash'
+import Breadcrumb from './breadcrumb'
 
 class Breadcrumbs extends React.Component {
 
   static propTypes = {
-    breadcrumbs: React.PropTypes.array
+    breadcrumbs: React.PropTypes.array.isRequired
   }
 
-  static defaultProps = {
+  constructor(props) {
+    super(props)
+    this.state = {
+      errors: this._validateProps(props)
+    }
   }
 
   render() {
+    if(!_.isEmpty(this.state.errors)) {
+      console.warn(this.state.errors)
+      return <div>Unable to load component</div>
+    }
     return (
       <div className="breadcrumbs">
-        <div className="ui small breadcrumb">
+        <div className="ui breadcrumb">
           { this.props.breadcrumbs.map((item, index) => {
             return <Breadcrumb item={item} key={`breadcrumb_${index}`} />
           })}
         </div>
       </div>
     )
+  }
+
+  _validateProps(props) {
+    let errors = []
+    if(!props.breadcrumbs) {
+      errors.push('You must specify a breadcrumbs property')
+    }
+    return errors
   }
 
 }
