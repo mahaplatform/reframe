@@ -89,68 +89,66 @@
 
 <div class="language-javascript highlighter-flow">
   <pre class="highlight">
-    <code>
-      import { Collection } from 'reframe';
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Collection</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;reframe&#39;</span><span class="p">;</span>
 
-      class Index extends React.Component {
+<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
 
-        render() {
-          return &lt;Collection {...this._getCollection()} /&gt;
-        }
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span><span class="nx">Collection</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getCollection</span><span class="p">()}</span> <span class="o">/&amp;</span><span class="nx">gt</span><span class="p">;</span>
+  <span class="p">}</span>
 
-        _getCollection() {
-            return {
-              id: 'contacts-index',
-              columns: [
-                {
-                  label: 'Name',
-                  key: 'first_name',
-                  primary: true,
-                  visible: true
-                },
-                {
-                  label: 'Email',
-                  key: 'email',
-                  primary: false,
-                  visible: true
-                },
-                {
-                  label: 'Phone',
-                  key: 'phone',
-                  primary: false,
-                  visible: true
-                }
-              ],
-              records: '/admin/contacts',
-              filters: '/admin/contacts/fields',
-              sort: { key: 'created_at', order: 'desc' },
-              card: {
-                image: 'photo',
-                url: '/admin/contacts/#{id}',
-                content: ContentCard
-              },
-              entity: 'contact',
-              empty: 'There are no contacts',
-              recordActions: [
-                {
-                  label: 'edit',
-                  icon: 'edit',
-                  redirect: '/admin/contacts/#{id}/edit'
-                }
-              ],
-              batchActions: [
-                {
-                  label: 'delete all',
-                  component: AddToList
-                },
-              ]
-            }
-          }
+  <span class="nx">_getCollection</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;contacts-index&#39;</span><span class="p">,</span>
+      <span class="nx">columns</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span>
+          <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;first_name&#39;</span><span class="p">,</span>
+          <span class="nx">primary</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Email&#39;</span><span class="p">,</span>
+          <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span>
+          <span class="nx">primary</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Phone&#39;</span><span class="p">,</span>
+          <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;phone&#39;</span><span class="p">,</span>
+          <span class="nx">primary</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nx">records</span><span class="o">:</span> <span class="s1">&#39;/admin/contacts&#39;</span><span class="p">,</span>
+      <span class="nx">filters</span><span class="o">:</span> <span class="s1">&#39;/admin/contacts/fields&#39;</span><span class="p">,</span>
+      <span class="nx">sort</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="nx">order</span><span class="o">:</span> <span class="s1">&#39;desc&#39;</span> <span class="p">},</span>
+      <span class="nx">card</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">image</span><span class="o">:</span> <span class="s1">&#39;photo&#39;</span><span class="p">,</span>
+        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;/admin/contacts/#{id}&#39;</span><span class="p">,</span>
+        <span class="nx">content</span><span class="o">:</span> <span class="nx">ContentCard</span>
+      <span class="p">},</span>
+      <span class="nx">entity</span><span class="o">:</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span>
+      <span class="nx">empty</span><span class="o">:</span> <span class="s1">&#39;There are no contacts&#39;</span><span class="p">,</span>
+      <span class="nx">recordActions</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span>
+          <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;edit&#39;</span><span class="p">,</span>
+          <span class="nx">redirect</span><span class="o">:</span> <span class="s1">&#39;/admin/contacts/#{id}/edit&#39;</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="nx">batchActions</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;delete all&#39;</span><span class="p">,</span>
+          <span class="nx">component</span><span class="o">:</span> <span class="nx">AddToList</span>
+        <span class="p">},</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
 
-        }
+<span class="p">}</span>
 
-        export default Index
-    </code>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
   </pre>
 </div>
 

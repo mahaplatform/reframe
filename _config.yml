@@ -1,3 +1,4 @@
+highlighter: pygments
 exclude: [Gemfile, Gemfile.lock, Procfile, config.rb, sass, .sass-cache]
 sass:
   style: compressed
