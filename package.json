@@ -1,9 +1,21 @@
 {
-  "name": "reframe",
+  "name": "reframejs",
+  "version": "0.0.1",
   "main": "dist/index.js",
-  "version": "3.0.0",
-  "description": "",
+  "description": "A collection of react components for rapidly prototyping and building responsive web applications",
+  "homepage": "http://thinktopography.github.io/reframe",
+  "license": "MIT",
   "author": "Greg Kops <greg@thinktopography.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinktopography/reframe"
+  },
+  "maintainers": [
+    {
+      "name": "Greg Kops",
+      "email": "greg@thinktopography.com"
+    }
+  ],
   "engines": {
     "node": ">= 5.9.0",
     "npm": ">= 3.7npm list graceful-fs"
