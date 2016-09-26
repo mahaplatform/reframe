@@ -1,5 +1,0 @@
-exclude: [Gemfile, Gemfile.lock, Procfile, config.rb, sass, .sass-cache]
-sass:
-  style: compressed
-  sass_dir: _sass
-permalink: :title
