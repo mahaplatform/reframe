@@ -2,5 +2,81 @@
 layout: base
 ---
 
-<h1>Getting Started with ReFrame</h1>
-<p>Hello World</p>
+<h1>Getting Started with Reframe</h1>
+
+<h2>What is Reframe?</h2>
+<p>Reframe is a collection of components which help developers rapidly prototype
+  and build responsive web applications. Built upon open source libraries like
+  <a href="https://github.com/facebook/react">React</a> and
+  <a href="https://github.com/reactjs/redux">Redux</a>, Reframe is meant to
+  coexist and integrate within the existing React ecosystem</p>
+
+<h2>How do I use Reframe?</h2>
+<p></p>
+
+<div class="language-javascript highlighter-flow">
+  <pre class="highlight">
+    <code>
+      import { Collection } from 'reframe';
+
+      class Index extends React.Component {
+
+        render() {
+          return &lt;Collection {...this._getCollection()} /&gt;
+        }
+
+        _getCollection() {
+            return {
+              id: 'contacts-index',
+              columns: [
+                {
+                  label: 'Name',
+                  key: 'first_name',
+                  primary: true,
+                  visible: true
+                },
+                {
+                  label: 'Email',
+                  key: 'email',
+                  primary: false,
+                  visible: true
+                },
+                {
+                  label: 'Phone',
+                  key: 'phone',
+                  primary: false,
+                  visible: true
+                }
+              ],
+              records: '/admin/contacts',
+              filters: '/admin/contacts/fields',
+              sort: { key: 'created_at', order: 'desc' },
+              card: {
+                image: 'photo',
+                url: '/admin/contacts/#{id}',
+                content: ContentCard
+              },
+              entity: 'contact',
+              empty: 'There are no contacts',
+              recordActions: [
+                {
+                  label: 'edit',
+                  icon: 'edit',
+                  redirect: '/admin/contacts/#{id}/edit'
+                }
+              ],
+              batchActions: [
+                {
+                  label: 'delete all',
+                  component: AddToList
+                },
+              ]
+            }
+          }
+
+        }
+
+        export default Index
+    </code>
+  </pre>
+</div>
