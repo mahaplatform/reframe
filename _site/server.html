@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset='utf-8'>
+  <title>Reframe</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="./css/default.css">
+  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link rel='shortcut icon' href='/static/favicon.png'>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="">
+
+  <header class='topbar'>
+    <nav class='width'>
+      <ul>
+        <li><a href="./index.html"class="active" >Docs</a></li>
+      </ul>
+      <ul class="external">
+        <li><a href="https://github.com/thinktopography.">Github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<section class='content'>
+  <div class='width'>
+    <nav class='toc'>
+      <section>
+        <h3>User Guide</h3>
+        <ul>
+          <li><a href="./index.html" class="active">Getting started with ReFrame</a></li>
+          <li><a href="./design.html">Design Philosophy</a></li>
+          <li><a href="./server.html">Server Requirements</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Component Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./breadcrumbs.html">Breadcrumbs</a></li>
+          <li><a href="./card.html">Card</a></li>
+          <li><a href="./collection.html">Collection</a></li>
+          <li><a href="./component.html">Component</a></li>
+          <li><a href="./container.html">Container</a></li>
+          <li><a href="./form.html">Form</a></li>
+          <li><a href="./modal.html">Modal</a></li>
+          <li><a href="./tabs.html">Tabs</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Control Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./checkbox.html">Checkbox</a></li>
+          <li><a href="./checkboxes.html">Checkboxes</a></li>
+          <li><a href="./colorfield.html">Colorfield</a></li>
+          <li><a href="./filefield.html">Filefield</a></li>
+          <li><a href="./radios.html">Radios</a></li>
+          <li><a href="./select.html">Select</a></li>
+          <li><a href="./tablefield.html">Tablefield</a></li>
+          <li><a href="./textarea.html">Textarea</a></li>
+          <li><a href="./textfield.html">Textfield</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Utility Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./api.html">API</a></li>
+          <li><a href="./config.html">Config</a></li>
+          <li><a href="./format.html">Format</a></li>
+          <li><a href="./socket.html">Socket</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <article class='withtoc'>
+      <h1>Server Requirements</h1>
+
+<h2>Collection Response</h2>
+<p>When using the <a href="./collection.html">Collection</a> or
+  <a href="container.html">Container</a> components to retrieve multiple
+  resources from an endpoint, Reframe expects the records to be returned
+  using the following format:</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">records</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Greg'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Kops'</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Megan'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Pugh'</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Kath'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Tibbetts'</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Armand'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Zerilli'</span> <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nx">total_records</span><span class="p">:</span> <span class="mi">225</span><span class="p">,</span>
+  <span class="nx">total_pages</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nx">current_page</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span></code></pre></div>
+</pre>
+
+<h2>Resource Response</h2>
+<p>When using the <a href="container.html">Container</a> component to
+  load a singleton resource, Reframe expects you to return the resource's
+  attributes in a flat json object:</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">first_name</span><span class="p">:</span> <span class="s1">'Greg'</span><span class="p">,</span>
+  <span class="nx">last_name</span><span class="p">:</span> <span class="s1">'Kops'</span>
+<span class="p">}</span></code></pre></div>
+</pre>
+
+<h2>Error Response</h2>
+<p>When using the <a href="./form.html">Form</a> component to create or update
+  records on the server, Reframe expects your endpoint to return errors in the
+  following format:<p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">errors</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">first_name</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"field is required"</span>
+    <span class="p">],</span>
+    <span class="nx">last_name</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"field is required"</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="nx">message</span><span class="p">:</span> <span class="s2">"There was a probem with your input"</span>
+<span class="p">}</span></code></pre></div>
+</pre>
+
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class='width'>
+    &copy; Copyright 2016, Think Topography, Inc.
+  </div>
+</footer>
+
+</body>
+</html>

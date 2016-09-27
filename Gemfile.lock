@@ -78,6 +78,7 @@ GEM
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     redcarpet (3.3.3)
+    rouge (2.0.6)
     safe_yaml (1.0.4)
     sass (3.4.22)
     sawyer (0.6.0)
@@ -95,3 +96,7 @@ DEPENDENCIES
   compass (~> 1.0.3)
   foreman (~> 0.70.0)
   jekyll (~> 2.5.3)
+  rouge
+
+BUNDLED WITH
+   1.13.1

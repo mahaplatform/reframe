@@ -1,0 +1,205 @@
+---
+layout: base
+---
+
+<h1>Collection</h1>
+
+<p>
+  &raquo; <a href="#overview">Overview</a><br />
+  &raquo; <a href="#example">Example</a><br />
+  &raquo; <a href="#attributes">Attributes</a>
+</p>
+
+<h2 id="overview">Overview</h2>
+<p>A collection is a component used to display multiple records in an
+  aggregate view. By default, collections offer a table view and a card view of
+  your data. These views can be turned of or off based on the component's
+  configuration.</p>
+<p>Collections can be configured with static data or dynamically loaded from
+  a remote datasource. If your remote datasource can deliver data in a paged
+  result and the collection can load data iteratively with an infinite scroll
+  behavior.</p>
+
+<h2 id="example">Example</h2>
+<pre class="highlight">
+{% highlight javascript %}
+import { Collection } from 'reframe';
+
+class Index extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'people',
+      columns: [
+        { label: 'First Name', key: 'first_name', visible: true },
+        { label: 'Last Name', key: 'last_name', visible: true }
+      ],
+      records: [
+        { first_name: 'Greg', last_name: 'Kops' },
+        { first_name: 'Megan', last_name: 'Pugh' },
+        { first_name: 'Kath', last_name: 'Tibbetts' },
+        { first_name: 'Armand', last_name: 'Zerilli' }
+      ]
+    }
+  }
+
+}
+
+export default Index
+{% endhighlight %}
+</pre>
+
+<h2 id="attributes">Attributes</h2>
+<p>A collection can be configured with the following attributes:</p>
+<pre class="highlight">
+{% highlight javascript %}
+{
+  id: "string",
+  columns: "string/array",
+  records: "string/array",
+  filters: "string/array",
+  sort: "object",
+  card: "object",
+  entity: "string",
+  recordActions: "array",
+  batchActions: "array"
+}
+{% endhighlight %}
+</pre>
+
+<h3>id</h3>
+<p>This is a required field and must be unique on any given page. It is a best
+  practice to make sure that this value is globally unique across your
+  application.</p>
+<pre class="highlight">
+{% highlight javascript %}
+id: 'contacts-index',
+{% endhighlight %}
+</pre>
+
+<h3>columns</h3>
+<p>Columns can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+columns: '/admin/customers/columns'
+{% endhighlight %}
+</pre>
+<p>Columns can be also be loaded synchronously from a static object:</p>
+<pre class="highlight">
+{% highlight javascript %}
+columns: [
+  { label: 'First Name', key: 'first_name', primary: true, visible: true },
+  { label: 'Last Name', key: 'last_name', primary: true, visible: true }
+]
+{% endhighlight %}
+</pre>
+
+<h3>records</h3>
+<p>Records can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+records: '/admin/contacts',
+{% endhighlight %}
+</pre>
+<p>Records can be also be loaded synchronously from a static object:</p>
+<pre class="highlight">
+{% highlight javascript %}
+records: [
+  { first_name: 'Greg', last_name: 'Kops' },
+  { first_name: 'Megan', last_name: 'Pugh' },
+  { first_name: 'Kath', last_name: 'Tibbetts' },
+  { first_name: 'Armand', last_name: 'Zerilli' }
+]
+{% endhighlight %}
+</pre>
+
+<h3>filters</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+filters: '/admin/contacts/fields',
+{% endhighlight %}
+</pre>
+<p>Filters can be also be loaded synchronously from a static object:</p>
+<pre class="highlight">
+{% highlight javascript %}
+filters: [
+  {
+    label: 'Basic Information',
+    fields: [
+      { code: 'first_name', label: 'First Name', type: 'textfield' },
+      { code: 'last_name', label: 'Last Name', type: 'textfield' },
+    ]
+  }
+],
+{% endhighlight %}
+</pre>
+
+<h3>sort</h3>
+<pre class="highlight">
+{% highlight javascript %}
+sort: {
+  key: 'created_at',
+  order: 'desc'
+}
+{% endhighlight %}
+</pre>
+
+<h3>card</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+card: {
+  image: 'photo',
+  url: '/admin/contacts/#{id}',
+  content: ContentCard
+}
+{% endhighlight %}
+</pre>
+
+<h3>entity</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+entity: 'contact'
+{% endhighlight %}
+</pre>
+
+<h3>empty</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+empty: 'There are no contacts'
+{% endhighlight %}
+</pre>
+
+<h3>recordActions</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+recordActions: [
+  {
+    label: 'edit',
+    icon: 'edit',
+    redirect: '/admin/contacts/#{id}/edit'
+  }
+]
+{% endhighlight %}
+</pre>
+
+<h3>batchActions</h3>
+<p>Filters can be loaded asynchronously from a external datasource:</p>
+<pre class="highlight">
+{% highlight javascript %}
+batchActions: [
+  {
+    label: 'delete all',
+    component: AddToList
+  }
+]
+{% endhighlight %}
+</pre>

@@ -1,0 +1,59 @@
+---
+layout: base
+---
+
+<h1>Server Requirements</h1>
+
+<h2>Collection Response</h2>
+<p>When using the <a href="./collection.html">Collection</a> or
+  <a href="container.html">Container</a> components to retrieve multiple
+  resources from an endpoint, Reframe expects the records to be returned
+  using the following format:</p>
+<pre class="highlight">
+{% highlight javascript %}
+{
+  records: [
+    { first_name: 'Greg', last_name: 'Kops' },
+    { first_name: 'Megan', last_name: 'Pugh' },
+    { first_name: 'Kath', last_name: 'Tibbetts' },
+    { first_name: 'Armand', last_name: 'Zerilli' }
+  ],
+  total_records: 225,
+  total_pages: 5,
+  current_page: 1
+}
+{% endhighlight %}
+</pre>
+
+<h2>Resource Response</h2>
+<p>When using the <a href="container.html">Container</a> component to
+  load a singleton resource, Reframe expects you to return the resource's
+  attributes in a flat json object:</p>
+<pre class="highlight">
+{% highlight javascript %}
+{
+  first_name: 'Greg',
+  last_name: 'Kops'
+}
+{% endhighlight %}
+</pre>
+
+<h2>Error Response</h2>
+<p>When using the <a href="./form.html">Form</a> component to create or update
+  records on the server, Reframe expects your endpoint to return errors in the
+  following format:<p>
+<pre class="highlight">
+{% highlight javascript %}
+{
+  errors: {
+    first_name: [
+      "field is required"
+    ],
+    last_name: [
+      "field is required"
+    ],
+  },
+  message: "There was a probem with your input"
+}
+{% endhighlight %}
+</pre>
