@@ -8,5 +8,5 @@ A set of React/Redux tools by Think Topography for web and mobile web developmen
 Install with [npm](http://npmjs.com):
 
 ```sh
-npm i --save reframejs
+npm install --save reframejs
 ```

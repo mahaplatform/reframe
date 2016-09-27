@@ -1,9 +1,14 @@
 import _ from 'lodash'
 
+
 class Config {
 
-  constructor(config) {
-    this.config = config[process.env.NODE_ENV]
+  constructor() {
+    this.config = {}
+  }
+
+  load(config) {
+    this.config = config
   }
 
   get(key) {
@@ -12,7 +17,6 @@ class Config {
 
 }
 
-// const configurations = require('../../../../../config/config')
-// const config = new Config(configurations)
-//
-// export default config
+const config = new Config()
+
+export default config
