@@ -27,49 +27,15 @@ class Index extends React.Component {
 
   _getCollection() {
     return {
-      id: 'contacts-index',
+      id: 'dashboard',
       columns: [
-        {
-          label: 'Name',
-          key: 'first_name',
-          primary: true,
-          visible: true
-        },
-        {
-          label: 'Email',
-          key: 'email',
-          primary: false,
-          visible: true
-        },
-        {
-          label: 'Phone',
-          key: 'phone',
-          primary: false,
-          visible: true
-        }
+        { label: 'Name', key: 'name', visible: true }
       ],
-      records: '/admin/contacts',
-      filters: '/admin/contacts/fields',
-      sort: { key: 'created_at', order: 'desc' },
-      card: {
-        image: 'photo',
-        url: '/admin/contacts/#{id}',
-        content: ContentCard
-      },
-      entity: 'contact',
-      empty: 'There are no contacts',
-      recordActions: [
-        {
-          label: 'edit',
-          icon: 'edit',
-          redirect: '/admin/contacts/#{id}/edit'
-        }
-      ],
-      batchActions: [
-        {
-          label: 'delete all',
-          component: AddToList
-        },
+      records: [
+        { name: 'Greg Kops' },
+        { name: 'Armand Zerilli' },
+        { name: 'Megan Pugh' },
+        { name: 'Kath Tibbetts' },
       ]
     }
   }
