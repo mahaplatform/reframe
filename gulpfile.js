@@ -13,10 +13,8 @@ var fs         = require('fs');
 var source     = require('vinyl-source-stream');
 var buffer     = require('vinyl-buffer');
 var bundles    = ['admin'];
-var libraries  = ['jquery','jquery-ui','semantic','d3','c3','redactor'];
 var inputs     = ['./src/index.js']
 var outputs     = ['./reframe.js']
-var globals    = libraries.map(function(script) { return 'app/assets/javascripts/lib/'+script+'.min.js'; });
 
 gulp.task('watch', ['js']);
 

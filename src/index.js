@@ -3,6 +3,7 @@ import Breadcrumbs from './breadcrumbs'
 import Card from './card'
 import Collection from './collection'
 import Component from './component'
+import Config from './utils/config'
 import Container from './container'
 import Controls from './controls'
 import Form from './form'
@@ -17,6 +18,7 @@ export { Breadcrumbs }
 export { Card }
 export { Collection }
 export { Component }
+export { Config }
 export { Container }
 export { Controls }
 export { Form }
@@ -32,6 +34,7 @@ export default {
   Card,
   Collection,
   Component,
+  Config,
   Container,
   Controls,
   Form,
