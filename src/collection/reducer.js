@@ -24,12 +24,6 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-    case actionTypes.SET_RECORDS:
-      return {
-        ...state,
-        records: action.records
-      }
-
     case actionTypes.FETCH_COLUMNS_REQUEST:
       return {
         ...state,
@@ -58,6 +52,7 @@ export default (state = INITIAL_STATE, action) => {
       }
 
     case actionTypes.FETCH_RECORDS_SUCCESS:
+    case actionTypes.SET_RECORDS:
       return {
         ...state,
         records: action.records,

@@ -47,11 +47,6 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.SET_RECORDS:
-      return _extends({}, state, {
-        records: action.records
-      });
-
     case actionTypes.FETCH_COLUMNS_REQUEST:
       return _extends({}, state, {
         status: 'loading_columns'
@@ -76,6 +71,7 @@ exports.default = function () {
       });
 
     case actionTypes.FETCH_RECORDS_SUCCESS:
+    case actionTypes.SET_RECORDS:
       return _extends({}, state, {
         records: action.records,
         status: 'records_loaded'
