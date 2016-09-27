@@ -1,5 +1,5 @@
 highlighter: pygments
-exclude: [Gemfile, Gemfile.lock, Procfile, config.rb, sass, .sass-cache]
+exclude: [Gemfile, Gemfile.lock, Procfile, config.rb, sass, .sass-cache, node_modules]
 sass:
   style: compressed
   sass_dir: _sass

@@ -27,15 +27,16 @@ class Index extends React.Component {
 
   _getCollection() {
     return {
-      id: 'dashboard',
+      id: 'people',
       columns: [
-        { label: 'Name', key: 'name', visible: true }
+        { label: 'First Name', key: 'first_name', visible: true },
+        { label: 'Last Name', key: 'last_name', visible: true }
       ],
       records: [
-        { name: 'Greg Kops' },
-        { name: 'Armand Zerilli' },
-        { name: 'Megan Pugh' },
-        { name: 'Kath Tibbetts' },
+        { first_name: 'Greg', last_name: 'Kops' },
+        { first_name: 'Armand', last_name: 'Zerilli' },
+        { first_name: 'Megan', last_name: 'Pugh' },
+        { first_name: 'Kath', last_name: 'Tibbetts' }
       ]
     }
   }
