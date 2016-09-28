@@ -63,6 +63,49 @@ p, ul, ol {
 .marketing-row a {
   color: #aaa; }
 
+.screenshot {
+  border: 1px solid #D68A00;
+  padding: 15px;
+  background-color: rgba(226, 141, 49, 0.1);
+  margin-bottom: 20px;
+}
+
+.attributes table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.attributes table tr td:nth-child(2) {
+  width: 200px;
+}
+.attributes table tr td:nth-child(3) {
+  width: 50px;
+  text-align: center;
+}
+.attributes table th, table td {
+  padding: 5px 10px;
+}
+.attributes table span.no {
+  color: #C00;
+}
+.attributes table span.yes {
+  color: #0C0;
+}
+.attributes table thead th {
+  background-color: #D68A00;
+  color: #FFF;
+  text-align: left;
+}
+.attributes table tbody td {
+  background-color: rgba(226, 141, 49, 0.1);
+}
+.attributes h3 {
+  background-color: #D68A00;
+  color: #FFF;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 div.highlighter-rouge,
 div.highlighter-flow {
   margin: 20px 0; }

@@ -6,7 +6,8 @@ layout: base
 
 <p>
   &raquo; <a href="#overview">Overview</a><br />
-  &raquo; <a href="#example">Example</a><br />
+  &raquo; <a href="#basic_example">Basic Example</a><br />
+  &raquo; <a href="#advanced_example">Advanced Example</a><br />
   &raquo; <a href="#attributes">Attributes</a>
 </p>
 
@@ -20,7 +21,10 @@ layout: base
   result and the collection can load data iteratively with an infinite scroll
   behavior.</p>
 
-<h2 id="example">Example</h2>
+<h2 id="basic_example">Basic Example</h2>
+<div class="screenshot">
+  <img src="/images/collection.jpg" />
+</div>
 <pre class="highlight">
 {% highlight javascript %}
 import { Collection } from 'reframe';
@@ -53,25 +57,133 @@ export default Index
 {% endhighlight %}
 </pre>
 
-<h2 id="attributes">Attributes</h2>
-<p>A collection can be configured with the following attributes:</p>
+<h2 id="advanced_example">Advanced Example</h2>
+<div class="screenshot">
+  <img src="/images/collection-advanced.jpg" />
+</div>
 <pre class="highlight">
 {% highlight javascript %}
-{
-  id: "string",
-  columns: "string/array",
-  records: "string/array",
-  filters: "string/array",
-  sort: "object",
-  card: "object",
-  entity: "string",
-  recordActions: "array",
-  batchActions: "array"
+import { Collection } from 'reframe';
+
+class Index extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'contacts-index',
+      columns: [
+        { label: 'Name', key: 'first_name', primary: true, visible: true, format: NameCell },
+        { label: 'Email', key: 'email', primary: false, visible: true },
+      ],
+      records: '/admin/contacts',
+      filters: '/admin/contacts/fields',
+      sort: { key: 'created_at', order: 'desc' },
+      card: {
+        image: 'photo',
+        url: '/admin/contacts/#{id}',
+        content: ContentCard
+      },
+      entity: 'contact',
+      empty: 'There are no contacts',
+      recordActions: [
+        { label: 'edit', icon: 'edit', redirect: '/admin/contacts/#{id}/edit'}
+      ],
+      batchActions: [
+        { label: 'add to list', component: AddToList },
+        { label: 'delete all', component: AddToList },
+        { label: 'tag all', component: AddToList },
+      ]
+    }
+  }
+
 }
+
+var NameCell = (props) => {
+  return <Link to={`/admin/contacts/${props.id}` }><img src={props.photo} /> {props.first_name} {props.last_name}</Link>
+}
+
+const ContentCard = (props) => {
+  return (
+    <div>
+      <h4>{props.first_name} {props.last_name}</h4>
+      <p>{props.email}</p>
+    </div>
+  )
+}
+
+export default Index
 {% endhighlight %}
 </pre>
 
-<h3>id</h3>
+<div class="attributes">
+<h2 id="attributes">Attributes</h2>
+<p>A collection can be configured with the following attributes:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Type(s)</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#id">id</a></td>
+      <td>STRING</td>
+      <td><span class="yes">YES</span></td>
+    </tr>
+    <tr>
+      <td><a href="#columns">columns</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="yes">YES</span></td>
+    </tr>
+    <tr>
+      <td><a href="#filters">filters</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#records">records</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#sort">sort</a></td>
+      <td>OBJECT</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#card">card</a></td>
+      <td>OBJECT</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#entity">entity</a></td>
+      <td>STRING</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#empty">empty</a></td>
+      <td>STRING</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#record_actions">recordActions</a></td>
+      <td>ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#batch_actions">batchActions</a></td>
+      <td>ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="id">id</h3>
 <p>This is a required field and must be unique on any given page. It is a best
   practice to make sure that this value is globally unique across your
   application.</p>
@@ -81,7 +193,7 @@ id: 'contacts-index',
 {% endhighlight %}
 </pre>
 
-<h3>columns</h3>
+<h3 id="columns">columns</h3>
 <p>Columns can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -98,7 +210,7 @@ columns: [
 {% endhighlight %}
 </pre>
 
-<h3>records</h3>
+<h3 id="records">records</h3>
 <p>Records can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -117,7 +229,7 @@ records: [
 {% endhighlight %}
 </pre>
 
-<h3>filters</h3>
+<h3 id="filters">filters</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -139,7 +251,7 @@ filters: [
 {% endhighlight %}
 </pre>
 
-<h3>sort</h3>
+<h3 id="sort">sort</h3>
 <pre class="highlight">
 {% highlight javascript %}
 sort: {
@@ -149,7 +261,7 @@ sort: {
 {% endhighlight %}
 </pre>
 
-<h3>card</h3>
+<h3 id="card">card</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -161,7 +273,7 @@ card: {
 {% endhighlight %}
 </pre>
 
-<h3>entity</h3>
+<h3 id="entity">entity</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -169,7 +281,7 @@ entity: 'contact'
 {% endhighlight %}
 </pre>
 
-<h3>empty</h3>
+<h3 id="empty">empty</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -177,7 +289,7 @@ empty: 'There are no contacts'
 {% endhighlight %}
 </pre>
 
-<h3>recordActions</h3>
+<h3 id="record_actions">recordActions</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -191,7 +303,7 @@ recordActions: [
 {% endhighlight %}
 </pre>
 
-<h3>batchActions</h3>
+<h3 id="batch_actions">batchActions</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 {% highlight javascript %}
@@ -203,3 +315,4 @@ batchActions: [
 ]
 {% endhighlight %}
 </pre>
+</div>

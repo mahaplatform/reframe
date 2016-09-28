@@ -80,7 +80,8 @@
 
 <p>
   &raquo; <a href="#overview">Overview</a><br />
-  &raquo; <a href="#example">Example</a><br />
+  &raquo; <a href="#basic_example">Basic Example</a><br />
+  &raquo; <a href="#advanced_example">Advanced Example</a><br />
   &raquo; <a href="#attributes">Attributes</a>
 </p>
 
@@ -94,7 +95,10 @@
   result and the collection can load data iteratively with an infinite scroll
   behavior.</p>
 
-<h2 id="example">Example</h2>
+<h2 id="basic_example">Basic Example</h2>
+<div class="screenshot">
+  <img src="/images/collection.jpg" />
+</div>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Collection</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
 
@@ -125,23 +129,131 @@
 <span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
 </pre>
 
-<h2 id="attributes">Attributes</h2>
-<p>A collection can be configured with the following attributes:</p>
+<h2 id="advanced_example">Advanced Example</h2>
+<div class="screenshot">
+  <img src="/images/collection-advanced.jpg" />
+</div>
 <pre class="highlight">
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
-  <span class="nl">id</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="nx">columns</span><span class="p">:</span> <span class="s2">"string/array"</span><span class="p">,</span>
-  <span class="nx">records</span><span class="p">:</span> <span class="s2">"string/array"</span><span class="p">,</span>
-  <span class="nx">filters</span><span class="p">:</span> <span class="s2">"string/array"</span><span class="p">,</span>
-  <span class="nx">sort</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
-  <span class="nx">card</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
-  <span class="nx">entity</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
-  <span class="nx">recordActions</span><span class="p">:</span> <span class="s2">"array"</span><span class="p">,</span>
-  <span class="nx">batchActions</span><span class="p">:</span> <span class="s2">"array"</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Collection</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Collection</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getCollection</span><span class="p">()}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+
+  <span class="nx">_getCollection</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'contacts-index'</span><span class="p">,</span>
+      <span class="na">columns</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span> <span class="na">primary</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">format</span><span class="p">:</span> <span class="nx">NameCell</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Email'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'email'</span><span class="p">,</span> <span class="na">primary</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+      <span class="p">],</span>
+      <span class="na">records</span><span class="p">:</span> <span class="s1">'/admin/contacts'</span><span class="p">,</span>
+      <span class="na">filters</span><span class="p">:</span> <span class="s1">'/admin/contacts/fields'</span><span class="p">,</span>
+      <span class="na">sort</span><span class="p">:</span> <span class="p">{</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'created_at'</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span> <span class="s1">'desc'</span> <span class="p">},</span>
+      <span class="na">card</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">image</span><span class="p">:</span> <span class="s1">'photo'</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">:</span> <span class="s1">'/admin/contacts/#{id}'</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="nx">ContentCard</span>
+      <span class="p">},</span>
+      <span class="na">entity</span><span class="p">:</span> <span class="s1">'contact'</span><span class="p">,</span>
+      <span class="na">empty</span><span class="p">:</span> <span class="s1">'There are no contacts'</span><span class="p">,</span>
+      <span class="na">recordActions</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'edit'</span><span class="p">,</span> <span class="na">icon</span><span class="p">:</span> <span class="s1">'edit'</span><span class="p">,</span> <span class="na">redirect</span><span class="p">:</span> <span class="s1">'/admin/contacts/#{id}/edit'</span><span class="p">}</span>
+      <span class="p">],</span>
+      <span class="na">batchActions</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'add to list'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">AddToList</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'delete all'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">AddToList</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'tag all'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">AddToList</span> <span class="p">},</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">NameCell</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">to</span><span class="o">=</span><span class="p">{</span><span class="s2">`/admin/contacts/</span><span class="p">${</span><span class="nx">props</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span> <span class="p">}</span><span class="o">&gt;&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">photo</span><span class="p">}</span> <span class="sr">/&gt; {props.first_name} {props.last_name}&lt;/</span><span class="nx">Link</span><span class="o">&gt;</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">ContentCard</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h4</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">first_name</span><span class="p">}</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">last_name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h4</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
 </pre>
 
-<h3>id</h3>
+<div class="attributes">
+<h2 id="attributes">Attributes</h2>
+<p>A collection can be configured with the following attributes:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Type(s)</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#id">id</a></td>
+      <td>STRING</td>
+      <td><span class="yes">YES</span></td>
+    </tr>
+    <tr>
+      <td><a href="#columns">columns</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="yes">YES</span></td>
+    </tr>
+    <tr>
+      <td><a href="#filters">filters</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#records">records</a></td>
+      <td>STRING / ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#sort">sort</a></td>
+      <td>OBJECT</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#card">card</a></td>
+      <td>OBJECT</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#entity">entity</a></td>
+      <td>STRING</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#empty">empty</a></td>
+      <td>STRING</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#record_actions">recordActions</a></td>
+      <td>ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+    <tr>
+      <td><a href="#batch_actions">batchActions</a></td>
+      <td>ARRAY</td>
+      <td><span class="no">NO</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="id">id</h3>
 <p>This is a required field and must be unique on any given page. It is a best
   practice to make sure that this value is globally unique across your
   application.</p>
@@ -149,7 +261,7 @@
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">id</span><span class="p">:</span> <span class="s1">'contacts-index'</span><span class="p">,</span></code></pre></div>
 </pre>
 
-<h3>columns</h3>
+<h3 id="columns">columns</h3>
 <p>Columns can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">columns</span><span class="p">:</span> <span class="s1">'/admin/customers/columns'</span></code></pre></div>
@@ -162,7 +274,7 @@
 <span class="p">]</span></code></pre></div>
 </pre>
 
-<h3>records</h3>
+<h3 id="records">records</h3>
 <p>Records can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">records</span><span class="p">:</span> <span class="s1">'/admin/contacts'</span><span class="p">,</span></code></pre></div>
@@ -177,7 +289,7 @@
 <span class="p">]</span></code></pre></div>
 </pre>
 
-<h3>filters</h3>
+<h3 id="filters">filters</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">filters</span><span class="p">:</span> <span class="s1">'/admin/contacts/fields'</span><span class="p">,</span></code></pre></div>
@@ -195,7 +307,7 @@
 <span class="p">],</span></code></pre></div>
 </pre>
 
-<h3>sort</h3>
+<h3 id="sort">sort</h3>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">sort</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">key</span><span class="p">:</span> <span class="s1">'created_at'</span><span class="p">,</span>
@@ -203,7 +315,7 @@
 <span class="p">}</span></code></pre></div>
 </pre>
 
-<h3>card</h3>
+<h3 id="card">card</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">card</span><span class="p">:</span> <span class="p">{</span>
@@ -213,19 +325,19 @@
 <span class="p">}</span></code></pre></div>
 </pre>
 
-<h3>entity</h3>
+<h3 id="entity">entity</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">entity</span><span class="p">:</span> <span class="s1">'contact'</span></code></pre></div>
 </pre>
 
-<h3>empty</h3>
+<h3 id="empty">empty</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">empty</span><span class="p">:</span> <span class="s1">'There are no contacts'</span></code></pre></div>
 </pre>
 
-<h3>recordActions</h3>
+<h3 id="record_actions">recordActions</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">recordActions</span><span class="p">:</span> <span class="p">[</span>
@@ -237,7 +349,7 @@
 <span class="p">]</span></code></pre></div>
 </pre>
 
-<h3>batchActions</h3>
+<h3 id="batch_actions">batchActions</h3>
 <p>Filters can be loaded asynchronously from a external datasource:</p>
 <pre class="highlight">
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">batchActions</span><span class="p">:</span> <span class="p">[</span>
@@ -247,6 +359,7 @@
   <span class="p">}</span>
 <span class="p">]</span></code></pre></div>
 </pre>
+</div>
 
     </article>
   </div>
