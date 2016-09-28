@@ -45,7 +45,7 @@ var _modal = require('./modal');
 
 var _modal2 = _interopRequireDefault(_modal);
 
-var _reducer = require('./component/reducer');
+var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 

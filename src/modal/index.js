@@ -25,7 +25,7 @@ class Modal extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => state.reframe.modal
+const mapStateToProps = (state, props) => state.modal
 
 const mapDispatchToProps = (dispatch) => ({
   onSetDefaults(data) {

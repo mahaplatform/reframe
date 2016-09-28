@@ -40,7 +40,7 @@ const Index = (id, mapEndpointsToProps) => {
 
     const mapStateToProps = (state, props) => ({
       id: id,
-      state: state.reframe[id]
+      state: state[id]
     })
 
 

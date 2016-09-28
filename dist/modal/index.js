@@ -60,7 +60,7 @@ Modal.defaultProps = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return state.reframe.modal;
+  return state.modal;
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {

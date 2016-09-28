@@ -174,7 +174,7 @@ class FileField extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  state: state.reframe[props.id]
+  state: state[props.id]
 })
 
 const mapDispatchToProps = {

@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 
-const Index = (rules, namespace, identifier) => {
+const Index = (rules, namespace, identifier = null) => {
 
   return function(WrappedComponent) {
 
@@ -17,7 +17,7 @@ const Index = (rules, namespace, identifier) => {
       }
 
       render() {
-        const id = _.get(this.props, identifier)
+        const id = (identifier) ? _.get(this.props, identifier) : namespace
         if(!_.isEmpty(this.state.errors)) {
           console.warn(this.state.errors)
           return (
@@ -43,31 +43,48 @@ const Index = (rules, namespace, identifier) => {
 
       _validateConfig(rules, config) {
         let errors = []
-        rules.required.map(required => {
-          if(!_.get(config, required)) {
-            errors.push(`You must specify the {${required}} property`)
-          }
-        })
+        if(rules.required) {
+          rules.required.map(required => {
+            if(!_.get(config, required)) {
+              errors.push(`You must specify the {${required}} property`)
+            }
+          })
+        }
         return errors
       }
 
       _handleInitialize() {
-        const id = _.get(this.props, identifier)
-        this.props.onAddComponent(namespace, id)
+        if(identifier) {
+          const id = _.get(this.props, identifier)
+          this.props.onAddComponent(namespace, id)
+        } else  {
+          this.props.onAddComponent(namespace)
+        }
       }
 
       _handleTerminate() {
-        const id = _.get(this.props, identifier)
-        this.props.onRemoveComponent(namespace, id)
+        if(identifier) {
+          const id = _.get(this.props, identifier)
+          this.props.onRemoveComponent(namespace, id)
+        } else  {
+          this.props.onRemoveComponent(namespace)
+        }
       }
 
     }
 
     const mapStateToProps = (state, props) => {
-      const id = _.get(props, identifier)
-      return {
-        initialized: (state.reframe[id] !== undefined)
+      if(identifier) {
+        const id = _.get(props, identifier)
+        return {
+          initialized: (state[id] !== undefined)
+        }
+      } else  {
+        return {
+          initialized: (state[namespace] !== undefined)
+        }
       }
+
     }
 
     const mapDispatchToProps = {

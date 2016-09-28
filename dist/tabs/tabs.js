@@ -101,7 +101,7 @@ Tabs.defaultProps = {
 
 var mapStateToProps = function mapStateToProps(state, props) {
   return {
-    state: state.reframe[props.id]
+    state: state[props.id]
   };
 };
 

@@ -97,7 +97,7 @@ var Index = function Index(id, mapEndpointsToProps) {
     var mapStateToProps = function mapStateToProps(state, props) {
       return {
         id: id,
-        state: state.reframe[id]
+        state: state[id]
       };
     };
 

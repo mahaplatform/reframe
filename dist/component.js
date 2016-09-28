@@ -30,7 +30,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function Index(rules, namespace, identifier) {
+var Index = function Index(rules, namespace) {
+  var identifier = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
 
   return function (WrappedComponent) {
     var Component = function (_React$Component) {
@@ -50,7 +52,7 @@ var Index = function Index(rules, namespace, identifier) {
       _createClass(Component, [{
         key: 'render',
         value: function render() {
-          var id = _lodash2.default.get(this.props, identifier);
+          var id = identifier ? _lodash2.default.get(this.props, identifier) : namespace;
           if (!_lodash2.default.isEmpty(this.state.errors)) {
             console.warn(this.state.errors);
             return _react2.default.createElement(
@@ -89,24 +91,34 @@ var Index = function Index(rules, namespace, identifier) {
         key: '_validateConfig',
         value: function _validateConfig(rules, config) {
           var errors = [];
-          rules.required.map(function (required) {
-            if (!_lodash2.default.get(config, required)) {
-              errors.push('You must specify the {' + required + '} property');
-            }
-          });
+          if (rules.required) {
+            rules.required.map(function (required) {
+              if (!_lodash2.default.get(config, required)) {
+                errors.push('You must specify the {' + required + '} property');
+              }
+            });
+          }
           return errors;
         }
       }, {
         key: '_handleInitialize',
         value: function _handleInitialize() {
-          var id = _lodash2.default.get(this.props, identifier);
-          this.props.onAddComponent(namespace, id);
+          if (identifier) {
+            var id = _lodash2.default.get(this.props, identifier);
+            this.props.onAddComponent(namespace, id);
+          } else {
+            this.props.onAddComponent(namespace);
+          }
         }
       }, {
         key: '_handleTerminate',
         value: function _handleTerminate() {
-          var id = _lodash2.default.get(this.props, identifier);
-          this.props.onRemoveComponent(namespace, id);
+          if (identifier) {
+            var id = _lodash2.default.get(this.props, identifier);
+            this.props.onRemoveComponent(namespace, id);
+          } else {
+            this.props.onRemoveComponent(namespace);
+          }
         }
       }]);
 
@@ -114,10 +126,16 @@ var Index = function Index(rules, namespace, identifier) {
     }(_react2.default.Component);
 
     var mapStateToProps = function mapStateToProps(state, props) {
-      var id = _lodash2.default.get(props, identifier);
-      return {
-        initialized: state.reframe[id] !== undefined
-      };
+      if (identifier) {
+        var id = _lodash2.default.get(props, identifier);
+        return {
+          initialized: state[id] !== undefined
+        };
+      } else {
+        return {
+          initialized: state[namespace] !== undefined
+        };
+      }
     };
 
     var mapDispatchToProps = {
