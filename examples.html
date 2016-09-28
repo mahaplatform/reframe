@@ -1,0 +1,91 @@
+---
+layout: base
+---
+
+<h1>Getting Started with Reframe</h1>
+
+<h2>What is Reframe?</h2>
+<p>Reframe is a collection of components which help developers rapidly prototype
+  and build responsive web applications. Built upon open source libraries like
+  <a href="https://github.com/facebook/react">React</a>,
+  <a href="https://github.com/reactjs/redux">Redux</a>, and
+  <a href="https://http://semantic-ui.com/">Semantic UI</a>, Reframe is meant to
+  coexist and integrate within the existing React ecosystem</p>
+
+<h2>How do I use Reframe?</h2>
+<p></p>
+
+<h3>A simple collection</h3>
+<pre class="highlight">
+{% highlight javascript %}
+import { Collection } from 'reframe';
+
+class Index extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'people',
+      columns: [
+        { label: 'First Name', key: 'first_name', visible: true },
+        { label: 'Last Name', key: 'last_name', visible: true }
+      ],
+      records: [
+        { first_name: 'Greg', last_name: 'Kops' },
+        { first_name: 'Megan', last_name: 'Pugh' },
+        { first_name: 'Kath', last_name: 'Tibbetts' },
+        { first_name: 'Armand', last_name: 'Zerilli' }
+      ]
+    }
+  }
+
+}
+
+export default Index
+{% endhighlight %}
+</pre>
+
+<h3>A simple form</h3>
+<pre class="highlight">
+{% highlight javascript %}
+import { Form } from 'reframe';
+
+class Index extends React.Component {
+
+  render() {
+    return <Form {...this._getForm()} />
+  }
+
+  _getForm() {
+    return {
+      id: 'contact-new',
+      sections: [
+        {
+          label: 'Basic Information',
+          fields: [
+            {
+              code: 'first_name',
+              label: 'First Name',
+              type: 'textfield',
+              required: true
+            },
+            {
+              code: 'last_name',
+              label: 'Last Name',
+              type: 'textfield',
+              required: true
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+}
+
+export default Index
+{% endhighlight %}
+</pre>

@@ -29,8 +29,9 @@
       <section>
         <h3>User Guide</h3>
         <ul>
-          <li><a href="./index.html" class="active">Getting started with ReFrame</a></li>
-          <li><a href="./design.html">Design Philosophy</a></li>
+          <li><a href="./index.html">Introduction</a></li>
+          <li><a href="./quickstart.html">Quickstart</a></li>
+          <li><a href="./state.html">State Management</a></li>
           <li><a href="./server.html">Server Requirements</a></li>
         </ul>
       </section>
@@ -76,89 +77,31 @@
     </nav>
 
     <article class='withtoc'>
-      <h1>Getting Started with Reframe</h1>
+      <h1>Introduction</h1>
 
 <h2>What is Reframe?</h2>
-<p>Reframe is a collection of components which help developers rapidly prototype
-  and build responsive web applications. Built upon open source libraries like
-  <a href="https://github.com/facebook/react">React</a>,
+<p>Reframe is a collection of components designed to help developers rapidly
+  prototype and build responsive web applications. Built upon open source
+  libraries like <a href="https://github.com/facebook/react">React</a>,
   <a href="https://github.com/reactjs/redux">Redux</a>, and
-  <a href="https://http://semantic-ui.com/">Semantic UI</a>, Reframe is meant to
-  coexist and integrate within the existing React ecosystem</p>
+  <a href="https://http://semantic-ui.com/">Semantic UI</a>, Reframe is built
+  to coexist and integrate with the existing React ecosystem</p>
 
-<h2>How do I use Reframe?</h2>
-<p></p>
+<h2>Frictionless Rapid Prototyping</h2>
+<p>Reframe is designed to reduce the cost and effort required to design and
+  implement application prototypes. Using a declarative syntax and
+  library of commonly used interface components, you can quickly assemble
+  a fully featured clickable prototypes of your application's layout and
+  functionality</p>
 
-<h3>A simple collection</h3>
-<pre class="highlight">
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Collection</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
+<h2>Accelerated Prototype to Production</h2>
+<p>Becuase Reframe enables you to statically mock your data OR connect it from
+  a remote data source, converting from prototype to application can be as eas
+  as replacing a json object with a URL endpoint</p>
 
-<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Collection</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getCollection</span><span class="p">()}</span> <span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">}</span>
-
-  <span class="nx">_getCollection</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="s1">'people'</span><span class="p">,</span>
-      <span class="na">columns</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'First Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Last Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'last_name'</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
-      <span class="p">],</span>
-      <span class="na">records</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Greg'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Kops'</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Megan'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Pugh'</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Kath'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Tibbetts'</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Armand'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Zerilli'</span> <span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-<span class="p">}</span>
-
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
-</pre>
-
-<h3>A simple form</h3>
-<pre class="highlight">
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Form</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
-
-<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-
-  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Form</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getForm</span><span class="p">()}</span> <span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">}</span>
-
-  <span class="nx">_getForm</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="s1">'contact-new'</span><span class="p">,</span>
-      <span class="na">sections</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-          <span class="na">label</span><span class="p">:</span> <span class="s1">'Basic Information'</span><span class="p">,</span>
-          <span class="na">fields</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-              <span class="na">code</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span>
-              <span class="na">label</span><span class="p">:</span> <span class="s1">'First Name'</span><span class="p">,</span>
-              <span class="na">type</span><span class="p">:</span> <span class="s1">'textfield'</span><span class="p">,</span>
-              <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-              <span class="na">code</span><span class="p">:</span> <span class="s1">'last_name'</span><span class="p">,</span>
-              <span class="na">label</span><span class="p">:</span> <span class="s1">'Last Name'</span><span class="p">,</span>
-              <span class="na">type</span><span class="p">:</span> <span class="s1">'textfield'</span><span class="p">,</span>
-              <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
-            <span class="p">}</span>
-          <span class="p">]</span>
-        <span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-<span class="p">}</span>
-
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
-</pre>
+<p class="docs-prevnext">
+  <a class="right" href="./quickstart.html">Next →</a>
+</p>
 
     </article>
   </div>

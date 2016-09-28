@@ -1,0 +1,166 @@
+---
+layout: base
+---
+
+<h1>Quickstart</h1>
+
+<p>First, add reframe to your project</p>
+
+<pre class="highlight">
+{% highlight bash %}
+npm install --save reframe
+{% endhighlight %}
+</pre>
+
+<p>Next create your first component</p>
+
+
+<pre class="highlight">
+{% highlight javascript %}
+import { Collection } from 'reframe';
+
+export default class Contacts extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'people',
+      columns: [
+        { label: 'Name', key: 'name', visible: true },
+      ],
+      records: [
+        { name: 'Greg Kops' },
+        { name: 'Megan Pugh' },
+        { name: 'Kath Tibbetts' },
+        { name: 'Armand Zerilli' }
+      ]
+    }
+  }
+
+}
+{% endhighlight %}
+</pre>
+
+<p>Compile your application and hit your browser:</p>
+
+<div class="screenshot">
+  <img src="./images/collection.jpg" />
+</div>
+
+<p>It's that easy! Of course, this isn't a very interesting example as it merely
+  displays a simple grid of static data. What if we wanted to load the data
+  from a remote data source? Ignoring security and authentication concerns for
+  a moment, let's refactor our collection:</p>
+
+<pre class="highlight">
+{% highlight javascript %}
+import { Collection } from 'reframe';
+
+export default class Contacts extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'people',
+      columns: [
+        { label: 'Name', key: 'name', visible: true },
+      ],
+      records: 'https://api.example.com/contacts'
+    }
+  }
+
+}
+{% endhighlight %}
+</pre>
+
+<p>Not much will change with the interface, but we made an important change to
+  the component's configuration. By replacing our static json records object with
+  an API endpoint: Now, the component will attempt to load this data remotely!</p>
+
+<p>Let's take a look at at forms:</p>
+
+<pre class="highlight">
+{% highlight javascript %}
+import { Form } from 'reframe';
+
+export default class New extends React.Component {
+
+  render() {
+    return <Form {...this._getForm()} />
+  }
+
+  _getForm() {
+    return {
+      id: 'new-contact',
+      sections: [
+        {
+          fields: [
+            { code: 'name', label: 'Name', type: 'textfield' },
+          ]
+        }
+      ]
+    }
+  }
+
+}
+{% endhighlight %}
+</pre>
+
+<p>Compile your application and hit your browser:</p>
+
+<div class="screenshot">
+  <img src="./images/form.jpg" />
+</div>
+
+<p>Once again not a lot to look at yet in this example, and if you press the
+  save button, nothing will happen. Just take a moment to notice how
+  declarative Reframe configuration is. Just as with the collection, you
+  can describe the look, functionality, and behavior all in one JSON object.
+  As you might imagine, connecting this form to a remote datasource is a
+  trivial addition:</p>
+
+<pre class="highlight">
+{% highlight javascript %}
+import { Form } from 'reframe';
+
+export default class New extends React.Component {
+
+  render() {
+    return <Form {...this._getForm()} />
+  }
+
+  _getForm() {
+    return {
+      id: 'new-contact',
+      method: 'POST',
+      action: 'https://api.example.com/contacts',
+      sections: [
+        {
+          fields: [
+            { code: 'name', label: 'Name', type: 'textfield' },
+          ]
+        }
+      ]
+    }
+  }
+
+}
+{% endhighlight %}
+</pre>
+
+<p>Now your form is able to submit an ajax request to your server API with
+  two simple additions to your configuration. Of course, you'll need to handle
+  validation on both the client side and server side, but we've thought through
+  all that! Reframe components are intended to make integrating with your server
+  backend a snap!</p>
+
+<p class="docs-prevnext">
+  <a href="./index.html">← Prev</a>
+  <a class="right" href="./state.html">Next →</a>
+</p>

@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset='utf-8'>
+  <title>Reframe</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="./css/default.css">
+  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link rel='shortcut icon' href='/static/favicon.png'>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="">
+
+  <header class='topbar'>
+    <nav class='width'>
+      <ul>
+        <li><a href="./index.html"class="active" >Docs</a></li>
+      </ul>
+      <ul class="external">
+        <li><a href="https://github.com/thinktopography/reframe">Github</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<section class='content'>
+  <div class='width'>
+    <nav class='toc'>
+      <section>
+        <h3>User Guide</h3>
+        <ul>
+          <li><a href="./index.html">Introduction</a></li>
+          <li><a href="./quickstart.html">Quickstart</a></li>
+          <li><a href="./state.html">State Management</a></li>
+          <li><a href="./server.html">Server Requirements</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Component Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./breadcrumbs.html">Breadcrumbs</a></li>
+          <li><a href="./card.html">Card</a></li>
+          <li><a href="./collection.html">Collection</a></li>
+          <li><a href="./component.html">Component</a></li>
+          <li><a href="./container.html">Container</a></li>
+          <li><a href="./form.html">Form</a></li>
+          <li><a href="./modal.html">Modal</a></li>
+          <li><a href="./tabs.html">Tabs</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Control Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./checkbox.html">Checkbox</a></li>
+          <li><a href="./checkboxes.html">Checkboxes</a></li>
+          <li><a href="./colorfield.html">Colorfield</a></li>
+          <li><a href="./filefield.html">Filefield</a></li>
+          <li><a href="./radios.html">Radios</a></li>
+          <li><a href="./select.html">Select</a></li>
+          <li><a href="./tablefield.html">Tablefield</a></li>
+          <li><a href="./textarea.html">Textarea</a></li>
+          <li><a href="./textfield.html">Textfield</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Utility Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./api.html">API</a></li>
+          <li><a href="./config.html">Config</a></li>
+          <li><a href="./format.html">Format</a></li>
+          <li><a href="./socket.html">Socket</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <article class='withtoc'>
+      <h1>Getting Started with Reframe</h1>
+
+<h2>What is Reframe?</h2>
+<p>Reframe is a collection of components which help developers rapidly prototype
+  and build responsive web applications. Built upon open source libraries like
+  <a href="https://github.com/facebook/react">React</a>,
+  <a href="https://github.com/reactjs/redux">Redux</a>, and
+  <a href="https://http://semantic-ui.com/">Semantic UI</a>, Reframe is meant to
+  coexist and integrate within the existing React ecosystem</p>
+
+<h2>How do I use Reframe?</h2>
+<p></p>
+
+<h3>A simple collection</h3>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Collection</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Collection</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getCollection</span><span class="p">()}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+
+  <span class="nx">_getCollection</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'people'</span><span class="p">,</span>
+      <span class="na">columns</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'First Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Last Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'last_name'</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="na">records</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Greg'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Kops'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Megan'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Pugh'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Kath'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Tibbetts'</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'Armand'</span><span class="p">,</span> <span class="na">last_name</span><span class="p">:</span> <span class="s1">'Zerilli'</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
+</pre>
+
+<h3>A simple form</h3>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Form</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Form</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">_getForm</span><span class="p">()}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+
+  <span class="nx">_getForm</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'contact-new'</span><span class="p">,</span>
+      <span class="na">sections</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">label</span><span class="p">:</span> <span class="s1">'Basic Information'</span><span class="p">,</span>
+          <span class="na">fields</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="na">code</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span>
+              <span class="na">label</span><span class="p">:</span> <span class="s1">'First Name'</span><span class="p">,</span>
+              <span class="na">type</span><span class="p">:</span> <span class="s1">'textfield'</span><span class="p">,</span>
+              <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="na">code</span><span class="p">:</span> <span class="s1">'last_name'</span><span class="p">,</span>
+              <span class="na">label</span><span class="p">:</span> <span class="s1">'Last Name'</span><span class="p">,</span>
+              <span class="na">type</span><span class="p">:</span> <span class="s1">'textfield'</span><span class="p">,</span>
+              <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Index</span></code></pre></div>
+</pre>
+
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class='width'>
+    &copy; Copyright 2016, Think Topography, Inc.
+  </div>
+</footer>
+
+</body>
+</html>
