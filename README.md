@@ -26,7 +26,8 @@ npm install --save reframe
 ```
 
 ## Example
-Here's an example of a simple Reframe collection component:
+Reframe components can be as simple or full featured as you need them to be.
+Here's an example of a simple Reframe Collection component:
 
 ```JavaScript
 import { Collection } from 'reframe';
@@ -40,13 +41,75 @@ export default class Contacts extends React.Component {
   _getCollection() {
     return {
       id: 'people',
-      columns: [
-        { label: 'Name', key: 'name', visible: true },
-      ],
-      records: 'https://api.example.com/contacts'
+      records: [
+        { name: 'Greg Kops' },
+        { name: 'Megan Pugh' },
+        { name: 'Kath Tibbetts' },
+        { name: 'Armand Zerilli' }
+      ]
     }
   }
 
+}
+```
+
+Here's an example of a more completely configured component:
+
+```JavaScript
+import { Collection } from 'reframe';
+
+export default class Contact extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'contacts-index',
+      columns: [
+        { label: 'Name', key: 'first_name', primary: true, visible: true, format: NameCell },
+        { label: 'Email', key: 'email', primary: false, visible: true },
+      ],
+      records: '/admin/contacts',
+      filters: '/admin/contacts/fields',
+      sort: { key: 'created_at', order: 'desc' },
+      card: {
+        image: 'photo',
+        url: '/admin/contacts/#{id}',
+        content: ContentCard
+      },
+      entity: 'contact',
+      empty: 'There are no contacts',
+      recordActions: [
+        { label: 'edit', icon: 'edit', redirect: '/admin/contacts/#{id}/edit'}
+      ],
+      batchActions: [
+        { label: 'add to list', component: AddToList },
+        { label: 'delete all', component: AddToList },
+        { label: 'tag all', component: AddToList },
+      ]
+    }
+  }
+
+}
+
+var NameCell = (props) => {
+  return (
+    <Link href={`/admin/contacts/${props.id}`}>
+      <img src={props.photo} />
+      {props.first_name} {props.last_name}
+    </Link>
+  )
+}
+
+const ContentCard = (props) => {
+  return (
+    <div>
+      <h4>{props.first_name} {props.last_name}</h4>
+      <p>{props.email}</p>
+    </div>
+  )
 }
 ```
 
