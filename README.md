@@ -18,6 +18,13 @@ Becuase Reframe enables you to statically mock your data OR connect it from
 a remote data source, converting from prototype to application can be as eas
 as replacing a JSON object with a URL endpoint
 
+## Installation
+Install with [npm](http://npmjs.com):
+
+```sh
+npm install --save reframe
+```
+
 ## Example
 Here's an example of a simple Reframe collection component:
 
@@ -43,18 +50,11 @@ export default class Contacts extends React.Component {
 }
 ```
 
-## Installation
-Install with [npm](http://npmjs.com):
-
-```sh
-npm install --save reframe
-```
-
 ## Author & Credits
 
-reframe was originally written by [Greg Kops](https://github.com/mochini) and
+Reframe was originally written by [Greg Kops](https://github.com/mochini) and
 [Armand Zerilli](https://github.com/zerilliworks) based upon their work at
-[Think Topography](http://thinktopography.com). reframe has been used in
+[Think Topography](http://thinktopography.com). Reframe has been used in
 production to support a handful of client applications.
 
 Special thanks to [Rick Wong](https://github.com/RickWong) for his generous
