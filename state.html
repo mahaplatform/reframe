@@ -1,0 +1,60 @@
+---
+layout: base
+---
+
+<h1>State Management</h1>
+<p>Redux is a powerful tool for managing state in your single page application.
+  Instead of dividing your state up into many tiny stateful components, redux
+  lets you combine all of your application's state into a single application
+  wide state tree.</p>
+<p>This is great because it enables you to inspect your application's state at
+  any point in time - from any perspective. This approach, however, can start to
+  break down as your application grows in size and complexity. Here are a few
+  key problems:</p>
+
+<h2>Namespace Competition</h2>
+<p>Lets say you have two of the same component used in an interface - perhaps a
+  textfield control on the form. Unless you are very careful with how you
+  write and combine your reducer, these two components will compete for the
+  same namespace in the application state tree - potentially overwriting
+  each other with each successive action.</p>
+
+<h2>Garbage Collection</h2>
+<p>As you navigate through your application and interact with various
+interfaces, you will add more and more data to the state tree. Once you navigate
+away from an interfaces, you probably don't need that state data any longer.
+Over time, you state will grow bulky and can evtually slow down your application</p>
+
+<h2>Reframe's Solution</h2>
+<p>Refeame is a component library and we expect developers to mix and match many
+  components in each interface. Because it is inevetable that this will happen,
+  we built a solution into the core of how we manage components and data in the
+  state tree</p>
+
+<pre class="highlight">
+{% highlight javascript %}
+import { Component } from 'reframe'
+
+class ExampleComponent extends React.Component {
+
+  render() {
+    return (...)
+  }
+
+}
+
+export default Component({}, 'example_component', 'id')(ExampleComponent)
+{% endhighlight %}
+</pre>
+
+<p>By importing the higher order `Component` function from reframe in the root
+  file of your component and wrapping your component, you are able to give it a
+  unique namespace in the state tree. In this case, reframe knows to place your
+  component in the namespace identitied by 'id' in the component props.
+  Furthermore, it knows that when actions come through the reducer, they will
+  be dispatched to the 'example_component' reducer.</p>
+
+<p class="docs-prevnext">
+  <a href="./quickstart.html">← Prev</a>
+  <a class="right" href="./server.html">Next →</a>
+</p>
