@@ -1,3 +1,4 @@
+
 * {
   padding: 0;
   margin: 0;
@@ -25,7 +26,7 @@ h1, h2, h3, h4 {
   position: relative; }
 
 header, h1, h2, h3, h4 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  font-family: "Museo", Helvetica, Arial, sans-serif; }
 
 code, pre {
   font-family: "Roboto Mono", Menlo, monospace;
@@ -233,11 +234,10 @@ header.topbar nav ul {
 
 header.topbar nav ul li {
   display: inline;
-  text-transform: lowercase; }
+ }
 
 header.topbar nav ul li a {
   padding: 0 8px;
-  text-transform: lowercase;
   letter-spacing: 1px;
   line-height: 50px;
   display: inline-block;

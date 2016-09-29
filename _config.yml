@@ -4,3 +4,15 @@ sass:
   style: compressed
   sass_dir: _sass
 permalink: :title
+navigation:
+- header: User Guide
+  section: userguide
+  items:
+  - label: Introduction
+    url: ./index.html
+  - label: Quick Start
+    url: ./quickstart.html
+  - label: State Management
+    url: ./state.html
+  - label: Server Requirements
+    url: ./server.html
