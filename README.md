@@ -1,15 +1,4 @@
 # ReFrame
-ReFrame Javascript Toolkit
-
-A set of React/Redux tools by Think Topography for web and mobile web development.
-
-## Installation
-
-Install with [npm](http://npmjs.com):
-
-```sh
-npm install --save reframe
-```
 
 ## What is Reframe?
 Reframe is a collection of components designed to help developers rapidly
@@ -28,3 +17,35 @@ functionality
 Becuase Reframe enables you to statically mock your data OR connect it from
 a remote data source, converting from prototype to application can be as eas
 as replacing a JSON object with a URL endpoint
+
+## Example
+Here's an example of a simple Reframe collection component:
+
+```JavaScript
+import { Collection } from 'reframe';
+
+export default class Contacts extends React.Component {
+
+  render() {
+    return <Collection {...this._getCollection()} />
+  }
+
+  _getCollection() {
+    return {
+      id: 'people',
+      columns: [
+        { label: 'Name', key: 'name', visible: true },
+      ],
+      records: 'https://api.example.com/contacts'
+    }
+  }
+
+}
+```
+
+## Installation
+Install with [npm](http://npmjs.com):
+
+```sh
+npm install --save reframe
+```
