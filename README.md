@@ -49,3 +49,13 @@ Install with [npm](http://npmjs.com):
 ```sh
 npm install --save reframe
 ```
+
+## Author & Credits
+
+reframe was originally written by [Greg Kops](https://github.com/mochini) and
+[Armand Zerilli](https://github.com/zerilliworks) based upon their work at
+[Think Topography](http://thinktopography.com). reframe has been used in
+production to support a handful of client applications.
+
+Special thanks to [Rick Wong](https://github.com/RickWong) for his generous
+donation of the 'reframe' npm package
