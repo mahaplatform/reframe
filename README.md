@@ -29,6 +29,8 @@ npm install --save reframe
 Reframe components can be as simple or full featured as you need them to be.
 Here's an example of a simple Reframe Collection component:
 
+![](http://thinktopography.github.io/reframe/images/collection.jpg)
+
 ```JavaScript
 import { Collection } from 'reframe';
 
@@ -54,6 +56,8 @@ export default class Contacts extends React.Component {
 ```
 
 Here's an example of a more completely configured component:
+
+![](http://thinktopography.github.io/reframe/images/collection-advanced.jpg)
 
 ```JavaScript
 import { Collection } from 'reframe';
