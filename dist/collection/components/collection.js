@@ -178,6 +178,7 @@ var Collection = function (_React$Component) {
       var _props3 = this.props;
       var id = _props3.id;
       var columns = _props3.columns;
+      var records = _props3.records;
       var onSetColumns = _props3.onSetColumns;
       var onFetchColumns = _props3.onFetchColumns;
 
@@ -185,6 +186,12 @@ var Collection = function (_React$Component) {
         onSetColumns(id, columns);
       } else if (_lodash2.default.isString(columns)) {
         onFetchColumns(id, columns);
+      } else if (_lodash2.default.isArray(records)) {
+        var keys = _lodash2.default.keys(records[0]);
+        var inferred = _lodash2.default.map(keys, function (key) {
+          return { label: key, key: key, primary: true, visible: true };
+        });
+        onSetColumns(id, inferred);
       }
     }
   }, {
@@ -198,7 +205,8 @@ var Collection = function (_React$Component) {
       var onFetchRecords = _props4.onFetchRecords;
 
       if (_lodash2.default.isArray(records)) {
-        onSetRecords(id, records);
+        var ordered = _lodash2.default.orderBy(records, state.params.sort.key, state.params.sort.order);
+        onSetRecords(id, ordered);
       } else if (_lodash2.default.isString(records)) {
         onFetchRecords(id, records, _extends({}, state.params.filter, {
           sort: (state.params.sort.order == 'desc' ? '-' : '') + state.params.sort.key

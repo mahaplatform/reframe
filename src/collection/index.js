@@ -39,7 +39,7 @@ class Index extends React.Component {
 }
 
 const validation = {
-  required: ['id','columns','records']
+  required: ['id','records']
 }
 
 export default Component(validation, 'collection', 'id')(Index)

@@ -140,18 +140,23 @@ class Collection extends React.Component {
   }
 
   _handleLoadColumns() {
-    const { id, columns, onSetColumns, onFetchColumns } = this.props
+    const { id, columns, records, onSetColumns, onFetchColumns } = this.props
     if(_.isArray(columns)) {
       onSetColumns(id, columns)
     } else if(_.isString(columns)) {
       onFetchColumns(id, columns)
+    } else if(_.isArray(records)) {
+      const keys = _.keys(records[0])
+      const inferred = _.map(keys, key => ({ label: key, key: key, primary: true, visible: true }))
+      onSetColumns(id, inferred)
     }
   }
 
   _handleLoadRecords() {
     const { id, records, state, onSetRecords, onFetchRecords } = this.props
     if(_.isArray(records)) {
-      onSetRecords(id, records)
+      const ordered = _.orderBy(records, state.params.sort.key, state.params.sort.order)
+      onSetRecords(id, ordered)
     } else if(_.isString(records)) {
       onFetchRecords(id, records, {
         ...state.params.filter,

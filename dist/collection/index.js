@@ -67,7 +67,7 @@ Index.propTypes = {
 
 
 var validation = {
-  required: ['id', 'columns', 'records']
+  required: ['id', 'records']
 };
 
 exports.default = (0, _component2.default)(validation, 'collection', 'id')(Index);
