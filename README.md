@@ -71,9 +71,11 @@ export default class Contacts extends React.Component {
 }
 ```
 
-Here's an example of a more completely configured component:
+It's that easy. There are many more configuration options available for each
+component - empowering you to customize the features and functionality. Here's
+an example of a more robustly configured and customized component:
 
-![](http://thinktopography.github.io/reframe/images/collection-advanced.jpg)
+![](http://thinktopography.github.io/reframe/images/collection-table.jpg)
 
 ```JavaScript
 import { Collection } from 'reframe';
