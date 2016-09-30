@@ -1,0 +1,113 @@
+---
+layout: base
+---
+
+<h1>Filesystem</h1>
+<p>Redux and React are fairly silent in mandating how you should organize your
+  files in your application's file hierarchy. There are suggestions out there
+  like the <a href="https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c#.e4eynnptg">Ducks</a>
+  specification. Reframe takes the following approach to structuring components</p>
+<pre class="highlight">
+{% highlight javascript %}
+accordian
+|_ tests
+|  |_ test.js
+|_ components
+|  |_ example.js
+|_ action_types.js
+|_ actions.js
+|_ index.js
+|_ reducer.js
+{% endhighlight %}
+</pre>
+
+<h2>action_types.js</h2>
+<p>We define our action_type constants in this file. We use constants for
+  action_types to ensure that the action_type we dispatch matches the
+  action_type that the reducer is looking for. Notice as well that we use the
+  convention `{component_name}/{capitalized_action_type}` for the text of the
+  action_type. This is so the reframe reducer can differentiate between actions
+  and route them to the appropriate reducer.</p>
+<pre class="highlight">
+{% highlight javascript %}
+export const TOGGLE = 'accordian/TOGGLE'
+{% endhighlight %}
+</pre>
+
+<h2>actions.js</h2>
+<p>We define our action creators in this file. Rather than import action_types
+  one by one, notice the syntax used to import all of the action_types as an
+  array. We can now reference our action types using the syntax
+  `actionsTypes.{action_type_constant}`. Also, notice how we include the `cid`
+  as one of the arguments for the action creator. This is required for reframe
+  to differentiate between different instances of the component that may be
+  active in a given interface.</p>
+<pre class="highlight">
+{% highlight javascript %}
+import * as actionTypes from './action_types'
+
+export const setRecords = (cid) => ({
+  type: actionTypes.TOGGLE,
+  cid
+})
+
+{% endhighlight %}
+</pre>
+
+<h2>index.js</h2>
+<p>This is the root of the component. Notice the use of the reframe Component
+  wrapper. This tells reframe to manage the state tree for this component and to
+  isolate the state for each of instance of the component active in the
+  interface, using the component's `id` prop as a key.</p>
+<pre class="highlight">
+{% highlight javascript %}
+import React from 'react'
+import { Component } from 'reframe'
+import Accordian from './components/accordian'
+
+class Index extends React.Component {
+
+  render() {
+    return <Accordian {...this.props} />
+  }
+
+}
+
+export default Component('accordian', 'id')(Index)
+{% endhighlight %}
+</pre>
+
+<h2>reducer.js</h2>
+<p>This is the file where you implement all of your redux reducer logic. Notice
+  how we set the initial state as a function default argument. This is essential
+  to ensure that the state tree is initialized when the component is first
+  added. Also, notice that although the action creator had a `cid` argument,
+  that variable has been removed from the `action`. That is because the cid is
+  used by reframe to determine which component to update. By the time the action
+  and state are routed to this function, that determination has been made and
+  the reducer can just be responsible for updating the component.</p>
+<pre class="highlight">
+{% highlight javascript %}
+import * as actionTypes from './action_types'
+
+export const INITIAL_STATE = {
+  expanded: false
+}
+
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case actionTypes.TOGGLE:
+      return {
+        ...state,
+        expanded: !expanded
+      }
+    default:
+      return state
+  }
+}
+{% endhighlight %}
+</pre>
+<p class="docs-prevnext">
+  <a href="./state.html">← Prev</a>
+  <a class="right" href="./server.html">Next →</a>
+</p>

@@ -6,7 +6,7 @@ sass:
 permalink: :title
 navigation:
 - header: User Guide
-  section: userguide
+  section: user_guide
   items:
   - label: Introduction
     url: ./index.html
@@ -14,5 +14,28 @@ navigation:
     url: ./quickstart.html
   - label: State Management
     url: ./state.html
+  - label: Filesystem
+    url: ./filesystem.html
   - label: Server Requirements
     url: ./server.html
+- header: Component Reference
+  section: component_reference
+  items:
+  - label: Overview
+    url: ./component_overview.html
+  - label: Breadcrumbs
+    url: ./breadcrumbs.html
+  - label: Card
+    url: ./card.html
+  - label: Collection
+    url: ./collection.html
+  - label: Component
+    url: ./component.html
+  - label: Container
+    url: ./container.html
+  - label: Form
+    url: ./form.html
+  - label: Modal
+    url: ./modal.html
+  - label: Tabs
+    url: ./tabs.html

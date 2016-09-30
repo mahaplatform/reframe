@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset='utf-8'>
+  <title>Reframe</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="./css/museo.css">
+  <link type="text/css" rel="stylesheet" href="./css/default.css">
+  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link rel='shortcut icon' href='/static/favicon.png'>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="">
+
+  <header class='topbar'>
+    <nav class='width'>
+      <ul>
+        <li><a href="./index.html"class="active" >Docs</a></li>
+      </ul>
+      <ul class="external">
+        <li><a href="https://github.com/thinktopography/reframe">GitHub</a></li>
+        <li><a href="https://www.npmjs.com/package/reframe">npm</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<section class='content'>
+  <div class='width'>
+    <nav class='toc'>
+      
+        <section>
+          <h3>User Guide</h3>
+          <ul>
+            
+              
+              
+              <li><a href="./index.html" class="item ">Introduction</a></li>
+            
+              
+              
+              <li><a href="./quickstart.html" class="item ">Quick Start</a></li>
+            
+              
+              
+              <li><a href="./state.html" class="item ">State Management</a></li>
+            
+              
+              
+              <li><a href="./filesystem.html" class="item ">Filesystem</a></li>
+            
+              
+              
+              <li><a href="./server.html" class="item ">Server Requirements</a></li>
+            
+          </ul>
+        </section>
+      
+        <section>
+          <h3>Component Reference</h3>
+          <ul>
+            
+              
+              
+              <li><a href="./component_overview.html" class="item ">Overview</a></li>
+            
+              
+              
+              <li><a href="./breadcrumbs.html" class="item ">Breadcrumbs</a></li>
+            
+              
+              
+              <li><a href="./card.html" class="item ">Card</a></li>
+            
+              
+              
+              <li><a href="./collection.html" class="item ">Collection</a></li>
+            
+              
+              
+              <li><a href="./component.html" class="item ">Component</a></li>
+            
+              
+              
+              <li><a href="./container.html" class="item ">Container</a></li>
+            
+              
+              
+              <li><a href="./form.html" class="item ">Form</a></li>
+            
+              
+              
+              <li><a href="./modal.html" class="item ">Modal</a></li>
+            
+              
+              
+              <li><a href="./tabs.html" class="item ">Tabs</a></li>
+            
+          </ul>
+        </section>
+      
+      <section>
+        <h3>Control Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./checkbox.html">Checkbox</a></li>
+          <li><a href="./checkboxes.html">Checkboxes</a></li>
+          <li><a href="./colorfield.html">Colorfield</a></li>
+          <li><a href="./filefield.html">Filefield</a></li>
+          <li><a href="./radios.html">Radios</a></li>
+          <li><a href="./select.html">Select</a></li>
+          <li><a href="./tablefield.html">Tablefield</a></li>
+          <li><a href="./textarea.html">Textarea</a></li>
+          <li><a href="./textfield.html">Textfield</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Utility Reference</h3>
+        <ul>
+          <li><a href="./overview.html">Overview</a></li>
+          <li><a href="./api.html">API</a></li>
+          <li><a href="./config.html">Config</a></li>
+          <li><a href="./format.html">Format</a></li>
+          <li><a href="./socket.html">Socket</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <article class='withtoc'>
+      <h1>Filesystem</h1>
+<p>Redux and React are fairly silent in mandating how you should organize your
+  files in your application's file hierarchy. There are suggestions out there
+  like the <a href="https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c#.e4eynnptg">Ducks</a>
+  specification. Reframe takes the following approach to structuring components</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">accordian</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">tests</span>
+<span class="o">|</span>  <span class="o">|</span><span class="nx">_</span> <span class="nx">test</span><span class="p">.</span><span class="nx">js</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">components</span>
+<span class="o">|</span>  <span class="o">|</span><span class="nx">_</span> <span class="nx">example</span><span class="p">.</span><span class="nx">js</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">action_types</span><span class="p">.</span><span class="nx">js</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">actions</span><span class="p">.</span><span class="nx">js</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">index</span><span class="p">.</span><span class="nx">js</span>
+<span class="o">|</span><span class="nx">_</span> <span class="nx">reducer</span><span class="p">.</span><span class="nx">js</span></code></pre></div>
+</pre>
+
+<h2>action_types.js</h2>
+<p>We define our action_type constants in this file. We use constants for
+  action_types to ensure that the action_type we dispatch matches the
+  action_type that the reducer is looking for. Notice as well that we use the
+  convention `{component_name}/{capitalized_action_type}` for the text of the
+  action_type. This is so the reframe reducer can differentiate between actions
+  and route them to the appropriate reducer.</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">TOGGLE</span> <span class="o">=</span> <span class="s1">'accordian/TOGGLE'</span></code></pre></div>
+</pre>
+
+<h2>actions.js</h2>
+<p>We define our action creators in this file. Rather than import action_types
+  one by one, notice the syntax used to import all of the action_types as an
+  array. We can now reference our action types using the syntax
+  `actionsTypes.{action_type_constant}`. Also, notice how we include the `cid`
+  as one of the arguments for the action creator. This is required for reframe
+  to differentiate between different instances of the component that may be
+  active in a given interface.</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">actionTypes</span> <span class="nx">from</span> <span class="s1">'./action_types'</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">setRecords</span> <span class="o">=</span> <span class="p">(</span><span class="nx">cid</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  <span class="na">type</span><span class="p">:</span> <span class="nx">actionTypes</span><span class="p">.</span><span class="nx">TOGGLE</span><span class="p">,</span>
+  <span class="nx">cid</span>
+<span class="p">})</span></code></pre></div>
+</pre>
+
+<h2>index.js</h2>
+<p>This is the root of the component. Notice the use of the reframe Component
+  wrapper. This tells reframe to manage the state tree for this component and to
+  isolate the state for each of instance of the component active in the
+  interface, using the component's `id` prop as a key.</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">'react'</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'reframe'</span>
+<span class="kr">import</span> <span class="nx">Accordian</span> <span class="nx">from</span> <span class="s1">'./components/accordian'</span>
+
+<span class="kr">class</span> <span class="nx">Index</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Accordian</span> <span class="p">{...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Component</span><span class="p">(</span><span class="s1">'accordian'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">)(</span><span class="nx">Index</span><span class="p">)</span></code></pre></div>
+</pre>
+
+<h2>reducer.js</h2>
+<p>This is the file where you implement all of your redux reducer logic. Notice
+  how we set the initial state as a function default argument. This is essential
+  to ensure that the state tree is initialized when the component is first
+  added. Also, notice that although the action creator had a `cid` argument,
+  that variable has been removed from the `action`. That is because the cid is
+  used by reframe to determine which component to update. By the time the action
+  and state are routed to this function, that determination has been made and
+  the reducer can just be responsible for updating the component.</p>
+<pre class="highlight">
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">actionTypes</span> <span class="nx">from</span> <span class="s1">'./action_types'</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">INITIAL_STATE</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">expanded</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">INITIAL_STATE</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">actionTypes</span><span class="p">.</span><span class="na">TOGGLE</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span>
+        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
+        <span class="na">expanded</span><span class="p">:</span> <span class="o">!</span><span class="nx">expanded</span>
+      <span class="p">}</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+</pre>
+<p class="docs-prevnext">
+  <a href="./state.html">← Prev</a>
+  <a class="right" href="./server.html">Next →</a>
+</p>
+
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class='width'>
+    &copy; Copyright 2016, Think Topography, Inc.
+  </div>
+</footer>
+
+</body>
+</html>
