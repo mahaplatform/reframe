@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Component from '../../component'
-import FileField from './components/filefield'
+import FileField from './filefield'
 
 class Index extends React.Component {
 

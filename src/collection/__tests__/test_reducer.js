@@ -6,7 +6,7 @@ jest.unmock('lodash')
 
 describe('collection reducer', () => {
 
-  it('set records', () => {
+  it('sets records', () => {
     let state = {
       records: []
     }
@@ -19,7 +19,8 @@ describe('collection reducer', () => {
     let expected = {
       records: [
         { id: 1, title: "One" }
-      ]
+      ],
+      status: 'records_loaded'
     }
     expect(reducer(state, action)).toEqual(expected)
   })
