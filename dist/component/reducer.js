@@ -16,35 +16,35 @@ var _action_types = require('./action_types');
 
 var actionTypes = _interopRequireWildcard(_action_types);
 
-var _reducer = require('./card/reducer');
+var _reducer = require('../card/reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _reducer3 = require('./collection/reducer');
+var _reducer3 = require('../collection/reducer');
 
 var _reducer4 = _interopRequireDefault(_reducer3);
 
-var _reducer5 = require('./container/reducer');
+var _reducer5 = require('../container/reducer');
 
 var _reducer6 = _interopRequireDefault(_reducer5);
 
-var _reducer7 = require('./controls/filefield/reducer');
+var _reducer7 = require('../controls/filefield/reducer');
 
 var _reducer8 = _interopRequireDefault(_reducer7);
 
-var _reducer9 = require('./form/reducer');
+var _reducer9 = require('../form/reducer');
 
 var _reducer10 = _interopRequireDefault(_reducer9);
 
-var _reducer11 = require('./tabs/reducer');
+var _reducer11 = require('../tabs/reducer');
 
 var _reducer12 = _interopRequireDefault(_reducer11);
 
-var _reducer13 = require('./controls/tablefield/reducer');
+var _reducer13 = require('../controls/tablefield/reducer');
 
 var _reducer14 = _interopRequireDefault(_reducer13);
 
-var _reducer15 = require('./tasks/reducer');
+var _reducer15 = require('../tasks/reducer');
 
 var _reducer16 = _interopRequireDefault(_reducer15);
 

@@ -1,53 +1,53 @@
+// @flow
+
 import * as actionTypes from './action_types'
 import Api from '../utils/api'
 
-export const addCollection = (cid) => ({
-  type: actionTypes.ADD_COLLECTION,
-  cid
-})
+type requestType = {
+  cid: string,
+  params: Object
+}
 
-export const removeCollection = (cid) => ({
-  type: actionTypes.REMOVE_COLLECTION,
-  cid
-})
+type responseType = {
+  cid: string,
+  entity: Object
+}
 
-export const setRecords = (cid, records) => ({
+export const setRecords = (cid: string, records: Array<Object>) => ({
   type: actionTypes.SET_RECORDS,
   cid,
   records
 })
 
-export const appendRecords = (cid, records) => ({
+export const appendRecords = (cid: string, records: Array<Object>) => ({
   type: actionTypes.APPEND_RECORDS,
   cid,
   records
 })
 
-export const toggleFilters = (cid) => ({
+export const toggleFilters = (cid: string) => ({
   type: actionTypes.TOGGLE_FILTERS,
   cid
 })
 
-export const changeLayout = (cid, layout) => ({
+export const changeLayout = (cid: string, layout: string) => ({
   type: actionTypes.CHANGE_LAYOUT,
   cid,
   layout
 })
 
-export const selectAll = (cid) => ({
+export const selectAll = (cid: string) => ({
   type: actionTypes.SELECT_ALL,
   cid
 })
 
-export const select = (cid, id) => ({
+export const select = (cid: string, id: number) => ({
   type: actionTypes.SELECT,
   cid,
   id
 })
 
-/* COLUMNS */
-
-export const fetchColumns = (cid, endpoint) => {
+export const fetchColumns = (cid: string, endpoint: string) => {
   return Api.get({
     cid,
     endpoint,
@@ -57,32 +57,30 @@ export const fetchColumns = (cid, endpoint) => {
   })
 }
 
-export const fetchColumnsRequest = (request) => ({
+export const fetchColumnsRequest = (request: requestType) => ({
   type: actionTypes.FETCH_COLUMNS_REQUEST,
   cid: request.cid
 })
 
-export const fetchColumnsSuccess = (response) => ({
+export const fetchColumnsSuccess = (response: responseType) => ({
   type: actionTypes.FETCH_COLUMNS_SUCCESS,
   cid: response.cid,
   columns: response.entity
 })
 
-export const fetchColumnsFailure = (response) => ({
+export const fetchColumnsFailure = (response: responseType) => ({
   type: actionTypes.FETCH_COLUMNS_FAILURE,
   cid: response.cid,
   error: response.entity
 })
 
-export const setColumns = (cid, columns)  => ({
+export const setColumns = (cid: string, columns: Array<Object>)  => ({
   type: actionTypes.SET_COLUMNS,
   cid,
   columns
 })
 
-/* RECORDS */
-
-export const fetchRecords = (cid, endpoint, params) => {
+export const fetchRecords = (cid: string, endpoint: string, params: Object) => {
   return Api.get({
     cid,
     params,
@@ -93,52 +91,46 @@ export const fetchRecords = (cid, endpoint, params) => {
   })
 }
 
-export const fetchRecordsRequest = (request) => ({
+export const fetchRecordsRequest = (request: requestType) => ({
   type: actionTypes.FETCH_RECORDS_REQUEST,
   cid: request.cid
 })
 
-export const fetchRecordsSuccess = (response) => ({
+export const fetchRecordsSuccess = (response: responseType) => ({
   type: actionTypes.FETCH_RECORDS_SUCCESS,
   cid: response.cid,
   records: response.entity
 })
 
-export const fetchRecordsFailure = (response) => ({
+export const fetchRecordsFailure = (response: responseType) => ({
   type: actionTypes.FETCH_RECORDS_FAILURE,
   cid: response.cid,
   error: response.entity
 })
 
-/* SORTING */
-
-export const sortRecords = (cid, key) => ({
+export const sortRecords = (cid: string, key: string) => ({
   type: actionTypes.SORT_RECORDS,
   cid,
   key
 })
 
-/* FILTERING */
-
-export const filterRecords = (cid, params) => ({
+export const filterRecords = (cid: string, params: Object) => ({
   type: actionTypes.FILTER_RECORDS,
   cid,
   params,
 })
 
-/* RELOADING */
-
-export const exportRecords = (cid) => ({
+export const exportRecords = (cid: string) => ({
   type: actionTypes.EXPORT_RECORDS,
   cid
 })
 
-export const reloadRecords = (cid) => ({
+export const reloadRecords = (cid: string) => ({
   type: actionTypes.RELOAD_RECORDS,
   cid
 })
 
-export const executeBatchAction = (cid, batchAction) => ({
+export const executeBatchAction = (cid: string, batchAction: string) => ({
   type: actionTypes.EXECUTE_BATCH_ACTION,
   cid,
   batchAction

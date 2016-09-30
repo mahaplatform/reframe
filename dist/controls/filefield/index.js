@@ -16,7 +16,7 @@ var _component = require('../../component');
 
 var _component2 = _interopRequireDefault(_component);
 
-var _filefield = require('./components/filefield');
+var _filefield = require('./filefield');
 
 var _filefield2 = _interopRequireDefault(_filefield);
 

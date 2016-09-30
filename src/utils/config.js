@@ -1,17 +1,20 @@
 import _ from 'lodash'
 
+type configType = {
+
+}
 
 class Config {
 
-  constructor() {
+  constructor(): void {
     this.config = {}
   }
 
-  load(config) {
+  load(config: configType): void {
     this.config = config
   }
 
-  get(key) {
+  get(key: string): any {
     return _.get(this.config, key)
   }
 
