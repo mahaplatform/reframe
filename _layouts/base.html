@@ -5,9 +5,9 @@
   <meta charset='utf-8'>
   <title>Reframe</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
-  <link type="text/css" rel="stylesheet" href="./css/museo.css">
-  <link type="text/css" rel="stylesheet" href="./css/default.css">
-  <link type="text/css" rel="stylesheet" href="./css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="{{site.baseurl}}/css/museo.css">
+  <link type="text/css" rel="stylesheet" href="{{site.baseurl}}/css/default.css">
+  <link type="text/css" rel="stylesheet" href="{{site.baseurl}}/css/syntax.css">
   <link rel='shortcut icon' href='/static/favicon.png'>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -16,7 +16,7 @@
   <header class='topbar'>
     <nav class='width'>
       <ul>
-        <li><a href="./index.html"class="active" >Docs</a></li>
+        <li><a href="{{site.baseurl}}/index.html"class="active" >Docs</a></li>
       </ul>
       <ul class="external">
         <li><a href="https://github.com/thinktopography/reframe">GitHub</a></li>
@@ -34,7 +34,8 @@
           <ul>
             {% for item in section.items %}
               {% assign current = nil %}
-              {% if page.permalink == item.url %}
+              {% assign url = site.baseurl | append: page.url %}
+              {% if url == item.url %}
                 {% assign current = 'active' %}
               {% endif %}
               <li><a href="{{item.url}}" class="item {{current}}">{{item.label}}</a></li>
@@ -42,33 +43,7 @@
           </ul>
         </section>
       {% endfor %}
-      <section>
-        <h3>Control Reference</h3>
-        <ul>
-          <li><a href="./overview.html">Overview</a></li>
-          <li><a href="./checkbox.html">Checkbox</a></li>
-          <li><a href="./checkboxes.html">Checkboxes</a></li>
-          <li><a href="./colorfield.html">Colorfield</a></li>
-          <li><a href="./filefield.html">Filefield</a></li>
-          <li><a href="./radios.html">Radios</a></li>
-          <li><a href="./select.html">Select</a></li>
-          <li><a href="./tablefield.html">Tablefield</a></li>
-          <li><a href="./textarea.html">Textarea</a></li>
-          <li><a href="./textfield.html">Textfield</a></li>
-        </ul>
-      </section>
-      <section>
-        <h3>Utility Reference</h3>
-        <ul>
-          <li><a href="./overview.html">Overview</a></li>
-          <li><a href="./api.html">API</a></li>
-          <li><a href="./config.html">Config</a></li>
-          <li><a href="./format.html">Format</a></li>
-          <li><a href="./socket.html">Socket</a></li>
-        </ul>
-      </section>
     </nav>
-
     <article class='withtoc'>
       {{ content }}
     </article>

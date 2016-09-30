@@ -170,7 +170,7 @@ a {
   color: #CC2E39; }
 
 nav.toc a {
-  color: #444; }
+  color: #888; }
 
 nav.toc a.active {
   color: #CC2E39; }
@@ -364,12 +364,11 @@ nav.toc {
   margin-bottom: 20px; }
 
 nav.toc h3 {
-  margin: 0.5em 0;
+  margin: 1em 0 0;
   padding-top: 0.5em;
   font-size: 14px;
   font-weight: bold;
-  text-transform: uppercase;
-  line-height: 40px; }
+  text-transform: uppercase; }
 
 nav.toc section:first-child h3 {
   border-top: none;
