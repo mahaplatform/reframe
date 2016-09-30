@@ -1,6 +1,6 @@
 # ReFrame
 
-![](http://thinktopography.github.io/reframe/images/card-collection.jpg)
+![](http://thinktopography.github.io/reframe/images/collection-card.jpg)
 
 ## What is Reframe?
 Reframe is a collection of React components designed to help developers rapidly
