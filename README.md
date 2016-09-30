@@ -3,7 +3,7 @@
 ![](http://thinktopography.github.io/reframe/images/card-collection.jpg)
 
 ## What is Reframe?
-Reframe is a collection of components designed to help developers rapidly
+Reframe is a collection of React components designed to help developers rapidly
 prototype and build responsive web applications. Built upon open source
 libraries like React, Redux, and Semantic UI, Reframe is intended
 to coexist and integrate with the existing React ecosystem
@@ -16,9 +16,23 @@ a fully featured clickable prototypes of your application's layout and
 functionality
 
 ## Accelerated Prototype to Production
-Becuase Reframe enables you to statically mock your data OR connect it from
+Because Reframe enables you to statically mock your data OR connect it from
 a remote data source, converting from prototype to application can be as eas
 as replacing a JSON object with a URL endpoint
+
+## Opinionated Approach
+In order to provide a high level of functionality, Reframe is implemented
+with a bold set of opinions regarding how you should structure your
+application. We use Semantic UI as the foundational CSS framework for our
+components and we use Redux to manage the application state.
+
+## Declarative Configuration
+Most functionality in Reframe is extremely declarative. You may find yourself
+writing more JSON configuration than actual JavaScript. We've intentionally
+made configuration as simple and terse as possible - choosing
+sensible defaults where possible. We have also tried to give the developer as
+many opportunities as possible to override these defaults to configure
+the desired behavior.
 
 ## Installation
 Install with [npm](http://npmjs.com):
