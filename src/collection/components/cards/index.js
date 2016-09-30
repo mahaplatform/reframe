@@ -5,7 +5,6 @@ import Card from './card'
 class Cards extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     records: React.PropTypes.array,
     card: React.PropTypes.object,
     selected: React.PropTypes.array,
@@ -15,14 +14,13 @@ class Cards extends React.Component {
   }
 
   render() {
-    const { id, card, records, selected, recordActions, batchActions,onSelect } = this.props
+    const { card, records, selected, recordActions, batchActions,onSelect } = this.props
     return (
       <div className="cards">
         {records.map((record, index) => {
           return (
             <div key={`card_${index}`} className="card">
-              <Card id={id}
-                    card={card}
+              <Card card={card}
                     selected={selected}
                     recordActions={recordActions}
                     batchActions={batchActions}

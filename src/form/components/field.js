@@ -5,7 +5,6 @@ import Control from '../../controls/control'
 class Field extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     code: React.PropTypes.string,
     include: React.PropTypes.bool,
     show: React.PropTypes.bool,
@@ -35,7 +34,7 @@ class Field extends React.Component {
   }
 
   render() {
-    const { id, code, type, include, show, label, style, instructions, required, datasource, columns, options, data, errors, fields, onUpdateData } = this.props
+    const { code, type, include, show, label, style, instructions, required, datasource, columns, options, data, errors, fields, onUpdateData } = this.props
     const error = (errors[code]) ? errors[code][0] : null
     let classes = ["field"]
     if(error) {
@@ -52,13 +51,11 @@ class Field extends React.Component {
           {(() => {
             if(type == 'fields') {
               return <Fields fields={fields}
-                             id={id}
                              onChange={this._handleUpdateData.bind(this)}
                              onUpdateData={onUpdateData} />
             } else  {
               const value = data[code]
-              return <Control id={code}
-                              type={type}
+              return <Control type={type}
                               label={label}
                               style={style}
                               datasource={datasource}
@@ -77,8 +74,8 @@ class Field extends React.Component {
   }
 
   _handleUpdateData(value) {
-    const { id, code, onUpdateData } = this.props
-    onUpdateData(id, code, value)
+    const { code, onUpdateData } = this.props
+    onUpdateData(code, value)
   }
 
 }

@@ -24,33 +24,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-function addFile(cid, totalChunks) {
+function addFile(totalChunks) {
   return {
     type: actionTypes.ADD_FILE,
-    cid: cid,
     totalChunks: totalChunks
   };
 }
 
-function uploadBegin(cid) {
+function uploadBegin() {
   return {
-    type: actionTypes.UPLOAD_BEGIN,
-    cid: cid
+    type: actionTypes.UPLOAD_BEGIN
   };
 }
 
-function uploadProgress(cid) {
+function uploadProgress() {
   return {
-    type: actionTypes.UPLOAD_PROGRESS,
-    cid: cid
+    type: actionTypes.UPLOAD_PROGRESS
   };
 }
 
 /* RECORDS */
 
-var uploadProcess = exports.uploadProcess = function uploadProcess(cid, upload_id) {
+var uploadProcess = exports.uploadProcess = function uploadProcess(upload_id) {
   return _api2.default.patch({
-    cid: cid,
     params: {
       upload_id: upload_id
     },
@@ -63,15 +59,13 @@ var uploadProcess = exports.uploadProcess = function uploadProcess(cid, upload_i
 
 var uploadProcessRequest = exports.uploadProcessRequest = function uploadProcessRequest(request) {
   return {
-    type: actionTypes.UPLOAD_PROCESS_REQUEST,
-    cid: request.cid
+    type: actionTypes.UPLOAD_PROCESS_REQUEST
   };
 };
 
 var uploadProcessSuccess = exports.uploadProcessSuccess = function uploadProcessSuccess(response) {
   return {
     type: actionTypes.UPLOAD_PROCESS_SUCCESS,
-    cid: response.cid,
     file: response.entity
   };
 };
@@ -79,36 +73,31 @@ var uploadProcessSuccess = exports.uploadProcessSuccess = function uploadProcess
 var uploadProcessFailure = exports.uploadProcessFailure = function uploadProcessFailure(response) {
   return {
     type: actionTypes.UPLOAD_PROCESS_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-function uploadSuccess(cid, file) {
+function uploadSuccess(file) {
   return {
     type: actionTypes.UPLOAD_SUCCESS,
-    cid: cid,
     file: file
   };
 }
 
-function uploadFailure(cid) {
+function uploadFailure() {
   return {
-    type: actionTypes.UPLOAD_FAILURE,
-    cid: cid
+    type: actionTypes.UPLOAD_FAILURE
   };
 }
 
-function removeFile(cid) {
+function removeFile() {
   return {
-    type: actionTypes.REMOVE_FILE,
-    cid: cid
+    type: actionTypes.REMOVE_FILE
   };
 }
 
-function changeFile(cid) {
+function changeFile() {
   return {
-    type: actionTypes.CHANGE_FILE,
-    cid: cid
+    type: actionTypes.CHANGE_FILE
   };
 }

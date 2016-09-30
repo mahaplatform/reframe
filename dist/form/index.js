@@ -12,19 +12,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _actions = require('./actions');
-
-var actions = _interopRequireWildcard(_actions);
-
-var _component = require('../component');
-
-var _component2 = _interopRequireDefault(_component);
-
 var _form = require('./components/form');
 
 var _form2 = _interopRequireDefault(_form);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _store = require('../store');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _reducer = require('./reducer');
+
+var _reducer2 = _interopRequireDefault(_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,7 +44,12 @@ var Index = function (_React$Component) {
   _createClass(Index, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_form2.default, this.props);
+      var store = (0, _store2.default)(_reducer2.default);
+      return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(_form2.default, this.props)
+      );
     }
   }]);
 
@@ -54,7 +57,6 @@ var Index = function (_React$Component) {
 }(_react2.default.Component);
 
 Index.propTypes = {
-  id: _react2.default.PropTypes.string,
   datasource: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
   sections: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
   method: _react2.default.PropTypes.string,
@@ -74,4 +76,4 @@ Index.propTypes = {
   onFailure: _react2.default.PropTypes.func,
   onSuccess: _react2.default.PropTypes.func
 };
-exports.default = (0, _component2.default)('form', 'id')(Index);
+exports.default = Index;

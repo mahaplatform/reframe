@@ -6,7 +6,6 @@ import * as actions from '../../actions'
 class Thead extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     columns: React.PropTypes.array,
     params: React.PropTypes.object,
     batchActions: React.PropTypes.array,
@@ -46,8 +45,7 @@ class Thead extends React.Component {
   }
 
   _handleSortRecords(column) {
-    const { id, onSortRecords } = this.props
-    onSortRecords(id, column)
+    this.props.onSortRecords(column)
   }
 
 }

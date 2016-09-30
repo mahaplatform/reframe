@@ -6,7 +6,6 @@ import * as actions from '../actions'
 class Toolbar extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     columns: React.PropTypes.array,
     records: React.PropTypes.array,
     card: React.PropTypes.object,
@@ -92,34 +91,29 @@ class Toolbar extends React.Component {
   }
 
   _handleToggleFilters() {
-    const { id, onToggleFilters } = this.props
-    onToggleFilters(id)
+    this.props.onToggleFilters()
   }
 
   _handleChangeLayout(layout) {
-    const { id, onChangeLayout } = this.props
-    onChangeLayout(id, layout)
+    this.props.onChangeLayout(layout)
   }
 
   _handleSelectAll() {
-    const { id, onSelectAll } = this.props
-    onSelectAll(id)
+    this.props.onSelectAll()
   }
 
   _handleExecuteBatchAction(index) {
-    const { id, batchActions, onExecuteBatchAction } = this.props
+    const { batchActions, onExecuteBatchAction } = this.props
     const batchAction = batchActions[index]
-    onExecuteBatchAction(id, batchAction.component)
+    onExecuteBatchAction(batchAction.component)
   }
 
   _handleReloadRecords() {
-    const { id, onReloadRecords } = this.props
-    onReloadRecords(id)
+    this.props.onReloadRecords()
   }
 
   _handleExportRecords() {
-    const { id, onExportRecords } = this.props
-    onExportRecords(id)
+    this.props.onExportRecords()
   }
 
 }

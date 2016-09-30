@@ -89,10 +89,6 @@ var Api = function () {
 
         var request = {};
 
-        if (options.cid) {
-          request.cid = options.cid;
-        }
-
         if (options.params) {
           request.params = options.params;
         }
@@ -107,20 +103,12 @@ var Api = function () {
             entity: json
           };
 
-          if (options.cid) {
-            success.cid = options.cid;
-          }
-
           dispatch(options.successCallback(success));
         }, function (response) {
 
           var failure = {
             entity: response.entity
           };
-
-          if (options.cid) {
-            failure.cid = options.cid;
-          }
 
           dispatch(options.errorCallback(failure));
         });

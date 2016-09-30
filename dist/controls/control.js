@@ -121,7 +121,6 @@ var Control = function (_React$Component) {
 }(_react2.default.Component);
 
 Control.propTypes = {
-  id: _react2.default.PropTypes.string,
   type: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element]),
   datasource: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.shape({
     source: _react2.default.PropTypes.string,

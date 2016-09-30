@@ -12,19 +12,23 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
+var _store = require('../store');
+
+var _store2 = _interopRequireDefault(_store);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
-
-var _reactRedux = require('react-redux');
 
 var _actions = require('./actions');
 
 var actions = _interopRequireWildcard(_actions);
 
-var _component = require('../component');
+var _reducer = require('./reducer');
 
-var _component2 = _interopRequireDefault(_component);
+var _reducer2 = _interopRequireDefault(_reducer);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -36,7 +40,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function Index(id, mapEndpointsToProps) {
+var Index = function Index(mapEndpointsToProps) {
 
   return function wrapWithConnect(WrappedComponent) {
     var Container = function (_React$Component) {
@@ -80,7 +84,7 @@ var Index = function Index(id, mapEndpointsToProps) {
 
           var resources = mapEndpointsToProps(this.props);
           _lodash2.default.forOwn(resources, function (endpoint, prop) {
-            _this2.props.onFetchResource(id, prop, endpoint);
+            _this2.props.onFetchResource(prop, endpoint);
           });
         }
       }]);
@@ -88,20 +92,41 @@ var Index = function Index(id, mapEndpointsToProps) {
       return Container;
     }(_react2.default.Component);
 
-    Container = (0, _component2.default)('container', 'id')(Container);
-
     var mapStateToProps = function mapStateToProps(state, props) {
-      return {
-        id: id,
-        state: state[id]
-      };
+      return { state: state };
     };
 
     var mapDispatchToProps = {
       onFetchResource: actions.fetchResource
     };
 
-    return (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Container);
+    Container = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Container);
+
+    var Root = function (_React$Component2) {
+      _inherits(Root, _React$Component2);
+
+      function Root() {
+        _classCallCheck(this, Root);
+
+        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
+      }
+
+      _createClass(Root, [{
+        key: 'render',
+        value: function render() {
+          var store = (0, _store2.default)(_reducer2.default);
+          return _react2.default.createElement(
+            _reactRedux.Provider,
+            { store: store },
+            _react2.default.createElement(Container, this.props)
+          );
+        }
+      }]);
+
+      return Root;
+    }(_react2.default.Component);
+
+    return Root;
   };
 };
 

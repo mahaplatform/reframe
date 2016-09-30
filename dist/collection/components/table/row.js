@@ -104,11 +104,7 @@ var Row = function (_React$Component) {
   }, {
     key: '_handleSelect',
     value: function _handleSelect(recordId) {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onSelect = _props2.onSelect;
-
-      onSelect(id, recordId);
+      this.props.onSelect(recordId);
     }
   }]);
 

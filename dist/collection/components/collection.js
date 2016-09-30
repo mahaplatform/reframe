@@ -67,7 +67,6 @@ var Collection = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var card = _props.card;
       var empty = _props.empty;
       var filters = _props.filters;
@@ -102,16 +101,14 @@ var Collection = function (_React$Component) {
           { className: classes.join(' ') },
           function () {
             if (filters) {
-              return _react2.default.createElement(_filters2.default, { id: id,
-                filters: filters,
+              return _react2.default.createElement(_filters2.default, { filters: filters,
                 onFilterRecords: onFilterRecords });
             }
           }(),
           _react2.default.createElement(
             'div',
             { className: 'collection-main' },
-            _react2.default.createElement(_toolbar2.default, { id: id,
-              columns: columns,
+            _react2.default.createElement(_toolbar2.default, { columns: columns,
               layout: layout,
               filters: filters,
               selectAll: selectAll,
@@ -130,14 +127,12 @@ var Collection = function (_React$Component) {
                 if (layout == 'card') {
                   var _React$createElement;
 
-                  return _react2.default.createElement(_cards2.default, (_React$createElement = { id: id,
-                    card: card,
+                  return _react2.default.createElement(_cards2.default, (_React$createElement = { card: card,
                     selected: selected,
                     records: records
                   }, _defineProperty(_React$createElement, 'selected', selected), _defineProperty(_React$createElement, 'recordActions', recordActions), _defineProperty(_React$createElement, 'batchActions', batchActions), _defineProperty(_React$createElement, 'onSelect', onSelect), _React$createElement));
                 } else {
-                  return _react2.default.createElement(_table2.default, { id: id,
-                    empty: empty,
+                  return _react2.default.createElement(_table2.default, { empty: empty,
                     params: params,
                     columns: columns,
                     records: records,
@@ -176,29 +171,27 @@ var Collection = function (_React$Component) {
     key: '_handleLoadColumns',
     value: function _handleLoadColumns() {
       var _props3 = this.props;
-      var id = _props3.id;
       var columns = _props3.columns;
       var records = _props3.records;
       var onSetColumns = _props3.onSetColumns;
       var onFetchColumns = _props3.onFetchColumns;
 
       if (_lodash2.default.isArray(columns)) {
-        onSetColumns(id, columns);
+        onSetColumns(columns);
       } else if (_lodash2.default.isString(columns)) {
-        onFetchColumns(id, columns);
+        onFetchColumns(columns);
       } else if (_lodash2.default.isArray(records)) {
         var keys = _lodash2.default.keys(records[0]);
         var inferred = _lodash2.default.map(keys, function (key) {
           return { label: key, key: key, primary: true, visible: true };
         });
-        onSetColumns(id, inferred);
+        onSetColumns(inferred);
       }
     }
   }, {
     key: '_handleLoadRecords',
     value: function _handleLoadRecords() {
       var _props4 = this.props;
-      var id = _props4.id;
       var records = _props4.records;
       var state = _props4.state;
       var onSetRecords = _props4.onSetRecords;
@@ -206,9 +199,9 @@ var Collection = function (_React$Component) {
 
       if (_lodash2.default.isArray(records)) {
         var ordered = _lodash2.default.orderBy(records, state.params.sort.key, state.params.sort.order);
-        onSetRecords(id, ordered);
+        onSetRecords(ordered);
       } else if (_lodash2.default.isString(records)) {
-        onFetchRecords(id, records, _extends({}, state.params.filter, {
+        onFetchRecords(records, _extends({}, state.params.filter, {
           sort: (state.params.sort.order == 'desc' ? '-' : '') + state.params.sort.key
         }));
       }
@@ -219,7 +212,6 @@ var Collection = function (_React$Component) {
 }(_react2.default.Component);
 
 Collection.propTypes = {
-  id: _react2.default.PropTypes.string,
   filters: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
   columns: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]).isRequired,
   records: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]).isRequired,
@@ -261,9 +253,7 @@ Collection.propTypes = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = {

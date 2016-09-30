@@ -11,7 +11,6 @@ import * as actions from '../actions'
 class Collection extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     filters: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.array,
@@ -61,7 +60,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { id, card, empty, filters, recordActions, batchActions } = this.props
+    const { card, empty, filters, recordActions, batchActions } = this.props
     const { onFilterRecords, onSortRecords, onSelect, onToggleFilters, onChangeLayout, onSelectAll, onExportRecords, onReloadRecords, onExecuteBatchAction } = this.props
     const { columns, records, params, status, expanded, layout, exporting, batchAction, selected, selectAll } = this.props.state
     if(status) {
@@ -71,15 +70,13 @@ class Collection extends React.Component {
           {(() => {
             if(filters) {
               return (
-                <Filters id={id}
-                         filters={filters}
+                <Filters filters={filters}
                          onFilterRecords={onFilterRecords} />
               )
             }
           })()}
           <div className="collection-main">
-            <Toolbar id={id}
-                     columns={columns}
+            <Toolbar columns={columns}
                      layout={layout}
                      filters={filters}
                      selectAll={selectAll}
@@ -94,8 +91,7 @@ class Collection extends React.Component {
             <div className="collection-data">
               {(() => {
                 if(layout == 'card') {
-                  return <Cards id={id}
-                                card={card}
+                  return <Cards card={card}
                                 selected={selected}
                                 records={records}
                                 selected={selected}
@@ -103,8 +99,7 @@ class Collection extends React.Component {
                                 batchActions={batchActions}
                                 onSelect={onSelect} />
                 } else {
-                  return <Table id={id}
-                                empty={empty}
+                  return <Table empty={empty}
                                 params={params}
                                 columns={columns}
                                 records={records}
@@ -140,25 +135,25 @@ class Collection extends React.Component {
   }
 
   _handleLoadColumns() {
-    const { id, columns, records, onSetColumns, onFetchColumns } = this.props
+    const { columns, records, onSetColumns, onFetchColumns } = this.props
     if(_.isArray(columns)) {
-      onSetColumns(id, columns)
+      onSetColumns(columns)
     } else if(_.isString(columns)) {
-      onFetchColumns(id, columns)
+      onFetchColumns(columns)
     } else if(_.isArray(records)) {
       const keys = _.keys(records[0])
       const inferred = _.map(keys, key => ({ label: key, key: key, primary: true, visible: true }))
-      onSetColumns(id, inferred)
+      onSetColumns(inferred)
     }
   }
 
   _handleLoadRecords() {
-    const { id, records, state, onSetRecords, onFetchRecords } = this.props
+    const { records, state, onSetRecords, onFetchRecords } = this.props
     if(_.isArray(records)) {
       const ordered = _.orderBy(records, state.params.sort.key, state.params.sort.order)
-      onSetRecords(id, ordered)
+      onSetRecords(ordered)
     } else if(_.isString(records)) {
-      onFetchRecords(id, records, {
+      onFetchRecords(records, {
         ...state.params.filter,
         sort: (state.params.sort.order == 'desc' ? '-' : '') + state.params.sort.key
       })
@@ -167,9 +162,7 @@ class Collection extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onFetchColumns: actions.fetchColumns,

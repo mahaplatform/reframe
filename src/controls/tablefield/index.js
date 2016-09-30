@@ -1,25 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import Component from '../../component'
+import { Provider } from 'react-redux'
 import TableField from './components/tablefield'
+import CreateStore from '../../store'
+import reducer from './reducer'
 
 class Index extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     columns: React.PropTypes.array,
     defaultValue: React.PropTypes.array,
     onChange: React.PropTypes.func
   }
 
   render() {
-    const { id, columns, defaultValue, onChange } = this.props
-    return <TableField id={id}
-                       columns={columns}
-                       defaultValue={defaultValue}
-                       onChange={onChange} />
+    const store = CreateStore(reducer)
+    const { columns, defaultValue, onChange } = this.props
+    return (
+      <Provider store={store}>
+        <TableField columns={columns}
+                    defaultValue={defaultValue}
+                    onChange={onChange} />
+      </Provider>
+    )
+
   }
 
 }
 
-export default Component('tablefield', 'id')(Index)
+export default Index

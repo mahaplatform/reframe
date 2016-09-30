@@ -1,6 +1,8 @@
 import React from 'react'
-import Component from '../component'
+import { Provider } from 'react-redux'
 import Tabs from './tabs'
+import CreateStore from '../store'
+import reducer from './reducer'
 
 class Index extends React.Component {
 
@@ -15,9 +17,14 @@ class Index extends React.Component {
   }
 
   render() {
-    return <Tabs {...this.props} />
+    const store = CreateStore(reducer)
+    return (
+      <Provider store={store}>
+        <Tabs {...this.props} />
+      </Provider>
+    )
   }
 
 }
 
-export default Component('tabs', 'id')(Index)
+export default Index

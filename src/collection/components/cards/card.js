@@ -7,7 +7,6 @@ import RecordActions from '../record_actions'
 class Card extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     record: React.PropTypes.object,
     card: React.PropTypes.object,
     selected: React.PropTypes.array,
@@ -62,8 +61,7 @@ class Card extends React.Component {
   }
 
   _handleSelect(recordId) {
-    const { id, onSelect } = this.props
-    onSelect(id, recordId)
+    this.props.onSelect(recordId)
   }
 
 }

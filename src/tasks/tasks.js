@@ -39,9 +39,7 @@ class Tasks extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onChangeTab: actions.changeTab

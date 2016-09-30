@@ -39,7 +39,6 @@ var Table = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var records = _props.records;
       var params = _props.params;
       var empty = _props.empty;
@@ -57,13 +56,11 @@ var Table = function (_React$Component) {
         _react2.default.createElement(
           'table',
           { className: 'ui single padded unstackable line table' },
-          _react2.default.createElement(_thead2.default, { id: id,
-            columns: columns,
+          _react2.default.createElement(_thead2.default, { columns: columns,
             params: params,
             batchActions: batchActions,
             onSortRecords: onSortRecords }),
-          _react2.default.createElement(_tbody2.default, { id: id,
-            empty: empty,
+          _react2.default.createElement(_tbody2.default, { empty: empty,
             columns: columns,
             records: records,
             selected: selected,
@@ -80,7 +77,6 @@ var Table = function (_React$Component) {
 }(_react2.default.Component);
 
 Table.propTypes = {
-  id: _react2.default.PropTypes.string,
   records: _react2.default.PropTypes.array,
   selected: _react2.default.PropTypes.array,
   params: _react2.default.PropTypes.object,

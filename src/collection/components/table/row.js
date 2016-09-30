@@ -60,8 +60,7 @@ class Row extends React.Component {
   }
 
   _handleSelect(recordId) {
-    const {id, onSelect} = this.props
-    onSelect(id, recordId);
+    this.props.onSelect(recordId);
   }
 
 }

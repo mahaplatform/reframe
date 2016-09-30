@@ -3,7 +3,6 @@ import React from 'react'
 class Buttons extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     buttons: React.PropTypes.array,
     onValidate: React.PropTypes.func,
     onReset: React.PropTypes.func
@@ -34,13 +33,11 @@ class Buttons extends React.Component {
   }
 
   _handleResetForm() {
-    const { onResetForm, id } = this.props
-    onResetForm(id)
+    this.props.onResetForm()
   }
 
   _handleValidateForm() {
-    const { onValidateForm, id } = this.props
-    onValidateForm(id)
+    this.props.onValidateForm()
   }
 
 }

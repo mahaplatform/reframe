@@ -70,20 +70,12 @@ var Buttons = function (_React$Component) {
   }, {
     key: '_handleResetForm',
     value: function _handleResetForm() {
-      var _props = this.props;
-      var onResetForm = _props.onResetForm;
-      var id = _props.id;
-
-      onResetForm(id);
+      this.props.onResetForm();
     }
   }, {
     key: '_handleValidateForm',
     value: function _handleValidateForm() {
-      var _props2 = this.props;
-      var onValidateForm = _props2.onValidateForm;
-      var id = _props2.id;
-
-      onValidateForm(id);
+      this.props.onValidateForm();
     }
   }]);
 
@@ -91,7 +83,6 @@ var Buttons = function (_React$Component) {
 }(_react2.default.Component);
 
 Buttons.propTypes = {
-  id: _react2.default.PropTypes.string,
   buttons: _react2.default.PropTypes.array,
   onValidate: _react2.default.PropTypes.func,
   onReset: _react2.default.PropTypes.func

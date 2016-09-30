@@ -47,7 +47,6 @@ var Row = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var index = _props.index;
       var row = _props.row;
       var columns = _props.columns;
@@ -69,7 +68,6 @@ var Row = function (_React$Component) {
           var value = _lodash2.default.get(row, column.code) || column.defaultValue;
           return _react2.default.createElement(_cell2.default, _extends({}, column, {
             key: 'column_' + columnindex,
-            id: id,
             code: column.code,
             index: index,
             defaultValue: value,
@@ -99,7 +97,7 @@ var Row = function (_React$Component) {
   }, {
     key: 'handleRemoveRow',
     value: function handleRemoveRow(index) {
-      this.props.onRemoveRow(this.props.id, index);
+      this.props.onRemoveRow(index);
     }
   }]);
 
@@ -107,7 +105,6 @@ var Row = function (_React$Component) {
 }(_react2.default.Component);
 
 Row.propTypes = {
-  id: _react2.default.PropTypes.string,
   row: _react2.default.PropTypes.object.isRequired,
   columns: _react2.default.PropTypes.array.isRequired,
   index: _react2.default.PropTypes.number,

@@ -1,21 +1,18 @@
 import * as actionTypes from './action_types'
 import Api from '../utils/api'
 
-export const addForm = (cid) => ({
-  type: actionTypes.ADD_FORM,
-  cid
+export const addForm = () => ({
+  type: actionTypes.ADD_FORM
 })
 
-export const removeForm = (cid) => ({
-  type: actionTypes.REMOVE_FORM,
-  cid
+export const removeForm = () => ({
+  type: actionTypes.REMOVE_FORM
 })
 
 /* SECTIONS */
 
-export const fetchSections = (cid, endpoint) => {
+export const fetchSections = (endpoint) => {
   return Api.get({
-    cid,
     endpoint,
     request: fetchSectionsRequest,
     success: fetchSectionsSuccess,
@@ -24,33 +21,28 @@ export const fetchSections = (cid, endpoint) => {
 }
 
 export const fetchSectionsRequest = (request) => ({
-  type: actionTypes.FETCH_SECTIONS_REQUEST,
-  cid: request.cid
+  type: actionTypes.FETCH_SECTIONS_REQUEST
 })
 
 export const fetchSectionsSuccess = (response) => ({
   type: actionTypes.FETCH_SECTIONS_SUCCESS,
-  cid: response.cid,
   sections: response.entity
 })
 
 export const fetchSectionsFailure = (response) => ({
   type: actionTypes.FETCH_SECTIONS_FAILURE,
-  cid: response.cid,
   error: response.entity
 })
 
-export const setSections = (cid, sections) => ({
+export const setSections = (sections) => ({
   type: actionTypes.SET_SECTIONS,
-  sections,
-  cid
+  sections
 })
 
 /* DATA */
 
-export const fetchData = (cid, endpoint) => {
+export const fetchData = (endpoint) => {
   return Api.get({
-    cid,
     endpoint,
     request: fetchDataRequest,
     success: fetchDataSuccess,
@@ -59,50 +51,42 @@ export const fetchData = (cid, endpoint) => {
 }
 
 export const fetchDataRequest = (request) => ({
-  type: actionTypes.FETCH_DATA_REQUEST,
-  cid: request.cid
+  type: actionTypes.FETCH_DATA_REQUEST
 })
 
 export const fetchDataSuccess = (response) => ({
   type: actionTypes.FETCH_DATA_SUCCESS,
-  cid: response.cid,
   data: response.entity
 })
 
 export const fetchDataFailure = (response) => ({
   type: actionTypes.FETCH_DATA_FAILURE,
-  cid: response.cid,
   error: response.entity
 })
 
-export const setData = (cid, data) => ({
+export const setData = (data) => ({
   type: actionTypes.SET_DATA,
-  data,
-  cid
+  data
 })
 
-export const setReady = (cid) => ({
-  type: actionTypes.SET_READY,
-  cid
+export const setReady = () => ({
+  type: actionTypes.SET_READY
 })
 
-export const updateData = (cid, key, value) => ({
+export const updateData = (key, value) => ({
   type: actionTypes.UPDATE_DATA,
   key,
-  value,
-  cid
+  value
 })
 
-export const validateForm = (cid) => ({
-  type: actionTypes.VALIDATE_FORM,
-  cid
+export const validateForm = () => ({
+  type: actionTypes.VALIDATE_FORM
 })
 
 /* SUBMIT */
 
-export const submitForm = (cid, method, endpoint, params) => {
+export const submitForm = (method, endpoint, params) => {
   return Api.request({
-    cid,
     method,
     endpoint,
     params,
@@ -112,23 +96,19 @@ export const submitForm = (cid, method, endpoint, params) => {
   })
 }
 export const submitRequest = (request) => ({
-  type: actionTypes.SUBMIT_REQUEST,
-  cid: request.cid
+  type: actionTypes.SUBMIT_REQUEST
 })
 
 export const submitSuccess = (response) => ({
   type: actionTypes.SUBMIT_SUCCESS,
-  cid: response.cid,
   data: response.entity
 })
 
 export const submitFailure = (response) => ({
   type: actionTypes.SUBMIT_FAILURE,
-  cid: response.cid,
   error: response.entity
 })
 
-export const resetForm = (cid) => ({
-  type: actionTypes.RESET_FORM,
-  cid
+export const resetForm = () => ({
+  type: actionTypes.RESET_FORM
 })

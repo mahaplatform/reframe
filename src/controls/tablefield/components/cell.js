@@ -4,7 +4,6 @@ import Control from '../../control'
 class Cell extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     index: React.PropTypes.number,
     code: React.PropTypes.string,
     type: React.PropTypes.string,
@@ -27,8 +26,8 @@ class Cell extends React.Component {
   }
 
   _handleUpdateCell(value) {
-    const { id, index, code, onUpdateCell } = this.props
-    onUpdateCell(id, index, code, value)
+    const { index, code, onUpdateCell } = this.props
+    onUpdateCell(index, code, value)
   }
 
 }

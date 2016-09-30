@@ -1,23 +1,26 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import Component from '../../component'
+import { Provider } from 'react-redux'
 import FileField from './filefield'
+import CreateStore from '../../store'
+import reducer from './reducer'
 
 class Index extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     defaultValue: React.PropTypes.array,
     onChange: React.PropTypes.func
   }
 
   render() {
-    const { id, columns, defaultValue, onChange } = this.props
-    return <FileField id={id}
-                       defaultValue={defaultValue}
-                       onChange={onChange} />
+    const store = CreateStore(reducer)
+    const { columns, defaultValue, onChange } = this.props
+    return (
+      <Provider store={store}>
+        <FileField defaultValue={defaultValue} onChange={onChange} />
+      </Provider>
+    )
   }
 
 }
 
-export default Component('filefield', 'id')(Index)
+export default Index

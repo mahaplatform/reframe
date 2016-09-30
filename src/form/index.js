@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import * as actions from './actions'
-import Component from '../component'
+import { Provider } from 'react-redux'
 import Form from './components/form'
+import CreateStore from '../store'
+import reducer from './reducer'
 
 class Index extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     datasource: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.array
@@ -35,9 +34,14 @@ class Index extends React.Component {
   }
 
   render() {
-    return <Form {...this.props} />
+    const store = CreateStore(reducer)
+    return (
+      <Provider store={store}>
+        <Form {...this.props} />
+      </Provider>
+    )
   }
 
 }
 
-export default Component('form', 'id')(Index)
+export default Index

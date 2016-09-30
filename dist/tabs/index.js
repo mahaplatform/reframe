@@ -10,13 +10,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _component = require('../component');
-
-var _component2 = _interopRequireDefault(_component);
+var _reactRedux = require('react-redux');
 
 var _tabs = require('./tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
+
+var _store = require('../store');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _reducer = require('./reducer');
+
+var _reducer2 = _interopRequireDefault(_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38,7 +44,12 @@ var Index = function (_React$Component) {
   _createClass(Index, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_tabs2.default, this.props);
+      var store = (0, _store2.default)(_reducer2.default);
+      return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(_tabs2.default, this.props)
+      );
     }
   }]);
 
@@ -53,4 +64,4 @@ Index.propTypes = {
 Index.defaultProps = {
   tabs: []
 };
-exports.default = (0, _component2.default)('tabs', 'id')(Index);
+exports.default = Index;

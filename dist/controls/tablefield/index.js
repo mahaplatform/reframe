@@ -12,13 +12,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _component = require('../../component');
-
-var _component2 = _interopRequireDefault(_component);
-
 var _tablefield = require('./components/tablefield');
 
 var _tablefield2 = _interopRequireDefault(_tablefield);
+
+var _store = require('../../store');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _reducer = require('./reducer');
+
+var _reducer2 = _interopRequireDefault(_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,16 +44,19 @@ var Index = function (_React$Component) {
   _createClass(Index, [{
     key: 'render',
     value: function render() {
+      var store = (0, _store2.default)(_reducer2.default);
       var _props = this.props;
-      var id = _props.id;
       var columns = _props.columns;
       var defaultValue = _props.defaultValue;
       var onChange = _props.onChange;
 
-      return _react2.default.createElement(_tablefield2.default, { id: id,
-        columns: columns,
-        defaultValue: defaultValue,
-        onChange: onChange });
+      return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(_tablefield2.default, { columns: columns,
+          defaultValue: defaultValue,
+          onChange: onChange })
+      );
     }
   }]);
 
@@ -57,9 +64,8 @@ var Index = function (_React$Component) {
 }(_react2.default.Component);
 
 Index.propTypes = {
-  id: _react2.default.PropTypes.string,
   columns: _react2.default.PropTypes.array,
   defaultValue: _react2.default.PropTypes.array,
   onChange: _react2.default.PropTypes.func
 };
-exports.default = (0, _component2.default)('tablefield', 'id')(Index);
+exports.default = Index;

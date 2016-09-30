@@ -7,7 +7,6 @@ import errorCode from 'rest/interceptor/errorCode'
 type optionsType = {
   method: string,
   action: string,
-  cid: string,
   params: Object,
   entity: Object
 }
@@ -62,10 +61,6 @@ class Api {
 
       let request = {}
 
-      if(options.cid) {
-        request.cid = options.cid
-      }
-
       if(options.params) {
         request.params = options.params
       }
@@ -80,20 +75,12 @@ class Api {
             entity: json
           }
 
-          if(options.cid) {
-            success.cid = options.cid
-          }
-
           dispatch(options.successCallback(success))
 
         }, response => {
 
           let failure = {
             entity: response.entity
-          }
-
-          if(options.cid) {
-            failure.cid = options.cid
           }
 
           dispatch(options.errorCallback(failure))

@@ -12,9 +12,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _field = require('./field');
+var _reactRedux = require('react-redux');
 
-var _field2 = _interopRequireDefault(_field);
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _actions = require('./actions');
+
+var actions = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,48 +32,61 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Fields = function (_React$Component) {
-  _inherits(Fields, _React$Component);
+var Container = function (_React$Component) {
+  _inherits(Container, _React$Component);
 
-  function Fields() {
-    _classCallCheck(this, Fields);
+  function Container() {
+    _classCallCheck(this, Container);
 
-    return _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
   }
 
-  _createClass(Fields, [{
+  _createClass(Container, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var fields = _props.fields;
-      var onChange = _props.onChange;
-      var onUpdateData = _props.onUpdateData;
+      var _props$state = this.props.state;
+      var status = _props$state.status;
+      var data = _props$state.data;
 
-      var numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
-      return _react2.default.createElement(
-        'div',
-        { className: numbers[fields.length] + ' fields' },
-        fields.map(function (field, index) {
-          return _react2.default.createElement(_field2.default, _extends({}, field, {
-            key: 'field_' + index,
-            onChange: onChange,
-            onUpdateData: onUpdateData }));
-        })
-      );
+      if (status == 'loading') {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading...'
+        );
+      } else if (status == 'error') {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Unable to load resources'
+        );
+      } else if (status == 'loaded') {
+        return _react2.default.createElement(WrappedComponent, _extends({}, this.props, data));
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var resources = mapEndpointsToProps(this.props);
+      _lodash2.default.forOwn(resources, function (endpoint, prop) {
+        _this2.props.onFetchResource(id, prop, endpoint);
+      });
     }
   }]);
 
-  return Fields;
+  return Container;
 }(_react2.default.Component);
 
-Fields.propTypes = {
-  fields: _react2.default.PropTypes.array,
-  onChange: _react2.default.PropTypes.func,
-  onUpdateData: _react2.default.PropTypes.func
+var mapStateToProps = function mapStateToProps(state, props) {
+  return { state: state };
 };
-Fields.defaultProps = {
-  fields: [],
-  onChange: function onChange() {},
-  onUpdateData: function onUpdateData() {}
+
+var mapDispatchToProps = {
+  onFetchResource: actions.fetchResource
 };
-exports.default = Fields;
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Container);

@@ -107,11 +107,7 @@ var Card = function (_React$Component) {
   }, {
     key: '_handleSelect',
     value: function _handleSelect(recordId) {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onSelect = _props2.onSelect;
-
-      onSelect(id, recordId);
+      this.props.onSelect(recordId);
     }
   }]);
 
@@ -119,7 +115,6 @@ var Card = function (_React$Component) {
 }(_react2.default.Component);
 
 Card.propTypes = {
-  id: _react2.default.PropTypes.string,
   record: _react2.default.PropTypes.object,
   card: _react2.default.PropTypes.object,
   selected: _react2.default.PropTypes.array,

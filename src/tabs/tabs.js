@@ -47,15 +47,12 @@ class Tabs extends React.Component {
   }
 
   _handleChangeTab(index) {
-    const { id, onChangeTab } = this.props
-    onChangeTab(id, index)
+    this.props.onChangeTab(index)
   }
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onChangeTab: actions.changeTab

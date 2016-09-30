@@ -17,55 +17,48 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var setRecords = exports.setRecords = function setRecords(cid, records) {
+var setRecords = exports.setRecords = function setRecords(records) {
   return {
     type: actionTypes.SET_RECORDS,
-    cid: cid,
     records: records
   };
 };
 
-var appendRecords = exports.appendRecords = function appendRecords(cid, records) {
+var appendRecords = exports.appendRecords = function appendRecords(records) {
   return {
     type: actionTypes.APPEND_RECORDS,
-    cid: cid,
     records: records
   };
 };
 
-var toggleFilters = exports.toggleFilters = function toggleFilters(cid) {
+var toggleFilters = exports.toggleFilters = function toggleFilters() {
   return {
-    type: actionTypes.TOGGLE_FILTERS,
-    cid: cid
+    type: actionTypes.TOGGLE_FILTERS
   };
 };
 
-var changeLayout = exports.changeLayout = function changeLayout(cid, layout) {
+var changeLayout = exports.changeLayout = function changeLayout(layout) {
   return {
     type: actionTypes.CHANGE_LAYOUT,
-    cid: cid,
     layout: layout
   };
 };
 
-var selectAll = exports.selectAll = function selectAll(cid) {
+var selectAll = exports.selectAll = function selectAll() {
   return {
-    type: actionTypes.SELECT_ALL,
-    cid: cid
+    type: actionTypes.SELECT_ALL
   };
 };
 
-var select = exports.select = function select(cid, id) {
+var select = exports.select = function select(id) {
   return {
     type: actionTypes.SELECT,
-    cid: cid,
     id: id
   };
 };
 
-var fetchColumns = exports.fetchColumns = function fetchColumns(cid, endpoint) {
+var fetchColumns = exports.fetchColumns = function fetchColumns(endpoint) {
   return _api2.default.get({
-    cid: cid,
     endpoint: endpoint,
     request: fetchColumnsRequest,
     success: fetchColumnsSuccess,
@@ -75,15 +68,13 @@ var fetchColumns = exports.fetchColumns = function fetchColumns(cid, endpoint) {
 
 var fetchColumnsRequest = exports.fetchColumnsRequest = function fetchColumnsRequest(request) {
   return {
-    type: actionTypes.FETCH_COLUMNS_REQUEST,
-    cid: request.cid
+    type: actionTypes.FETCH_COLUMNS_REQUEST
   };
 };
 
 var fetchColumnsSuccess = exports.fetchColumnsSuccess = function fetchColumnsSuccess(response) {
   return {
     type: actionTypes.FETCH_COLUMNS_SUCCESS,
-    cid: response.cid,
     columns: response.entity
   };
 };
@@ -91,22 +82,19 @@ var fetchColumnsSuccess = exports.fetchColumnsSuccess = function fetchColumnsSuc
 var fetchColumnsFailure = exports.fetchColumnsFailure = function fetchColumnsFailure(response) {
   return {
     type: actionTypes.FETCH_COLUMNS_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-var setColumns = exports.setColumns = function setColumns(cid, columns) {
+var setColumns = exports.setColumns = function setColumns(columns) {
   return {
     type: actionTypes.SET_COLUMNS,
-    cid: cid,
     columns: columns
   };
 };
 
-var fetchRecords = exports.fetchRecords = function fetchRecords(cid, endpoint, params) {
+var fetchRecords = exports.fetchRecords = function fetchRecords(endpoint, params) {
   return _api2.default.get({
-    cid: cid,
     params: params,
     endpoint: endpoint,
     request: fetchRecordsRequest,
@@ -117,15 +105,13 @@ var fetchRecords = exports.fetchRecords = function fetchRecords(cid, endpoint, p
 
 var fetchRecordsRequest = exports.fetchRecordsRequest = function fetchRecordsRequest(request) {
   return {
-    type: actionTypes.FETCH_RECORDS_REQUEST,
-    cid: request.cid
+    type: actionTypes.FETCH_RECORDS_REQUEST
   };
 };
 
 var fetchRecordsSuccess = exports.fetchRecordsSuccess = function fetchRecordsSuccess(response) {
   return {
     type: actionTypes.FETCH_RECORDS_SUCCESS,
-    cid: response.cid,
     records: response.entity
   };
 };
@@ -133,45 +119,39 @@ var fetchRecordsSuccess = exports.fetchRecordsSuccess = function fetchRecordsSuc
 var fetchRecordsFailure = exports.fetchRecordsFailure = function fetchRecordsFailure(response) {
   return {
     type: actionTypes.FETCH_RECORDS_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-var sortRecords = exports.sortRecords = function sortRecords(cid, key) {
+var sortRecords = exports.sortRecords = function sortRecords(key) {
   return {
     type: actionTypes.SORT_RECORDS,
-    cid: cid,
     key: key
   };
 };
 
-var filterRecords = exports.filterRecords = function filterRecords(cid, params) {
+var filterRecords = exports.filterRecords = function filterRecords(params) {
   return {
     type: actionTypes.FILTER_RECORDS,
-    cid: cid,
     params: params
   };
 };
 
-var exportRecords = exports.exportRecords = function exportRecords(cid) {
+var exportRecords = exports.exportRecords = function exportRecords() {
   return {
-    type: actionTypes.EXPORT_RECORDS,
-    cid: cid
+    type: actionTypes.EXPORT_RECORDS
   };
 };
 
-var reloadRecords = exports.reloadRecords = function reloadRecords(cid) {
+var reloadRecords = exports.reloadRecords = function reloadRecords() {
   return {
-    type: actionTypes.RELOAD_RECORDS,
-    cid: cid
+    type: actionTypes.RELOAD_RECORDS
   };
 };
 
-var executeBatchAction = exports.executeBatchAction = function executeBatchAction(cid, batchAction) {
+var executeBatchAction = exports.executeBatchAction = function executeBatchAction(batchAction) {
   return {
     type: actionTypes.EXECUTE_BATCH_ACTION,
-    cid: cid,
     batchAction: batchAction
   };
 };

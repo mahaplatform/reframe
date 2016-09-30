@@ -141,9 +141,7 @@ Card.defaultProps = {};
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = {};

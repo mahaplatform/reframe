@@ -54,12 +54,11 @@ var Cell = function (_React$Component) {
     key: '_handleUpdateCell',
     value: function _handleUpdateCell(value) {
       var _props2 = this.props;
-      var id = _props2.id;
       var index = _props2.index;
       var code = _props2.code;
       var onUpdateCell = _props2.onUpdateCell;
 
-      onUpdateCell(id, index, code, value);
+      onUpdateCell(index, code, value);
     }
   }]);
 
@@ -67,7 +66,6 @@ var Cell = function (_React$Component) {
 }(_react2.default.Component);
 
 Cell.propTypes = {
-  id: _react2.default.PropTypes.string,
   index: _react2.default.PropTypes.number,
   code: _react2.default.PropTypes.string,
   type: _react2.default.PropTypes.string,

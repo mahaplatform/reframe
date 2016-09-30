@@ -1,10 +1,11 @@
 import React from 'react'
+import { Provider, connect } from 'react-redux'
+import CreateStore from '../store'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 import * as actions from './actions'
-import Component from '../component'
+import reducer from './reducer'
 
-const Index = (id, mapEndpointsToProps) => {
+const Index = (mapEndpointsToProps) => {
 
   return function wrapWithConnect(WrappedComponent) {
 
@@ -26,25 +27,34 @@ const Index = (id, mapEndpointsToProps) => {
       componentDidMount() {
         const resources = mapEndpointsToProps(this.props)
         _.forOwn(resources, (endpoint, prop) => {
-          this.props.onFetchResource(id, prop, endpoint)
+          this.props.onFetchResource(prop, endpoint)
         })
       }
 
     }
 
-    Container = Component('container', 'id')(Container)
-
-    const mapStateToProps = (state, props) => ({
-      id: id,
-      state: state[id]
-    })
-
+    const mapStateToProps = (state, props) => ({ state })
 
     const mapDispatchToProps = {
       onFetchResource: actions.fetchResource
     }
 
-    return connect(mapStateToProps, mapDispatchToProps)(Container)
+    Container = connect(mapStateToProps, mapDispatchToProps)(Container)
+
+    class Root extends React.Component {
+
+      render() {
+        const store = CreateStore(reducer)
+        return (
+          <Provider store={store}>
+            <Container {...this.props} />
+          </Provider>
+        )
+      }
+
+    }
+
+    return Root
 
   }
 

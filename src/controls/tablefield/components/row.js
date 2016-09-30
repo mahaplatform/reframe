@@ -8,7 +8,6 @@ import Cell from './cell'
 class Row extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     row: React.PropTypes.object.isRequired,
     columns: React.PropTypes.array.isRequired,
     index: React.PropTypes.number,
@@ -21,7 +20,7 @@ class Row extends React.Component {
   }
 
   render() {
-    const { id, index, row, columns, isDragging, connectDragSource, connectDropTarget, connectDragPreview, onUpdateCell } = this.props
+    const { index, row, columns, isDragging, connectDragSource, connectDropTarget, connectDragPreview, onUpdateCell } = this.props
     return connectDropTarget(connectDragPreview(
       <tr>
         {connectDragSource(
@@ -33,7 +32,6 @@ class Row extends React.Component {
           let value = _.get(row, column.code) || column.defaultValue
           return <Cell {...column}
                        key={`column_${columnindex}`}
-                       id={id}
                        code={column.code}
                        index={index}
                        defaultValue={value}
@@ -59,7 +57,7 @@ class Row extends React.Component {
   }
 
   handleRemoveRow(index) {
-    this.props.onRemoveRow(this.props.id, index)
+    this.props.onRemoveRow(index)
   }
 
 }

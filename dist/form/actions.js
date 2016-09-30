@@ -17,25 +17,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var addForm = exports.addForm = function addForm(cid) {
+var addForm = exports.addForm = function addForm() {
   return {
-    type: actionTypes.ADD_FORM,
-    cid: cid
+    type: actionTypes.ADD_FORM
   };
 };
 
-var removeForm = exports.removeForm = function removeForm(cid) {
+var removeForm = exports.removeForm = function removeForm() {
   return {
-    type: actionTypes.REMOVE_FORM,
-    cid: cid
+    type: actionTypes.REMOVE_FORM
   };
 };
 
 /* SECTIONS */
 
-var fetchSections = exports.fetchSections = function fetchSections(cid, endpoint) {
+var fetchSections = exports.fetchSections = function fetchSections(endpoint) {
   return _api2.default.get({
-    cid: cid,
     endpoint: endpoint,
     request: fetchSectionsRequest,
     success: fetchSectionsSuccess,
@@ -45,15 +42,13 @@ var fetchSections = exports.fetchSections = function fetchSections(cid, endpoint
 
 var fetchSectionsRequest = exports.fetchSectionsRequest = function fetchSectionsRequest(request) {
   return {
-    type: actionTypes.FETCH_SECTIONS_REQUEST,
-    cid: request.cid
+    type: actionTypes.FETCH_SECTIONS_REQUEST
   };
 };
 
 var fetchSectionsSuccess = exports.fetchSectionsSuccess = function fetchSectionsSuccess(response) {
   return {
     type: actionTypes.FETCH_SECTIONS_SUCCESS,
-    cid: response.cid,
     sections: response.entity
   };
 };
@@ -61,24 +56,21 @@ var fetchSectionsSuccess = exports.fetchSectionsSuccess = function fetchSections
 var fetchSectionsFailure = exports.fetchSectionsFailure = function fetchSectionsFailure(response) {
   return {
     type: actionTypes.FETCH_SECTIONS_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-var setSections = exports.setSections = function setSections(cid, sections) {
+var setSections = exports.setSections = function setSections(sections) {
   return {
     type: actionTypes.SET_SECTIONS,
-    sections: sections,
-    cid: cid
+    sections: sections
   };
 };
 
 /* DATA */
 
-var fetchData = exports.fetchData = function fetchData(cid, endpoint) {
+var fetchData = exports.fetchData = function fetchData(endpoint) {
   return _api2.default.get({
-    cid: cid,
     endpoint: endpoint,
     request: fetchDataRequest,
     success: fetchDataSuccess,
@@ -88,15 +80,13 @@ var fetchData = exports.fetchData = function fetchData(cid, endpoint) {
 
 var fetchDataRequest = exports.fetchDataRequest = function fetchDataRequest(request) {
   return {
-    type: actionTypes.FETCH_DATA_REQUEST,
-    cid: request.cid
+    type: actionTypes.FETCH_DATA_REQUEST
   };
 };
 
 var fetchDataSuccess = exports.fetchDataSuccess = function fetchDataSuccess(response) {
   return {
     type: actionTypes.FETCH_DATA_SUCCESS,
-    cid: response.cid,
     data: response.entity
   };
 };
@@ -104,47 +94,41 @@ var fetchDataSuccess = exports.fetchDataSuccess = function fetchDataSuccess(resp
 var fetchDataFailure = exports.fetchDataFailure = function fetchDataFailure(response) {
   return {
     type: actionTypes.FETCH_DATA_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-var setData = exports.setData = function setData(cid, data) {
+var setData = exports.setData = function setData(data) {
   return {
     type: actionTypes.SET_DATA,
-    data: data,
-    cid: cid
+    data: data
   };
 };
 
-var setReady = exports.setReady = function setReady(cid) {
+var setReady = exports.setReady = function setReady() {
   return {
-    type: actionTypes.SET_READY,
-    cid: cid
+    type: actionTypes.SET_READY
   };
 };
 
-var updateData = exports.updateData = function updateData(cid, key, value) {
+var updateData = exports.updateData = function updateData(key, value) {
   return {
     type: actionTypes.UPDATE_DATA,
     key: key,
-    value: value,
-    cid: cid
+    value: value
   };
 };
 
-var validateForm = exports.validateForm = function validateForm(cid) {
+var validateForm = exports.validateForm = function validateForm() {
   return {
-    type: actionTypes.VALIDATE_FORM,
-    cid: cid
+    type: actionTypes.VALIDATE_FORM
   };
 };
 
 /* SUBMIT */
 
-var submitForm = exports.submitForm = function submitForm(cid, method, endpoint, params) {
+var submitForm = exports.submitForm = function submitForm(method, endpoint, params) {
   return _api2.default.request({
-    cid: cid,
     method: method,
     endpoint: endpoint,
     params: params,
@@ -155,15 +139,13 @@ var submitForm = exports.submitForm = function submitForm(cid, method, endpoint,
 };
 var submitRequest = exports.submitRequest = function submitRequest(request) {
   return {
-    type: actionTypes.SUBMIT_REQUEST,
-    cid: request.cid
+    type: actionTypes.SUBMIT_REQUEST
   };
 };
 
 var submitSuccess = exports.submitSuccess = function submitSuccess(response) {
   return {
     type: actionTypes.SUBMIT_SUCCESS,
-    cid: response.cid,
     data: response.entity
   };
 };
@@ -171,14 +153,12 @@ var submitSuccess = exports.submitSuccess = function submitSuccess(response) {
 var submitFailure = exports.submitFailure = function submitFailure(response) {
   return {
     type: actionTypes.SUBMIT_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };
 
-var resetForm = exports.resetForm = function resetForm(cid) {
+var resetForm = exports.resetForm = function resetForm() {
   return {
-    type: actionTypes.RESET_FORM,
-    cid: cid
+    type: actionTypes.RESET_FORM
   };
 };

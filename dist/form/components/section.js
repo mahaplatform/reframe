@@ -42,7 +42,6 @@ var Section = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var style = _props.style;
       var collapsing = _props.collapsing;
       var label = _props.label;
@@ -75,7 +74,6 @@ var Section = function (_React$Component) {
           ) : null,
           fields.map(function (field, index) {
             return _react2.default.createElement(_field2.default, _extends({}, field, {
-              id: id,
               data: data,
               errors: errors,
               key: 'field_' + index,
@@ -95,7 +93,6 @@ var Section = function (_React$Component) {
 }(_react2.default.Component);
 
 Section.propTypes = {
-  id: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.string,
   label: _react2.default.PropTypes.string,
   instructions: _react2.default.PropTypes.string,

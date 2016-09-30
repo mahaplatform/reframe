@@ -92,11 +92,7 @@ var Thead = function (_React$Component) {
   }, {
     key: '_handleSortRecords',
     value: function _handleSortRecords(column) {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onSortRecords = _props2.onSortRecords;
-
-      onSortRecords(id, column);
+      this.props.onSortRecords(column);
     }
   }]);
 
@@ -104,7 +100,6 @@ var Thead = function (_React$Component) {
 }(_react2.default.Component);
 
 Thead.propTypes = {
-  id: _react2.default.PropTypes.string,
   columns: _react2.default.PropTypes.array,
   params: _react2.default.PropTypes.object,
   batchActions: _react2.default.PropTypes.array,

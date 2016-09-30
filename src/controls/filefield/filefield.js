@@ -8,9 +8,7 @@ import config from '../../utils/config'
 class FileField extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     state: React.PropTypes.shape({
-      id: React.PropTypes.string,
     }),
     onAddFile: React.PropTypes.func,
     onUploadBegin: React.PropTypes.func,
@@ -131,51 +129,43 @@ class FileField extends React.Component {
   }
 
   _handleFileAdded(file) {
-    const { id, onAddFile } = this.props
-    onAddFile(id, file.chunks.length)
+    this.props.onAddFile(file.chunks.length)
   }
 
   _handleUploadBegin() {
-    const { id, onUploadBegin } = this.props
     this.r.upload()
-    onUploadBegin(id)
+    this.props.onUploadBegin()
   }
 
   _handleUploadProgress(file) {
-    const { id, onUploadProgress } = this.props
-    onUploadProgress(id)
+    this.props.onUploadProgress()
   }
 
   _handleUploadFailure(file, message) {
-    const { id, onUploadFailure } = this.props
-    onUploadFailure(id, message)
+    this.props.onUploadFailure(message)
   }
 
   _handleUploadSuccess(file, response) {
-    const { id, onUploadSuccess, onUploadProcess } = this.props
+    const { onUploadSuccess, onUploadProcess } = this.props
     const upload = JSON.parse(response)
     if(upload.status == 'completed') {
-      onUploadSuccess(id, upload)
+      onUploadSuccess(upload)
     } else {
-      onUploadProcess(id, upload.id)
+      onUploadProcess(upload.id)
     }
   }
 
   _handleChangeFile(file) {
-    const { id, onChangeFile } = this.props
-    onChangeFile(id)
+    this.props.onChangeFile()
   }
 
   _handleRemoveFile(file) {
-    const { id, onRemoveFile } = this.props
-    onRemoveFile(id)
+    this.props.onRemoveFile()
   }
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onAddFile: actions.addFile,

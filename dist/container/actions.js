@@ -17,9 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var fetchResource = exports.fetchResource = function fetchResource(cid, prop, endpoint) {
+var fetchResource = exports.fetchResource = function fetchResource(prop, endpoint) {
   return _api2.default.get({
-    cid: cid,
     endpoint: endpoint,
     request: fetchResourceRequest,
     success: fetchResourceSuccess(prop),
@@ -29,8 +28,7 @@ var fetchResource = exports.fetchResource = function fetchResource(cid, prop, en
 
 var fetchResourceRequest = exports.fetchResourceRequest = function fetchResourceRequest(request) {
   return {
-    type: actionTypes.FETCH_RESOURCE_REQUEST,
-    cid: request.cid
+    type: actionTypes.FETCH_RESOURCE_REQUEST
   };
 };
 
@@ -38,7 +36,6 @@ var fetchResourceSuccess = exports.fetchResourceSuccess = function fetchResource
   return function (response) {
     return {
       type: actionTypes.FETCH_RESOURCE_SUCCESS,
-      cid: response.cid,
       result: response.entity,
       prop: prop
     };
@@ -48,7 +45,6 @@ var fetchResourceSuccess = exports.fetchResourceSuccess = function fetchResource
 var fetchResourceFailure = exports.fetchResourceFailure = function fetchResourceFailure(response) {
   return {
     type: actionTypes.FETCH_RESOURCE_FAILURE,
-    cid: response.cid,
     error: response.entity
   };
 };

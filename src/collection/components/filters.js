@@ -4,7 +4,6 @@ import Form from '../../form'
 class Filters extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     filters: React.PropTypes.array,
     onFilterRecords: React.PropTypes.func
   }
@@ -18,9 +17,8 @@ class Filters extends React.Component {
   }
 
   _getForm() {
-    const { id, filters } = this.props
+    const { filters } = this.props
     return {
-      id: `${id}-filter`,
       onChange: this._handleFilterRecords.bind(this),
       style: 'basic',
       sections: filters,
@@ -29,8 +27,7 @@ class Filters extends React.Component {
   }
 
   _handleFilterRecords(data) {
-    const { id, onFilterRecords } = this.props
-    onFilterRecords(id, data)
+    this.props.onFilterRecords(data)
   }
 
 }

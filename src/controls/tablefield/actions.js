@@ -1,50 +1,44 @@
 import * as actionTypes from './action_types'
 
-export function initialize(cid, columns, value) {
+export function initialize(columns, value) {
   return {
     type: actionTypes.INITIALIZE,
-    cid,
     columns,
     value
   }
 }
 
-export function addRow(cid) {
+export function addRow() {
   return {
-    type: actionTypes.ADD_ROW,
-    cid
+    type: actionTypes.ADD_ROW
   }
 }
 
-export function moveRow(cid, fromIndex, toIndex) {
+export function moveRow(fromIndex, toIndex) {
   return {
     type: actionTypes.MOVE_ROW,
-    cid,
     fromIndex,
     toIndex
   }
 }
 
-export function removeRow(cid, index) {
+export function removeRow(index) {
   return {
     type: actionTypes.REMOVE_ROW,
-    cid,
     index
   }
 }
 
-export function updateTable(cid, value) {
+export function updateTable(value) {
   return {
     type: actionTypes.UPDATE_TABLE,
-    cid,
     value
   }
 }
 
-export function updateCell(cid, index, code, value) {
+export function updateCell(index, code, value) {
   return {
     type: actionTypes.UPDATE_CELL,
-    cid,
     index,
     code,
     value

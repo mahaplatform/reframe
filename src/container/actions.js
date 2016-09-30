@@ -1,9 +1,8 @@
 import * as actionTypes from './action_types'
 import Api from '../utils/api'
 
-export const fetchResource = (cid, prop, endpoint) => {
+export const fetchResource = (prop, endpoint) => {
   return Api.get({
-    cid,
     endpoint,
     request: fetchResourceRequest,
     success: fetchResourceSuccess(prop),
@@ -12,14 +11,12 @@ export const fetchResource = (cid, prop, endpoint) => {
 }
 
 export const fetchResourceRequest = (request) => ({
-  type: actionTypes.FETCH_RESOURCE_REQUEST,
-  cid: request.cid
+  type: actionTypes.FETCH_RESOURCE_REQUEST
 })
 
 export const fetchResourceSuccess = (prop)  => {
   return (response) => ({
     type: actionTypes.FETCH_RESOURCE_SUCCESS,
-    cid: response.cid,
     result: response.entity,
     prop
   })
@@ -27,6 +24,5 @@ export const fetchResourceSuccess = (prop)  => {
 
 export const fetchResourceFailure = (response) => ({
   type: actionTypes.FETCH_RESOURCE_FAILURE,
-  cid: response.cid,
   error: response.entity,
 })

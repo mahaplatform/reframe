@@ -125,7 +125,6 @@ var Tbody = function (_React$Component) {
 }(_react2.default.Component);
 
 Tbody.propTypes = {
-  id: _react2.default.PropTypes.string,
   empty: _react2.default.PropTypes.string,
   columns: _react2.default.PropTypes.array,
   records: _react2.default.PropTypes.array,

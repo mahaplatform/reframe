@@ -219,72 +219,47 @@ var FileField = function (_React$Component) {
   }, {
     key: '_handleFileAdded',
     value: function _handleFileAdded(file) {
-      var _props = this.props;
-      var id = _props.id;
-      var onAddFile = _props.onAddFile;
-
-      onAddFile(id, file.chunks.length);
+      this.props.onAddFile(file.chunks.length);
     }
   }, {
     key: '_handleUploadBegin',
     value: function _handleUploadBegin() {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onUploadBegin = _props2.onUploadBegin;
-
       this.r.upload();
-      onUploadBegin(id);
+      this.props.onUploadBegin();
     }
   }, {
     key: '_handleUploadProgress',
     value: function _handleUploadProgress(file) {
-      var _props3 = this.props;
-      var id = _props3.id;
-      var onUploadProgress = _props3.onUploadProgress;
-
-      onUploadProgress(id);
+      this.props.onUploadProgress();
     }
   }, {
     key: '_handleUploadFailure',
     value: function _handleUploadFailure(file, message) {
-      var _props4 = this.props;
-      var id = _props4.id;
-      var onUploadFailure = _props4.onUploadFailure;
-
-      onUploadFailure(id, message);
+      this.props.onUploadFailure(message);
     }
   }, {
     key: '_handleUploadSuccess',
     value: function _handleUploadSuccess(file, response) {
-      var _props5 = this.props;
-      var id = _props5.id;
-      var onUploadSuccess = _props5.onUploadSuccess;
-      var onUploadProcess = _props5.onUploadProcess;
+      var _props = this.props;
+      var onUploadSuccess = _props.onUploadSuccess;
+      var onUploadProcess = _props.onUploadProcess;
 
       var upload = JSON.parse(response);
       if (upload.status == 'completed') {
-        onUploadSuccess(id, upload);
+        onUploadSuccess(upload);
       } else {
-        onUploadProcess(id, upload.id);
+        onUploadProcess(upload.id);
       }
     }
   }, {
     key: '_handleChangeFile',
     value: function _handleChangeFile(file) {
-      var _props6 = this.props;
-      var id = _props6.id;
-      var onChangeFile = _props6.onChangeFile;
-
-      onChangeFile(id);
+      this.props.onChangeFile();
     }
   }, {
     key: '_handleRemoveFile',
     value: function _handleRemoveFile(file) {
-      var _props7 = this.props;
-      var id = _props7.id;
-      var onRemoveFile = _props7.onRemoveFile;
-
-      onRemoveFile(id);
+      this.props.onRemoveFile();
     }
   }]);
 
@@ -292,10 +267,7 @@ var FileField = function (_React$Component) {
 }(_react2.default.Component);
 
 FileField.propTypes = {
-  id: _react2.default.PropTypes.string,
-  state: _react2.default.PropTypes.shape({
-    id: _react2.default.PropTypes.string
-  }),
+  state: _react2.default.PropTypes.shape({}),
   onAddFile: _react2.default.PropTypes.func,
   onUploadBegin: _react2.default.PropTypes.func,
   onUploadProgress: _react2.default.PropTypes.func,
@@ -308,9 +280,7 @@ FileField.propTypes = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = {

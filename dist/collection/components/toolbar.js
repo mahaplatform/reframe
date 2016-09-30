@@ -143,58 +143,37 @@ var Toolbar = function (_React$Component) {
   }, {
     key: '_handleToggleFilters',
     value: function _handleToggleFilters() {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onToggleFilters = _props2.onToggleFilters;
-
-      onToggleFilters(id);
+      this.props.onToggleFilters();
     }
   }, {
     key: '_handleChangeLayout',
     value: function _handleChangeLayout(layout) {
-      var _props3 = this.props;
-      var id = _props3.id;
-      var onChangeLayout = _props3.onChangeLayout;
-
-      onChangeLayout(id, layout);
+      this.props.onChangeLayout(layout);
     }
   }, {
     key: '_handleSelectAll',
     value: function _handleSelectAll() {
-      var _props4 = this.props;
-      var id = _props4.id;
-      var onSelectAll = _props4.onSelectAll;
-
-      onSelectAll(id);
+      this.props.onSelectAll();
     }
   }, {
     key: '_handleExecuteBatchAction',
     value: function _handleExecuteBatchAction(index) {
-      var _props5 = this.props;
-      var id = _props5.id;
-      var batchActions = _props5.batchActions;
-      var onExecuteBatchAction = _props5.onExecuteBatchAction;
+      var _props2 = this.props;
+      var batchActions = _props2.batchActions;
+      var onExecuteBatchAction = _props2.onExecuteBatchAction;
 
       var batchAction = batchActions[index];
-      onExecuteBatchAction(id, batchAction.component);
+      onExecuteBatchAction(batchAction.component);
     }
   }, {
     key: '_handleReloadRecords',
     value: function _handleReloadRecords() {
-      var _props6 = this.props;
-      var id = _props6.id;
-      var onReloadRecords = _props6.onReloadRecords;
-
-      onReloadRecords(id);
+      this.props.onReloadRecords();
     }
   }, {
     key: '_handleExportRecords',
     value: function _handleExportRecords() {
-      var _props7 = this.props;
-      var id = _props7.id;
-      var onExportRecords = _props7.onExportRecords;
-
-      onExportRecords(id);
+      this.props.onExportRecords();
     }
   }]);
 
@@ -202,7 +181,6 @@ var Toolbar = function (_React$Component) {
 }(_react2.default.Component);
 
 Toolbar.propTypes = {
-  id: _react2.default.PropTypes.string,
   columns: _react2.default.PropTypes.array,
   records: _react2.default.PropTypes.array,
   card: _react2.default.PropTypes.object,

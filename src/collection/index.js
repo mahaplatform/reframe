@@ -1,11 +1,12 @@
 import React from 'react'
-import Component from '../component'
+import { Provider } from 'react-redux'
 import Collection from './components/collection'
+import CreateStore from '../store'
+import reducer from './reducer'
 
 class Index extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     filters: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.array,
@@ -32,9 +33,14 @@ class Index extends React.Component {
   }
 
   render() {
-    return <Collection {...this.props} />
+    const store = CreateStore(reducer)
+    return (
+      <Provider store={store}>
+        <Collection {...this.props} />
+      </Provider>
+    )
   }
 
 }
 
-export default Component('collection', 'id')(Index)
+export default Index

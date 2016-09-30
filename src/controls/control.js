@@ -29,7 +29,6 @@ const standardControls = {
 class Control extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     type: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element

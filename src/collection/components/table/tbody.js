@@ -5,7 +5,6 @@ import Row from './row'
 class Tbody extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     empty: React.PropTypes.string,
     columns: React.PropTypes.array,
     records: React.PropTypes.array,

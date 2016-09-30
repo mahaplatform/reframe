@@ -53,7 +53,6 @@ var TableField = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var onMoveRow = _props.onMoveRow;
       var onRemoveRow = _props.onRemoveRow;
       var onUpdateCell = _props.onUpdateCell;
@@ -100,7 +99,6 @@ var TableField = function (_React$Component) {
                 null,
                 value.map(function (row, index) {
                   return _react2.default.createElement(_row2.default, { key: 'row_' + index,
-                    id: id,
                     row: row,
                     columns: columns,
                     index: index,
@@ -162,37 +160,26 @@ var TableField = function (_React$Component) {
     key: '_handleInitialize',
     value: function _handleInitialize() {
       var _props2 = this.props;
-      var id = _props2.id;
       var columns = _props2.columns;
       var value = _props2.value;
       var onInitialize = _props2.onInitialize;
 
-      onInitialize(id, columns, value);
+      onInitialize(columns, value);
     }
   }, {
     key: '_handleAddRow',
     value: function _handleAddRow() {
-      var _props3 = this.props;
-      var id = _props3.id;
-      var onAddRow = _props3.onAddRow;
-
-      onAddRow(id);
+      this.props.onAddRow();
     }
   }, {
     key: '_handleChange',
     value: function _handleChange(value) {
-      var onChange = this.props.onChange;
-
-      onChange(value);
+      this.props.onChange(value);
     }
   }, {
     key: '_handleUpdateTable',
     value: function _handleUpdateTable(value) {
-      var _props4 = this.props;
-      var id = _props4.id;
-      var onUpdateTable = _props4.onUpdateTable;
-
-      onUpdateTable(id, value);
+      this.props.onUpdateTable(value);
     }
   }]);
 
@@ -200,7 +187,6 @@ var TableField = function (_React$Component) {
 }(_react2.default.Component);
 
 TableField.propTypes = {
-  id: _react2.default.PropTypes.string,
   state: _react2.default.PropTypes.shape({
     columns: _react2.default.PropTypes.array,
     value: _react2.default.PropTypes.object
@@ -215,9 +201,7 @@ TableField.propTypes = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = {

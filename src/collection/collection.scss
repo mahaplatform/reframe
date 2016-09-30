@@ -122,6 +122,13 @@
           }
         }
       }
+      .loading {
+        td:after {
+          content: '';
+          display: block;
+          height: 24px;
+        }
+      }
       tbody {
         tr {
           &:hover {

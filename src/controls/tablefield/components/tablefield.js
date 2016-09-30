@@ -9,7 +9,6 @@ import DragLayer from './drag_layer'
 class TableField extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     state: React.PropTypes.shape({
       columns: React.PropTypes.array,
       value: React.PropTypes.object,
@@ -23,7 +22,7 @@ class TableField extends React.Component {
   }
 
   render() {
-    const { id, onMoveRow, onRemoveRow, onUpdateCell } = this.props
+    const { onMoveRow, onRemoveRow, onUpdateCell } = this.props
     const { columns, value } = this.props.state
     const colspan = columns.length + 2
     return (
@@ -44,7 +43,6 @@ class TableField extends React.Component {
                 <tbody>
                   {value.map((row, index) => {
                     return <Row key={`row_${index}`}
-                                id={id}
                                 row={row}
                                 columns={columns}
                                 index={index}
@@ -92,30 +90,25 @@ class TableField extends React.Component {
   }
 
   _handleInitialize() {
-    const { id, columns, value, onInitialize } = this.props
-    onInitialize(id, columns, value)
+    const { columns, value, onInitialize } = this.props
+    onInitialize(columns, value)
   }
 
   _handleAddRow() {
-    const { id, onAddRow } = this.props
-    onAddRow(id)
+    this.props.onAddRow()
   }
 
   _handleChange(value) {
-    const { onChange } = this.props
-    onChange(value)
+    this.props.onChange(value)
   }
 
   _handleUpdateTable(value) {
-    const { id, onUpdateTable } = this.props
-    onUpdateTable(id, value)
+    this.props.onUpdateTable(value)
   }
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onInitialize: actions.initialize,

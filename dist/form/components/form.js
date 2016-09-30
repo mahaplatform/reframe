@@ -65,7 +65,6 @@ var Form = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var style = _props.style;
       var title = _props.title;
       var instructions = _props.instructions;
@@ -114,7 +113,6 @@ var Form = function (_React$Component) {
             ) : null,
             sections.map(function (section, index) {
               return _react2.default.createElement(_section2.default, _extends({}, section, {
-                id: id,
                 style: style,
                 data: data,
                 errors: errors,
@@ -127,7 +125,6 @@ var Form = function (_React$Component) {
               _react2.default.createElement(_message2.default, { message: message })
             ) : null,
             buttons ? _react2.default.createElement(_buttons2.default, { buttons: buttons,
-              id: id,
               onValidateForm: onValidateForm,
               onResetForm: onResetForm }) : null
           )
@@ -166,22 +163,20 @@ var Form = function (_React$Component) {
     key: '_handleLoadSections',
     value: function _handleLoadSections() {
       var _props3 = this.props;
-      var id = _props3.id;
       var sections = _props3.sections;
       var onFetchSections = _props3.onFetchSections;
       var onSetSections = _props3.onSetSections;
 
       if (_lodash2.default.isString(sections)) {
-        onFetchSections(id, sections);
+        onFetchSections(sections);
       } else if (_lodash2.default.isArray(sections)) {
-        onSetSections(id, sections);
+        onSetSections(sections);
       }
     }
   }, {
     key: '_handleLoadData',
     value: function _handleLoadData() {
       var _props4 = this.props;
-      var id = _props4.id;
       var data = _props4.data;
       var onFetchData = _props4.onFetchData;
       var onSetData = _props4.onSetData;
@@ -189,27 +184,26 @@ var Form = function (_React$Component) {
       var query = this.context.location.query;
 
       if (_lodash2.default.isString(data)) {
-        onFetchData(id, data);
+        onFetchData(data);
       } else if (_lodash2.default.isObject(data)) {
-        onSetData(id, data);
+        onSetData(data);
       } else if (query) {
-        onSetData(id, query);
+        onSetData(query);
       } else {
-        onSetReady(id);
+        onSetReady();
       }
     }
   }, {
     key: '_handleChange',
     value: function _handleChange(previous, current) {
       var _props5 = this.props;
-      var id = _props5.id;
       var onChangeField = _props5.onChangeField;
       var onChange = _props5.onChange;
 
       if (onChangeField) {
         _lodash2.default.forOwn(current, function (value, code) {
           if (previous[code] != current[code]) {
-            onChangeField(id, code, value);
+            onChangeField(code, value);
           }
         });
       }
@@ -221,7 +215,6 @@ var Form = function (_React$Component) {
     key: '_handleSubmit',
     value: function _handleSubmit() {
       var _props6 = this.props;
-      var id = _props6.id;
       var method = _props6.method;
       var action = _props6.action;
       var onSubmit = _props6.onSubmit;
@@ -229,7 +222,7 @@ var Form = function (_React$Component) {
 
       var data = this._collectData();
       if (action) {
-        onSubmitForm(id, method, action, data);
+        onSubmitForm(method, action, data);
       } else if (onSubmit) {
         if (onSubmit(data)) {
           this._handleSuccess();
@@ -306,7 +299,6 @@ Form.contextTypes = {
   history: _react2.default.PropTypes.object
 };
 Form.propTypes = {
-  id: _react2.default.PropTypes.string,
   datasource: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
   sections: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
   method: _react2.default.PropTypes.string,
@@ -348,9 +340,7 @@ Form.defaultProps = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = (_mapDispatchToProps = {

@@ -43,12 +43,9 @@ var Filters = function (_React$Component) {
   }, {
     key: '_getForm',
     value: function _getForm() {
-      var _props = this.props;
-      var id = _props.id;
-      var filters = _props.filters;
+      var filters = this.props.filters;
 
       return {
-        id: id + '-filter',
         onChange: this._handleFilterRecords.bind(this),
         style: 'basic',
         sections: filters,
@@ -58,11 +55,7 @@ var Filters = function (_React$Component) {
   }, {
     key: '_handleFilterRecords',
     value: function _handleFilterRecords(data) {
-      var _props2 = this.props;
-      var id = _props2.id;
-      var onFilterRecords = _props2.onFilterRecords;
-
-      onFilterRecords(id, data);
+      this.props.onFilterRecords(data);
     }
   }]);
 
@@ -70,7 +63,6 @@ var Filters = function (_React$Component) {
 }(_react2.default.Component);
 
 Filters.propTypes = {
-  id: _react2.default.PropTypes.string,
   filters: _react2.default.PropTypes.array,
   onFilterRecords: _react2.default.PropTypes.func
 };

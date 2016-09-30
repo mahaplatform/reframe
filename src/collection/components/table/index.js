@@ -5,7 +5,6 @@ import Tbody from './tbody'
 class Table extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     records: React.PropTypes.array,
     selected: React.PropTypes.array,
     params: React.PropTypes.object,
@@ -19,17 +18,15 @@ class Table extends React.Component {
   }
 
   render() {
-    const { id, records, params, empty, columns, status, selected, recordActions, batchActions, onSelect, onSortRecords } = this.props
+    const { records, params, empty, columns, status, selected, recordActions, batchActions, onSelect, onSortRecords } = this.props
     return (
       <div className="table" ref="table">
         <table className="ui single padded unstackable line table">
-          <Thead id={id}
-                 columns={columns}
+          <Thead columns={columns}
                  params={params}
                  batchActions={batchActions}
                  onSortRecords={onSortRecords} />
-          <Tbody id={id}
-                 empty={empty}
+          <Tbody empty={empty}
                  columns={columns}
                  records={records}
                  selected={selected}

@@ -39,7 +39,6 @@ var Cards = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props;
-      var id = _props.id;
       var card = _props.card;
       var records = _props.records;
       var selected = _props.selected;
@@ -54,8 +53,7 @@ var Cards = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             { key: 'card_' + index, className: 'card' },
-            _react2.default.createElement(_card2.default, { id: id,
-              card: card,
+            _react2.default.createElement(_card2.default, { card: card,
               selected: selected,
               recordActions: recordActions,
               batchActions: batchActions,
@@ -71,7 +69,6 @@ var Cards = function (_React$Component) {
 }(_react2.default.Component);
 
 Cards.propTypes = {
-  id: _react2.default.PropTypes.string,
   records: _react2.default.PropTypes.array,
   card: _react2.default.PropTypes.object,
   selected: _react2.default.PropTypes.array,

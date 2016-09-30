@@ -4,7 +4,6 @@ import Field from './field.js'
 class Section extends React.Component {
 
   static propTypes = {
-    id: React.PropTypes.string,
     style: React.PropTypes.string,
     label: React.PropTypes.string,
     instructions: React.PropTypes.string,
@@ -28,7 +27,7 @@ class Section extends React.Component {
   }
 
   render() {
-    const { id, style, collapsing, label, instructions, fields, data, errors, onUpdateData } = this.props
+    const { style, collapsing, label, instructions, fields, data, errors, onUpdateData } = this.props
     let classes = (style == 'basic') ? ['ui', 'basic', 'segment'] : ['ui', 'segment']
     if(collapsing) {
       classes.push('collapsing')
@@ -41,7 +40,6 @@ class Section extends React.Component {
           {(instructions) ? <div className="instructions">{instructions}</div> : null}
           { fields.map((field, index) => {
             return <Field {...field}
-                          id={id}
                           data={data}
                           errors={errors}
                           key={`field_${index}`}

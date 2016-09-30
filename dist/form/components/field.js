@@ -41,7 +41,6 @@ var Field = function (_React$Component) {
       var _this2 = this;
 
       var _props = this.props;
-      var id = _props.id;
       var code = _props.code;
       var type = _props.type;
       var include = _props.include;
@@ -83,13 +82,11 @@ var Field = function (_React$Component) {
           function () {
             if (type == 'fields') {
               return _react2.default.createElement(_fields2.default, { fields: fields,
-                id: id,
                 onChange: _this2._handleUpdateData.bind(_this2),
                 onUpdateData: onUpdateData });
             } else {
               var value = data[code];
-              return _react2.default.createElement(_control2.default, { id: code,
-                type: type,
+              return _react2.default.createElement(_control2.default, { type: type,
                 label: label,
                 style: style,
                 datasource: datasource,
@@ -113,11 +110,10 @@ var Field = function (_React$Component) {
     key: '_handleUpdateData',
     value: function _handleUpdateData(value) {
       var _props2 = this.props;
-      var id = _props2.id;
       var code = _props2.code;
       var onUpdateData = _props2.onUpdateData;
 
-      onUpdateData(id, code, value);
+      onUpdateData(code, value);
     }
   }]);
 
@@ -125,7 +121,6 @@ var Field = function (_React$Component) {
 }(_react2.default.Component);
 
 Field.propTypes = {
-  id: _react2.default.PropTypes.string,
   code: _react2.default.PropTypes.string,
   include: _react2.default.PropTypes.bool,
   show: _react2.default.PropTypes.bool,

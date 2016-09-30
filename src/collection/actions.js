@@ -4,52 +4,43 @@ import * as actionTypes from './action_types'
 import Api from '../utils/api'
 
 type requestType = {
-  cid: string,
   params: Object
 }
 
 type responseType = {
-  cid: string,
   entity: Object
 }
 
-export const setRecords = (cid: string, records: Array<Object>) => ({
+export const setRecords = (records: Array<Object>) => ({
   type: actionTypes.SET_RECORDS,
-  cid,
   records
 })
 
-export const appendRecords = (cid: string, records: Array<Object>) => ({
+export const appendRecords = (records: Array<Object>) => ({
   type: actionTypes.APPEND_RECORDS,
-  cid,
   records
 })
 
-export const toggleFilters = (cid: string) => ({
+export const toggleFilters = () => ({
   type: actionTypes.TOGGLE_FILTERS,
-  cid
 })
 
-export const changeLayout = (cid: string, layout: string) => ({
+export const changeLayout = (layout: string) => ({
   type: actionTypes.CHANGE_LAYOUT,
-  cid,
   layout
 })
 
-export const selectAll = (cid: string) => ({
+export const selectAll = () => ({
   type: actionTypes.SELECT_ALL,
-  cid
 })
 
-export const select = (cid: string, id: number) => ({
+export const select = (id: number) => ({
   type: actionTypes.SELECT,
-  cid,
   id
 })
 
-export const fetchColumns = (cid: string, endpoint: string) => {
+export const fetchColumns = (endpoint: string) => {
   return Api.get({
-    cid,
     endpoint,
     request: fetchColumnsRequest,
     success: fetchColumnsSuccess,
@@ -59,30 +50,25 @@ export const fetchColumns = (cid: string, endpoint: string) => {
 
 export const fetchColumnsRequest = (request: requestType) => ({
   type: actionTypes.FETCH_COLUMNS_REQUEST,
-  cid: request.cid
 })
 
 export const fetchColumnsSuccess = (response: responseType) => ({
   type: actionTypes.FETCH_COLUMNS_SUCCESS,
-  cid: response.cid,
   columns: response.entity
 })
 
 export const fetchColumnsFailure = (response: responseType) => ({
   type: actionTypes.FETCH_COLUMNS_FAILURE,
-  cid: response.cid,
   error: response.entity
 })
 
-export const setColumns = (cid: string, columns: Array<Object>)  => ({
+export const setColumns = (columns: Array<Object>)  => ({
   type: actionTypes.SET_COLUMNS,
-  cid,
   columns
 })
 
-export const fetchRecords = (cid: string, endpoint: string, params: Object) => {
+export const fetchRecords = (endpoint: string, params: Object) => {
   return Api.get({
-    cid,
     params,
     endpoint: endpoint,
     request: fetchRecordsRequest,
@@ -92,46 +78,38 @@ export const fetchRecords = (cid: string, endpoint: string, params: Object) => {
 }
 
 export const fetchRecordsRequest = (request: requestType) => ({
-  type: actionTypes.FETCH_RECORDS_REQUEST,
-  cid: request.cid
+  type: actionTypes.FETCH_RECORDS_REQUEST
 })
 
 export const fetchRecordsSuccess = (response: responseType) => ({
   type: actionTypes.FETCH_RECORDS_SUCCESS,
-  cid: response.cid,
   records: response.entity
 })
 
 export const fetchRecordsFailure = (response: responseType) => ({
   type: actionTypes.FETCH_RECORDS_FAILURE,
-  cid: response.cid,
   error: response.entity
 })
 
-export const sortRecords = (cid: string, key: string) => ({
+export const sortRecords = (key: string) => ({
   type: actionTypes.SORT_RECORDS,
-  cid,
   key
 })
 
-export const filterRecords = (cid: string, params: Object) => ({
+export const filterRecords = (params: Object) => ({
   type: actionTypes.FILTER_RECORDS,
-  cid,
   params,
 })
 
-export const exportRecords = (cid: string) => ({
-  type: actionTypes.EXPORT_RECORDS,
-  cid
+export const exportRecords = () => ({
+  type: actionTypes.EXPORT_RECORDS
 })
 
-export const reloadRecords = (cid: string) => ({
-  type: actionTypes.RELOAD_RECORDS,
-  cid
+export const reloadRecords = () => ({
+  type: actionTypes.RELOAD_RECORDS
 })
 
-export const executeBatchAction = (cid: string, batchAction: string) => ({
+export const executeBatchAction = (batchAction: string) => ({
   type: actionTypes.EXECUTE_BATCH_ACTION,
-  cid,
   batchAction
 })

@@ -74,11 +74,7 @@ var Tabs = function (_React$Component) {
   }, {
     key: '_handleChangeTab',
     value: function _handleChangeTab(index) {
-      var _props = this.props;
-      var id = _props.id;
-      var onChangeTab = _props.onChangeTab;
-
-      onChangeTab(id, index);
+      this.props.onChangeTab(index);
     }
   }]);
 
@@ -100,9 +96,7 @@ Tabs.defaultProps = {
 
 
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    state: state[props.id]
-  };
+  return { state: state };
 };
 
 var mapDispatchToProps = {

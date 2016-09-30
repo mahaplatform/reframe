@@ -15,7 +15,6 @@ class Form extends React.Component {
   }
 
   static propTypes = {
-    id: React.PropTypes.string,
     datasource: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.array
@@ -65,7 +64,7 @@ class Form extends React.Component {
  }
 
   render() {
-    const { id, style, title, instructions, buttons } = this.props
+    const { style, title, instructions, buttons } = this.props
     const { onUpdateData, onValidateForm, onResetForm } = this.props
     const { status, sections, message, data, errors } = this.props.state
     if(status) {
@@ -88,7 +87,6 @@ class Form extends React.Component {
             </div> : null}
             {sections.map((section, index) => {
               return <Section {...section}
-                id={id}
                 style={style}
                 data={data}
                 errors={errors}
@@ -97,7 +95,6 @@ class Form extends React.Component {
             })}
             {(message) ? <div className={segmentClass}><Message message={message} /></div> : null}
             {(buttons) ? <Buttons buttons={buttons}
-                                  id={id}
                                   onValidateForm={onValidateForm}
                                   onResetForm={onResetForm} /> : null}
           </div>
@@ -130,34 +127,34 @@ class Form extends React.Component {
   }
 
   _handleLoadSections() {
-    const { id, sections, onFetchSections, onSetSections } = this.props
+    const { sections, onFetchSections, onSetSections } = this.props
     if(_.isString(sections)) {
-      onFetchSections(id, sections)
+      onFetchSections(sections)
     } else if(_.isArray(sections)) {
-      onSetSections(id, sections)
+      onSetSections(sections)
     }
   }
 
   _handleLoadData() {
-    const { id, data, onFetchData, onSetData, onSetReady } = this.props
+    const { data, onFetchData, onSetData, onSetReady } = this.props
     const { query } = this.context.location
     if(_.isString(data)) {
-      onFetchData(id, data)
+      onFetchData(data)
     } else if(_.isObject(data)) {
-      onSetData(id, data)
+      onSetData(data)
     } else if(query) {
-      onSetData(id, query)
+      onSetData(query)
     } else {
-      onSetReady(id)
+      onSetReady()
     }
   }
 
   _handleChange(previous, current) {
-    const { id, onChangeField, onChange } = this.props
+    const { onChangeField, onChange } = this.props
     if(onChangeField) {
       _.forOwn(current, (value, code) => {
         if(previous[code] != current[code]) {
-          onChangeField(id, code, value)
+          onChangeField(code, value)
         }
       })
     }
@@ -167,10 +164,10 @@ class Form extends React.Component {
   }
 
   _handleSubmit() {
-    const { id, method, action, onSubmit, onSubmitForm } = this.props
+    const { method, action, onSubmit, onSubmitForm } = this.props
     let data = this._collectData()
     if(action) {
-      onSubmitForm(id, method, action, data)
+      onSubmitForm(method, action, data)
     } else if(onSubmit) {
       if(onSubmit(data)) {
         this._handleSuccess()
@@ -227,9 +224,7 @@ class Form extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({
-  state: state[props.id]
-})
+const mapStateToProps = (state, props) => ({ state })
 
 const mapDispatchToProps = {
   onFetchSections: actions.fetchSections,

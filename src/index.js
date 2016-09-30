@@ -2,13 +2,12 @@ import Api from './utils/api'
 import Breadcrumbs from './breadcrumbs'
 import Card from './card'
 import Collection from './collection'
-import Component from './component'
 import Config from './utils/config'
 import Container from './container'
 import Controls from './controls'
+import CreateStore from './store'
 import Form from './form'
 import Modal from './modal'
-import Reducer from './component/reducer'
 import Socket from './utils/socket'
 import Tabs from './tabs'
 import Tasks from './tasks'
@@ -17,13 +16,12 @@ export { Api }
 export { Breadcrumbs }
 export { Card }
 export { Collection }
-export { Component }
 export { Config }
 export { Container }
 export { Controls }
+export { CreateStore }
 export { Form }
 export { Modal }
-export { Reducer }
 export { Socket }
 export { Tabs }
 export { Tasks }
@@ -33,13 +31,12 @@ export default {
   Breadcrumbs,
   Card,
   Collection,
-  Component,
   Config,
   Container,
   Controls,
+  CreateStore,
   Form,
   Modal,
-  Reducer,
   Socket,
   Tabs,
   Tasks
