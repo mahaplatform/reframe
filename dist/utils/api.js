@@ -69,12 +69,14 @@ var Api = function () {
       options.requestCallback = options.request ? options.request : function () {};
       options.successCallback = options.success ? options.success : function () {};
       options.failureCallback = options.failure ? options.failure : function () {};
+
       var config = {
         method: options.method,
-        path: this.path(options.endpoint),
+        path: this._path(options.endpoint),
         headers: { 'Content-Type': 'application/json' },
         mixin: { withCredentials: true }
       };
+
       if (options.params) {
         if (options.method == 'GET') {
           config.params = options.params;
@@ -82,15 +84,19 @@ var Api = function () {
           config.entity = options.params;
         }
       }
+
       return function (dispatch) {
 
         var request = {};
+
         if (options.cid) {
           request.cid = options.cid;
         }
+
         if (options.params) {
           request.params = options.params;
         }
+
         dispatch(options.requestCallback(request));
 
         return _this.client(config).then(function (response) {
@@ -100,25 +106,29 @@ var Api = function () {
           var success = {
             entity: json
           };
+
           if (options.cid) {
             success.cid = options.cid;
           }
+
           dispatch(options.successCallback(success));
         }, function (response) {
 
           var failure = {
             entity: response.entity
           };
+
           if (options.cid) {
             failure.cid = options.cid;
           }
+
           dispatch(options.errorCallback(failure));
         });
       };
     }
   }, {
-    key: 'path',
-    value: function path(endpoint) {
+    key: '_path',
+    value: function _path(endpoint) {
       return _config2.default.get('api.host') + endpoint;
     }
   }]);

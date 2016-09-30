@@ -22,8 +22,4 @@ class Index extends React.Component {
 
 }
 
-const validation = {
-  required: ['columns']
-}
-
-export default Component(validation, 'tablefield', 'id')(Index)
+export default Component('tablefield', 'id')(Index)

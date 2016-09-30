@@ -32,11 +32,7 @@ const Index = (id, mapEndpointsToProps) => {
 
     }
 
-    const validation = {
-      required: []
-    }
-
-    Container = Component(validation, 'container', 'id')(Container)
+    Container = Component('container', 'id')(Container)
 
     const mapStateToProps = (state, props) => ({
       id: id,

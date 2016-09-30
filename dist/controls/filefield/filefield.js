@@ -22,11 +22,11 @@ var _bytes = require('bytes');
 
 var _bytes2 = _interopRequireDefault(_bytes);
 
-var _actions = require('../actions');
+var _actions = require('./actions');
 
 var actions = _interopRequireWildcard(_actions);
 
-var _config = require('../../../utils/config');
+var _config = require('../../utils/config');
 
 var _config2 = _interopRequireDefault(_config);
 

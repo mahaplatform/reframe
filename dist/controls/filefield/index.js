@@ -60,10 +60,4 @@ Index.propTypes = {
   defaultValue: _react2.default.PropTypes.array,
   onChange: _react2.default.PropTypes.func
 };
-
-
-var validation = {
-  required: []
-};
-
-exports.default = (0, _component2.default)(validation, 'filefield', 'id')(Index);
+exports.default = (0, _component2.default)('filefield', 'id')(Index);

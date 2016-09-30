@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Resumable from 'resumablejs'
 import bytes from 'bytes'
-import * as actions from '../actions'
-import config from '../../../utils/config'
+import * as actions from './actions'
+import config from '../../utils/config'
 
 class FileField extends React.Component {
 

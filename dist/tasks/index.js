@@ -53,10 +53,4 @@ Index.propTypes = {
 Index.defaultProps = {
   tasks: []
 };
-
-
-var validation = {
-  required: ['id', 'tasks']
-};
-
-exports.default = (0, _component2.default)(validation, 'tasks', 'id')(_tasks2.default);
+exports.default = (0, _component2.default)('tasks', 'id')(_tasks2.default);

@@ -3,29 +3,14 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import * as actions from './actions'
 
-const Index = (rules, namespace, identifier = null) => {
+const Index = (namespace, identifier = null) => {
 
   return function(WrappedComponent) {
 
     class Component extends React.Component {
 
-      constructor(props) {
-        super(props)
-        this.state = {
-          errors: this._validateConfig(rules, props)
-        }
-      }
-
       render() {
-        const id = (identifier) ? _.get(this.props, identifier) : namespace
-        if(!_.isEmpty(this.state.errors)) {
-          console.warn(this.state.errors)
-          return (
-            <div className="ui negative message">
-              <p>Unable to load component <strong>{id}</strong></p>
-            </div>
-          )
-        } else if(this.props.initialized) {
+        if(this.props.initialized) {
           return <WrappedComponent {...this.props} />
         } else {
           return <div />
@@ -33,24 +18,10 @@ const Index = (rules, namespace, identifier = null) => {
       }
 
       componentDidMount() {
-        if(_.isEmpty(this.state.errors)) {
-          this._handleInitialize()
-        }
+        this._handleInitialize()
       }
       componentWillUnmount() {
         this._handleTerminate()
-      }
-
-      _validateConfig(rules, config) {
-        let errors = []
-        if(rules.required) {
-          rules.required.map(required => {
-            if(!_.get(config, required)) {
-              errors.push(`You must specify the {${required}} property`)
-            }
-          })
-        }
-        return errors
       }
 
       _handleInitialize() {

@@ -88,11 +88,7 @@ var Index = function Index(id, mapEndpointsToProps) {
       return Container;
     }(_react2.default.Component);
 
-    var validation = {
-      required: []
-    };
-
-    Container = (0, _component2.default)(validation, 'container', 'id')(Container);
+    Container = (0, _component2.default)('container', 'id')(Container);
 
     var mapStateToProps = function mapStateToProps(state, props) {
       return {

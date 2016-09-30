@@ -64,10 +64,4 @@ Index.propTypes = {
   recordActions: _react2.default.PropTypes.array,
   batchActions: _react2.default.PropTypes.array
 };
-
-
-var validation = {
-  required: ['id', 'records']
-};
-
-exports.default = (0, _component2.default)(validation, 'collection', 'id')(Index);
+exports.default = (0, _component2.default)('collection', 'id')(Index);

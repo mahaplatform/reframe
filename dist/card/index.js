@@ -47,10 +47,4 @@ var Index = function (_React$Component) {
 
 Index.propTypes = {};
 Index.defaultProps = {};
-
-
-var validation = {
-  required: []
-};
-
-exports.default = (0, _component2.default)(validation, 'card', 'id')(Index);
+exports.default = (0, _component2.default)('card', 'id')(Index);

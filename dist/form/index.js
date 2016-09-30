@@ -74,10 +74,4 @@ Index.propTypes = {
   onFailure: _react2.default.PropTypes.func,
   onSuccess: _react2.default.PropTypes.func
 };
-
-
-var validation = {
-  required: ['id']
-};
-
-exports.default = (0, _component2.default)(validation, 'form', 'id')(Index);
+exports.default = (0, _component2.default)('form', 'id')(Index);

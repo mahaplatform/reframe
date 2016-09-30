@@ -20,8 +20,4 @@ class Index extends React.Component {
 
 }
 
-const validation = {
-  required: ['id', 'tabs']
-}
-
-export default Component(validation, 'tabs', 'id')(Index)
+export default Component('tabs', 'id')(Index)

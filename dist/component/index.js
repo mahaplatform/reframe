@@ -30,46 +30,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function Index(rules, namespace) {
-  var identifier = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+var Index = function Index(namespace) {
+  var identifier = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
 
   return function (WrappedComponent) {
     var Component = function (_React$Component) {
       _inherits(Component, _React$Component);
 
-      function Component(props) {
+      function Component() {
         _classCallCheck(this, Component);
 
-        var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, props));
-
-        _this.state = {
-          errors: _this._validateConfig(rules, props)
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).apply(this, arguments));
       }
 
       _createClass(Component, [{
         key: 'render',
         value: function render() {
-          var id = identifier ? _lodash2.default.get(this.props, identifier) : namespace;
-          if (!_lodash2.default.isEmpty(this.state.errors)) {
-            console.warn(this.state.errors);
-            return _react2.default.createElement(
-              'div',
-              { className: 'ui negative message' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'Unable to load component ',
-                _react2.default.createElement(
-                  'strong',
-                  null,
-                  id
-                )
-              )
-            );
-          } else if (this.props.initialized) {
+          if (this.props.initialized) {
             return _react2.default.createElement(WrappedComponent, this.props);
           } else {
             return _react2.default.createElement('div', null);
@@ -78,27 +56,12 @@ var Index = function Index(rules, namespace) {
       }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-          if (_lodash2.default.isEmpty(this.state.errors)) {
-            this._handleInitialize();
-          }
+          this._handleInitialize();
         }
       }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
           this._handleTerminate();
-        }
-      }, {
-        key: '_validateConfig',
-        value: function _validateConfig(rules, config) {
-          var errors = [];
-          if (rules.required) {
-            rules.required.map(function (required) {
-              if (!_lodash2.default.get(config, required)) {
-                errors.push('You must specify the {' + required + '} property');
-              }
-            });
-          }
-          return errors;
         }
       }, {
         key: '_handleInitialize',

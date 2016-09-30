@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.executeBatchAction = exports.reloadRecords = exports.exportRecords = exports.filterRecords = exports.sortRecords = exports.fetchRecordsFailure = exports.fetchRecordsSuccess = exports.fetchRecordsRequest = exports.fetchRecords = exports.setColumns = exports.fetchColumnsFailure = exports.fetchColumnsSuccess = exports.fetchColumnsRequest = exports.fetchColumns = exports.select = exports.selectAll = exports.changeLayout = exports.toggleFilters = exports.appendRecords = exports.setRecords = exports.removeCollection = exports.addCollection = undefined;
+exports.executeBatchAction = exports.reloadRecords = exports.exportRecords = exports.filterRecords = exports.sortRecords = exports.fetchRecordsFailure = exports.fetchRecordsSuccess = exports.fetchRecordsRequest = exports.fetchRecords = exports.setColumns = exports.fetchColumnsFailure = exports.fetchColumnsSuccess = exports.fetchColumnsRequest = exports.fetchColumns = exports.select = exports.selectAll = exports.changeLayout = exports.toggleFilters = exports.appendRecords = exports.setRecords = undefined;
 
 var _action_types = require('./action_types');
 
@@ -16,20 +16,6 @@ var _api2 = _interopRequireDefault(_api);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var addCollection = exports.addCollection = function addCollection(cid) {
-  return {
-    type: actionTypes.ADD_COLLECTION,
-    cid: cid
-  };
-};
-
-var removeCollection = exports.removeCollection = function removeCollection(cid) {
-  return {
-    type: actionTypes.REMOVE_COLLECTION,
-    cid: cid
-  };
-};
 
 var setRecords = exports.setRecords = function setRecords(cid, records) {
   return {
@@ -77,8 +63,6 @@ var select = exports.select = function select(cid, id) {
   };
 };
 
-/* COLUMNS */
-
 var fetchColumns = exports.fetchColumns = function fetchColumns(cid, endpoint) {
   return _api2.default.get({
     cid: cid,
@@ -120,8 +104,6 @@ var setColumns = exports.setColumns = function setColumns(cid, columns) {
   };
 };
 
-/* RECORDS */
-
 var fetchRecords = exports.fetchRecords = function fetchRecords(cid, endpoint, params) {
   return _api2.default.get({
     cid: cid,
@@ -156,8 +138,6 @@ var fetchRecordsFailure = exports.fetchRecordsFailure = function fetchRecordsFai
   };
 };
 
-/* SORTING */
-
 var sortRecords = exports.sortRecords = function sortRecords(cid, key) {
   return {
     type: actionTypes.SORT_RECORDS,
@@ -166,8 +146,6 @@ var sortRecords = exports.sortRecords = function sortRecords(cid, key) {
   };
 };
 
-/* FILTERING */
-
 var filterRecords = exports.filterRecords = function filterRecords(cid, params) {
   return {
     type: actionTypes.FILTER_RECORDS,
@@ -175,8 +153,6 @@ var filterRecords = exports.filterRecords = function filterRecords(cid, params) 
     params: params
   };
 };
-
-/* RELOADING */
 
 var exportRecords = exports.exportRecords = function exportRecords(cid) {
   return {

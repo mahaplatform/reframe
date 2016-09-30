@@ -62,10 +62,4 @@ Index.propTypes = {
   defaultValue: _react2.default.PropTypes.array,
   onChange: _react2.default.PropTypes.func
 };
-
-
-var validation = {
-  required: ['columns']
-};
-
-exports.default = (0, _component2.default)(validation, 'tablefield', 'id')(Index);
+exports.default = (0, _component2.default)('tablefield', 'id')(Index);
