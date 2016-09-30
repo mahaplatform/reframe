@@ -1,5 +1,7 @@
 # ReFrame
 
+![](http://thinktopography.github.io/reframe/images/card-collection.jpg)
+
 ## What is Reframe?
 Reframe is a collection of components designed to help developers rapidly
 prototype and build responsive web applications. Built upon open source

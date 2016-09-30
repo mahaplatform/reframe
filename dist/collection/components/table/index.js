@@ -56,7 +56,7 @@ var Table = function (_React$Component) {
         { className: 'table', ref: 'table' },
         _react2.default.createElement(
           'table',
-          { className: 'ui single unstackable line table' },
+          { className: 'ui single padded unstackable line table' },
           _react2.default.createElement(_thead2.default, { id: id,
             columns: columns,
             params: params,

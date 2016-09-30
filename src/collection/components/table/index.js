@@ -22,7 +22,7 @@ class Table extends React.Component {
     const { id, records, params, empty, columns, status, selected, recordActions, batchActions, onSelect, onSortRecords } = this.props
     return (
       <div className="table" ref="table">
-        <table className="ui single unstackable line table">
+        <table className="ui single padded unstackable line table">
           <Thead id={id}
                  columns={columns}
                  params={params}
