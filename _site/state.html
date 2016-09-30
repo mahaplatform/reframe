@@ -134,7 +134,7 @@ Over time, you state will grow bulky and can eventually slow down your applicati
 
 <span class="p">}</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">Component</span><span class="p">({},</span> <span class="s1">'example_component'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">)(</span><span class="nx">ExampleComponent</span><span class="p">)</span></code></pre></div>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Component</span><span class="p">(</span><span class="s1">'example_component'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">)(</span><span class="nx">ExampleComponent</span><span class="p">)</span></code></pre></div>
 </pre>
 
 <p>By importing the higher order `Component` function from reframe in the root
@@ -143,7 +143,7 @@ Over time, you state will grow bulky and can eventually slow down your applicati
   component in the namespace identitied by 'id' in the component props.
   Furthermore, it knows that when actions come through the reducer, they will
   be dispatched to the 'example_component' reducer.</p>
-
+  
 <p class="docs-prevnext">
   <a href="./quickstart.html">← Prev</a>
   <a class="right" href="./server.html">Next →</a>
