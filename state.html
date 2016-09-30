@@ -35,7 +35,7 @@ Over time, you state will grow bulky and can eventually slow down your applicati
 {% highlight javascript %}
 import { Component } from 'reframe'
 
-class ExampleComponent extends React.Component {
+class Example extends React.Component {
 
   render() {
     return (...)
@@ -43,7 +43,7 @@ class ExampleComponent extends React.Component {
 
 }
 
-export default Component('example_component', 'id')(ExampleComponent)
+export default Component('example', 'id')(ExampleComponent)
 {% endhighlight %}
 </pre>
 
@@ -53,7 +53,7 @@ export default Component('example_component', 'id')(ExampleComponent)
   component in the namespace identitied by 'id' in the component props.
   Furthermore, it knows that when actions come through the reducer, they will
   be dispatched to the 'example_component' reducer.</p>
-  
+
 <p class="docs-prevnext">
   <a href="./quickstart.html">← Prev</a>
   <a class="right" href="./server.html">Next →</a>
