@@ -12,12 +12,15 @@ navigation:
     url: ./index.html
   - label: Quick Start
     url: ./quickstart.html
+- header: Component Guide
+  section: component_guide
+  items:
+  - label: Overview
+    url: ./component_overview.html
   - label: State Management
     url: ./state.html
-  - label: Filesystem
+  - label: Component Filesystem
     url: ./filesystem.html
-  - label: Server Requirements
-    url: ./server.html
 - header: Component Reference
   section: component_reference
   items:

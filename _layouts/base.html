@@ -34,7 +34,7 @@
           <ul>
             {% for item in section.items %}
               {% assign current = nil %}
-              {% if page.url == item.url %}
+              {% if page.permalink == item.url %}
                 {% assign current = 'active' %}
               {% endif %}
               <li><a href="{{item.url}}" class="item {{current}}">{{item.label}}</a></li>
