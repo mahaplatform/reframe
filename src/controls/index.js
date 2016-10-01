@@ -6,6 +6,7 @@ import Radios from './radios'
 import Select from './select'
 import Tablefield from './tablefield'
 import Textfield from './textfield'
+import Textarea from './textarea'
 
 export { Checkbox }
 export { Checkboxes }
@@ -15,6 +16,7 @@ export { Radios }
 export { Select }
 export { Tablefield }
 export { Textfield }
+export { Textarea }
 
 export default {
   Checkbox,
@@ -24,5 +26,6 @@ export default {
   Radios,
   Select,
   Tablefield,
-  Textfield
+  Textfield,
+  Textarea
 }

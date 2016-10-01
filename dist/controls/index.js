@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Textfield = exports.Tablefield = exports.Select = exports.Radios = exports.Filefield = exports.Colorfield = exports.Checkboxes = exports.Checkbox = undefined;
+exports.Textarea = exports.Textfield = exports.Tablefield = exports.Select = exports.Radios = exports.Filefield = exports.Colorfield = exports.Checkboxes = exports.Checkbox = undefined;
 
 var _checkbox = require('./checkbox');
 
@@ -37,6 +37,10 @@ var _textfield = require('./textfield');
 
 var _textfield2 = _interopRequireDefault(_textfield);
 
+var _textarea = require('./textarea');
+
+var _textarea2 = _interopRequireDefault(_textarea);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Checkbox = _checkbox2.default;
@@ -47,6 +51,7 @@ exports.Radios = _radios2.default;
 exports.Select = _select2.default;
 exports.Tablefield = _tablefield2.default;
 exports.Textfield = _textfield2.default;
+exports.Textarea = _textarea2.default;
 exports.default = {
   Checkbox: _checkbox2.default,
   Checkboxes: _checkboxes2.default,
@@ -55,5 +60,6 @@ exports.default = {
   Radios: _radios2.default,
   Select: _select2.default,
   Tablefield: _tablefield2.default,
-  Textfield: _textfield2.default
+  Textfield: _textfield2.default,
+  Textarea: _textarea2.default
 };

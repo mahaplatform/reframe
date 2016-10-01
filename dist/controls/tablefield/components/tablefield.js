@@ -76,7 +76,7 @@ var TableField = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 { className: 'collapsing' },
-                ' '
+                '\xA0'
               ),
               columns.map(function (column, index) {
                 return _react2.default.createElement(
@@ -88,7 +88,7 @@ var TableField = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 { className: 'collapsing' },
-                ' '
+                '\xA0'
               )
             )
           ),

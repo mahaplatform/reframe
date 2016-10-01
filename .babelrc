@@ -7,8 +7,5 @@
     "transform-class-properties",
     "transform-object-rest-spread",
     "transform-flow-strip-types"
-  ],
-  "ignore": [
-    "__tests__/*.js"
   ]
 }
