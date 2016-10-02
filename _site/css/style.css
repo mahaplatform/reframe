@@ -167,19 +167,19 @@ ul, ol {
 
 a {
   text-decoration: none;
-  color: #CC2E39; }
+  color: #11807e; }
 
 nav.toc a {
   color: #888; }
 
 nav.toc a.active {
-  color: #CC2E39; }
+  color: #11807e; }
 
 a.hash-link {
   color: #ccc; }
 
 a.hash-link:hover {
-  color: #CC2E39; }
+  color: #11807e; }
 
 .width {
   margin: 0 auto;
@@ -219,7 +219,7 @@ header.topbar .logo {
   background-size: contain;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  height: 150px;
+  height: 200px;
   margin-bottom: 15px; }
 
   .hero p {
@@ -251,12 +251,12 @@ header.topbar nav ul li a {
 
 header.topbar nav ul li a.active {
   color: #FFF;
-  border-bottom: 3px solid #FBE178;
+  border-bottom: 3px solid #11807e;
   background: #222; }
 
 header.topbar nav ul li a:hover {
-  background: #FBE178;
-  color: #222; }
+  background: #11807e;
+  color: #FFF; }
 
 header.hero {
   padding: 20px 0; }
@@ -281,7 +281,7 @@ header.hero p {
   text-transform: uppercase; }
 
 header.hero a.button {
-  background: #CC2E39;
+  background: #11807e;
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
