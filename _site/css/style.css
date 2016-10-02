@@ -215,7 +215,7 @@ header.topbar .logo {
   height: 50px; }
 
 .flow-header {
-  background-image: url("/assets/flow-hero-logo.png");
+  background-image: url("/reframe/images/logo.png");
   background-size: contain;
   background-position: 50% 50%;
   background-repeat: no-repeat;
