@@ -65,9 +65,6 @@ p, ul, ol {
   color: #aaa; }
 
 .screenshot {
-  border: 1px solid #D68A00;
-  padding: 15px;
-  background-color: rgba(226, 141, 49, 0.1);
   margin-bottom: 20px;
 }
 
@@ -278,8 +275,7 @@ header.hero h1 {
   line-height: 1.5em; }
 
 header.hero p {
-  margin: 0 0 .5em;
-  text-transform: uppercase; }
+  margin: 0 0 .5em; }
 
 header.hero a.button {
   background: #11807e;

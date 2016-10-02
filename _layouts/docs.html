@@ -1,0 +1,28 @@
+---
+layout: base
+permalink: /index.html
+---
+<section class='content'>
+  <div class='width'>
+    <nav class='toc'>
+      {% for section in site.navigation %}
+        <section>
+          <h3>{{section.header}}</h3>
+          <ul>
+            {% for item in section.items %}
+              {% assign current = nil %}
+              {% assign url = site.baseurl | append: page.url %}
+              {% if url == item.url %}
+                {% assign current = 'active' %}
+              {% endif %}
+              <li><a href="{{item.url}}" class="item {{current}}">{{item.label}}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    </nav>
+    <article class='withtoc'>
+      {{ content }}
+    </article>
+  </div>
+</section>
