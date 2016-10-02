@@ -222,6 +222,10 @@ header.topbar .logo {
   height: 150px;
   margin-bottom: 15px; }
 
+  .hero p {
+    font-size: 1.4em;
+    line-height: 1.4em;
+  }
 header.topbar nav ul.external {
   float: right; }
 
