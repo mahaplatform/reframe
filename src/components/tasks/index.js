@@ -1,30 +1,49 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import Tasks from './tasks'
-import CreateStore from '../../store'
-import reducer from './reducer'
+import { Link } from 'react-router'
+import Task from './task'
+import _ from 'lodash'
 
-class Index extends React.Component {
+class Tasks extends React.Component {
 
   static propTypes = {
     tasks: React.PropTypes.arrayOf(React.PropTypes.shape({
-      label: React.PropTypes.string
-    }))
+      label: React.PropTypes.string,
+      route: React.PropTypes.string,
+      handler: React.PropTypes.func,
+      primary: React.PropTypes.bool
+    })).isRequired
   }
 
   static defaultProps = {
-    tasks: []
   }
 
   render() {
-    const store = CreateStore(reducer)
+    const { tasks } = this.props
+    const primary = _.filter(tasks, task => task.primary === true)
     return (
-      <Provider store={store}>
-        <Tasks {...this.props} />
-      </Provider>
+      <div className="tasks">
+        <div className="ui basic buttons">
+          {primary.map((task, index) => {
+            return <Task key={`primary_task_${index}`} {...task} />
+          })}
+          <div className="ui icon top right pointing dropdown button" ref="dropdown">
+            <i className="setting icon"></i>
+            <i className="caret down icon"></i>
+            <div className="menu">
+              {tasks.map((task, index) => {
+                return <Task key={`task_${index}`} {...task} />
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
     )
+  }
+
+  componentDidMount() {
+    $(this.refs.dropdown).dropdown()
   }
 
 }
 
-export default Index
+export default Tasks

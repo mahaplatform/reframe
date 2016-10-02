@@ -38,9 +38,9 @@ var Tabs = function (_React$Component) {
   _createClass(Tabs, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var tabs = this.props.tabs;
+      var _props = this.props;
+      var tabs = _props.tabs;
+      var onChangeTab = _props.onChangeTab;
       var active = this.props.state.active;
 
       var Element = tabs[active].content;
@@ -51,17 +51,8 @@ var Tabs = function (_React$Component) {
           'div',
           { className: 'ui top attached tabular menu' },
           tabs.map(function (tab, index) {
-            var classes = ["item"];
-            if (index == active) {
-              classes.push("active");
-            }
-            return _react2.default.createElement(
-              'div',
-              { key: 'tab_' + index,
-                className: classes.join(" "),
-                onClick: _this2._handleChangeTab.bind(_this2, index) },
-              tab.label
-            );
+            var isActive = index == active;
+            return _react2.default.createElement(Tab, { active: isActive, label: label, onChangeTab: onChangeTab });
           })
         ),
         _react2.default.createElement(
@@ -70,11 +61,6 @@ var Tabs = function (_React$Component) {
           _react2.default.createElement(Element, null)
         )
       );
-    }
-  }, {
-    key: '_handleChangeTab',
-    value: function _handleChangeTab(index) {
-      this.props.onChangeTab(index);
     }
   }]);
 

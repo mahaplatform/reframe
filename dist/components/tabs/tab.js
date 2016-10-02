@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6,11 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,52 +18,46 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Breadcrumb = function (_React$Component) {
-  _inherits(Breadcrumb, _React$Component);
+var Tab = function (_React$Component) {
+  _inherits(Tab, _React$Component);
 
-  function Breadcrumb() {
-    _classCallCheck(this, Breadcrumb);
+  function Tab() {
+    _classCallCheck(this, Tab);
 
-    return _possibleConstructorReturn(this, (Breadcrumb.__proto__ || Object.getPrototypeOf(Breadcrumb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Tab.__proto__ || Object.getPrototypeOf(Tab)).apply(this, arguments));
   }
 
-  _createClass(Breadcrumb, [{
-    key: 'render',
+  _createClass(Tab, [{
+    key: "render",
     value: function render() {
-      if (this.props.route) {
-        return _react2.default.createElement(
-          'span',
-          null,
-          _react2.default.createElement(
-            _reactRouter.Link,
-            { to: this.props.route, className: 'section' },
-            this.props.label
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'divider' },
-            ' / '
-          )
-        );
-      } else {
-        return _react2.default.createElement(
-          'span',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'active section' },
-            this.props.label
-          )
-        );
-      }
+      var _props = this.props;
+      var label = _props.label;
+      var index = _props.index;
+      var active = _props.active;
+
+      var classes = active ? "item active" : "item";
+      return _react2.default.createElement(
+        "div",
+        { className: classes, onClick: this._handleChangeTab.bind(this, index) },
+        label
+      );
+    }
+  }, {
+    key: "_handleChangeTab",
+    value: function _handleChangeTab(index) {
+      this.props.onChangeTab(index);
     }
   }]);
 
-  return Breadcrumb;
+  return Tab;
 }(_react2.default.Component);
 
-Breadcrumb.propTypes = {
-  label: _react2.default.PropTypes.string.isRequired,
-  route: _react2.default.PropTypes.string
+Tab.propTypes = {
+  label: _react2.default.PropTypes.string,
+  active: _react2.default.PropTypes.bool,
+  onChangeTab: _react2.default.PropTypes.func
 };
-exports.default = Breadcrumb;
+Tab.defaultProps = {
+  active: false
+};
+exports.default = Tab;

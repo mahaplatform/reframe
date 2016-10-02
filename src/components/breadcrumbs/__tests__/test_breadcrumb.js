@@ -4,9 +4,9 @@ import Breadcrumb from '../breadcrumb'
 
 jest.unmock('../breadcrumb')
 
-describe('breadcrumb reducer', () => {
+describe('breadcrumb component', () => {
 
-  it('renders a breadcrumb with a route', () => {
+  it('renders with a route', () => {
 
     const breadcrumb = shallow(
       <Breadcrumb label="Dashboard" route="/admin" />
@@ -23,7 +23,7 @@ describe('breadcrumb reducer', () => {
     expect(divider.text()).toEqual(' / ')
   })
 
-  it('renders a breadcrumb without a route', () => {
+  it('renders without a route', () => {
 
     const breadcrumb = shallow(
       <Breadcrumb label="Contacts" />

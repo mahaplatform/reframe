@@ -70,6 +70,7 @@
     "jest-cli": "^15.1.1",
     "react-addons-test-utils": "^15.3.2",
     "redux-devtools": "^3.3.1",
+    "sinon": "^1.17.6",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
@@ -82,10 +83,17 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "cacheDirectory": "/tmp/jest",
     "unmockedModulePathPatterns": [
       "react",
+      "react-dom",
+      "react-router",
+      "redux",
+      "redux-thunk",
+      "redux-logger",
       "enzyme",
       "cheerio",
+      "sinon",
       "lodash"
     ]
   }

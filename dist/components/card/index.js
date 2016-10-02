@@ -12,17 +12,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _card = require('./card');
+var _reactRouter = require('react-router');
 
-var _card2 = _interopRequireDefault(_card);
+var _actions = require('./actions');
 
-var _store = require('../../store');
+var actions = _interopRequireWildcard(_actions);
 
-var _store2 = _interopRequireDefault(_store);
+var _format = require('../../utils/format');
 
-var _reducer = require('./reducer');
+var _format2 = _interopRequireDefault(_format);
 
-var _reducer2 = _interopRequireDefault(_reducer);
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32,30 +32,132 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Index = function (_React$Component) {
-  _inherits(Index, _React$Component);
+var Card = function (_React$Component) {
+  _inherits(Card, _React$Component);
 
-  function Index() {
-    _classCallCheck(this, Index);
+  function Card() {
+    _classCallCheck(this, Card);
 
-    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
   }
 
-  _createClass(Index, [{
+  _createClass(Card, [{
     key: 'render',
     value: function render() {
-      var store = (0, _store2.default)(_reducer2.default);
+      var _props = this.props;
+      var header = _props.header;
+      var image = _props.image;
+      var items = _props.items;
+      var body = _props.body;
+      var buttons = _props.buttons;
+
       return _react2.default.createElement(
-        _reactRedux.Provider,
-        { store: store },
-        _react2.default.createElement(_card2.default, this.props)
+        'div',
+        { className: 'ui card fluid' },
+        function () {
+          if (header) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'content' },
+              header
+            );
+          }
+        }(),
+        function () {
+          if (image) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'image' },
+              _react2.default.createElement('img', { src: image })
+            );
+          }
+        }(),
+        function () {
+          if (body) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'ui content' },
+              body
+            );
+          }
+        }(),
+        function () {
+          if (items) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'ui content' },
+              _react2.default.createElement(
+                'div',
+                { className: 'ui list' },
+                items.map(function (item, index) {
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'item_' + index, className: 'item' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'header' },
+                      item.label
+                    ),
+                    _react2.default.createElement(_format2.default, { format: item.format, value: item.content })
+                  );
+                })
+              )
+            );
+          }
+        }(),
+        function () {
+          if (buttons) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'extra content' },
+              _react2.default.createElement(
+                'div',
+                { className: 'ui two buttons' },
+                buttons.map(function (button, index) {
+                  var classes = ['ui', 'button'];
+                  if (button.style) {
+                    classes.push(button.style);
+                  }
+                  return _react2.default.createElement(
+                    _reactRouter.Link,
+                    { key: 'task_' + index, to: button.route, className: classes.join(' ') },
+                    button.label
+                  );
+                })
+              )
+            );
+          }
+        }()
       );
     }
   }]);
 
-  return Index;
+  return Card;
 }(_react2.default.Component);
 
-Index.propTypes = {};
-Index.defaultProps = {};
-exports.default = Index;
+Card.propTypes = {
+  header: _react2.default.PropTypes.string,
+  image: _react2.default.PropTypes.string,
+  items: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+    label: _react2.default.PropTypes.string,
+    content: _react2.default.PropTypes.string,
+    format: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element])
+  })),
+  body: _react2.default.PropTypes.string,
+  buttons: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+    label: _react2.default.PropTypes.string,
+    style: _react2.default.PropTypes.string,
+    route: _react2.default.PropTypes.string,
+    onClick: _react2.default.PropTypes.func
+  }))
+};
+Card.defaultProps = {};
+
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  return { state: state };
+};
+
+var mapDispatchToProps = {};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Card);

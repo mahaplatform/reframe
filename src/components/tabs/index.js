@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import Tabs from './tabs'
+import Tabs from './components/tabs'
 import CreateStore from '../../store'
 import reducer from './reducer'
 
