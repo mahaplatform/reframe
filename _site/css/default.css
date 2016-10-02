@@ -211,22 +211,16 @@ header.topbar {
 
 header.topbar .logo {
   float: left;
-  margin-top: 5px;
-  margin-right: 10px;
-  height: 40px; }
+  margin-right: 20px;
+  height: 50px; }
 
 .flow-header {
-  background-image: url("../images/logo.png");
+  background-image: url("/assets/flow-hero-logo.png");
   background-size: contain;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  height: 200px;
+  height: 150px;
   margin-bottom: 15px; }
-
-  .hero p {
-    font-size: 1.4em;
-    line-height: 1.4em;
-  }
 
 header.topbar nav ul.external {
   float: right; }
