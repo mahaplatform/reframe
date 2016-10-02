@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">
 <head>
@@ -15,40 +14,59 @@
 
   <header class='topbar'>
     <nav class='width'>
+      <a href="/reframe/index.html">
+        <img src="/reframe/images/logo.png" class="logo" />
+      </a>
       <ul>
-        <li><a href="{{site.baseurl}}/index.html"class="active" >Docs</a></li>
+        <li><a href="{{site.baseurl}}/guides/user/index.html">Docs</a></li>
       </ul>
       <ul class="external">
         <li><a href="https://github.com/thinktopography/reframe">GitHub</a></li>
-        <li><a href="https://www.npmjs.com/package/reframe">npm</a></li>
       </ul>
     </nav>
   </header>
 
-<section class='content'>
-  <div class='width'>
-    <nav class='toc'>
-      {% for section in site.navigation %}
-        <section>
-          <h3>{{section.header}}</h3>
-          <ul>
-            {% for item in section.items %}
-              {% assign current = nil %}
-              {% assign url = site.baseurl | append: page.url %}
-              {% if url == item.url %}
-                {% assign current = 'active' %}
-              {% endif %}
-              <li><a href="{{item.url}}" class="item {{current}}">{{item.label}}</a></li>
-            {% endfor %}
-          </ul>
-        </section>
-      {% endfor %}
-    </nav>
-    <article class='withtoc'>
-      {{ content }}
-    </article>
-  </div>
-</section>
+  {% if page.permalink == '/index.html' %}
+    <header class="main hero"><div class="width">
+      <div class="flow-header"></div>
+        <div>
+          <p>Supercharged UI Toolkit<br />for React Applications</p>
+        </div>
+      </div>
+    </header>
+    <section class='content'>
+      <div class='width'>
+        <article>
+          {{ content }}
+        </article>
+      </div>
+    </section>
+  {% else %}
+    <section class='content'>
+      <div class='width'>
+        <nav class='toc'>
+          {% for section in site.navigation %}
+            <section>
+              <h3>{{section.header}}</h3>
+              <ul>
+                {% for item in section.items %}
+                  {% assign current = nil %}
+                  {% assign url = site.baseurl | append: page.url %}
+                  {% if url == item.url %}
+                    {% assign current = 'active' %}
+                  {% endif %}
+                  <li><a href="{{item.url}}" class="item {{current}}">{{item.label}}</a></li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endfor %}
+        </nav>
+        <article class='withtoc'>
+          {{ content }}
+        </article>
+      </div>
+    </section>
+  {% endif %}
 
 <footer>
   <div class='width'>

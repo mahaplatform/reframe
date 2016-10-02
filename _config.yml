@@ -10,9 +10,9 @@ navigation:
   section: user_guide
   items:
   - label: Introduction
-    url: /reframe/index.html
+    url: /reframe/guides/user/index.html
   - label: Quick Start
-    url: /reframe/quickstart.html
+    url: /reframe/guides/user/quickstart.html
 - header: Component Guide
   section: component_guide
   items:
