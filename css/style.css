@@ -200,8 +200,8 @@ div.getting-started:after,
   visibility: hidden; }
 
 header.topbar {
-  background: #222;
-  color: #EEE;
+  background: #11807e;
+  color: #FFF;
   position: fixed;
   top: 0;
   height: 50px;
@@ -223,6 +223,7 @@ header.topbar .logo {
   margin-bottom: 15px; }
 
   .hero p {
+    font-weight: bold;
     font-size: 1.4em;
     line-height: 1.4em;
   }
@@ -251,11 +252,11 @@ header.topbar nav ul li a {
 
 header.topbar nav ul li a.active {
   color: #FFF;
-  border-bottom: 3px solid #11807e;
+  border-bottom: 3px solid rgba(0,0,0,0.5);
   background: #222; }
 
 header.topbar nav ul li a:hover {
-  background: #11807e;
+  background: rgba(0,0,0,0.2);
   color: #FFF; }
 
 header.hero {
@@ -265,7 +266,7 @@ header.hero .width {
   text-align: center; }
 
 header.hero.main {
-  background: #363d42;
+  background: url('/reframe/images/nighttime.jpg');
   color: #ebebed;
   padding: 40px 0; }
 
