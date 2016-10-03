@@ -5,9 +5,20 @@ permalink: /index.html
 <section class='content'>
   <div class='width'>
     <nav class='toc'>
-      blog
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            {% assign url = site.baseurl | append: post.url %}
+            {{ post.date | date: "%b %-d, %Y" }}<br />
+            <a href="{{ url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </nav>
     <article class='withtoc'>
+      {{ page.date | date: "%A, %B %-d, %Y" }}
+      <h2>{{ page.title }}</h2>
+      <p>By {{ page.author }}</p>
       {{ content }}
     </article>
   </div>

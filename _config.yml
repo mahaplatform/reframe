@@ -1,6 +1,12 @@
+title: Reframe JS
+tagline: Supercharge UI Toolkit for React Applications
+author: Greg Kops
+email: greg@thinktopography.compressed
+descriptions: Supercharge UI Toolkit for React Applications
 highlighter: rouge
 exclude: [Gemfile, Gemfile.lock, Procfile, config.rb, sass, .sass-cache, node_modules]
 baseurl: /reframe
+url: http://thinktopography.github.io/reframe
 sass:
   style: compressed
   sass_dir: _sass

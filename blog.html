@@ -1,8 +1,28 @@
 ---
-layout: blog
+layout: base
 permalink: /blog.html
 ---
-{% for post in site.posts %}
-  <h2>{{ post.title }}</h2>
-  {{ post.body}}
-{% endfor %}
+
+<section class='content'>
+  <div class='width'>
+    <nav class='toc'>
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            {% assign url = site.baseurl | append: post.url %}
+            {{ post.date | date: "%b %-d, %Y" }}<br />
+            <a href="{{ url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <article class="withtoc">
+      {% for post in site.posts %}
+        {% assign url = site.baseurl | append: post.url %}
+        <h2><a href="{{ url }}">{{ post.title }}</a></h2>
+        <p>{{ post.date | date: "%A, %B %-d, %Y" }} by {{ post.author }}</p>
+        {{ post.content }}
+      {% endfor %}
+    </article>
+  </div>
+</section>
