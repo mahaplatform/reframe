@@ -37,7 +37,6 @@ export default class Contact extends React.Component {
 
   _getCollection() {
     return {
-      id: 'contacts-index',
       columns: [
         { label: 'Name', key: 'first_name', primary: true, visible: true, format: NameCell },
         { label: 'Email', key: 'email', primary: false, visible: true },
@@ -98,11 +97,6 @@ const ContentCard = (props) => {
   </thead>
   <tbody>
     <tr>
-      <td><a href="#id">id</a></td>
-      <td>STRING</td>
-      <td><span class="yes">YES</span></td>
-    </tr>
-    <tr>
       <td><a href="#columns">columns</a></td>
       <td>STRING / ARRAY</td>
       <td><span class="yes">YES</span></td>
@@ -149,16 +143,6 @@ const ContentCard = (props) => {
     </tr>
   </tbody>
 </table>
-
-<h3 id="id">id</h3>
-<p>This is a required field and must be unique on any given page. It is a best
-  practice to make sure that this value is globally unique across your
-  application.</p>
-<pre class="highlight">
-{% highlight javascript %}
-id: 'contacts-index',
-{% endhighlight %}
-</pre>
 
 <h3 id="columns">columns</h3>
 <p>Columns can be loaded asynchronously from a external datasource:</p>

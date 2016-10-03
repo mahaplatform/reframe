@@ -251,7 +251,6 @@
 
   <span class="nx">_getCollection</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="s1">'contacts-index'</span><span class="p">,</span>
       <span class="na">columns</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'first_name'</span><span class="p">,</span> <span class="na">primary</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">format</span><span class="p">:</span> <span class="nx">NameCell</span> <span class="p">},</span>
         <span class="p">{</span> <span class="na">label</span><span class="p">:</span> <span class="s1">'Email'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'email'</span><span class="p">,</span> <span class="na">primary</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">visible</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
@@ -311,11 +310,6 @@
   </thead>
   <tbody>
     <tr>
-      <td><a href="#id">id</a></td>
-      <td>STRING</td>
-      <td><span class="yes">YES</span></td>
-    </tr>
-    <tr>
       <td><a href="#columns">columns</a></td>
       <td>STRING / ARRAY</td>
       <td><span class="yes">YES</span></td>
@@ -362,14 +356,6 @@
     </tr>
   </tbody>
 </table>
-
-<h3 id="id">id</h3>
-<p>This is a required field and must be unique on any given page. It is a best
-  practice to make sure that this value is globally unique across your
-  application.</p>
-<pre class="highlight">
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">id</span><span class="p">:</span> <span class="s1">'contacts-index'</span><span class="p">,</span></code></pre></div>
-</pre>
 
 <h3 id="columns">columns</h3>
 <p>Columns can be loaded asynchronously from a external datasource:</p>
