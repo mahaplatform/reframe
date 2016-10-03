@@ -7,7 +7,7 @@ class Tabs extends React.Component {
     tabs: React.PropTypes.arrayOf(React.PropTypes.shape({
       label: React.PropTypes.string,
       content: React.PropTypes.element
-    })),
+    })).isRequired,
     onChangeTab: React.PropTypes.func.isRequired,
     active: React.PropTypes.number
   }
