@@ -1,6 +1,6 @@
 {
   "name": "reframe",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "dist/index.js",
   "description": "A collection of react components for rapidly prototyping and building responsive web applications",
   "homepage": "http://thinktopography.github.io/reframe",
@@ -85,7 +85,6 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "cacheDirectory": "/tmp/jest",
     "automock": true,
     "unmockedModulePathPatterns": [
       "react",
