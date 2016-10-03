@@ -1,4 +1,5 @@
 # ReFrame
+![](https://circleci.com/gh/thinktopography/reframe.png?style=shield&circle-token=510e9789fad82aaa0d6e18ee15f49724bea193f8)
 
 ![](http://thinktopography.github.io/reframe/images/collection-card.jpg)
 
