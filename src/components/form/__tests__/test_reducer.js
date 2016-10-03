@@ -4,7 +4,7 @@ import * as actionTypes from '../action_types'
 jest.unmock('../reducer')
 jest.unmock('lodash')
 
-describe('collection reducer', () => {
+describe('form reducer', () => {
 
   it('set sections', () => {
     let state = {
