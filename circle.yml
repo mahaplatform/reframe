@@ -1,3 +1,9 @@
 machine:
+  ruby:
+    version: 2.2.2
   node:
     version: 5.9.0
+general:
+  branches:
+    ignore:
+      - gh-pages
