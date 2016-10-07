@@ -81,7 +81,8 @@
     "build": "rm -rf ./dist && babel --debug -d ./dist ./src",
     "build_examples": "rm -rf ./examples/dist && babel --debug -d ./examples/dist ./examples/src",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "test": "jest ./src"
+    "test": "jest ./src",
+    "coverage": "jest --coverage && codeclimate-test-reporter < coverage/lcov.info"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
