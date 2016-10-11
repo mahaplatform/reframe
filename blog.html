@@ -18,10 +18,17 @@ permalink: /blog.html
     </nav>
     <article class="withtoc">
       {% for post in site.posts %}
-        {% assign url = site.baseurl | append: post.url %}
-        <h2><a href="{{ url }}">{{ post.title }}</a></h2>
-        <p>{{ post.date | date: "%A, %B %-d, %Y" }} by {{ post.author }}</p>
-        {{ post.content }}
+        <div class="post">
+          {% assign url = site.baseurl | append: post.url %}
+          <h2><a href="{{ url }}">{{ post.title }}</a></h2>
+          <p class="byline">
+            <img class="avatar" src="{{post.avatar}}"/>
+            <span class="author">{{ post.author }}</span>
+            <span class="date">{{ post.date | date: "%B %-d, %Y" }}</span>
+          </p>
+          {{ post.excerpt }}
+          <a class="button" href="{{ url }}">Continue Reading &rarr;</a>
+        </div>
       {% endfor %}
     </article>
   </div>
