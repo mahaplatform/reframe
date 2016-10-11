@@ -264,12 +264,17 @@ header.hero {
   padding: 20px 0; }
 
 header.hero .width {
-  text-align: center; }
+  margin: auto;
+  text-align: center;
+ }
 
 header.hero.main {
-  background: url('/reframe/images/nighttime.jpg');
+  height: 50vh;
   color: #ebebed;
-  padding: 40px 0; }
+  background-position: center;
+  background-size: cover;
+  display: flex;
+}
 
 header.hero h1 {
   font-size: 4em;
