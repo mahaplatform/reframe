@@ -11,25 +11,25 @@ class Format extends React.Component {
     let Content = Default
     if(_.isFunction(format)) {
       Content = format
-    } else if(format == 'status') {
+    } else if(format === 'status') {
       Content = Status
-    } else if(format == 'price') {
+    } else if(format === 'price') {
       Content = Price
-    } else if(format == 'date') {
+    } else if(format === 'date') {
       Content = Date
-    } else if(format == 'datetime') {
+    } else if(format === 'datetime') {
       Content = DateTime
-    } else if(format == 'check_times') {
+    } else if(format === 'check_times') {
       Content = CheckTimes
-    } else if(format == 'check') {
+    } else if(format === 'check') {
       Content = Check
-    } else if(format == 'capitalize') {
+    } else if(format === 'capitalize') {
       Content = Capitalize
-    } else if(format == 'email') {
+    } else if(format === 'email') {
       Content = Email
-    } else if(format == 'raw') {
+    } else if(format === 'raw') {
       Content = Raw
-    } else if(this.props.value === '') {
+    } else if(this.props.value ==== '') {
       Content = Empty
     }
     return <Content {...this.props} />
@@ -54,11 +54,11 @@ const Status = (props) => {
 }
 
 const CheckTimes = (props) => {
-  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <i className="icon red times" />
+  return ((props.value !=== false && !_.isNull(props.value)) || props.value ==== true) ? <i className="icon green check" /> : <i className="icon red times" />
 }
 
 const Check = (props) => {
-  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <span />
+  return ((props.value !=== false && !_.isNull(props.value)) || props.value ==== true) ? <i className="icon green check" /> : <span />
 }
 
 const Price = (props) => {

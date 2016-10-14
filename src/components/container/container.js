@@ -7,11 +7,11 @@ class Container extends React.Component {
 
   render() {
     const { status, data } = this.props.state
-    if(status == 'loading') {
+    if(status === 'loading') {
       return <div>Loading...</div>
-    } else if(status == 'error') {
+    } else if(status === 'error') {
       return <div>Unable to load resources</div>
-    } else if(status == 'loaded') {
+    } else if(status === 'loaded') {
       return <WrappedComponent {...this.props} {...data} />
     } else  {
       return null

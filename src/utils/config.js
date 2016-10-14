@@ -1,7 +1,6 @@
 import _ from 'lodash'
 
 type configType = {
-
 }
 
 class Config {

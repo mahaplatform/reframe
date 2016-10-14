@@ -48,6 +48,7 @@
   "devDependencies": {
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
+    "babel-eslint": "^7.0.0",
     "babel-jest": "^15.0.0",
     "babel-plugin-transform-class-properties": "^6.5.2",
     "babel-plugin-transform-flow-strip-types": "^6.14.0",
@@ -61,9 +62,12 @@
     "codeclimate-test-reporter": "^0.4.0",
     "envify": "^3.4.0",
     "enzyme": "^2.4.1",
-    "eslint": "^1.7.3",
-    "eslint-loader": "^1.1.0",
-    "eslint-plugin-react": "^3.6.3",
+    "eslint": "^3.8.0",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-promise": "^3.0.0",
+    "eslint-plugin-react": "^6.4.1",
+    "eslint-plugin-standard": "^2.0.1",
     "flow-bin": "^0.30.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
@@ -83,7 +87,8 @@
     "build_examples": "rm -rf ./examples/dist && babel --debug -d ./examples/dist ./examples/src",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "test": "jest ./src",
-    "coverage": "jest --coverage && codeclimate-test-reporter < coverage/lcov.info"
+    "coverage": "jest --coverage && codeclimate-test-reporter < coverage/lcov.info",
+    "eslint": "eslint ."
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
