@@ -25,7 +25,7 @@
       "never"
     ],
     "indent": [
-      2,
+      "error",
       2
     ],
     "linebreak-style": [
