@@ -13,12 +13,12 @@ describe('collection reducer', () => {
     let action = {
       type: actionTypes.SET_RECORDS,
       records: [
-        { id: 1, title: "One" }
+        { id: 1, title: 'One' }
       ]
     }
     let expected = {
       records: [
-        { id: 1, title: "One" }
+        { id: 1, title: 'One' }
       ],
       status: 'records_loaded'
     }
@@ -28,19 +28,19 @@ describe('collection reducer', () => {
   it('appends records', () => {
     let state = {
       records: [
-        { id: 1, title: "One" }
+        { id: 1, title: 'One' }
       ]
     }
     let action = {
       type: actionTypes.APPEND_RECORDS,
       records: [
-        { id: 2, title: "Two"}
+        { id: 2, title: 'Two'}
       ]
     }
     let expected = {
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ]
     }
     expect(reducer(state, action)).toEqual(expected)
@@ -77,8 +77,8 @@ describe('collection reducer', () => {
     let state = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1]
     }
@@ -88,8 +88,8 @@ describe('collection reducer', () => {
     let expected = {
       selectAll: true,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1,2]
     }
@@ -100,8 +100,8 @@ describe('collection reducer', () => {
     let state = {
       selectAll: true,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1,2]
     }
@@ -111,8 +111,8 @@ describe('collection reducer', () => {
     let expected = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: []
     }
@@ -123,8 +123,8 @@ describe('collection reducer', () => {
     let state = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: []
     }
@@ -135,8 +135,8 @@ describe('collection reducer', () => {
     let expected = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1]
     }
@@ -147,8 +147,8 @@ describe('collection reducer', () => {
     let state = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1]
     }
@@ -159,8 +159,8 @@ describe('collection reducer', () => {
     let expected = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: []
     }
@@ -171,8 +171,8 @@ describe('collection reducer', () => {
     let state = {
       selectAll: false,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1]
     }
@@ -183,8 +183,8 @@ describe('collection reducer', () => {
     let expected = {
       selectAll: true,
       records: [
-        { id: 1, title: "One" },
-        { id: 2, title: "Two" }
+        { id: 1, title: 'One' },
+        { id: 2, title: 'Two' }
       ],
       selected: [1,2]
     }

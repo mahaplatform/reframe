@@ -48,12 +48,12 @@ class TextField extends React.Component {
                          value={this.state.value}
                          autoComplete={this.props.autoComplete}
                          placeholder={this.props.placeholder}
-                         onChange={this.handleChange.bind(this)}
-                         onBlur={this.handleBlur.bind(this)}
-                         onFocus={this.handleFocus.bind(this)}
-                         onKeyPress={this.handleKeyPress.bind(this)}
-                         onKeyUp={this.handleKeyUp.bind(this)}
-                         onKeyDown={this.handleKeyDown.bind(this)} />
+                         onChange={this._handleChange.bind(this)}
+                         onBlur={this._handleBlur.bind(this)}
+                         onFocus={this._handleFocus.bind(this)}
+                         onKeyPress={this._handleKeyPress.bind(this)}
+                         onKeyUp={this._handleKeyUp.bind(this)}
+                         onKeyDown={this._handleKeyDown.bind(this)} />
     if(this.props.prefix || this.props.suffix) {
       return (
         <div className="textfield">
@@ -88,29 +88,29 @@ class TextField extends React.Component {
     }
   }
 
-  handleChange(event) {
+  _handleChange(event) {
     this.setValue(event.target.value)
     this.props.onChange(event.target.value)
   }
 
-  handleBlur(event) {
-    this.props.onBlur(this.state.value);
+  _handleBlur(event) {
+    this.props.onBlur(this.state.value)
   }
 
-  handleFocus(event) {
-    this.props.onFocus(this.state.value);
+  _handleFocus(event) {
+    this.props.onFocus(this.state.value)
   }
 
-  handleKeyPress(event) {
-    this.props.onKeyPress(this.state.value);
+  _handleKeyPress(event) {
+    this.props.onKeyPress(this.state.value)
   }
 
-  handleKeyUp(event) {
-    this.props.onKeyUp(this.state.value);
+  _handleKeyUp(event) {
+    this.props.onKeyUp(this.state.value)
   }
 
-  handleKeyDown(event) {
-    this.props.onKeyDown(this.state.value);
+  _handleKeyDown(event) {
+    this.props.onKeyDown(this.state.value)
   }
 
   setValue(value) {

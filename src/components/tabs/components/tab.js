@@ -14,7 +14,7 @@ class Tab extends React.Component {
 
   render() {
     const { label, index, active } = this.props
-    const classes = active ? "item active" : "item"
+    const classes = active ? 'item active' : 'item'
     return (
       <div className={classes} onClick={this._handleChangeTab.bind(this, index)}>
         {label}

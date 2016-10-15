@@ -1,16 +1,16 @@
 import React from 'react'
-import { SketchPicker } from 'react-color';
+import { SketchPicker } from 'react-color'
 
 class ColorField extends React.Component {
 
   static propTypes = {
     defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
 
   static defaultProps = {
     defaultValue: '#FFFFFF',
-    onChange: () => {},
+    onChange: () => {}
   }
 
   constructor(props) {

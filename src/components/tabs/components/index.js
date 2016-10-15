@@ -22,10 +22,10 @@ class Index extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => state
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {
   onChangeTab: actions.changeTab
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

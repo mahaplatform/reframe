@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class Checkbox extends React.Component {
 
@@ -43,14 +44,14 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    const { label, style } = this.props
+    const { style } = this.props
     let classes = ['ui', 'checkbox']
     if(style) {
       classes.push(style)
     }
     return (
       <div className="control">
-        <div className={classes.join(" ")} ref="control">
+        <div className={classes.join(' ')} ref="control">
           <input type="checkbox" name="public" />
         </div>
       </div>

@@ -16,7 +16,7 @@ class Task extends React.Component {
 
   render() {
     const { label, route, handler, primary } = this.props
-    const classes = primary ? "ui button" : ""
+    const classes = primary ? 'ui button' : ''
     if(route) {
       return <Link className={classes} to={route}>{label}</Link>
     } else if (handler) {

@@ -1,14 +1,14 @@
 import React from 'react'
-import api from '../../utils/api'
+import _ from 'lodash'
 import states from './states'
 import countries from './countries'
 import timezones from './timezones'
 
 const UNINITIALIZED = 'uninitialized'
-const AWAITING = 'awaiting'
-const SYNCING = 'syncing'
-const READY = 'ready'
-const ERROR = 'error'
+// const AWAITING = 'awaiting'
+// const SYNCING = 'syncing'
+// const READY = 'ready'
+// const ERROR = 'error'
 
 class DynamicControl extends React.Component {
 

@@ -12,7 +12,7 @@ class Tbody extends React.Component {
     status: React.PropTypes.string,
     recordActions: React.PropTypes.array,
     batchActions: React.PropTypes.array,
-    onSelect: React.PropTypes.func,
+    onSelect: React.PropTypes.func
   }
 
   render() {

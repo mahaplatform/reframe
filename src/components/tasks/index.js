@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router'
 import Task from './task'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class Tasks extends React.Component {
 

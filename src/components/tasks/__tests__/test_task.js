@@ -30,7 +30,7 @@ describe('task component', () => {
   })
 
   it('renders with a handler', () => {
-    const onClick = sinon.spy();
+    const onClick = sinon.spy()
     const task = shallow(
       <Task label='Details' handler={onClick} />
     )

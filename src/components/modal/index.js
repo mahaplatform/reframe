@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import * as actions from '../actions'
 import Index from './components/index'
 
 class Modal extends React.Component {
@@ -25,15 +26,11 @@ class Modal extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => state.modal
+const mapStateToProps = (state) => state.modal
 
-const mapDispatchToProps = (dispatch) => ({
-  onSetDefaults(data) {
-    dispatch(actions.setDefaults(data))
-  },
-  onLoadForm(endpoint) {
-    dispatch(actions.loadForm(endpoint))
-  },
-})
+const mapDispatchToProps = {
+  onSetDefaults: actions.setDefaults,
+  onLoadForm: actions.loadForm
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)

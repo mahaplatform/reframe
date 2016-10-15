@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { findDOMNode } from 'react-dom'
 import { DragSource, DropTarget } from 'react-dnd'
-import { getEmptyImage } from 'react-dnd-html5-backend';
+import { getEmptyImage } from 'react-dnd-html5-backend'
 import Cell from './cell'
 
 class Row extends React.Component {
@@ -20,7 +20,7 @@ class Row extends React.Component {
   }
 
   render() {
-    const { index, row, columns, isDragging, connectDragSource, connectDropTarget, connectDragPreview, onUpdateCell } = this.props
+    const { index, row, columns, connectDragSource, connectDropTarget, connectDragPreview, onUpdateCell } = this.props
     return connectDropTarget(connectDragPreview(
       <tr>
         {connectDragSource(
@@ -47,13 +47,13 @@ class Row extends React.Component {
   componentDidMount() {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true
-    });
+    })
   }
 
   componentDidUpdate() {
     this.props.connectDragPreview(getEmptyImage(), {
       captureDraggingState: true
-    });
+    })
   }
 
   handleRemoveRow(index) {
@@ -92,16 +92,16 @@ const rowTarget = {
     const parentNode = findDOMNode(component).parentNode
     const width = element.offsetWidth
     const height = hoverBoundingRect.bottom - hoverBoundingRect.top
-    let top = 0;
+    let top = 0
     let el = parentNode
     while (el) {
-      if (el.tagName == "BODY") {
-        var yScroll = el.scrollTop || document.documentElement.scrollTop;
-        top += (el.offsetTop - yScroll + el.clientTop);
+      if (el.tagName == 'BODY') {
+        var yScroll = el.scrollTop || document.documentElement.scrollTop
+        top += (el.offsetTop - yScroll + el.clientTop)
       } else {
-        top += (el.offsetTop - el.scrollTop + el.clientTop);
+        top += (el.offsetTop - el.scrollTop + el.clientTop)
       }
-      el = el.offsetParent;
+      el = el.offsetParent
     }
     item.width = width + 2
     item.parentTop = top - 1

@@ -13,19 +13,19 @@ class Collection extends React.Component {
   static propTypes = {
     filters: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]),
     columns: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]).isRequired,
     records: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]).isRequired,
-      sort: React.PropTypes.shape({
+    sort: React.PropTypes.shape({
       key: React.PropTypes.string,
-      order: React.PropTypes.string,
+      order: React.PropTypes.string
     }),
     card: React.PropTypes.object,
     layout: React.PropTypes.oneOf(['table', 'card']),
@@ -56,7 +56,7 @@ class Collection extends React.Component {
       exporting: React.PropTypes.bool,
       batchAction: React.PropTypes.string,
       selected: React.PropTypes.array
-    }),
+    })
   }
 
   render() {
@@ -162,7 +162,7 @@ class Collection extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({ state })
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {
   onFetchColumns: actions.fetchColumns,

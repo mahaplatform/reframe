@@ -34,5 +34,5 @@ export const fetchResourceSuccess = (prop: string )  => {
 
 export const fetchResourceFailure = (response: responseType) => ({
   type: actionTypes.FETCH_RESOURCE_FAILURE,
-  error: response.entity,
+  error: response.entity
 })

@@ -29,7 +29,7 @@ class Format extends React.Component {
       Content = Email
     } else if(format === 'raw') {
       Content = Raw
-    } else if(this.props.value ==== '') {
+    } else if(this.props.value === '') {
       Content = Empty
     }
     return <Content {...this.props} />
@@ -45,7 +45,7 @@ const Raw = (props) => {
   return <span dangerouslySetInnerHTML={{__html: props.value}}></span>
 }
 
-const Empty = (props) => {
+const Empty = () => {
   return <span dangerouslySetInnerHTML={{__html: '&nbsp;'}}></span>
 }
 
@@ -54,11 +54,11 @@ const Status = (props) => {
 }
 
 const CheckTimes = (props) => {
-  return ((props.value !=== false && !_.isNull(props.value)) || props.value ==== true) ? <i className="icon green check" /> : <i className="icon red times" />
+  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <i className="icon red times" />
 }
 
 const Check = (props) => {
-  return ((props.value !=== false && !_.isNull(props.value)) || props.value ==== true) ? <i className="icon green check" /> : <span />
+  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <span />
 }
 
 const Price = (props) => {

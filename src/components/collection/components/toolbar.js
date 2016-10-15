@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import _ from 'lodash'
-import * as actions from '../actions'
+import $ from 'jquery'
 
 class Toolbar extends React.Component {
 
@@ -22,7 +20,7 @@ class Toolbar extends React.Component {
   }
 
   render() {
-    const { batchActions, records, columns, card, layout, filters, selectAll } = this.props
+    const { batchActions, columns, card, layout, filters, selectAll } = this.props
     return (
       <div className="collection-toolbar">
         {(() => {

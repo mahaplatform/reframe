@@ -22,7 +22,7 @@ export const appendRecords = (records: Array<Object>) => ({
 })
 
 export const toggleFilters = () => ({
-  type: actionTypes.TOGGLE_FILTERS,
+  type: actionTypes.TOGGLE_FILTERS
 })
 
 export const changeLayout = (layout: string) => ({
@@ -31,7 +31,7 @@ export const changeLayout = (layout: string) => ({
 })
 
 export const selectAll = () => ({
-  type: actionTypes.SELECT_ALL,
+  type: actionTypes.SELECT_ALL
 })
 
 export const select = (id: number) => ({
@@ -49,7 +49,7 @@ export const fetchColumns = (endpoint: string) => {
 }
 
 export const fetchColumnsRequest = (request: requestType) => ({
-  type: actionTypes.FETCH_COLUMNS_REQUEST,
+  type: actionTypes.FETCH_COLUMNS_REQUEST
 })
 
 export const fetchColumnsSuccess = (response: responseType) => ({
@@ -98,7 +98,7 @@ export const sortRecords = (key: string) => ({
 
 export const filterRecords = (params: Object) => ({
   type: actionTypes.FILTER_RECORDS,
-  params,
+  params
 })
 
 export const exportRecords = () => ({

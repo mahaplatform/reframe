@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class MultiSelect extends React.Component {
 
@@ -9,7 +10,7 @@ class MultiSelect extends React.Component {
     disabled: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
     defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -18,7 +19,7 @@ class MultiSelect extends React.Component {
     disabled: false,
     placeholder: '',
     defaultValue: [],
-    onChange: () => {},
+    onChange: () => {}
   }
 
   constructor(props) {

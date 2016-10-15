@@ -36,16 +36,16 @@ class Field extends React.Component {
   render() {
     const { code, type, include, show, label, style, instructions, required, datasource, columns, options, data, errors, fields, onUpdateData } = this.props
     const error = (errors[code]) ? errors[code][0] : null
-    let classes = ["field"]
+    let classes = ['field']
     if(error) {
-      classes.push("error")
+      classes.push('error')
     }
     if(required) {
-      classes.push("required")
+      classes.push('required')
     }
     if(include && show) {
       return (
-        <div className={classes.join(" ")}>
+        <div className={classes.join(' ')}>
           {(label) ? <label>{label}</label> : null}
           {(instructions) ? <div className="instructions">{instructions}</div> : null}
           {(() => {

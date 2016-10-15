@@ -37,7 +37,7 @@ describe('tasks component', () => {
     expect(menu.children().length).toEqual(2)
 
     const first = menu.childAt(0)
-    expect(primary.is('Task[route="/contacts/1/edit"]')).toBeTruthy()
+    expect(first.is('Task[route="/contacts/1/edit"]')).toBeTruthy()
 
     const second = menu.childAt(1)
     expect(second.is('Task')).toBeTruthy()

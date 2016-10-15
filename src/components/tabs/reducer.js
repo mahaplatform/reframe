@@ -8,14 +8,14 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-    case actionTypes.CHANGE_TAB:
-      return {
-        ...state,
-        active: action.index
-      }
+  case actionTypes.CHANGE_TAB:
+    return {
+      ...state,
+      active: action.index
+    }
 
-    default:
-      return state
+  default:
+    return state
 
   }
 

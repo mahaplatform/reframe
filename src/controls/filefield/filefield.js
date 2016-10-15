@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Resumable from 'resumablejs'
 import bytes from 'bytes'
+import $ from 'jquery'
 import * as actions from './actions'
 import config from '../../utils/config'
 
@@ -17,7 +18,7 @@ class FileField extends React.Component {
     onUploadSuccess: React.PropTypes.func,
     onUploadFailure: React.PropTypes.func,
     onRemoveFile: React.PropTypes.func,
-    onChangeFile: React.PropTypes.func,
+    onChangeFile: React.PropTypes.func
   }
 
   constructor(props) {
@@ -33,7 +34,7 @@ class FileField extends React.Component {
     const { status } = this.props.state
     let classes = ['filefield', status]
     return (
-      <div className={classes.join(" ")}>
+      <div className={classes.join(' ')}>
         <div ref="browse" className="ui browse button">
           Choose File...
         </div>
@@ -165,7 +166,7 @@ class FileField extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({ state })
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {
   onAddFile: actions.addFile,
@@ -175,7 +176,7 @@ const mapDispatchToProps = {
   onUploadFailure: actions.uploadFailure,
   onUploadSuccess: actions.uploadSuccess,
   onRemoveFile: actions.removeFile,
-  onChangeFile: actions.changeFile,
+  onChangeFile: actions.changeFile
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileField)

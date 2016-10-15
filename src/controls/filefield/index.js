@@ -13,7 +13,7 @@ class Index extends React.Component {
 
   render() {
     const store = CreateStore(reducer)
-    const { columns, defaultValue, onChange } = this.props
+    const { defaultValue, onChange } = this.props
     return (
       <Provider store={store}>
         <FileField defaultValue={defaultValue} onChange={onChange} />

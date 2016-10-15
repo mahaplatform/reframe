@@ -1,18 +1,19 @@
 import React from 'react'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class Radios extends React.Component {
 
   static propTypes = {
     options: React.PropTypes.array,
     defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
 
   static defaultProps = {
     options: [],
     defaultValue: null,
-    onChange: () => {},
+    onChange: () => {}
   }
 
   constructor(props) {
@@ -65,7 +66,7 @@ class Radios extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     $(this.refs.control).find('.checkbox').checkbox('refresh')
   }
 

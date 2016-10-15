@@ -18,8 +18,8 @@ class Buttons extends React.Component {
             classes.push('positive')
             return <button key={`button_${index}`} className={classes.join(' ')} onClick={this._handleValidateForm.bind(this)}>{button.label}</button>
           } else if(button.type == 'reset') {
-              classes.push('negative')
-              return <button key={`button_${index}`} className={classes.join(' ')} onClick={this._handleResetForm.bind(this)}>{button.label}</button>
+            classes.push('negative')
+            return <button key={`button_${index}`} className={classes.join(' ')} onClick={this._handleResetForm.bind(this)}>{button.label}</button>
           } else {
             if(button.color) {
               classes.push(button.color)

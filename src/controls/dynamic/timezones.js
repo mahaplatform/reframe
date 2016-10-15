@@ -143,7 +143,7 @@ export default [
   ['(GMT+12:00)', 'Marshall Is.'],
   ['(GMT+12:00)', 'Wellington'],
   ['(GMT+12:45)', 'Chatham Is.'],
-  ['(GMT+13:00)', "Nuku'alofa"],
+  ['(GMT+13:00)', 'Nuku\'alofa'],
   ['(GMT+13:00)', 'Samoa'],
   ['(GMT+13:00)', 'Tokelau Is.']
 ]

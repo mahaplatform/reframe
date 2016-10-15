@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class Select extends React.Component {
 
@@ -10,7 +11,7 @@ class Select extends React.Component {
     placeholder: React.PropTypes.string,
     status: React.PropTypes.string,
     defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -20,7 +21,7 @@ class Select extends React.Component {
     placeholder: '',
     status: 'ready',
     defaultValue: null,
-    onChange: () => {},
+    onChange: () => {}
   }
 
   constructor(props) {
@@ -32,7 +33,7 @@ class Select extends React.Component {
 
   render() {
     const { prompt, options, defaultValue, disabled, status } = this.props
-    let classes = ["ui","fluid","search","selection","dropdown"]
+    let classes = ['ui','fluid','search','selection','dropdown']
     if(disabled) {
       classes.push('disabled')
     }
@@ -50,7 +51,7 @@ class Select extends React.Component {
             return (
               <div className="menu">
                 {options.map((option, index) => {
-                  return <div key={`option_${index}`} className={(option.key == this.state.value) ? "item active selected" : "item"} data-value={option.key}>{option.value}</div>
+                  return <div key={`option_${index}`} className={(option.key == this.state.value) ? 'item active selected' : 'item'} data-value={option.key}>{option.value}</div>
                 })}
               </div>
             )

@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 
 class Export extends React.Component {
 
@@ -84,15 +85,12 @@ class Export extends React.Component {
   }
 
   _handleXls() {
-    console.log('xls')
   }
 
   _handleCsv() {
-    console.log('csv')
   }
 
   _handleTsv() {
-    console.log('tsv')
   }
 
 }

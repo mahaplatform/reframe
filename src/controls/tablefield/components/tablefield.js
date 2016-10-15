@@ -11,7 +11,7 @@ class TableField extends React.Component {
   static propTypes = {
     state: React.PropTypes.shape({
       columns: React.PropTypes.array,
-      value: React.PropTypes.object,
+      value: React.PropTypes.object
     }),
     onInitialize: React.PropTypes.func,
     onAddRow: React.PropTypes.func,
@@ -108,7 +108,7 @@ class TableField extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({ state })
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {
   onInitialize: actions.initialize,

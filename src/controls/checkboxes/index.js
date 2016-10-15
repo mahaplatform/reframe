@@ -1,18 +1,19 @@
 import React from 'react'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class Checkboxes extends React.Component {
 
   static propTypes = {
     options: React.PropTypes.array,
     defaultValue: React.PropTypes.array,
-    onChange: React.PropTypes.func,
+    onChange: React.PropTypes.func
   }
 
   static defaultProps = {
     options: [],
     defaultValue: [],
-    onChange: () => {},
+    onChange: () => {}
   }
 
   constructor(props) {
@@ -23,7 +24,7 @@ class Checkboxes extends React.Component {
   }
 
   render() {
-    const { options, defaultValue } = this.props
+    const { options } = this.props
     return (
       <div className="checkboxes" ref="control">
         {(() => {
@@ -65,7 +66,7 @@ class Checkboxes extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     $(this.refs.control).find('.checkbox').checkbox('refresh')
   }
 

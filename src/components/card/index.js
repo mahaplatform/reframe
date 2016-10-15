@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import * as actions from './actions'
 import Format from '../../utils/format'
 
 class Card extends React.Component {
@@ -25,7 +24,7 @@ class Card extends React.Component {
         label: React.PropTypes.string,
         style: React.PropTypes.string,
         route: React.PropTypes.string,
-        onClick: React.PropTypes.func,
+        onClick: React.PropTypes.func
       })
     )
   }
@@ -105,7 +104,7 @@ class Card extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({ state })
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {}
 

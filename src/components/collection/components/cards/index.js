@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import Card from './card'
 
 class Cards extends React.Component {

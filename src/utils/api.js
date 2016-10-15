@@ -14,7 +14,7 @@ type optionsType = {
 class Api {
 
   constructor(): void {
-    this.client = rest.wrap(mime).wrap(defaultRequest).wrap(errorCode);
+    this.client = rest.wrap(mime).wrap(defaultRequest).wrap(errorCode)
   }
 
   get(options: optionsType): any {

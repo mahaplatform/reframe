@@ -1,7 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
-import * as actions from '../../actions'
 
 class Thead extends React.Component {
 

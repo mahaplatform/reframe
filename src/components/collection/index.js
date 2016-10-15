@@ -9,19 +9,19 @@ class Index extends React.Component {
   static propTypes = {
     filters: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]),
     columns: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]).isRequired,
     records: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.array,
+      React.PropTypes.array
     ]).isRequired,
     sort: React.PropTypes.shape({
       key: React.PropTypes.string,
-      order: React.PropTypes.string,
+      order: React.PropTypes.string
     }),
     card: React.PropTypes.object,
     layout: React.PropTypes.oneOf(['table', 'card']),

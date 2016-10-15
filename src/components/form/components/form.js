@@ -45,23 +45,23 @@ class Form extends React.Component {
       data: React.PropTypes.object,
       errors: React.PropTypes.object,
       result: React.PropTypes.object,
-      message: React.PropTypes.string,
+      message: React.PropTypes.string
     }),
     onValidateForm: React.PropTypes.func,
     onResetForm: React.PropTypes.func,
-    onUpdateData: React.PropTypes.func,
+    onUpdateData: React.PropTypes.func
   }
 
   static defaultProps = {
-   style: 'standard',
-   method: 'GET',
-   action: null,
-   title: null,
-   instructions: null,
-   buttons: [
-     { label: 'Save', type: 'submit' }
-   ]
- }
+    style: 'standard',
+    method: 'GET',
+    action: null,
+    title: null,
+    instructions: null,
+    buttons: [
+      { label: 'Save', type: 'submit' }
+    ]
+  }
 
   render() {
     const { style, title, instructions, buttons } = this.props
@@ -204,7 +204,7 @@ class Form extends React.Component {
   }
 
   _handleRedirect() {
-    _.templateSettings.interpolate = /#{([\s\S]+?)}/g;
+    _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const { redirect } = this.props
     const { result } = this.props.state
     const url = _.template(redirect)(result)
@@ -224,7 +224,7 @@ class Form extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({ state })
+const mapStateToProps = (state) => state
 
 const mapDispatchToProps = {
   onFetchSections: actions.fetchSections,
@@ -235,9 +235,7 @@ const mapDispatchToProps = {
   onSubmitForm: actions.submitForm,
   onResetForm: actions.resetForm,
   onUpdateData: actions.updateData,
-  onValidateForm: actions.validateForm,
-  onResetForm: actions.resetForm,
-  onUpdateData: actions.updateData
+  onValidateForm: actions.validateForm
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form)

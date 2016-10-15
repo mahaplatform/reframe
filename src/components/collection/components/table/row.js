@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import * as actions from '../../actions'
+import _ from 'lodash'
 import Cell from './cell'
 import RecordActions from '../record_actions'
 
-import _ from 'lodash'
 
 class Row extends React.Component {
 
@@ -15,7 +12,7 @@ class Row extends React.Component {
     batchActions: React.PropTypes.array,
     columns: React.PropTypes.array,
     selected: React.PropTypes.array,
-    onSelect: React.PropTypes.func,
+    onSelect: React.PropTypes.func
   }
 
   render() {
@@ -60,7 +57,7 @@ class Row extends React.Component {
   }
 
   _handleSelect(recordId) {
-    this.props.onSelect(recordId);
+    this.props.onSelect(recordId)
   }
 
 }

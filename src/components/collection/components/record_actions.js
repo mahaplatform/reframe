@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import _ from 'lodash'
+import $ from 'jquery'
 
 class RecordActions extends React.Component {
 
@@ -8,18 +9,18 @@ class RecordActions extends React.Component {
     button: React.PropTypes.bool.isRequired,
     icon: React.PropTypes.string.isRequired,
     record: React.PropTypes.object.isRequired,
-    recordActions: React.PropTypes.array.isRequired,
+    recordActions: React.PropTypes.array.isRequired
   }
 
   static defaultProps = {
     button: true,
     icon: '',
     recordActions: [],
-    record: {},
+    record: {}
   }
 
   render() {
-    _.templateSettings.interpolate = /#{([\s\S]+?)}/g;
+    _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const { button, icon, record, recordActions } = this.props
     let classes = ['ui', 'icon', 'top', 'right', 'pointing', 'dropdown']
     if(button) {

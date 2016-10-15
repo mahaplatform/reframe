@@ -23,7 +23,7 @@ const standardControls = {
   'select': Select,
   'textfield': TextField,
   'textarea': TextArea,
-  'tablefield': TableField,
+  'tablefield': TableField
 }
 
 class Control extends React.Component {

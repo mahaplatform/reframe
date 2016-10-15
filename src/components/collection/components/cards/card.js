@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import $ from 'jquery'
 import _ from 'lodash'
 import Format from '../../../../utils/format'
 import RecordActions from '../record_actions'
@@ -16,7 +17,7 @@ class Card extends React.Component {
   }
 
   render() {
-    _.templateSettings.interpolate = /#{([\s\S]+?)}/g;
+    _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const { card, record, selected, recordActions, batchActions } = this.props
     const image = _.get(record, card.image)
     const checked = _.includes(selected, record.id)

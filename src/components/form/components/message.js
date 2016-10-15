@@ -3,11 +3,11 @@ import React from 'react'
 class Message extends React.Component {
 
   static propTypes = {
-    message: React.PropTypes.object,
+    message: React.PropTypes.object
   }
 
   static defaultProps = {
-    message: null,
+    message: null
   }
 
   render() {

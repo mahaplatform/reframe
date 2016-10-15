@@ -1,22 +1,14 @@
 import React from 'react'
-import { DragLayer } from 'react-dnd';
+import { DragLayer } from 'react-dnd'
 import Row from './row'
 
-const layerStyles = {
-  position: 'fixed',
-  pointerEvents: 'none',
-  zIndex: 100,
-  left: 0,
-  top: 0
-}
-
 function getItemStyles(props) {
-  const { initialOffset, currentOffset, item } = props;
+  const { initialOffset, currentOffset, item } = props
 
   if (!initialOffset || !currentOffset) {
     return {
       display: 'none'
-    };
+    }
   }
 
   const top = Math.min(Math.max(currentOffset.y, item.parentTop), item.parentBottom)

@@ -30,15 +30,11 @@ class Modal extends React.Component {
 
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   title: state.title,
   open: state.open
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-Modal = connect(mapStateToProps, mapDispatchToProps)(Modal)
+Modal = connect(mapStateToProps)(Modal)
 
 export default Modal

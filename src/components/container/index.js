@@ -33,7 +33,7 @@ const Index = (mapEndpointsToProps) => {
 
     }
 
-    const mapStateToProps = (state, props) => ({ state })
+    const mapStateToProps = (state) => state
 
     const mapDispatchToProps = {
       onFetchResource: actions.fetchResource
