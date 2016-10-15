@@ -19,7 +19,7 @@
     "react"
   ],
   "rules": {
-    "strict": "off",
+    "strict": 0,
     "comma-dangle": [
       2,
       "never"
