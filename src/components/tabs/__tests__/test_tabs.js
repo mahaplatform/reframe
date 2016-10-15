@@ -8,7 +8,7 @@ jest.unmock('../components/tabs')
 describe('tabs component', () => {
 
   it('renders with tabs and pane', () => {
-    const Two = () => {
+    const Two = (props) => {
       return <div>Two</div>
     }
     const onChangeTab = sinon.spy()
