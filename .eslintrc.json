@@ -21,11 +21,11 @@
   "rules": {
     "strict": 0,
     "comma-dangle": [
-      "error",
+      2,
       "never"
     ],
     "indent": [
-      "error",
+      2,
       2
     ],
     "linebreak-style": [
