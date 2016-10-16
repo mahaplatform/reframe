@@ -14,15 +14,9 @@ var _reactRedux = require('react-redux');
 
 var _reactRouter = require('react-router');
 
-var _actions = require('./actions');
-
-var actions = _interopRequireWildcard(_actions);
-
 var _format = require('../../utils/format');
 
 var _format2 = _interopRequireDefault(_format);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -154,8 +148,8 @@ Card.propTypes = {
 Card.defaultProps = {};
 
 
-var mapStateToProps = function mapStateToProps(state, props) {
-  return { state: state };
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
 };
 
 var mapDispatchToProps = {};

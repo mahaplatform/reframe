@@ -10,17 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
+var _jquery = require('jquery');
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _actions = require('../actions');
-
-var actions = _interopRequireWildcard(_actions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,7 +38,6 @@ var Toolbar = function (_React$Component) {
 
       var _props = this.props;
       var batchActions = _props.batchActions;
-      var records = _props.records;
       var columns = _props.columns;
       var card = _props.card;
       var layout = _props.layout;
@@ -136,7 +127,7 @@ var Toolbar = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $(this.refs.batchActions).dropdown({
+      (0, _jquery2.default)(this.refs.batchActions).dropdown({
         onChange: this._handleExecuteBatchAction.bind(this)
       });
     }

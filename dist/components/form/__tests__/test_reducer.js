@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 jest.unmock('../reducer');
 jest.unmock('lodash');
 
-describe('collection reducer', function () {
+describe('form reducer', function () {
 
   it('set sections', function () {
     var state = {

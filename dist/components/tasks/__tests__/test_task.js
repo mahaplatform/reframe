@@ -16,41 +16,42 @@ var _task2 = _interopRequireDefault(_task);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-jest.unmock('sinon');
 jest.unmock('../task');
 
 describe('task component', function () {
 
   it('renders with a route', function () {
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', route: '/contact/1/edit' }));
-    expect(task.is('Link[to="/contact/1/edit"]')).toBeTruthy();
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', route: '/contacts/1/details' }));
+    expect(task.is('Link[to="/contacts/1/details"]')).toBeTruthy();
+    expect(task.childAt(0).text()).toEqual('Details');
   });
 
-  it('renders as a button with a route', function () {
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', button: true, route: '/contact/1/edit' }));
+  it('renders primary as a button', function () {
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', route: '/contacts/1/details', primary: true }));
     expect(task.is('Link.ui.button')).toBeTruthy();
   });
 
-  it('renders as a plain link with a route', function () {
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', button: false, route: '/contact/1/edit' }));
+  it('renders secondary as a link', function () {
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', route: '/contacts/1/details', primary: false }));
     expect(task.is('Link')).toBeTruthy();
   });
 
   it('renders with a handler', function () {
     var onClick = _sinon2.default.spy();
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', handler: onClick }));
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', handler: onClick }));
     expect(task.is('a[onClick]')).toBeTruthy();
+    expect(task.text()).toEqual('Details');
     task.simulate('click');
     expect(onClick.calledOnce).toEqual(true);
   });
 
-  it('renders as a button with a route', function () {
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', button: true, handler: function handler() {} }));
+  it('renders primary as a button', function () {
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', handler: function handler() {}, primary: true }));
     expect(task.is('a.ui.button')).toBeTruthy();
   });
 
-  it('renders as a plain link with a route', function () {
-    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'edit contact', button: false, handler: function handler() {} }));
+  it('renders secondary as a link', function () {
+    var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Details', handler: function handler() {}, primary: false }));
     expect(task.is('a')).toBeTruthy();
   });
 });

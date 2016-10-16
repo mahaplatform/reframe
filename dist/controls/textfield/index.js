@@ -46,12 +46,12 @@ var TextField = function (_React$Component) {
         value: this.state.value,
         autoComplete: this.props.autoComplete,
         placeholder: this.props.placeholder,
-        onChange: this.handleChange.bind(this),
-        onBlur: this.handleBlur.bind(this),
-        onFocus: this.handleFocus.bind(this),
-        onKeyPress: this.handleKeyPress.bind(this),
-        onKeyUp: this.handleKeyUp.bind(this),
-        onKeyDown: this.handleKeyDown.bind(this) });
+        onChange: this._handleChange.bind(this),
+        onBlur: this._handleBlur.bind(this),
+        onFocus: this._handleFocus.bind(this),
+        onKeyPress: this._handleKeyPress.bind(this),
+        onKeyUp: this._handleKeyUp.bind(this),
+        onKeyDown: this._handleKeyDown.bind(this) });
       if (this.props.prefix || this.props.suffix) {
         return _react2.default.createElement(
           'div',
@@ -96,34 +96,34 @@ var TextField = function (_React$Component) {
       }
     }
   }, {
-    key: 'handleChange',
-    value: function handleChange(event) {
+    key: '_handleChange',
+    value: function _handleChange(event) {
       this.setValue(event.target.value);
       this.props.onChange(event.target.value);
     }
   }, {
-    key: 'handleBlur',
-    value: function handleBlur(event) {
+    key: '_handleBlur',
+    value: function _handleBlur(event) {
       this.props.onBlur(this.state.value);
     }
   }, {
-    key: 'handleFocus',
-    value: function handleFocus(event) {
+    key: '_handleFocus',
+    value: function _handleFocus(event) {
       this.props.onFocus(this.state.value);
     }
   }, {
-    key: 'handleKeyPress',
-    value: function handleKeyPress(event) {
+    key: '_handleKeyPress',
+    value: function _handleKeyPress(event) {
       this.props.onKeyPress(this.state.value);
     }
   }, {
-    key: 'handleKeyUp',
-    value: function handleKeyUp(event) {
+    key: '_handleKeyUp',
+    value: function _handleKeyUp(event) {
       this.props.onKeyUp(this.state.value);
     }
   }, {
-    key: 'handleKeyDown',
-    value: function handleKeyDown(event) {
+    key: '_handleKeyDown',
+    value: function _handleKeyDown(event) {
       this.props.onKeyDown(this.state.value);
     }
   }, {

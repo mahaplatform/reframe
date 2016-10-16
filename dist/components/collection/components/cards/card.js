@@ -14,6 +14,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -102,7 +106,7 @@ var Card = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $(this.refs.card).find('.dropdown').dropdown();
+      (0, _jquery2.default)(this.refs.card).find('.dropdown').dropdown();
     }
   }, {
     key: '_handleSelect',

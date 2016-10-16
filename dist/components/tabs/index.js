@@ -12,7 +12,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _tabs = require('./tabs');
+var _tabs = require('./components/tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
 

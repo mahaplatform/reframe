@@ -200,8 +200,8 @@ TableField.propTypes = {
 };
 
 
-var mapStateToProps = function mapStateToProps(state, props) {
-  return { state: state };
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
 };
 
 var mapDispatchToProps = {

@@ -23,10 +23,10 @@ describe('collection reducer', function () {
     };
     var action = {
       type: actionTypes.SET_RECORDS,
-      records: [{ id: 1, title: "One" }]
+      records: [{ id: 1, title: 'One' }]
     };
     var expected = {
-      records: [{ id: 1, title: "One" }],
+      records: [{ id: 1, title: 'One' }],
       status: 'records_loaded'
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
@@ -34,14 +34,14 @@ describe('collection reducer', function () {
 
   it('appends records', function () {
     var state = {
-      records: [{ id: 1, title: "One" }]
+      records: [{ id: 1, title: 'One' }]
     };
     var action = {
       type: actionTypes.APPEND_RECORDS,
-      records: [{ id: 2, title: "Two" }]
+      records: [{ id: 2, title: 'Two' }]
     };
     var expected = {
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }]
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }]
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
   });
@@ -76,7 +76,7 @@ describe('collection reducer', function () {
   it('selects all records if at least one record is deselected', function () {
     var state = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1]
     };
     var action = {
@@ -84,7 +84,7 @@ describe('collection reducer', function () {
     };
     var expected = {
       selectAll: true,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1, 2]
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
@@ -93,7 +93,7 @@ describe('collection reducer', function () {
   it('deselects all records if all records are selected', function () {
     var state = {
       selectAll: true,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1, 2]
     };
     var action = {
@@ -101,7 +101,7 @@ describe('collection reducer', function () {
     };
     var expected = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: []
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
@@ -110,7 +110,7 @@ describe('collection reducer', function () {
   it('selects a record if the record is deselected', function () {
     var state = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: []
     };
     var action = {
@@ -119,7 +119,7 @@ describe('collection reducer', function () {
     };
     var expected = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1]
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
@@ -128,7 +128,7 @@ describe('collection reducer', function () {
   it('deselects a record if the record is selected', function () {
     var state = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1]
     };
     var action = {
@@ -137,7 +137,7 @@ describe('collection reducer', function () {
     };
     var expected = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: []
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);
@@ -146,7 +146,7 @@ describe('collection reducer', function () {
   it('sets selectAll to true if all records are selected', function () {
     var state = {
       selectAll: false,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1]
     };
     var action = {
@@ -155,7 +155,7 @@ describe('collection reducer', function () {
     };
     var expected = {
       selectAll: true,
-      records: [{ id: 1, title: "One" }, { id: 2, title: "Two" }],
+      records: [{ id: 1, title: 'One' }, { id: 2, title: 'Two' }],
       selected: [1, 2]
     };
     expect((0, _reducer2.default)(state, action)).toEqual(expected);

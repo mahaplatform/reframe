@@ -46,31 +46,31 @@ var Format = function (_React$Component) {
     value: function render() {
       var format = this.props.format;
 
-      var Content = Default;
       if (_lodash2.default.isFunction(format)) {
-        Content = format;
-      } else if (format == 'status') {
-        Content = Status;
-      } else if (format == 'price') {
-        Content = Price;
-      } else if (format == 'date') {
-        Content = Date;
-      } else if (format == 'datetime') {
-        Content = DateTime;
-      } else if (format == 'check_times') {
-        Content = CheckTimes;
-      } else if (format == 'check') {
-        Content = Check;
-      } else if (format == 'capitalize') {
-        Content = Capitalize;
-      } else if (format == 'email') {
-        Content = Email;
-      } else if (format == 'raw') {
-        Content = Raw;
+        return format(this.props);
+      } else if (format === 'status') {
+        return Status(this.props);
+      } else if (format === 'price') {
+        return Price(this.props);
+      } else if (format === 'date') {
+        return Date(this.props, 'MM/DD/YY');
+      } else if (format === 'datetime') {
+        return Date(this.props, 'MM/DD/YY @ hh:mm A');
+      } else if (format === 'check_times') {
+        return Check(this.props, true);
+      } else if (format === 'check') {
+        return Check(this.props, false);
+      } else if (format === 'capitalize') {
+        return Capitalize(this.props);
+      } else if (format === 'email') {
+        return Email(this.props);
+      } else if (format === 'raw') {
+        return Raw(this.props);
       } else if (this.props.value === '') {
-        Content = Empty;
+        return Empty(this.props);
+      } else {
+        return Default(this.props);
       }
-      return _react2.default.createElement(Content, this.props);
     }
   }]);
 
@@ -89,7 +89,7 @@ var Raw = function Raw(props) {
   return _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: props.value } });
 };
 
-var Empty = function Empty(props) {
+var Empty = function Empty() {
   return _react2.default.createElement('span', { dangerouslySetInnerHTML: { __html: '&nbsp;' } });
 };
 
@@ -101,12 +101,9 @@ var Status = function Status(props) {
   ) : _react2.default.createElement('span', null);
 };
 
-var CheckTimes = function CheckTimes(props) {
-  return props.value !== false && !_lodash2.default.isNull(props.value) || props.value === true ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('i', { className: 'icon red times' });
-};
-
-var Check = function Check(props) {
-  return props.value !== false && !_lodash2.default.isNull(props.value) || props.value === true ? _react2.default.createElement('i', { className: 'icon green check' }) : _react2.default.createElement('span', null);
+var Check = function Check(props, times) {
+  var alternate = times ? _react2.default.createElement('i', { className: 'icon red times' }) : _react2.default.createElement('span', null);
+  return props.value !== false && !_lodash2.default.isNull(props.value) || props.value === true ? _react2.default.createElement('i', { className: 'icon green check' }) : alternate;
 };
 
 var Price = function Price(props) {
@@ -117,19 +114,11 @@ var Price = function Price(props) {
   );
 };
 
-var Date = function Date(props) {
+var Date = function Date(props, format) {
   return _react2.default.createElement(
     'span',
     null,
-    props.value ? (0, _moment2.default)(props.value).format('MM/DD/YY') : ''
-  );
-};
-
-var DateTime = function DateTime(props) {
-  return _react2.default.createElement(
-    'span',
-    null,
-    props.value ? (0, _moment2.default)(props.value).format('MM/DD/YY @ hh:mm A') : ''
+    props.value ? (0, _moment2.default)(props.value).format(format) : ''
   );
 };
 

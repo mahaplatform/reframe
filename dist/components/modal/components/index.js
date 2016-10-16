@@ -71,17 +71,13 @@ Modal.propTypes = {
 };
 
 
-var mapStateToProps = function mapStateToProps(state, props) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
     title: state.title,
     open: state.open
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
-};
-
-Modal = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Modal);
+Modal = (0, _reactRedux.connect)(mapStateToProps)(Modal);
 
 exports.default = Modal;

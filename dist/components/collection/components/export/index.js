@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -142,7 +146,7 @@ var Export = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $(this.refs.format).dropdown({
+      (0, _jquery2.default)(this.refs.format).dropdown({
         action: this._handleExport.bind(this)
       });
     }
@@ -159,19 +163,13 @@ var Export = function (_React$Component) {
     }
   }, {
     key: '_handleXls',
-    value: function _handleXls() {
-      console.log('xls');
-    }
+    value: function _handleXls() {}
   }, {
     key: '_handleCsv',
-    value: function _handleCsv() {
-      console.log('csv');
-    }
+    value: function _handleCsv() {}
   }, {
     key: '_handleTsv',
-    value: function _handleTsv() {
-      console.log('tsv');
-    }
+    value: function _handleTsv() {}
   }]);
 
   return Export;

@@ -12,21 +12,26 @@ var actionTypes = _interopRequireWildcard(_action_types);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var initialState = {
-  title: props.title,
-  open: props.open
+var INITIAL_STATE = {
+  title: null,
+  open: false
 };
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
   var action = arguments[1];
 
+
   switch (action.type) {
+
     case actionTypes.OPEN_MODAL:
       return _extends({}, state, { open: true });
+
     case actionTypes.CLOSE_MODAL:
       return _extends({}, state, { open: false });
+
     default:
       return state;
+
   }
 };

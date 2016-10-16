@@ -12,15 +12,19 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = require('react-router');
-
 var _task = require('./task');
 
 var _task2 = _interopRequireDefault(_task);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _lodash = require('lodash');
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42,14 +46,17 @@ var Tasks = function (_React$Component) {
     value: function render() {
       var tasks = this.props.tasks;
 
+      var primary = _lodash2.default.filter(tasks, function (task) {
+        return task.primary === true;
+      });
       return _react2.default.createElement(
         'div',
         { className: 'tasks' },
         _react2.default.createElement(
           'div',
           { className: 'ui basic buttons' },
-          tasks.primary.map(function (task, index) {
-            return _react2.default.createElement(_task2.default, _extends({ key: 'primary_task_' + index, button: true }, task));
+          primary.map(function (task, index) {
+            return _react2.default.createElement(_task2.default, _extends({ key: 'primary_task_' + index }, task));
           }),
           _react2.default.createElement(
             'div',
@@ -59,8 +66,8 @@ var Tasks = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'menu' },
-              [].concat(_toConsumableArray(tasks.primary), _toConsumableArray(tasks.secondary)).map(function (task, index) {
-                return _react2.default.createElement(_task2.default, _extends({ key: 'primary_secondary_task_' + index, button: false }, task));
+              tasks.map(function (task, index) {
+                return _react2.default.createElement(_task2.default, _extends({ key: 'task_' + index }, task));
               })
             )
           )
@@ -70,7 +77,7 @@ var Tasks = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $(this.refs.dropdown).dropdown();
+      (0, _jquery2.default)(this.refs.dropdown).dropdown();
     }
   }]);
 
@@ -79,12 +86,11 @@ var Tasks = function (_React$Component) {
 
 Tasks.propTypes = {
   tasks: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-    label: _react2.default.PropTypes.string.isRequired,
+    label: _react2.default.PropTypes.string,
     route: _react2.default.PropTypes.string,
-    onClick: _react2.default.PropTypes.string
-  }))
+    handler: _react2.default.PropTypes.func,
+    primary: _react2.default.PropTypes.bool
+  })).isRequired
 };
-Tasks.defaultProps = {
-  tasks: []
-};
+Tasks.defaultProps = {};
 exports.default = Tasks;

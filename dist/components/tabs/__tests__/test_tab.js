@@ -6,13 +6,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _enzyme = require('enzyme');
 
-var _tab = require('../tab');
+var _tab = require('../components/tab');
 
 var _tab2 = _interopRequireDefault(_tab);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-jest.unmock('../tab');
+jest.unmock('../components/tab');
 
 describe('tab component', function () {
 

@@ -22,6 +22,10 @@ var _bytes = require('bytes');
 
 var _bytes2 = _interopRequireDefault(_bytes);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var _actions = require('./actions');
 
 var actions = _interopRequireWildcard(_actions);
@@ -66,7 +70,7 @@ var FileField = function (_React$Component) {
       var classes = ['filefield', status];
       return _react2.default.createElement(
         'div',
-        { className: classes.join(" ") },
+        { className: classes.join(' ') },
         _react2.default.createElement(
           'div',
           { ref: 'browse', className: 'ui browse button' },
@@ -202,7 +206,7 @@ var FileField = function (_React$Component) {
       }
       if (prevProps.state.uploadedChunks != this.props.state.uploadedChunks) {
         var percent = Math.min(100, Math.ceil(uploadedChunks / totalChunks * 100));
-        $(this.refs.progress).progress({
+        (0, _jquery2.default)(this.refs.progress).progress({
           percent: percent
         });
       }
@@ -279,8 +283,8 @@ FileField.propTypes = {
 };
 
 
-var mapStateToProps = function mapStateToProps(state, props) {
-  return { state: state };
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
 };
 
 var mapDispatchToProps = {

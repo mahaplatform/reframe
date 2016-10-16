@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -83,22 +87,22 @@ var Radios = function (_React$Component) {
     value: function componentDidMount() {
       var defaultValue = this.props.defaultValue;
 
-      $(this.refs.control).find('.checkbox').checkbox({
+      (0, _jquery2.default)(this.refs.control).find('.checkbox').checkbox({
         onChange: this.handleChange.bind(this)
       });
       if (defaultValue) {
-        $(this.refs.control).checkbox('set checked', defaultValue);
+        (0, _jquery2.default)(this.refs.control).checkbox('set checked', defaultValue);
       }
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      $(this.refs.control).find('.checkbox').checkbox('refresh');
+    value: function componentDidUpdate() {
+      (0, _jquery2.default)(this.refs.control).find('.checkbox').checkbox('refresh');
     }
   }, {
     key: 'handleChange',
     value: function handleChange(event) {
-      var value = $(this.refs.control).find('.checkbox input:checked').val();
+      var value = (0, _jquery2.default)(this.refs.control).find('.checkbox input:checked').val();
       this.setValue(value);
       this.props.onChange(value);
     }

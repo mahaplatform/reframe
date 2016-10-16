@@ -12,10 +12,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _breadcrumb = require('./breadcrumb');
 
 var _breadcrumb2 = _interopRequireDefault(_breadcrumb);
@@ -31,28 +27,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Breadcrumbs = function (_React$Component) {
   _inherits(Breadcrumbs, _React$Component);
 
-  function Breadcrumbs(props) {
+  function Breadcrumbs() {
     _classCallCheck(this, Breadcrumbs);
 
-    var _this = _possibleConstructorReturn(this, (Breadcrumbs.__proto__ || Object.getPrototypeOf(Breadcrumbs)).call(this, props));
-
-    _this.state = {
-      errors: _this._validateProps(props)
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Breadcrumbs.__proto__ || Object.getPrototypeOf(Breadcrumbs)).apply(this, arguments));
   }
 
   _createClass(Breadcrumbs, [{
     key: 'render',
     value: function render() {
-      if (!_lodash2.default.isEmpty(this.state.errors)) {
-        console.warn(this.state.errors);
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Unable to load component'
-        );
-      }
       return _react2.default.createElement(
         'div',
         { className: 'breadcrumbs' },
@@ -65,15 +48,6 @@ var Breadcrumbs = function (_React$Component) {
           })
         )
       );
-    }
-  }, {
-    key: '_validateProps',
-    value: function _validateProps(props) {
-      var errors = [];
-      if (!props.breadcrumbs) {
-        errors.push('You must specify a breadcrumbs property');
-      }
-      return errors;
     }
   }]);
 

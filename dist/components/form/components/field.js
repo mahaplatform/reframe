@@ -58,17 +58,17 @@ var Field = function (_React$Component) {
       var onUpdateData = _props.onUpdateData;
 
       var error = errors[code] ? errors[code][0] : null;
-      var classes = ["field"];
+      var classes = ['field'];
       if (error) {
-        classes.push("error");
+        classes.push('error');
       }
       if (required) {
-        classes.push("required");
+        classes.push('required');
       }
       if (include && show) {
         return _react2.default.createElement(
           'div',
-          { className: classes.join(" ") },
+          { className: classes.join(' ') },
           label ? _react2.default.createElement(
             'label',
             null,

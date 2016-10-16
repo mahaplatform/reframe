@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (sections, callback) {
   _lodash2.default.map(sections, function (section) {
     _lodash2.default.map(section.fields, function (field) {
-      if (field.type == 'fields') {
+      if (field.type === 'fields') {
         _lodash2.default.map(field.fields, function (subfield) {
           callback(subfield);
         });

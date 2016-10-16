@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41,9 +45,7 @@ var Checkboxes = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props;
-      var options = _props.options;
-      var defaultValue = _props.defaultValue;
+      var options = this.props.options;
 
       return _react2.default.createElement(
         'div',
@@ -86,25 +88,25 @@ var Checkboxes = function (_React$Component) {
 
       var defaultValue = this.props.defaultValue;
 
-      $(this.refs.control).checkbox({
+      (0, _jquery2.default)(this.refs.control).checkbox({
         onChange: this._handleChange.bind(this)
       });
       if (defaultValue) {
         defaultValue.map(function (value) {
-          $(_this3.refs[value]).checkbox('set checked');
+          (0, _jquery2.default)(_this3.refs[value]).checkbox('set checked');
         });
       }
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      $(this.refs.control).find('.checkbox').checkbox('refresh');
+    value: function componentDidUpdate() {
+      (0, _jquery2.default)(this.refs.control).find('.checkbox').checkbox('refresh');
     }
   }, {
     key: '_handleChange',
     value: function _handleChange(event) {
-      var values = $(this.refs.control).find('.checkbox input:checked').toArray().map(function (checkbox) {
-        return $(checkbox).val();
+      var values = (0, _jquery2.default)(this.refs.control).find('.checkbox input:checked').toArray().map(function (checkbox) {
+        return (0, _jquery2.default)(checkbox).val();
       });
       this.setValue(values);
       this.props.onChange(values);

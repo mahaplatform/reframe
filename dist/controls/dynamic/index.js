@@ -12,9 +12,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _api = require('../../utils/api');
+var _lodash = require('lodash');
 
-var _api2 = _interopRequireDefault(_api);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _states = require('./states');
 
@@ -39,10 +39,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var UNINITIALIZED = 'uninitialized';
-var AWAITING = 'awaiting';
-var SYNCING = 'syncing';
-var READY = 'ready';
-var ERROR = 'error';
+// const AWAITING = 'awaiting'
+// const SYNCING = 'syncing'
+// const READY = 'ready'
+// const ERROR = 'error'
 
 var DynamicControl = function (_React$Component) {
   _inherits(DynamicControl, _React$Component);
@@ -65,31 +65,31 @@ var DynamicControl = function (_React$Component) {
 
       var datasource = this.props.datasource;
 
-      var controlProps = _.omit(this.props, ['datasource']);
+      var controlProps = _lodash2.default.omit(this.props, ['datasource']);
       var finalProps = _extends({}, controlProps, {
         status: this.state.status
       });
       if (datasource) {
         (function () {
-          var source = _.isString(datasource) ? datasource : datasource.source;
+          var source = _lodash2.default.isString(datasource) ? datasource : datasource.source;
           var key = datasource.key ? datasource.key : null;
           var value = datasource.value ? datasource.value : null;
           if (source == 'countries') {
             key = key || 'abbreviation';
             value = value || 'name';
-            finalProps.options = _.map(_this2.getCountries(), function (country) {
+            finalProps.options = _lodash2.default.map(_this2.getCountries(), function (country) {
               return { key: country[key], value: country[value] };
             });
           } else if (source == 'states') {
             key = key || 'abbreviation';
             value = value || 'name';
-            finalProps.options = _.map(_this2.getStates(), function (state) {
+            finalProps.options = _lodash2.default.map(_this2.getStates(), function (state) {
               return { key: state[key], value: state[value] };
             });
           } else if (source == 'timezones') {
             key = key || 'offset';
             value = value || 'name';
-            finalProps.options = _.map(_this2.getTimezones(), function (timezone) {
+            finalProps.options = _lodash2.default.map(_this2.getTimezones(), function (timezone) {
               return { key: timezone[key], value: timezone[value] };
             });
           }
@@ -104,21 +104,21 @@ var DynamicControl = function (_React$Component) {
   }, {
     key: 'getCountries',
     value: function getCountries() {
-      return _.map(_countries2.default, function (country) {
+      return _lodash2.default.map(_countries2.default, function (country) {
         return { abbreviation: country[0], name: country[1] };
       });
     }
   }, {
     key: 'getStates',
     value: function getStates() {
-      return _.map(_states2.default, function (state) {
+      return _lodash2.default.map(_states2.default, function (state) {
         return { abbreviation: state[0], name: state[1] };
       });
     }
   }, {
     key: 'getTimezones',
     value: function getTimezones() {
-      return _.map(_timezones2.default, function (timezone) {
+      return _lodash2.default.map(_timezones2.default, function (timezone) {
         return { offset: timezone[0], name: timezone[1] };
       });
     }

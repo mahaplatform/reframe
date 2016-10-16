@@ -10,13 +10,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
+var _lodash = require('lodash');
 
-var _actions = require('./actions');
+var _lodash2 = _interopRequireDefault(_lodash);
 
-var actions = _interopRequireWildcard(_actions);
+var _tab = require('./tab');
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _tab2 = _interopRequireDefault(_tab);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,10 +40,10 @@ var Tabs = function (_React$Component) {
     value: function render() {
       var _props = this.props;
       var tabs = _props.tabs;
+      var active = _props.active;
       var onChangeTab = _props.onChangeTab;
-      var active = this.props.state.active;
 
-      var Element = tabs[active].content;
+      var content = tabs[active].content;
       return _react2.default.createElement(
         'div',
         { className: 'tabs' },
@@ -52,13 +52,25 @@ var Tabs = function (_React$Component) {
           { className: 'ui top attached tabular menu' },
           tabs.map(function (tab, index) {
             var isActive = index == active;
-            return _react2.default.createElement(Tab, { active: isActive, label: label, onChangeTab: onChangeTab });
+            return _react2.default.createElement(_tab2.default, { key: 'tab_' + index, active: isActive, label: tab.label, onChangeTab: onChangeTab });
           })
         ),
         _react2.default.createElement(
           'div',
           { className: 'ui bottom attached active tab segment' },
-          _react2.default.createElement(Element, null)
+          function () {
+            if (_lodash2.default.isString(content)) {
+              return _react2.default.createElement(
+                'p',
+                null,
+                content
+              );
+            } else if (_lodash2.default.isElement(content)) {
+              return _react2.default.createElement('content', null);
+            } else if (_lodash2.default.isFunction(content)) {
+              return { content: content };
+            }
+          }()
         )
       );
     }
@@ -70,23 +82,12 @@ var Tabs = function (_React$Component) {
 Tabs.propTypes = {
   tabs: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
     label: _react2.default.PropTypes.string,
-    content: _react2.default.PropTypes.func
-  })),
-  state: _react2.default.PropTypes.shape({
-    active: _react2.default.PropTypes.number
-  })
+    content: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.func, _react2.default.PropTypes.element])
+  })).isRequired,
+  onChangeTab: _react2.default.PropTypes.func.isRequired,
+  active: _react2.default.PropTypes.number
 };
 Tabs.defaultProps = {
-  tabs: []
+  active: 0
 };
-
-
-var mapStateToProps = function mapStateToProps(state, props) {
-  return { state: state };
-};
-
-var mapDispatchToProps = {
-  onChangeTab: actions.changeTab
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Tabs);
+exports.default = Tabs;

@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39,9 +43,7 @@ var Checkbox = function (_React$Component) {
   _createClass(Checkbox, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var label = _props.label;
-      var style = _props.style;
+      var style = this.props.style;
 
       var classes = ['ui', 'checkbox'];
       if (style) {
@@ -52,7 +54,7 @@ var Checkbox = function (_React$Component) {
         { className: 'control' },
         _react2.default.createElement(
           'div',
-          { className: classes.join(" "), ref: 'control' },
+          { className: classes.join(' '), ref: 'control' },
           _react2.default.createElement('input', { type: 'checkbox', name: 'public' })
         )
       );
@@ -62,11 +64,11 @@ var Checkbox = function (_React$Component) {
     value: function componentDidMount() {
       var defaultValue = this.props.defaultValue;
 
-      $(this.refs.control).checkbox({
+      (0, _jquery2.default)(this.refs.control).checkbox({
         onChange: this._handleChange.bind(this)
       });
       if (defaultValue) {
-        $(this.refs.control).checkbox('set checked');
+        (0, _jquery2.default)(this.refs.control).checkbox('set checked');
       }
     }
   }, {
@@ -79,7 +81,7 @@ var Checkbox = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange(value) {
-      this.props.onChange($(this.refs.control).checkbox('is checked'));
+      this.props.onChange((0, _jquery2.default)(this.refs.control).checkbox('is checked'));
     }
   }, {
     key: 'setValue',

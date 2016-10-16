@@ -36,13 +36,13 @@ var Task = function (_React$Component) {
       var label = _props.label;
       var route = _props.route;
       var handler = _props.handler;
-      var button = _props.button;
+      var primary = _props.primary;
 
-      var classes = button ? "ui button" : "";
+      var classes = primary ? 'ui button' : '';
       if (route) {
         return _react2.default.createElement(
           _reactRouter.Link,
-          { to: route, className: classes },
+          { className: classes, to: route },
           label
         );
       } else if (handler) {
@@ -60,11 +60,11 @@ var Task = function (_React$Component) {
 
 Task.propTypes = {
   label: _react2.default.PropTypes.string.isRequired,
-  button: _react2.default.PropTypes.bool,
   route: _react2.default.PropTypes.string,
-  handler: _react2.default.PropTypes.func
+  handler: _react2.default.PropTypes.func,
+  primary: _react2.default.PropTypes.bool
 };
 Task.defaultProps = {
-  button: false
+  primary: false
 };
 exports.default = Task;

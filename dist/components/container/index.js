@@ -59,19 +59,19 @@ var Index = function Index(mapEndpointsToProps) {
           var status = _props$state.status;
           var data = _props$state.data;
 
-          if (status == 'loading') {
+          if (status === 'loading') {
             return _react2.default.createElement(
               'div',
               null,
               'Loading...'
             );
-          } else if (status == 'error') {
+          } else if (status === 'error') {
             return _react2.default.createElement(
               'div',
               null,
               'Unable to load resources'
             );
-          } else if (status == 'loaded') {
+          } else if (status === 'loaded') {
             return _react2.default.createElement(WrappedComponent, _extends({}, this.props, data));
           } else {
             return null;
@@ -92,8 +92,8 @@ var Index = function Index(mapEndpointsToProps) {
       return Container;
     }(_react2.default.Component);
 
-    var mapStateToProps = function mapStateToProps(state, props) {
-      return { state: state };
+    var mapStateToProps = function mapStateToProps(state) {
+      return state;
     };
 
     var mapDispatchToProps = {

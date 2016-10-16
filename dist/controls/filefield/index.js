@@ -46,7 +46,6 @@ var Index = function (_React$Component) {
     value: function render() {
       var store = (0, _store2.default)(_reducer2.default);
       var _props = this.props;
-      var columns = _props.columns;
       var defaultValue = _props.defaultValue;
       var onChange = _props.onChange;
 

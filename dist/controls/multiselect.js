@@ -14,6 +14,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -76,14 +80,14 @@ var MultiSelect = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      $(this.refs.control).find('dropdown').dropdown({
+      (0, _jquery2.default)(this.refs.control).find('dropdown').dropdown({
         onChange: this.handleChange.bind(this)
       });
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      $(this.refs.control).find('dropdown').dropdown('refresh');
+      (0, _jquery2.default)(this.refs.control).find('dropdown').dropdown('refresh');
       if (prevProps.defaultValue != this.props.defaultValue) {
         this.setState({
           value: this.props.defaultValue

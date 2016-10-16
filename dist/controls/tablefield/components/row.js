@@ -50,7 +50,6 @@ var Row = function (_React$Component) {
       var index = _props.index;
       var row = _props.row;
       var columns = _props.columns;
-      var isDragging = _props.isDragging;
       var connectDragSource = _props.connectDragSource;
       var connectDropTarget = _props.connectDropTarget;
       var connectDragPreview = _props.connectDragPreview;
@@ -150,7 +149,7 @@ var rowTarget = {
     var top = 0;
     var el = parentNode;
     while (el) {
-      if (el.tagName == "BODY") {
+      if (el.tagName == 'BODY') {
         var yScroll = el.scrollTop || document.documentElement.scrollTop;
         top += el.offsetTop - yScroll + el.clientTop;
       } else {
