@@ -43,10 +43,8 @@ class Collection extends React.Component {
     onSelect: React.PropTypes.func,
     onToggleFilters: React.PropTypes.func,
     onChangeLayout: React.PropTypes.func,
-    onSelectAll: React.PropTypes.func,
     onExportRecords: React.PropTypes.func,
     onReloadRecords: React.PropTypes.func,
-    onExecuteBatchAction: React.PropTypes.func,
     state: React.PropTypes.shape({
       records: React.PropTypes.string,
       params: React.PropTypes.object,
@@ -61,8 +59,8 @@ class Collection extends React.Component {
 
   render() {
     const { card, empty, filters, recordActions, batchActions } = this.props
-    const { onFilterRecords, onSortRecords, onSelect, onToggleFilters, onChangeLayout, onSelectAll, onExportRecords, onReloadRecords, onExecuteBatchAction } = this.props
-    const { columns, records, params, status, expanded, layout, exporting, batchAction, selected, selectAll } = this.props.state
+    const { onFilterRecords, onSortRecords, onSelect, onToggleFilters, onChangeLayout, onExportRecords, onReloadRecords } = this.props
+    const { columns, records, params, status, expanded, layout, exporting, batchAction, selected } = this.props.state
     if(status) {
       const classes = (expanded) ? ['collection','expanded'] : ['collection']
       return (
@@ -79,15 +77,12 @@ class Collection extends React.Component {
             <Toolbar columns={columns}
                      layout={layout}
                      filters={filters}
-                     selectAll={selectAll}
                      card={card}
                      batchActions={batchActions}
                      onToggleFilters={onToggleFilters}
                      onChangeLayout={onChangeLayout}
-                     onSelectAll={onSelectAll}
                      onExportRecords={onExportRecords}
-                     onReloadRecords={onReloadRecords}
-                     onExecuteBatchAction={onExecuteBatchAction} />
+                     onReloadRecords={onReloadRecords} />
             <div className="collection-data">
               {(() => {
                 if(layout == 'card') {
@@ -174,10 +169,8 @@ const mapDispatchToProps = {
   onSortRecords: actions.sortRecords,
   onToggleFilters: actions.toggleFilters,
   onChangeLayout: actions.changeLayout,
-  onSelectAll: actions.selectAll,
   onExportRecords: actions.exportRecords,
-  onReloadRecords: actions.reloadRecords,
-  onExecuteBatchAction: actions.executeBatchAction
+  onReloadRecords: actions.reloadRecords
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Collection)

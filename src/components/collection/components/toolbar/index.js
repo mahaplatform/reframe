@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from 'jquery'
 
 class Toolbar extends React.Component {
 
@@ -9,42 +8,18 @@ class Toolbar extends React.Component {
     card: React.PropTypes.object,
     layout: React.PropTypes.string,
     filters: React.PropTypes.array,
-    selectAll: React.PropTypes.bool,
     batchActions: React.PropTypes.array,
     onToggleFilters: React.PropTypes.func,
     onChangeLayout: React.PropTypes.func,
-    onSelectAll: React.PropTypes.func,
     onExportRecords: React.PropTypes.func,
-    onReloadRecords: React.PropTypes.func,
-    onExecuteBatchAction: React.PropTypes.func
+    onReloadRecords: React.PropTypes.func
   }
 
   render() {
-    const { batchActions, columns, card, layout, filters, selectAll } = this.props
+    const { batchActions, columns, card, layout, filters } = this.props
     return (
       <div className="collection-toolbar">
-        {(() => {
-          if(batchActions) {
-            return (
-              <div className="collection-batch-actions">
-                <input type="checkbox" checked={selectAll} onChange={this._handleSelectAll.bind(this)} />
-                <div className="ui dropdown selection" ref="batchActions">
-                  <i className="dropdown icon"></i>
-                  <div className="default text">With Selected</div>
-                  <div className="menu">
-                    {batchActions.map((action, index) => {
-                      return (
-                        <div key={`action_${index}`} className="item" data-value={index}>
-                          {action.label}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            )
-          }
-        })()}
+        { (batchActions) ?  <BatchActions batchActions={batchActions} /> : null }
         <div className="collection-layouts">
           <div className="ui icon compact menu">
             {(() => {
@@ -82,12 +57,6 @@ class Toolbar extends React.Component {
     )
   }
 
-  componentDidMount() {
-    $(this.refs.batchActions).dropdown({
-      onChange: this._handleExecuteBatchAction.bind(this)
-    })
-  }
-
   _handleToggleFilters() {
     this.props.onToggleFilters()
   }
@@ -98,12 +67,6 @@ class Toolbar extends React.Component {
 
   _handleSelectAll() {
     this.props.onSelectAll()
-  }
-
-  _handleExecuteBatchAction(index) {
-    const { batchActions, onExecuteBatchAction } = this.props
-    const batchAction = batchActions[index]
-    onExecuteBatchAction(batchAction.component)
   }
 
   _handleReloadRecords() {

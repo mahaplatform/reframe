@@ -9,7 +9,7 @@ type responseType = {
 }
 
 import * as actionTypes from './action_types'
-import Api from '../../utils/api'
+// import Api from '../../utils/api'
 
 export const setRecords = (records: Array<Object>) => ({
   type: actionTypes.SET_RECORDS,
