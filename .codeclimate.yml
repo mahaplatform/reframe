@@ -6,7 +6,7 @@ engines:
       languages:
       - javascript
     exclude_paths:
-    - **/__tests__/test_*.js
+    - "**/__tests__/test_*.js"
   eslint:
     enabled: true
     channel: "eslint-3"
