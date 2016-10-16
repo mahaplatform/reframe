@@ -8,31 +8,31 @@ class Format extends React.Component {
 
   render() {
     const { format } = this.props
-    let Content = Default
     if(_.isFunction(format)) {
-      Content = format
+      return format(this.props)
     } else if(format === 'status') {
-      Content = Status
+      return Status(this.props)
     } else if(format === 'price') {
-      Content = Price
+      return Price(this.props)
     } else if(format === 'date') {
-      Content = Date
+      return Date(this.props, 'MM/DD/YY')
     } else if(format === 'datetime') {
-      Content = DateTime
+      return Date(this.props, 'MM/DD/YY @ hh:mm A')
     } else if(format === 'check_times') {
-      Content = CheckTimes
+      return Check(this.props, true)
     } else if(format === 'check') {
-      Content = Check
+      return Check(this.props, false)
     } else if(format === 'capitalize') {
-      Content = Capitalize
+      return Capitalize(this.props)
     } else if(format === 'email') {
-      Content = Email
+      return Email(this.props)
     } else if(format === 'raw') {
-      Content = Raw
+      return Raw(this.props)
     } else if(this.props.value === '') {
-      Content = Empty
+      return Empty(this.props)
+    } else {
+      return Default(this.props)
     }
-    return <Content {...this.props} />
   }
 
 }
@@ -53,24 +53,17 @@ const Status = (props) => {
   return (props.value) ? <span className={props.value.toLowerCase()}>{props.value.toUpperCase()}</span> : <span />
 }
 
-const CheckTimes = (props) => {
-  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <i className="icon red times" />
-}
-
-const Check = (props) => {
-  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : <span />
+const Check = (props, times) => {
+  let alternate = (times) ? <i className="icon red times" /> : <span />
+  return ((props.value !== false && !_.isNull(props.value)) || props.value === true) ? <i className="icon green check" /> : alternate
 }
 
 const Price = (props) => {
   return <span>{numeral(props.value).format('$0,0.00')}</span>
 }
 
-const Date = (props) => {
-  return <span>{(props.value) ? moment(props.value).format('MM/DD/YY') : ''}</span>
-}
-
-const DateTime = (props) => {
-  return <span>{(props.value) ? moment(props.value).format('MM/DD/YY @ hh:mm A') : ''}</span>
+const Date = (props, format) => {
+  return <span>{(props.value) ? moment(props.value).format(format) : ''}</span>
 }
 
 const Capitalize = (props) => {
