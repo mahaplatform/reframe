@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,7 +31,20 @@ var Checkbox = function (_React$Component) {
     return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
   }
 
+  _createClass(Checkbox, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement('input', this._getConfig());
+    }
+  }, {
+    key: '_getConfig',
+    value: function _getConfig() {
+      return {};
+    }
+  }]);
+
   return Checkbox;
 }(_react2.default.Component);
 
+Checkbox.PropTypes = {};
 exports.default = Checkbox;

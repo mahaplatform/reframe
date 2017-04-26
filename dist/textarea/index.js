@@ -22,16 +22,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Control = function (_React$Component) {
-  _inherits(Control, _React$Component);
+var Textarea = function (_React$Component) {
+  _inherits(Textarea, _React$Component);
 
-  function Control() {
-    _classCallCheck(this, Control);
+  function Textarea() {
+    _classCallCheck(this, Textarea);
 
-    return _possibleConstructorReturn(this, (Control.__proto__ || Object.getPrototypeOf(Control)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Textarea.__proto__ || Object.getPrototypeOf(Textarea)).apply(this, arguments));
   }
 
-  _createClass(Control, [{
+  _createClass(Textarea, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement('input', this._getConfig());
@@ -43,8 +43,8 @@ var Control = function (_React$Component) {
     }
   }]);
 
-  return Control;
+  return Textarea;
 }(_react2.default.Component);
 
-Control.PropTypes = {};
-exports.default = Control;
+Textarea.PropTypes = {};
+exports.default = Textarea;

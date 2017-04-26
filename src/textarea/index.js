@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Checkbox extends React.Component {
+class Textarea extends React.Component {
 
   static PropTypes = {
   }
@@ -19,4 +19,4 @@ class Checkbox extends React.Component {
 
 }
 
-export default Checkbox
+export default Textarea
