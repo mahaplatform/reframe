@@ -1,0 +1,13 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FOCUS_SEARCH = exports.FOCUS_SEARCH = 'FOCUS_SEARCH';
+var RESET_SEARCH = exports.RESET_SEARCH = 'RESET_SEARCH';
+var ABORT_SEARCH = exports.ABORT_SEARCH = 'ABORT_SEARCH';
+var COMPLETE_SEARCH = exports.COMPLETE_SEARCH = 'COMPLETE_SEARCH';
+var TYPE_SEARCH = exports.TYPE_SEARCH = 'TYPE_SEARCH';
+var LOOKUP_REQUEST = exports.LOOKUP_REQUEST = 'LOOKUP_REQUEST';
+var LOOKUP_SUCCESS = exports.LOOKUP_SUCCESS = 'LOOKUP_SUCCESS';
+var LOOKUP_FAILURE = exports.LOOKUP_FAILURE = 'LOOKUP_FAILURE';

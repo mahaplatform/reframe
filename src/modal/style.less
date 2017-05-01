@@ -1,0 +1,87 @@
+.chrome-modal {
+  flex: 1;
+  display: flex;
+}
+.chrome-modal-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.chrome-modal-window {
+  position: absolute;
+  background: #FFFFFF;
+  display: flex;
+  overflow: hidden;
+  & > div {
+    display: flex;
+    flex: 1;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .chrome-modal-overlay {
+    .opacity-transition(0, 0.5, .5s);
+    .opacity(0.5);
+    background-color: #000;
+  }
+  .chrome-modal-window  {
+    .opacity-transition(0, 1, .5s);
+    width: 768px;
+    height: 576px;
+    top: 50%;
+    left: 50%;
+    margin-top: -288px;
+    margin-left: -384px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .chrome-modal-window  {
+    .translate-y-transition(100%, 0, .5s);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+.chrome-modal-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  flex: 1;
+  flex-direction: column;
+}
+.chrome-modal-panel-header {
+  flex: 0 0 50px;
+  display: flex;
+  background-color: @primary_background_color;
+}
+.chrome-modal-panel-header-cancel,
+.chrome-modal-panel-header-proceed {
+  flex: 0 0 100px;
+  display: block;
+  color: #FFF;
+  padding: 15px;
+  cursor: pointer;
+}
+.chrome-modal-panel-header-title {
+  flex: 1;
+  color: #FFF;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+.chrome-modal-panel-header-proceed {
+  text-align: right;
+}
+.chrome-modal-panel-body {
+  .scrollable();
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}

@@ -1,0 +1,193 @@
+* {
+	-webkit-tap-highlight-color: none;
+}
+body {
+	background-color: #FFFFFF;
+}
+.ui.pointing.menu .item:after,
+.ui.dimmer {
+	z-index: 0 !important;
+}
+
+.opacity(@opacity: 0.5) {
+	opacity: @opacity;
+}
+.scale(@n,@n) {
+	transform: scale(@n,@n);
+}
+.translateX(@x) {
+  transform: translateX(@x);
+}
+.translateY(@x) {
+  transform: translateY(@x);
+}
+.rotateY(@deg) {
+  transform: rotateY(@deg);
+}
+.scale(@x) {
+  transform: scale(@x);
+}
+.border-radius(@radius) {
+	border-radius: @radius;
+	background-clip: padding-box;
+}
+.border-radius(@tl, @tr, @br, @bl) {
+	border-radius: @tl @tr @br @bl;
+	background-clip: padding-box;
+}
+.transition(@transition) {
+  transition: @transition;
+}
+.backface-visibility(@value) {
+	backface-visibility: @value;
+}
+.expanded(@begin, @end) {
+  &.expanded-appear,
+  &.expanded-enter,
+  &.expanded-leave.expanded-leave-active {
+    @begin();
+  }
+  &.expanded-appear.expanded-appear-active,
+  &.expanded-enter.expanded-enter-active,
+  &.expanded-leave {
+    @end();
+  }
+}
+.opacity-transition(@start, @end, @duration) {
+  .transition(opacity @duration cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  .expanded({
+    .opacity(@start);
+  }, {
+    .opacity(@end);
+  })
+}
+.scale-opacity-transition(@start, @end, @duration) {
+	transition: transform @duration cubic-bezier(0.7, 0, 0.175, 1) 0s, opacity @duration cubic-bezier(0.7, 0, 0.175, 1) 0s;
+  .expanded({
+    .scale(@start);
+		.opacity(@start);
+  }, {
+    .scale(@end);
+		.opacity(@end);
+  })
+}
+.translate-x-transition(@start, @end, @duration) {
+  .transition(transform @duration cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  .expanded({
+    .translateX(@start);
+  }, {
+    .translateX(@end);
+  })
+}
+.translate-y-transition(@start, @end, @duration) {
+  .transition(transform @duration cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  .expanded({
+    .translateY(@start);
+  }, {
+    .translateY(@end);
+  })
+}
+.scrollable {
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+&.next-appear, &.next-enter, &.next-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.next-appear, &.next-enter {
+	.translateX(100%);
+	z-index: 1;
+}
+&.next-appear.next-appear-active, &.next-enter.next-enter-active {
+	.translateX(0);
+}
+&.next-leave {
+	.translateX(0);
+	z-index: 0;
+}
+&.next-leave.next-leave-active {
+	.translateX(-25%);
+}
+
+&.back-appear, &.back-enter, &.back-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.back-leave {
+	.translateX(0);
+	z-index: 1;
+}
+&.back-leave.back-leave-active {
+	.translateX(100%);
+}
+&.back-appear, &.back-enter {
+	.translateX(-25%);
+	z-index: 0;
+}
+&.back-appear.back-appear-active, &.back-enter.back-enter-active {
+	.translateX(0);
+}
+
+&.slide-next-appear, &.slide-next-enter, &.slide-next-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.slide-next-appear, &.slide-next-enter {
+	.translateX(100%);
+}
+&.slide-next-appear.slide-next-appear-active, &.slide-next-enter.slide-next-enter-active {
+	.translateX(0);
+}
+&.slide-next-leave {
+	.translateX(0);
+}
+&.slide-next-leave.slide-next-leave-active {
+	.translateX(-100%);
+}
+
+&.stack-appear, &.stack-enter, &.stack-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.stack-appear, &.stack-enter {
+	.translateX(100%);
+}
+&.stack-appear.stack-appear-active, &.stack-enter.stack-enter-active {
+	.translateX(0);
+}
+&.stack-leave {
+	.translateX(0);
+}
+&.stack-leave.stack-leave-active {
+	.translateX(100%);
+}
+
+&.slide-back-appear, &.slide-back-enter, &.slide-back-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.slide-back-leave {
+	.translateX(0);
+}
+&.slide-back-leave.slide-back-leave-active {
+	.translateX(100%);
+}
+&.slide-back-appear, &.slide-back-enter {
+	.translateX(-100%);
+}
+&.slide-back-appear.slide-back-appear-active, &.slide-back-enter.slide-back-enter-active {
+	.translateX(0);
+}
+
+&.fade-appear, &.fade-enter, &.fade-leave {
+	.transition(opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.fade-leave.fade-leave-active, &.fade-appear, &.fade-enter {
+	.opacity(0);
+}
+&.fade-appear.fade-appear-active, &.fade-enter.fade-enter-active, &.fade-leave {
+	.opacity(1);
+}
+.chrome-page {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	.scrollable();
+}
