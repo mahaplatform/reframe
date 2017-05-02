@@ -1,0 +1,192 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _control = require('../control');
+
+var _control2 = _interopRequireDefault(_control);
+
+var _fields = require('./fields');
+
+var _fields2 = _interopRequireDefault(_fields);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Field = function (_React$Component) {
+  _inherits(Field, _React$Component);
+
+  function Field() {
+    _classCallCheck(this, Field);
+
+    return _possibleConstructorReturn(this, (Field.__proto__ || Object.getPrototypeOf(Field)).apply(this, arguments));
+  }
+
+  _createClass(Field, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          data = _props.data,
+          include = _props.include,
+          instructions = _props.instructions,
+          label = _props.label,
+          name = _props.name,
+          show = _props.show,
+          type = _props.type;
+
+      var defaultValue = _.get(data, name);
+      var error = this._getError();
+      if (!include || !show) return null;
+      return _react2.default.createElement(
+        'div',
+        { className: this._getClass() },
+        label && _react2.default.createElement(
+          'label',
+          null,
+          label
+        ),
+        instructions && _react2.default.createElement(
+          'div',
+          { className: 'instructions' },
+          instructions
+        ),
+        type === 'fields' ? _react2.default.createElement(_fields2.default, this._getFields()) : _react2.default.createElement(_control2.default, this._getControl()),
+        error && _react2.default.createElement(
+          'div',
+          { className: 'error-message' },
+          error
+        )
+      );
+    }
+  }, {
+    key: '_getClass',
+    value: function _getClass() {
+      var required = this.props.required;
+
+      var error = this._getError();
+      return ['field'].concat(_toConsumableArray(error ? [error] : []), _toConsumableArray(required ? [required] : [])).join(' ');
+    }
+  }, {
+    key: '_getError',
+    value: function _getError() {
+      var _props2 = this.props,
+          errors = _props2.errors,
+          name = _props2.name;
+
+      return errors && errors[name] ? errors[name][0] : null;
+    }
+  }, {
+    key: '_getFields',
+    value: function _getFields() {
+      var _props3 = this.props,
+          fields = _props3.fields,
+          onSubmit = _props3.onSubmit,
+          onUpdateData = _props3.onUpdateData;
+
+      return {
+        fields: fields,
+        onChange: this._handleUpdateData.bind(this),
+        onSubmit: onSubmit,
+        onUpdateData: onUpdateData
+      };
+    }
+  }, {
+    key: '_getControl',
+    value: function _getControl() {
+      var _props4 = this.props,
+          columns = _props4.columns,
+          defaultValue = _props4.defaultValue,
+          disabled = _props4.disabled,
+          endpoint = _props4.endpoint,
+          form = _props4.form,
+          format = _props4.format,
+          label = _props4.label;
+      var _props5 = this.props,
+          options = _props5.options,
+          prompt = _props5.prompt,
+          prefix = _props5.prefix,
+          sort = _props5.sort,
+          suffix = _props5.suffix,
+          type = _props5.type,
+          text = _props5.text,
+          value = _props5.value,
+          onSubmit = _props5.onSubmit;
+
+      return {
+        columns: columns,
+        defaultValue: defaultValue,
+        disabled: disabled,
+        endpoint: endpoint,
+        form: form,
+        format: format,
+        label: label,
+        options: options,
+        prompt: prompt,
+        prefix: prefix,
+        sort: sort,
+        suffix: suffix,
+        text: text,
+        type: type,
+        value: value,
+        onChange: this._handleUpdateData.bind(this),
+        onSubmit: onSubmit
+      };
+    }
+  }, {
+    key: '_handleUpdateData',
+    value: function _handleUpdateData(value) {
+      this.props.onUpdateData(this.props.name, value);
+    }
+  }]);
+
+  return Field;
+}(_react2.default.Component);
+
+Field.propTypes = {
+  columns: _react2.default.PropTypes.array,
+  data: _react2.default.PropTypes.object,
+  endpoint: _react2.default.PropTypes.string,
+  errors: _react2.default.PropTypes.object,
+  fields: _react2.default.PropTypes.array,
+  include: _react2.default.PropTypes.bool,
+  instructions: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string.isRequired,
+  options: _react2.default.PropTypes.array,
+  required: _react2.default.PropTypes.bool,
+  type: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.func]).isRequired,
+  show: _react2.default.PropTypes.bool,
+  onSubmit: _react2.default.PropTypes.func,
+  onUpdateData: _react2.default.PropTypes.func
+};
+Field.defaultProps = {
+  columns: [],
+  data: {},
+  errors: {},
+  fields: [],
+  include: true,
+  options: [],
+  required: false,
+  show: true,
+  onUpdateData: function onUpdateData() {}
+};
+exports.default = Field;

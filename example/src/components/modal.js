@@ -25,4 +25,6 @@ class Modal extends React.Component {
 
 }
 
+const Foo = () => <div>Foo</div>
+
 export default Modal

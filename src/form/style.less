@@ -1,0 +1,105 @@
+.ui.form {
+  position: static !important;
+}
+.reframe-modal-panel .reframe-form {
+  flex: 1;
+}
+.reframe-form {
+  .reframe-form-header,
+  .reframe-form-footer {
+    padding: 15px 15px 0;
+    .reframe-form-after,
+    .reframe-form-before,
+    .instructions {
+      margin-bottom: 15px;
+    }
+  }
+  .ui.segment {
+    padding: 0;
+    margin: 0 0 1px;
+    & > h4 {
+      position: relative;
+      background-color: #EEE;
+      padding: 1em;
+      font-size: 1em;
+      line-height: 1em;
+      color: #999;
+      margin: 0;
+      i {
+        position: absolute;
+        right: 1em;
+        font-size: 1em;
+      }
+    }
+    &.collapsing {
+      cursor: pointer;
+      &.collapsed .section {
+        display: none;
+      }
+    }
+  }
+  .section {
+    padding: 1em;
+    & > .field {
+      line-height: 1.8em;
+      margin-bottom: 1em;
+      & > label {
+        margin-bottom: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    & > .instructions {
+      margin-bottom: 1em;
+    }
+  }
+  .instructions {
+    color: #AAAAAA;
+    p {
+      color: #AAAAAA;
+      font-size: 1em;
+      line-height: 1em;
+    }
+  }
+  :disabled  {
+    background-color: #F0F0F0 !important;
+  }
+  .error {
+    input, textarea, select, .lookup-field, .dropdown {
+      border-color: #DB2828 !important;
+      background-color: #FFF6F6;
+      .border-radius(5px 5px 0 0) !important;
+    }
+    & > label {
+      color: #DB2828 !important;
+    }
+    .error-message {
+      background-color: #DB2828 !important;
+      color: #FFF !important;
+      padding: 5px 10px;
+      font-size: .8em;
+      .border-radius(0 0 5px 5px) !important;
+    }
+    .ui.right {
+      input {
+        .border-radius(5px 0 0 0) !important;
+      }
+      .ui.label {
+        .border-radius(0 5px 0 0) !important;
+      }
+    }
+    .ui.left {
+      input {
+        .border-radius(0 5px 0 0) !important;
+      }
+      .ui.label {
+        .border-radius(5px 0 0 0) !important;
+      }
+    }
+    .ui.label {
+      background-color: #DB2828 !important;
+      color: #FFF !important;
+    }
+  }
+}

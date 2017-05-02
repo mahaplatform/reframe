@@ -1,1 +1,15 @@
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SET_SECTIONS = exports.SET_SECTIONS = 'SET_SECTIONS';
+var FETCH_DATA_REQUEST = exports.FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
+var FETCH_DATA_SUCCESS = exports.FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+var FETCH_DATA_FAILURE = exports.FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+var SET_DATA = exports.SET_DATA = 'SET_DATA';
+var SET_READY = exports.SET_READY = 'SET_READY';
+var UPDATE_DATA = exports.UPDATE_DATA = 'UPDATE_DATA';
+var SUBMIT_REQUEST = exports.SUBMIT_REQUEST = 'SUBMIT_REQUEST';
+var SUBMIT_SUCCESS = exports.SUBMIT_SUCCESS = 'SUBMIT_SUCCESS';
+var SUBMIT_FAILURE = exports.SUBMIT_FAILURE = 'SUBMIT_FAILURE';

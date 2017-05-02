@@ -4,63 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _reduxRubberstamp = require('redux-rubberstamp');
 
-var _react = require('react');
+var _reducer = require('./reducer');
 
-var _react2 = _interopRequireDefault(_react);
+var _reducer2 = _interopRequireDefault(_reducer);
 
-var _propTypes = require('prop-types');
+var _form = require('./form');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _form2 = _interopRequireDefault(_form);
+
+var _actions = require('./actions');
+
+var actions = _interopRequireWildcard(_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Form = function (_React$Component) {
-  _inherits(Form, _React$Component);
-
-  function Form() {
-    _classCallCheck(this, Form);
-
-    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
-  }
-
-  _createClass(Form, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement('input', this._getConfig());
-    }
-  }, {
-    key: '_getConfig',
-    value: function _getConfig() {
-      return {};
-    }
-  }]);
-
-  return Form;
-}(_react2.default.Component);
-
-Form.PropTypes = {
-  action: _propTypes2.default.string,
-  data: _propTypes2.default.object,
-  errors: _propTypes2.default.object,
-  method: _propTypes2.default.string,
-  fields: _propTypes2.default.array,
-  status: _propTypes2.default.string,
-  title: _propTypes2.default.string,
-  onChange: _propTypes2.default.func,
-  onChangeField: _propTypes2.default.func,
-  onSubmit: _propTypes2.default.func,
-  onFailure: _propTypes2.default.func,
-  onSuccess: _propTypes2.default.func,
-  onValidateForm: _propTypes2.default.func,
-  onResetForm: _propTypes2.default.func,
-  onUpdateData: _propTypes2.default.func
-};
-exports.default = Form;
+exports.default = (0, _reduxRubberstamp.Singleton)('platform.form', _form2.default, _reducer2.default, actions);
