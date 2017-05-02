@@ -69,7 +69,8 @@ var Form = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-modal-panel-header-title' },
-            title
+            title,
+            this.props.foo
           ),
           _react2.default.createElement(
             'div',

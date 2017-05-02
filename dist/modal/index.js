@@ -22,4 +22,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _reduxRubberstamp.Singleton)('platform.modal', _modal2.default, _reducer2.default, actions);
+exports.default = (0, _reduxRubberstamp.Singleton)({
+  namespace: 'platform.modal',
+  component: _modal2.default,
+  reducer: _reducer2.default,
+  actions: actions
+});

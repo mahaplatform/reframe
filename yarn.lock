@@ -2219,9 +2219,9 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-redux-rubberstamp@^1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/redux-rubberstamp/-/redux-rubberstamp-1.1.8.tgz#a191959933d64b0a9135bf41d1a197586b9a1f09"
+redux-rubberstamp@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/redux-rubberstamp/-/redux-rubberstamp-1.2.1.tgz#b790b47fcd305c80d8486f41a5b2e0161d854f8a"
   dependencies:
     lodash "^4.17.4"
     react "^15.5.4"
@@ -2329,6 +2329,10 @@ require-uncached@^1.0.2:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
+
+reselect@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-3.0.0.tgz#b2e35977f03048700028eaee3a8c0639e40e8f35"
 
 resolve-from@^1.0.0:
   version "1.0.1"

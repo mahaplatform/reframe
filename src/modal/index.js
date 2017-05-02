@@ -3,4 +3,9 @@ import reducer from './reducer'
 import modal from './modal'
 import * as actions from './actions'
 
-export default Singleton('platform.modal', modal, reducer, actions)
+export default Singleton({
+  namespace: 'platform.modal',
+  component: modal,
+  reducer,
+  actions
+})

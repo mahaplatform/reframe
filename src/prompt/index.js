@@ -1,6 +1,11 @@
 import { Singleton } from 'redux-rubberstamp'
 import reducer from './reducer'
-import component from './component'
+import prompt from './prompt'
 import * as actions from './actions'
 
-export default Singleton('platform.prompt', component, reducer, actions)
+export default Singleton({
+  namespace: 'platform.prompt',
+  component: prompt,
+  reducer,
+  actions
+})

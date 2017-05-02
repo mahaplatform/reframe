@@ -10,9 +10,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _component = require('./component');
+var _prompt = require('./prompt');
 
-var _component2 = _interopRequireDefault(_component);
+var _prompt2 = _interopRequireDefault(_prompt);
 
 var _actions = require('./actions');
 
@@ -22,4 +22,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _reduxRubberstamp.Singleton)('platform.prompt', _component2.default, _reducer2.default, actions);
+exports.default = (0, _reduxRubberstamp.Singleton)({
+  namespace: 'platform.prompt',
+  component: _prompt2.default,
+  reducer: _reducer2.default,
+  actions: actions
+});
