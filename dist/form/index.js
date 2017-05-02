@@ -47,21 +47,20 @@ var Form = function (_React$Component) {
 }(_react2.default.Component);
 
 Form.PropTypes = {
-  action: _react2.default.PropTypes.string,
-
-  data: _react2.default.PropTypes.object,
-  errors: _react2.default.PropTypes.object,
-  method: _react2.default.PropTypes.string,
-  fields: _react2.default.PropTypes.array,
-  status: _react2.default.PropTypes.string,
-  title: _react2.default.PropTypes.string,
-  onChange: _react2.default.PropTypes.func,
-  onChangeField: _react2.default.PropTypes.func,
-  onSubmit: _react2.default.PropTypes.func,
-  onFailure: _react2.default.PropTypes.func,
-  onSuccess: _react2.default.PropTypes.func,
-  onValidateForm: _react2.default.PropTypes.func,
-  onResetForm: _react2.default.PropTypes.func,
-  onUpdateData: _react2.default.PropTypes.func
+  action: _propTypes2.default.string,
+  data: _propTypes2.default.object,
+  errors: _propTypes2.default.object,
+  method: _propTypes2.default.string,
+  fields: _propTypes2.default.array,
+  status: _propTypes2.default.string,
+  title: _propTypes2.default.string,
+  onChange: _propTypes2.default.func,
+  onChangeField: _propTypes2.default.func,
+  onSubmit: _propTypes2.default.func,
+  onFailure: _propTypes2.default.func,
+  onSuccess: _propTypes2.default.func,
+  onValidateForm: _propTypes2.default.func,
+  onResetForm: _propTypes2.default.func,
+  onUpdateData: _propTypes2.default.func
 };
 exports.default = Form;

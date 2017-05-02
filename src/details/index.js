@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Format from '../format'
 
 class Details extends React.Component {
@@ -24,8 +23,7 @@ class Details extends React.Component {
       PropTypes.shape({
         label: PropTypes.string,
         style: PropTypes.string,
-        route: PropTypes.string,
-        onClick: PropTypes.func
+        handler: PropTypes.string
       })
     )
   }
@@ -33,12 +31,12 @@ class Details extends React.Component {
   render() {
     const { top, image, items, body, buttons } = this.props
     return (
-      <div className="chrome-details">
-        { top && <div className="chrome-details-top">{ top }</div> }
-        { image && <div className="chrome-details-image"><img src={ image } className="ui circular image" /></div> }
-        { body && <div className="chrome-details-content">{ body }</div> }
+      <div className="reframe-details">
+        { top && <div className="reframe-details-top">{ top }</div> }
+        { image && <div className="reframe-details-image"><img src={ image } className="ui circular image" /></div> }
+        { body && <div className="reframe-details-content">{ body }</div> }
         { items &&
-          <div className="chrome-details-content">
+          <div className="reframe-details-content">
             <div className="ui list">
               {items.map((item, index) => {
                 if(item.content !== null || item.content === undefined) {
@@ -61,7 +59,7 @@ class Details extends React.Component {
                 if(button.style) {
                   classes.push(button.style)
                 }
-                return <Link key={`task_${index}`} to={button.route} className={classes.join(' ')}>{button.label}</Link>
+                return <div key={`task_${index}`} handler={button.handler} className={classes.join(' ')}>{button.label}</div>
               })}
             </div>
           </div>

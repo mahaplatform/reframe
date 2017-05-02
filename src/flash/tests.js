@@ -106,7 +106,7 @@ describe('flash component', () => {
       const flash = shallow(
         <Flash {...config}><div>child</div></Flash>
       )
-      expect(flash.is('div.chrome-flash')).to.be.true
+      expect(flash.is('div.reframe-flash')).to.be.true
       expect(flash.children.length).to.be.equal(1)
 
       const child = flash.childAt(0)
@@ -129,7 +129,7 @@ describe('flash component', () => {
 
       const transitionGroup = flash.childAt(0)
       const panel = transitionGroup.childAt(0)
-      expect(panel.is('div.chrome-flash-popup.success')).to.be.true
+      expect(panel.is('div.reframe-flash-popup.success')).to.be.true
 
       const paragraph = panel.childAt(0)
       expect(paragraph.is('p')).to.be.truthy

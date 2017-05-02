@@ -1,8 +1,8 @@
-.chrome-prompt {
+.reframe-prompt {
   flex: 1;
   display: flex;
 }
-.chrome-prompt-overlay {
+.reframe-prompt-overlay {
   .opacity-transition(0, 0.5, .25s);
   .opacity(0.5);
   position: fixed;
@@ -12,7 +12,7 @@
   right: 0;
   background-color: rgb(0, 0, 0);
 }
-.chrome-prompt-options {
+.reframe-prompt-options {
   position: fixed;
   .border-radius(5px);
   background-color: #FFFFFF;
@@ -30,7 +30,7 @@
     left: 50%;
     margin-left: -160px;
   }
-  .chrome-prompt-header {
+  .reframe-prompt-header {
     .border-radius(5px 5px 0 0);
     border-bottom: 1px solid #CCC;
     display: block;
@@ -41,8 +41,8 @@
       color: #000000;
     }
   }
-  .chrome-prompt-option,
-  .chrome-prompt-cancel {
+  .reframe-prompt-option,
+  .reframe-prompt-cancel {
     display: block;
     padding: 15px;
     text-align: center;
@@ -55,7 +55,7 @@
       border-bottom: none;
     }
   }
-  .chrome-prompt-option {
+  .reframe-prompt-option {
     border-bottom: 1px solid #CCC;
   }
 }

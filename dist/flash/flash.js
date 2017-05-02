@@ -15,9 +15,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+var _reactTransitionGroup = require('react-transition-group');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,14 +44,14 @@ var Flash = exports.Flash = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'chrome-flash' },
+        { className: 'reframe-flash' },
         children,
         _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
+          _reactTransitionGroup.CSSTransitionGroup,
           { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250 },
           message && _react2.default.createElement(
             'div',
-            { className: 'chrome-flash-popup ' + style, key: 'flash_' + message },
+            { className: 'reframe-flash-popup ' + style, key: 'flash_' + message },
             _react2.default.createElement(
               'p',
               null,

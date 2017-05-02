@@ -1,7 +1,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 export class Flash extends React.Component {
 
@@ -19,11 +19,11 @@ export class Flash extends React.Component {
   render() {
     const { children, message, style } = this.props
     return (
-      <div className="chrome-flash">
+      <div className="reframe-flash">
         { children }
         <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
           {message &&
-            <div className={`chrome-flash-popup ${style}`} key={`flash_${message}`}>
+            <div className={`reframe-flash-popup ${style}`} key={`flash_${message}`}>
               <p>
                 { this._getIcon(style) }
                 { message }

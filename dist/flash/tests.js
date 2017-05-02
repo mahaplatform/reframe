@@ -128,7 +128,7 @@ describe('flash component', function () {
           'child'
         )
       ));
-      (0, _chai.expect)(flash.is('div.chrome-flash')).to.be.true;
+      (0, _chai.expect)(flash.is('div.reframe-flash')).to.be.true;
       (0, _chai.expect)(flash.children.length).to.be.equal(1);
 
       var child = flash.childAt(0);
@@ -149,7 +149,7 @@ describe('flash component', function () {
 
       var transitionGroup = flash.childAt(0);
       var panel = transitionGroup.childAt(0);
-      (0, _chai.expect)(panel.is('div.chrome-flash-popup.success')).to.be.true;
+      (0, _chai.expect)(panel.is('div.reframe-flash-popup.success')).to.be.true;
 
       var paragraph = panel.childAt(0);
       (0, _chai.expect)(paragraph.is('p')).to.be.truthy;

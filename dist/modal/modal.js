@@ -14,9 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+var _reactTransitionGroup = require('react-transition-group');
 
 var _lodash = require('lodash');
 
@@ -48,17 +46,17 @@ var Modal = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'chrome-modal' },
+        { className: 'reframe-modal' },
         children,
         _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
+          _reactTransitionGroup.CSSTransitionGroup,
           { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          components && components.length > 0 && _react2.default.createElement('div', { className: 'chrome-modal-overlay', onClick: this._handleClose.bind(this) }),
+          components && components.length > 0 && _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) }),
           components && components.length > 0 && _react2.default.createElement(
             'div',
-            { className: 'chrome-modal-window' },
+            { className: 'reframe-modal-window' },
             _react2.default.createElement(
-              _reactAddonsCssTransitionGroup2.default,
+              _reactTransitionGroup.CSSTransitionGroup,
               { transitionName: 'stack', component: 'div', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
               components.map(function (component, index) {
                 return _lodash2.default.isFunction(component) ? _react2.default.createElement(component, { key: 'modal_panel_' + index }) : _react2.default.cloneElement(component, { key: 'modal_panel_' + index });

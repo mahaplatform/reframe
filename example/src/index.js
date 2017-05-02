@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './style.less'
 
 import Root from './root'
-import Platform from 'reframe/dist/platform'
+import { Platform } from 'reframe'
 import Demo from './demo'
 
 const MyApp = () => (

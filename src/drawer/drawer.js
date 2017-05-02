@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 
 class Drawer extends React.Component {
@@ -19,12 +19,12 @@ class Drawer extends React.Component {
   render() {
     const { children, component, location } = this.props
     return (
-      <div className="chrome-drawer">
+      <div className="reframe-drawer">
         { children }
         <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-          { component && <div className="chrome-drawer-overlay" onClick={this._handleClose.bind(this)} /> }
+          { component && <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} /> }
           { component &&
-            <div className={`chrome-drawer-panel chrome-drawer-panel-${location}`}>
+            <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>
               { _.isFunction(component) ? React.createElement(component) : React.cloneElement(component) }
             </div>
           }

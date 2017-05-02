@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class Tasks extends React.Component {
 
@@ -23,20 +23,20 @@ class Tasks extends React.Component {
   render() {
     const { children, items } = this.props
     return (
-      <div className="chrome-tasks">
+      <div className="reframe-tasks">
         { children }
         <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
-          { items && <div className="chrome-tasks-overlay" onClick={ this._handleClose.bind(this) } /> }
+          { items && <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } /> }
           { items &&
-            <div className="chrome-tasks-list">
+            <div className="reframe-tasks-list">
               {items.map((item, index) => {
                 return (
-                  <div key={`task_${index}`} className="chrome-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
+                  <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
                     { item.label }
                   </div>
                 )
               })}
-              <div className="chrome-tasks-cancel" onClick={ this._handleClose.bind(this) }>
+              <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
                 Cancel
               </div>
             </div>

@@ -14,9 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+var _reactTransitionGroup = require('react-transition-group');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47,24 +45,24 @@ var Prompt = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'chrome-prompt' },
+        { className: 'reframe-prompt' },
         children,
         _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
+          _reactTransitionGroup.CSSTransitionGroup,
           { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
-          message && _react2.default.createElement('div', { className: 'chrome-prompt-overlay', onClick: this._handleClosePrompt.bind(this) }),
+          message && _react2.default.createElement('div', { className: 'reframe-prompt-overlay', onClick: this._handleClosePrompt.bind(this) }),
           message && _react2.default.createElement(
             'div',
-            { className: 'chrome-prompt-options' },
+            { className: 'reframe-prompt-options' },
             message && _react2.default.createElement(
               'div',
-              { className: 'chrome-prompt-header' },
+              { className: 'reframe-prompt-header' },
               message
             ),
             options && options.map(function (option, index) {
               return _react2.default.createElement(
                 'div',
-                { key: 'option_' + index, className: 'chrome-prompt-option', onClick: _this2._handleChooseOption.bind(_this2, index) },
+                { key: 'option_' + index, className: 'reframe-prompt-option', onClick: _this2._handleChooseOption.bind(_this2, index) },
                 option.label
               );
             })

@@ -1,15 +1,15 @@
-.chrome-modal {
+.reframe-modal {
   flex: 1;
   display: flex;
 }
-.chrome-modal-overlay {
+.reframe-modal-overlay {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 }
-.chrome-modal-window {
+.reframe-modal-window {
   position: absolute;
   background: #FFFFFF;
   display: flex;
@@ -20,12 +20,12 @@
   }
 }
 @media only screen and (min-width: 768px) {
-  .chrome-modal-overlay {
+  .reframe-modal-overlay {
     .opacity-transition(0, 0.5, .5s);
     .opacity(0.5);
     background-color: #000;
   }
-  .chrome-modal-window  {
+  .reframe-modal-window  {
     .opacity-transition(0, 1, .5s);
     width: 768px;
     height: 576px;
@@ -36,7 +36,7 @@
   }
 }
 @media only screen and (max-width: 767px) {
-  .chrome-modal-window  {
+  .reframe-modal-window  {
     .translate-y-transition(100%, 0, .5s);
     top: 0;
     right: 0;
@@ -44,7 +44,7 @@
     left: 0;
   }
 }
-.chrome-modal-panel {
+.reframe-modal-panel {
   position: absolute;
   top: 0;
   right: 0;
@@ -56,30 +56,30 @@
   flex: 1;
   flex-direction: column;
 }
-.chrome-modal-panel-header {
+.reframe-modal-panel-header {
   flex: 0 0 50px;
   display: flex;
   background-color: @primary_background_color;
 }
-.chrome-modal-panel-header-cancel,
-.chrome-modal-panel-header-proceed {
+.reframe-modal-panel-header-cancel,
+.reframe-modal-panel-header-proceed {
   flex: 0 0 100px;
   display: block;
   color: #FFF;
   padding: 15px;
   cursor: pointer;
 }
-.chrome-modal-panel-header-title {
+.reframe-modal-panel-header-title {
   flex: 1;
   color: #FFF;
   padding: 15px;
   text-align: center;
   font-weight: bold;
 }
-.chrome-modal-panel-header-proceed {
+.reframe-modal-panel-header-proceed {
   text-align: right;
 }
-.chrome-modal-panel-body {
+.reframe-modal-panel-body {
   .scrollable();
   display: flex;
   flex: 1;

@@ -16,8 +16,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRouterDom = require('react-router-dom');
-
 var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
@@ -53,25 +51,25 @@ var Details = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'chrome-details' },
+        { className: 'reframe-details' },
         top && _react2.default.createElement(
           'div',
-          { className: 'chrome-details-top' },
+          { className: 'reframe-details-top' },
           top
         ),
         image && _react2.default.createElement(
           'div',
-          { className: 'chrome-details-image' },
+          { className: 'reframe-details-image' },
           _react2.default.createElement('img', { src: image, className: 'ui circular image' })
         ),
         body && _react2.default.createElement(
           'div',
-          { className: 'chrome-details-content' },
+          { className: 'reframe-details-content' },
           body
         ),
         items && _react2.default.createElement(
           'div',
-          { className: 'chrome-details-content' },
+          { className: 'reframe-details-content' },
           _react2.default.createElement(
             'div',
             { className: 'ui list' },
@@ -103,8 +101,8 @@ var Details = function (_React$Component) {
                 classes.push(button.style);
               }
               return _react2.default.createElement(
-                _reactRouterDom.Link,
-                { key: 'task_' + index, to: button.route, className: classes.join(' ') },
+                'div',
+                { key: 'task_' + index, handler: button.handler, className: classes.join(' ') },
                 button.label
               );
             })
@@ -129,8 +127,7 @@ Details.propTypes = {
   buttons: _propTypes2.default.arrayOf(_propTypes2.default.shape({
     label: _propTypes2.default.string,
     style: _propTypes2.default.string,
-    route: _propTypes2.default.string,
-    onClick: _propTypes2.default.func
+    handler: _propTypes2.default.string
   }))
 };
 exports.default = Details;

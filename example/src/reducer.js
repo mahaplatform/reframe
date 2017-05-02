@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux-rubberstamp'
-import Drawer from 'reframe/dist/drawer'
-import Flash from 'reframe/dist/flash'
-import Modal from 'reframe/dist/modal'
-import Prompt from 'reframe/dist/prompt'
-import Tasks from 'reframe/dist/tasks'
-import Tray from 'reframe/dist/tray'
+import { Drawer } from 'reframe'
+import { Flash } from 'reframe'
+import { Modal } from 'reframe'
+import { Prompt } from 'reframe'
+import { Tasks } from 'reframe'
+import { Tray } from 'reframe'
 
 export default combineReducers([
   Drawer,

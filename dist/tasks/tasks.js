@@ -14,9 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
-
-var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
+var _reactTransitionGroup = require('react-transition-group');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -46,25 +44,25 @@ var Tasks = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'chrome-tasks' },
+        { className: 'reframe-tasks' },
         children,
         _react2.default.createElement(
-          _reactAddonsCssTransitionGroup2.default,
+          _reactTransitionGroup.CSSTransitionGroup,
           { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
-          items && _react2.default.createElement('div', { className: 'chrome-tasks-overlay', onClick: this._handleClose.bind(this) }),
+          items && _react2.default.createElement('div', { className: 'reframe-tasks-overlay', onClick: this._handleClose.bind(this) }),
           items && _react2.default.createElement(
             'div',
-            { className: 'chrome-tasks-list' },
+            { className: 'reframe-tasks-list' },
             items.map(function (item, index) {
               return _react2.default.createElement(
                 'div',
-                { key: 'task_' + index, className: 'chrome-tasks-item', onClick: _this2._handleChoose.bind(_this2, index) },
+                { key: 'task_' + index, className: 'reframe-tasks-item', onClick: _this2._handleChoose.bind(_this2, index) },
                 item.label
               );
             }),
             _react2.default.createElement(
               'div',
-              { className: 'chrome-tasks-cancel', onClick: this._handleClose.bind(this) },
+              { className: 'reframe-tasks-cancel', onClick: this._handleClose.bind(this) },
               'Cancel'
             )
           )

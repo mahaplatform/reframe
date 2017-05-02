@@ -2,13 +2,6 @@
   "name": "reframe",
   "version": "0.0.14",
   "main": "dist/index.js",
-  "directories": {
-    "lib": "./dist",
-    "example": "./example"
-  },
-  "files": [
-    "./dist"
-  ],
   "scripts": {
     "build": "rm -rf ./dist && babel ./src --out-dir ./dist",
     "test": "NODE_ENV=test NODE_PATH=./src mocha --recursive --require babel-core/register ./src/**/tests.js"
@@ -32,10 +25,12 @@
     "npm": ">= 3.7npm list graceful-fs"
   },
   "dependencies": {
+    "moment": "^2.18.1",
+    "numeral": "^2.0.6",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
+    "react-transition-group": "^1.1.2",
     "redux": "^3.6.0",
     "redux-rubberstamp": "^1.1.8"
   },

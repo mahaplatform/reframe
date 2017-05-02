@@ -1,8 +1,9 @@
-.chrome-tray {
+.reframe-tray {
   flex: 1;
   display: flex;
+
 }
-.chrome-tray-overlay {
+.reframe-tray-overlay {
   .opacity-transition(0, 0.5, .25s);
   .opacity(0.5);
   background-color: #000;
@@ -12,13 +13,13 @@
   bottom: 0;
   left: 0;
 }
-.chrome-tray-panel {
+.reframe-tray-panel {
   background-color: #FFFFFF;
   position: absolute;
   display: flex;
 }
 @media only screen and (min-width: 768px) {
-  .chrome-tray-panel {
+  .reframe-tray-panel {
     .opacity-transition(0, 1, .5s);
     width: 768px;
     height: 576px;
@@ -29,7 +30,7 @@
   }
 }
 @media only screen and (max-width: 767px) {
-  .chrome-tray-panel {
+  .reframe-tray-panel {
     .translate-y-transition(100%, 0, .25s);
     left: 0;
     right: 0;

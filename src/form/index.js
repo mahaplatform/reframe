@@ -4,22 +4,21 @@ import PropTypes from 'prop-types'
 class Form extends React.Component {
 
   static PropTypes = {
-    action: React.PropTypes.string,
-
-    data: React.PropTypes.object,
-    errors: React.PropTypes.object,
-    method: React.PropTypes.string,
-    fields: React.PropTypes.array,
-    status: React.PropTypes.string,
-    title: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    onChangeField: React.PropTypes.func,
-    onSubmit: React.PropTypes.func,
-    onFailure: React.PropTypes.func,
-    onSuccess: React.PropTypes.func,
-    onValidateForm: React.PropTypes.func,
-    onResetForm: React.PropTypes.func,
-    onUpdateData: React.PropTypes.func
+    action: PropTypes.string,
+    data: PropTypes.object,
+    errors: PropTypes.object,
+    method: PropTypes.string,
+    fields: PropTypes.array,
+    status: PropTypes.string,
+    title: PropTypes.string,
+    onChange: PropTypes.func,
+    onChangeField: PropTypes.func,
+    onSubmit: PropTypes.func,
+    onFailure: PropTypes.func,
+    onSuccess: PropTypes.func,
+    onValidateForm: PropTypes.func,
+    onResetForm: PropTypes.func,
+    onUpdateData: PropTypes.func
   }
 
   render() {

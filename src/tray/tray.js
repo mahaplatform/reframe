@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 
 class Tray extends React.Component {
@@ -18,12 +18,12 @@ class Tray extends React.Component {
   render() {
     const { children, component } = this.props
     return (
-      <div className="chrome-tray">
+      <div className="reframe-tray">
         { children }
         <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={true} transitionAppearTimeout={500}>
-          { component && <div className="chrome-tray-overlay" onClick={this._handleCloseTray.bind(this)} /> }
+          { component && <div className="reframe-tray-overlay" onClick={this._handleCloseTray.bind(this)} /> }
           { component &&
-            <div className="chrome-tray-panel">
+            <div className="reframe-tray-panel">
               { _.isFunction(component) ? React.createElement(component) : component }
             </div>
           }

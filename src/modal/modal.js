@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 
 class Modal extends React.Component {
@@ -19,12 +19,12 @@ class Modal extends React.Component {
   render() {
     const { children, components } = this.props
     return (
-      <div className="chrome-modal">
+      <div className="reframe-modal">
         { children }
         <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-          { components && components.length > 0 && <div className="chrome-modal-overlay" onClick={this._handleClose.bind(this)} /> }
+          { components && components.length > 0 && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
           { components && components.length > 0 &&
-            <div className="chrome-modal-window">
+            <div className="reframe-modal-window">
               <CSSTransitionGroup transitionName="stack" component="div" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
                 { components.map((component, index) => {
                   return _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` })
