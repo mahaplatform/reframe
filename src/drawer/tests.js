@@ -5,7 +5,7 @@ import { spy } from 'sinon'
 import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
-import Tasks from './component'
+import Drawer from './drawer'
 
 describe('drawer component', () => {
 
@@ -48,7 +48,7 @@ describe('drawer component', () => {
 
     })
 
-    it('can open tasks', () => {
+    it('can open drawer', () => {
 
       const state = {
         component: null,
@@ -70,7 +70,7 @@ describe('drawer component', () => {
 
     })
 
-    it('can close tasks', () => {
+    it('can close drawer', () => {
 
       const state = {
         component: 'foo',

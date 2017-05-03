@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
-import component from './component'
+import history from './history'
 
 describe('history component', () => {
 

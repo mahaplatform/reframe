@@ -5,7 +5,7 @@ import { spy } from 'sinon'
 import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
-import Tray from './component'
+import Tray from './tray'
 
 describe('tray component', () => {
 
