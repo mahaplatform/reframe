@@ -1,20 +1,17 @@
 import React from 'react'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { createEpicMiddleware } from 'redux-observable'
+import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import createApiRequest from 'redux-api-request'
 import createlocalStorage from 'redux-local-storage'
 import reducer from './reducer'
-import epic from './epic'
 
 class Root extends React.Component {
 
   constructor(props) {
 
     super(props)
-
-    const epicMiddleware = createEpicMiddleware(epic)
 
     const loggerMiddleware = createLogger()
 
@@ -23,8 +20,7 @@ class Root extends React.Component {
     const localStorageMiddleware = createlocalStorage()
 
     const middleware = [
-      epicMiddleware,
-      loggerMiddleware,
+      thunkMiddleware,
       apiRequestMiddleware,
       localStorageMiddleware,
       ...(process.env.NODE_ENV !== 'production') ? [loggerMiddleware] : []
