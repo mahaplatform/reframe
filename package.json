@@ -25,6 +25,7 @@
     "npm": ">= 3.7npm list graceful-fs"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.5.8",
