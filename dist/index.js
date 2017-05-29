@@ -3,11 +3,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tray = exports.Textfield = exports.Textarea = exports.Tasks = exports.Prompt = exports.Platform = exports.Modal = exports.History = exports.Format = exports.Form = exports.Flash = exports.Drawer = exports.Details = exports.Control = exports.Checkbox = undefined;
 
 var _checkbox = require('./checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
+
+var _collection = require('./collection');
+
+var _collection2 = _interopRequireDefault(_collection);
 
 var _control = require('./control');
 
@@ -37,6 +40,10 @@ var _history = require('./history');
 
 var _history2 = _interopRequireDefault(_history);
 
+var _infinite = require('./infinite');
+
+var _infinite2 = _interopRequireDefault(_infinite);
+
 var _modal = require('./modal');
 
 var _modal2 = _interopRequireDefault(_modal);
@@ -48,6 +55,10 @@ var _platform2 = _interopRequireDefault(_platform);
 var _prompt = require('./prompt');
 
 var _prompt2 = _interopRequireDefault(_prompt);
+
+var _table = require('./table');
+
+var _table2 = _interopRequireDefault(_table);
 
 var _tasks = require('./tasks');
 
@@ -67,18 +78,28 @@ var _tray2 = _interopRequireDefault(_tray);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.Checkbox = _checkbox2.default;
-exports.Control = _control2.default;
-exports.Details = _details2.default;
-exports.Drawer = _drawer2.default;
-exports.Flash = _flash2.default;
-exports.Form = _form2.default;
-exports.Format = _format2.default;
-exports.History = _history2.default;
-exports.Modal = _modal2.default;
-exports.Platform = _platform2.default;
-exports.Prompt = _prompt2.default;
-exports.Tasks = _tasks2.default;
-exports.Textarea = _textarea2.default;
-exports.Textfield = _textfield2.default;
-exports.Tray = _tray2.default;
+exports.default = {
+  Checkbox: _checkbox2.default,
+  Collection: _collection2.default,
+  Control: _control2.default,
+  Details: _details2.default,
+  Drawer: _drawer2.default,
+  Flash: _flash2.default,
+  Form: _form2.default,
+  Format: _format2.default,
+  History: _history2.default,
+  Infinite: _infinite2.default,
+  Modal: _modal2.default,
+  Platform: _platform2.default,
+  Prompt: _prompt2.default,
+  Table: _table2.default,
+  Tasks: _tasks2.default,
+  Textarea: _textarea2.default,
+  Textfield: _textfield2.default,
+  Tray: _tray2.default
+};
+
+
+Object.keys(exports.default).map(function (key) {
+  exports[key] = exports.default[key];
+});

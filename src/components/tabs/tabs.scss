@@ -1,0 +1,9 @@
+.tabs {
+  .item {
+    cursor: pointer;
+  }
+  .ui.bottom.attached.active.tab.segment {
+    position: relative;
+    overflow: hidden;
+  }
+}

@@ -27,6 +27,10 @@ body {
 .scale(@x) {
   transform: scale(@x);
 }
+.scrollable {
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
 .border-radius(@radius) {
 	border-radius: @radius;
 	background-clip: padding-box;
@@ -42,14 +46,14 @@ body {
 	backface-visibility: @value;
 }
 .expanded(@begin, @end) {
-  &.expanded-appear,
-  &.expanded-enter,
-  &.expanded-leave.expanded-leave-active {
+  .expanded-appear,
+  .expanded-enter,
+  .expanded-leave.expanded-leave-active {
     @begin();
   }
-  &.expanded-appear.expanded-appear-active,
-  &.expanded-enter.expanded-enter-active,
-  &.expanded-leave {
+  .expanded-appear.expanded-appear-active,
+  .expanded-enter.expanded-enter-active,
+  .expanded-leave {
     @end();
   }
 }
@@ -87,102 +91,98 @@ body {
     .translateY(@end);
   })
 }
-.scrollable {
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
-}
 
-&.next-appear, &.next-enter, &.next-leave {
+.next-appear, .next-enter, .next-leave {
 	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-&.next-appear, &.next-enter {
+.next-appear, .next-enter {
 	.translateX(100%);
 	z-index: 1;
 }
-&.next-appear.next-appear-active, &.next-enter.next-enter-active {
+.next-appear.next-appear-active, .next-enter.next-enter-active {
 	.translateX(0);
 }
-&.next-leave {
+.next-leave {
 	.translateX(0);
 	z-index: 0;
 }
-&.next-leave.next-leave-active {
+.next-leave.next-leave-active {
 	.translateX(-25%);
 }
 
-&.back-appear, &.back-enter, &.back-leave {
+.back-appear, .back-enter, .back-leave {
 	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-&.back-leave {
+.back-leave {
 	.translateX(0);
 	z-index: 1;
 }
-&.back-leave.back-leave-active {
+.back-leave.back-leave-active {
 	.translateX(100%);
 }
-&.back-appear, &.back-enter {
+.back-appear, .back-enter {
 	.translateX(-25%);
 	z-index: 0;
 }
-&.back-appear.back-appear-active, &.back-enter.back-enter-active {
+.back-appear.back-appear-active, .back-enter.back-enter-active {
 	.translateX(0);
 }
 
-&.slide-next-appear, &.slide-next-enter, &.slide-next-leave {
+.slide-next-enter, .slide-next-leave {
 	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-&.slide-next-appear, &.slide-next-enter {
+.slide-next-enter {
 	.translateX(100%);
 }
-&.slide-next-appear.slide-next-appear-active, &.slide-next-enter.slide-next-enter-active {
+.slide-next-enter.slide-next-enter-active {
 	.translateX(0);
 }
-&.slide-next-leave {
+.slide-next-leave {
 	.translateX(0);
 }
-&.slide-next-leave.slide-next-leave-active {
+.slide-next-leave.slide-next-leave-active {
 	.translateX(-100%);
 }
 
-&.stack-appear, &.stack-enter, &.stack-leave {
+.slide-back-enter, .slide-back-leave {
 	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-&.stack-appear, &.stack-enter {
-	.translateX(100%);
-}
-&.stack-appear.stack-appear-active, &.stack-enter.stack-enter-active {
+.slide-back-leave {
 	.translateX(0);
 }
-&.stack-leave {
-	.translateX(0);
-}
-&.stack-leave.stack-leave-active {
+.slide-back-leave.slide-back-leave-active {
 	.translateX(100%);
 }
-
-&.slide-back-appear, &.slide-back-enter, &.slide-back-leave {
-	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
-}
-&.slide-back-leave {
-	.translateX(0);
-}
-&.slide-back-leave.slide-back-leave-active {
-	.translateX(100%);
-}
-&.slide-back-appear, &.slide-back-enter {
+.slide-back-enter {
 	.translateX(-100%);
 }
-&.slide-back-appear.slide-back-appear-active, &.slide-back-enter.slide-back-enter-active {
+.slide-back-enter.slide-back-enter-active {
 	.translateX(0);
 }
 
-&.fade-appear, &.fade-enter, &.fade-leave {
+.stack-appear, .stack-enter, .stack-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+.stack-appear, .stack-enter {
+	.translateX(100%);
+}
+.stack-appear.stack-appear-active, .stack-enter.stack-enter-active {
+	.translateX(0);
+}
+.stack-leave {
+	.translateX(0);
+}
+.stack-leave.stack-leave-active {
+	.translateX(100%);
+}
+
+.fade-appear, .fade-enter, .fade-leave {
 	.transition(opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-&.fade-leave.fade-leave-active, &.fade-appear, &.fade-enter {
+.fade-leave.fade-leave-active, .fade-appear, .fade-enter {
 	.opacity(0);
 }
-&.fade-appear.fade-appear-active, &.fade-enter.fade-enter-active, &.fade-leave {
+.fade-appear.fade-appear-active, .fade-enter.fade-enter-active, .fade-leave {
 	.opacity(1);
 }
 .reframe-page {

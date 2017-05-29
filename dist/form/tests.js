@@ -2,9 +2,9 @@
 
 var _chai = require('chai');
 
-var _index = require('./index');
+var _form = require('./form');
 
-var _index2 = _interopRequireDefault(_index);
+var _form2 = _interopRequireDefault(_form);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

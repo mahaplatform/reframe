@@ -14,9 +14,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _component = require('./component');
+var _history = require('./history');
 
-var _component2 = _interopRequireDefault(_component);
+var _history2 = _interopRequireDefault(_history);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

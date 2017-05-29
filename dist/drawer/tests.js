@@ -22,9 +22,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _component = require('./component');
+var _drawer = require('./drawer');
 
-var _component2 = _interopRequireDefault(_component);
+var _drawer2 = _interopRequireDefault(_drawer);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -67,7 +67,7 @@ describe('drawer component', function () {
       (0, _chai.expect)((0, _reducer2.default)(undefined, '')).to.eql(expected);
     });
 
-    it('can open tasks', function () {
+    it('can open drawer', function () {
 
       var state = {
         component: null,
@@ -88,7 +88,7 @@ describe('drawer component', function () {
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);
     });
 
-    it('can close tasks', function () {
+    it('can close drawer', function () {
 
       var state = {
         component: 'foo',

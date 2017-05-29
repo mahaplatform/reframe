@@ -22,9 +22,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _component = require('./component');
+var _tray = require('./tray');
 
-var _component2 = _interopRequireDefault(_component);
+var _tray2 = _interopRequireDefault(_tray);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 

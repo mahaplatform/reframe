@@ -22,9 +22,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _component = require('./component');
+var _flash = require('./flash');
 
-var _component2 = _interopRequireDefault(_component);
+var _flash2 = _interopRequireDefault(_flash);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -120,7 +120,7 @@ describe('flash component', function () {
       };
 
       var flash = (0, _enzyme.shallow)(_react2.default.createElement(
-        _component2.default,
+        _flash2.default,
         config,
         _react2.default.createElement(
           'div',
@@ -145,7 +145,7 @@ describe('flash component', function () {
         onClear: function onClear() {}
       };
 
-      var flash = (0, _enzyme.shallow)(_react2.default.createElement(_component2.default, config));
+      var flash = (0, _enzyme.shallow)(_react2.default.createElement(_flash2.default, config));
 
       var transitionGroup = flash.childAt(0);
       var panel = transitionGroup.childAt(0);
