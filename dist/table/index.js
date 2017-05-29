@@ -65,7 +65,7 @@ var Table = function (_React$Component) {
                 if (column.collapsing === true) klass.push('collapsing');
                 return _react2.default.createElement(
                   'div',
-                  { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column.key) },
+                  { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column) },
                   column.label,
                   sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
                 );
@@ -124,16 +124,16 @@ var Table = function (_React$Component) {
   }, {
     key: '_resizeColumns',
     value: function _resizeColumns() {
-      var _this3 = this;
-
-      if (this.refs.body.childNodes.length === 0) return;
-      Array.from(this.refs.body.childNodes[0].childNodes).map(function (cell, index) {
-        _this3.refs.head.childNodes[index].style.width = cell.offsetWidth + 'px';
+      var rows = this.refs.body.childNodes;
+      if (rows.length === 0) return;
+      Array.from(rows[0].childNodes).map(function (cell, index) {
+        cell.style.width = cell.offsetWidth + 'px';
       });
     }
   }, {
     key: '_handleSort',
-    value: function _handleSort(key) {
+    value: function _handleSort(column) {
+      var key = column.sort || column.key;
       this.props.onSort(key);
     }
   }, {

@@ -34,7 +34,7 @@ var Scrollpane = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Scrollpane.__proto__ || Object.getPrototypeOf(Scrollpane)).call(this, props));
 
-    _this.notified = false;
+    _this.attached = false;
     return _this;
   }
 
@@ -63,27 +63,28 @@ var Scrollpane = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      if (!this.notified) this._detachScrollListener();
+      this._detachScrollListener();
     }
   }, {
     key: '_attachScrollListener',
     value: function _attachScrollListener() {
       var scrollpane = this.refs.scrollpane;
 
-      if (scrollpane.scrollHeight <= scrollpane.offsetHeight) return;
-      this.notified = false;
+      if (this.attached || scrollpane.scrollHeight <= scrollpane.offsetHeight) return;
       scrollpane.addEventListener('scroll', this.listener, true);
       scrollpane.addEventListener('resize', this.listener, true);
       this._scrollListener();
+      this.attached = true;
     }
   }, {
     key: '_detachScrollListener',
     value: function _detachScrollListener() {
       var scrollpane = this.refs.scrollpane;
 
-      this.notified = true;
+      if (!this.attached) return;
       scrollpane.removeEventListener('scroll', this.listener, true);
       scrollpane.removeEventListener('resize', this.listener, true);
+      this.attached = false;
     }
   }, {
     key: '_scrollListener',
@@ -113,7 +114,7 @@ Scrollpane.PropTypes = {
   onReachBottom: _propTypes2.default.func
 };
 Scrollpane.defaultProps = {
-  notificationPercent: 20,
+  notificationPercent: 30,
   onReachBottom: null
 };
 exports.default = Scrollpane;

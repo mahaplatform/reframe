@@ -28,7 +28,7 @@ class Table extends React.Component {
                 if(column.primary === true) klass.push('mobile')
                 if(column.collapsing === true) klass.push('collapsing')
                 return (
-                  <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column.key) }>
+                  <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column) }>
                     { column.label }
                     { sort && column.key === sort.key &&
                       (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
@@ -76,23 +76,21 @@ class Table extends React.Component {
 
   _getScrollpane() {
     return {
-      onReachBottom: this._handleLoadMore.bind(this)
+      onReachBottom: this.props.onLoadMore.bind(this)
     }
   }
 
   _resizeColumns() {
-    if(this.refs.body.childNodes.length === 0) return
-    Array.from(this.refs.body.childNodes[0].childNodes).map((cell, index) => {
-      this.refs.head.childNodes[index].style.width = `${cell.offsetWidth}px`
+    const rows = this.refs.body.childNodes
+    if(rows.length === 0) return
+    Array.from(rows[0].childNodes).map((cell, index) => {
+      cell.style.width = `${cell.offsetWidth}px`
     })
   }
 
-  _handleSort(key) {
+  _handleSort(column) {
+    const key = column.sort || column.key
     this.props.onSort(key)
-  }
-
-  _handleLoadMore() {
-    this.props.onLoadMore()
   }
 
 }

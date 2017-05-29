@@ -80,7 +80,7 @@ exports.default = function () {
         all: action.result.pagination.all,
         records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records), _toConsumableArray(action.result.data)) : action.result.data,
         total: action.result.pagination.total,
-        status: loaded >= action.result.pagination.total ? 'completed' : 'loaded'
+        status: state.records.length + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'
       });
 
     case actionTypes.FETCH_FAILURE:

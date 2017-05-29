@@ -10,13 +10,13 @@ class Scrollpane extends React.Component {
   }
 
   static defaultProps = {
-    notificationPercent: 20,
+    notificationPercent: 30,
     onReachBottom: null
   }
 
   constructor(props) {
     super(props)
-    this.notified = false
+    this.attached = false
   }
 
   render() {
@@ -38,23 +38,24 @@ class Scrollpane extends React.Component {
   }
 
   componentWillUnmount() {
-    if(!this.notified) this._detachScrollListener()
+    this._detachScrollListener()
   }
 
   _attachScrollListener() {
     const { scrollpane } = this.refs
-    if(scrollpane.scrollHeight <= scrollpane.offsetHeight) return
-    this.notified = false
+    if(this.attached || scrollpane.scrollHeight <= scrollpane.offsetHeight) return
     scrollpane.addEventListener('scroll', this.listener, true)
     scrollpane.addEventListener('resize', this.listener, true)
     this._scrollListener()
+    this.attached = true
   }
 
   _detachScrollListener() {
     const { scrollpane } = this.refs
-    this.notified = true
+    if(!this.attached) return
     scrollpane.removeEventListener('scroll', this.listener, true)
     scrollpane.removeEventListener('resize', this.listener, true)
+    this.attached = false
   }
 
   _scrollListener() {

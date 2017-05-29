@@ -74,7 +74,7 @@ export default (state = INITIAL_STATE, action) => {
         ...action.result.data
       ] : action.result.data,
       total: action.result.pagination.total,
-      status: (loaded >= action.result.pagination.total) ? 'completed' : 'loaded'
+      status: (state.records.length + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
     }
 
   case actionTypes.FETCH_FAILURE:

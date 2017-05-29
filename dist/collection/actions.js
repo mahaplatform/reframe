@@ -43,7 +43,7 @@ var setRecords = exports.setRecords = function setRecords(records) {
 var fetch = exports.fetch = function fetch(endpoint, query) {
   return {
     type: 'API_REQUEST',
-    method: 'POST',
+    method: 'GET',
     endpoint: endpoint,
     query: query,
     request: actionTypes.FETCH_REQUEST,
