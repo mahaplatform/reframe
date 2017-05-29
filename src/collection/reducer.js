@@ -2,20 +2,59 @@ import * as actionTypes from './action_types'
 
 const INITIAL_STATE = {
   all: 0,
+  params: {
+    sort: {
+      key: null,
+      order: null
+    },
+    filter: {}
+  },
   records: [],
+  static: false,
   status: 'pending',
-  total: 0
+  total: 0,
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
+  case actionTypes.SET_PARAMS:
+    return {
+      ...state,
+      params: {
+        filter: action.filter,
+        sort: action.sort
+      }
+    }
+
+  case actionTypes.FILTER:
+    return {
+      ...state,
+      params: {
+        ...state.params,
+        filter: action.filter
+      }
+    }
+
+  case actionTypes.SORT:
+    return {
+      ...state,
+      params: {
+        ...state.params,
+        sort: {
+          key: action.key,
+          order: (state.params.sort.key == action.key && state.params.sort.order == 'asc') ? 'desc' : 'asc'
+        }
+      }
+    }
+
   case actionTypes.SET_RECORDS:
     return {
       ...state,
       all: action.records.length,
       records: action.records,
+      static: true,
       status: 'completed',
       total: action.records.length
     }

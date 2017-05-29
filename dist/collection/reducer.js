@@ -16,7 +16,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var INITIAL_STATE = {
   all: 0,
+  params: {
+    sort: {
+      key: null,
+      order: null
+    },
+    filter: {}
+  },
   records: [],
+  static: false,
   status: 'pending',
   total: 0
 };
@@ -28,10 +36,36 @@ exports.default = function () {
 
   switch (action.type) {
 
+    case actionTypes.SET_PARAMS:
+      return _extends({}, state, {
+        params: {
+          filter: action.filter,
+          sort: action.sort
+        }
+      });
+
+    case actionTypes.FILTER:
+      return _extends({}, state, {
+        params: _extends({}, state.params, {
+          filter: action.filter
+        })
+      });
+
+    case actionTypes.SORT:
+      return _extends({}, state, {
+        params: _extends({}, state.params, {
+          sort: {
+            key: action.key,
+            order: state.params.sort.key == action.key && state.params.sort.order == 'asc' ? 'desc' : 'asc'
+          }
+        })
+      });
+
     case actionTypes.SET_RECORDS:
       return _extends({}, state, {
         all: action.records.length,
         records: action.records,
+        static: true,
         status: 'completed',
         total: action.records.length
       });

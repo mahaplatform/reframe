@@ -57,6 +57,12 @@ var Collection = function (_React$Component) {
           data = _props.data,
           onSetRecords = _props.onSetRecords;
 
+      var filter = this.props.filter || {};
+      var sort = this.props.sort || {
+        key: 'created_at',
+        order: 'desc'
+      };
+      this.props.onSetParams(filter, sort);
       if (data) onSetRecords(data);
     }
   }, {
@@ -64,8 +70,11 @@ var Collection = function (_React$Component) {
     value: function _getTable() {
       var _props2 = this.props,
           columns = _props2.columns,
+          params = _props2.params,
           records = _props2.records,
-          sort = _props2.sort;
+          total = _props2.total,
+          onSort = _props2.onSort;
+      var sort = params.sort;
 
       return {
         columns: columns,
@@ -75,9 +84,7 @@ var Collection = function (_React$Component) {
         onLoadMore: function onLoadMore() {
           return console.log('Load More');
         },
-        onSort: function onSort(key) {
-          return console.log('Sort ' + key);
-        }
+        onSort: onSort.bind(this)
       };
     }
   }]);
@@ -88,6 +95,11 @@ var Collection = function (_React$Component) {
 Collection.PropTypes = {
   columns: _propTypes2.default.array,
   data: _propTypes2.default.array,
+  filter: _propTypes2.default.object,
+  params: _propTypes2.default.shape({
+    filter: _propTypes2.default.object,
+    sort: _propTypes2.default.object
+  }),
   records: _propTypes2.default.array,
   sort: _propTypes2.default.shape({
     key: _propTypes2.default.string,

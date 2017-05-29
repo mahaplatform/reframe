@@ -17,7 +17,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { columns, records, sort, onSort } = this.props
+    const { columns, records, params, sort, onSort } = this.props
     return (
       <div className="reframe-table">
         <div className="reframe-table-head">
@@ -30,7 +30,7 @@ class Table extends React.Component {
                 return (
                   <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column.key) }>
                     { column.label }
-                    { column.key === sort.key &&
+                    { sort && column.key === sort.key &&
                       (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
                     }
                   </div>

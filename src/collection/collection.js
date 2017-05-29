@@ -7,6 +7,11 @@ class Collection extends React.Component {
   static PropTypes = {
     columns: PropTypes.array,
     data: PropTypes.array,
+    filter: PropTypes.object,
+    params: PropTypes.shape({
+      filter: PropTypes.object,
+      sort: PropTypes.object,
+    }),
     records: PropTypes.array,
     sort: PropTypes.shape({
       key: PropTypes.string,
@@ -27,18 +32,25 @@ class Collection extends React.Component {
 
   componentDidMount() {
     const { data, onSetRecords } = this.props
+    const filter = this.props.filter || {}
+    const sort = this.props.sort || {
+      key: 'created_at',
+      order: 'desc'
+    }
+    this.props.onSetParams(filter, sort)
     if(data) onSetRecords(data)
   }
 
   _getTable() {
-    const { columns, records, sort } = this.props
+    const { columns, params, records, total, onSort } = this.props
+    const { sort } = params
     return {
       columns,
       records,
       sort,
       total: 300,
       onLoadMore: () => console.log(`Load More`),
-      onSort: (key) => console.log(`Sort ${key}`)
+      onSort: onSort.bind(this)
     }
   }
 

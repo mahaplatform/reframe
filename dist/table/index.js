@@ -43,6 +43,7 @@ var Table = function (_React$Component) {
       var _props = this.props,
           columns = _props.columns,
           records = _props.records,
+          params = _props.params,
           sort = _props.sort,
           onSort = _props.onSort;
 
@@ -66,7 +67,7 @@ var Table = function (_React$Component) {
                   'div',
                   { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column.key) },
                   column.label,
-                  column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
+                  sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
                 );
               })
             )
