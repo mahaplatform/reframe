@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -13,6 +15,16 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _format = require('../format');
+
+var _format2 = _interopRequireDefault(_format);
 
 var _scrollpane = require('../scrollpane');
 
@@ -42,6 +54,8 @@ var Table = function (_React$Component) {
 
       var _props = this.props,
           columns = _props.columns,
+          link = _props.link,
+          modal = _props.modal,
           records = _props.records,
           params = _props.params,
           sort = _props.sort,
@@ -83,21 +97,40 @@ var Table = function (_React$Component) {
               'div',
               { className: 'reframe-table-body-wrapper', ref: 'body' },
               records.map(function (record, rowIndex) {
-                return _react2.default.createElement(
-                  'div',
-                  { key: 'row-' + rowIndex, className: 'reframe-table-body-row' },
-                  columns.map(function (column, columnIndex) {
-                    var klass = ['reframe-table-body-cell'];
-                    if (column.primary === true) klass.push('mobile');
-                    if (column.collapsing === true) klass.push('collapsing');
-                    if (column.centered === true) klass.push('centered');
-                    return _react2.default.createElement(
-                      'div',
-                      { key: 'cell-' + rowIndex + '-' + columnIndex, className: klass.join(' ') },
-                      record[column.key]
-                    );
-                  })
-                );
+                var row = columns.map(function (column, columnIndex) {
+                  var value = _lodash2.default.get(record, column.key);
+                  var klass = ['reframe-table-body-cell'];
+                  if (column.primary === true) klass.push('mobile');
+                  if (column.collapsing === true) klass.push('collapsing');
+                  if (column.centered === true) klass.push('centered');
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'cell_' + rowIndex + '_' + columnIndex, className: klass.join(' ') },
+                    _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: value }))
+                  );
+                }).concat(_this2.props.export ? [_react2.default.createElement('div', { key: 'cell_extra', className: 'table-cell mobile' })] : []);
+
+                if (link) {
+                  _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
+                  var to = _lodash2.default.template(link)(record);
+                  return _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', to: to },
+                    row
+                  );
+                } else if (modal) {
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleModal.bind(_this2, record.id) },
+                    row
+                  );
+                } else {
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row' },
+                    row
+                  );
+                }
               })
             )
           )
@@ -118,7 +151,7 @@ var Table = function (_React$Component) {
     key: '_getScrollpane',
     value: function _getScrollpane() {
       return {
-        onReachBottom: this._handleLoadMore.bind(this)
+        onReachBottom: this.props.onLoadMore.bind(this)
       };
     }
   }, {
@@ -136,11 +169,6 @@ var Table = function (_React$Component) {
       var key = column.sort || column.key;
       this.props.onSort(key);
     }
-  }, {
-    key: '_handleLoadMore',
-    value: function _handleLoadMore() {
-      this.props.onLoadMore();
-    }
   }]);
 
   return Table;
@@ -148,6 +176,8 @@ var Table = function (_React$Component) {
 
 Table.PropTypes = {
   columns: _propTypes2.default.array,
+  link: _propTypes2.default.string,
+  modal: _propTypes2.default.element,
   records: _propTypes2.default.array,
   sort: _propTypes2.default.shape({
     key: _propTypes2.default.string,

@@ -11,6 +11,7 @@ import Infinite from './infinite'
 import Modal from './modal'
 import Platform from './platform'
 import Prompt from './prompt'
+import Scrollpane from './scrollpane'
 import Table from './table'
 import Tasks from './tasks'
 import Textarea from './textarea'
@@ -31,6 +32,7 @@ export default {
   Modal,
   Platform,
   Prompt,
+  Scrollpane,
   Table,
   Tasks,
   Textarea,

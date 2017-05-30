@@ -56,6 +56,10 @@ var _prompt = require('./prompt');
 
 var _prompt2 = _interopRequireDefault(_prompt);
 
+var _scrollpane = require('./scrollpane');
+
+var _scrollpane2 = _interopRequireDefault(_scrollpane);
+
 var _table = require('./table');
 
 var _table2 = _interopRequireDefault(_table);
@@ -92,6 +96,7 @@ exports.default = {
   Modal: _modal2.default,
   Platform: _platform2.default,
   Prompt: _prompt2.default,
+  Scrollpane: _scrollpane2.default,
   Table: _table2.default,
   Tasks: _tasks2.default,
   Textarea: _textarea2.default,
