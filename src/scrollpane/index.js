@@ -46,7 +46,6 @@ class Scrollpane extends React.Component {
 
   _attachScrollListener() {
     const { scrollpane } = this.refs
-    if(scrollpane.scrollHeight <= scrollpane.offsetHeight) return
     scrollpane.addEventListener('scroll', this.listener, true)
     scrollpane.addEventListener('resize', this.listener, true)
     this._scrollListener()
@@ -93,6 +92,7 @@ class Scrollpane extends React.Component {
           node.style.top = `${scrollpane.offsetTop}px`
           node.style.left = 0
           node.style.right = 0
+          node.style.zIndex = 2
           this.fixed = index
           this.headers[index].fixed = true
         } else if(header.fixed && index <= this.fixed && scrollpane.scrollTop < header.top) {

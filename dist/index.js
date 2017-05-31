@@ -64,6 +64,10 @@ var _table = require('./table');
 
 var _table2 = _interopRequireDefault(_table);
 
+var _tabs = require('./tabs');
+
+var _tabs2 = _interopRequireDefault(_tabs);
+
 var _tasks = require('./tasks');
 
 var _tasks2 = _interopRequireDefault(_tasks);
@@ -98,6 +102,7 @@ exports.default = {
   Prompt: _prompt2.default,
   Scrollpane: _scrollpane2.default,
   Table: _table2.default,
+  Tabs: _tabs2.default,
   Tasks: _tasks2.default,
   Textarea: _textarea2.default,
   Textfield: _textfield2.default,

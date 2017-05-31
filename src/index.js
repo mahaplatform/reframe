@@ -13,6 +13,7 @@ import Platform from './platform'
 import Prompt from './prompt'
 import Scrollpane from './scrollpane'
 import Table from './table'
+import Tabs from './tabs'
 import Tasks from './tasks'
 import Textarea from './textarea'
 import Textfield from './textfield'
@@ -34,6 +35,7 @@ export default {
   Prompt,
   Scrollpane,
   Table,
+  Tabs,
   Tasks,
   Textarea,
   Textfield,
