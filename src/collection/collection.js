@@ -13,6 +13,9 @@ class Collection extends React.Component {
     entity: PropTypes.object,
     empty: PropTypes.object,
     filter: PropTypes.object,
+    handler: PropTypes.func,
+    link: PropTypes.string,
+    modal: PropTypes.string,
     params: PropTypes.object,
     records: PropTypes.array,
     sort: PropTypes.object,
@@ -113,11 +116,12 @@ class Collection extends React.Component {
   }
 
   _getTable() {
-    const { columns, link, modal, params, records, status, onSort } = this.props
+    const { columns, handler, link, modal, params, records, status, onSort } = this.props
     const { sort } = params
     return {
       columns,
       export: this.props.export,
+      handler,
       link,
       modal,
       records,

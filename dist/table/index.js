@@ -54,10 +54,11 @@ var Table = function (_React$Component) {
 
       var _props = this.props,
           columns = _props.columns,
+          handler = _props.handler,
           link = _props.link,
           modal = _props.modal,
-          records = _props.records,
           params = _props.params,
+          records = _props.records,
           sort = _props.sort,
           onSort = _props.onSort;
 
@@ -124,6 +125,12 @@ var Table = function (_React$Component) {
                     { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleModal.bind(_this2, record.id) },
                     row
                   );
+                } else if (handler) {
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleHandler.bind(_this2, record.id) },
+                    row
+                  );
                 } else {
                   return _react2.default.createElement(
                     'div',
@@ -168,6 +175,11 @@ var Table = function (_React$Component) {
     value: function _handleSort(column) {
       var key = column.sort || column.key;
       this.props.onSort(key);
+    }
+  }, {
+    key: '_handleHandler',
+    value: function _handleHandler(id) {
+      this.props.handler(id);
     }
   }]);
 

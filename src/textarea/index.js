@@ -1,22 +1,60 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import _ from 'lodash'
 
-class Textarea extends React.Component {
+class TextArea extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
+    maxLength: React.PropTypes.number,
+    disabled: React.PropTypes.bool,
+    placeholder: React.PropTypes.string,
+    defaultValue: React.PropTypes.string
+  }
+
+  static defaultProps = {
+    disabled: false,
+    maxLength: null,
+    placeholder: '',
+    defaultValue: '',
+    onChange: () => {}
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: _.toString(props.defaultValue)
+    }
   }
 
   render() {
+    const { placeholder, disabled } = this.props
+    const { value } = this.state
     return (
-      <input {...this._getConfig()} />
+      <div className="textarea">
+        <textarea placeholder={placeholder}
+                  disabled={disabled}
+                  defaultValue={value}
+                  onChange={this.handleChange.bind(this)} />
+      </div>
     )
   }
 
-  _getConfig() {
-    return {
+  componentDidUpdate(prevProps) {
+    if(prevProps.defaultValue != this.props.defaultValue) {
+      this.setValue(this.props.defaultValue)
+    }
+  }
+
+  handleChange(event) {
+    this.setValue(event.target.value)
+    this.props.onChange(event.target.value)
+  }
+
+  setValue(value) {
+    if(this.props.maxLength && value.length <= this.props.maxLength) {
+      this.setState({value})
     }
   }
 
 }
 
-export default Textarea
+export default TextArea

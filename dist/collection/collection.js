@@ -210,6 +210,7 @@ var Collection = function (_React$Component) {
     value: function _getTable() {
       var _props3 = this.props,
           columns = _props3.columns,
+          handler = _props3.handler,
           link = _props3.link,
           modal = _props3.modal,
           params = _props3.params,
@@ -221,6 +222,7 @@ var Collection = function (_React$Component) {
       return {
         columns: columns,
         export: this.props.export,
+        handler: handler,
         link: link,
         modal: modal,
         records: records,
@@ -269,6 +271,9 @@ Collection.PropTypes = {
   entity: _propTypes2.default.object,
   empty: _propTypes2.default.object,
   filter: _propTypes2.default.object,
+  handler: _propTypes2.default.func,
+  link: _propTypes2.default.string,
+  modal: _propTypes2.default.string,
   params: _propTypes2.default.object,
   records: _propTypes2.default.array,
   sort: _propTypes2.default.object,

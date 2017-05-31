@@ -18,9 +18,17 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _textarea = require('../textarea');
+
+var _textarea2 = _interopRequireDefault(_textarea);
+
 var _textfield = require('../textfield');
 
 var _textfield2 = _interopRequireDefault(_textfield);
+
+var _password = require('../password');
+
+var _password2 = _interopRequireDefault(_password);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,22 +38,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import Dynamic from 'admin/components/dynamic'
-// import Checkbox from 'admin/components/checkbox'
-// // import Checkboxes from 'admin/components/checkboxes'
-// // import ColorField from 'admin/components/colorfield'
-// import FileField from 'admin/components/filefield'
-// import Lookup from 'admin/components/lookup'
+// import Dynamic from '../dynamic'
+// import Checkbox from '../checkbox'
+// // import Checkboxes from '../checkboxes'
+// // import ColorField from '../colorfield'
+// import FileField from '../filefield'
+// import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
-// import Select from 'admin/components/select'
+// import Select from '../select'
 // // import TableField from './tablefield'
-// import Text from 'admin/components/text'
-// import TextArea from 'admin/components/textarea'
+// import Text from '../text'
 
 
-// import Password from 'admin/components/password'
-// import DateField from 'admin/components/datefield'
+// import DateField from '../datefield'
 
 var standardControls = {
   // 'checkbox': Checkbox,
@@ -57,7 +63,9 @@ var standardControls = {
   // // 'radios': Radios,
   // 'select': Select,
   // 'text': Text,
-  'textfield': _textfield2.default
+  'textfield': _textfield2.default,
+  'password': _password2.default,
+  'textarea': _textarea2.default
 };
 
 var Control = function (_React$Component) {
@@ -91,11 +99,7 @@ var Control = function (_React$Component) {
           value = _props2.value,
           text = _props2.text;
 
-      return {
-        endpoint: endpoint,
-        value: value,
-        text: text
-      };
+      return { endpoint: endpoint, value: value, text: text };
     }
   }]);
 

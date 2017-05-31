@@ -2,21 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-// import Dynamic from 'admin/components/dynamic'
-// import Checkbox from 'admin/components/checkbox'
-// // import Checkboxes from 'admin/components/checkboxes'
-// // import ColorField from 'admin/components/colorfield'
-// import FileField from 'admin/components/filefield'
-// import Lookup from 'admin/components/lookup'
+// import Dynamic from '../dynamic'
+// import Checkbox from '../checkbox'
+// // import Checkboxes from '../checkboxes'
+// // import ColorField from '../colorfield'
+// import FileField from '../filefield'
+// import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
-// import Select from 'admin/components/select'
+// import Select from '../select'
 // // import TableField from './tablefield'
-// import Text from 'admin/components/text'
-// import TextArea from 'admin/components/textarea'
+// import Text from '../text'
+import TextArea from '../textarea'
 import TextField from '../textfield'
-// import Password from 'admin/components/password'
-// import DateField from 'admin/components/datefield'
+import Password from '../password'
+// import DateField from '../datefield'
 
 const standardControls = {
   // 'checkbox': Checkbox,
@@ -29,8 +29,8 @@ const standardControls = {
   // 'select': Select,
   // 'text': Text,
   'textfield': TextField,
-  // 'password': Password,
-  // 'textarea': TextArea,
+  'password': Password,
+  'textarea': TextArea,
   // 'datefield': DateField
   // 'tablefield': TableField
 }
@@ -65,11 +65,7 @@ class Control extends React.Component {
 
   _getDynamic() {
     const { endpoint, value, text } = this.props
-    return {
-      endpoint,
-      value,
-      text
-    }
+    return { endpoint, value, text }
   }
 
 }

@@ -22,7 +22,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { columns, link, modal, records, params, sort, onSort } = this.props
+    const { columns, handler, link, modal, params, records, sort, onSort } = this.props
     return (
       <div className="reframe-table">
         <div className="reframe-table-head">
@@ -75,6 +75,12 @@ class Table extends React.Component {
                       { row }
                     </div>
                   )
+                } else if(handler) {
+                  return (
+                    <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleHandler.bind(this, record.id) }>
+                      { row }
+                    </div>
+                  )
                 } else {
                   return (
                     <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
@@ -116,6 +122,10 @@ class Table extends React.Component {
   _handleSort(column) {
     const key = column.sort || column.key
     this.props.onSort(key)
+  }
+
+  _handleHandler(id) {
+    this.props.handler(id)
   }
 
 }
