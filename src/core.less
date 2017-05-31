@@ -45,6 +45,21 @@ body {
 .backface-visibility(@value) {
 	backface-visibility: @value;
 }
+.colorize(@class) {
+  .red .@{class} { background-color: @red; }
+  .orange .@{class} { background-color: @orange; }
+  .yellow .@{class} { background-color: @yellow; }
+	.olive .@{class} { background-color: @olive; }
+	.green .@{class} { background-color: @green; }
+	.teal .@{class} { background-color: @teal; }
+  .blue .@{class} { background-color: @blue; }
+	.violet .@{class} { background-color: @violet; }
+  .purple .@{class} { background-color: @purple; }
+	.pink .@{class} { background-color: @pink; }
+	.brown .@{class} { background-color: @brown; }
+	.grey .@{class} { background-color: @grey; }
+  .black .@{class} { background-color: @black; }
+}
 .expanded(@begin, @end) {
   &.expanded-appear,
   &.expanded-enter,

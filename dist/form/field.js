@@ -162,21 +162,21 @@ var Field = function (_React$Component) {
 }(_react2.default.Component);
 
 Field.propTypes = {
-  columns: _react2.default.PropTypes.array,
-  data: _react2.default.PropTypes.object,
-  endpoint: _react2.default.PropTypes.string,
-  errors: _react2.default.PropTypes.object,
-  fields: _react2.default.PropTypes.array,
-  include: _react2.default.PropTypes.bool,
-  instructions: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
-  name: _react2.default.PropTypes.string.isRequired,
-  options: _react2.default.PropTypes.array,
-  required: _react2.default.PropTypes.bool,
-  type: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.func]).isRequired,
-  show: _react2.default.PropTypes.bool,
-  onSubmit: _react2.default.PropTypes.func,
-  onUpdateData: _react2.default.PropTypes.func
+  columns: _propTypes2.default.array,
+  data: _propTypes2.default.object,
+  endpoint: _propTypes2.default.string,
+  errors: _propTypes2.default.object,
+  fields: _propTypes2.default.array,
+  include: _propTypes2.default.bool,
+  instructions: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  name: _propTypes2.default.string.isRequired,
+  options: _propTypes2.default.array,
+  required: _propTypes2.default.bool,
+  type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
+  show: _propTypes2.default.bool,
+  onSubmit: _propTypes2.default.func,
+  onUpdateData: _propTypes2.default.func
 };
 Field.defaultProps = {
   columns: [],

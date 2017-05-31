@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -99,10 +103,10 @@ var Control = function (_React$Component) {
 }(_react2.default.Component);
 
 Control.propTypes = {
-  type: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.func]).isRequired,
-  endpoint: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.any,
-  options: _react2.default.PropTypes.array
+  type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
+  endpoint: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.any,
+  options: _propTypes2.default.array
 };
 Control.defaultProps = {
   type: 'textfield',

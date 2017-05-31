@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _field = require('./field');
 
 var _field2 = _interopRequireDefault(_field);
@@ -61,10 +65,10 @@ var Fields = function (_React$Component) {
 }(_react2.default.Component);
 
 Fields.propTypes = {
-  fields: _react2.default.PropTypes.array,
-  onChange: _react2.default.PropTypes.func,
-  onSubmit: _react2.default.PropTypes.func,
-  onUpdateData: _react2.default.PropTypes.func
+  fields: _propTypes2.default.array,
+  onChange: _propTypes2.default.func,
+  onSubmit: _propTypes2.default.func,
+  onUpdateData: _propTypes2.default.func
 };
 Fields.defaultProps = {
   fields: [],

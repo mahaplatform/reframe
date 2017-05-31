@@ -1,19 +1,21 @@
-@page_header_background_color: @primary_background_color;
-@page_header_color: @primary_color;
+body {
+  .colorize(reframe-tabs)
+}
 
 .reframe-tabs {
-  background-color: @page_header_background_color;
+  background-color: @primary_background_color;
   margin: 0;
   display: flex;
 }
 .reframe-tabs-item {
   flex: 1;
   padding: 15px;
-  color: @page_header_color !important;
+  color: @primary_color !important;
   text-align: center;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
   &.active {
-    border-color: @page_header_color;
+    border-color: @primary_color;
   }
 }
 .reframe-tab {

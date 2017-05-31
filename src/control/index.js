@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 // import Dynamic from 'admin/components/dynamic'
@@ -37,13 +38,13 @@ const standardControls = {
 class Control extends React.Component {
 
   static propTypes = {
-    type: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.func
+    type: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
     ]).isRequired,
-    endpoint: React.PropTypes.string,
-    defaultValue: React.PropTypes.any,
-    options: React.PropTypes.array
+    endpoint: PropTypes.string,
+    defaultValue: PropTypes.any,
+    options: PropTypes.array
   }
 
   static defaultProps = {

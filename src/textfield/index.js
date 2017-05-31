@@ -1,22 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class TextField extends React.Component {
 
   static propTypes = {
-    autoComplete: React.PropTypes.string,
-    maxLength: React.PropTypes.number,
-    prefix: React.PropTypes.string,
-    suffix: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onKeyPress: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func
+    autoComplete: PropTypes.string,
+    maxLength: PropTypes.number,
+    prefix: PropTypes.string,
+    suffix: PropTypes.string,
+    disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onKeyUp: PropTypes.func,
+    onKeyDown: PropTypes.func
   }
 
   static defaultProps = {

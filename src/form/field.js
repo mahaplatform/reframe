@@ -6,24 +6,24 @@ import Fields from './fields'
 class Field extends React.Component {
 
   static propTypes = {
-    columns: React.PropTypes.array,
-    data: React.PropTypes.object,
-    endpoint: React.PropTypes.string,
-    errors: React.PropTypes.object,
-    fields: React.PropTypes.array,
-    include: React.PropTypes.bool,
-    instructions: React.PropTypes.string,
-    label: React.PropTypes.string,
-    name: React.PropTypes.string.isRequired,
-    options: React.PropTypes.array,
-    required: React.PropTypes.bool,
-    type: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.func
+    columns: PropTypes.array,
+    data: PropTypes.object,
+    endpoint: PropTypes.string,
+    errors: PropTypes.object,
+    fields: PropTypes.array,
+    include: PropTypes.bool,
+    instructions: PropTypes.string,
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    options: PropTypes.array,
+    required: PropTypes.bool,
+    type: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
     ]).isRequired,
-    show: React.PropTypes.bool,
-    onSubmit: React.PropTypes.func,
-    onUpdateData: React.PropTypes.func
+    show: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    onUpdateData: PropTypes.func
   }
 
   static defaultProps = {

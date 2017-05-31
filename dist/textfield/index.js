@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -136,19 +140,19 @@ var TextField = function (_React$Component) {
 }(_react2.default.Component);
 
 TextField.propTypes = {
-  autoComplete: _react2.default.PropTypes.string,
-  maxLength: _react2.default.PropTypes.number,
-  prefix: _react2.default.PropTypes.string,
-  suffix: _react2.default.PropTypes.string,
-  disabled: _react2.default.PropTypes.bool,
-  placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string,
-  onChange: _react2.default.PropTypes.func,
-  onFocus: _react2.default.PropTypes.func,
-  onBlur: _react2.default.PropTypes.func,
-  onKeyPress: _react2.default.PropTypes.func,
-  onKeyUp: _react2.default.PropTypes.func,
-  onKeyDown: _react2.default.PropTypes.func
+  autoComplete: _propTypes2.default.string,
+  maxLength: _propTypes2.default.number,
+  prefix: _propTypes2.default.string,
+  suffix: _propTypes2.default.string,
+  disabled: _propTypes2.default.bool,
+  placeholder: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.string,
+  onChange: _propTypes2.default.func,
+  onFocus: _propTypes2.default.func,
+  onBlur: _propTypes2.default.func,
+  onKeyPress: _propTypes2.default.func,
+  onKeyUp: _propTypes2.default.func,
+  onKeyDown: _propTypes2.default.func
 };
 TextField.defaultProps = {
   autoComplete: 'off',

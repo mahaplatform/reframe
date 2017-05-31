@@ -1,13 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Field from './field'
 
 class Fields extends React.Component {
 
   static propTypes = {
-    fields: React.PropTypes.array,
-    onChange: React.PropTypes.func,
-    onSubmit: React.PropTypes.func,
-    onUpdateData: React.PropTypes.func
+    fields: PropTypes.array,
+    onChange: PropTypes.func,
+    onSubmit: PropTypes.func,
+    onUpdateData: PropTypes.func
   }
 
   static defaultProps = {
