@@ -21,7 +21,7 @@ export class Flash extends React.Component {
     return (
       <div className="reframe-flash">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-flash-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
           {message &&
             <div className={`reframe-flash-popup ${style}`} key={`flash_${message}`}>
               <p>

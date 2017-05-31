@@ -50,7 +50,14 @@ var Modal = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-modal-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           components && components.length > 0 && _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) }),
           components && components.length > 0 && _react2.default.createElement(
             'div',

@@ -25,7 +25,7 @@ class Tasks extends React.Component {
     return (
       <div className="reframe-tasks">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-tasks-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
           { items && <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } /> }
           { items &&
             <div className="reframe-tasks-list">

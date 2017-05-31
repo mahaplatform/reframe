@@ -46,14 +46,14 @@ body {
 	backface-visibility: @value;
 }
 .expanded(@begin, @end) {
-  .expanded-appear,
-  .expanded-enter,
-  .expanded-leave.expanded-leave-active {
+  &.expanded-appear,
+  &.expanded-enter,
+  &.expanded-leave.expanded-leave-active {
     @begin();
   }
-  .expanded-appear.expanded-appear-active,
-  .expanded-enter.expanded-enter-active,
-  .expanded-leave {
+  &.expanded-appear.expanded-appear-active,
+  &.expanded-enter.expanded-enter-active,
+  &.expanded-leave {
     @end();
   }
 }

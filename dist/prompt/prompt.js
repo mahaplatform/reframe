@@ -49,7 +49,14 @@ var Prompt = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-prompt-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
           message && _react2.default.createElement('div', { className: 'reframe-prompt-overlay', onClick: this._handleClosePrompt.bind(this) }),
           message && _react2.default.createElement(
             'div',

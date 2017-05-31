@@ -50,7 +50,14 @@ var Tray = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500, transitionAppear: true, transitionAppearTimeout: 500 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-tray-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           component && _react2.default.createElement('div', { className: 'reframe-tray-overlay', onClick: this._handleCloseTray.bind(this) }),
           component && _react2.default.createElement(
             'div',

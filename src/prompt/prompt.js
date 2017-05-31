@@ -32,7 +32,7 @@ class Prompt extends React.Component {
     return (
       <div className="reframe-prompt">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-prompt-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
           { message && <div className="reframe-prompt-overlay" onClick={ this._handleClosePrompt.bind(this) } /> }
           { message &&
             <div className="reframe-prompt-options">

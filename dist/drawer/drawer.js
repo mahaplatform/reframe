@@ -51,7 +51,14 @@ var Drawer = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-drawer-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           component && _react2.default.createElement('div', { className: 'reframe-drawer-overlay', onClick: this._handleClose.bind(this) }),
           component && _react2.default.createElement(
             'div',
@@ -90,7 +97,7 @@ Drawer.childContextTypes = {
   drawer: _propTypes2.default.object
 };
 Drawer.propTypes = {
-  component: _propTypes2.default.object,
+  component: _propTypes2.default.func,
   location: _propTypes2.default.string,
   onOpen: _propTypes2.default.func,
   onClose: _propTypes2.default.func

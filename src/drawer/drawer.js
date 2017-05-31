@@ -10,7 +10,7 @@ class Drawer extends React.Component {
   }
 
   static propTypes = {
-    component: PropTypes.object,
+    component: PropTypes.func,
     location: PropTypes.string,
     onOpen: PropTypes.func,
     onClose: PropTypes.func
@@ -21,7 +21,7 @@ class Drawer extends React.Component {
     return (
       <div className="reframe-drawer">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-drawer-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
           { component && <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} /> }
           { component &&
             <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>

@@ -21,7 +21,7 @@ class Modal extends React.Component {
     return (
       <div className="reframe-modal">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-modal-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
           { components && components.length > 0 && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
           { components && components.length > 0 &&
             <div className="reframe-modal-window">

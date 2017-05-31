@@ -48,7 +48,14 @@ var Tasks = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-tasks-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
           items && _react2.default.createElement('div', { className: 'reframe-tasks-overlay', onClick: this._handleClose.bind(this) }),
           items && _react2.default.createElement(
             'div',

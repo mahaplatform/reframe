@@ -20,7 +20,7 @@ class Tray extends React.Component {
     return (
       <div className="reframe-tray">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppear={true} transitionAppearTimeout={500}>
+        <CSSTransitionGroup component={ ({ children }) => <div className="reframe-tray-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
           { component && <div className="reframe-tray-overlay" onClick={this._handleCloseTray.bind(this)} /> }
           { component &&
             <div className="reframe-tray-panel">

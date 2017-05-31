@@ -48,7 +48,14 @@ var Flash = exports.Flash = function (_React$Component) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250 },
+          { component: function component(_ref) {
+              var children = _ref.children;
+              return _react2.default.createElement(
+                'div',
+                { className: 'reframe-flash-outlet' },
+                children
+              );
+            }, transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250 },
           message && _react2.default.createElement(
             'div',
             { className: 'reframe-flash-popup ' + style, key: 'flash_' + message },
