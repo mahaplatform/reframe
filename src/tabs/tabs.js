@@ -45,7 +45,7 @@ export class Tabs extends React.Component {
           { tabs.map((tab, index) => {
             return (
               <div key={`tab_body_${index}`} className={`reframe-tab-body ${this._getStatus(index)}`}>
-                <tab.component />
+                { _.isFunction() ? <tab.component /> : tab.component }
               </div>
             )
           }) }

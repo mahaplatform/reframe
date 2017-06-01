@@ -87,7 +87,7 @@ var Tabs = exports.Tabs = function (_React$Component) {
             return _react2.default.createElement(
               'div',
               { key: 'tab_body_' + index, className: 'reframe-tab-body ' + _this2._getStatus(index) },
-              _react2.default.createElement(tab.component, null)
+              _lodash2.default.isFunction() ? _react2.default.createElement(tab.component, null) : tab.component
             );
           })
         )
