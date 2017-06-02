@@ -12,6 +12,7 @@ import Modal from './modal'
 import Platform from './platform'
 import Prompt from './prompt'
 import Scrollpane from './scrollpane'
+import Stack from './stack'
 import Table from './table'
 import Tabs from './tabs'
 import Tasks from './tasks'
@@ -34,6 +35,7 @@ export default {
   Platform,
   Prompt,
   Scrollpane,
+  Stack,
   Table,
   Tabs,
   Tasks,

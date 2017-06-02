@@ -60,6 +60,10 @@ var _scrollpane = require('./scrollpane');
 
 var _scrollpane2 = _interopRequireDefault(_scrollpane);
 
+var _stack = require('./stack');
+
+var _stack2 = _interopRequireDefault(_stack);
+
 var _table = require('./table');
 
 var _table2 = _interopRequireDefault(_table);
@@ -101,6 +105,7 @@ exports.default = {
   Platform: _platform2.default,
   Prompt: _prompt2.default,
   Scrollpane: _scrollpane2.default,
+  Stack: _stack2.default,
   Table: _table2.default,
   Tabs: _tabs2.default,
   Tasks: _tasks2.default,

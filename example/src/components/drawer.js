@@ -23,7 +23,7 @@ class Drawer extends React.Component {
   }
 
   _handleDrawer(location) {
-    this.context.drawer.open(<Foo />, location)
+    this.context.drawer.open(Foo, location)
   }
 
 }
