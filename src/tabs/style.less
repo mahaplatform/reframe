@@ -5,6 +5,11 @@ body {
 .reframe-tabs {
   background-color: @primary_background_color;
   margin: 0;
+}
+.reframe-tabs-items {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
   display: flex;
 }
 .reframe-tabs-item {
@@ -20,13 +25,13 @@ body {
 }
 .reframe-tab {
   position: relative;
+  width: 100%;
 }
-.reframe-tab-body {
+.reframe-tab-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 15px;
   display: none;
   &.transitioning {
     transition: transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
@@ -42,4 +47,10 @@ body {
   &.left {
     .translateX(-100%);
   }
+}
+.reframe-tab-body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
 }

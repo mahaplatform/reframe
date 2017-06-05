@@ -69,15 +69,19 @@ var Tabs = exports.Tabs = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-tabs' },
-            tabs.map(function (tab, index) {
-              var klass = ['reframe-tabs-item'];
-              if (index === chosen) klass.push('active');
-              return _react2.default.createElement(
-                'a',
-                { key: 'tab_' + index, onClick: _this2._handleChoose.bind(_this2, index), className: klass.join(' ') },
-                tab.label
-              );
-            })
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-tabs-items' },
+              tabs.map(function (tab, index) {
+                var klass = ['reframe-tabs-item'];
+                if (index === chosen) klass.push('active');
+                return _react2.default.createElement(
+                  'a',
+                  { key: 'tab_' + index, onClick: _this2._handleChoose.bind(_this2, index), className: klass.join(' ') },
+                  tab.label
+                );
+              })
+            )
           )
         ),
         _react2.default.createElement(
@@ -86,8 +90,12 @@ var Tabs = exports.Tabs = function (_React$Component) {
           tabs.map(function (tab, index) {
             return _react2.default.createElement(
               'div',
-              { key: 'tab_body_' + index, className: 'reframe-tab-body ' + _this2._getStatus(index) },
-              _lodash2.default.isFunction() ? _react2.default.createElement(tab.component, null) : tab.component
+              { key: 'tab_body_' + index, className: 'reframe-tab-wrapper ' + _this2._getStatus(index) },
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-tab-body' },
+                _lodash2.default.isFunction() ? _react2.default.createElement(tab.component, null) : tab.component
+              )
             );
           })
         )

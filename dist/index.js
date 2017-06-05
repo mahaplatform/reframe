@@ -28,6 +28,10 @@ var _flash = require('./flash');
 
 var _flash2 = _interopRequireDefault(_flash);
 
+var _filefield = require('./filefield');
+
+var _filefield2 = _interopRequireDefault(_filefield);
+
 var _form = require('./form');
 
 var _form2 = _interopRequireDefault(_form);
@@ -43,6 +47,10 @@ var _history2 = _interopRequireDefault(_history);
 var _infinite = require('./infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
+
+var _list = require('./list');
+
+var _list2 = _interopRequireDefault(_list);
 
 var _modal = require('./modal');
 
@@ -96,11 +104,13 @@ exports.default = {
   Control: _control2.default,
   Details: _details2.default,
   Drawer: _drawer2.default,
+  Filefield: _filefield2.default,
   Flash: _flash2.default,
   Form: _form2.default,
   Format: _format2.default,
   History: _history2.default,
   Infinite: _infinite2.default,
+  List: _list2.default,
   Modal: _modal2.default,
   Platform: _platform2.default,
   Prompt: _prompt2.default,

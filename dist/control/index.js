@@ -18,6 +18,14 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _checkbox = require('../checkbox');
+
+var _checkbox2 = _interopRequireDefault(_checkbox);
+
+var _filefield = require('../filefield');
+
+var _filefield2 = _interopRequireDefault(_filefield);
+
 var _textarea = require('../textarea');
 
 var _textarea2 = _interopRequireDefault(_textarea);
@@ -39,10 +47,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // import Dynamic from '../dynamic'
-// import Checkbox from '../checkbox'
+
 // // import Checkboxes from '../checkboxes'
 // // import ColorField from '../colorfield'
-// import FileField from '../filefield'
+
 // import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
@@ -54,10 +62,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import DateField from '../datefield'
 
 var standardControls = {
-  // 'checkbox': Checkbox,
+  'checkbox': _checkbox2.default,
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
-  // 'filefield': FileField,
+  'filefield': _filefield2.default,
   // 'lookup': Lookup,
   // // 'multiselect': MultiSelect,
   // // 'radios': Radios,

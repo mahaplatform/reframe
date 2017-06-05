@@ -59,10 +59,10 @@ var Collection = function (_React$Component) {
         if (empty) {
           return _react2.default.createElement(
             'div',
-            { className: 'table-empty' },
+            { className: 'reframe-collection-empty' },
             _react2.default.createElement(
               'div',
-              { className: 'table-empty-message' },
+              { className: 'reframe-collection-empty-message' },
               _react2.default.createElement(
                 'h2',
                 null,
@@ -92,10 +92,10 @@ var Collection = function (_React$Component) {
         } else {
           return _react2.default.createElement(
             'div',
-            { className: 'table-empty' },
+            { className: 'reframe-collection-empty' },
             _react2.default.createElement(
               'div',
-              { className: 'table-empty-message' },
+              { className: 'reframe-collection-empty-message' },
               _react2.default.createElement(
                 'h3',
                 null,

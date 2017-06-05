@@ -10,9 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _lodash = require('lodash');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,26 +25,60 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Checkbox = function (_React$Component) {
   _inherits(Checkbox, _React$Component);
 
-  function Checkbox() {
+  function Checkbox(props) {
     _classCallCheck(this, Checkbox);
 
-    return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props));
+
+    _this.state = {
+      value: props.defaultValue
+    };
+    return _this;
   }
 
   _createClass(Checkbox, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('input', this._getConfig());
+      var style = this.props.style;
+
+      var classes = ['ui', 'checkbox'];
+      if (style) {
+        classes.push(style);
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'control' },
+        _react2.default.createElement(
+          'div',
+          { className: classes.join(' ') },
+          _react2.default.createElement('i', { className: 'toggle ' + (this.state.value ? 'on' : 'off') + ' icon', onClick: this._handleChange.bind(this) })
+        )
+      );
     }
   }, {
-    key: '_getConfig',
-    value: function _getConfig() {
-      return {};
+    key: '_handleChange',
+    value: function _handleChange(value) {
+      this.setValue(!this.state.value);
+    }
+  }, {
+    key: 'setValue',
+    value: function setValue(value) {
+      this.setState({ value: value });
+      this.props.onChange(value);
     }
   }]);
 
   return Checkbox;
 }(_react2.default.Component);
 
-Checkbox.PropTypes = {};
+Checkbox.propTypes = {
+  disabled: _react2.default.PropTypes.bool,
+  defaultValue: _react2.default.PropTypes.bool,
+  onChange: _react2.default.PropTypes.func
+};
+Checkbox.defaultProps = {
+  disabled: false,
+  defaultValue: false,
+  onChange: function onChange() {}
+};
 exports.default = Checkbox;

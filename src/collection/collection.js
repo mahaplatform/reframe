@@ -32,8 +32,8 @@ class Collection extends React.Component {
     if(status === 'completed' && all === 0) {
       if(empty) {
         return (
-          <div className="table-empty">
-            <div className="table-empty-message">
+          <div className="reframe-collection-empty">
+            <div className="reframe-collection-empty-message">
               <h2><i className={`circular ${empty.icon} icon`} /></h2>
               <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
               <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>
@@ -48,8 +48,8 @@ class Collection extends React.Component {
         )
       } else {
         return (
-          <div className="table-empty">
-            <div className="table-empty-message">
+          <div className="reframe-collection-empty">
+            <div className="reframe-collection-empty-message">
               <h3>No Results Found</h3>
               <p>There are no { pluralize(entity.replace('_', ' ')) }</p>
             </div>

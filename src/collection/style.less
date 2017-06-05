@@ -10,7 +10,42 @@
   flex-direction: column;
 }
 .reframe-collection-loader {
-  flex: 0 0 50px;
+  flex: 0 0 35.em;
   position: relative;
   background: #DDD;
+}
+
+.reframe-collection-empty {
+  flex: 1;
+  display: flex;
+  margin: 20px;
+  border: 3px dashed #DDD;
+  background-color: #F9F9F9;
+  width: ~"calc(100% - 40px)";
+}
+.reframe-collection-empty-message {
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  h2 {
+    margin: 0 0 20px;
+    font-size: 50px;
+    i {
+      background-color: #FFF;
+    }
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 28px;
+    margin: 0;
+    color: #666;
+  }
+  p {
+    margin: 0 0 20px;
+    color: #888;
+  }
+  .ui.basic.red.button {
+    display: block;
+    background: #FFF !important;
+  }
 }

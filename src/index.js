@@ -4,10 +4,12 @@ import Control from './control'
 import Details from './details'
 import Drawer from './drawer'
 import Flash from './flash'
+import Filefield from './filefield'
 import Form from './form'
 import Format from './format'
 import History from './history'
 import Infinite from './infinite'
+import List from './list'
 import Modal from './modal'
 import Platform from './platform'
 import Prompt from './prompt'
@@ -26,11 +28,13 @@ export default {
   Control,
   Details,
   Drawer,
+  Filefield,
   Flash,
   Form,
   Format,
   History,
   Infinite,
+  List,
   Modal,
   Platform,
   Prompt,

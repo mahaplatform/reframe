@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 // import Dynamic from '../dynamic'
-// import Checkbox from '../checkbox'
+import Checkbox from '../checkbox'
 // // import Checkboxes from '../checkboxes'
 // // import ColorField from '../colorfield'
-// import FileField from '../filefield'
+import Filefield from '../filefield'
 // import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
@@ -19,10 +19,10 @@ import Password from '../password'
 // import DateField from '../datefield'
 
 const standardControls = {
-  // 'checkbox': Checkbox,
+  'checkbox': Checkbox,
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
-  // 'filefield': FileField,
+  'filefield': Filefield,
   // 'lookup': Lookup,
   // // 'multiselect': MultiSelect,
   // // 'radios': Radios,

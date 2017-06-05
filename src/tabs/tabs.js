@@ -30,22 +30,26 @@ export class Tabs extends React.Component {
         { children }
         <div className="reframe-scrollpane-header">
           <div className="reframe-tabs">
-            { tabs.map((tab, index) => {
-              const klass = ['reframe-tabs-item']
-              if(index === chosen) klass.push('active')
-              return (
-                <a key={`tab_${index}`} onClick={ this._handleChoose.bind(this, index) } className={klass.join(' ')}>
-                  { tab.label }
-                </a>
-              )
-            }) }
+            <div className="reframe-tabs-items">
+              { tabs.map((tab, index) => {
+                const klass = ['reframe-tabs-item']
+                if(index === chosen) klass.push('active')
+                return (
+                  <a key={`tab_${index}`} onClick={ this._handleChoose.bind(this, index) } className={klass.join(' ')}>
+                    { tab.label }
+                  </a>
+                )
+              }) }
+            </div>
           </div>
         </div>
         <div className="reframe-tab">
           { tabs.map((tab, index) => {
             return (
-              <div key={`tab_body_${index}`} className={`reframe-tab-body ${this._getStatus(index)}`}>
-                { _.isFunction() ? <tab.component /> : tab.component }
+              <div key={`tab_body_${index}`} className={`reframe-tab-wrapper ${this._getStatus(index)}`}>
+                <div className="reframe-tab-body">
+                  { _.isFunction() ? <tab.component /> : tab.component }
+                </div>
               </div>
             )
           }) }
