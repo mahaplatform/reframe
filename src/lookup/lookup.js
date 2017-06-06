@@ -7,10 +7,6 @@ import Search from './search'
 
 class Lookup extends React.Component {
 
-  static contextTypes = {
-    modal: PropTypes.object
-  }
-
   static propTypes = {
     active: PropTypes.bool,
     chosen: PropTypes.object,
@@ -38,17 +34,17 @@ class Lookup extends React.Component {
   }
 
   render() {
-    const { chosen, disabled, format, prompt, text } = this.props
+    const { active, chosen, disabled, format, prompt, selected, text } = this.props
     const value = chosen ? _.get(chosen, text) : ''
     return (
-      <div className="lookup-field">
+      <div className="reframe-lookup-field">
         { chosen &&
-          <div className="lookup-token" onClick={ this._handleBegin.bind(this) }>
+          <div className="reframe-lookup-token" onClick={ this._handleBegin.bind(this) }>
             <Format {...chosen} format={format} value={value} />
           </div>
         }
         { chosen &&
-          <div className="lookup-field-clear">
+          <div className="reframe-lookup-field-clear">
             <i className="icon circle remove" onClick={ this._handleClear.bind(this) } />
           </div>
         }
@@ -59,6 +55,7 @@ class Lookup extends React.Component {
                  value={value}
                  placeholder={ prompt } />
        }
+       { active && <Search { ...this.props } />}
      </div>
     )
   }
@@ -72,15 +69,8 @@ class Lookup extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { active, disabled, endpoint, sort, onClear, onLookup } = this.props
-    const { modal } = this.context
-    if(prevProps.active !== active && active) {
-      const query = { $filter: { q: '' }, $sort: sort }
-      onLookup(query, endpoint)
-      modal.push(<Search {...this.props} />)
-    } else if(prevProps.disabled !== disabled) {
-      onClear()
-    }
+    const { disabled, onClear } = this.props
+    if(prevProps.disabled !== disabled) onClear()
   }
 
   _handleBegin(e) {

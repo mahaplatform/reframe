@@ -172,11 +172,18 @@ var Search = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var query = this.refs.query;
-      this._handleLooup = _lodash2.default.throttle(this.props.onLookup.bind(this), 500);
+      var _props2 = this.props,
+          sort = _props2.sort,
+          endpoint = _props2.endpoint,
+          onLookup = _props2.onLookup;
+
+      var refs = this.refs;
+      this._handleLookup = _lodash2.default.throttle(onLookup.bind(this), 500);
       setTimeout(function () {
-        return query.focus();
+        return refs.query.focus();
       }, 500);
+      var query = { $filter: { q: '' }, $sort: sort };
+      onLookup(query, endpoint);
     }
   }, {
     key: '_handleBegin',
@@ -186,15 +193,14 @@ var Search = function (_React$Component) {
   }, {
     key: '_handleCancel',
     value: function _handleCancel() {
-      this.context.modal.pop();
       this.props.onCancel();
     }
   }, {
     key: '_handleType',
     value: function _handleType(event) {
-      var _props2 = this.props,
-          sort = _props2.sort,
-          endpoint = _props2.endpoint;
+      var _props3 = this.props,
+          sort = _props3.sort,
+          endpoint = _props3.endpoint;
 
       var q = event.target.value;
       var params = { $filter: { q: q }, $sort: sort };
@@ -209,7 +215,6 @@ var Search = function (_React$Component) {
       var value = _lodash2.default.get(chosen, this.props.value);
       this.props.onChoose(index);
       this.props.onChange(value);
-      this.context.modal.pop();
     }
   }, {
     key: '_handleAdd',
@@ -235,7 +240,4 @@ var Search = function (_React$Component) {
   return Search;
 }(_react2.default.Component);
 
-Search.contextTypes = {
-  modal: _react2.default.PropTypes.object
-};
 exports.default = Search;

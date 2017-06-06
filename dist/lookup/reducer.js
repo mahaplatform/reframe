@@ -60,12 +60,14 @@ exports.default = function () {
       });
 
     case actionTypes.LOAD_SUCCESS:
-      return _extends({}, state);
+      return _extends({}, state, {
+        status: 'success'
+      });
 
     case actionTypes.LOOKUP_SUCCESS:
       return _extends({}, state, {
         status: 'success',
-        results: action.data
+        results: action.result.data
       });
 
     case actionTypes.LOOKUP_FAILURE:

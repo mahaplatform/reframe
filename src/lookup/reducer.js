@@ -52,14 +52,15 @@ export default (state = INITIAL_VALUE, action) => {
 
   case actionTypes.LOAD_SUCCESS:
     return {
-      ...state
+      ...state,
+      status: 'success'
     }
 
   case actionTypes.LOOKUP_SUCCESS:
     return {
       ...state,
       status: 'success',
-      results: action.data
+      results: action.result.data
     }
 
   case actionTypes.LOOKUP_FAILURE:

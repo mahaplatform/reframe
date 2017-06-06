@@ -55,31 +55,34 @@ var Lookup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          active = _props.active,
           chosen = _props.chosen,
           disabled = _props.disabled,
           format = _props.format,
           prompt = _props.prompt,
+          selected = _props.selected,
           text = _props.text;
 
       var value = chosen ? _lodash2.default.get(chosen, text) : '';
       return _react2.default.createElement(
         'div',
-        { className: 'lookup-field' },
+        { className: 'reframe-lookup-field' },
         chosen && _react2.default.createElement(
           'div',
-          { className: 'lookup-token', onClick: this._handleBegin.bind(this) },
+          { className: 'reframe-lookup-token', onClick: this._handleBegin.bind(this) },
           _react2.default.createElement(_format2.default, _extends({}, chosen, { format: format, value: value }))
         ),
         chosen && _react2.default.createElement(
           'div',
-          { className: 'lookup-field-clear' },
+          { className: 'reframe-lookup-field-clear' },
           _react2.default.createElement('i', { className: 'icon circle remove', onClick: this._handleClear.bind(this) })
         ),
         !chosen && _react2.default.createElement('input', { type: 'text',
           disabled: disabled,
           onFocus: this._handleBegin.bind(this),
           value: value,
-          placeholder: prompt })
+          placeholder: prompt }),
+        active && _react2.default.createElement(_search2.default, this.props)
       );
     }
   }, {
@@ -99,21 +102,10 @@ var Lookup = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       var _props3 = this.props,
-          active = _props3.active,
           disabled = _props3.disabled,
-          endpoint = _props3.endpoint,
-          sort = _props3.sort,
-          onClear = _props3.onClear,
-          onLookup = _props3.onLookup;
-      var modal = this.context.modal;
+          onClear = _props3.onClear;
 
-      if (prevProps.active !== active && active) {
-        var query = { $filter: { q: '' }, $sort: sort };
-        onLookup(query, endpoint);
-        modal.push(_react2.default.createElement(_search2.default, this.props));
-      } else if (prevProps.disabled !== disabled) {
-        onClear();
-      }
+      if (prevProps.disabled !== disabled) onClear();
     }
   }, {
     key: '_handleBegin',
@@ -138,9 +130,6 @@ var Lookup = function (_React$Component) {
   return Lookup;
 }(_react2.default.Component);
 
-Lookup.contextTypes = {
-  modal: _propTypes2.default.object
-};
 Lookup.propTypes = {
   active: _propTypes2.default.bool,
   chosen: _propTypes2.default.object,

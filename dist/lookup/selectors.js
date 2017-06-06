@@ -16,6 +16,5 @@ var selectedSelector = function selectedSelector(state) {
 };
 
 var chosen = exports.chosen = (0, _reselect.createSelector)(resultsSelector, selectedSelector, function (results, selected) {
-  var index = selected || 0;
-  return results.length > 0 ? results[index] : null;
+  return selected !== null && results.length > 0 ? results[selected] : null;
 });

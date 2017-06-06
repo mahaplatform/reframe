@@ -6,10 +6,6 @@ import * as actions from './actions'
 
 class Search extends React.Component {
 
-  static contextTypes = {
-    modal: React.PropTypes.object
-  }
-
   render() {
     const { label, results, status, selected, text, form, format } = this.props
     return (
@@ -78,9 +74,12 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    const query = this.refs.query
-    this._handleLooup = _.throttle(this.props.onLookup.bind(this), 500)
-    setTimeout(() => query.focus(), 500)
+    const { sort, endpoint, onLookup } = this.props
+    const refs = this.refs
+    this._handleLookup = _.throttle(onLookup.bind(this), 500)
+    setTimeout(() => refs.query.focus(), 500)
+    const query = { $filter: { q: '' }, $sort: sort }
+    onLookup(query, endpoint)
   }
 
   _handleBegin() {
@@ -88,7 +87,6 @@ class Search extends React.Component {
   }
 
   _handleCancel() {
-    this.context.modal.pop()
     this.props.onCancel()
   }
 
@@ -105,7 +103,6 @@ class Search extends React.Component {
     const value = _.get(chosen, this.props.value)
     this.props.onChoose(index)
     this.props.onChange(value)
-    this.context.modal.pop()
   }
 
   _handleAdd() {
