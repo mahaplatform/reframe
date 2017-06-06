@@ -14,13 +14,14 @@ body {
 }
 .reframe-tabs-item {
   flex: 1;
-  padding: 15px;
-  color: @primary_color !important;
+  padding: 1em;
+  color: fadeout(@primary_color, 30%) !important;
   text-align: center;
-  border-bottom: 2px solid transparent;
+  border-bottom: 4px solid transparent;
   cursor: pointer;
   &.active {
     border-color: @primary_color;
+    color: @primary_color !important;
   }
 }
 .reframe-tab {
@@ -52,5 +53,5 @@ body {
   margin: 0 auto;
   width: 100%;
   max-width: 800px;
-  padding: 15px;
+  padding: 1em;
 }

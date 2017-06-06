@@ -13,13 +13,13 @@ class List extends React.Component {
     return (
       <div className="reframe-list">
         { sections.map((section, index) => (
-          <div className="reframe-list-section">
+          <div key={`list_section_${index}`} className="reframe-list-section">
             <div className="reframe-list-title">
               { section.title }
             </div>
             { section.items && section.items.length > 0 &&
               section.items.map((item, itemIndex) => (
-                <div className="reframe-list-item">
+                <div key={`list_item_${itemIndex}`} className="reframe-list-item">
                   { item.icon &&
                     <div className="reframe-list-item-icon">
                       <i className={`${item.icon} icon`} />
@@ -34,7 +34,9 @@ class List extends React.Component {
             }
             { !section.items || (section.items && section.items.length === 0) &&
               <div className="reframe-list-item">
-                { section.content }
+                <div className="reframe-list-item-content">
+                  { section.empty }
+                </div>
               </div>
             }
           </div>

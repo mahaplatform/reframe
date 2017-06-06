@@ -50,7 +50,7 @@ var List = function (_React$Component) {
         sections.map(function (section, index) {
           return _react2.default.createElement(
             'div',
-            { className: 'reframe-list-section' },
+            { key: 'list_section_' + index, className: 'reframe-list-section' },
             _react2.default.createElement(
               'div',
               { className: 'reframe-list-title' },
@@ -59,7 +59,7 @@ var List = function (_React$Component) {
             section.items && section.items.length > 0 && section.items.map(function (item, itemIndex) {
               return _react2.default.createElement(
                 'div',
-                { className: 'reframe-list-item' },
+                { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
                 item.icon && _react2.default.createElement(
                   'div',
                   { className: 'reframe-list-item-icon' },
@@ -81,7 +81,11 @@ var List = function (_React$Component) {
             !section.items || section.items && section.items.length === 0 && _react2.default.createElement(
               'div',
               { className: 'reframe-list-item' },
-              section.content
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-list-item-content' },
+                section.empty
+              )
             )
           );
         })

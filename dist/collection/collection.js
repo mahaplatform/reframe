@@ -54,58 +54,65 @@ var Collection = function (_React$Component) {
           records = _props.records,
           status = _props.status;
 
-
       if (status === 'completed' && all === 0) {
         if (empty) {
           return _react2.default.createElement(
             'div',
-            { className: 'reframe-collection-empty' },
+            { className: 'reframe-collection' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-collection-empty-message' },
+              { className: 'reframe-collection-empty' },
               _react2.default.createElement(
-                'h2',
-                null,
-                _react2.default.createElement('i', { className: 'circular ' + empty.icon + ' icon' })
-              ),
-              _react2.default.createElement(
-                'h3',
-                null,
-                'No ',
-                _lodash2.default.startCase((0, _pluralize2.default)(entity.replace('_', ' ')))
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'You have not yet created any ',
-                (0, _pluralize2.default)(entity.replace('_', ' '))
-              ),
-              empty.modal && _react2.default.createElement(
                 'div',
-                { className: 'ui basic button red', onClick: this._handleAddNew.bind(this) },
-                _react2.default.createElement('i', { className: 'plus icon' }),
-                'Create New ',
-                _lodash2.default.startCase(entity.replace('_', ' '))
+                { className: 'reframe-collection-empty-message' },
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  _react2.default.createElement('i', { className: 'circular ' + empty.icon + ' icon' })
+                ),
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'No ',
+                  _lodash2.default.startCase((0, _pluralize2.default)(entity.replace('_', ' ')))
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'You have not yet created any ',
+                  (0, _pluralize2.default)(entity.replace('_', ' '))
+                ),
+                empty.modal && _react2.default.createElement(
+                  'div',
+                  { className: 'ui basic button red', onClick: this._handleAddNew.bind(this) },
+                  _react2.default.createElement('i', { className: 'plus icon' }),
+                  'Create New ',
+                  _lodash2.default.startCase(entity.replace('_', ' '))
+                )
               )
             )
           );
         } else {
           return _react2.default.createElement(
             'div',
-            { className: 'reframe-collection-empty' },
+            { className: 'reframe-collection' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-collection-empty-message' },
+              { className: 'reframe-collection-empty' },
               _react2.default.createElement(
-                'h3',
-                null,
-                'No Results Found'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'There are no ',
-                (0, _pluralize2.default)(entity.replace('_', ' '))
+                'div',
+                { className: 'reframe-collection-empty-message' },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'No Results Found'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'There are no ',
+                  (0, _pluralize2.default)(entity.replace('_', ' '))
+                )
               )
             )
           );
@@ -259,11 +266,19 @@ var Collection = function (_React$Component) {
       if (sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key;
       if (skip === 0 || loaded < total) onFetch(endpoint, query);
     }
+  }, {
+    key: '_handleAddNew',
+    value: function _handleAddNew() {
+      this.context.modal.push(this.props.empty.modal);
+    }
   }]);
 
   return Collection;
 }(_react2.default.Component);
 
+Collection.contextTypes = {
+  modal: _propTypes2.default.object
+};
 Collection.PropTypes = {
   all: _propTypes2.default.number,
   columns: _propTypes2.default.array,
