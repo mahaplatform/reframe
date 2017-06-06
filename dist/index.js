@@ -48,6 +48,10 @@ var _infinite = require('./infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
 
+var _lookup = require('./lookup');
+
+var _lookup2 = _interopRequireDefault(_lookup);
+
 var _list = require('./list');
 
 var _list2 = _interopRequireDefault(_list);
@@ -110,6 +114,7 @@ exports.default = {
   Format: _format2.default,
   History: _history2.default,
   Infinite: _infinite2.default,
+  Lookup: _lookup2.default,
   List: _list2.default,
   Modal: _modal2.default,
   Platform: _platform2.default,

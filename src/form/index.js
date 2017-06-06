@@ -4,7 +4,7 @@ import form from './form'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.form',
+  namespace: 'reframe.form',
   component: form,
   reducer,
   actions

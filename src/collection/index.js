@@ -5,7 +5,7 @@ import * as actions from './actions'
 import * as selectors from './selectors'
 
 export default Factory({
-  namespace: 'platform.collection',
+  namespace: 'reframe.collection',
   component: collection,
   reducer,
   selectors,

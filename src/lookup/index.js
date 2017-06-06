@@ -1,11 +1,13 @@
 import { Factory } from 'redux-rubberstamp'
 import reducer from './reducer'
-import infinite from './infinite'
+import lookup from './lookup'
 import * as actions from './actions'
+import * as selectors from './selectors'
 
 export default Factory({
-  namespace: 'reframe.infinite',
-  component: infinite,
+  namespace: 'reframe.lookup',
+  component: lookup,
   reducer,
-  actions
+  actions,
+  selectors
 })

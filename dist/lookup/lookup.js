@@ -1,0 +1,166 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _format = require('../format');
+
+var _format2 = _interopRequireDefault(_format);
+
+var _actions = require('./actions');
+
+var actions = _interopRequireWildcard(_actions);
+
+var _search = require('./search');
+
+var _search2 = _interopRequireDefault(_search);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Lookup = function (_React$Component) {
+  _inherits(Lookup, _React$Component);
+
+  function Lookup() {
+    _classCallCheck(this, Lookup);
+
+    return _possibleConstructorReturn(this, (Lookup.__proto__ || Object.getPrototypeOf(Lookup)).apply(this, arguments));
+  }
+
+  _createClass(Lookup, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          chosen = _props.chosen,
+          disabled = _props.disabled,
+          format = _props.format,
+          prompt = _props.prompt,
+          text = _props.text;
+
+      var value = chosen ? _lodash2.default.get(chosen, text) : '';
+      return _react2.default.createElement(
+        'div',
+        { className: 'lookup-field' },
+        chosen && _react2.default.createElement(
+          'div',
+          { className: 'lookup-token', onClick: this._handleBegin.bind(this) },
+          _react2.default.createElement(_format2.default, _extends({}, chosen, { format: format, value: value }))
+        ),
+        chosen && _react2.default.createElement(
+          'div',
+          { className: 'lookup-field-clear' },
+          _react2.default.createElement('i', { className: 'icon circle remove', onClick: this._handleClear.bind(this) })
+        ),
+        !chosen && _react2.default.createElement('input', { type: 'text',
+          disabled: disabled,
+          onFocus: this._handleBegin.bind(this),
+          value: value,
+          placeholder: prompt })
+      );
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props2 = this.props,
+          defaultValue = _props2.defaultValue,
+          endpoint = _props2.endpoint,
+          onLoad = _props2.onLoad;
+
+      if (defaultValue) {
+        var params = { $ids: [defaultValue] };
+        onLoad(params, endpoint);
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props3 = this.props,
+          active = _props3.active,
+          disabled = _props3.disabled,
+          endpoint = _props3.endpoint,
+          sort = _props3.sort,
+          onClear = _props3.onClear,
+          onLookup = _props3.onLookup;
+      var modal = this.context.modal;
+
+      if (prevProps.active !== active && active) {
+        var query = { $filter: { q: '' }, $sort: sort };
+        onLookup(query, endpoint);
+        modal.push(_react2.default.createElement(_search2.default, this.props));
+      } else if (prevProps.disabled !== disabled) {
+        onClear();
+      }
+    }
+  }, {
+    key: '_handleBegin',
+    value: function _handleBegin(e) {
+      this.props.onBegin();
+      e.target.blur();
+      e.preventDefault();
+      return false;
+    }
+  }, {
+    key: '_handleClear',
+    value: function _handleClear() {
+      var _props4 = this.props,
+          onClear = _props4.onClear,
+          onChange = _props4.onChange;
+
+      onClear();
+      onChange();
+    }
+  }]);
+
+  return Lookup;
+}(_react2.default.Component);
+
+Lookup.contextTypes = {
+  modal: _propTypes2.default.object
+};
+Lookup.propTypes = {
+  active: _propTypes2.default.bool,
+  chosen: _propTypes2.default.object,
+  disabled: _propTypes2.default.bool,
+  defaultValue: _propTypes2.default.number,
+  endpoint: _propTypes2.default.string,
+  format: _propTypes2.default.oneOfType(prompt, prompt),
+  prompt: _propTypes2.default.string,
+  query: _propTypes2.default.string,
+  results: _propTypes2.default.array,
+  selected: _propTypes2.default.number,
+  sort: _propTypes2.default.string,
+  status: _propTypes2.default.string,
+  text: _propTypes2.default.string,
+  onBegin: _propTypes2.default.func,
+  onClear: _propTypes2.default.func,
+  onCancel: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func,
+  onType: _propTypes2.default.func,
+  onLoad: _propTypes2.default.func,
+  onLoookup: _propTypes2.default.func
+};
+exports.default = Lookup;

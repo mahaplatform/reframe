@@ -7,7 +7,7 @@ import Checkbox from '../checkbox'
 // // import Checkboxes from '../checkboxes'
 // // import ColorField from '../colorfield'
 import Filefield from '../filefield'
-// import Lookup from '../lookup'
+import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
 // import Select from '../select'
@@ -23,9 +23,9 @@ const standardControls = {
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
   'filefield': Filefield,
-  // 'lookup': Lookup,
-  // // 'multiselect': MultiSelect,
-  // // 'radios': Radios,
+  'lookup': Lookup,
+  // 'multiselect': MultiSelect,
+  // 'radios': Radios,
   // 'select': Select,
   // 'text': Text,
   'textfield': TextField,

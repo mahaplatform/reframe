@@ -4,7 +4,7 @@ import flash from './flash'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.flash',
+  namespace: 'reframe.flash',
   component: flash,
   reducer,
   actions

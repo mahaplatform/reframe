@@ -26,6 +26,10 @@ var _filefield = require('../filefield');
 
 var _filefield2 = _interopRequireDefault(_filefield);
 
+var _lookup = require('../lookup');
+
+var _lookup2 = _interopRequireDefault(_lookup);
+
 var _textarea = require('../textarea');
 
 var _textarea2 = _interopRequireDefault(_textarea);
@@ -51,7 +55,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // // import Checkboxes from '../checkboxes'
 // // import ColorField from '../colorfield'
 
-// import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
 // import Select from '../select'
@@ -66,9 +69,9 @@ var standardControls = {
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
   'filefield': _filefield2.default,
-  // 'lookup': Lookup,
-  // // 'multiselect': MultiSelect,
-  // // 'radios': Radios,
+  'lookup': _lookup2.default,
+  // 'multiselect': MultiSelect,
+  // 'radios': Radios,
   // 'select': Select,
   // 'text': Text,
   'textfield': _textfield2.default,

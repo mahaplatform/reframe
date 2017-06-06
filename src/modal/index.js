@@ -4,7 +4,7 @@ import modal from './modal'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.modal',
+  namespace: 'reframe.modal',
   component: modal,
   reducer,
   actions

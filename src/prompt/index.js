@@ -4,7 +4,7 @@ import prompt from './prompt'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.prompt',
+  namespace: 'reframe.prompt',
   component: prompt,
   reducer,
   actions

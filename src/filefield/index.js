@@ -4,7 +4,7 @@ import filefield from './filefield'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.filefield',
+  namespace: 'reframe.filefield',
   component: filefield,
   reducer,
   actions

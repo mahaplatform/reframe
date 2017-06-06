@@ -4,7 +4,7 @@ import tasks from './tasks'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.tasks',
+  namespace: 'reframe.tasks',
   component: tasks,
   reducer,
   actions

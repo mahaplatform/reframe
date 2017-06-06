@@ -9,6 +9,7 @@ import Form from './form'
 import Format from './format'
 import History from './history'
 import Infinite from './infinite'
+import Lookup from './lookup'
 import List from './list'
 import Modal from './modal'
 import Platform from './platform'
@@ -34,6 +35,7 @@ export default {
   Format,
   History,
   Infinite,
+  Lookup,
   List,
   Modal,
   Platform,

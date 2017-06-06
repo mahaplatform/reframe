@@ -1,0 +1,131 @@
+.reframe-lookup-field {
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: .28571429rem;
+  display: flex;
+  input {
+    border: none !important;
+    flex: 1
+  }
+  .reframe-lookup-token {
+    flex: 1;
+    border: 1px solid #DDD;
+    background-color: #F9F9F9;
+    padding: 10px;
+    margin: 5px 0 5px 5px;
+    line-height: 1.4285em;
+    color: #888888 !important;
+    .border-radius(5px);
+    strong {
+      color: #000;
+    }
+    .avatar {
+      display: inline-block !important;
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+      float: left;
+    }
+  }
+  .reframe-lookup-field-clear {
+    flex: 0 0 35px;
+    display: flex;
+    i {
+      margin: auto;
+      line-height: 18px;
+      font-size: 18px;
+      cursor: pointer;
+      .opacity(.6);
+      &:hover {
+        .opacity(1);
+      }
+    }
+  }
+}
+.reframe-lookup-panel {
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+  background-color: #FFF;
+}
+.reframe-lookup-panel-search {
+  flex: 0 0 50px;
+  border-bottom: 1px solid #DDD;
+  background-color: #EEE;
+  padding: 10px;
+}
+.reframe-lookup-panel-add {
+  flex: 0 0 50px;
+  padding: 10px;
+  border-top: 1px solid #DDD;
+  background-color: #EEE;
+}
+.reframe-lookup-panel-loader {
+  flex: 1;
+  display:flex;
+  flex-direction: column;
+}
+.reframe-lookup-panel-results {
+  .scrollable();
+  flex: 1;
+}
+.reframe-lookup-panel-result {
+  padding: 15px;
+  border-bottom: 1px solid #EEE;
+  background-color: #FFF;
+  cursor: pointer;
+  display: flex;
+  color: #888888 !important;
+  .reframe-lookup-panel-result-label {
+    flex: 1;
+  }
+  .reframe-lookup-panel-result-icon {
+    flex: 0 0 25px;
+  }
+  &:hover {
+    background-color: #F9F9F9;
+  }
+  strong {
+    color: #000;
+  }
+  .avatar {
+    display: inline-block !important;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    float: left;
+  }
+}
+.reframe-lookup-panel-empty {
+  flex: 1;
+  display: flex;
+  margin: 20px;
+  border: 3px dashed #DDD;
+  background-color: #F9F9F9;
+  width: ~"calc(100% - 40px)";
+}
+.reframe-lookup-panel-empty-message {
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  h2 {
+    margin: 0 0 20px;
+    font-size: 50px;
+    i {
+      background-color: #FFF;
+    }
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 28px;
+    margin: 0;
+    color: #666;
+  }
+  p {
+    margin: 0 0 20px;
+    color: #888;
+  }
+  .ui.basic.red.button {
+    display: block;
+    background: #FFF !important;
+  }
+}

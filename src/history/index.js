@@ -4,7 +4,7 @@ import history from './history'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.history',
+  namespace: 'reframe.history',
   component: history,
   reducer,
   actions

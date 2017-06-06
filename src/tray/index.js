@@ -4,7 +4,7 @@ import tray from './tray'
 import * as actions from './actions'
 
 export default Singleton({
-  namespace: 'platform.tray',
+  namespace: 'reframe.tray',
   component: tray,
   reducer,
   actions
