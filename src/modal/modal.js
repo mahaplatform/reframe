@@ -10,26 +10,25 @@ class Modal extends React.Component {
   }
 
   static propTypes = {
-    components: PropTypes.array,
+    component: PropTypes.oneOf(
+      PropTypes.element,
+      PropTypes.func
+    ),
     onClose: PropTypes.func,
     onPop: PropTypes.func,
     onPush: PropTypes.func
   }
 
   render() {
-    const { children, components } = this.props
+    const { children, component } = this.props
     return (
       <div className="reframe-modal">
         { children }
         <CSSTransitionGroup component={ ({ children }) => <div className="reframe-modal-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-          { components && components.length > 0 && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
-          { components && components.length > 0 &&
+          { component && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
+          { component &&
             <div className="reframe-modal-window">
-              <CSSTransitionGroup transitionName="stack" component="div" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-                { components.map((component, index) => {
-                  return _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` })
-                }) }
-              </CSSTransitionGroup>
+              { _.isFunction(component) ? React.createElement(component) : component }
             </div>
           }
         </CSSTransitionGroup>
@@ -42,12 +41,11 @@ class Modal extends React.Component {
   }
 
   getChildContext() {
-    const { onClose, onPop, onPush } = this.props
+    const { onClose, onOpen } = this.props
     return {
       modal: {
-        close: onClose,
-        pop: onPop,
-        push: onPush
+        open: onOpen,
+        close: onClose
       }
     }
   }

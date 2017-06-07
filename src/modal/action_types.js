@@ -1,3 +1,2 @@
-export const PUSH = 'PUSH'
-export const POP = 'POP'
+export const OPEN = 'OPEN'
 export const CLOSE = 'CLOSE'

@@ -16,7 +16,7 @@ import Lookup from '../lookup'
 import TextArea from '../textarea'
 import TextField from '../textfield'
 import Password from '../password'
-// import DateField from '../datefield'
+import DateField from '../datefield'
 
 const standardControls = {
   'checkbox': Checkbox,
@@ -31,7 +31,7 @@ const standardControls = {
   'textfield': TextField,
   'password': Password,
   'textarea': TextArea,
-  // 'datefield': DateField
+  'datefield': DateField
   // 'tablefield': TableField
 }
 

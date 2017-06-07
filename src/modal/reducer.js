@@ -1,29 +1,21 @@
 import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
-  components: []
+  component: null
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.PUSH:
+  case actionTypes.OPEN:
     return {
-      components: [
-        ...state.components,
-        action.component
-      ]
-    }
-
-  case actionTypes.POP:
-    return {
-      components: state.components.slice(0, state.length - 1)
+      component: action.component
     }
 
   case actionTypes.CLOSE:
     return {
-      components: []
+      component: null
     }
 
   default:

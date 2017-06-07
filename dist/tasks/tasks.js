@@ -99,7 +99,7 @@ var Tasks = function (_React$Component) {
       if (items[index].route) {
         this.context.history.push(items[index].route);
       } else if (items[index].modal) {
-        this.context.modal.push(items[index].modal);
+        this.context.modal.open(items[index].modal);
       } else if (items[index].drawer) {
         var location = items[index].location || 'right';
         this.context.drawer.open(items[index].drawer, location);

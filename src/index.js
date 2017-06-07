@@ -1,6 +1,7 @@
 import Checkbox from './checkbox'
 import Collection from './collection'
 import Control from './control'
+import Datefield from './details'
 import Details from './details'
 import Drawer from './drawer'
 import Flash from './flash'
@@ -27,6 +28,7 @@ export default {
   Checkbox,
   Collection,
   Control,
+  Datefield,
   Details,
   Drawer,
   Filefield,

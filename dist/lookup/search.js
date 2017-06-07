@@ -219,7 +219,7 @@ var Search = function (_React$Component) {
   }, {
     key: '_handleAdd',
     value: function _handleAdd() {
-      this.context.modal.push(_react2.default.createElement(_form2.default, this._getForm()));
+      this.context.modal.open(_react2.default.createElement(_form2.default, this._getForm()));
     }
   }, {
     key: '_getForm',
@@ -227,11 +227,11 @@ var Search = function (_React$Component) {
       var _this3 = this;
 
       return _extends({}, this.props.form, {
-        onCancel: this.context.modal.pop,
+        onCancel: this.context.modal.close,
         onSuccess: function onSuccess(chosen) {
           _this3.props.onChoose(0);
           _this3.props.onChange(value);
-          _this3.context.modal.pop();
+          _this3.context.modal.close();
         }
       });
     }

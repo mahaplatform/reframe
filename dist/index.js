@@ -106,6 +106,7 @@ exports.default = {
   Checkbox: _checkbox2.default,
   Collection: _collection2.default,
   Control: _control2.default,
+  Datefield: _details2.default,
   Details: _details2.default,
   Drawer: _drawer2.default,
   Filefield: _filefield2.default,

@@ -269,7 +269,7 @@ var Collection = function (_React$Component) {
   }, {
     key: '_handleAddNew',
     value: function _handleAddNew() {
-      this.context.modal.push(this.props.empty.modal);
+      this.context.modal.open(this.props.empty.modal);
     }
   }]);
 

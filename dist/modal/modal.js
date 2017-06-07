@@ -42,7 +42,7 @@ var Modal = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          components = _props.components;
+          component = _props.component;
 
       return _react2.default.createElement(
         'div',
@@ -58,17 +58,11 @@ var Modal = function (_React$Component) {
                 children
               );
             }, transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          components && components.length > 0 && _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) }),
-          components && components.length > 0 && _react2.default.createElement(
+          component && _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) }),
+          component && _react2.default.createElement(
             'div',
             { className: 'reframe-modal-window' },
-            _react2.default.createElement(
-              _reactTransitionGroup.CSSTransitionGroup,
-              { transitionName: 'stack', component: 'div', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-              components.map(function (component, index) {
-                return _lodash2.default.isFunction(component) ? _react2.default.createElement(component, { key: 'modal_panel_' + index }) : _react2.default.cloneElement(component, { key: 'modal_panel_' + index });
-              })
-            )
+            _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : component
           )
         )
       );
@@ -83,14 +77,12 @@ var Modal = function (_React$Component) {
     value: function getChildContext() {
       var _props2 = this.props,
           onClose = _props2.onClose,
-          onPop = _props2.onPop,
-          onPush = _props2.onPush;
+          onOpen = _props2.onOpen;
 
       return {
         modal: {
-          close: onClose,
-          pop: onPop,
-          push: onPush
+          open: onOpen,
+          close: onClose
         }
       };
     }
@@ -103,7 +95,7 @@ Modal.childContextTypes = {
   modal: _propTypes2.default.object
 };
 Modal.propTypes = {
-  components: _propTypes2.default.array,
+  component: _propTypes2.default.oneOf(_propTypes2.default.element, _propTypes2.default.func),
   onClose: _propTypes2.default.func,
   onPop: _propTypes2.default.func,
   onPush: _propTypes2.default.func

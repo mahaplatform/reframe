@@ -106,17 +106,17 @@ class Search extends React.Component {
   }
 
   _handleAdd() {
-    this.context.modal.push(<Form {...this._getForm()} />)
+    this.context.modal.open(<Form {...this._getForm()} />)
   }
 
   _getForm() {
     return {
       ...this.props.form,
-      onCancel: this.context.modal.pop,
+      onCancel: this.context.modal.close,
       onSuccess: (chosen) => {
         this.props.onChoose(0)
         this.props.onChange(value)
-        this.context.modal.pop()
+        this.context.modal.close()
       }
     }
 

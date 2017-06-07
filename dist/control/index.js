@@ -42,6 +42,10 @@ var _password = require('../password');
 
 var _password2 = _interopRequireDefault(_password);
 
+var _datefield = require('../datefield');
+
+var _datefield2 = _interopRequireDefault(_datefield);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -62,8 +66,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import Text from '../text'
 
 
-// import DateField from '../datefield'
-
 var standardControls = {
   'checkbox': _checkbox2.default,
   // 'checkboxes': Checkboxes,
@@ -76,7 +78,9 @@ var standardControls = {
   // 'text': Text,
   'textfield': _textfield2.default,
   'password': _password2.default,
-  'textarea': _textarea2.default
+  'textarea': _textarea2.default,
+  'datefield': _datefield2.default
+  // 'tablefield': TableField
 };
 
 var Control = function (_React$Component) {

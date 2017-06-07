@@ -1,12 +1,8 @@
 import * as actionTypes from './action_types'
 
-export const push = (component) => ({
-  type: actionTypes.PUSH,
+export const open = (component) => ({
+  type: actionTypes.OPEN,
   component
-})
-
-export const pop = () => ({
-  type: actionTypes.POP
 })
 
 export const close = () => ({
