@@ -22,12 +22,16 @@ export class Flash extends React.Component {
       <div className="reframe-flash">
         { children }
         <CSSTransitionGroup component={ ({ children }) => <div className="reframe-flash-outlet">{ children }</div> } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
-          {message &&
+          { message &&
             <div className={`reframe-flash-popup ${style}`} key={`flash_${message}`}>
-              <p>
-                { this._getIcon(style) }
-                { message }
-              </p>
+              <div className="reframe-flash-popup-panel">
+                <div className="reframe-flash-popup-icon">
+                  { this._getIcon(style) }
+                </div>
+                <div className="reframe-flash-popup-message">
+                  <p>{ message }</p>
+                </div>
+              </div>
             </div>
           }
         </CSSTransitionGroup>
@@ -38,7 +42,7 @@ export class Flash extends React.Component {
   componentDidUpdate(prevProps) {
     const { message, onClear } = this.props
     if(prevProps.message !== message && message) {
-      window.setTimeout(onClear , 2000)
+      window.setTimeout(onClear, 2000)
     }
   }
 

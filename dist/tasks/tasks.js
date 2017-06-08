@@ -95,16 +95,19 @@ var Tasks = function (_React$Component) {
     value: function _handleChoose(index) {
       var items = this.props.items;
 
-      this._handleClose();
       if (items[index].route) {
         this.context.history.push(items[index].route);
+        this._handleClose();
       } else if (items[index].modal) {
         this.context.modal.open(items[index].modal);
+        this._handleClose();
       } else if (items[index].drawer) {
         var location = items[index].location || 'right';
         this.context.drawer.open(items[index].drawer, location);
+        this._handleClose();
       } else if (items[index].handler) {
-        items[index].handler();
+        var done = this._handleClose.bind(this);
+        items[index].handler(done);
       }
     }
   }, {

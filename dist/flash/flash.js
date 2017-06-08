@@ -60,10 +60,22 @@ var Flash = exports.Flash = function (_React$Component) {
             'div',
             { className: 'reframe-flash-popup ' + style, key: 'flash_' + message },
             _react2.default.createElement(
-              'p',
-              null,
-              this._getIcon(style),
-              message
+              'div',
+              { className: 'reframe-flash-popup-panel' },
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-flash-popup-icon' },
+                this._getIcon(style)
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-flash-popup-message' },
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  message
+                )
+              )
             )
           )
         )

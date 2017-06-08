@@ -58,16 +58,19 @@ class Tasks extends React.Component {
 
   _handleChoose(index) {
     const { items } = this.props
-    this._handleClose()
     if(items[index].route) {
       this.context.history.push(items[index].route)
+      this._handleClose()
     } else if(items[index].modal){
       this.context.modal.open(items[index].modal)
+      this._handleClose()
     } else if(items[index].drawer){
       const location = items[index].location || 'right'
       this.context.drawer.open(items[index].drawer, location)
+      this._handleClose()
     } else if(items[index].handler){
-      items[index].handler()
+      const done = this._handleClose.bind(this)
+      items[index].handler(done)
     }
   }
 
