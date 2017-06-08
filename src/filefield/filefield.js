@@ -53,6 +53,7 @@ class FileField extends React.Component {
                 }
                 { file.status === 'success' &&
                   <div className="reframe-filefield-preview">
+                    <img src={`/imagecache/fit=cover&w=300&h=300${file.asset.path}`} title={ file.asset.original_file_name } />
                     <div className="reframe-filefield-preview-caption">
                       <p>
                         { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })

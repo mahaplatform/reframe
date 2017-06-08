@@ -90,6 +90,7 @@ var FileField = function (_React$Component) {
               file.status === 'success' && _react2.default.createElement(
                 'div',
                 { className: 'reframe-filefield-preview' },
+                _react2.default.createElement('img', { src: '/imagecache/fit=cover&w=300&h=300' + file.asset.path, title: file.asset.original_file_name }),
                 _react2.default.createElement(
                   'div',
                   { className: 'reframe-filefield-preview-caption' },
