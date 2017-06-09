@@ -40,6 +40,6 @@
     "redux-logger": "^3.0.1",
     "redux-rubberstamp": "^1.1.8",
     "redux-thunk": "^2.2.0",
-    "reframe": "^0.0.13"
+    "reframe": "latest"
   }
 }

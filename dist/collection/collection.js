@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -51,6 +53,7 @@ var Collection = function (_React$Component) {
           columns = _props.columns,
           empty = _props.empty,
           entity = _props.entity,
+          layout = _props.layout,
           records = _props.records,
           status = _props.status;
 
@@ -138,6 +141,7 @@ var Collection = function (_React$Component) {
               )
             ),
             status !== 'failure' && records.length > 0 && columns && _react2.default.createElement(_table2.default, this._getTable()),
+            status !== 'failure' && records.length > 0 && layout && _react2.default.createElement(layout, _extends({}, this._getLayout())),
             status === 'completed' && records.length === 0 && _react2.default.createElement(
               'div',
               { className: 'reframe-collection-empty' },
@@ -240,6 +244,22 @@ var Collection = function (_React$Component) {
       };
     }
   }, {
+    key: '_getLayout',
+    value: function _getLayout() {
+      var _props4 = this.props,
+          records = _props4.records,
+          sort = _props4.sort,
+          status = _props4.status;
+
+      return {
+        records: records,
+        sort: sort,
+        status: status,
+        onLoadMore: this._handleFetch.bind(this),
+        onSort: this._handleSort.bind(this)
+      };
+    }
+  }, {
     key: '_handleSort',
     value: function _handleSort(key) {
       this.props.onSort(key);
@@ -248,12 +268,12 @@ var Collection = function (_React$Component) {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var _props4 = this.props,
-          endpoint = _props4.endpoint,
-          records = _props4.records,
-          params = _props4.params,
-          total = _props4.total,
-          onFetch = _props4.onFetch;
+      var _props5 = this.props,
+          endpoint = _props5.endpoint,
+          records = _props5.records,
+          params = _props5.params,
+          total = _props5.total,
+          onFetch = _props5.onFetch;
 
       if (!endpoint) return;
       var filter = params.filter,
@@ -287,6 +307,7 @@ Collection.PropTypes = {
   empty: _propTypes2.default.object,
   filter: _propTypes2.default.object,
   handler: _propTypes2.default.func,
+  layout: _propTypes2.default.func,
   link: _propTypes2.default.string,
   modal: _propTypes2.default.string,
   params: _propTypes2.default.object,

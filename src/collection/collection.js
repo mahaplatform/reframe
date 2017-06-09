@@ -18,6 +18,7 @@ class Collection extends React.Component {
     empty: PropTypes.object,
     filter: PropTypes.object,
     handler: PropTypes.func,
+    layout: PropTypes.func,
     link: PropTypes.string,
     modal: PropTypes.string,
     params: PropTypes.object,
@@ -31,7 +32,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { all, columns, empty, entity, records, status } = this.props
+    const { all, columns, empty, entity, layout, records, status } = this.props
     if(status === 'completed' && all === 0) {
       if(empty) {
         return (
@@ -74,9 +75,8 @@ class Collection extends React.Component {
                 </div>
               </div>
             }
-            { status !== 'failure' && records.length > 0 && columns &&
-              <Table { ...this._getTable() } />
-            }
+            { status !== 'failure' && records.length > 0 && columns && <Table { ...this._getTable() } /> }
+            { status !== 'failure' && records.length > 0 && layout && React.createElement(layout, { ...this._getLayout() }) }
             { status === 'completed' && records.length === 0 &&
               <div className="reframe-collection-empty">
                 <div className="reframe-collection-empty-message">
@@ -131,6 +131,17 @@ class Collection extends React.Component {
       handler,
       link,
       modal,
+      records,
+      sort,
+      status,
+      onLoadMore: this._handleFetch.bind(this),
+      onSort: this._handleSort.bind(this)
+    }
+  }
+
+  _getLayout() {
+    const { records, sort, status } = this.props
+    return {
       records,
       sort,
       status,

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { Form } from 'reframe'
 
 class Modal extends React.Component {
 
@@ -20,11 +21,38 @@ class Modal extends React.Component {
   }
 
   _handleModal() {
-    this.context.modal.push(<Foo />)
+    this.context.modal.open(Foo)
   }
 
 }
 
-const Foo = () => <div>Foo</div>
+class Foo extends React.Component {
+
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
+  render() {
+    return <Form { ...this._getForm() } />
+  }
+
+  _getForm() {
+    return {
+      title: 'Form',
+      sections: [
+        {
+          fields: [
+            { label: 'One', name: 'one', type: 'lookup' }
+          ]
+        }
+      ]
+    }
+  }
+
+  _handleClose() {
+    this.context.modal.close()
+  }
+
+}
 
 export default Modal

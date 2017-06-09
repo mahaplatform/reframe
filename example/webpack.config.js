@@ -11,6 +11,11 @@ module.exports = (env) => ({
     path: path.resolve('.', 'dist', 'js'),
     filename: path.join('[name]-[hash].min.js')
   },
+  resolve: {
+   alias: {
+     react: path.resolve('node_modules/react'),
+   },
+ },
   module: {
     rules: [
       {

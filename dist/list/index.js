@@ -40,55 +40,17 @@ var List = function (_React$Component) {
   _createClass(List, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var sections = this.props.sections;
+      var _props = this.props,
+          items = _props.items,
+          sections = _props.sections;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-list' },
-        sections.map(function (section, index) {
-          return _react2.default.createElement(
-            'div',
-            { key: 'list_section_' + index, className: 'reframe-list-section' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-title' },
-              section.title
-            ),
-            section.items && section.items.length > 0 && section.items.map(function (item, itemIndex) {
-              return _react2.default.createElement(
-                'div',
-                { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
-                item.icon && _react2.default.createElement(
-                  'div',
-                  { className: 'reframe-list-item-icon' },
-                  _react2.default.createElement('i', { className: item.icon + ' icon' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'reframe-list-item-content' },
-                  _react2.default.createElement(
-                    'strong',
-                    null,
-                    item.label
-                  ),
-                  _react2.default.createElement('br', null),
-                  _react2.default.createElement(_format2.default, _extends({}, _this2.props, { format: item.format, value: item.content }))
-                )
-              );
-            }),
-            !section.items || section.items && section.items.length === 0 && _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-item' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-list-item-content' },
-                section.empty
-              )
-            )
-          );
-        })
+        sections && sections.map(function (section, index) {
+          return _react2.default.createElement(Section, _extends({}, section, { key: 'list_section_' + index }));
+        }),
+        items && _react2.default.createElement(Section, { items: items })
       );
     }
   }]);
@@ -97,6 +59,78 @@ var List = function (_React$Component) {
 }(_react2.default.Component);
 
 List.propTypes = {
+  items: _propTypes2.default.array,
   sections: _propTypes2.default.array
+};
+
+var Section = function (_React$Component2) {
+  _inherits(Section, _React$Component2);
+
+  function Section() {
+    _classCallCheck(this, Section);
+
+    return _possibleConstructorReturn(this, (Section.__proto__ || Object.getPrototypeOf(Section)).apply(this, arguments));
+  }
+
+  _createClass(Section, [{
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var _props2 = this.props,
+          empty = _props2.empty,
+          items = _props2.items,
+          title = _props2.title;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'reframe-list-section' },
+        title && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-title' },
+          title
+        ),
+        items && items.length > 0 && items.map(function (item, itemIndex) {
+          return _react2.default.createElement(
+            'div',
+            { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
+            item.icon && _react2.default.createElement(
+              'div',
+              { className: 'reframe-list-item-icon' },
+              _react2.default.createElement('i', { className: item.icon + ' icon' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-list-item-content' },
+              _react2.default.createElement(
+                'strong',
+                null,
+                item.label
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(_format2.default, _extends({}, _this3.props, { format: item.format, value: item.content }))
+            )
+          );
+        }),
+        !items || items && items.length === 0 && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item' },
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-list-item-content' },
+            empty
+          )
+        )
+      );
+    }
+  }]);
+
+  return Section;
+}(_react2.default.Component);
+
+Section.propTypes = {
+  empty: _propTypes2.default.string,
+  items: _propTypes2.default.array,
+  title: _propTypes2.default.string
 };
 exports.default = List;
