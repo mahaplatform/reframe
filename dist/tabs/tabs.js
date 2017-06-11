@@ -94,7 +94,7 @@ var Tabs = exports.Tabs = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'reframe-tab-body' },
-                _lodash2.default.isFunction() ? _react2.default.createElement(tab.component, null) : tab.component
+                _lodash2.default.isFunction() ? _react2.default.createElement(tab.component) : tab.component
               )
             );
           })

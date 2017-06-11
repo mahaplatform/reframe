@@ -92,9 +92,9 @@ var Scrollpane = function (_React$Component) {
     value: function _getHeaders() {
       var scrollpane = this.refs.scrollpane;
 
-      var childNodes = Array.from(scrollpane.childNodes);
+      var childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'));
       return childNodes.reduce(function (headers, node) {
-        if (!node.className.match(/reframe-scrollpane-header/)) return headers;
+        // if(!node.className.match(/reframe-scrollpane-header/)) return headers
         var top = node.offsetTop - node.offsetHeight;
         return [].concat(_toConsumableArray(headers), [{
           node: node,
@@ -126,7 +126,7 @@ var Scrollpane = function (_React$Component) {
         this.headers.map(function (header, index) {
           var node = header.node;
           if (!header.fixed && index > _this2.fixed && scrollpane.scrollTop >= header.top) {
-            node.nextSibling.style.marginTop = node.offsetHeight + 'px';
+            scrollpane.style.paddingTop = node.offsetHeight + 'px';
             node.style.position = 'fixed';
             node.style.top = scrollpane.offsetTop + 'px';
             node.style.left = 0;
@@ -135,7 +135,7 @@ var Scrollpane = function (_React$Component) {
             _this2.fixed = index;
             _this2.headers[index].fixed = true;
           } else if (header.fixed && index <= _this2.fixed && scrollpane.scrollTop < header.top) {
-            node.nextSibling.removeAttribute('style');
+            scrollpane.removeAttribute('style');
             node.removeAttribute('style');
             _this2.headers[index].fixed = false;
             _this2.fixed = _this2.fixed - 1;

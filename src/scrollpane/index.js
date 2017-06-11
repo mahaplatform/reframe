@@ -59,9 +59,9 @@ class Scrollpane extends React.Component {
 
   _getHeaders() {
     const { scrollpane } = this.refs
-    const childNodes = Array.from(scrollpane.childNodes)
+    const childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'))
     return childNodes.reduce((headers, node) => {
-      if(!node.className.match(/reframe-scrollpane-header/)) return headers
+      // if(!node.className.match(/reframe-scrollpane-header/)) return headers
       const top = node.offsetTop - node.offsetHeight
       return [
         ...headers,
@@ -87,7 +87,7 @@ class Scrollpane extends React.Component {
       this.headers.map((header, index) => {
         const node = header.node
         if(!header.fixed && index > this.fixed && scrollpane.scrollTop >= header.top) {
-          node.nextSibling.style.marginTop = `${node.offsetHeight}px`
+          scrollpane.style.paddingTop = `${node.offsetHeight}px`
           node.style.position = 'fixed'
           node.style.top = `${scrollpane.offsetTop}px`
           node.style.left = 0
@@ -96,7 +96,7 @@ class Scrollpane extends React.Component {
           this.fixed = index
           this.headers[index].fixed = true
         } else if(header.fixed && index <= this.fixed && scrollpane.scrollTop < header.top) {
-          node.nextSibling.removeAttribute('style')
+          scrollpane.removeAttribute('style')
           node.removeAttribute('style')
           this.headers[index].fixed = false
           this.fixed = this.fixed - 1

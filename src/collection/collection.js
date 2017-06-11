@@ -43,7 +43,7 @@ class Collection extends React.Component {
                 <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
                 <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>
                 { empty.modal &&
-                  <div className="ui basic button red" onClick={ this._handleAddNew.bind(this)}>
+                  <div className="ui basic button" onClick={ this._handleAddNew.bind(this)}>
                     <i className="plus icon" />
                     Create New {_.startCase(entity.replace('_', ' '))}
                   </div>

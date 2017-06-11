@@ -102,17 +102,17 @@ var Section = function (_React$Component2) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-list-item-content' },
-              _react2.default.createElement(
+              item.label && _react2.default.createElement(
                 'strong',
                 null,
-                item.label
+                item.label,
+                _react2.default.createElement('br', null)
               ),
-              _react2.default.createElement('br', null),
               _react2.default.createElement(_format2.default, _extends({}, _this3.props, { format: item.format, value: item.content }))
             )
           );
         }),
-        !items || items && items.length === 0 && _react2.default.createElement(
+        empty && !items || items && items.length === 0 && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item' },
           _react2.default.createElement(

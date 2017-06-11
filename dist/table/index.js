@@ -63,37 +63,37 @@ var Table = function (_React$Component) {
           onSort = _props.onSort;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'reframe-table' },
+        _scrollpane2.default,
+        this._getScrollpane(),
         _react2.default.createElement(
           'div',
-          { className: 'reframe-table-head' },
+          { className: 'reframe-table' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-table-head-wrapper' },
+            { className: 'reframe-table-head reframe-scrollpane-header' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-table-head-row', ref: 'head' },
-              columns.map(function (column, columnIndex) {
-                var klass = ['reframe-table-head-cell'];
-                if (column.primary === true) klass.push('mobile');
-                if (column.collapsing === true) klass.push('collapsing');
-                return _react2.default.createElement(
-                  'div',
-                  { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column) },
-                  column.label,
-                  sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
-                );
-              })
+              { className: 'reframe-table-head-wrapper' },
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-table-head-row', ref: 'head' },
+                columns.map(function (column, columnIndex) {
+                  var klass = ['reframe-table-head-cell'];
+                  if (column.primary === true) klass.push('mobile');
+                  if (column.collapsing === true) klass.push('collapsing');
+                  return _react2.default.createElement(
+                    'div',
+                    { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column) },
+                    column.label,
+                    sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
+                  );
+                })
+              )
             )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-table-body' },
+          ),
           _react2.default.createElement(
-            _scrollpane2.default,
-            this._getScrollpane(),
+            'div',
+            { className: 'reframe-table-body' },
             _react2.default.createElement(
               'div',
               { className: 'reframe-table-body-wrapper', ref: 'body' },

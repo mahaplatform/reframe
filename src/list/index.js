@@ -47,7 +47,7 @@ class Section extends React.Component {
                 </div>
               }
               <div className="reframe-list-item-content">
-                <strong>{ item.label }</strong><br />
+                { item.label && <strong>{ item.label }<br /></strong> }
                 <Format { ...this.props } format={ item.format } value={ item.content } />
               </div>
             </div>

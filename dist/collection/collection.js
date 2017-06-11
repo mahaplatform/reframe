@@ -87,7 +87,7 @@ var Collection = function (_React$Component) {
                 ),
                 empty.modal && _react2.default.createElement(
                   'div',
-                  { className: 'ui basic button red', onClick: this._handleAddNew.bind(this) },
+                  { className: 'ui basic button', onClick: this._handleAddNew.bind(this) },
                   _react2.default.createElement('i', { className: 'plus icon' }),
                   'Create New ',
                   _lodash2.default.startCase(entity.replace('_', ' '))

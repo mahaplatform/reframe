@@ -48,7 +48,7 @@ export class Tabs extends React.Component {
             return (
               <div key={`tab_body_${index}`} className={`reframe-tab-wrapper ${this._getStatus(index)}`}>
                 <div className="reframe-tab-body">
-                  { _.isFunction() ? <tab.component /> : tab.component }
+                  { _.isFunction() ? React.createElement(tab.component) : tab.component }
                 </div>
               </div>
             )

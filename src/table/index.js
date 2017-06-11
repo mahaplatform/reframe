@@ -24,28 +24,28 @@ class Table extends React.Component {
   render() {
     const { columns, handler, link, modal, params, records, sort, onSort } = this.props
     return (
-      <div className="reframe-table">
-        <div className="reframe-table-head">
-          <div className="reframe-table-head-wrapper">
-            <div className="reframe-table-head-row" ref="head">
-              { columns.map((column, columnIndex) => {
-                let klass = ['reframe-table-head-cell']
-                if(column.primary === true) klass.push('mobile')
-                if(column.collapsing === true) klass.push('collapsing')
-                return (
-                  <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column) }>
-                    { column.label }
-                    { sort && column.key === sort.key &&
-                      (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
-                    }
-                  </div>
-                )
-              })}
+      <Scrollpane { ...this._getScrollpane() }>
+        <div className="reframe-table">
+          <div className="reframe-table-head reframe-scrollpane-header">
+            <div className="reframe-table-head-wrapper">
+              <div className="reframe-table-head-row" ref="head">
+                { columns.map((column, columnIndex) => {
+                  let klass = ['reframe-table-head-cell']
+                  if(column.primary === true) klass.push('mobile')
+                  if(column.collapsing === true) klass.push('collapsing')
+                  return (
+                    <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column) }>
+                      { column.label }
+                      { sort && column.key === sort.key &&
+                        (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                      }
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="reframe-table-body">
-          <Scrollpane { ...this._getScrollpane() }>
+          <div className="reframe-table-body">
             <div className="reframe-table-body-wrapper" ref="body">
               { records.map((record, rowIndex) => {
                 const row = columns.map((column, columnIndex) => {
@@ -91,9 +91,9 @@ class Table extends React.Component {
 
               })}
             </div>
-          </Scrollpane>
+          </div>
         </div>
-      </div>
+      </Scrollpane>
     )
   }
 
