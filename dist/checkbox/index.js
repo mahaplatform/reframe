@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -72,9 +76,9 @@ var Checkbox = function (_React$Component) {
 }(_react2.default.Component);
 
 Checkbox.propTypes = {
-  disabled: _react2.default.PropTypes.bool,
-  defaultValue: _react2.default.PropTypes.bool,
-  onChange: _react2.default.PropTypes.func
+  disabled: _propTypes2.default.bool,
+  defaultValue: _propTypes2.default.bool,
+  onChange: _propTypes2.default.func
 };
 Checkbox.defaultProps = {
   disabled: false,

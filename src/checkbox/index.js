@@ -1,12 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class Checkbox extends React.Component {
 
   static propTypes = {
-    disabled: React.PropTypes.bool,
-    defaultValue: React.PropTypes.bool,
-    onChange: React.PropTypes.func
+    disabled: PropTypes.bool,
+    defaultValue: PropTypes.bool,
+    onChange: PropTypes.func
   }
 
   static defaultProps = {

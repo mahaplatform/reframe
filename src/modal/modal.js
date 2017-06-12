@@ -22,10 +22,10 @@ class Modal extends React.Component {
   }
 
   static propTypes = {
-    component: PropTypes.oneOf(
+    component: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func
-    ),
+    ]),
     onClose: PropTypes.func,
     onPop: PropTypes.func,
     onPush: PropTypes.func

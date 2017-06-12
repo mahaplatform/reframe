@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -79,10 +83,10 @@ var TextArea = function (_React$Component) {
 }(_react2.default.Component);
 
 TextArea.propTypes = {
-  maxLength: _react2.default.PropTypes.number,
-  disabled: _react2.default.PropTypes.bool,
-  placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string
+  maxLength: _propTypes2.default.number,
+  disabled: _propTypes2.default.bool,
+  placeholder: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.string
 };
 TextArea.defaultProps = {
   disabled: false,

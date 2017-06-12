@@ -116,7 +116,7 @@ Modal.childContextTypes = {
   modal: _propTypes2.default.object
 };
 Modal.propTypes = {
-  component: _propTypes2.default.oneOf(_propTypes2.default.element, _propTypes2.default.func),
+  component: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   onClose: _propTypes2.default.func,
   onPop: _propTypes2.default.func,
   onPush: _propTypes2.default.func

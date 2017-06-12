@@ -1,20 +1,21 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 class DateField extends React.Component {
 
   static propTypes = {
-    autoComplete: React.PropTypes.string,
-    maxLength: React.PropTypes.number,
-    disabled: React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    defaultValue: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onKeyPress: React.PropTypes.func,
-    onKeyUp: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func
+    autoComplete: PropTypes.string,
+    maxLength: PropTypes.number,
+    disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onKeyUp: PropTypes.func,
+    onKeyDown: PropTypes.func
   }
 
   static defaultProps = {

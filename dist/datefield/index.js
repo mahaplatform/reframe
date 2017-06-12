@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -120,17 +124,17 @@ var DateField = function (_React$Component) {
 }(_react2.default.Component);
 
 DateField.propTypes = {
-  autoComplete: _react2.default.PropTypes.string,
-  maxLength: _react2.default.PropTypes.number,
-  disabled: _react2.default.PropTypes.bool,
-  placeholder: _react2.default.PropTypes.string,
-  defaultValue: _react2.default.PropTypes.string,
-  onChange: _react2.default.PropTypes.func,
-  onFocus: _react2.default.PropTypes.func,
-  onBlur: _react2.default.PropTypes.func,
-  onKeyPress: _react2.default.PropTypes.func,
-  onKeyUp: _react2.default.PropTypes.func,
-  onKeyDown: _react2.default.PropTypes.func
+  autoComplete: _propTypes2.default.string,
+  maxLength: _propTypes2.default.number,
+  disabled: _propTypes2.default.bool,
+  placeholder: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.string,
+  onChange: _propTypes2.default.func,
+  onFocus: _propTypes2.default.func,
+  onBlur: _propTypes2.default.func,
+  onKeyPress: _propTypes2.default.func,
+  onKeyUp: _propTypes2.default.func,
+  onKeyDown: _propTypes2.default.func
 };
 DateField.defaultProps = {
   autoComplete: 'off',

@@ -1,13 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 class TextArea extends React.Component {
 
   static propTypes = {
-    maxLength: React.PropTypes.number,
-    disabled: React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    defaultValue: React.PropTypes.string
+    maxLength: PropTypes.number,
+    disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
+    defaultValue: PropTypes.string
   }
 
   static defaultProps = {

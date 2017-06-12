@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Resumable from 'resumablejs'
 import bytes from 'bytes'
@@ -8,20 +9,20 @@ import * as actions from './actions'
 class FileField extends React.Component {
 
   static propTypes = {
-    endpoint: React.PropTypes.string,
-    files: React.PropTypes.array,
-    multiple: React.PropTypes.bool,
-    prompt: React.PropTypes.string,
-    status: React.PropTypes.string,
-    token: React.PropTypes.string,
-    onAddFile: React.PropTypes.func,
-    onUploadBegin: React.PropTypes.func,
-    onUploadProgress: React.PropTypes.func,
-    onUploadProcess: React.PropTypes.func,
-    onUploadSuccess: React.PropTypes.func,
-    onUploadFailure: React.PropTypes.func,
-    onRemoveFile: React.PropTypes.func,
-    onChangeFile: React.PropTypes.func
+    endpoint: PropTypes.string,
+    files: PropTypes.array,
+    multiple: PropTypes.bool,
+    prompt: PropTypes.string,
+    status: PropTypes.string,
+    token: PropTypes.string,
+    onAddFile: PropTypes.func,
+    onUploadBegin: PropTypes.func,
+    onUploadProgress: PropTypes.func,
+    onUploadProcess: PropTypes.func,
+    onUploadSuccess: PropTypes.func,
+    onUploadFailure: PropTypes.func,
+    onRemoveFile: PropTypes.func,
+    onChangeFile: PropTypes.func
   }
 
   static defaultProps = {

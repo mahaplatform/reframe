@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -225,20 +229,20 @@ var FileField = function (_React$Component) {
 }(_react2.default.Component);
 
 FileField.propTypes = {
-  endpoint: _react2.default.PropTypes.string,
-  files: _react2.default.PropTypes.array,
-  multiple: _react2.default.PropTypes.bool,
-  prompt: _react2.default.PropTypes.string,
-  status: _react2.default.PropTypes.string,
-  token: _react2.default.PropTypes.string,
-  onAddFile: _react2.default.PropTypes.func,
-  onUploadBegin: _react2.default.PropTypes.func,
-  onUploadProgress: _react2.default.PropTypes.func,
-  onUploadProcess: _react2.default.PropTypes.func,
-  onUploadSuccess: _react2.default.PropTypes.func,
-  onUploadFailure: _react2.default.PropTypes.func,
-  onRemoveFile: _react2.default.PropTypes.func,
-  onChangeFile: _react2.default.PropTypes.func
+  endpoint: _propTypes2.default.string,
+  files: _propTypes2.default.array,
+  multiple: _propTypes2.default.bool,
+  prompt: _propTypes2.default.string,
+  status: _propTypes2.default.string,
+  token: _propTypes2.default.string,
+  onAddFile: _propTypes2.default.func,
+  onUploadBegin: _propTypes2.default.func,
+  onUploadProgress: _propTypes2.default.func,
+  onUploadProcess: _propTypes2.default.func,
+  onUploadSuccess: _propTypes2.default.func,
+  onUploadFailure: _propTypes2.default.func,
+  onRemoveFile: _propTypes2.default.func,
+  onChangeFile: _propTypes2.default.func
 };
 FileField.defaultProps = {
   prompt: 'Choose File(s)',
