@@ -1,6 +1,7 @@
 import React from 'react'
 import Drawer from '../drawer'
 import Flash from '../flash'
+import Popup from '../popup'
 import Modal from '../modal'
 import Prompt from '../prompt'
 import Tasks from '../tasks'
@@ -12,17 +13,19 @@ class Platform extends React.Component {
     const { children } = this.props
     return (
       <Flash>
-        <Modal>
-          <Prompt>
-            <Drawer>
-              <Tasks>
-                <Tray>
-                  { children }
-                </Tray>
-              </Tasks>
-            </Drawer>
-          </Prompt>
-        </Modal>
+        <Popup>
+          <Modal>
+            <Prompt>
+              <Drawer>
+                <Tasks>
+                  <Tray>
+                    { children }
+                  </Tray>
+                </Tasks>
+              </Drawer>
+            </Prompt>
+          </Modal>
+        </Popup>
       </Flash>
     )
   }

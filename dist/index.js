@@ -64,6 +64,10 @@ var _platform = require('./platform');
 
 var _platform2 = _interopRequireDefault(_platform);
 
+var _popup = require('./popup');
+
+var _popup2 = _interopRequireDefault(_popup);
+
 var _prompt = require('./prompt');
 
 var _prompt2 = _interopRequireDefault(_prompt);
@@ -119,6 +123,7 @@ exports.default = {
   List: _list2.default,
   Modal: _modal2.default,
   Platform: _platform2.default,
+  Popup: _popup2.default,
   Prompt: _prompt2.default,
   Scrollpane: _scrollpane2.default,
   Stack: _stack2.default,

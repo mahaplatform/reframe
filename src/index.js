@@ -14,6 +14,7 @@ import Lookup from './lookup'
 import List from './list'
 import Modal from './modal'
 import Platform from './platform'
+import Popup from './popup'
 import Prompt from './prompt'
 import Scrollpane from './scrollpane'
 import Stack from './stack'
@@ -41,6 +42,7 @@ export default {
   List,
   Modal,
   Platform,
+  Popup,
   Prompt,
   Scrollpane,
   Stack,

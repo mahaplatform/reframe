@@ -18,6 +18,10 @@ var _flash = require('../flash');
 
 var _flash2 = _interopRequireDefault(_flash);
 
+var _popup = require('../popup');
+
+var _popup2 = _interopRequireDefault(_popup);
+
 var _modal = require('../modal');
 
 var _modal2 = _interopRequireDefault(_modal);
@@ -60,21 +64,25 @@ var Platform = function (_React$Component) {
         _flash2.default,
         null,
         _react2.default.createElement(
-          _modal2.default,
+          _popup2.default,
           null,
           _react2.default.createElement(
-            _prompt2.default,
+            _modal2.default,
             null,
             _react2.default.createElement(
-              _drawer2.default,
+              _prompt2.default,
               null,
               _react2.default.createElement(
-                _tasks2.default,
+                _drawer2.default,
                 null,
                 _react2.default.createElement(
-                  _tray2.default,
+                  _tasks2.default,
                   null,
-                  children
+                  _react2.default.createElement(
+                    _tray2.default,
+                    null,
+                    children
+                  )
                 )
               )
             )
