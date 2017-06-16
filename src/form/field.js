@@ -82,8 +82,10 @@ class Field extends React.Component {
   }
 
   _getControl() {
-    const { columns, defaultValue, disabled, endpoint, form, format, label, options } = this.props
-    const { prompt, prefix, sort, suffix, type, text, token, value, onSubmit } = this.props
+    const { columns, data, disabled, endpoint, form, format, label, name } = this.props
+    const { options, prompt, prefix, sort, suffix, type, text, token, value } = this.props
+    const { onSubmit, onUpdateData } = this.props
+    const defaultValue = _.get(data, name)
     return {
       columns,
       defaultValue,
@@ -101,7 +103,7 @@ class Field extends React.Component {
       token,
       type,
       value,
-      onChange: this._handleUpdateData.bind(this),
+      onChange: onUpdateData,
       onSubmit
     }
   }

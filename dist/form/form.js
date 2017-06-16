@@ -52,9 +52,7 @@ var Form = function (_React$Component) {
           title = _props.title;
 
       var formClasses = ['ui', 'form', 'reframe-form', status];
-      if (_.includes(['pending', 'submitting'], status)) {
-        formClasses.push('loading');
-      }
+      if (_.includes(['pending', 'submitting'], status)) formClasses.push('loading');
       return _react2.default.createElement(
         'div',
         { className: 'reframe-modal-panel' },
@@ -132,16 +130,93 @@ var Form = function (_React$Component) {
       onSetSections(sections);
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props3 = this.props,
+          data = _props3.data,
+          entity = _props3.entity,
+          status = _props3.status;
+
+      if (prevProps.status !== status) {
+        if (status === 'configured') this._handleLoadData();
+        if (status === 'validated') this._handleSubmit();
+        if (status === 'success') this._handleSuccess(entity);
+        if (status === 'failure') this._handleFailure();
+      }
+      if (prevProps.data != data) this._handleChange(prevProps.data, data);
+    }
+  }, {
     key: '_handleCancel',
     value: function _handleCancel() {
       this.context.modal.close();
     }
   }, {
+    key: '_handleLoadData',
+    value: function _handleLoadData() {
+      var _props4 = this.props,
+          defaults = _props4.defaults,
+          endpoint = _props4.endpoint,
+          sections = _props4.sections,
+          onFetchData = _props4.onFetchData,
+          onSetData = _props4.onSetData;
+
+      if (endpoint) return onFetchData(endpoint);
+      onSetData(defaults);
+    }
+  }, {
     key: '_handleUpdateData',
     value: function _handleUpdateData(key, value) {}
   }, {
+    key: '_handleChange',
+    value: function _handleChange(previous, current) {
+      var _props5 = this.props,
+          onChangeField = _props5.onChangeField,
+          onChange = _props5.onChange;
+
+      if (onChangeField) {
+        _.forOwn(current, function (value, code) {
+          if (previous[code] != current[code]) onChangeField(code, value);
+        });
+      }
+      if (onChange) onChange(current);
+    }
+  }, {
     key: '_handleSubmit',
-    value: function _handleSubmit() {}
+    value: function _handleSubmit() {
+      var _props6 = this.props,
+          action = _props6.action,
+          filtered = _props6.filtered,
+          method = _props6.method,
+          onSubmit = _props6.onSubmit,
+          onSubmitForm = _props6.onSubmitForm;
+
+      if (action) return onSubmitForm(method, action, filtered);
+      if (onSubmit) {
+        if (onSubmit(filtered)) return this._handleSuccess();
+        return this._handleFailure();
+      }
+      this._handleSuccess();
+    }
+  }, {
+    key: '_handleSuccess',
+    value: function _handleSuccess() {
+      var flash = this.context.flash;
+      var _props7 = this.props,
+          successMessage = _props7.successMessage,
+          onSuccess = _props7.onSuccess;
+
+      if (successMessage) flash.set('success', successMessage);
+      onSuccess(entity);
+    }
+  }, {
+    key: '_handleFailure',
+    value: function _handleFailure() {
+      var flash = this.context.flash;
+      var onFailure = this.props.onFailure;
+
+      flash.set('error', 'There were problems with your data');
+      onFailure();
+    }
   }]);
 
   return Form;
@@ -154,6 +229,7 @@ Form.PropTypes = {
   action: _propTypes2.default.string,
   after: _propTypes2.default.string,
   before: _propTypes2.default.string,
+  defaults: _propTypes2.default.object,
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
   fields: _propTypes2.default.array,

@@ -47,13 +47,14 @@ var Section = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           collapsing = _props.collapsing,
-          label = _props.label,
-          instructions = _props.instructions,
-          fields = _props.fields,
           data = _props.data,
           errors = _props.errors,
-          onSubmit = _props.onSubmit,
-          onUpdateData = _props.onUpdateData;
+          fields = _props.fields,
+          instructions = _props.instructions,
+          label = _props.label;
+      var _props2 = this.props,
+          onSubmit = _props2.onSubmit,
+          onUpdateData = _props2.onUpdateData;
       var collapsed = this.state.collapsed;
 
       var classes = ['ui', 'basic', 'segment'];

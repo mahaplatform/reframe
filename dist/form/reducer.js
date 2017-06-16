@@ -33,6 +33,24 @@ exports.default = function () {
         status: 'configured'
       });
 
+    case actionTypes.FETCH_DATA_REQUEST:
+      return _extends({}, state, {
+        status: 'loading'
+      });
+
+    case actionTypes.FETCH_DATA_SUCCESS:
+    case actionTypes.SET_DATA:
+      return _extends({}, state, {
+        status: 'ready',
+        data: action.result.data
+      });
+
+    case actionTypes.FETCH_DATA_FAILURE:
+      return _extends({}, state, {
+        status: 'error',
+        error: action.result.error
+      });
+
     default:
       return state;
   }

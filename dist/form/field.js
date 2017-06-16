@@ -114,14 +114,15 @@ var Field = function (_React$Component) {
     value: function _getControl() {
       var _props4 = this.props,
           columns = _props4.columns,
-          defaultValue = _props4.defaultValue,
+          data = _props4.data,
           disabled = _props4.disabled,
           endpoint = _props4.endpoint,
           form = _props4.form,
           format = _props4.format,
           label = _props4.label,
-          options = _props4.options;
+          name = _props4.name;
       var _props5 = this.props,
+          options = _props5.options,
           prompt = _props5.prompt,
           prefix = _props5.prefix,
           sort = _props5.sort,
@@ -129,9 +130,12 @@ var Field = function (_React$Component) {
           type = _props5.type,
           text = _props5.text,
           token = _props5.token,
-          value = _props5.value,
-          onSubmit = _props5.onSubmit;
+          value = _props5.value;
+      var _props6 = this.props,
+          onSubmit = _props6.onSubmit,
+          onUpdateData = _props6.onUpdateData;
 
+      var defaultValue = _.get(data, name);
       return {
         columns: columns,
         defaultValue: defaultValue,
@@ -149,7 +153,7 @@ var Field = function (_React$Component) {
         token: token,
         type: type,
         value: value,
-        onChange: this._handleUpdateData.bind(this),
+        onChange: onUpdateData,
         onSubmit: onSubmit
       };
     }

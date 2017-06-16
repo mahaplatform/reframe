@@ -13,22 +13,26 @@
 .reframe-list-item {
   border-bottom: 1px solid lighten(@black, 90%);
   display: flex;
+  color: lighten(@black, 40%);
+  position: relative;
   strong {
     color: @black;
-  }
-  .reframe-list-item-icon {
-    display: flex;
-    padding: 15px;
-    i {
-      margin: auto;
-    }
-  }
-  .reframe-list-item-content {
-    padding: 15px;
-    flex: 1;
-    color: lighten(@black, 40%);
   }
   & > div:nth-child(2) {
     padding: 15px 15px 15px 0;
   }
+}
+.reframe-list-item-padded {
+  padding: 1em;
+}
+.reframe-list-item-icon {
+  display: flex;
+  padding: 15px;
+  i {
+    margin: auto;
+  }
+}
+.reframe-list-item-content {
+  padding: 15px;
+  flex: 1;
 }

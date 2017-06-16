@@ -28,7 +28,8 @@ class Section extends React.Component {
   }
 
   render() {
-    const { collapsing, label, instructions, fields, data, errors, onSubmit, onUpdateData } = this.props
+    const { collapsing, data, errors, fields, instructions, label } = this.props
+    const { onSubmit, onUpdateData } = this.props
     const { collapsed } = this.state
     let classes = ['ui', 'basic', 'segment']
     if(collapsing) {

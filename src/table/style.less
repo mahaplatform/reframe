@@ -27,11 +27,13 @@ a.reframe-table-body-row {
 .reframe-table-head-cell,
 .reframe-table-body-cell {
   display: table-cell;
-  padding: 12px 18px;
+  padding: 1em;
   border-bottom: 1px solid @table_border_color;
+  &.collapsing {
+    width: 1px;
+  }
 }
 .reframe-table-head-cell {
-  border-right: 1px solid @table_border_color;
   background-color: @table_header_background_color;
   font-weight: bold;
   position: relative;
@@ -44,7 +46,7 @@ a.reframe-table-body-row {
   }
   .chevron {
     position: absolute;
-    right: 18px;
+    right: 1em;
     color: #AAA;
   }
 }
@@ -53,13 +55,14 @@ a.reframe-table-body-row {
   vertical-align: middle;
   color: @table_body_font_color !important;
   strong {
-    color: #000;
-  }
-  &.collapsing {
-    width: 1px;
+    color: @black;
   }
   &.centered {
     text-align: center;
+  }
+  &.icon {
+    color: #CCCCCC !important;
+    font-size: 0.8em;
   }
 }
 @media only screen and (max-width: 767px) {

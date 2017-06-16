@@ -87,7 +87,8 @@ var Table = function (_React$Component) {
                     column.label,
                     sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
                   );
-                })
+                }),
+                link && _react2.default.createElement('div', { className: 'reframe-table-head-cell mobile collapsing' })
               )
             )
           ),
@@ -109,7 +110,7 @@ var Table = function (_React$Component) {
                     { key: 'cell_' + rowIndex + '_' + columnIndex, className: klass.join(' ') },
                     _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: value }))
                   );
-                }).concat(_this2.props.export ? [_react2.default.createElement('div', { key: 'cell_extra', className: 'table-cell mobile' })] : []);
+                }).concat(_this2.props.export ? [_react2.default.createElement('div', { key: 'cell_extra', className: 'reframe-table-body-cell mobile' })] : []);
 
                 if (link) {
                   _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
@@ -117,7 +118,12 @@ var Table = function (_React$Component) {
                   return _react2.default.createElement(
                     _reactRouterDom.Link,
                     { key: 'record_' + rowIndex, className: 'reframe-table-body-row', to: to },
-                    row
+                    row,
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'reframe-table-body-cell icon mobile collapsing centered' },
+                      _react2.default.createElement('i', { className: 'chevron right icon' })
+                    )
                   );
                 } else if (modal) {
                   return _react2.default.createElement(

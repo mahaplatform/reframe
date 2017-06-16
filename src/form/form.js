@@ -12,6 +12,7 @@ class Form extends React.Component {
     action: PropTypes.string,
     after: PropTypes.string,
     before: PropTypes.string,
+    defaults: PropTypes.object,
     data: PropTypes.object,
     errors: PropTypes.object,
     fields: PropTypes.array,
@@ -33,9 +34,7 @@ class Form extends React.Component {
   render() {
     const { after, before, data, errors, instructions, sections, title } = this.props
     let formClasses = ['ui', 'form', 'reframe-form', status]
-    if(_.includes(['pending', 'submitting'], status)) {
-      formClasses.push('loading')
-    }
+    if(_.includes(['pending', 'submitting'], status)) formClasses.push('loading')
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
@@ -58,14 +57,12 @@ class Form extends React.Component {
               </div>
             }
             <div className={formClasses.join(' ')} ref="form">
-              { sections.map((section, index) => {
-                return <Section {...section}
-                                key={`section_${index}`}
-                                data={data}
-                                errors={errors}
-                                onUpdateData={this._handleUpdateData.bind(this)}
-                                onSubmit={this._handleSubmit.bind(this)} />
-              })}
+              { sections.map((section, index) => <Section {...section}
+                              key={`section_${index}`}
+                              data={data}
+                              errors={errors}
+                              onUpdateData={this._handleUpdateData.bind(this)}
+                              onSubmit={this._handleSubmit.bind(this)} />)}
             </div>
             { after &&
               <div className="reframe-form-footer">
@@ -83,16 +80,63 @@ class Form extends React.Component {
     onSetSections(sections)
   }
 
+  componentDidUpdate(prevProps) {
+    const { data, entity, status } = this.props
+    if(prevProps.status !== status) {
+      if(status === 'configured') this._handleLoadData()
+      if(status === 'validated') this._handleSubmit()
+      if(status === 'success') this._handleSuccess(entity)
+      if(status === 'failure') this._handleFailure()
+    }
+    if(prevProps.data != data) this._handleChange(prevProps.data, data)
+  }
+
   _handleCancel() {
     this.context.modal.close()
+  }
+
+  _handleLoadData() {
+    const { defaults, endpoint, sections, onFetchData, onSetData } = this.props
+    if(endpoint) return onFetchData(endpoint)
+    onSetData(defaults)
   }
 
   _handleUpdateData(key, value) {
   }
 
-  _handleSubmit() {
+  _handleChange(previous, current) {
+    const { onChangeField, onChange } = this.props
+    if(onChangeField) {
+      _.forOwn(current, (value, code) => {
+        if(previous[code] != current[code]) onChangeField(code, value)
+      })
+    }
+    if(onChange) onChange(current)
   }
 
+  _handleSubmit() {
+    const { action, filtered, method, onSubmit, onSubmitForm } = this.props
+    if(action) return onSubmitForm(method, action, filtered)
+    if(onSubmit) {
+      if(onSubmit(filtered)) return this._handleSuccess()
+      return this._handleFailure()
+    }
+    this._handleSuccess()
+  }
+
+  _handleSuccess() {
+    const { flash } = this.context
+    const { successMessage, onSuccess } = this.props
+    if(successMessage) flash.set('success', successMessage)
+    onSuccess(entity)
+  }
+
+  _handleFailure() {
+    const { flash } = this.context
+    const { onFailure } = this.props
+    flash.set('error', 'There were problems with your data')
+    onFailure()
+  }
 
 }
 

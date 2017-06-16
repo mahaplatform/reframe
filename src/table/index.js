@@ -42,6 +42,7 @@ class Table extends React.Component {
                     </div>
                   )
                 })}
+                { link && <div className="reframe-table-head-cell mobile collapsing" /> }
               </div>
             </div>
           </div>
@@ -59,7 +60,7 @@ class Table extends React.Component {
                       <Format {...record} format={column.format} value={value} />
                     </div>
                   )
-                }).concat((this.props.export ? [<div key="cell_extra" className="table-cell mobile" />] : []))
+                }).concat((this.props.export ? [<div key="cell_extra" className="reframe-table-body-cell mobile" />] : []))
 
                 if(link) {
                   _.templateSettings.interpolate = /#{([\s\S]+?)}/g
@@ -67,6 +68,9 @@ class Table extends React.Component {
                   return (
                     <Link key={ `record_${rowIndex}` } className="reframe-table-body-row" to={to}>
                       { row }
+                      <div className="reframe-table-body-cell icon mobile collapsing centered">
+                        <i className="chevron right icon" />
+                      </div>
                     </Link>
                   )
                 } else if(modal) {

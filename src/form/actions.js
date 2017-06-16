@@ -6,7 +6,7 @@ export const setSections = (sections) => ({
 })
 
 export const fetchData = (endpoint) => ({
-  type: 'api/REQUEST',
+  type: 'API_REQUEST',
   method: 'GET',
   endpoint,
   request: actionTypes.FETCH_DATA_REQUEST,
@@ -29,10 +29,10 @@ export const updateData = (key, value) => ({
   value
 })
 
-export const submitForm = (method, endpoint, params) => ({
-  type: 'api/REQUEST',
+export const submitForm = (method, endpoint, body) => ({
+  type: 'API_REQUEST',
   method,
-  params,
+  body,
   endpoint,
   request: actionTypes.SUBMIT_REQUEST,
   success: actionTypes.SUBMIT_SUCCESS,

@@ -16,9 +16,15 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
+
+var _reactRouterDom = require('react-router-dom');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,6 +47,7 @@ var List = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          empty = _props.empty,
           items = _props.items,
           sections = _props.sections;
 
@@ -50,7 +57,7 @@ var List = function (_React$Component) {
         sections && sections.map(function (section, index) {
           return _react2.default.createElement(Section, _extends({}, section, { key: 'list_section_' + index }));
         }),
-        items && _react2.default.createElement(Section, { items: items })
+        items && _react2.default.createElement(Section, { items: items, empty: empty })
       );
     }
   }]);
@@ -59,6 +66,7 @@ var List = function (_React$Component) {
 }(_react2.default.Component);
 
 List.propTypes = {
+  empty: _propTypes2.default.string,
   items: _propTypes2.default.array,
   sections: _propTypes2.default.array
 };
@@ -75,8 +83,6 @@ var Section = function (_React$Component2) {
   _createClass(Section, [{
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       var _props2 = this.props,
           empty = _props2.empty,
           items = _props2.items,
@@ -91,15 +97,16 @@ var Section = function (_React$Component2) {
           title
         ),
         items && items.length > 0 && items.map(function (item, itemIndex) {
-          return _react2.default.createElement(
+          var content = _react2.default.createElement(
             'div',
             { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
-            item.icon && _react2.default.createElement(
+            item.component && _lodash2.default.isFunction(item.component) ? _react2.default.createElement(item.component, item.content) : item.component,
+            !item.component && item.icon && _react2.default.createElement(
               'div',
               { className: 'reframe-list-item-icon' },
               _react2.default.createElement('i', { className: item.icon + ' icon' })
             ),
-            _react2.default.createElement(
+            !item.component && _react2.default.createElement(
               'div',
               { className: 'reframe-list-item-content' },
               item.label && _react2.default.createElement(
@@ -108,9 +115,17 @@ var Section = function (_React$Component2) {
                 item.label,
                 _react2.default.createElement('br', null)
               ),
-              _react2.default.createElement(_format2.default, _extends({}, _this3.props, { format: item.format, value: item.content }))
+              !item.component && _react2.default.createElement(_format2.default, _extends({}, item.content, { format: item.format, value: item.content }))
             )
           );
+          if (item.link) {
+            return _react2.default.createElement(
+              _reactRouterDom.Link,
+              { key: 'list_item_link_' + itemIndex, to: item.link },
+              content
+            );
+          }
+          return content;
         }),
         empty && !items || items && items.length === 0 && _react2.default.createElement(
           'div',

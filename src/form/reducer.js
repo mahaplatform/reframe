@@ -19,6 +19,27 @@ export default (state = INITIAL_STATE, action) => {
       status: 'configured'
     }
 
+  case actionTypes.FETCH_DATA_REQUEST:
+    return {
+      ...state,
+      status: 'loading'
+    }
+
+  case actionTypes.FETCH_DATA_SUCCESS:
+  case actionTypes.SET_DATA:
+    return {
+      ...state,
+      status: 'ready',
+      data: action.result.data
+    }
+
+  case actionTypes.FETCH_DATA_FAILURE:
+    return {
+      ...state,
+      status: 'error',
+      error: action.result.error
+    }
+
   default:
     return state
   }

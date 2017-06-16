@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -19,8 +21,6 @@ var _lodash = require('lodash');
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45,45 +45,36 @@ var TextField = function (_React$Component) {
   _createClass(TextField, [{
     key: 'render',
     value: function render() {
-      var input = _react2.default.createElement('input', { ref: 'control',
-        type: 'text',
-        defaultValue: this.state.value,
-        autoComplete: this.props.autoComplete,
-        placeholder: this.props.placeholder,
-        onChange: this._handleChange.bind(this),
-        onBlur: this._handleBlur.bind(this),
-        onFocus: this._handleFocus.bind(this),
-        onKeyPress: this._handleKeyPress.bind(this),
-        onKeyUp: this._handleKeyUp.bind(this),
-        onKeyDown: this._handleKeyDown.bind(this) });
-      if (this.props.prefix || this.props.suffix) {
-        var classes = ['ui', 'labeled', 'input'].concat(_toConsumableArray(this.props.prefix ? ['left'] : []), _toConsumableArray(this.props.suffix ? ['right'] : []));
-        return _react2.default.createElement(
-          'div',
-          { className: 'textfield' },
-          _react2.default.createElement(
-            'div',
-            { className: classes.join(' ') },
-            this.props.prefix && _react2.default.createElement(
-              'div',
-              { className: 'ui label' },
-              this.props.prefix
-            ),
-            input,
-            this.props.suffix && _react2.default.createElement(
-              'div',
-              { className: 'ui label' },
-              this.props.suffix
-            )
-          )
-        );
-      } else {
+      var input = _react2.default.createElement('input', _extends({ ref: 'control' }, this._getControl()));
+      if (!this.props.prefix && !this.props.suffix) {
         return _react2.default.createElement(
           'div',
           { className: 'textfield' },
           input
         );
       }
+      var classes = ['ui', 'labeled', 'input'];
+      if (this.props.prefix) classes.push('left');
+      if (this.props.suffix) classes.push('right');
+      return _react2.default.createElement(
+        'div',
+        { className: 'textfield' },
+        _react2.default.createElement(
+          'div',
+          { className: classes.join(' ') },
+          this.props.prefix && _react2.default.createElement(
+            'div',
+            { className: 'ui label' },
+            this.props.prefix
+          ),
+          input,
+          this.props.suffix && _react2.default.createElement(
+            'div',
+            { className: 'ui label' },
+            this.props.suffix
+          )
+        )
+      );
     }
   }, {
     key: 'componentDidUpdate',
@@ -91,6 +82,24 @@ var TextField = function (_React$Component) {
       if (prevProps.defaultValue != this.props.defaultValue) {
         this.setValue(this.props.defaultValue);
       }
+    }
+  }, {
+    key: '_getControl',
+    value: function _getControl() {
+      var value = this.state.value;
+
+      return {
+        type: 'text',
+        value: value,
+        autoComplete: this.props.autoComplete,
+        placeholder: this.props.placeholder,
+        onChange: this._handleChange.bind(this),
+        onBlur: this._handleBlur.bind(this),
+        onFocus: this._handleFocus.bind(this),
+        onKeyPress: this._handleKeyPress.bind(this),
+        onKeyUp: this._handleKeyUp.bind(this),
+        onKeyDown: this._handleKeyDown.bind(this)
+      };
     }
   }, {
     key: '_handleChange',

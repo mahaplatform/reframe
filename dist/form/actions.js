@@ -20,7 +20,7 @@ var setSections = exports.setSections = function setSections(sections) {
 
 var fetchData = exports.fetchData = function fetchData(endpoint) {
   return {
-    type: 'api/REQUEST',
+    type: 'API_REQUEST',
     method: 'GET',
     endpoint: endpoint,
     request: actionTypes.FETCH_DATA_REQUEST,
@@ -50,11 +50,11 @@ var updateData = exports.updateData = function updateData(key, value) {
   };
 };
 
-var submitForm = exports.submitForm = function submitForm(method, endpoint, params) {
+var submitForm = exports.submitForm = function submitForm(method, endpoint, body) {
   return {
-    type: 'api/REQUEST',
+    type: 'API_REQUEST',
     method: method,
-    params: params,
+    body: body,
     endpoint: endpoint,
     request: actionTypes.SUBMIT_REQUEST,
     success: actionTypes.SUBMIT_SUCCESS,

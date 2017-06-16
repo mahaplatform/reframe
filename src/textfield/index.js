@@ -44,45 +44,43 @@ class TextField extends React.Component {
   }
 
   render() {
-    const input = <input ref="control"
-                         type="text"
-                         defaultValue={this.state.value}
-                         autoComplete={this.props.autoComplete}
-                         placeholder={this.props.placeholder}
-                         onChange={this._handleChange.bind(this)}
-                         onBlur={this._handleBlur.bind(this)}
-                         onFocus={this._handleFocus.bind(this)}
-                         onKeyPress={this._handleKeyPress.bind(this)}
-                         onKeyUp={this._handleKeyUp.bind(this)}
-                         onKeyDown={this._handleKeyDown.bind(this)} />
-    if(this.props.prefix || this.props.suffix) {
-      let classes = [
-        ...['ui','labeled','input'],
-        ...(this.props.prefix ? ['left'] : []),
-        ...(this.props.suffix ? ['right'] : [])
-      ]
-      return (
-        <div className="textfield">
-          <div className={classes.join(' ')}>
-            { this.props.prefix && <div className="ui label">{this.props.prefix}</div> }
-            {input}
-            { this.props.suffix && <div className="ui label">{this.props.suffix}</div> }
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="textfield">
-          {input}
-        </div>
-
-      )
+    const input = <input ref="control" { ...this._getControl() } />
+    if(!this.props.prefix && !this.props.suffix) {
+      return <div className="textfield">{ input }</div>
     }
+    const classes = ['ui','labeled','input']
+    if(this.props.prefix) classes.push('left')
+    if(this.props.suffix) classes.push('right')
+    return (
+      <div className="textfield">
+        <div className={classes.join(' ')}>
+          { this.props.prefix && <div className="ui label">{this.props.prefix}</div> }
+          {input}
+          { this.props.suffix && <div className="ui label">{this.props.suffix}</div> }
+        </div>
+      </div>
+    )
   }
 
   componentDidUpdate(prevProps) {
     if(prevProps.defaultValue != this.props.defaultValue) {
       this.setValue(this.props.defaultValue)
+    }
+  }
+
+  _getControl() {
+    const { value } = this.state
+    return {
+      type: 'text',
+      value,
+      autoComplete: this.props.autoComplete,
+      placeholder: this.props.placeholder,
+      onChange: this._handleChange.bind(this),
+      onBlur: this._handleBlur.bind(this),
+      onFocus: this._handleFocus.bind(this),
+      onKeyPress: this._handleKeyPress.bind(this),
+      onKeyUp: this._handleKeyUp.bind(this),
+      onKeyDown: this._handleKeyDown.bind(this)
     }
   }
 
