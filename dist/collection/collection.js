@@ -62,24 +62,36 @@ var Collection = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             { className: 'reframe-collection' },
-            _react2.default.createElement(
+            empty.component ? _react2.default.createElement(
+              'div',
+              { className: 'reframe-collection-empty' },
+              _lodash2.default.isFunction(empty.component) ? _react2.default.createElement(empty.component) : empty.component
+            ) : _react2.default.createElement(
               'div',
               { className: 'reframe-collection-empty' },
               _react2.default.createElement(
                 'div',
                 { className: 'reframe-collection-empty-message' },
-                _react2.default.createElement(
+                empty.icon && _react2.default.createElement(
                   'h2',
                   null,
                   _react2.default.createElement('i', { className: 'circular ' + empty.icon + ' icon' })
                 ),
-                _react2.default.createElement(
+                empty.title ? _react2.default.createElement(
+                  'h3',
+                  null,
+                  empty.title
+                ) : _react2.default.createElement(
                   'h3',
                   null,
                   'No ',
                   _lodash2.default.startCase((0, _pluralize2.default)(entity.replace('_', ' ')))
                 ),
-                _react2.default.createElement(
+                empty.message ? _react2.default.createElement(
+                  'p',
+                  null,
+                  empty.message
+                ) : _react2.default.createElement(
                   'p',
                   null,
                   'You have not yet created any ',
@@ -304,7 +316,11 @@ Collection.PropTypes = {
   columns: _propTypes2.default.array,
   data: _propTypes2.default.array,
   entity: _propTypes2.default.object,
-  empty: _propTypes2.default.object,
+  empty: _propTypes2.default.shape({
+    icon: _propTypes2.default.string,
+    message: _propTypes2.default.string,
+    modal: _propTypes2.default.func
+  }),
   filter: _propTypes2.default.object,
   handler: _propTypes2.default.func,
   layout: _propTypes2.default.func,

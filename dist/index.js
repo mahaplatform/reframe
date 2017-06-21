@@ -76,6 +76,10 @@ var _scrollpane = require('./scrollpane');
 
 var _scrollpane2 = _interopRequireDefault(_scrollpane);
 
+var _search = require('./search');
+
+var _search2 = _interopRequireDefault(_search);
+
 var _stack = require('./stack');
 
 var _stack2 = _interopRequireDefault(_stack);
@@ -126,6 +130,7 @@ exports.default = {
   Popup: _popup2.default,
   Prompt: _prompt2.default,
   Scrollpane: _scrollpane2.default,
+  Search: _search2.default,
   Stack: _stack2.default,
   Table: _table2.default,
   Tabs: _tabs2.default,

@@ -100,12 +100,12 @@ var Section = function (_React$Component2) {
           var content = _react2.default.createElement(
             'div',
             { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
-            item.component && _lodash2.default.isFunction(item.component) ? _react2.default.createElement(item.component, item.content) : item.component,
-            !item.component && item.icon && _react2.default.createElement(
+            item.icon && _react2.default.createElement(
               'div',
               { className: 'reframe-list-item-icon' },
               _react2.default.createElement('i', { className: item.icon + ' icon' })
             ),
+            item.component && _lodash2.default.isFunction(item.component) ? _react2.default.createElement(item.component, item.content) : item.component,
             !item.component && _react2.default.createElement(
               'div',
               { className: 'reframe-list-item-content' },
@@ -116,6 +116,16 @@ var Section = function (_React$Component2) {
                 _react2.default.createElement('br', null)
               ),
               !item.component && _react2.default.createElement(_format2.default, _extends({}, item.content, { format: item.format, value: item.content }))
+            ),
+            item.extra && _react2.default.createElement(
+              'div',
+              { className: 'reframe-list-item-extra' },
+              _lodash2.default.isFunction(item.extra) ? _react2.default.createElement(item.extra) : item.extra
+            ),
+            item.link && _react2.default.createElement(
+              'div',
+              { className: 'reframe-list-item-proceed' },
+              _react2.default.createElement('i', { className: 'chevron right icon' })
             )
           );
           if (item.link) {

@@ -1,5 +1,5 @@
 .reframe-list {
-  margin-bottom: 10px;
+  margin-bottom: 1em;
   background-color: @white;
 }
 .reframe-list-title {
@@ -7,7 +7,7 @@
   background-color: darken(@white, 5%);
   color: @black;
   font-weight: bold;
-  padding: 15px;
+  padding: 1em;
   text-transform: uppercase;
 }
 .reframe-list-item {
@@ -18,21 +18,40 @@
   strong {
     color: @black;
   }
-  & > div:nth-child(2) {
-    padding: 15px 15px 15px 0;
-  }
 }
 .reframe-list-item-padded {
   padding: 1em;
 }
 .reframe-list-item-icon {
   display: flex;
-  padding: 15px;
+  padding: 1em 0 1em 1em;
   i {
     margin: auto;
   }
 }
 .reframe-list-item-content {
-  padding: 15px;
+  padding: 1em;
   flex: 1;
+}
+.reframe-list-item-extra {
+  display: flex;
+  padding: 1em 1em 1em 0;
+  & > * {
+    margin: auto !important;
+  }
+  .button {
+    padding: 0.75em !important;
+    i {
+      margin: 0 !important;
+    }
+  }
+}
+.reframe-list-item-proceed {
+  display: flex;
+  padding: 1em 1em 1em 0;
+  font-size: 0.8em;
+  i {
+    margin: auto !important;
+    color: fadeout(@black, 80);
+  }
 }

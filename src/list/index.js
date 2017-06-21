@@ -41,18 +41,28 @@ class Section extends React.Component {
           items.map((item, itemIndex) => {
             const content = (
               <div key={`list_item_${itemIndex}`} className="reframe-list-item">
-                { item.component &&
-                  _.isFunction(item.component) ? React.createElement(item.component, item.content) : item.component
-                }
-                { !item.component && item.icon &&
+                { item.icon &&
                   <div className="reframe-list-item-icon">
                     <i className={`${item.icon} icon`} />
                   </div>
+                }
+                { item.component &&
+                  _.isFunction(item.component) ? React.createElement(item.component, item.content) : item.component
                 }
                 { !item.component &&
                   <div className="reframe-list-item-content">
                     { item.label && <strong>{ item.label }<br /></strong> }
                     { !item.component && <Format { ...item.content } format={ item.format } value={ item.content } /> }
+                  </div>
+                }
+                { item.extra &&
+                  <div className="reframe-list-item-extra">
+                    { _.isFunction(item.extra) ? React.createElement(item.extra) : item.extra }
+                  </div>
+                }
+                { item.link &&
+                  <div className="reframe-list-item-proceed">
+                    <i className="chevron right icon" />
                   </div>
                 }
               </div>
