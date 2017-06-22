@@ -15,10 +15,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = {
-  all: 0,
-  records: [],
+  all: null,
+  records: null,
   status: 'pending',
-  total: 300
+  total: null
 };
 
 exports.default = function () {
@@ -34,11 +34,12 @@ exports.default = function () {
       });
 
     case actionTypes.FETCH_SUCCESS:
+      var loaded = state.records ? state.records.length : 0;
       return _extends({}, state, {
         all: action.result.pagination.all,
         records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records), _toConsumableArray(action.result.data)) : action.result.data,
         total: action.result.pagination.total,
-        status: loaded >= action.result.pagination.total ? 'completed' : 'loaded'
+        status: loaded + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'
       });
 
     case actionTypes.FETCH_FAILURE:

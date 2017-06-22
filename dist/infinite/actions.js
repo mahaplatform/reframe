@@ -14,7 +14,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var fetch = exports.fetch = function fetch(endpoint, query) {
   return {
     type: 'API_REQUEST',
-    method: 'POST',
+    method: 'GET',
     endpoint: endpoint,
     query: query,
     request: actionTypes.FETCH_REQUEST,

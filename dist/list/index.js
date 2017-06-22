@@ -135,6 +135,13 @@ var Section = function (_React$Component2) {
               content
             );
           }
+          if (item.handler) {
+            return _react2.default.createElement(
+              'div',
+              { key: 'list_item_link_' + itemIndex, onClick: item.handler },
+              content
+            );
+          }
           return content;
         }),
         empty && !items || items && items.length === 0 && _react2.default.createElement(

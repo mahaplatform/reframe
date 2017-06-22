@@ -18,6 +18,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _scrollpane = require('../scrollpane');
+
+var _scrollpane2 = _interopRequireDefault(_scrollpane);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38,23 +42,30 @@ var Infinite = function (_React$Component) {
   _createClass(Infinite, [{
     key: 'render',
     value: function render() {
-      var children = this.props.children;
+      var _props = this.props,
+          empty = _props.empty,
+          layout = _props.layout,
+          loading = _props.loading,
+          records = _props.records,
+          status = _props.status;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-infinite' },
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-infinite-body', ref: 'infinite' },
-          children
-        ),
-        status === 'loading' && _react2.default.createElement(
-          'div',
-          { className: 'reframe-infinite-footer' },
-          _react2.default.createElement(
+        status === 'loading' && !records && (_lodash2.default.isFunction(loading) ? _react2.default.createElement(loading) : loading),
+        status !== 'failed' && records && records.length === 0 && (_lodash2.default.isFunction(empty) ? _react2.default.createElement(empty) : empty),
+        status !== 'failed' && records && records.length > 0 && _react2.default.createElement(
+          _scrollpane2.default,
+          this._getScrollpane(),
+          _lodash2.default.isFunction(layout) ? _react2.default.createElement(layout, { records: records }) : layout,
+          status === 'loading' && _react2.default.createElement(
             'div',
-            { className: 'ui active inverted dimmer' },
-            _react2.default.createElement('div', { className: 'ui small loader' })
+            { className: 'reframe-infinite-loader' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui active inverted dimmer' },
+              _react2.default.createElement('div', { className: 'ui small loader' })
+            )
           )
         )
       );
@@ -62,82 +73,44 @@ var Infinite = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.listener = _lodash2.default.throttle(this._scrollListener.bind(this), 100);
-      this._attachScrollListener();
+      this._handleFetch(0);
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var _props = this.props,
-          filter = _props.filter,
-          sort = _props.sort,
-          loaded = _props.loaded,
-          records = _props.records,
-          status = _props.status;
-
-      if (!_lodash2.default.isEqual(prevProps.sort, sort) || !_lodash2.default.isEqual(prevProps.filter, filter)) {
-        this._handleFetch(0);
-      } else if (prevProps.status !== status) {
-        if (status === 'loaded' && records.length > 0) {
-          this._attachScrollListener();
-        } else if (status === 'pending') {
-          this._handleFetch(loaded);
-        } else if (status === 'completed') {
-          this._detachScrollListener();
-        }
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this._detachScrollListener();
-    }
-  }, {
-    key: '_attachScrollListener',
-    value: function _attachScrollListener() {
-      var infinite = this.refs.infinite;
-
-      infinite.addEventListener('scroll', this.listener, true);
-      infinite.addEventListener('resize', this.listener, true);
-      this._scrollListener();
-    }
-  }, {
-    key: '_detachScrollListener',
-    value: function _detachScrollListener() {
-      var infinite = this.refs.infinite;
-
-      infinite.removeEventListener('scroll', this._listener(), true);
-      infinite.removeEventListener('resize', this._listener(), true);
-    }
-  }, {
-    key: '_scrollListener',
-    value: function _scrollListener() {
-      var infinite = this.refs.infinite;
       var _props2 = this.props,
-          records = _props2.records,
-          status = _props2.status,
-          total = _props2.total;
+          filter = _props2.filter,
+          sort = _props2.sort;
 
-      var bottomPosition = infinite.scrollHeight - (infinite.scrollTop + infinite.offsetHeight);
-      var percentRemaining = bottomPosition / infinite.scrollHeight * 100;
-      if (percentRemaining <= 20 && status !== 'laoding' && records.length < total) {
-        this._handleFetch(records.length);
+      if (!_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
+        this._handleFetch(0);
       }
+    }
+  }, {
+    key: '_getScrollpane',
+    value: function _getScrollpane() {
+      return {
+        onReachBottom: this._handleFetch.bind(this)
+      };
     }
   }, {
     key: '_handleFetch',
-    value: function _handleFetch(loaded) {
+    value: function _handleFetch() {
+      var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var _props3 = this.props,
           endpoint = _props3.endpoint,
           filter = _props3.filter,
+          records = _props3.records,
           sort = _props3.sort,
+          total = _props3.total,
           onFetch = _props3.onFetch;
-      // const $filter = filter
-      // const $page = { skip: loaded }
-      // const $sort = (sort.order === 'desc' ? '-' : '') + sort.key
 
-      var params = {}; //{ $filter, $page, $sort }
-      onFetch(endpoint, params);
+      var loaded = records ? records.length : 0;
+      var $page = { skip: skip !== null ? skip : loaded };
+      var query = { $page: $page };
+      if (filter) query.$filter = filter;
+      if (sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key;
+      if (skip === 0 || total === null || loaded < total) onFetch(endpoint, query);
     }
   }]);
 
@@ -146,10 +119,21 @@ var Infinite = function (_React$Component) {
 
 Infinite.PropTypes = {
   all: _propTypes2.default.number,
+  empty: _propTypes2.default.func,
   endpoint: _propTypes2.default.string,
+  filter: _propTypes2.default.object,
+  layout: _propTypes2.default.func,
+  loading: _propTypes2.default.func,
   records: _propTypes2.default.array,
   status: _propTypes2.default.string,
   total: _propTypes2.default.number,
   onFetch: _propTypes2.default.func
+};
+Infinite.defaultProps = {
+  sort: {
+    key: null,
+    order: null
+  },
+  filter: {}
 };
 exports.default = Infinite;

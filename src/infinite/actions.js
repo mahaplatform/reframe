@@ -2,7 +2,7 @@ import * as actionTypes from './action_types'
 
 export const fetch = (endpoint, query) => ({
   type: 'API_REQUEST',
-  method: 'POST',
+  method: 'GET',
   endpoint,
   query,
   request: actionTypes.FETCH_REQUEST,

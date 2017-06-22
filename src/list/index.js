@@ -74,6 +74,13 @@ class Section extends React.Component {
                 </Link>
               )
             }
+            if(item.handler) {
+              return (
+                <div key={`list_item_link_${itemIndex}`} onClick={ item.handler }>
+                  { content }
+                </div>
+              )
+            }
             return content
           })
         }

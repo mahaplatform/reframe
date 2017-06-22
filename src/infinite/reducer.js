@@ -1,10 +1,10 @@
 import * as actionTypes from './action_types'
 
 const INITIAL_STATE = {
-  all: 0,
-  records: [],
+  all: null,
+  records: null,
   status: 'pending',
-  total: 300
+  total: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +18,7 @@ export default (state = INITIAL_STATE, action) => {
     }
 
   case actionTypes.FETCH_SUCCESS:
+    const loaded = state.records ? state.records.length : 0
     return {
       ...state,
       all: action.result.pagination.all,
@@ -26,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
         ...action.result.data
       ] : action.result.data,
       total: action.result.pagination.total,
-      status: (loaded >= action.result.pagination.total) ? 'completed' : 'loaded'
+      status: (loaded + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
     }
 
   case actionTypes.FETCH_FAILURE:
