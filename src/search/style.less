@@ -50,6 +50,19 @@
     }
   }
 }
+.reframe-search-chosen {
+  max-height: 4em;
+  .scrollable();
+  color: @blue;
+  margin: 0.5em 0.5em 0;
+  font-size: 0.8em;
+  span:last-child:after {
+    content: '';
+  }
+  span:after {
+    content: ', ';
+  }
+}
 .reframe-search-filter {
   flex: 0 0 50px;
   display: flex;

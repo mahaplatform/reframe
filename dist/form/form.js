@@ -140,7 +140,7 @@ var Form = function (_React$Component) {
       if (prevProps.status !== status) {
         if (status === 'configured') this._handleLoadData();
         if (status === 'validated') this._handleSubmit();
-        if (status === 'success') this._handleSuccess(entity);
+        if (status === 'success') this._handleSuccess();
         if (status === 'failure') this._handleFailure();
       }
       if (prevProps.data != data) this._handleChange(prevProps.data, data);
@@ -202,6 +202,7 @@ var Form = function (_React$Component) {
     value: function _handleSuccess() {
       var flash = this.context.flash;
       var _props7 = this.props,
+          entity = _props7.entity,
           successMessage = _props7.successMessage,
           onSuccess = _props7.onSuccess;
 
@@ -223,6 +224,7 @@ var Form = function (_React$Component) {
 }(_react2.default.Component);
 
 Form.contextTypes = {
+  flash: _propTypes2.default.object,
   modal: _propTypes2.default.object
 };
 Form.PropTypes = {

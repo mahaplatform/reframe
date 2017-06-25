@@ -5,6 +5,7 @@ import Section from './section'
 class Form extends React.Component {
 
   static contextTypes = {
+    flash: PropTypes.object,
     modal: PropTypes.object
   }
 
@@ -85,7 +86,7 @@ class Form extends React.Component {
     if(prevProps.status !== status) {
       if(status === 'configured') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
-      if(status === 'success') this._handleSuccess(entity)
+      if(status === 'success') this._handleSuccess()
       if(status === 'failure') this._handleFailure()
     }
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
@@ -126,7 +127,7 @@ class Form extends React.Component {
 
   _handleSuccess() {
     const { flash } = this.context
-    const { successMessage, onSuccess } = this.props
+    const { entity, successMessage, onSuccess } = this.props
     if(successMessage) flash.set('success', successMessage)
     onSuccess(entity)
   }

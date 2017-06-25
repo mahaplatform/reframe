@@ -51,6 +51,24 @@ exports.default = function () {
         error: action.result.error
       });
 
+    case actionTypes.SUBMIT_REQUEST:
+      return _extends({}, state, {
+        status: 'submitting'
+      });
+
+    case actionTypes.SUBMIT_SUCCESS:
+      return _extends({}, state, {
+        status: 'success',
+        entity: action.result.data
+      });
+
+    case actionTypes.SUBMIT_FAILURE:
+      return _extends({}, state, {
+        status: 'failure',
+        errors: action.result.errors,
+        message: action.result.meta.message
+      });
+
     default:
       return state;
   }
