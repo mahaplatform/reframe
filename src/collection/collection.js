@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import pluralize from 'pluralize'
 import Filter from '../filter'
-import Table from '../table'
 import _ from 'lodash'
+import { Loading, Empty, Failure, Results } from './results'
 
 class Collection extends React.Component {
 
@@ -70,16 +70,7 @@ class Collection extends React.Component {
           </div>
         )
       } else {
-        return (
-          <div className="reframe-collection">
-            <div className="reframe-collection-empty">
-              <div className="reframe-collection-empty-message">
-                <h3>No Results Found</h3>
-                <p>There are no { pluralize(entity.replace('_', ' ')) }</p>
-              </div>
-            </div>
-          </div>
-        )
+        return <Empty />
       }
     } else {
       return (
@@ -90,39 +81,10 @@ class Collection extends React.Component {
                 <Filter { ...this._getFilter() } />
               </div>
             }
-            { status === 'loading' && records.length === 0 &&
-              <div className="reframe-loader">
-                <div className="ui active inverted dimmer">
-                  <div className="ui large text loader">Loading</div>
-                </div>
-              </div>
-            }
-            { status !== 'failure' && records.length > 0 && columns && <Table { ...this._getTable() } /> }
-            { status !== 'failure' && records.length > 0 && layout && React.createElement(layout, { ...this._getLayout() }) }
-            { status === 'completed' && records.length === 0 &&
-              <div className="reframe-collection-empty">
-                <div className="reframe-collection-empty-message">
-                  <h2><i className="circular remove icon" /></h2>
-                  <h3>No Results Found</h3>
-                  <p>No records matched your query</p>
-                </div>
-              </div>
-            }
-            { status === 'failure' &&
-              <div className="reframe-error">
-                <div className="reframe-error-message">
-                  <i className="warning sign icon" />
-                  <h2>Unable to load<br /> records</h2>
-                </div>
-              </div>
-            }
-            { status === 'loading' && records.length > 0 &&
-              <div className="reframe-collection-loader">
-                <div className="ui active inverted dimmer">
-                  <div className="ui small loader"></div>
-                </div>
-              </div>
-            }
+            { status === 'loading' && records.length > 0 && <Loading /> }
+            { status === 'completed' && records.length === 0 && <Empty /> }
+            { status !== 'failure' && records.length > 0 && <Results { ...this._getResults() } /> }
+            { status === 'failure' && <Failure /> }
           </div>
         </div>
       )
@@ -153,29 +115,9 @@ class Collection extends React.Component {
     }
   }
 
-  _getTable() {
-    const { columns, handler, link, modal, params, records, status, onSort } = this.props
-    const { sort } = params
+  _getResults() {
     return {
-      columns,
-      export: this.props.export,
-      handler,
-      link,
-      modal,
-      records,
-      sort,
-      status,
-      onLoadMore: this._handleFetch.bind(this),
-      onSort: this._handleSort.bind(this)
-    }
-  }
-
-  _getLayout() {
-    const { records, sort, status } = this.props
-    return {
-      records,
-      sort,
-      status,
+      ...this.props,
       onLoadMore: this._handleFetch.bind(this),
       onSort: this._handleSort.bind(this)
     }
@@ -202,5 +144,6 @@ class Collection extends React.Component {
   }
 
 }
+
 
 export default Collection

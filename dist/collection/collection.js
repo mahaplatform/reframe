@@ -24,13 +24,11 @@ var _filter = require('../filter');
 
 var _filter2 = _interopRequireDefault(_filter);
 
-var _table = require('../table');
-
-var _table2 = _interopRequireDefault(_table);
-
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
+
+var _results = require('./results');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -113,29 +111,7 @@ var Collection = function (_React$Component) {
             )
           );
         } else {
-          return _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-empty' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-collection-empty-message' },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  'No Results Found'
-                ),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  'There are no ',
-                  (0, _pluralize2.default)(entity.replace('_', ' '))
-                )
-              )
-            )
-          );
+          return _react2.default.createElement(_results.Empty, null);
         }
       } else {
         return _react2.default.createElement(
@@ -149,69 +125,10 @@ var Collection = function (_React$Component) {
               { className: 'reframe-collection-header' },
               _react2.default.createElement(_filter2.default, this._getFilter())
             ),
-            status === 'loading' && records.length === 0 && _react2.default.createElement(
-              'div',
-              { className: 'reframe-loader' },
-              _react2.default.createElement(
-                'div',
-                { className: 'ui active inverted dimmer' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'ui large text loader' },
-                  'Loading'
-                )
-              )
-            ),
-            status !== 'failure' && records.length > 0 && columns && _react2.default.createElement(_table2.default, this._getTable()),
-            status !== 'failure' && records.length > 0 && layout && _react2.default.createElement(layout, _extends({}, this._getLayout())),
-            status === 'completed' && records.length === 0 && _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-empty' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-collection-empty-message' },
-                _react2.default.createElement(
-                  'h2',
-                  null,
-                  _react2.default.createElement('i', { className: 'circular remove icon' })
-                ),
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  'No Results Found'
-                ),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  'No records matched your query'
-                )
-              )
-            ),
-            status === 'failure' && _react2.default.createElement(
-              'div',
-              { className: 'reframe-error' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-error-message' },
-                _react2.default.createElement('i', { className: 'warning sign icon' }),
-                _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Unable to load',
-                  _react2.default.createElement('br', null),
-                  ' records'
-                )
-              )
-            ),
-            status === 'loading' && records.length > 0 && _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-loader' },
-              _react2.default.createElement(
-                'div',
-                { className: 'ui active inverted dimmer' },
-                _react2.default.createElement('div', { className: 'ui small loader' })
-              )
-            )
+            status === 'loading' && records.length > 0 && _react2.default.createElement(_results.Loading, null),
+            status === 'completed' && records.length === 0 && _react2.default.createElement(_results.Empty, null),
+            status !== 'failure' && records.length > 0 && _react2.default.createElement(_results.Results, this._getResults()),
+            status === 'failure' && _react2.default.createElement(_results.Failure, null)
           )
         );
       }
@@ -253,47 +170,12 @@ var Collection = function (_React$Component) {
       };
     }
   }, {
-    key: '_getTable',
-    value: function _getTable() {
-      var _props4 = this.props,
-          columns = _props4.columns,
-          handler = _props4.handler,
-          link = _props4.link,
-          modal = _props4.modal,
-          params = _props4.params,
-          records = _props4.records,
-          status = _props4.status,
-          onSort = _props4.onSort;
-      var sort = params.sort;
-
-      return {
-        columns: columns,
-        export: this.props.export,
-        handler: handler,
-        link: link,
-        modal: modal,
-        records: records,
-        sort: sort,
-        status: status,
+    key: '_getResults',
+    value: function _getResults() {
+      return _extends({}, this.props, {
         onLoadMore: this._handleFetch.bind(this),
         onSort: this._handleSort.bind(this)
-      };
-    }
-  }, {
-    key: '_getLayout',
-    value: function _getLayout() {
-      var _props5 = this.props,
-          records = _props5.records,
-          sort = _props5.sort,
-          status = _props5.status;
-
-      return {
-        records: records,
-        sort: sort,
-        status: status,
-        onLoadMore: this._handleFetch.bind(this),
-        onSort: this._handleSort.bind(this)
-      };
+      });
     }
   }, {
     key: '_handleSort',
@@ -304,12 +186,12 @@ var Collection = function (_React$Component) {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var _props6 = this.props,
-          endpoint = _props6.endpoint,
-          records = _props6.records,
-          params = _props6.params,
-          total = _props6.total,
-          onFetch = _props6.onFetch;
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          records = _props4.records,
+          params = _props4.params,
+          total = _props4.total,
+          onFetch = _props4.onFetch;
 
       if (!endpoint) return;
       var filter = params.filter,
