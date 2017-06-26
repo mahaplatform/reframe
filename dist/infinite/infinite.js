@@ -79,10 +79,11 @@ var Infinite = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       var _props2 = this.props,
+          cacheKey = _props2.cacheKey,
           filter = _props2.filter,
           sort = _props2.sort;
 
-      if (!_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
+      if (cacheKey !== prevProps.cacheKey || !_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
         this._handleFetch(0);
       }
     }
@@ -119,6 +120,7 @@ var Infinite = function (_React$Component) {
 
 Infinite.PropTypes = {
   all: _propTypes2.default.number,
+  cacheKey: _propTypes2.default.string,
   empty: _propTypes2.default.func,
   endpoint: _propTypes2.default.string,
   filter: _propTypes2.default.object,
@@ -130,6 +132,7 @@ Infinite.PropTypes = {
   onFetch: _propTypes2.default.func
 };
 Infinite.defaultProps = {
+  cacheKey: null,
   sort: {
     key: null,
     order: null

@@ -7,6 +7,7 @@ class Infinite extends React.Component {
 
   static PropTypes = {
     all: PropTypes.number,
+    cacheKey: PropTypes.string,
     empty: PropTypes.func,
     endpoint: PropTypes.string,
     filter: PropTypes.object,
@@ -19,6 +20,7 @@ class Infinite extends React.Component {
   }
 
   static defaultProps = {
+    cacheKey: null,
     sort: {
       key: null,
       order: null
@@ -42,7 +44,6 @@ class Infinite extends React.Component {
                 </div>
               </div>
             }
-
           </Scrollpane>
         }
       </div>
@@ -54,8 +55,8 @@ class Infinite extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { filter, sort } = this.props
-    if(!_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
+    const { cacheKey, filter, sort } = this.props
+    if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
       this._handleFetch(0)
     }
   }
