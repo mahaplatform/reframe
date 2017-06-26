@@ -33,6 +33,27 @@ class Infinite extends React.Component {
     return (
       <div className="reframe-infinite">
         { status === 'loading' && !records && ( _.isFunction(loading) ? React.createElement(loading) : loading ) }
+        { status === 'delayed' &&
+          <div className="reframe-collection-empty">
+            <div className="reframe-collection-empty-message">
+              <h2><i className="circular hourglass half icon" /></h2>
+              <h3>Slow Network</h3>
+              <p>This is taking longer than we expected...</p>
+            </div>
+          </div>
+        }
+        { status === 'timeout' &&
+          <div className="reframe-collection-empty">
+            <div className="reframe-collection-empty-message">
+              <h2><i className="circular hourglass end icon" /></h2>
+              <h3>Request Timeout</h3>
+              <p>It took too long to complete your request</p>
+              <div className="ui basic button" onClick={ this._handleFetch.bind(this, 0) } >
+                Try again
+              </div>
+            </div>
+          </div>
+        }
         { status !== 'failed' && records && records.length === 0 && ( _.isFunction(empty) ? React.createElement(empty) : empty ) }
         { status !== 'failed' && records && records.length > 0 &&
           <Scrollpane { ...this._getScrollpane() }>
@@ -51,11 +72,15 @@ class Infinite extends React.Component {
   }
 
   componentDidMount() {
+    this.timeout = null
     this._handleFetch(0)
   }
 
   componentDidUpdate(prevProps) {
-    const { cacheKey, filter, sort } = this.props
+    const { cacheKey, filter, sort, status } = this.props
+    if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
+      clearTimeout(this.timeout)
+    }
     if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
       this._handleFetch(0)
     }
@@ -75,6 +100,22 @@ class Infinite extends React.Component {
     if(filter) query.$filter = filter
     if(sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key
     if(skip === 0 || total === null || loaded < total) onFetch(endpoint, query)
+    this.timeout = setTimeout(this._handleDelay.bind(this), 3000)
+  }
+
+  _handleDelay() {
+    if(this.props.status !== 'loading') return
+    this.props.onFetchDelay()
+    this.timeout = setTimeout(this._handleTimeout.bind(this), 3000)
+  }
+
+  _handleTimeout() {
+    if(this.props.status !== 'delyed') return
+    this.props.onFetchTimeout()
+  }
+
+  _handleRefresh() {
+    this.props.onFetchTimeout()
   }
 
 }

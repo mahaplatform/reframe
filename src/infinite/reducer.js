@@ -18,6 +18,7 @@ export default (state = INITIAL_STATE, action) => {
     }
 
   case actionTypes.FETCH_SUCCESS:
+    if(!_.includes(['loading','delayed'], state.status)) return { ...state }
     const loaded = state.records ? state.records.length : 0
     return {
       ...state,
@@ -34,6 +35,18 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       status: 'failure'
+    }
+
+  case actionTypes.FETCH_DELAY:
+    return {
+      ...state,
+      status: 'delayed'
+    }
+
+  case actionTypes.FETCH_TIMEOUT:
+    return {
+      ...state,
+      status: 'timeout'
     }
 
   default:

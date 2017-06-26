@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetch = undefined;
+exports.fetchTimeout = exports.fetchDelay = exports.fetch = undefined;
 
 var _action_types = require('./action_types');
 
@@ -20,5 +20,17 @@ var fetch = exports.fetch = function fetch(endpoint, query) {
     request: actionTypes.FETCH_REQUEST,
     success: actionTypes.FETCH_SUCCESS,
     failure: actionTypes.FETCH_FAILURE
+  };
+};
+
+var fetchDelay = exports.fetchDelay = function fetchDelay() {
+  return {
+    type: actionTypes.FETCH_DELAY
+  };
+};
+
+var fetchTimeout = exports.fetchTimeout = function fetchTimeout() {
+  return {
+    type: actionTypes.FETCH_TIMEOUT
   };
 };

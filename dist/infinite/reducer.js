@@ -34,6 +34,7 @@ exports.default = function () {
       });
 
     case actionTypes.FETCH_SUCCESS:
+      if (!_.includes(['loading', 'delayed'], state.status)) return _extends({}, state);
       var loaded = state.records ? state.records.length : 0;
       return _extends({}, state, {
         all: action.result.pagination.all,
@@ -45,6 +46,16 @@ exports.default = function () {
     case actionTypes.FETCH_FAILURE:
       return _extends({}, state, {
         status: 'failure'
+      });
+
+    case actionTypes.FETCH_DELAY:
+      return _extends({}, state, {
+        status: 'delayed'
+      });
+
+    case actionTypes.FETCH_TIMEOUT:
+      return _extends({}, state, {
+        status: 'timeout'
       });
 
     default:

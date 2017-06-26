@@ -53,6 +53,57 @@ var Infinite = function (_React$Component) {
         'div',
         { className: 'reframe-infinite' },
         status === 'loading' && !records && (_lodash2.default.isFunction(loading) ? _react2.default.createElement(loading) : loading),
+        status === 'delayed' && _react2.default.createElement(
+          'div',
+          { className: 'reframe-collection-empty' },
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-collection-empty-message' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              _react2.default.createElement('i', { className: 'circular hourglass half icon' })
+            ),
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Slow Network'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'This is taking longer than we expected...'
+            )
+          )
+        ),
+        status === 'timeout' && _react2.default.createElement(
+          'div',
+          { className: 'reframe-collection-empty' },
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-collection-empty-message' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              _react2.default.createElement('i', { className: 'circular hourglass end icon' })
+            ),
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Request Timeout'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'It took too long to complete your request'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'ui basic button', onClick: this._handleFetch.bind(this, 0) },
+              'Try again'
+            )
+          )
+        ),
         status !== 'failed' && records && records.length === 0 && (_lodash2.default.isFunction(empty) ? _react2.default.createElement(empty) : empty),
         status !== 'failed' && records && records.length > 0 && _react2.default.createElement(
           _scrollpane2.default,
@@ -73,6 +124,7 @@ var Infinite = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.timeout = null;
       this._handleFetch(0);
     }
   }, {
@@ -81,8 +133,12 @@ var Infinite = function (_React$Component) {
       var _props2 = this.props,
           cacheKey = _props2.cacheKey,
           filter = _props2.filter,
-          sort = _props2.sort;
+          sort = _props2.sort,
+          status = _props2.status;
 
+      if (this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
+        clearTimeout(this.timeout);
+      }
       if (cacheKey !== prevProps.cacheKey || !_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
         this._handleFetch(0);
       }
@@ -112,6 +168,25 @@ var Infinite = function (_React$Component) {
       if (filter) query.$filter = filter;
       if (sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key;
       if (skip === 0 || total === null || loaded < total) onFetch(endpoint, query);
+      this.timeout = setTimeout(this._handleDelay.bind(this), 3000);
+    }
+  }, {
+    key: '_handleDelay',
+    value: function _handleDelay() {
+      if (this.props.status !== 'loading') return;
+      this.props.onFetchDelay();
+      this.timeout = setTimeout(this._handleTimeout.bind(this), 3000);
+    }
+  }, {
+    key: '_handleTimeout',
+    value: function _handleTimeout() {
+      if (this.props.status !== 'delyed') return;
+      this.props.onFetchTimeout();
+    }
+  }, {
+    key: '_handleRefresh',
+    value: function _handleRefresh() {
+      this.props.onFetchTimeout();
     }
   }]);
 

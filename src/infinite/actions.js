@@ -9,3 +9,11 @@ export const fetch = (endpoint, query) => ({
   success: actionTypes.FETCH_SUCCESS,
   failure: actionTypes.FETCH_FAILURE
 })
+
+export const fetchDelay = () => ({
+  type: actionTypes.FETCH_DELAY
+})
+
+export const fetchTimeout = () => ({
+  type: actionTypes.FETCH_TIMEOUT
+})
