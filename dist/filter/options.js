@@ -58,27 +58,27 @@ var Options = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'filter-body' },
+        { className: 'reframe-filter-body' },
         _react2.default.createElement(
           'div',
-          { className: 'filter-results' },
+          { className: 'reframe-filter-results' },
           options.map(function (option, index) {
             return _react2.default.createElement(
               'div',
-              { key: 'filter_' + index, className: 'filter-item', onClick: _this2._handleChoose.bind(_this2, option.value, option.text, option.token) },
+              { key: 'filter_' + index, className: 'reframe-filter-item', onClick: _this2._handleChoose.bind(_this2, option.value, option.text, option.token) },
               _react2.default.createElement(
                 'div',
-                { className: 'filter-item-label' },
+                { className: 'reframe-filter-item-label' },
                 _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
               ),
               option.description && _react2.default.createElement(
                 'div',
-                { className: 'filter-item-description' },
+                { className: 'reframe-filter-item-description' },
                 option.description
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'filter-item-icon' },
+                { className: 'reframe-filter-item-icon' },
                 _this2._checked(name, multiple, results, option) ? _react2.default.createElement('i', { className: 'green check icon' }) : null
               )
             );
@@ -193,13 +193,13 @@ var Container = function (_React$Component3) {
       if (endpoint) {
         return _react2.default.createElement(
           'div',
-          { className: 'filter-search' },
+          { className: 'reframe-filter-search' },
           _react2.default.createElement(
             'div',
-            { className: 'filter-search-form ui form' },
+            { className: 'reframe-filter-search-form ui form' },
             _react2.default.createElement(
               'div',
-              { className: 'filter-search-input' },
+              { className: 'reframe-filter-search-input' },
               _react2.default.createElement('i', { className: 'search icon' }),
               _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'results', value: query }),
               query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })

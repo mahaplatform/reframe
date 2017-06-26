@@ -1,10 +1,10 @@
-.filters {
+.reframe-filters {
   .scrollable();
   width: 100vw;
   white-space: nowrap;
   background-color: #333333;
 }
-.filter-tokens {
+.reframe-filter-tokens {
   padding: 10px;
   height: 50px;
   color: #FFF;
@@ -27,12 +27,12 @@
     }
   }
 }
-.filter {
+.reframe-filter {
   flex: 1;
   position: relative;
   overflow: hidden;
 }
-.filter-panel {
+.reframe-filter-panel {
   position: absolute;
   background-color: @white;
   top: 0;
@@ -42,49 +42,49 @@
   display: flex;
   flex-direction: column;
 }
-.filter-header {
+.reframe-filter-header {
   flex: 0 0 50px;
   display: flex;
 }
-.filter-header-back {
+.reframe-filter-header-back {
   flex: 0 0 110px;
   padding: 15px 0 15px 15px;
   cursor: pointer;
 }
-.filter-header-title {
+.reframe-filter-header-title {
   flex: 1;
   padding: 15px 0;
   font-weight: bold;
   text-align: center;
 }
-.filter-header-next {
+.reframe-filter-header-next {
   flex: 0 0 90px;
   text-align: right;
   padding: 15px 15px 15px 0;
   cursor: pointer;
 }
-.filter-body {
+.reframe-filter-body {
   flex: 1;
   display: flex;
   background-color: #FFFFFF;
   flex-direction: column;
 }
-.filter-results {
+.reframe-filter-results {
   .scrollable();
   flex: 1;
 }
-.filter-search {
+.reframe-filter-search {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.filter-search-form {
+.reframe-filter-search-form {
   flex: 0 0 50px;
   padding: 8px;
   display: flex;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
-  .filter-search-input {
+  .reframe-filter-search-input {
     .border-radius(5px);
     flex: 1;
     background-color: #EEEEEE;
@@ -115,7 +115,7 @@
     }
   }
 }
-.filter-item {
+.reframe-filter-item {
   padding: 15px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
@@ -125,23 +125,23 @@
     background-color: #F9F9F9;
   }
 }
-.filter-item-field {
+.reframe-filter-item-field {
   display: flex;
   align-items: center;
   color: #444444;
   flex: 0 1 100px;
 }
-.filter-item-label {
+.reframe-filter-item-label {
   align-items: center;
   flex: 1;
 }
-.filter-item-description {
+.reframe-filter-item-description {
   flex: 2;
   color: green;
   line-height: 16px;
   font-size: 13px;
 }
-.filter-item-values {
+.reframe-filter-item-values {
   flex: 1;
   display: flex;
   align-items: center;
@@ -153,7 +153,7 @@
     text-align: right;
   }
 }
-.filter-item-count {
+.reframe-filter-item-count {
   flex: 0 0 25px;
   display: flex;
   .label {
@@ -166,7 +166,7 @@
     font-weight: bold;
    }
 }
-.filter-item-icon {
+.reframe-filter-item-icon {
   flex: 0 0 20px;
   display: flex;
   align-items: center;
@@ -175,7 +175,7 @@
     color: #BBB;
   }
 }
-.filter-footer {
+.reframe-filter-footer {
   flex: 0 0 50px;
   padding: 15px;
   text-align: center;
@@ -186,18 +186,18 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .filter-header,
-  .filter-header-back,
-  .filter-header-title,
-  .filter-header-next {
+  .reframe-filter-header,
+  .reframe-filter-header-back,
+  .reframe-filter-header-title,
+  .reframe-filter-header-next {
     background-color: @primary_background_color;
     color: @primary_color;
   }
 }
 @media only screen and (max-width: 767px) {
-  .filter-header-back,
-  .filter-header-title,
-  .filter-header-next {
+  .reframe-filter-header-back,
+  .reframe-filter-header-title,
+  .reframe-filter-header-next {
     background-color: #F9F9F9;
     color: #444444;
     border-bottom: 1px solid #EEEEEE;

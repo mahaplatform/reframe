@@ -32,8 +32,8 @@ class Filter extends React.Component {
   render() {
     const { fields, results } = this.props
     return (
-      <div className="filters">
-        <div className="filter-tokens">
+      <div className="reframe-filters">
+        <div className="reframe-filter-tokens">
           { fields.map(field => {
             if(results[field.name]) {
               if(_.isArray(results[field.name])) {

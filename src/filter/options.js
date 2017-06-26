@@ -9,20 +9,20 @@ class Options extends React.Component {
   render() {
     const { name, format, multiple, options, results, status } = this.props
     return (
-      <div className="filter-body">
-        <div className="filter-results">
+      <div className="reframe-filter-body">
+        <div className="reframe-filter-results">
           { options.map((option, index) => {
             return (
-              <div key={`filter_${index}`} className="filter-item" onClick={ this._handleChoose.bind(this, option.value, option.text, option.token) }>
-                <div className="filter-item-label">
+              <div key={`filter_${index}`} className="reframe-filter-item" onClick={ this._handleChoose.bind(this, option.value, option.text, option.token) }>
+                <div className="reframe-filter-item-label">
                   <Format {...option.record} format={format} value={option.text} />
                 </div>
                 { option.description &&
-                  <div className="filter-item-description">
+                  <div className="reframe-filter-item-description">
                     { option.description }
                   </div>
                 }
-                <div className="filter-item-icon">
+                <div className="reframe-filter-item-icon">
                   { this._checked(name, multiple, results, option) ? <i className="green check icon" /> : null }
                 </div>
               </div>
@@ -93,9 +93,9 @@ class Container extends React.Component {
     const { endpoint, label, query } = this.props
     if(endpoint) {
       return (
-        <div className="filter-search">
-          <div className="filter-search-form ui form">
-            <div className="filter-search-input">
+        <div className="reframe-filter-search">
+          <div className="reframe-filter-search-form ui form">
+            <div className="reframe-filter-search-input">
               <i className="search icon" />
               <input type="text" placeholder={`Find a ${label}...`} onChange={ this._handleType.bind(this) } ref="results" value={query} />
               { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }

@@ -42,31 +42,31 @@ var Select = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'filter-panel' },
+        { className: 'reframe-filter-panel' },
         _react2.default.createElement(
           'div',
-          { className: 'filter-header' },
+          { className: 'reframe-filter-header' },
           _react2.default.createElement(
             'div',
-            { className: 'filter-header-back', onClick: this._handleBack.bind(this) },
+            { className: 'reframe-filter-header-back', onClick: this._handleBack.bind(this) },
             _react2.default.createElement('i', { className: 'chevron left icon' }),
             'Back'
           ),
           _react2.default.createElement(
             'div',
-            { className: 'filter-header-title' },
+            { className: 'reframe-filter-header-title' },
             label
           ),
           _react2.default.createElement(
             'div',
-            { className: 'filter-header-next', onClick: this._handleDone.bind(this) },
+            { className: 'reframe-filter-header-next', onClick: this._handleDone.bind(this) },
             'Done'
           )
         ),
         _react2.default.createElement(_options2.default, this.props),
         _react2.default.createElement(
           'div',
-          { className: 'filter-footer', onClick: this._handleReset.bind(this) },
+          { className: 'reframe-filter-footer', onClick: this._handleReset.bind(this) },
           'Reset ',
           label
         )

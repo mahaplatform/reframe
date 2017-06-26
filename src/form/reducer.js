@@ -40,6 +40,16 @@ export default (state = INITIAL_STATE, action) => {
       error: action.result.error
     }
 
+  case actionTypes.UPDATE_DATA:
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        [action.key]: action.value
+      },
+      errors: _.omit(state.errors, action.key)
+    }
+
   case actionTypes.SUBMIT_REQUEST:
     return {
       ...state,

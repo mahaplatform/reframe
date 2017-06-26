@@ -12,6 +12,8 @@ var actionTypes = _interopRequireWildcard(_action_types);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var INITIAL_STATE = {
   status: 'pending',
   config: [],
@@ -49,6 +51,12 @@ exports.default = function () {
       return _extends({}, state, {
         status: 'error',
         error: action.result.error
+      });
+
+    case actionTypes.UPDATE_DATA:
+      return _extends({}, state, {
+        data: _extends({}, state.data, _defineProperty({}, action.key, action.value)),
+        errors: _.omit(state.errors, action.key)
       });
 
     case actionTypes.SUBMIT_REQUEST:

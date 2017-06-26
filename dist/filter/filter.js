@@ -54,10 +54,10 @@ var Filter = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'filters' },
+        { className: 'reframe-filters' },
         _react2.default.createElement(
           'div',
-          { className: 'filter-tokens' },
+          { className: 'reframe-filter-tokens' },
           fields.map(function (field) {
             if (results[field.name]) {
               if (_lodash2.default.isArray(results[field.name])) {

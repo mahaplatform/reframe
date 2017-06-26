@@ -1,7 +1,7 @@
 import * as actionTypes from './action_types'
 
 export const load = (key, endpoint, value, text, ids) => ({
-  type: 'APIREQUEST',
+  type: 'API_REQUEST',
   method: 'GET',
   endpoint,
   meta: { key, value, text },

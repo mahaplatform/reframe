@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var load = exports.load = function load(key, endpoint, value, text, ids) {
   return {
-    type: 'APIREQUEST',
+    type: 'API_REQUEST',
     method: 'GET',
     endpoint: endpoint,
     meta: { key: key, value: value, text: text },

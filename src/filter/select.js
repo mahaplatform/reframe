@@ -23,21 +23,21 @@ class Select extends React.Component {
   render() {
     const { label } = this.props
     return (
-      <div className="filter-panel">
-        <div className="filter-header">
-          <div className="filter-header-back" onClick={ this._handleBack.bind(this) }>
+      <div className="reframe-filter-panel">
+        <div className="reframe-filter-header">
+          <div className="reframe-filter-header-back" onClick={ this._handleBack.bind(this) }>
             <i className="chevron left icon" />
             Back
           </div>
-          <div className="filter-header-title">
+          <div className="reframe-filter-header-title">
             { label }
           </div>
-          <div className="filter-header-next" onClick={ this._handleDone.bind(this) }>
+          <div className="reframe-filter-header-next" onClick={ this._handleDone.bind(this) }>
             Done
           </div>
         </div>
         <Options {...this.props} />
-        <div className="filter-footer" onClick={ this._handleReset.bind(this) }>
+        <div className="reframe-filter-footer" onClick={ this._handleReset.bind(this) }>
           Reset { label }
         </div>
       </div>

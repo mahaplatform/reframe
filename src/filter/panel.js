@@ -17,7 +17,7 @@ class Panel extends React.Component {
   render() {
     const { active, fields } = this.props
     return (
-      <div className="filter">
+      <div className="reframe-filter">
         <Fields { ...this._getFields() } />
         <CSSTransitionGroup transitionName='stack' component={ this._firstChild } transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
           { active !== null && fields[active].type === 'select' && <Select { ...this._getSelect() } /> }
@@ -43,6 +43,7 @@ class Panel extends React.Component {
   _getSelect() {
     return {
       ...this.props.fields[this.props.active],
+      q: this.props.q,
       query: this.props.query,
       results: this.props.results,
       onBack: this.props.onBack,

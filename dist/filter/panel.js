@@ -58,7 +58,7 @@ var Panel = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'filter' },
+        { className: 'reframe-filter' },
         _react2.default.createElement(_fields2.default, this._getFields()),
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
@@ -87,6 +87,7 @@ var Panel = function (_React$Component) {
     key: '_getSelect',
     value: function _getSelect() {
       return _extends({}, this.props.fields[this.props.active], {
+        q: this.props.q,
         query: this.props.query,
         results: this.props.results,
         onBack: this.props.onBack,

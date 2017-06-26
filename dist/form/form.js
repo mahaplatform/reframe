@@ -165,7 +165,11 @@ var Form = function (_React$Component) {
     }
   }, {
     key: '_handleUpdateData',
-    value: function _handleUpdateData(key, value) {}
+    value: function _handleUpdateData(key, value) {
+      var onUpdateData = this.props.onUpdateData;
+
+      onUpdateData(key, value);
+    }
   }, {
     key: '_handleChange',
     value: function _handleChange(previous, current) {

@@ -103,6 +103,8 @@ class Form extends React.Component {
   }
 
   _handleUpdateData(key, value) {
+    const { onUpdateData } = this.props
+    onUpdateData(key, value)
   }
 
   _handleChange(previous, current) {

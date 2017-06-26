@@ -61,8 +61,8 @@ class Field extends React.Component {
     const error = this._getError()
     return [
       'field',
-      ...(error) ? [ error ] : [],
-      ...(required) ? [ required ] : [],
+      ...(error) ? [ 'error' ] : [],
+      ...(required) ? [ 'required' ] : [],
     ].join(' ')
   }
 
@@ -103,7 +103,7 @@ class Field extends React.Component {
       token,
       type,
       value,
-      onChange: onUpdateData,
+      onChange: this._handleUpdateData.bind(this),
       onSubmit
     }
   }

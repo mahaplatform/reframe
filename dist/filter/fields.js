@@ -42,38 +42,38 @@ var Fields = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'filter-panel' },
+        { className: 'reframe-filter-panel' },
         _react2.default.createElement(
           'div',
-          { className: 'filter-header' },
-          _react2.default.createElement('div', { className: 'filter-header-back' }),
+          { className: 'reframe-filter-header' },
+          _react2.default.createElement('div', { className: 'reframe-filter-header-back' }),
           _react2.default.createElement(
             'div',
-            { className: 'filter-header-title' },
+            { className: 'reframe-filter-header-title' },
             'Filters'
           ),
           _react2.default.createElement(
             'div',
-            { className: 'filter-header-next', onClick: this._handleDone.bind(this) },
+            { className: 'reframe-filter-header-next', onClick: this._handleDone.bind(this) },
             'Done'
           )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'filter-body' },
+          { className: 'reframe-filter-body' },
           fields.map(function (field, index) {
             var values = _this2._values(field, results);
             return _react2.default.createElement(
               'div',
-              { key: 'filter_' + index, className: 'filter-item', onClick: _this2._handleChoose.bind(_this2, index) },
+              { key: 'filter_' + index, className: 'reframe-filter-item', onClick: _this2._handleChoose.bind(_this2, index) },
               _react2.default.createElement(
                 'div',
-                { className: 'filter-item-field' },
+                { className: 'reframe-filter-item-field' },
                 field.label
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'filter-item-values' },
+                { className: 'reframe-filter-item-values' },
                 values && _react2.default.createElement(
                   'div',
                   { className: 'values' },
@@ -82,7 +82,7 @@ var Fields = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'filter-item-icon' },
+                { className: 'reframe-filter-item-icon' },
                 _react2.default.createElement('i', { className: 'chevron right icon' })
               )
             );
@@ -90,7 +90,7 @@ var Fields = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'filter-footer', onClick: this._handleResetAll.bind(this) },
+          { className: 'reframe-filter-footer', onClick: this._handleResetAll.bind(this) },
           'Reset Filter'
         )
       );

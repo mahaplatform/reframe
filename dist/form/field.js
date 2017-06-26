@@ -83,7 +83,7 @@ var Field = function (_React$Component) {
       var required = this.props.required;
 
       var error = this._getError();
-      return ['field'].concat(_toConsumableArray(error ? [error] : []), _toConsumableArray(required ? [required] : [])).join(' ');
+      return ['field'].concat(_toConsumableArray(error ? ['error'] : []), _toConsumableArray(required ? ['required'] : [])).join(' ');
     }
   }, {
     key: '_getError',
@@ -153,7 +153,7 @@ var Field = function (_React$Component) {
         token: token,
         type: type,
         value: value,
-        onChange: onUpdateData,
+        onChange: this._handleUpdateData.bind(this),
         onSubmit: onSubmit
       };
     }
