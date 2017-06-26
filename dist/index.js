@@ -32,6 +32,10 @@ var _filefield = require('./filefield');
 
 var _filefield2 = _interopRequireDefault(_filefield);
 
+var _filter = require('./filter');
+
+var _filter2 = _interopRequireDefault(_filter);
+
 var _form = require('./form');
 
 var _form2 = _interopRequireDefault(_form);
@@ -118,6 +122,7 @@ exports.default = {
   Details: _details2.default,
   Drawer: _drawer2.default,
   Filefield: _filefield2.default,
+  Filter: _filter2.default,
   Flash: _flash2.default,
   Form: _form2.default,
   Format: _format2.default,

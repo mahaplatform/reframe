@@ -206,6 +206,22 @@ body {
 	.translateX(0);
 }
 
+&.stack-appear, &.stack-enter, &.stack-leave {
+	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+}
+&.stack-appear, &.stack-enter {
+	.translateX(100%);
+}
+&.stack-appear.stack-appear-active, &.stack-enter.stack-enter-active {
+	.translateX(0);
+}
+&.stack-leave {
+	.translateX(0);
+}
+&.stack-leave.stack-leave-active {
+	.translateX(100%);
+}
+
 .fade-appear, .fade-enter, .fade-leave {
 	.transition(opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }

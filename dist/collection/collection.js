@@ -20,6 +20,10 @@ var _pluralize = require('pluralize');
 
 var _pluralize2 = _interopRequireDefault(_pluralize);
 
+var _filter = require('../filter');
+
+var _filter2 = _interopRequireDefault(_filter);
+
 var _table = require('../table');
 
 var _table2 = _interopRequireDefault(_table);
@@ -53,6 +57,7 @@ var Collection = function (_React$Component) {
           columns = _props.columns,
           empty = _props.empty,
           entity = _props.entity,
+          filters = _props.filters,
           layout = _props.layout,
           records = _props.records,
           status = _props.status;
@@ -139,6 +144,11 @@ var Collection = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-collection-layout' },
+            filters && _react2.default.createElement(
+              'div',
+              { className: 'reframe-collection-header' },
+              _react2.default.createElement(_filter2.default, this._getFilter())
+            ),
             status === 'loading' && records.length === 0 && _react2.default.createElement(
               'div',
               { className: 'reframe-loader' },
@@ -229,17 +239,31 @@ var Collection = function (_React$Component) {
       }
     }
   }, {
+    key: '_getFilter',
+    value: function _getFilter() {
+      var _props3 = this.props,
+          filters = _props3.filters,
+          params = _props3.params,
+          onFilter = _props3.onFilter;
+
+      return {
+        fields: filters,
+        filters: params.filter,
+        onChange: onFilter
+      };
+    }
+  }, {
     key: '_getTable',
     value: function _getTable() {
-      var _props3 = this.props,
-          columns = _props3.columns,
-          handler = _props3.handler,
-          link = _props3.link,
-          modal = _props3.modal,
-          params = _props3.params,
-          records = _props3.records,
-          status = _props3.status,
-          onSort = _props3.onSort;
+      var _props4 = this.props,
+          columns = _props4.columns,
+          handler = _props4.handler,
+          link = _props4.link,
+          modal = _props4.modal,
+          params = _props4.params,
+          records = _props4.records,
+          status = _props4.status,
+          onSort = _props4.onSort;
       var sort = params.sort;
 
       return {
@@ -258,10 +282,10 @@ var Collection = function (_React$Component) {
   }, {
     key: '_getLayout',
     value: function _getLayout() {
-      var _props4 = this.props,
-          records = _props4.records,
-          sort = _props4.sort,
-          status = _props4.status;
+      var _props5 = this.props,
+          records = _props5.records,
+          sort = _props5.sort,
+          status = _props5.status;
 
       return {
         records: records,
@@ -280,12 +304,12 @@ var Collection = function (_React$Component) {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var _props5 = this.props,
-          endpoint = _props5.endpoint,
-          records = _props5.records,
-          params = _props5.params,
-          total = _props5.total,
-          onFetch = _props5.onFetch;
+      var _props6 = this.props,
+          endpoint = _props6.endpoint,
+          records = _props6.records,
+          params = _props6.params,
+          total = _props6.total,
+          onFetch = _props6.onFetch;
 
       if (!endpoint) return;
       var filter = params.filter,
@@ -322,6 +346,7 @@ Collection.PropTypes = {
     modal: _propTypes2.default.func
   }),
   filter: _propTypes2.default.object,
+  filters: _propTypes2.default.array,
   handler: _propTypes2.default.func,
   layout: _propTypes2.default.func,
   link: _propTypes2.default.string,

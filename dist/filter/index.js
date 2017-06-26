@@ -10,9 +10,9 @@ var _reducer = require('./reducer');
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _filefield = require('./filefield');
+var _filter = require('./filter');
 
-var _filefield2 = _interopRequireDefault(_filefield);
+var _filter2 = _interopRequireDefault(_filter);
 
 var _actions = require('./actions');
 
@@ -22,9 +22,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _reduxRubberstamp.Factory)({
-  namespace: 'reframe.filefield',
-  component: _filefield2.default,
+exports.default = (0, _reduxRubberstamp.Singleton)({
+  namespace: 'reframe.filter',
+  component: _filter2.default,
   reducer: _reducer2.default,
   actions: actions
 });

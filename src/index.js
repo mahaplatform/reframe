@@ -6,6 +6,7 @@ import Details from './details'
 import Drawer from './drawer'
 import Flash from './flash'
 import Filefield from './filefield'
+import Filter from './filter'
 import Form from './form'
 import Format from './format'
 import History from './history'
@@ -34,6 +35,7 @@ export default {
   Details,
   Drawer,
   Filefield,
+  Filter,
   Flash,
   Form,
   Format,

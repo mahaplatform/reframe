@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import pluralize from 'pluralize'
+import Filter from '../filter'
 import Table from '../table'
 import _ from 'lodash'
 
@@ -21,6 +22,7 @@ class Collection extends React.Component {
       modal: PropTypes.func
     }),
     filter: PropTypes.object,
+    filters: PropTypes.array,
     handler: PropTypes.func,
     layout: PropTypes.func,
     link: PropTypes.string,
@@ -36,7 +38,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { all, columns, empty, entity, layout, records, status } = this.props
+    const { all, columns, empty, entity, filters, layout, records, status } = this.props
     if(status === 'completed' && all === 0) {
       if(empty) {
         return (
@@ -83,6 +85,11 @@ class Collection extends React.Component {
       return (
         <div className="reframe-collection">
           <div className="reframe-collection-layout">
+            { filters &&
+              <div className="reframe-collection-header">
+                <Filter { ...this._getFilter() } />
+              </div>
+            }
             { status === 'loading' && records.length === 0 &&
               <div className="reframe-loader">
                 <div className="ui active inverted dimmer">
@@ -134,6 +141,15 @@ class Collection extends React.Component {
     const { params } = this.props
     if(!_.isEqual(prevProps.params, params)) {
       this._handleFetch(0)
+    }
+  }
+
+  _getFilter() {
+    const { filters, params, onFilter } = this.props
+    return {
+      fields: filters,
+      filters: params.filter,
+      onChange: onFilter
     }
   }
 
