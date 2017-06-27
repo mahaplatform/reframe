@@ -28,11 +28,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Loading = exports.Loading = function Loading() {
   return _react2.default.createElement(
     'div',
-    { className: 'reframe-collection-loader' },
+    { className: 'reframe-loader' },
     _react2.default.createElement(
       'div',
       { className: 'ui active inverted dimmer' },
-      _react2.default.createElement('div', { className: 'ui small loader' })
+      _react2.default.createElement(
+        'div',
+        { className: 'ui large text loader' },
+        'Loading'
+      )
     )
   );
 };
@@ -100,6 +104,13 @@ var Results = exports.Results = function (_React$Component) {
 
       if (columns) return _react2.default.createElement(_table2.default, this._getTable());
       if (layout) return _react2.default.createElement(layout, _extends({}, this._getCustomLayout()));
+    }
+  }, {
+    key: '_getScrollpane',
+    value: function _getScrollpane() {
+      return {
+        onReachBottom: this.props.onLoadMore.bind(this)
+      };
     }
   }, {
     key: '_getTable',

@@ -67,7 +67,7 @@ var Infinite = function (_React$Component) {
             _react2.default.createElement(
               'h3',
               null,
-              'Slow Network'
+              'The network is a bit slow'
             ),
             _react2.default.createElement(
               'p',
@@ -90,7 +90,7 @@ var Infinite = function (_React$Component) {
             _react2.default.createElement(
               'h3',
               null,
-              'Request Timeout'
+              'Your request timed out'
             ),
             _react2.default.createElement(
               'p',

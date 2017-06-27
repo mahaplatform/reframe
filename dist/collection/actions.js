@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetch = exports.setRecords = exports.filter = exports.sort = exports.setParams = undefined;
+exports.setRecords = exports.filter = exports.sort = exports.setParams = undefined;
 
 var _action_types = require('./action_types');
 
@@ -37,17 +37,5 @@ var setRecords = exports.setRecords = function setRecords(records) {
   return {
     type: 'SET_RECORDS',
     records: records
-  };
-};
-
-var fetch = exports.fetch = function fetch(endpoint, query) {
-  return {
-    type: 'API_REQUEST',
-    method: 'GET',
-    endpoint: endpoint,
-    query: query,
-    request: actionTypes.FETCH_REQUEST,
-    success: actionTypes.FETCH_SUCCESS,
-    failure: actionTypes.FETCH_FAILURE
   };
 };

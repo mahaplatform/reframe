@@ -2,9 +2,9 @@ import React from 'react'
 import Table from '../table'
 
 export const Loading = () => (
-  <div className="reframe-collection-loader">
+  <div className="reframe-loader">
     <div className="ui active inverted dimmer">
-      <div className="ui small loader"></div>
+      <div className="ui large text loader">Loading</div>
     </div>
   </div>
 )
@@ -35,6 +35,14 @@ export class Results extends React.Component {
     if(columns) return <Table { ...this._getTable() } />
     if(layout) return React.createElement(layout, { ...this._getCustomLayout() })
   }
+
+
+  _getScrollpane() {
+    return {
+      onReachBottom: this.props.onLoadMore.bind(this)
+    }
+  }
+
 
   _getTable() {
     const { columns, handler, link, modal, params, records, status, onLoadMore, onSort } = this.props

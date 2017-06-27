@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import pluralize from 'pluralize'
 import Filter from '../filter'
 import _ from 'lodash'
+import Infinite from '../infinite'
 import { Loading, Empty, Failure, Results } from './results'
 
 class Collection extends React.Component {
@@ -38,7 +39,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { all, empty, entity, filters, records, status } = this.props
+    const { all, empty, entity, filters, records } = this.props
     if(status === 'completed' && all === 0) {
       if(empty) {
         return (
@@ -81,10 +82,7 @@ class Collection extends React.Component {
                 <Filter { ...this._getFilter() } />
               </div>
             }
-            { status === 'loading' && records.length > 0 && <Loading /> }
-            { status === 'completed' && records.length === 0 && <Empty /> }
-            { status !== 'failure' && records.length > 0 && <Results { ...this._getResults() } /> }
-            { status === 'failure' && <Failure /> }
+            { records ? <Results { ...this.props } /> : <Infinite { ...this._getInfinite() } /> }
           </div>
         </div>
       )
@@ -99,13 +97,6 @@ class Collection extends React.Component {
     if(data) onSetRecords(data)
   }
 
-  componentDidUpdate(prevProps) {
-    const { params } = this.props
-    if(!_.isEqual(prevProps.params, params)) {
-      this._handleFetch(0)
-    }
-  }
-
   _getFilter() {
     const { filters, params, onFilter } = this.props
     return {
@@ -115,16 +106,18 @@ class Collection extends React.Component {
     }
   }
 
-  _getResults() {
+  _getInfinite() {
+    const { endpoint, params } = this.props
+    const { filter, sort } = params
     return {
-      ...this.props,
-      onLoadMore: this._handleFetch.bind(this),
-      onSort: this._handleSort.bind(this)
+      endpoint,
+      filter,
+      loading: Loading,
+      empty: Empty,
+      failure: Failure,
+      layout: (props) => <Results { ...this.props } { ...props } />,
+      sort
     }
-  }
-
-  _handleSort(key) {
-    this.props.onSort(key)
   }
 
   _handleFetch(skip = null) {

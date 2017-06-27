@@ -28,6 +28,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _infinite = require('../infinite');
+
+var _infinite2 = _interopRequireDefault(_infinite);
+
 var _results = require('./results');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -55,8 +59,7 @@ var Collection = function (_React$Component) {
           empty = _props.empty,
           entity = _props.entity,
           filters = _props.filters,
-          records = _props.records,
-          status = _props.status;
+          records = _props.records;
 
       if (status === 'completed' && all === 0) {
         if (empty) {
@@ -123,10 +126,7 @@ var Collection = function (_React$Component) {
               { className: 'reframe-collection-header' },
               _react2.default.createElement(_filter2.default, this._getFilter())
             ),
-            status === 'loading' && records.length > 0 && _react2.default.createElement(_results.Loading, null),
-            status === 'completed' && records.length === 0 && _react2.default.createElement(_results.Empty, null),
-            status !== 'failure' && records.length > 0 && _react2.default.createElement(_results.Results, this._getResults()),
-            status === 'failure' && _react2.default.createElement(_results.Failure, null)
+            records ? _react2.default.createElement(_results.Results, this.props) : _react2.default.createElement(_infinite2.default, this._getInfinite())
           )
         );
       }
@@ -144,15 +144,6 @@ var Collection = function (_React$Component) {
       if (data) onSetRecords(data);
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      var params = this.props.params;
-
-      if (!_lodash2.default.isEqual(prevProps.params, params)) {
-        this._handleFetch(0);
-      }
-    }
-  }, {
     key: '_getFilter',
     value: function _getFilter() {
       var _props3 = this.props,
@@ -167,28 +158,38 @@ var Collection = function (_React$Component) {
       };
     }
   }, {
-    key: '_getResults',
-    value: function _getResults() {
-      return _extends({}, this.props, {
-        onLoadMore: this._handleFetch.bind(this),
-        onSort: this._handleSort.bind(this)
-      });
-    }
-  }, {
-    key: '_handleSort',
-    value: function _handleSort(key) {
-      this.props.onSort(key);
+    key: '_getInfinite',
+    value: function _getInfinite() {
+      var _this2 = this;
+
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          params = _props4.params;
+      var filter = params.filter,
+          sort = params.sort;
+
+      return {
+        endpoint: endpoint,
+        filter: filter,
+        loading: _results.Loading,
+        empty: _results.Empty,
+        failure: _results.Failure,
+        layout: function layout(props) {
+          return _react2.default.createElement(_results.Results, _extends({}, _this2.props, props));
+        },
+        sort: sort
+      };
     }
   }, {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var _props4 = this.props,
-          endpoint = _props4.endpoint,
-          records = _props4.records,
-          params = _props4.params,
-          total = _props4.total,
-          onFetch = _props4.onFetch;
+      var _props5 = this.props,
+          endpoint = _props5.endpoint,
+          records = _props5.records,
+          params = _props5.params,
+          total = _props5.total,
+          onFetch = _props5.onFetch;
 
       if (!endpoint) return;
       var filter = params.filter,

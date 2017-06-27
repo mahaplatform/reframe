@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import Format from '../format'
-import Scrollpane from '../scrollpane'
 
 class Table extends React.Component {
 
@@ -24,80 +23,78 @@ class Table extends React.Component {
   render() {
     const { columns, handler, link, modal, records, sort } = this.props
     return (
-      <Scrollpane { ...this._getScrollpane() }>
-        <div className="reframe-table">
-          <div className="reframe-table-head reframe-scrollpane-header">
-            <div className="reframe-table-head-wrapper">
-              <div className="reframe-table-head-row" ref="head">
-                { columns.map((column, columnIndex) => {
-                  let klass = ['reframe-table-head-cell']
-                  if(column.primary === true) klass.push('mobile')
-                  if(column.collapsing === true) klass.push('collapsing')
-                  return (
-                    <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column) }>
-                      { column.label }
-                      { sort && column.key === sort.key &&
-                        (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
-                      }
-                    </div>
-                  )
-                })}
-                { link && <div className="reframe-table-head-cell mobile collapsing" /> }
-              </div>
-            </div>
-          </div>
-          <div className="reframe-table-body">
-            <div className="reframe-table-body-wrapper" ref="body">
-              { records.map((record, rowIndex) => {
-                const row = columns.map((column, columnIndex) => {
-                  const value = _.get(record, column.key)
-                  let klass = ['reframe-table-body-cell']
-                  if(column.primary === true) klass.push('mobile')
-                  if(column.collapsing === true) klass.push('collapsing')
-                  if(column.centered === true) klass.push('centered')
-                  return (
-                    <div key={ `cell_${rowIndex}_${columnIndex}` } className={ klass.join(' ') }>
-                      <Format {...record} format={column.format} value={value} />
-                    </div>
-                  )
-                }).concat((this.props.export ? [<div key="cell_extra" className="reframe-table-body-cell mobile" />] : []))
-
-                if(link) {
-                  _.templateSettings.interpolate = /#{([\s\S]+?)}/g
-                  const to = _.template(link)(record)
-                  return (
-                    <Link key={ `record_${rowIndex}` } className="reframe-table-body-row" to={to}>
-                      { row }
-                      <div className="reframe-table-body-cell icon mobile collapsing centered">
-                        <i className="chevron right icon" />
-                      </div>
-                    </Link>
-                  )
-                } else if(modal) {
-                  return (
-                    <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleModal.bind(this, record.id) }>
-                      { row }
-                    </div>
-                  )
-                } else if(handler) {
-                  return (
-                    <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleHandler.bind(this, record.id) }>
-                      { row }
-                    </div>
-                  )
-                } else {
-                  return (
-                    <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
-                      { row }
-                    </div>
-                  )
-                }
-
+      <div className="reframe-table">
+        <div className="reframe-table-head reframe-scrollpane-header">
+          <div className="reframe-table-head-wrapper">
+            <div className="reframe-table-head-row" ref="head">
+              { columns.map((column, columnIndex) => {
+                let klass = ['reframe-table-head-cell']
+                if(column.primary === true) klass.push('mobile')
+                if(column.collapsing === true) klass.push('collapsing')
+                return (
+                  <div key={`header-${columnIndex}`} className={ klass.join(' ') } onClick={ this._handleSort.bind(this, column) }>
+                    { column.label }
+                    { sort && column.key === sort.key &&
+                      (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                    }
+                  </div>
+                )
               })}
+              { link && <div className="reframe-table-head-cell mobile collapsing" /> }
             </div>
           </div>
         </div>
-      </Scrollpane>
+        <div className="reframe-table-body">
+          <div className="reframe-table-body-wrapper" ref="body">
+            { records.map((record, rowIndex) => {
+              const row = columns.map((column, columnIndex) => {
+                const value = _.get(record, column.key)
+                let klass = ['reframe-table-body-cell']
+                if(column.primary === true) klass.push('mobile')
+                if(column.collapsing === true) klass.push('collapsing')
+                if(column.centered === true) klass.push('centered')
+                return (
+                  <div key={ `cell_${rowIndex}_${columnIndex}` } className={ klass.join(' ') }>
+                    <Format {...record} format={column.format} value={value} />
+                  </div>
+                )
+              }).concat((this.props.export ? [<div key="cell_extra" className="reframe-table-body-cell mobile" />] : []))
+
+              if(link) {
+                _.templateSettings.interpolate = /#{([\s\S]+?)}/g
+                const to = _.template(link)(record)
+                return (
+                  <Link key={ `record_${rowIndex}` } className="reframe-table-body-row" to={to}>
+                    { row }
+                    <div className="reframe-table-body-cell icon mobile collapsing centered">
+                      <i className="chevron right icon" />
+                    </div>
+                  </Link>
+                )
+              } else if(modal) {
+                return (
+                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleModal.bind(this, record.id) }>
+                    { row }
+                  </div>
+                )
+              } else if(handler) {
+                return (
+                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleHandler.bind(this, record.id) }>
+                    { row }
+                  </div>
+                )
+              } else {
+                return (
+                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
+                    { row }
+                  </div>
+                )
+              }
+
+            })}
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -107,12 +104,6 @@ class Table extends React.Component {
 
   componentDidUpdate() {
     this._resizeColumns()
-  }
-
-  _getScrollpane() {
-    return {
-      onReachBottom: this.props.onLoadMore.bind(this)
-    }
   }
 
   _resizeColumns() {

@@ -15,12 +15,8 @@ var sortSelector = function sortSelector(state) {
   return state.params.sort;
 };
 
-var staticSelector = function staticSelector(state) {
-  return state.static;
-};
-
-var records = exports.records = (0, _reselect.createSelector)(recordsSelector, sortSelector, staticSelector, function (records, sort, staticData) {
-  if (!staticData) return records;
+var records = exports.records = (0, _reselect.createSelector)(recordsSelector, sortSelector, function (records, sort) {
+  if (!records) return null;
   return records.sort(function (a, b) {
     var aValue = a[sort.key];
     var bValue = b[sort.key];

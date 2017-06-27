@@ -37,7 +37,7 @@ class Infinite extends React.Component {
           <div className="reframe-collection-empty">
             <div className="reframe-collection-empty-message">
               <h2><i className="circular hourglass half icon" /></h2>
-              <h3>Slow Network</h3>
+              <h3>The network is a bit slow</h3>
               <p>This is taking longer than we expected...</p>
             </div>
           </div>
@@ -46,7 +46,7 @@ class Infinite extends React.Component {
           <div className="reframe-collection-empty">
             <div className="reframe-collection-empty-message">
               <h2><i className="circular hourglass end icon" /></h2>
-              <h3>Request Timeout</h3>
+              <h3>Your request timed out</h3>
               <p>It took too long to complete your request</p>
               <div className="ui basic button" onClick={ this._handleFetch.bind(this, 0) } >
                 Try again

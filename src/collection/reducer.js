@@ -1,7 +1,6 @@
 import * as actionTypes from './action_types'
 
 const INITIAL_STATE = {
-  all: 0,
   params: {
     sort: {
       key: null,
@@ -9,10 +8,7 @@ const INITIAL_STATE = {
     },
     filter: {}
   },
-  records: [],
-  static: false,
-  status: 'pending',
-  total: 0
+  records: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -52,35 +48,7 @@ export default (state = INITIAL_STATE, action) => {
   case actionTypes.SET_RECORDS:
     return {
       ...state,
-      all: action.records.length,
-      records: action.records,
-      static: true,
-      status: 'completed',
-      total: action.records.length
-    }
-
-  case actionTypes.FETCH_REQUEST:
-    return {
-      ...state,
-      status: 'loading'
-    }
-
-  case actionTypes.FETCH_SUCCESS:
-    return {
-      ...state,
-      all: action.result.pagination.all,
-      records: (action.result.pagination.skip > 0) ? [
-        ...state.records,
-        ...action.result.data
-      ] : action.result.data,
-      total: action.result.pagination.total,
-      status: (state.records.length + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
-    }
-
-  case actionTypes.FETCH_FAILURE:
-    return {
-      ...state,
-      status: 'failure'
+      records: action.records
     }
 
   default:

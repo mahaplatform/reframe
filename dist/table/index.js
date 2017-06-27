@@ -26,10 +26,6 @@ var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
-var _scrollpane = require('../scrollpane');
-
-var _scrollpane2 = _interopRequireDefault(_scrollpane);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61,89 +57,85 @@ var Table = function (_React$Component) {
           sort = _props.sort;
 
       return _react2.default.createElement(
-        _scrollpane2.default,
-        this._getScrollpane(),
+        'div',
+        { className: 'reframe-table' },
         _react2.default.createElement(
           'div',
-          { className: 'reframe-table' },
+          { className: 'reframe-table-head reframe-scrollpane-header' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-table-head reframe-scrollpane-header' },
+            { className: 'reframe-table-head-wrapper' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-table-head-wrapper' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-table-head-row', ref: 'head' },
-                columns.map(function (column, columnIndex) {
-                  var klass = ['reframe-table-head-cell'];
-                  if (column.primary === true) klass.push('mobile');
-                  if (column.collapsing === true) klass.push('collapsing');
-                  return _react2.default.createElement(
-                    'div',
-                    { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column) },
-                    column.label,
-                    sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
-                  );
-                }),
-                link && _react2.default.createElement('div', { className: 'reframe-table-head-cell mobile collapsing' })
-              )
+              { className: 'reframe-table-head-row', ref: 'head' },
+              columns.map(function (column, columnIndex) {
+                var klass = ['reframe-table-head-cell'];
+                if (column.primary === true) klass.push('mobile');
+                if (column.collapsing === true) klass.push('collapsing');
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'header-' + columnIndex, className: klass.join(' '), onClick: _this2._handleSort.bind(_this2, column) },
+                  column.label,
+                  sort && column.key === sort.key && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
+                );
+              }),
+              link && _react2.default.createElement('div', { className: 'reframe-table-head-cell mobile collapsing' })
             )
-          ),
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-table-body' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-table-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-table-body-wrapper', ref: 'body' },
-              records.map(function (record, rowIndex) {
-                var row = columns.map(function (column, columnIndex) {
-                  var value = _lodash2.default.get(record, column.key);
-                  var klass = ['reframe-table-body-cell'];
-                  if (column.primary === true) klass.push('mobile');
-                  if (column.collapsing === true) klass.push('collapsing');
-                  if (column.centered === true) klass.push('centered');
-                  return _react2.default.createElement(
-                    'div',
-                    { key: 'cell_' + rowIndex + '_' + columnIndex, className: klass.join(' ') },
-                    _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: value }))
-                  );
-                }).concat(_this2.props.export ? [_react2.default.createElement('div', { key: 'cell_extra', className: 'reframe-table-body-cell mobile' })] : []);
+            { className: 'reframe-table-body-wrapper', ref: 'body' },
+            records.map(function (record, rowIndex) {
+              var row = columns.map(function (column, columnIndex) {
+                var value = _lodash2.default.get(record, column.key);
+                var klass = ['reframe-table-body-cell'];
+                if (column.primary === true) klass.push('mobile');
+                if (column.collapsing === true) klass.push('collapsing');
+                if (column.centered === true) klass.push('centered');
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'cell_' + rowIndex + '_' + columnIndex, className: klass.join(' ') },
+                  _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: value }))
+                );
+              }).concat(_this2.props.export ? [_react2.default.createElement('div', { key: 'cell_extra', className: 'reframe-table-body-cell mobile' })] : []);
 
-                if (link) {
-                  _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
-                  var to = _lodash2.default.template(link)(record);
-                  return _react2.default.createElement(
-                    _reactRouterDom.Link,
-                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', to: to },
-                    row,
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'reframe-table-body-cell icon mobile collapsing centered' },
-                      _react2.default.createElement('i', { className: 'chevron right icon' })
-                    )
-                  );
-                } else if (modal) {
-                  return _react2.default.createElement(
+              if (link) {
+                _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
+                var to = _lodash2.default.template(link)(record);
+                return _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { key: 'record_' + rowIndex, className: 'reframe-table-body-row', to: to },
+                  row,
+                  _react2.default.createElement(
                     'div',
-                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleModal.bind(_this2, record.id) },
-                    row
-                  );
-                } else if (handler) {
-                  return _react2.default.createElement(
-                    'div',
-                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleHandler.bind(_this2, record.id) },
-                    row
-                  );
-                } else {
-                  return _react2.default.createElement(
-                    'div',
-                    { key: 'record_' + rowIndex, className: 'reframe-table-body-row' },
-                    row
-                  );
-                }
-              })
-            )
+                    { className: 'reframe-table-body-cell icon mobile collapsing centered' },
+                    _react2.default.createElement('i', { className: 'chevron right icon' })
+                  )
+                );
+              } else if (modal) {
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleModal.bind(_this2, record.id) },
+                  row
+                );
+              } else if (handler) {
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleHandler.bind(_this2, record.id) },
+                  row
+                );
+              } else {
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'record_' + rowIndex, className: 'reframe-table-body-row' },
+                  row
+                );
+              }
+            })
           )
         )
       );
@@ -157,13 +149,6 @@ var Table = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       this._resizeColumns();
-    }
-  }, {
-    key: '_getScrollpane',
-    value: function _getScrollpane() {
-      return {
-        onReachBottom: this.props.onLoadMore.bind(this)
-      };
     }
   }, {
     key: '_resizeColumns',
