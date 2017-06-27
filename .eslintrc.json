@@ -3,7 +3,8 @@
   "env": {
     "browser": true,
     "commonjs": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -17,6 +18,10 @@
   "plugins": [
     "react"
   ],
+  "globals": {
+    "$": true,
+    "process": true
+   },
   "rules": {
     "strict": 0,
     "comma-dangle": [

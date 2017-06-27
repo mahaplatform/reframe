@@ -95,9 +95,7 @@ var Control = function (_React$Component) {
   _createClass(Control, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          type = _props.type,
-          endpoint = _props.endpoint;
+      var type = this.props.type;
 
       var Element = _lodash2.default.isString(this.props.type) ? _lodash2.default.get(standardControls, type) : type;
       return _react2.default.createElement(
@@ -109,10 +107,10 @@ var Control = function (_React$Component) {
   }, {
     key: '_getDynamic',
     value: function _getDynamic() {
-      var _props2 = this.props,
-          endpoint = _props2.endpoint,
-          value = _props2.value,
-          text = _props2.text;
+      var _props = this.props,
+          endpoint = _props.endpoint,
+          value = _props.value,
+          text = _props.text;
 
       return { endpoint: endpoint, value: value, text: text };
     }

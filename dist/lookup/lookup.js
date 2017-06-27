@@ -24,15 +24,9 @@ var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
-var _actions = require('./actions');
-
-var actions = _interopRequireWildcard(_actions);
-
 var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60,7 +54,6 @@ var Lookup = function (_React$Component) {
           disabled = _props.disabled,
           format = _props.format,
           prompt = _props.prompt,
-          selected = _props.selected,
           text = _props.text;
 
       var value = chosen ? _lodash2.default.get(chosen, text) : '';

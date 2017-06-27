@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 import Form from '../form'
 import Format from '../format'
-import * as actions from './actions'
 
 class Search extends React.Component {
 
@@ -114,6 +113,7 @@ class Search extends React.Component {
       ...this.props.form,
       onCancel: this.context.modal.close,
       onSuccess: (chosen) => {
+        const value = _.get(chosen, this.props.value)
         this.props.onChoose(0)
         this.props.onChange(value)
         this.context.modal.close()

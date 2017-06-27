@@ -22,6 +22,10 @@ var _fields = require('./fields');
 
 var _fields2 = _interopRequireDefault(_fields);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -45,15 +49,12 @@ var Field = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          data = _props.data,
           include = _props.include,
           instructions = _props.instructions,
           label = _props.label,
-          name = _props.name,
           show = _props.show,
           type = _props.type;
 
-      var defaultValue = _.get(data, name);
       var error = this._getError();
       if (!include || !show) return null;
       return _react2.default.createElement(
@@ -131,11 +132,9 @@ var Field = function (_React$Component) {
           text = _props5.text,
           token = _props5.token,
           value = _props5.value;
-      var _props6 = this.props,
-          onSubmit = _props6.onSubmit,
-          onUpdateData = _props6.onUpdateData;
+      var onSubmit = this.props.onSubmit;
 
-      var defaultValue = _.get(data, name);
+      var defaultValue = _lodash2.default.get(data, name);
       return {
         columns: columns,
         defaultValue: defaultValue,

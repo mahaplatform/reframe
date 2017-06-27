@@ -13,10 +13,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
 var _table = require('../table');
 
 var _table2 = _interopRequireDefault(_table);

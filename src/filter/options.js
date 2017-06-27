@@ -7,7 +7,7 @@ import Format from '../format'
 class Options extends React.Component {
 
   render() {
-    const { name, format, multiple, options, results, status } = this.props
+    const { name, format, multiple, options, results } = this.props
     return (
       <div className="reframe-filter-body">
         <div className="reframe-filter-results">

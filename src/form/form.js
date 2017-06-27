@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Section from './section'
+import _ from 'lodash'
 
 class Form extends React.Component {
 
@@ -82,7 +83,7 @@ class Form extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { data, entity, status } = this.props
+    const { data, status } = this.props
     if(prevProps.status !== status) {
       if(status === 'configured') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
@@ -97,7 +98,7 @@ class Form extends React.Component {
   }
 
   _handleLoadData() {
-    const { defaults, endpoint, sections, onFetchData, onSetData } = this.props
+    const { defaults, endpoint, onFetchData, onSetData } = this.props
     if(endpoint) return onFetchData(endpoint)
     onSetData(defaults)
   }

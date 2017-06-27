@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Format from '../format'
-import * as actions from './actions'
 import Search from './search'
 
 class Lookup extends React.Component {
@@ -34,7 +33,7 @@ class Lookup extends React.Component {
   }
 
   render() {
-    const { active, chosen, disabled, format, prompt, selected, text } = this.props
+    const { active, chosen, disabled, format, prompt, text } = this.props
     const value = chosen ? _.get(chosen, text) : ''
     return (
       <div className="reframe-lookup-field">

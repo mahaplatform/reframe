@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Control from '../control'
 import Fields from './fields'
+import _ from 'lodash'
 
 class Field extends React.Component {
 
@@ -39,8 +40,7 @@ class Field extends React.Component {
   }
 
   render() {
-    const { data, include, instructions, label, name, show, type } = this.props
-    const defaultValue = _.get(data, name)
+    const { include, instructions, label, show, type } = this.props
     const error = this._getError()
     if(!include || !show) return null
     return (
@@ -62,7 +62,7 @@ class Field extends React.Component {
     return [
       'field',
       ...(error) ? [ 'error' ] : [],
-      ...(required) ? [ 'required' ] : [],
+      ...(required) ? [ 'required' ] : []
     ].join(' ')
   }
 
@@ -84,7 +84,7 @@ class Field extends React.Component {
   _getControl() {
     const { columns, data, disabled, endpoint, form, format, label, name } = this.props
     const { options, prompt, prefix, sort, suffix, type, text, token, value } = this.props
-    const { onSubmit, onUpdateData } = this.props
+    const { onSubmit } = this.props
     const defaultValue = _.get(data, name)
     return {
       columns,

@@ -38,7 +38,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { all, columns, empty, entity, filters, layout, records, status } = this.props
+    const { all, empty, entity, filters, records, status } = this.props
     if(status === 'completed' && all === 0) {
       if(empty) {
         return (
@@ -92,7 +92,7 @@ class Collection extends React.Component {
   }
 
   componentDidMount() {
-    const { data, endpoint, onSetRecords } = this.props
+    const { data, onSetRecords } = this.props
     const filter = this.props.filter || {}
     const sort = this.props.sort || { key: 'created_at', order: 'desc' }
     this.props.onSetParams(filter, sort)

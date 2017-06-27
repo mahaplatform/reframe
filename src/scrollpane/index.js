@@ -76,7 +76,7 @@ class Scrollpane extends React.Component {
 
   _scrollListener() {
     const { scrollpane } = this.refs
-    const { notificationPercent, records, status, total, onReachBottom } = this.props
+    const { notificationPercent, onReachBottom } = this.props
     const bottomPosition = scrollpane.scrollHeight - (scrollpane.scrollTop + scrollpane.offsetHeight)
     const percentRemaining = (bottomPosition / scrollpane.scrollHeight) * 100
     if(!this.notified && percentRemaining <= notificationPercent) {

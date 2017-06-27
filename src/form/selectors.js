@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import _ from 'lodash'
 
 const sectionsSelector = state => state.config
 

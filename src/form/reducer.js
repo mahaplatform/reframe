@@ -1,4 +1,5 @@
 import * as actionTypes from './action_types'
+import _ from 'lodash'
 
 const INITIAL_STATE = {
   status: 'pending',

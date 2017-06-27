@@ -24,12 +24,6 @@ var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
-var _actions = require('./actions');
-
-var actions = _interopRequireWildcard(_actions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -229,6 +223,7 @@ var Search = function (_React$Component) {
       return _extends({}, this.props.form, {
         onCancel: this.context.modal.close,
         onSuccess: function onSuccess(chosen) {
+          var value = _lodash2.default.get(chosen, _this3.props.value);
           _this3.props.onChoose(0);
           _this3.props.onChange(value);
           _this3.context.modal.close();

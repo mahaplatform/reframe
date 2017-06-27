@@ -14,7 +14,7 @@ class Table extends React.Component {
     records: PropTypes.array,
     sort: PropTypes.shape({
       key: PropTypes.string,
-      order: PropTypes.string,
+      order: PropTypes.string
     }),
     total: PropTypes.number,
     onLoadMore: PropTypes.func,
@@ -22,7 +22,7 @@ class Table extends React.Component {
   }
 
   render() {
-    const { columns, handler, link, modal, params, records, sort, onSort } = this.props
+    const { columns, handler, link, modal, records, sort } = this.props
     return (
       <Scrollpane { ...this._getScrollpane() }>
         <div className="reframe-table">

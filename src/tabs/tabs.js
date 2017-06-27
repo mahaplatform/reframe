@@ -24,7 +24,6 @@ export class Tabs extends React.Component {
 
   render() {
     const { children, chosen, tabs } = this.props
-    const { visited } = this.state
     return (
       <Scrollpane>
         { children }

@@ -7,6 +7,12 @@ exports.errors = exports.defaults = exports.filtered = undefined;
 
 var _reselect = require('reselect');
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var sectionsSelector = function sectionsSelector(state) {
   return state.config;
 };
@@ -40,7 +46,7 @@ var errors = exports.errors = (0, _reselect.createSelector)(sectionsSelector, da
   var errors = {};
   _mapFields(sections, function (field) {
     var value = data[field.name];
-    if (field.required && _.isEmpty(value)) {
+    if (field.required && _lodash2.default.isEmpty(value)) {
       errors[field.name] = ['field is required'];
     }
   });

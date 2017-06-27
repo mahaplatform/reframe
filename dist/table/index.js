@@ -57,10 +57,8 @@ var Table = function (_React$Component) {
           handler = _props.handler,
           link = _props.link,
           modal = _props.modal,
-          params = _props.params,
           records = _props.records,
-          sort = _props.sort,
-          onSort = _props.onSort;
+          sort = _props.sort;
 
       return _react2.default.createElement(
         _scrollpane2.default,

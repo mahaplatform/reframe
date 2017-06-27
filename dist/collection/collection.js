@@ -52,11 +52,9 @@ var Collection = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           all = _props.all,
-          columns = _props.columns,
           empty = _props.empty,
           entity = _props.entity,
           filters = _props.filters,
-          layout = _props.layout,
           records = _props.records,
           status = _props.status;
 
@@ -138,7 +136,6 @@ var Collection = function (_React$Component) {
     value: function componentDidMount() {
       var _props2 = this.props,
           data = _props2.data,
-          endpoint = _props2.endpoint,
           onSetRecords = _props2.onSetRecords;
 
       var filter = this.props.filter || {};

@@ -57,7 +57,6 @@ var Tabs = exports.Tabs = function (_React$Component) {
           children = _props.children,
           chosen = _props.chosen,
           tabs = _props.tabs;
-      var visited = this.state.visited;
 
       return _react2.default.createElement(
         _scrollpane2.default,

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import List from '../list'
+import _ from 'lodash'
 
 class Search extends React.Component {
 

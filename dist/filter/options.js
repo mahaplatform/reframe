@@ -53,8 +53,7 @@ var Options = function (_React$Component) {
           format = _props.format,
           multiple = _props.multiple,
           options = _props.options,
-          results = _props.results,
-          status = _props.status;
+          results = _props.results;
 
       return _react2.default.createElement(
         'div',

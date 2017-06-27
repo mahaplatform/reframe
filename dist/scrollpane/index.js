@@ -111,9 +111,6 @@ var Scrollpane = function (_React$Component) {
       var scrollpane = this.refs.scrollpane;
       var _props = this.props,
           notificationPercent = _props.notificationPercent,
-          records = _props.records,
-          status = _props.status,
-          total = _props.total,
           onReachBottom = _props.onReachBottom;
 
       var bottomPosition = scrollpane.scrollHeight - (scrollpane.scrollTop + scrollpane.offsetHeight);

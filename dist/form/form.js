@@ -20,6 +20,10 @@ var _section = require('./section');
 
 var _section2 = _interopRequireDefault(_section);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52,7 +56,7 @@ var Form = function (_React$Component) {
           title = _props.title;
 
       var formClasses = ['ui', 'form', 'reframe-form', status];
-      if (_.includes(['pending', 'submitting'], status)) formClasses.push('loading');
+      if (_lodash2.default.includes(['pending', 'submitting'], status)) formClasses.push('loading');
       return _react2.default.createElement(
         'div',
         { className: 'reframe-modal-panel' },
@@ -134,7 +138,6 @@ var Form = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _props3 = this.props,
           data = _props3.data,
-          entity = _props3.entity,
           status = _props3.status;
 
       if (prevProps.status !== status) {
@@ -156,7 +159,6 @@ var Form = function (_React$Component) {
       var _props4 = this.props,
           defaults = _props4.defaults,
           endpoint = _props4.endpoint,
-          sections = _props4.sections,
           onFetchData = _props4.onFetchData,
           onSetData = _props4.onSetData;
 
@@ -178,7 +180,7 @@ var Form = function (_React$Component) {
           onChange = _props5.onChange;
 
       if (onChangeField) {
-        _.forOwn(current, function (value, code) {
+        _lodash2.default.forOwn(current, function (value, code) {
           if (previous[code] != current[code]) onChangeField(code, value);
         });
       }

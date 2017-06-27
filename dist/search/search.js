@@ -18,6 +18,10 @@ var _list = require('../list');
 
 var _list2 = _interopRequireDefault(_list);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -120,7 +124,7 @@ var Search = function (_React$Component) {
           endpoint = _props2.endpoint,
           onLookup = _props2.onLookup;
 
-      this._handleLookup = _.throttle(onLookup.bind(this), 500);
+      this._handleLookup = _lodash2.default.throttle(onLookup.bind(this), 500);
       setTimeout(function () {
         return _this2.refs.query.focus();
       }, 500);

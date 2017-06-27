@@ -54,7 +54,7 @@ class Control extends React.Component {
   }
 
   render() {
-    const { type, endpoint } = this.props
+    const { type } = this.props
     const Element = (_.isString(this.props.type)) ? _.get(standardControls, type) : type
     return (
       <div className="control">

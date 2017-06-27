@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   records: [],
   static: false,
   status: 'pending',
-  total: 0,
+  total: 0
 }
 
 export default (state = INITIAL_STATE, action) => {

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Resumable from 'resumablejs'
 import bytes from 'bytes'
-// import Image from 'admin/components/image'
-import * as actions from './actions'
 
 class FileField extends React.Component {
 
@@ -77,7 +75,6 @@ class FileField extends React.Component {
       </div>
     )
   }
-  // <Image src={ file.asset.path } title={ file.asset.original_file_name } transforms={{ fit: 'cover', w: 300, h: 300 }} />
 
   componentDidMount() {
     const { cid, defaultValue, onLoadFiles } = this.props
@@ -105,7 +102,7 @@ class FileField extends React.Component {
   }
 
   _initializeResumable() {
-    const { endpoint, multiple, team, token } = this.props
+    const { endpoint, multiple, token } = this.props
     this.resumable = new Resumable({
       target: endpoint,
       chunkSize: 1024 * 128,
