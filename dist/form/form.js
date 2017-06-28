@@ -151,7 +151,7 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleCancel',
     value: function _handleCancel() {
-      this.context.modal.close();
+      this.props.onCancel();
     }
   }, {
     key: '_handleLoadData',
@@ -206,23 +206,12 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleSuccess',
     value: function _handleSuccess() {
-      var flash = this.context.flash;
-      var _props7 = this.props,
-          entity = _props7.entity,
-          successMessage = _props7.successMessage,
-          onSuccess = _props7.onSuccess;
-
-      if (successMessage) flash.set('success', successMessage);
-      onSuccess(entity);
+      this.props.onSuccess(this.props.entity);
     }
   }, {
     key: '_handleFailure',
     value: function _handleFailure() {
-      var flash = this.context.flash;
-      var onFailure = this.props.onFailure;
-
-      flash.set('error', 'There were problems with your data');
-      onFailure();
+      this.props.onFailure();
     }
   }]);
 
@@ -230,7 +219,6 @@ var Form = function (_React$Component) {
 }(_react2.default.Component);
 
 Form.contextTypes = {
-  flash: _propTypes2.default.object,
   modal: _propTypes2.default.object
 };
 Form.PropTypes = {
@@ -254,5 +242,14 @@ Form.PropTypes = {
   onValidateForm: _propTypes2.default.func,
   onResetForm: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
+};
+Form.defaultProps = {
+  method: 'GET',
+  onCancel: function onCancel() {},
+  onChange: function onChange() {},
+  onChangeField: function onChangeField() {},
+  onSubmit: function onSubmit() {},
+  onFailure: function onFailure(error) {},
+  onSuccess: function onSuccess(entity) {}
 };
 exports.default = Form;

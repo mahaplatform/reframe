@@ -6,7 +6,6 @@ import _ from 'lodash'
 class Form extends React.Component {
 
   static contextTypes = {
-    flash: PropTypes.object,
     modal: PropTypes.object
   }
 
@@ -32,6 +31,17 @@ class Form extends React.Component {
     onResetForm: PropTypes.func,
     onUpdateData: PropTypes.func
   }
+
+  static defaultProps = {
+    method: 'GET',
+    onCancel: () => {},
+    onChange: () => {},
+    onChangeField: () => {},
+    onSubmit: () => {},
+    onFailure: (error) => {},
+    onSuccess: (entity) => {}
+  }
+
 
   render() {
     const { after, before, data, errors, instructions, sections, title } = this.props
@@ -94,7 +104,7 @@ class Form extends React.Component {
   }
 
   _handleCancel() {
-    this.context.modal.close()
+    this.props.onCancel()
   }
 
   _handleLoadData() {
@@ -129,17 +139,11 @@ class Form extends React.Component {
   }
 
   _handleSuccess() {
-    const { flash } = this.context
-    const { entity, successMessage, onSuccess } = this.props
-    if(successMessage) flash.set('success', successMessage)
-    onSuccess(entity)
+    this.props.onSuccess(this.props.entity)
   }
 
   _handleFailure() {
-    const { flash } = this.context
-    const { onFailure } = this.props
-    flash.set('error', 'There were problems with your data')
-    onFailure()
+    this.props.onFailure()
   }
 
 }

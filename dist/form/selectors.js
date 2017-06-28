@@ -3,15 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.errors = exports.defaults = exports.filtered = undefined;
+exports.defaults = exports.filtered = undefined;
 
 var _reselect = require('reselect');
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var sectionsSelector = function sectionsSelector(state) {
   return state.config;
@@ -39,18 +33,6 @@ var defaults = exports.defaults = (0, _reselect.createSelector)(sectionsSelector
     }
   });
   return defaults;
-});
-
-var errors = exports.errors = (0, _reselect.createSelector)(sectionsSelector, dataSelector, function (sections, data) {
-  var message = 'There were problems with your data.';
-  var errors = {};
-  _mapFields(sections, function (field) {
-    var value = data[field.name];
-    if (field.required && _lodash2.default.isEmpty(value)) {
-      errors[field.name] = ['field is required'];
-    }
-  });
-  return errors ? { message: message, errors: errors } : null;
 });
 
 var _mapFields = function _mapFields(sections, callback) {

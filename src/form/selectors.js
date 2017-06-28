@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import _ from 'lodash'
 
 const sectionsSelector = state => state.config
 
@@ -29,22 +28,6 @@ export const defaults = createSelector(
       }
     })
     return defaults
-  }
-)
-
-export const errors = createSelector(
-  sectionsSelector,
-  dataSelector,
-  (sections, data) => {
-    const message = 'There were problems with your data.'
-    let errors = {}
-    _mapFields(sections, field => {
-      let value = data[field.name]
-      if(field.required && _.isEmpty(value)) {
-        errors[field.name] = ['field is required']
-      }
-    })
-    return errors ? { message, errors } : null
   }
 )
 

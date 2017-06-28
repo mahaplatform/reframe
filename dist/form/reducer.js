@@ -47,16 +47,21 @@ exports.default = function () {
       });
 
     case actionTypes.FETCH_DATA_SUCCESS:
-    case actionTypes.SET_DATA:
       return _extends({}, state, {
         status: 'ready',
         data: action.result.data
       });
 
+    case actionTypes.SET_DATA:
+      return _extends({}, state, {
+        status: 'ready',
+        data: action.data
+      });
+
     case actionTypes.FETCH_DATA_FAILURE:
       return _extends({}, state, {
-        status: 'error',
-        error: action.result.error
+        status: 'failure',
+        errors: action.result.errors
       });
 
     case actionTypes.UPDATE_DATA:
