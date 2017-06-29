@@ -13,8 +13,8 @@ class Lookup extends React.Component {
     defaultValue: PropTypes.number,
     endpoint: PropTypes.string,
     format: PropTypes.oneOfType([
-      prompt: PropTypes.string,
-      prompt: PropTypes.func
+      PropTypes.string,
+      PropTypes.func
     ]),
     prompt: PropTypes.string,
     query: PropTypes.string,

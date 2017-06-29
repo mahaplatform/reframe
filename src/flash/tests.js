@@ -128,15 +128,23 @@ describe('flash component', () => {
       )
 
       const transitionGroup = flash.childAt(0)
-      const panel = transitionGroup.childAt(0)
-      expect(panel.is('div.reframe-flash-popup.success')).to.be.true
+      const popup = transitionGroup.childAt(0)
+      expect(popup.is('div.reframe-flash-popup.success')).to.be.true
 
-      const paragraph = panel.childAt(0)
+      const panel = popup.childAt(0)
+      expect(panel.is('div.reframe-flash-popup-panel')).to.be.true
+
+      const icon = panel.childAt(0)
+      expect(icon.is('div.reframe-flash-popup-icon')).to.be.true
+      expect(icon.childAt(0).is('i.fa.fa-check-circle')).to.be.true
+
+      const message = panel.childAt(1)
+      expect(message.is('div.reframe-flash-popup-message')).to.be.true
+
+      const paragraph = message.childAt(0)
       expect(paragraph.is('p')).to.be.truthy
       expect(paragraph.text()).to.equal('good job')
 
-      const icon = paragraph.childAt(0)
-      expect(icon.is('i.fa.fa-check-circle')).to.be.true
 
     })
 

@@ -33,6 +33,7 @@
     "pluralize": "^5.0.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-addons-test-utils": "^15.6.0",
     "react-api-request": "^1.0.2",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
@@ -52,7 +53,6 @@
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "mocha": "^3.3.0",
-    "react-addons-test-utils": "^15.5.1",
     "sinon": "^2.2.0"
   }
 }
