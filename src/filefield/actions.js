@@ -1,11 +1,10 @@
 import * as actionTypes from './action_types'
 
-export const loadFiles = (cid, ids) => ({
+export const loadFiles = (endpoint, $ids) => ({
   type: 'API_REQUEST',
   method: 'GET',
-  endpoint: '/admin/assets',
-  params: { $ids: ids },
-  meta: { cid },
+  endpoint,
+  query: { $ids },
   request: actionTypes.LOAD_FILES_REQUEST,
   success: actionTypes.LOAD_FILES_SUCCESS,
   failure: actionTypes.LOAD_FILES_FAILURE

@@ -127,7 +127,6 @@ Control.propTypes = {
 };
 Control.defaultProps = {
   type: 'textfield',
-  datasource: null,
   options: []
 };
 exports.default = Control;

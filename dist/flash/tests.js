@@ -148,15 +148,22 @@ describe('flash component', function () {
       var flash = (0, _enzyme.shallow)(_react2.default.createElement(_flash2.default, config));
 
       var transitionGroup = flash.childAt(0);
-      var panel = transitionGroup.childAt(0);
-      (0, _chai.expect)(panel.is('div.reframe-flash-popup.success')).to.be.true;
+      var popup = transitionGroup.childAt(0);
+      (0, _chai.expect)(popup.is('div.reframe-flash-popup.success')).to.be.true;
 
-      var paragraph = panel.childAt(0);
+      var panel = popup.childAt(0);
+      (0, _chai.expect)(panel.is('div.reframe-flash-popup-panel')).to.be.true;
+
+      var icon = panel.childAt(0);
+      (0, _chai.expect)(icon.is('div.reframe-flash-popup-icon')).to.be.true;
+      (0, _chai.expect)(icon.childAt(0).is('i.fa.fa-check-circle')).to.be.true;
+
+      var message = panel.childAt(1);
+      (0, _chai.expect)(message.is('div.reframe-flash-popup-message')).to.be.true;
+
+      var paragraph = message.childAt(0);
       (0, _chai.expect)(paragraph.is('p')).to.be.truthy;
       (0, _chai.expect)(paragraph.text()).to.equal('good job');
-
-      var icon = paragraph.childAt(0);
-      (0, _chai.expect)(icon.is('i.fa.fa-check-circle')).to.be.true;
     });
   });
 });

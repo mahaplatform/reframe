@@ -49,7 +49,6 @@ class Control extends React.Component {
 
   static defaultProps = {
     type: 'textfield',
-    datasource: null,
     options: []
   }
 

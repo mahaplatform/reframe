@@ -129,7 +129,7 @@ Lookup.propTypes = {
   disabled: _propTypes2.default.bool,
   defaultValue: _propTypes2.default.number,
   endpoint: _propTypes2.default.string,
-  format: _propTypes2.default.oneOfType([prompt, prompt]),
+  format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
   prompt: _propTypes2.default.string,
   query: _propTypes2.default.string,
   results: _propTypes2.default.array,

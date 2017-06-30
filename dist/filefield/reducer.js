@@ -34,7 +34,7 @@ exports.default = function () {
 
     case actionTypes.LOAD_FILES_SUCCESS:
       return _extends({}, state, {
-        files: action.data.map(function (file) {
+        files: action.result.data.map(function (file) {
           return {
             fileName: file.file_name,
             fileSize: file.file_size,

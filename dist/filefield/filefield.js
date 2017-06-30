@@ -118,15 +118,6 @@ var FileField = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props2 = this.props,
-          cid = _props2.cid,
-          defaultValue = _props2.defaultValue,
-          onLoadFiles = _props2.onLoadFiles;
-
-      if (defaultValue) {
-        var ids = !_lodash2.default.isArray(defaultValue) ? [defaultValue] : defaultValue;
-        onLoadFiles(cid, ids);
-      }
       this._initializeResumable();
     }
   }, {
@@ -134,9 +125,15 @@ var FileField = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this3 = this;
 
-      var files = this.props.files;
+      var _props2 = this.props,
+          defaultValue = _props2.defaultValue,
+          files = _props2.files,
+          onLoadFiles = _props2.onLoadFiles;
 
-      if (files.length > prevProps.files.length) {
+      if (prevProps.defaultValue !== defaultValue) {
+        var ids = !_lodash2.default.isArray(defaultValue) ? [defaultValue] : defaultValue;
+        onLoadFiles('/api/admin/team/assets', ids);
+      } else if (files.length > prevProps.files.length) {
         this._handleUploadBegin();
       } else if (files.length < prevProps.files.length) {
         this._initializeResumable();

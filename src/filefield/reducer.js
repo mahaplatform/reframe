@@ -13,7 +13,7 @@ export default (state = INITIAL_VALUE, action) => {
   case actionTypes.LOAD_FILES_SUCCESS:
     return {
       ...state,
-      files: action.data.map(file => ({
+      files: action.result.data.map(file => ({
         fileName: file.file_name,
         fileSize: file.file_size,
         contentType: file.content_type,
