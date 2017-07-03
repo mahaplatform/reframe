@@ -117,13 +117,20 @@ var Failure = exports.Failure = function Failure(props) {
     _react2.default.createElement(
       "div",
       { className: "reframe-message-panel" },
-      _react2.default.createElement("i", { className: "warning sign icon" }),
       _react2.default.createElement(
         "h2",
         null,
-        "Unable to load",
-        _react2.default.createElement("br", null),
-        " records"
+        _react2.default.createElement("i", { className: "circular warning sign icon" })
+      ),
+      _react2.default.createElement(
+        "h3",
+        null,
+        "Unable to load records"
+      ),
+      _react2.default.createElement(
+        "p",
+        null,
+        "There was a problem with fetching your data"
       )
     )
   );

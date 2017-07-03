@@ -55,81 +55,23 @@ var Collection = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
-          all = _props.all,
-          empty = _props.empty,
-          entity = _props.entity,
           filters = _props.filters,
           records = _props.records;
 
-      if (status === 'completed' && all === 0) {
-        if (empty) {
-          return _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection' },
-            empty.component ? _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-empty' },
-              _lodash2.default.isFunction(empty.component) ? _react2.default.createElement(empty.component) : empty.component
-            ) : _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-empty' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-collection-empty-message' },
-                empty.icon && _react2.default.createElement(
-                  'h2',
-                  null,
-                  _react2.default.createElement('i', { className: 'circular ' + empty.icon + ' icon' })
-                ),
-                empty.title ? _react2.default.createElement(
-                  'h3',
-                  null,
-                  empty.title
-                ) : _react2.default.createElement(
-                  'h3',
-                  null,
-                  'No ',
-                  _lodash2.default.startCase((0, _pluralize2.default)(entity.replace('_', ' ')))
-                ),
-                empty.message ? _react2.default.createElement(
-                  'p',
-                  null,
-                  empty.message
-                ) : _react2.default.createElement(
-                  'p',
-                  null,
-                  'You have not yet created any ',
-                  (0, _pluralize2.default)(entity.replace('_', ' '))
-                ),
-                empty.modal && _react2.default.createElement(
-                  'div',
-                  { className: 'ui basic button', onClick: this._handleAddNew.bind(this) },
-                  _react2.default.createElement('i', { className: 'plus icon' }),
-                  'Create New ',
-                  _lodash2.default.startCase(entity.replace('_', ' '))
-                )
-              )
-            )
-          );
-        } else {
-          return _react2.default.createElement(_results.Empty, null);
-        }
-      } else {
-        return _react2.default.createElement(
+      return _react2.default.createElement(
+        'div',
+        { className: 'reframe-collection' },
+        _react2.default.createElement(
           'div',
-          { className: 'reframe-collection' },
-          _react2.default.createElement(
+          { className: 'reframe-collection-layout' },
+          filters && _react2.default.createElement(
             'div',
-            { className: 'reframe-collection-layout' },
-            filters && _react2.default.createElement(
-              'div',
-              { className: 'reframe-collection-header' },
-              _react2.default.createElement(_filter2.default, this._getFilter())
-            ),
-            records ? _react2.default.createElement(_results.Results, this.props) : _react2.default.createElement(_infinite2.default, this._getInfinite())
-          )
-        );
-      }
+            { className: 'reframe-collection-header' },
+            _react2.default.createElement(_filter2.default, this._getFilter())
+          ),
+          records ? _react2.default.createElement(_results.Results, this.props) : _react2.default.createElement(_infinite2.default, this._getInfinite())
+        )
+      );
     }
   }, {
     key: 'componentDidMount',
@@ -175,7 +117,7 @@ var Collection = function (_React$Component) {
         endpoint: endpoint,
         filter: filter,
         loading: loading,
-        empty: empty,
+        empty: _react2.default.createElement(_results.Empty, this.props),
         failure: failure,
         layout: function layout(props) {
           return _react2.default.createElement(_results.Results, _extends({}, _this2.props, props));

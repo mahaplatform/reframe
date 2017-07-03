@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import Form from '../form'
 import Format from '../format'
+import Results from './results'
 
 class Search extends React.Component {
 
@@ -25,41 +26,7 @@ class Search extends React.Component {
              <input type="text" placeholder={`Find a ${label}...`} onChange={this._handleType.bind(this)} ref="query" />
            </div>
          </div>
-         { status === 'loading' &&
-           <div className="reframe-lookup-panel-loader">
-             <div className="reframe-loader">
-               <div className="ui active inverted dimmer">
-                 <div className="ui large text loader">Loading</div>
-               </div>
-             </div>
-           </div>
-         }
-         { status === 'success' && results.length === 0 &&
-           <div className="reframe-lookup-panel-empty">
-             <div className="reframe-lookup-panel-empty-message">
-               <h2><i className="circular remove icon" /></h2>
-               <h3>No Results Found</h3>
-               <p>No {label} match your query</p>
-             </div>
-           </div>
-         }
-         { status === 'success' && results.length > 0 &&
-           <div className="reframe-lookup-panel-results">
-             { results.map((result, index) => {
-               const value = _.get(result, text)
-               return (
-                 <div key={`result_${index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, index) }>
-                   <div className="reframe-lookup-panel-result-label">
-                     <Format {...result} format={format} value={value} />
-                   </div>
-                   <div className="reframe-lookup-panel-result-icon">
-                     { index === selected ? <i className="green check icon" /> : null }
-                   </div>
-                 </div>
-               )
-             })}
-           </div>
-         }
+         <Infinite { ...this._getInfinite() } />
          { form &&
            <div className="reframe-lookup-panel-add">
              <div className="ui fluid blue button" onClick={ this._handleAdd.bind(this)}>
@@ -79,6 +46,17 @@ class Search extends React.Component {
     setTimeout(() => refs.query.focus(), 500)
     const query = { $filter: { q: '' }, $sort: sort }
     onLookup(query, endpoint)
+  }
+
+  _getInfinite() {
+    const { endpoint, query, sort } = this.props
+    const filter = { q: query }
+    return {
+      endpoint,
+      filter,
+      layout: (props) => <Results { ...this.props } { ...props } onChoose={ this._handleChoose.bind(this) } />,
+      sort
+    }
   }
 
   _handleBegin() {

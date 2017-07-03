@@ -44,8 +44,9 @@ export const Empty = (props) => (
 export const Failure = (props) => (
   <div className="reframe-message">
     <div className="reframe-message-panel">
-      <i className="warning sign icon" />
-      <h2>Unable to load<br /> records</h2>
+      <h2><i className="circular warning sign icon" /></h2>
+      <h3>Unable to load records</h3>
+      <p>There was a problem with fetching your data</p>
     </div>
   </div>
 )

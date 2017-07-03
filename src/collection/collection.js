@@ -51,54 +51,19 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { all, empty, entity, filters, records } = this.props
-    if(status === 'completed' && all === 0) {
-      if(empty) {
-        return (
-          <div className="reframe-collection">
-            { empty.component ?
-              <div className="reframe-collection-empty">
-                { _.isFunction(empty.component) ? React.createElement(empty.component) : empty.component }
-              </div> :
-              <div className="reframe-collection-empty">
-                <div className="reframe-collection-empty-message">
-                  { empty.icon && <h2><i className={`circular ${empty.icon} icon`} /></h2>}
-                  { empty.title ?
-                    <h3>{ empty.title }</h3> :
-                    <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
-                  }
-                  { empty.message ?
-                    <p>{ empty.message }</p> :
-                    <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>
-                  }
-                  { empty.modal &&
-                    <div className="ui basic button" onClick={ this._handleAddNew.bind(this)}>
-                      <i className="plus icon" />
-                      Create New {_.startCase(entity.replace('_', ' '))}
-                    </div>
-                  }
-                </div>
-              </div>
-            }
-          </div>
-        )
-      } else {
-        return <Empty />
-      }
-    } else {
-      return (
-        <div className="reframe-collection">
-          <div className="reframe-collection-layout">
-            { filters &&
-              <div className="reframe-collection-header">
-                <Filter { ...this._getFilter() } />
-              </div>
-            }
-            { records ? <Results { ...this.props } /> : <Infinite { ...this._getInfinite() } /> }
-          </div>
+    const { filters, records } = this.props
+    return (
+      <div className="reframe-collection">
+        <div className="reframe-collection-layout">
+          { filters &&
+            <div className="reframe-collection-header">
+              <Filter { ...this._getFilter() } />
+            </div>
+          }
+          { records ? <Results { ...this.props } /> : <Infinite { ...this._getInfinite() } /> }
         </div>
-      )
-    }
+      </div>
+    )
   }
 
   componentDidMount() {
@@ -125,7 +90,7 @@ class Collection extends React.Component {
       endpoint,
       filter,
       loading,
-      empty,
+      empty: <Empty { ...this.props } />,
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort
@@ -149,6 +114,5 @@ class Collection extends React.Component {
   }
 
 }
-
 
 export default Collection

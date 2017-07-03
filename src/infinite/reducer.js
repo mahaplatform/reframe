@@ -35,7 +35,7 @@ export default (state = INITIAL_STATE, action) => {
   case actionTypes.FETCH_FAILURE:
     return {
       ...state,
-      status: 'failure'
+      status: 'failed'
     }
 
   case actionTypes.FETCH_DELAY:

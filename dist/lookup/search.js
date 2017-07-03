@@ -24,6 +24,10 @@ var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
+var _results = require('./results');
+
+var _results2 = _interopRequireDefault(_results);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44,8 +48,6 @@ var Search = function (_React$Component) {
   _createClass(Search, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           label = _props.label,
           results = _props.results,
@@ -87,69 +89,7 @@ var Search = function (_React$Component) {
               _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'query' })
             )
           ),
-          status === 'loading' && _react2.default.createElement(
-            'div',
-            { className: 'reframe-lookup-panel-loader' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-loader' },
-              _react2.default.createElement(
-                'div',
-                { className: 'ui active inverted dimmer' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'ui large text loader' },
-                  'Loading'
-                )
-              )
-            )
-          ),
-          status === 'success' && results.length === 0 && _react2.default.createElement(
-            'div',
-            { className: 'reframe-lookup-panel-empty' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-lookup-panel-empty-message' },
-              _react2.default.createElement(
-                'h2',
-                null,
-                _react2.default.createElement('i', { className: 'circular remove icon' })
-              ),
-              _react2.default.createElement(
-                'h3',
-                null,
-                'No Results Found'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'No ',
-                label,
-                ' match your query'
-              )
-            )
-          ),
-          status === 'success' && results.length > 0 && _react2.default.createElement(
-            'div',
-            { className: 'reframe-lookup-panel-results' },
-            results.map(function (result, index) {
-              var value = _lodash2.default.get(result, text);
-              return _react2.default.createElement(
-                'div',
-                { key: 'result_' + index, className: 'reframe-lookup-panel-result', onClick: _this2._handleChoose.bind(_this2, index) },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'reframe-lookup-panel-result-label' },
-                  _react2.default.createElement(_format2.default, _extends({}, result, { format: format, value: value }))
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'reframe-lookup-panel-result-icon' },
-                  index === selected ? _react2.default.createElement('i', { className: 'green check icon' }) : null
-                )
-              );
-            })
-          ),
+          _react2.default.createElement(Infinite, this._getInfinite()),
           form && _react2.default.createElement(
             'div',
             { className: 'reframe-lookup-panel-add' },
@@ -180,6 +120,26 @@ var Search = function (_React$Component) {
       onLookup(query, endpoint);
     }
   }, {
+    key: '_getInfinite',
+    value: function _getInfinite() {
+      var _this2 = this;
+
+      var _props3 = this.props,
+          endpoint = _props3.endpoint,
+          query = _props3.query,
+          sort = _props3.sort;
+
+      var filter = { q: query };
+      return {
+        endpoint: endpoint,
+        filter: filter,
+        layout: function layout(props) {
+          return _react2.default.createElement(_results2.default, _extends({}, _this2.props, props, { onChoose: _this2._handleChoose.bind(_this2) }));
+        },
+        sort: sort
+      };
+    }
+  }, {
     key: '_handleBegin',
     value: function _handleBegin() {
       this.props.onBegin();
@@ -192,9 +152,9 @@ var Search = function (_React$Component) {
   }, {
     key: '_handleType',
     value: function _handleType(event) {
-      var _props3 = this.props,
-          sort = _props3.sort,
-          endpoint = _props3.endpoint;
+      var _props4 = this.props,
+          sort = _props4.sort,
+          endpoint = _props4.endpoint;
 
       var q = event.target.value;
       var params = { $filter: { q: q }, $sort: sort };

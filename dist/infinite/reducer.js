@@ -51,7 +51,7 @@ exports.default = function () {
 
     case actionTypes.FETCH_FAILURE:
       return _extends({}, state, {
-        status: 'failure'
+        status: 'failed'
       });
 
     case actionTypes.FETCH_DELAY:
