@@ -27,64 +27,35 @@ class List extends React.Component {
 class Section extends React.Component {
 
   static propTypes = {
+    component: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
+    content: PropTypes.string,
     empty: PropTypes.string,
     items: PropTypes.array,
     title: PropTypes.string
   }
 
   render() {
-    const { empty, items, title } = this.props
+    const { component, content, empty, items, title } = this.props
     return (
       <div className="reframe-list-section">
         { title && <div className="reframe-list-title">{ title }</div> }
-        { items && items.length > 0 &&
-          items.map((item, itemIndex) => {
-            const content = (
-              <div key={`list_item_${itemIndex}`} className="reframe-list-item">
-                { item.icon &&
-                  <div className="reframe-list-item-icon">
-                    <i className={`${item.icon} icon`} />
-                  </div>
-                }
-                { item.component &&
-                  _.isFunction(item.component) ? React.createElement(item.component, item.content) : item.component
-                }
-                { !item.component &&
-                  <div className="reframe-list-item-content">
-                    { item.label && <strong>{ item.label }<br /></strong> }
-                    { !item.component && <Format { ...item.content } format={ item.format } value={ item.content } /> }
-                  </div>
-                }
-                { item.extra &&
-                  <div className="reframe-list-item-extra">
-                    { _.isFunction(item.extra) ? React.createElement(item.extra) : item.extra }
-                  </div>
-                }
-                { item.link &&
-                  <div className="reframe-list-item-proceed">
-                    <i className="chevron right icon" />
-                  </div>
-                }
-              </div>
-            )
-            if(item.link) {
-              return (
-                <Link key={`list_item_link_${itemIndex}`} to={ item.link }>
-                  { content }
-                </Link>
-              )
-            }
-            if(item.handler) {
-              return (
-                <div key={`list_item_link_${itemIndex}`} onClick={ item.handler }>
-                  { content }
-                </div>
-              )
-            }
-            return content
-          })
+        { component &&
+          _.isFunction(component) ? React.createElement(component, content) : component
         }
-        { empty && !items || (items && items.length === 0) &&
+        { content &&
+          <div className="reframe-list-item">
+            <div className="reframe-list-item-content">
+              { content }
+            </div>
+          </div>
+        }
+        { items && items.length > 0 &&
+          items.map((item, itemIndex) => <Item key={`list_item_${itemIndex}`} { ...item } />)
+        }
+        { empty && items && items.length === 0 &&
           <div className="reframe-list-item">
             <div className="reframe-list-item-content">
               { empty }
@@ -97,8 +68,64 @@ class Section extends React.Component {
 
 }
 
+class Item extends React.Component {
 
+  static propTypes = {
+    component: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
+    content: PropTypes.any,
+    extra: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
+    format: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func,
+      PropTypes.element
+    ]),
+    handler: PropTypes.func,
+    icon: PropTypes.string,
+    label: PropTypes.string,
+    link: PropTypes.string
+  }
 
+  render() {
+    const { component, content, extra, format, handler, icon, label, link } = this.props
+    const item = (
+      <div className="reframe-list-item">
+        { icon &&
+          <div className="reframe-list-item-icon">
+            <i className={`${icon} icon`} />
+          </div>
+        }
+        { component &&
+          _.isFunction(component) ? React.createElement(component, content) : component
+        }
+        { !component &&
+          <div className="reframe-list-item-content">
+            { label && <strong>{ label }<br /></strong> }
+            { !component && <Format { ...content } format={ format } value={ content } /> }
+          </div>
+        }
+        { extra &&
+          <div className="reframe-list-item-extra">
+            { _.isFunction(extra) ? React.createElement(extra) : extra }
+          </div>
+        }
+        { link &&
+          <div className="reframe-list-item-proceed">
+            <i className="chevron right icon" />
+          </div>
+        }
+      </div>
+    )
+    if(link) return <Link to={ link }>{ item }</Link>
+    if(handler) return <div onClick={ handler }>{ item }</div>
+    return item
+  }
 
+}
 
 export default List

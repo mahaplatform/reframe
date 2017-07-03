@@ -2,62 +2,70 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
+import { Delayed, Empty, Failure, Loading, Timeout } from './results'
 
 class Infinite extends React.Component {
 
   static PropTypes = {
     all: PropTypes.number,
     cacheKey: PropTypes.string,
-    empty: PropTypes.func,
+    delayed: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
+    empty: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     endpoint: PropTypes.string,
+    failure: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     filter: PropTypes.object,
     layout: PropTypes.func,
-    loading: PropTypes.func,
+    loading: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     records: PropTypes.array,
     status: PropTypes.string,
+    timeout: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     total: PropTypes.number,
-    onFetch: PropTypes.func
+    onFetch: PropTypes.func,
+    onFetchDelay: PropTypes.func,
+    onFetchTimeout: PropTypes.func
   }
 
   static defaultProps = {
     cacheKey: null,
+    delayed: Delayed,
+    empty: Empty,
+    failure: Failure,
+    filter: {},
+    loading: Loading,
     sort: {
       key: null,
       order: null
     },
-    filter: {}
+    timeout: Timeout
   }
 
   render() {
-    const { empty, layout, loading, records, status } = this.props
+    const { delayed, empty, failure, layout, loading, records, status, timeout } = this.props
     return (
       <div className="reframe-infinite">
-        { status === 'loading' && !records && ( _.isFunction(loading) ? React.createElement(loading) : loading ) }
-        { status === 'delayed' &&
-          <div className="reframe-collection-empty">
-            <div className="reframe-collection-empty-message">
-              <h2><i className="circular hourglass half icon" /></h2>
-              <h3>The network is a bit slow</h3>
-              <p>This is taking longer than we expected...</p>
-            </div>
-          </div>
-        }
-        { status === 'timeout' &&
-          <div className="reframe-collection-empty">
-            <div className="reframe-collection-empty-message">
-              <h2><i className="circular hourglass end icon" /></h2>
-              <h3>Your request timed out</h3>
-              <p>It took too long to complete your request</p>
-              <div className="ui basic button" onClick={ this._handleFetch.bind(this, 0) } >
-                Try again
-              </div>
-            </div>
-          </div>
-        }
-        { status !== 'failed' && records && records.length === 0 && ( _.isFunction(empty) ? React.createElement(empty) : empty ) }
+        { status === 'loading' && !records && this._getComponent(loading) }
+        { status === 'delayed' && this._getComponent(delayed) }
+        { status === 'timeout' && this._getComponent(timeout) }
+        { status === 'failed' && this._getComponent(failure) }
+        { status !== 'failed' && records && records.length === 0 && this._getComponent(empty) }
         { status !== 'failed' && records && records.length > 0 &&
           <Scrollpane { ...this._getScrollpane() }>
-            { _.isFunction(layout) ? React.createElement(layout, { records }) : layout }
+            { _.isFunction(layout) ? React.createElement(layout, this.props) : layout }
             { status === 'loading' &&
               <div className="reframe-infinite-loader">
                 <div className="ui active inverted dimmer">
@@ -84,6 +92,10 @@ class Infinite extends React.Component {
     if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
       this._handleFetch(0)
     }
+  }
+
+  _getComponent(component) {
+    return _.isFunction(component) ? React.createElement(component, this.props) : component
   }
 
   _getScrollpane() {

@@ -4,7 +4,7 @@ import pluralize from 'pluralize'
 import Filter from '../filter'
 import _ from 'lodash'
 import Infinite from '../infinite'
-import { Loading, Empty, Failure, Results } from './results'
+import { Empty, Results } from './results'
 
 class Collection extends React.Component {
 
@@ -17,15 +17,27 @@ class Collection extends React.Component {
     columns: PropTypes.array,
     data: PropTypes.array,
     entity: PropTypes.object,
-    empty: PropTypes.shape({
-      icon: PropTypes.string,
-      message: PropTypes.string,
-      modal: PropTypes.func
-    }),
+    empty: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element,
+      PropTypes.shape({
+        icon: PropTypes.string,
+        message: PropTypes.string,
+        modal: PropTypes.func
+      })
+    ]),
+    failure: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     filter: PropTypes.object,
     filters: PropTypes.array,
     handler: PropTypes.func,
     layout: PropTypes.func,
+    loading: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.element
+    ]),
     link: PropTypes.string,
     modal: PropTypes.string,
     params: PropTypes.object,
@@ -107,14 +119,14 @@ class Collection extends React.Component {
   }
 
   _getInfinite() {
-    const { endpoint, params } = this.props
+    const { endpoint, params, loading, empty, failure } = this.props
     const { filter, sort } = params
     return {
       endpoint,
       filter,
-      loading: Loading,
-      empty: Empty,
-      failure: Failure,
+      loading,
+      empty,
+      failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort
     }

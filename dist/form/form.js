@@ -52,11 +52,12 @@ var Form = function (_React$Component) {
           data = _props.data,
           errors = _props.errors,
           instructions = _props.instructions,
+          status = _props.status,
           sections = _props.sections,
           title = _props.title;
 
-      var formClasses = ['ui', 'form', 'reframe-form', status];
-      if (_lodash2.default.includes(['pending', 'submitting'], status)) formClasses.push('loading');
+      var classes = ['ui', 'form', 'reframe-form', status];
+      if (_lodash2.default.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading');
       return _react2.default.createElement(
         'div',
         { className: 'reframe-modal-panel' },
@@ -99,9 +100,9 @@ var Form = function (_React$Component) {
                 instructions
               )
             ),
-            _react2.default.createElement(
+            status !== 'loading' && _react2.default.createElement(
               'div',
-              { className: formClasses.join(' '), ref: 'form' },
+              { className: classes.join(' '), ref: 'form' },
               sections.map(function (section, index) {
                 return _react2.default.createElement(_section2.default, _extends({}, section, {
                   key: 'section_' + index,
@@ -111,6 +112,7 @@ var Form = function (_React$Component) {
                   onSubmit: _this2._handleSubmit.bind(_this2) }));
               })
             ),
+            status === 'loading' && _react2.default.createElement('div', { className: 'ui active centered inline loader' }),
             after && _react2.default.createElement(
               'div',
               { className: 'reframe-form-footer' },

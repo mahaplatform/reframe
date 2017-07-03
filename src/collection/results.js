@@ -1,29 +1,20 @@
 import React from 'react'
 import Table from '../table'
+import _ from 'lodash'
+import pluralize from 'pluralize'
 
-export const Loading = () => (
-  <div className="reframe-loader">
-    <div className="ui active inverted dimmer">
-      <div className="ui large text loader">Loading</div>
-    </div>
-  </div>
-)
-
-export const Empty = () => (
-  <div className="reframe-collection-empty">
-    <div className="reframe-collection-empty-message">
-      <h2><i className="circular remove icon" /></h2>
-      <h3>No Results Found</h3>
-      <p>No records matched your query</p>
-    </div>
-  </div>
-)
-
-export const Failure = () => (
-  <div className="reframe-error">
-    <div className="reframe-error-message">
-      <i className="warning sign icon" />
-      <h2>Unable to load<br /> records</h2>
+export const Empty = (props) => (
+  <div className="reframe-message">
+    <div className="reframe-message-panel">
+      <h2><i className={`circular ${props.empty.icon} icon`} /></h2>
+      <h3>No { _.startCase(pluralize(props.entity.replace('_', ' '))) }</h3>
+      <p>You have not yet created any { pluralize(props.entity.replace('_', ' ')) }</p>
+      { props.empty.modal &&
+        <div className="ui basic button red" onClick={ props.onAddNew.bind(this)}>
+          <i className="plus icon" />
+          Create New {_.startCase(props.entity.replace('_', ' '))}
+        </div>
+      }
     </div>
   </div>
 )
@@ -36,13 +27,11 @@ export class Results extends React.Component {
     if(layout) return React.createElement(layout, { ...this._getCustomLayout() })
   }
 
-
   _getScrollpane() {
     return {
       onReachBottom: this.props.onLoadMore.bind(this)
     }
   }
-
 
   _getTable() {
     const { columns, handler, link, modal, params, records, status, onLoadMore, onSort } = this.props

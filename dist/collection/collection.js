@@ -164,16 +164,19 @@ var Collection = function (_React$Component) {
 
       var _props4 = this.props,
           endpoint = _props4.endpoint,
-          params = _props4.params;
+          params = _props4.params,
+          loading = _props4.loading,
+          empty = _props4.empty,
+          failure = _props4.failure;
       var filter = params.filter,
           sort = params.sort;
 
       return {
         endpoint: endpoint,
         filter: filter,
-        loading: _results.Loading,
-        empty: _results.Empty,
-        failure: _results.Failure,
+        loading: loading,
+        empty: empty,
+        failure: failure,
         layout: function layout(props) {
           return _react2.default.createElement(_results.Results, _extends({}, _this2.props, props));
         },
@@ -220,15 +223,17 @@ Collection.PropTypes = {
   columns: _propTypes2.default.array,
   data: _propTypes2.default.array,
   entity: _propTypes2.default.object,
-  empty: _propTypes2.default.shape({
+  empty: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element, _propTypes2.default.shape({
     icon: _propTypes2.default.string,
     message: _propTypes2.default.string,
     modal: _propTypes2.default.func
-  }),
+  })]),
+  failure: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   filter: _propTypes2.default.object,
   filters: _propTypes2.default.array,
   handler: _propTypes2.default.func,
   layout: _propTypes2.default.func,
+  loading: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   link: _propTypes2.default.string,
   modal: _propTypes2.default.string,
   params: _propTypes2.default.object,

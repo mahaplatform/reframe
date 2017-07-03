@@ -64,7 +64,7 @@ var Panel = function (_React$Component) {
           _reactTransitionGroup.CSSTransitionGroup,
           { transitionName: 'stack', component: this._firstChild, transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           active !== null && fields[active].type === 'select' && _react2.default.createElement(_select2.default, this._getSelect()),
-          active !== null && fields[active].type === 'daterange' && _react2.default.createElement(_daterange2.default, fields[active])
+          active !== null && fields[active].type === 'daterange' && _react2.default.createElement(_daterange2.default, this._getDateRange())
         )
       );
     }
@@ -86,6 +86,21 @@ var Panel = function (_React$Component) {
   }, {
     key: '_getSelect',
     value: function _getSelect() {
+      return _extends({}, this.props.fields[this.props.active], {
+        q: this.props.q,
+        query: this.props.query,
+        results: this.props.results,
+        onBack: this.props.onBack,
+        onAbort: this.props.onAbort,
+        onType: this.props.onType,
+        onLookup: this.props.onLookup,
+        onUpdate: this.props.onUpdate,
+        onReset: this.props.onReset
+      });
+    }
+  }, {
+    key: '_getDateRange',
+    value: function _getDateRange() {
       return _extends({}, this.props.fields[this.props.active], {
         q: this.props.q,
         query: this.props.query,

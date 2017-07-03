@@ -77,15 +77,17 @@ class FileField extends React.Component {
   }
 
   componentDidMount() {
+    const { defaultValue, onLoadFiles } = this.props
+    if(defaultValue) {
+      const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
+      onLoadFiles('/api/admin/team/assets', ids)
+    }
     this._initializeResumable()
   }
 
   componentDidUpdate(prevProps) {
-    const { defaultValue, files, onLoadFiles } = this.props
-    if(prevProps.defaultValue !== defaultValue) {
-      const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
-      onLoadFiles('/api/admin/team/assets', ids)
-    } else if(files.length > prevProps.files.length) {
+    const { files } = this.props
+    if(files.length > prevProps.files.length) {
       this._handleUploadBegin()
     } else if(files.length < prevProps.files.length) {
       this._initializeResumable()

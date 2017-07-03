@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Results = exports.Failure = exports.Empty = exports.Loading = undefined;
+exports.Results = exports.Empty = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -17,6 +17,14 @@ var _table = require('../table');
 
 var _table2 = _interopRequireDefault(_table);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _pluralize = require('pluralize');
+
+var _pluralize2 = _interopRequireDefault(_pluralize);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25,62 +33,36 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Loading = exports.Loading = function Loading() {
+var Empty = exports.Empty = function Empty(props) {
   return _react2.default.createElement(
     'div',
-    { className: 'reframe-loader' },
+    { className: 'reframe-message' },
     _react2.default.createElement(
       'div',
-      { className: 'ui active inverted dimmer' },
-      _react2.default.createElement(
-        'div',
-        { className: 'ui large text loader' },
-        'Loading'
-      )
-    )
-  );
-};
-
-var Empty = exports.Empty = function Empty() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-collection-empty' },
-    _react2.default.createElement(
-      'div',
-      { className: 'reframe-collection-empty-message' },
+      { className: 'reframe-message-panel' },
       _react2.default.createElement(
         'h2',
         null,
-        _react2.default.createElement('i', { className: 'circular remove icon' })
+        _react2.default.createElement('i', { className: 'circular ' + props.empty.icon + ' icon' })
       ),
       _react2.default.createElement(
         'h3',
         null,
-        'No Results Found'
+        'No ',
+        _lodash2.default.startCase((0, _pluralize2.default)(props.entity.replace('_', ' ')))
       ),
       _react2.default.createElement(
         'p',
         null,
-        'No records matched your query'
-      )
-    )
-  );
-};
-
-var Failure = exports.Failure = function Failure() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-error' },
-    _react2.default.createElement(
-      'div',
-      { className: 'reframe-error-message' },
-      _react2.default.createElement('i', { className: 'warning sign icon' }),
-      _react2.default.createElement(
-        'h2',
-        null,
-        'Unable to load',
-        _react2.default.createElement('br', null),
-        ' records'
+        'You have not yet created any ',
+        (0, _pluralize2.default)(props.entity.replace('_', ' '))
+      ),
+      props.empty.modal && _react2.default.createElement(
+        'div',
+        { className: 'ui basic button red', onClick: props.onAddNew.bind(undefined) },
+        _react2.default.createElement('i', { className: 'plus icon' }),
+        'Create New ',
+        _lodash2.default.startCase(props.entity.replace('_', ' '))
       )
     )
   );

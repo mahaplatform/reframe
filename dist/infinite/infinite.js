@@ -22,6 +22,8 @@ var _scrollpane = require('../scrollpane');
 
 var _scrollpane2 = _interopRequireDefault(_scrollpane);
 
+var _results = require('./results');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43,72 +45,27 @@ var Infinite = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          delayed = _props.delayed,
           empty = _props.empty,
+          failure = _props.failure,
           layout = _props.layout,
           loading = _props.loading,
           records = _props.records,
-          status = _props.status;
+          status = _props.status,
+          timeout = _props.timeout;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-infinite' },
-        status === 'loading' && !records && (_lodash2.default.isFunction(loading) ? _react2.default.createElement(loading) : loading),
-        status === 'delayed' && _react2.default.createElement(
-          'div',
-          { className: 'reframe-collection-empty' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection-empty-message' },
-            _react2.default.createElement(
-              'h2',
-              null,
-              _react2.default.createElement('i', { className: 'circular hourglass half icon' })
-            ),
-            _react2.default.createElement(
-              'h3',
-              null,
-              'The network is a bit slow'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'This is taking longer than we expected...'
-            )
-          )
-        ),
-        status === 'timeout' && _react2.default.createElement(
-          'div',
-          { className: 'reframe-collection-empty' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection-empty-message' },
-            _react2.default.createElement(
-              'h2',
-              null,
-              _react2.default.createElement('i', { className: 'circular hourglass end icon' })
-            ),
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Your request timed out'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'It took too long to complete your request'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'ui basic button', onClick: this._handleFetch.bind(this, 0) },
-              'Try again'
-            )
-          )
-        ),
-        status !== 'failed' && records && records.length === 0 && (_lodash2.default.isFunction(empty) ? _react2.default.createElement(empty) : empty),
+        status === 'loading' && !records && this._getComponent(loading),
+        status === 'delayed' && this._getComponent(delayed),
+        status === 'timeout' && this._getComponent(timeout),
+        status === 'failed' && this._getComponent(failure),
+        status !== 'failed' && records && records.length === 0 && this._getComponent(empty),
         status !== 'failed' && records && records.length > 0 && _react2.default.createElement(
           _scrollpane2.default,
           this._getScrollpane(),
-          _lodash2.default.isFunction(layout) ? _react2.default.createElement(layout, { records: records }) : layout,
+          _lodash2.default.isFunction(layout) ? _react2.default.createElement(layout, this.props) : layout,
           status === 'loading' && _react2.default.createElement(
             'div',
             { className: 'reframe-infinite-loader' },
@@ -142,6 +99,11 @@ var Infinite = function (_React$Component) {
       if (cacheKey !== prevProps.cacheKey || !_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
         this._handleFetch(0);
       }
+    }
+  }, {
+    key: '_getComponent',
+    value: function _getComponent(component) {
+      return _lodash2.default.isFunction(component) ? _react2.default.createElement(component, this.props) : component;
     }
   }, {
     key: '_getScrollpane',
@@ -196,22 +158,32 @@ var Infinite = function (_React$Component) {
 Infinite.PropTypes = {
   all: _propTypes2.default.number,
   cacheKey: _propTypes2.default.string,
-  empty: _propTypes2.default.func,
+  delayed: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
+  empty: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   endpoint: _propTypes2.default.string,
+  failure: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   filter: _propTypes2.default.object,
   layout: _propTypes2.default.func,
-  loading: _propTypes2.default.func,
+  loading: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   records: _propTypes2.default.array,
   status: _propTypes2.default.string,
+  timeout: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   total: _propTypes2.default.number,
-  onFetch: _propTypes2.default.func
+  onFetch: _propTypes2.default.func,
+  onFetchDelay: _propTypes2.default.func,
+  onFetchTimeout: _propTypes2.default.func
 };
 Infinite.defaultProps = {
   cacheKey: null,
+  delayed: _results.Delayed,
+  empty: _results.Empty,
+  failure: _results.Failure,
+  filter: {},
+  loading: _results.Loading,
   sort: {
     key: null,
     order: null
   },
-  filter: {}
+  timeout: _results.Timeout
 };
 exports.default = Infinite;

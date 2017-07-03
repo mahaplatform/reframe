@@ -21,7 +21,7 @@ class Panel extends React.Component {
         <Fields { ...this._getFields() } />
         <CSSTransitionGroup transitionName='stack' component={ this._firstChild } transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
           { active !== null && fields[active].type === 'select' && <Select { ...this._getSelect() } /> }
-          { active !== null && fields[active].type === 'daterange' && <DateRange { ...fields[active]} /> }
+          { active !== null && fields[active].type === 'daterange' && <DateRange { ...this._getDateRange() } /> }
         </CSSTransitionGroup>
       </div>
     )
@@ -41,6 +41,21 @@ class Panel extends React.Component {
   }
 
   _getSelect() {
+    return {
+      ...this.props.fields[this.props.active],
+      q: this.props.q,
+      query: this.props.query,
+      results: this.props.results,
+      onBack: this.props.onBack,
+      onAbort: this.props.onAbort,
+      onType: this.props.onType,
+      onLookup: this.props.onLookup,
+      onUpdate: this.props.onUpdate,
+      onReset: this.props.onReset
+    }
+  }
+
+  _getDateRange() {
     return {
       ...this.props.fields[this.props.active],
       q: this.props.q,

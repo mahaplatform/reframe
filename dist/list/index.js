@@ -84,6 +84,8 @@ var Section = function (_React$Component2) {
     key: 'render',
     value: function render() {
       var _props2 = this.props,
+          component = _props2.component,
+          content = _props2.content,
           empty = _props2.empty,
           items = _props2.items,
           title = _props2.title;
@@ -96,55 +98,20 @@ var Section = function (_React$Component2) {
           { className: 'reframe-list-title' },
           title
         ),
-        items && items.length > 0 && items.map(function (item, itemIndex) {
-          var content = _react2.default.createElement(
+        component && _lodash2.default.isFunction(component) ? _react2.default.createElement(component, content) : component,
+        content && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item' },
+          _react2.default.createElement(
             'div',
-            { key: 'list_item_' + itemIndex, className: 'reframe-list-item' },
-            item.icon && _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-item-icon' },
-              _react2.default.createElement('i', { className: item.icon + ' icon' })
-            ),
-            item.component && _lodash2.default.isFunction(item.component) ? _react2.default.createElement(item.component, item.content) : item.component,
-            !item.component && _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-item-content' },
-              item.label && _react2.default.createElement(
-                'strong',
-                null,
-                item.label,
-                _react2.default.createElement('br', null)
-              ),
-              !item.component && _react2.default.createElement(_format2.default, _extends({}, item.content, { format: item.format, value: item.content }))
-            ),
-            item.extra && _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-item-extra' },
-              _lodash2.default.isFunction(item.extra) ? _react2.default.createElement(item.extra) : item.extra
-            ),
-            item.link && _react2.default.createElement(
-              'div',
-              { className: 'reframe-list-item-proceed' },
-              _react2.default.createElement('i', { className: 'chevron right icon' })
-            )
-          );
-          if (item.link) {
-            return _react2.default.createElement(
-              _reactRouterDom.Link,
-              { key: 'list_item_link_' + itemIndex, to: item.link },
-              content
-            );
-          }
-          if (item.handler) {
-            return _react2.default.createElement(
-              'div',
-              { key: 'list_item_link_' + itemIndex, onClick: item.handler },
-              content
-            );
-          }
-          return content;
+            { className: 'reframe-list-item-content' },
+            content
+          )
+        ),
+        items && items.length > 0 && items.map(function (item, itemIndex) {
+          return _react2.default.createElement(Item, _extends({ key: 'list_item_' + itemIndex }, item));
         }),
-        empty && !items || items && items.length === 0 && _react2.default.createElement(
+        empty && items && items.length === 0 && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item' },
           _react2.default.createElement(
@@ -161,8 +128,91 @@ var Section = function (_React$Component2) {
 }(_react2.default.Component);
 
 Section.propTypes = {
+  component: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
+  content: _propTypes2.default.string,
   empty: _propTypes2.default.string,
   items: _propTypes2.default.array,
   title: _propTypes2.default.string
+};
+
+var Item = function (_React$Component3) {
+  _inherits(Item, _React$Component3);
+
+  function Item() {
+    _classCallCheck(this, Item);
+
+    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
+  }
+
+  _createClass(Item, [{
+    key: 'render',
+    value: function render() {
+      var _props3 = this.props,
+          component = _props3.component,
+          content = _props3.content,
+          extra = _props3.extra,
+          format = _props3.format,
+          handler = _props3.handler,
+          icon = _props3.icon,
+          label = _props3.label,
+          link = _props3.link;
+
+      var item = _react2.default.createElement(
+        'div',
+        { className: 'reframe-list-item' },
+        icon && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item-icon' },
+          _react2.default.createElement('i', { className: icon + ' icon' })
+        ),
+        component && _lodash2.default.isFunction(component) ? _react2.default.createElement(component, content) : component,
+        !component && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item-content' },
+          label && _react2.default.createElement(
+            'strong',
+            null,
+            label,
+            _react2.default.createElement('br', null)
+          ),
+          !component && _react2.default.createElement(_format2.default, _extends({}, content, { format: format, value: content }))
+        ),
+        extra && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item-extra' },
+          _lodash2.default.isFunction(extra) ? _react2.default.createElement(extra) : extra
+        ),
+        link && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-item-proceed' },
+          _react2.default.createElement('i', { className: 'chevron right icon' })
+        )
+      );
+      if (link) return _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: link },
+        item
+      );
+      if (handler) return _react2.default.createElement(
+        'div',
+        { onClick: handler },
+        item
+      );
+      return item;
+    }
+  }]);
+
+  return Item;
+}(_react2.default.Component);
+
+Item.propTypes = {
+  component: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
+  content: _propTypes2.default.any,
+  extra: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
+  format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func, _propTypes2.default.element]),
+  handler: _propTypes2.default.func,
+  icon: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  link: _propTypes2.default.string
 };
 exports.default = List;

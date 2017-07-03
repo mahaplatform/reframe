@@ -10,26 +10,36 @@
 	.scrollable();
 }
 
-.reframe-error {
-  flex: 1;
+.reframe-message {
+	flex: 1;
   display: flex;
+  background-color: fadeout(@black, 98%)
 }
-.reframe-error-message {
-  margin: 20vh auto 0;
-  width: 320px;
+.reframe-message-panel {
+	margin: auto;
   text-align: center;
-  color: #CCC;
+  padding: 20px;
+  height: 19em;
   h2 {
-     font-size: 32px;
-     line-height: 48px;
-     margin-top: 0;
+    margin: 0 0 20px;
+    font-size: 50px;
+    i {
+      background-color: #FFF;
+    }
   }
-  i {
-    font-size: 100px;
-    line-height: 100px;
+  h3 {
+    font-size: 22px;
+    line-height: 28px;
+    margin: 0;
+    color: #666;
+  }
+  p {
+    margin: 0 0 20px;
+    color: #888;
   }
   .ui.button {
-    background-color: #FFF !important;
+    display: block;
+    background: #FFF !important;
   }
 }
 .reframe-loader {

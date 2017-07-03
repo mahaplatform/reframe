@@ -44,9 +44,9 @@ class Form extends React.Component {
 
 
   render() {
-    const { after, before, data, errors, instructions, sections, title } = this.props
-    let formClasses = ['ui', 'form', 'reframe-form', status]
-    if(_.includes(['pending', 'submitting'], status)) formClasses.push('loading')
+    const { after, before, data, errors, instructions, status, sections, title } = this.props
+    let classes = ['ui', 'form', 'reframe-form', status]
+    if(_.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading')
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
@@ -65,17 +65,20 @@ class Form extends React.Component {
             { (before || instructions) &&
               <div className="reframe-form-header">
                 { before && <div className="reframe-form-before">{ before }</div> }
-                { instructions && <div className="instructions">{instructions}</div> }
+                { instructions && <div className="instructions">{ instructions }</div> }
               </div>
             }
-            <div className={formClasses.join(' ')} ref="form">
-              { sections.map((section, index) => <Section {...section}
-                              key={`section_${index}`}
-                              data={data}
-                              errors={errors}
-                              onUpdateData={this._handleUpdateData.bind(this)}
-                              onSubmit={this._handleSubmit.bind(this)} />)}
-            </div>
+            { status !== 'loading' &&
+              <div className={ classes.join(' ') } ref="form">
+                { sections.map((section, index) => <Section {...section}
+                                key={`section_${index}`}
+                                data={data}
+                                errors={errors}
+                                onUpdateData={this._handleUpdateData.bind(this)}
+                                onSubmit={this._handleSubmit.bind(this)} />)}
+              </div>
+            }
+            { status === 'loading' && <div className="ui active centered inline loader" /> }
             { after &&
               <div className="reframe-form-footer">
                 <div className="reframe-form-after">{ after }</div>
