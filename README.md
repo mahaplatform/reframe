@@ -1,4 +1,5 @@
-# Reframe
+<img src="https://raw.githubusercontent.com/mahaplatform/reframe/master/docs/logo.png" title="Reframe" alt="Reframe"/>
+
 <a href="https://circleci.com/gh/mahaplatform/reframe">
   <img src="https://img.shields.io/circleci/project/mahaplatform/reframe.svg?maxAge=600" alt="Build Status" >
 </a>
