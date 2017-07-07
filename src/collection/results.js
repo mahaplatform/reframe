@@ -6,9 +6,10 @@ import pluralize from 'pluralize'
 export const Empty = (props) => (
   <div className="reframe-message">
     <div className="reframe-message-panel">
-      <h2><i className={`circular ${props.empty.icon} icon`} /></h2>
+      <h2><i className={`circular ${props.empty && props.empty.icon ? props.empty.icon : 'warning sign'} icon`} /></h2>
       <h3>No { _.startCase(pluralize(props.entity.replace('_', ' '))) }</h3>
-      <p>You have not yet created any { pluralize(props.entity.replace('_', ' ')) }</p>
+      { !props.empty || (props.empty && !props.empty.message) && <p>You have not yet created any { pluralize(props.entity.replace('_', ' ')) }</p>}
+      { props.empty && props.empty.message && <p>{ props.empty.message }</p>}
       { props.empty.modal &&
         <div className="ui basic button red" onClick={ props.onAddNew.bind(this)}>
           <i className="plus icon" />

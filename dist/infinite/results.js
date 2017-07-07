@@ -30,23 +30,13 @@ var Loading = exports.Loading = function Loading(props) {
 var Delayed = exports.Delayed = function Delayed(props) {
   return _react2.default.createElement(
     "div",
-    { className: "reframe-message" },
+    { className: "reframe-loader" },
     _react2.default.createElement(
       "div",
-      { className: "reframe-message-panel" },
+      { className: "ui active inverted dimmer" },
       _react2.default.createElement(
-        "h2",
-        null,
-        _react2.default.createElement("i", { className: "circular hourglass half icon" })
-      ),
-      _react2.default.createElement(
-        "h3",
-        null,
-        "The network is a bit slow"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
+        "div",
+        { className: "ui large text loader" },
         "This is taking longer than we expected..."
       )
     )

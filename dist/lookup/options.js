@@ -20,13 +20,15 @@ var _infinite = require('../infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
 
+var _form = require('../form');
+
+var _form2 = _interopRequireDefault(_form);
+
 var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -49,72 +51,36 @@ var Options = function (_React$Component) {
       var _this2 = this;
 
       var _props = this.props,
-          name = _props.name,
           format = _props.format,
-          multiple = _props.multiple,
           options = _props.options,
-          results = _props.results;
+          selected = _props.selected;
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-filter-body' },
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-filter-results' },
-          options.map(function (option, index) {
-            return _react2.default.createElement(
+        { className: 'reframe-lookup-panel-results' },
+        options.map(function (option, index) {
+          return _react2.default.createElement(
+            'div',
+            { key: 'result_' + index, className: 'reframe-lookup-panel-result', onClick: _this2._handleChoose.bind(_this2, option) },
+            _react2.default.createElement(
               'div',
-              { key: 'filter_' + index, className: 'reframe-filter-item', onClick: _this2._handleChoose.bind(_this2, option.value, option.text, option.token) },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-filter-item-label' },
-                _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
-              ),
-              option.description && _react2.default.createElement(
-                'div',
-                { className: 'reframe-filter-item-description' },
-                option.description
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-filter-item-icon' },
-                _this2._checked(name, multiple, results, option) ? _react2.default.createElement('i', { className: 'green check icon' }) : null
-              )
-            );
-          })
-        )
+              { className: 'reframe-lookup-panel-result-label' },
+              _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-lookup-panel-result-icon' },
+              index === selected ? _react2.default.createElement('i', { className: 'green check icon' }) : null
+            )
+          );
+        })
       );
     }
   }, {
-    key: '_checked',
-    value: function _checked(name, multiple, results, option) {
-      if (multiple) {
-        return results[name] && _lodash2.default.find(results[name], { key: option.value });
-      } else {
-        return results[name] && results[name].key == option.value;
-      }
-    }
-  }, {
     key: '_handleChoose',
-    value: function _handleChoose(key, value, token) {
-      var _props2 = this.props,
-          name = _props2.name,
-          multiple = _props2.multiple,
-          results = _props2.results,
-          onUpdate = _props2.onUpdate;
-
-      var values = null;
-      if (multiple) {
-        values = results[name] || [];
-        values = _lodash2.default.find(values, { key: key }) ? _lodash2.default.filter(values, function (item) {
-          return item.key !== key;
-        }) : [].concat(_toConsumableArray(values), [{ key: key, value: token || value }]);
-      } else {
-        if (!results[name] || results[name].key !== key) {
-          values = { key: key, value: token || value };
-        }
-      }
-      onUpdate(name, values);
+    value: function _handleChoose(chosen) {
+      this.props.onChoose(chosen);
+      this.props.onChange(chosen.value);
     }
   }]);
 
@@ -140,16 +106,14 @@ var Dynamic = function (_React$Component2) {
   }, {
     key: '_getOptions',
     value: function _getOptions() {
-      var _props3 = this.props,
-          format = _props3.format,
-          multiple = _props3.multiple,
-          name = _props3.name,
-          records = _props3.records,
-          results = _props3.results,
-          text = _props3.text,
-          value = _props3.value,
-          status = _props3.status,
-          onUpdate = _props3.onUpdate;
+      var _props2 = this.props,
+          format = _props2.format,
+          selected = _props2.selected,
+          records = _props2.records,
+          value = _props2.value,
+          text = _props2.text,
+          onChoose = _props2.onChoose,
+          onChange = _props2.onChange;
 
       var options = records.map(function (record) {
         return {
@@ -159,13 +123,11 @@ var Dynamic = function (_React$Component2) {
         };
       });
       return {
-        name: name,
         format: format,
-        multiple: multiple,
+        selected: selected,
         options: options,
-        results: results,
-        status: status,
-        onUpdate: onUpdate
+        onChoose: onChoose,
+        onChange: onChange
       };
     }
   }]);
@@ -176,43 +138,60 @@ var Dynamic = function (_React$Component2) {
 var Container = function (_React$Component3) {
   _inherits(Container, _React$Component3);
 
-  function Container(props) {
+  function Container() {
     _classCallCheck(this, Container);
 
-    var _this4 = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
-
-    _this4._handleLookup = _lodash2.default.throttle(props.onLookup, 500);
-    return _this4;
+    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
   }
 
   _createClass(Container, [{
     key: 'render',
     value: function render() {
-      var _props4 = this.props,
-          endpoint = _props4.endpoint,
-          label = _props4.label,
-          query = _props4.query;
+      var _props3 = this.props,
+          endpoint = _props3.endpoint,
+          label = _props3.label,
+          form = _props3.form;
 
       if (endpoint) {
         return _react2.default.createElement(
           'div',
-          { className: 'reframe-filter-search' },
+          { className: 'reframe-lookup-panel' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-filter-search-form ui form' },
+            { className: 'reframe-lookup-panel-search' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-filter-search-input' },
-              _react2.default.createElement('i', { className: 'search icon' }),
-              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'results', value: query }),
-              query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
+              { className: 'ui form' },
+              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'query' })
             )
           ),
-          _react2.default.createElement(_infinite2.default, this._getInfinite())
+          _react2.default.createElement(_infinite2.default, this._getInfinite()),
+          form && _react2.default.createElement(
+            'div',
+            { className: 'reframe-lookup-panel-add' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui fluid blue button', onClick: this._handleAdd.bind(this) },
+              'Add ',
+              label
+            )
+          )
         );
       } else {
-        return _react2.default.createElement(Options, this.props);
+        return _react2.default.createElement(
+          'div',
+          { className: 'reframe-lookup-panel' },
+          _react2.default.createElement(Options, this.props)
+        );
       }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props4 = this.props,
+          sort = _props4.sort,
+          endpoint = _props4.endpoint,
+          onLookup = _props4.onLookup;
     }
   }, {
     key: '_getInfinite',
@@ -221,12 +200,13 @@ var Container = function (_React$Component3) {
 
       var _props5 = this.props,
           endpoint = _props5.endpoint,
-          sort = _props5.sort,
-          q = _props5.q;
+          query = _props5.query,
+          sort = _props5.sort;
 
+      var filter = { q: query };
       return {
         endpoint: endpoint,
-        filter: { q: q },
+        filter: filter,
         layout: function layout(props) {
           return _react2.default.createElement(Dynamic, _extends({}, _this5.props, props));
         },
@@ -236,13 +216,33 @@ var Container = function (_React$Component3) {
   }, {
     key: '_handleType',
     value: function _handleType(event) {
-      this.props.onType(event.target.value);
-      this._handleLookup(event.target.value);
+      var _props6 = this.props,
+          sort = _props6.sort,
+          endpoint = _props6.endpoint;
+
+      var q = event.target.value;
+      var params = { $filter: { q: q }, $sort: sort };
+      this.props.onType(q);
     }
   }, {
-    key: '_handleAbort',
-    value: function _handleAbort() {
-      this.props.onAbort();
+    key: '_handleAdd',
+    value: function _handleAdd() {
+      this.context.modal.open(_react2.default.createElement(_form2.default, this._getForm()));
+    }
+  }, {
+    key: '_getForm',
+    value: function _getForm() {
+      var _this6 = this;
+
+      return _extends({}, this.props.form, {
+        onCancel: this.context.modal.close,
+        onSuccess: function onSuccess(chosen) {
+          var value = _lodash2.default.get(chosen, _this6.props.value);
+          _this6.props.onChoose(0);
+          _this6.props.onChange(value);
+          _this6.context.modal.close();
+        }
+      });
     }
   }]);
 

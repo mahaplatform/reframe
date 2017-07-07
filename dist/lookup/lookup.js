@@ -16,6 +16,8 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _reactTransitionGroup = require('react-transition-group');
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -36,8 +38,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Lookup = function (_React$Component) {
-  _inherits(Lookup, _React$Component);
+var LookupOutlet = function (_React$Component) {
+  _inherits(LookupOutlet, _React$Component);
+
+  function LookupOutlet() {
+    _classCallCheck(this, LookupOutlet);
+
+    return _possibleConstructorReturn(this, (LookupOutlet.__proto__ || Object.getPrototypeOf(LookupOutlet)).apply(this, arguments));
+  }
+
+  _createClass(LookupOutlet, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'reframe-lookup-search-outlet' },
+        this.props.children
+      );
+    }
+  }]);
+
+  return LookupOutlet;
+}(_react2.default.Component);
+
+var Lookup = function (_React$Component2) {
+  _inherits(Lookup, _React$Component2);
 
   function Lookup() {
     _classCallCheck(this, Lookup);
@@ -56,7 +81,7 @@ var Lookup = function (_React$Component) {
           prompt = _props.prompt,
           text = _props.text;
 
-      var value = chosen ? _lodash2.default.get(chosen, text) : '';
+      var value = chosen ? chosen.text : '';
       return _react2.default.createElement(
         'div',
         { className: 'reframe-lookup-field' },
@@ -75,7 +100,11 @@ var Lookup = function (_React$Component) {
           onFocus: this._handleBegin.bind(this),
           value: value,
           placeholder: prompt }),
-        active && _react2.default.createElement(_search2.default, this.props)
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransitionGroup,
+          { component: LookupOutlet, transitionName: 'cover', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
+          active && _react2.default.createElement(_search2.default, this.props)
+        )
       );
     }
   }, {

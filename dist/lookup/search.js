@@ -4,29 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
+var _options = require('./options');
 
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _form = require('../form');
-
-var _form2 = _interopRequireDefault(_form);
-
-var _format = require('../format');
-
-var _format2 = _interopRequireDefault(_format);
-
-var _results = require('./results');
-
-var _results2 = _interopRequireDefault(_results);
+var _options2 = _interopRequireDefault(_options);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77,118 +63,13 @@ var Search = function (_React$Component) {
           ),
           _react2.default.createElement('div', { className: 'reframe-modal-panel-header-proceed' })
         ),
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-lookup-panel' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-lookup-panel-search' },
-            _react2.default.createElement(
-              'div',
-              { className: 'ui form' },
-              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'query' })
-            )
-          ),
-          _react2.default.createElement(Infinite, this._getInfinite()),
-          form && _react2.default.createElement(
-            'div',
-            { className: 'reframe-lookup-panel-add' },
-            _react2.default.createElement(
-              'div',
-              { className: 'ui fluid blue button', onClick: this._handleAdd.bind(this) },
-              'Add ',
-              label
-            )
-          )
-        )
+        _react2.default.createElement(_options2.default, this.props)
       );
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props2 = this.props,
-          sort = _props2.sort,
-          endpoint = _props2.endpoint,
-          onLookup = _props2.onLookup;
-
-      var refs = this.refs;
-      this._handleLookup = _lodash2.default.throttle(onLookup.bind(this), 500);
-      setTimeout(function () {
-        return refs.query.focus();
-      }, 500);
-      var query = { $filter: { q: '' }, $sort: sort };
-      onLookup(query, endpoint);
-    }
-  }, {
-    key: '_getInfinite',
-    value: function _getInfinite() {
-      var _this2 = this;
-
-      var _props3 = this.props,
-          endpoint = _props3.endpoint,
-          query = _props3.query,
-          sort = _props3.sort;
-
-      var filter = { q: query };
-      return {
-        endpoint: endpoint,
-        filter: filter,
-        layout: function layout(props) {
-          return _react2.default.createElement(_results2.default, _extends({}, _this2.props, props, { onChoose: _this2._handleChoose.bind(_this2) }));
-        },
-        sort: sort
-      };
-    }
-  }, {
-    key: '_handleBegin',
-    value: function _handleBegin() {
-      this.props.onBegin();
     }
   }, {
     key: '_handleCancel',
     value: function _handleCancel() {
       this.props.onCancel();
-    }
-  }, {
-    key: '_handleType',
-    value: function _handleType(event) {
-      var _props4 = this.props,
-          sort = _props4.sort,
-          endpoint = _props4.endpoint;
-
-      var q = event.target.value;
-      var params = { $filter: { q: q }, $sort: sort };
-      this.props.onType(q);
-      this._handleLookup(params, endpoint);
-    }
-  }, {
-    key: '_handleChoose',
-    value: function _handleChoose(index) {
-      var chosen = this.props.chosen;
-
-      var value = _lodash2.default.get(chosen, this.props.value);
-      this.props.onChoose(index);
-      this.props.onChange(value);
-    }
-  }, {
-    key: '_handleAdd',
-    value: function _handleAdd() {
-      this.context.modal.open(_react2.default.createElement(_form2.default, this._getForm()));
-    }
-  }, {
-    key: '_getForm',
-    value: function _getForm() {
-      var _this3 = this;
-
-      return _extends({}, this.props.form, {
-        onCancel: this.context.modal.close,
-        onSuccess: function onSuccess(chosen) {
-          var value = _lodash2.default.get(chosen, _this3.props.value);
-          _this3.props.onChoose(0);
-          _this3.props.onChange(value);
-          _this3.context.modal.close();
-        }
-      });
     }
   }]);
 

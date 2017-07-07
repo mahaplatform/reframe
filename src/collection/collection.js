@@ -90,7 +90,7 @@ class Collection extends React.Component {
       endpoint,
       filter,
       loading,
-      empty: empty || <Empty { ...this.props } />,
+      empty: _.isPlainObject(empty) ? <Empty { ...this.props } /> : empty,
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort

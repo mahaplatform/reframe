@@ -8,11 +8,8 @@ class Outlet extends React.Component {
     return <div className="reframe-tasks-outlet">{ this.props.children }</div>
   }
 
-  shoudlComponentUpdate() {
-    return true
-  }
-
 }
+
 class Tasks extends React.Component {
 
   static childContextTypes = {

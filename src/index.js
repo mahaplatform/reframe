@@ -25,6 +25,7 @@ import Tabs from './tabs'
 import Tasks from './tasks'
 import Textarea from './textarea'
 import Textfield from './textfield'
+import ToggleList from './toggle_list'
 import Tray from './tray'
 
 export default {
@@ -55,6 +56,7 @@ export default {
   Tasks,
   Textarea,
   Textfield,
+  ToggleList,
   Tray
 }
 

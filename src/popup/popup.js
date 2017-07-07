@@ -9,10 +9,6 @@ class Outlet extends React.Component {
     return <div className="reframe-popup-outlet">{ this.props.children }</div>
   }
 
-  shoudlComponentUpdate() {
-    return true
-  }
-
 }
 
 export class Popup extends React.Component {

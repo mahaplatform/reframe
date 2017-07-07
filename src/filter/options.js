@@ -66,9 +66,11 @@ class Dynamic extends React.Component {
 
   _getOptions() {
     const { format, multiple, name, records, results, text, value, status, onUpdate } = this.props
-    const options = records.map(record => {
-      return { value: _.get(record, value), text: _.get(record, text), record }
-    })
+    const options = records.map(record => ({
+      value: _.get(record, value),
+      text: _.get(record, text),
+      record
+    }))
     return {
       name,
       format,

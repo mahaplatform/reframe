@@ -1,8 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 import Format from '../format'
 import Search from './search'
+
+class LookupOutlet extends React.Component {
+
+  render() {
+    return <div className="reframe-lookup-search-outlet">{ this.props.children }</div>
+  }
+
+}
 
 class Lookup extends React.Component {
 
@@ -34,12 +43,12 @@ class Lookup extends React.Component {
 
   render() {
     const { active, chosen, disabled, format, prompt, text } = this.props
-    const value = chosen ? _.get(chosen, text) : ''
+    const value = chosen ? chosen.text : ''
     return (
       <div className="reframe-lookup-field">
         { chosen &&
           <div className="reframe-lookup-token" onClick={ this._handleBegin.bind(this) }>
-            <Format {...chosen} format={format} value={value} />
+            <Format { ...chosen } format={ format } value={ value } />
           </div>
         }
         { chosen &&
@@ -49,12 +58,14 @@ class Lookup extends React.Component {
         }
         { !chosen &&
           <input type="text"
-                 disabled={disabled}
+                 disabled={ disabled }
                  onFocus={ this._handleBegin.bind(this) }
-                 value={value}
+                 value={ value }
                  placeholder={ prompt } />
        }
-       { active && <Search { ...this.props } />}
+       <CSSTransitionGroup component={ LookupOutlet } transitionName="cover" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
+         { active && <Search { ...this.props } />}
+       </CSSTransitionGroup>
      </div>
     )
   }

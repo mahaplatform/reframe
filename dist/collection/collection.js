@@ -117,7 +117,7 @@ var Collection = function (_React$Component) {
         endpoint: endpoint,
         filter: filter,
         loading: loading,
-        empty: empty || _react2.default.createElement(_results.Empty, this.props),
+        empty: _lodash2.default.isPlainObject(empty) ? _react2.default.createElement(_results.Empty, this.props) : empty,
         failure: failure,
         layout: function layout(props) {
           return _react2.default.createElement(_results.Results, _extends({}, _this2.props, props));

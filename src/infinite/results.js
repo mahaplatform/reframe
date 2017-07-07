@@ -9,11 +9,9 @@ export const Loading = (props) => (
 )
 
 export const Delayed = (props) => (
-  <div className="reframe-message">
-    <div className="reframe-message-panel">
-      <h2><i className="circular hourglass half icon" /></h2>
-      <h3>The network is a bit slow</h3>
-      <p>This is taking longer than we expected...</p>
+  <div className="reframe-loader">
+    <div className="ui active inverted dimmer">
+      <div className="ui large text loader">This is taking longer than we expected...</div>
     </div>
   </div>
 )

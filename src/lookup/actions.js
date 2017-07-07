@@ -12,9 +12,9 @@ export const cancel = () => ({
   type: actionTypes.CANCEL
 })
 
-export const choose = (index) => ({
+export const choose = (chosen) => ({
   type: actionTypes.CHOOSE,
-  index
+  chosen
 })
 
 export const type = (q) => ({
@@ -30,14 +30,4 @@ export const load = (query, endpoint) => ({
   request: actionTypes.LOAD_REQUEST,
   success: actionTypes.LOAD_SUCCESS,
   failure: actionTypes.LOAD_FAILURE
-})
-
-export const lookup = (query, endpoint) => ({
-  type: 'API_REQUEST',
-  method: 'GET',
-  endpoint,
-  query,
-  request: actionTypes.LOOKUP_REQUEST,
-  success: actionTypes.LOOKUP_SUCCESS,
-  failure: actionTypes.LOOKUP_FAILURE
 })

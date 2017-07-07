@@ -9,10 +9,6 @@ class Outlet extends React.Component {
     return <div className="reframe-drawer-outlet">{ this.props.children }</div>
   }
 
-  shoudlComponentUpdate() {
-    return true
-  }
-
 }
 
 class Drawer extends React.Component {

@@ -8,10 +8,6 @@ class Outlet extends React.Component {
     return <div className="reframe-prompt-outlet">{ this.props.children }</div>
   }
 
-  shoudlComponentUpdate() {
-    return true
-  }
-
 }
 
 class Prompt extends React.Component {

@@ -15,8 +15,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var INITIAL_VALUE = {
   active: false,
   query: null,
-  selected: null,
-  results: [],
+  chosen: null,
   status: 'ready'
 };
 
@@ -34,7 +33,7 @@ exports.default = function () {
 
     case actionTypes.CLEAR:
       return _extends({}, state, {
-        selected: null
+        chosen: null
       });
 
     case actionTypes.CANCEL:
@@ -45,7 +44,7 @@ exports.default = function () {
     case actionTypes.CHOOSE:
       return _extends({}, state, {
         active: false,
-        selected: action.index
+        chosen: action.chosen
       });
 
     case actionTypes.TYPE:
@@ -53,26 +52,9 @@ exports.default = function () {
         query: action.q
       });
 
-    case actionTypes.LOOKUP_REQUEST:
-      return _extends({}, state, {
-        status: 'loading',
-        query: action.request.params.$filter.q
-      });
-
     case actionTypes.LOAD_SUCCESS:
       return _extends({}, state, {
         status: 'success'
-      });
-
-    case actionTypes.LOOKUP_SUCCESS:
-      return _extends({}, state, {
-        status: 'success',
-        results: action.result.data
-      });
-
-    case actionTypes.LOOKUP_FAILURE:
-      return _extends({}, state, {
-        status: 'failure'
       });
 
     default:

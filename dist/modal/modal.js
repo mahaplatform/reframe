@@ -46,11 +46,6 @@ var Outlet = function (_React$Component) {
         this.props.children
       );
     }
-  }, {
-    key: 'shoudlComponentUpdate',
-    value: function shoudlComponentUpdate() {
-      return true;
-    }
   }]);
 
   return Outlet;

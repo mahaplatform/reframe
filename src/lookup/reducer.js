@@ -3,8 +3,7 @@ import * as actionTypes from './action_types'
 const INITIAL_VALUE = {
   active: false,
   query: null,
-  selected: null,
-  results: [],
+  chosen: null,
   status: 'ready'
 }
 
@@ -21,7 +20,7 @@ export default (state = INITIAL_VALUE, action) => {
   case actionTypes.CLEAR:
     return {
       ...state,
-      selected: null
+      chosen: null
     }
 
   case actionTypes.CANCEL:
@@ -34,7 +33,7 @@ export default (state = INITIAL_VALUE, action) => {
     return {
       ...state,
       active: false,
-      selected: action.index
+      chosen: action.chosen
     }
 
   case actionTypes.TYPE:
@@ -43,30 +42,10 @@ export default (state = INITIAL_VALUE, action) => {
       query: action.q
     }
 
-  case actionTypes.LOOKUP_REQUEST:
-    return {
-      ...state,
-      status: 'loading',
-      query: action.request.params.$filter.q
-    }
-
   case actionTypes.LOAD_SUCCESS:
     return {
       ...state,
       status: 'success'
-    }
-
-  case actionTypes.LOOKUP_SUCCESS:
-    return {
-      ...state,
-      status: 'success',
-      results: action.result.data
-    }
-
-  case actionTypes.LOOKUP_FAILURE:
-    return {
-      ...state,
-      status: 'failure'
     }
 
   default:

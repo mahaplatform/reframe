@@ -3,38 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.load = exports.type = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
+exports.save = exports.load = exports.toggle = exports.type = undefined;
 
 var _action_types = require('./action_types');
 
 var actionTypes = _interopRequireWildcard(_action_types);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var begin = exports.begin = function begin() {
-  return {
-    type: actionTypes.BEGIN
-  };
-};
-
-var clear = exports.clear = function clear() {
-  return {
-    type: actionTypes.CLEAR
-  };
-};
-
-var cancel = exports.cancel = function cancel() {
-  return {
-    type: actionTypes.CANCEL
-  };
-};
-
-var choose = exports.choose = function choose(chosen) {
-  return {
-    type: actionTypes.CHOOSE,
-    chosen: chosen
-  };
-};
 
 var type = exports.type = function type(q) {
   return {
@@ -43,7 +18,14 @@ var type = exports.type = function type(q) {
   };
 };
 
-var load = exports.load = function load(query, endpoint) {
+var toggle = exports.toggle = function toggle(record) {
+  return {
+    type: actionTypes.TOGGLE,
+    record: record
+  };
+};
+
+var load = exports.load = function load(endpoint, query) {
   return {
     type: 'API_REQUEST',
     method: 'GET',
@@ -52,5 +34,19 @@ var load = exports.load = function load(query, endpoint) {
     request: actionTypes.LOAD_REQUEST,
     success: actionTypes.LOAD_SUCCESS,
     failure: actionTypes.LOAD_FAILURE
+  };
+};
+
+var save = exports.save = function save(endpoint, ids, onSuccess, onFailure) {
+  return {
+    type: 'API_REQUEST',
+    method: 'PATCH',
+    endpoint: endpoint,
+    body: { ids: ids },
+    request: actionTypes.SAVE_REQUEST,
+    success: actionTypes.SAVE_SUCCESS,
+    failure: actionTypes.SAVE_FAILURE,
+    onSuccess: onSuccess,
+    onFailure: onFailure
   };
 };

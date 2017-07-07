@@ -43,7 +43,7 @@ var Empty = exports.Empty = function Empty(props) {
       _react2.default.createElement(
         'h2',
         null,
-        _react2.default.createElement('i', { className: 'circular ' + props.empty.icon + ' icon' })
+        _react2.default.createElement('i', { className: 'circular ' + (props.empty && props.empty.icon ? props.empty.icon : 'warning sign') + ' icon' })
       ),
       _react2.default.createElement(
         'h3',
@@ -51,11 +51,16 @@ var Empty = exports.Empty = function Empty(props) {
         'No ',
         _lodash2.default.startCase((0, _pluralize2.default)(props.entity.replace('_', ' ')))
       ),
-      _react2.default.createElement(
+      !props.empty || props.empty && !props.empty.message && _react2.default.createElement(
         'p',
         null,
         'You have not yet created any ',
         (0, _pluralize2.default)(props.entity.replace('_', ' '))
+      ),
+      props.empty && props.empty.message && _react2.default.createElement(
+        'p',
+        null,
+        props.empty.message
       ),
       props.empty.modal && _react2.default.createElement(
         'div',
