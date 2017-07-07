@@ -33,37 +33,47 @@ class Filter extends React.Component {
     const { fields, results } = this.props
     return (
       <div className="reframe-filters">
-        <div className="reframe-filter-tokens">
-          { fields.map(field => {
-            if(results[field.name]) {
-              if(_.isArray(results[field.name])) {
-                return results[field.name].map((filter, index) => (
-                  <span key={`filter_${index}`} className="ui small basic button">
-                    <span className="label" onClick={ this._handleOpen.bind(this) }>
-                      { filter.value }
-                    </span>
-                    <i className="remove icon" onClick={ this._handleRemove.bind(this, field.name, index) } />
-                  </span>
-                ))
-              } else if(_.isObject(results[field.name])) {
-                return (
-                  <span key="filter_remove"  className="ui small basic button">
-                    <span className="label" onClick={ this._handleOpen.bind(this) }>
-                      { results[field.name].value }
-                    </span>
-                    <i className="remove icon" onClick={ this._handleRemove.bind(this, field.name) } />
-                  </span>
-                )
-              }
-            }
-          }) }
-          { fields &&
-            <a onClick={ this._handleOpen.bind(this) } className="ui small basic add button">
-              <i className="plus icon" />
-              Add Filter
-            </a>
-          }
+        <div className="reframe-filters-header">
+          <div className="reframe-filters-header-search">
+            <div className="reframe-filters-header-search-input">
+              <i className="search icon" />
+              <div className="ui input">
+                <input type="text" placeholder="Search" ref="query"/>
+              </div>
+              { false && <i className="remove circle icon" /> }
+            </div>
+          </div>
+          <div className="reframe-filters-header-filter" onClick={ this._handleOpen.bind(this) }>
+            <i className="icon options" />
+          </div>
         </div>
+        { Object.keys(results).length > 0 &&
+          <div className="reframe-filter-tokens">
+            { fields.map(field => {
+              if(results[field.name]) {
+                if(_.isArray(results[field.name])) {
+                  return results[field.name].map((filter, index) => (
+                    <span key={`filter_${index}`} className="ui small basic button">
+                      <span className="label" onClick={ this._handleOpen.bind(this) }>
+                        { filter.value }
+                      </span>
+                      <i className="remove icon" onClick={ this._handleRemove.bind(this, field.name, index) } />
+                    </span>
+                  ))
+                } else if(_.isObject(results[field.name])) {
+                  return (
+                    <span key="filter_remove"  className="ui small basic button">
+                      <span className="label" onClick={ this._handleOpen.bind(this) }>
+                        { results[field.name].value }
+                      </span>
+                      <i className="remove icon" onClick={ this._handleRemove.bind(this, field.name) } />
+                    </span>
+                  )
+                }
+              }
+            }) }
+          </div>
+        }
       </div>
     )
   }

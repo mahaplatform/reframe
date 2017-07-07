@@ -54,7 +54,7 @@ exports.default = function () {
 
     case actionTypes.REMOVE:
       return _extends({}, state, {
-        results: _lodash2.default.isArray(state.results[action.key]) ? _extends({}, state.results, _defineProperty({}, action.key, [].concat(_toConsumableArray(state.results[action.key].slice(0, action.index)), _toConsumableArray(state.results[action.key].slice(action.index + 1))))) : _lodash2.default.omit(state.results, action.key)
+        results: _lodash2.default.isArray(state.results[action.key]) && state.results[action.key].length > 1 ? _extends({}, state.results, _defineProperty({}, action.key, [].concat(_toConsumableArray(state.results[action.key].slice(0, action.index)), _toConsumableArray(state.results[action.key].slice(action.index + 1))))) : _lodash2.default.omit(state.results, action.key)
       });
 
     case actionTypes.RESET_ALL:

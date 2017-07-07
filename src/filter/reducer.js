@@ -38,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
   case actionTypes.REMOVE:
     return {
       ...state,
-      results: (_.isArray(state.results[action.key])) ? {
+      results: (_.isArray(state.results[action.key]) && state.results[action.key].length > 1) ? {
         ...state.results,
         [action.key]: [
           ...state.results[action.key].slice(0, action.index),

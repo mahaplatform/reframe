@@ -57,6 +57,30 @@ var Filter = function (_React$Component) {
         { className: 'reframe-filters' },
         _react2.default.createElement(
           'div',
+          { className: 'reframe-filters-header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-filters-header-search' },
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-filters-header-search-input' },
+              _react2.default.createElement('i', { className: 'search icon' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'ui input' },
+                _react2.default.createElement('input', { type: 'text', placeholder: 'Search', ref: 'query' })
+              ),
+              false && _react2.default.createElement('i', { className: 'remove circle icon' })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-filters-header-filter', onClick: this._handleOpen.bind(this) },
+            _react2.default.createElement('i', { className: 'icon options' })
+          )
+        ),
+        Object.keys(results).length > 0 && _react2.default.createElement(
+          'div',
           { className: 'reframe-filter-tokens' },
           fields.map(function (field) {
             if (results[field.name]) {
@@ -86,13 +110,7 @@ var Filter = function (_React$Component) {
                 );
               }
             }
-          }),
-          fields && _react2.default.createElement(
-            'a',
-            { onClick: this._handleOpen.bind(this), className: 'ui small basic add button' },
-            _react2.default.createElement('i', { className: 'plus icon' }),
-            'Add Filter'
-          )
+          })
         )
       );
     }

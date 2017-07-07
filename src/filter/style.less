@@ -1,19 +1,84 @@
 .reframe-filters {
-  .scrollable();
   width: 100vw;
   white-space: nowrap;
-  background-color: #333333;
+  background-color: #DDD;
+}
+.reframe-filters-header {
+  display: flex;
+}
+.reframe-filters-header-search {
+  flex: 1;
+  padding: 0.5em;
+}
+.reframe-filters-header-search-input {
+  .border-radius(5px);
+  background-color: fadeout(@white, 20);
+  display: flex;
+  .search.icon {
+    color: fadeout(@black, 80);
+    margin: 8px 0;
+    flex: 0 0 40px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .remove.icon {
+    color: fadeout(@black, 80);
+    margin: 8px 0;
+    flex: 0 0 30px;
+    cursor: pointer;
+    font-size: 18px !important;
+  }
+  .ui.input {
+    flex: 1;
+    padding: 0 10px 0 0;
+    input {
+      padding: 8px;
+      width: 100%;
+      border-radius: 0;
+      background-color: transparent;
+      color: fadeout(@black, 40);
+      border: none !important;
+      padding-left: 0;
+      padding-right: 0;
+      &::-webkit-input-placeholder {
+        color: fadeout(@black, 60);
+      }
+      &:-moz-placeholder {
+        color: fadeout(@black, 60);
+      }
+      &::-moz-placeholder {
+        color: fadeout(@black, 60);
+      }
+      &::-webkit-input-placeholder,
+      &:-moz-placeholder,
+      &::-moz-placeholder,
+      &:-ms-input-placeholder {
+        color: fadeout(@black, 60);
+      }
+    }
+  }
+}
+.reframe-filters-header-filter {
+  color: fadeout(@black, 60);
+  padding: 0.5em 0.5em 0.5em 0;
+  cursor: pointer;
+  i {
+    font-size: 1.5em;
+    line-height: 1.6em;
+  }
 }
 .reframe-filter-tokens {
-  padding: 10px;
-  height: 50px;
-  color: #FFF;
+  .scrollable-x();
+  padding: 0 0 0.5em 0.5em;
+  color: @white;
   .ui.basic.button {
     display: inline-block;
-    background: rgba(255, 255, 255, .6) !important;
+    background: @white !important;
     color: #333333 !important;
     padding: 8px;
     margin: 0 8px 0 0 !important;
+    box-shadow: none;
+    text-shadow: none;
     &.add {
       background: transparent !important;
       border: 1px solid #BBBBBB;
