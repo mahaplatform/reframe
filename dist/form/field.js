@@ -115,9 +115,11 @@ var Field = function (_React$Component) {
     value: function _getControl() {
       var _props4 = this.props,
           columns = _props4.columns,
+          component = _props4.component,
           data = _props4.data,
           disabled = _props4.disabled,
           endpoint = _props4.endpoint,
+          filters = _props4.filters,
           form = _props4.form,
           format = _props4.format,
           label = _props4.label,
@@ -137,9 +139,11 @@ var Field = function (_React$Component) {
       var defaultValue = _lodash2.default.get(data, name);
       return {
         columns: columns,
+        component: component,
         defaultValue: defaultValue,
         disabled: disabled,
         endpoint: endpoint,
+        filters: filters,
         form: form,
         format: format,
         label: label,

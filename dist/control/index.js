@@ -22,6 +22,10 @@ var _checkbox = require('../checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
+var _datefield = require('../datefield');
+
+var _datefield2 = _interopRequireDefault(_datefield);
+
 var _filefield = require('../filefield');
 
 var _filefield2 = _interopRequireDefault(_filefield);
@@ -38,13 +42,13 @@ var _textfield = require('../textfield');
 
 var _textfield2 = _interopRequireDefault(_textfield);
 
+var _toggle_list = require('../toggle_list');
+
+var _toggle_list2 = _interopRequireDefault(_toggle_list);
+
 var _password = require('../password');
 
 var _password2 = _interopRequireDefault(_password);
-
-var _datefield = require('../datefield');
-
-var _datefield2 = _interopRequireDefault(_datefield);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,6 +74,7 @@ var standardControls = {
   'checkbox': _checkbox2.default,
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
+  'datefield': _datefield2.default,
   'filefield': _filefield2.default,
   'lookup': _lookup2.default,
   // 'multiselect': MultiSelect,
@@ -79,8 +84,8 @@ var standardControls = {
   'textfield': _textfield2.default,
   'password': _password2.default,
   'textarea': _textarea2.default,
-  'datefield': _datefield2.default
   // 'tablefield': TableField
+  'togglelist': _toggle_list2.default
 };
 
 var Control = function (_React$Component) {

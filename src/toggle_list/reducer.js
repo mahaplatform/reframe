@@ -2,51 +2,27 @@ import _ from 'lodash'
 import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
-  query: '',
-  chosen: [],
-  status: 'ready'
+  chosen: []
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.RESET:
-    return INITIAL_STATE
-
-  case actionTypes.TYPE:
-    return {
-      ...state,
-      query: action.q
-    }
-
   case actionTypes.TOGGLE:
-    const index = _.findIndex(state.chosen, { id: action.record.id })
+    const included = _.includes(state.chosen, action.id)
     return {
       ...state,
-      chosen: index >= 0 ? state.chosen.filter(record => record.id !== action.record.id) : [
+      chosen: included ? _.without(state.chosen, action.id) : [
         ...state.chosen,
-        action.record
+        action.id
       ]
     }
 
-  case actionTypes.LOAD_REQUEST:
+  case actionTypes.SET:
     return {
       ...state,
-      status: 'loading'
-    }
-
-  case actionTypes.LOAD_SUCCESS:
-    return {
-      ...state,
-      status: 'success',
-      chosen: action.result.data
-    }
-
-  case actionTypes.LOAD_FAILURE:
-    return {
-      ...state,
-      status: 'failure'
+      chosen: action.ids
     }
 
   default:

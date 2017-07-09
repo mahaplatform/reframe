@@ -6,6 +6,7 @@ import _ from 'lodash'
 import Checkbox from '../checkbox'
 // // import Checkboxes from '../checkboxes'
 // // import ColorField from '../colorfield'
+import DateField from '../datefield'
 import Filefield from '../filefield'
 import Lookup from '../lookup'
 // // import MultiSelect from './multiselect'
@@ -15,13 +16,14 @@ import Lookup from '../lookup'
 // import Text from '../text'
 import TextArea from '../textarea'
 import TextField from '../textfield'
+import ToggleList from '../toggle_list'
 import Password from '../password'
-import DateField from '../datefield'
 
 const standardControls = {
   'checkbox': Checkbox,
   // 'checkboxes': Checkboxes,
   // 'colorfield': ColorField,
+  'datefield': DateField,
   'filefield': Filefield,
   'lookup': Lookup,
   // 'multiselect': MultiSelect,
@@ -31,8 +33,8 @@ const standardControls = {
   'textfield': TextField,
   'password': Password,
   'textarea': TextArea,
-  'datefield': DateField
   // 'tablefield': TableField
+  'togglelist': ToggleList
 }
 
 class Control extends React.Component {

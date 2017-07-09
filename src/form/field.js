@@ -82,15 +82,17 @@ class Field extends React.Component {
   }
 
   _getControl() {
-    const { columns, data, disabled, endpoint, form, format, label, name } = this.props
+    const { columns, component, data, disabled, endpoint, filters, form, format, label, name } = this.props
     const { options, prompt, prefix, sort, suffix, type, text, token, value } = this.props
     const { onSubmit } = this.props
     const defaultValue = _.get(data, name)
     return {
       columns,
+      component,
       defaultValue,
       disabled,
       endpoint,
+      filters,
       form,
       format,
       label,

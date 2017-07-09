@@ -22,9 +22,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
-  query: '',
-  chosen: [],
-  status: 'ready'
+  chosen: []
 };
 
 exports.default = function () {
@@ -34,36 +32,15 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.RESET:
-      return INITIAL_STATE;
-
-    case actionTypes.TYPE:
-      return _extends({}, state, {
-        query: action.q
-      });
-
     case actionTypes.TOGGLE:
-      var index = _lodash2.default.findIndex(state.chosen, { id: action.record.id });
+      var included = _lodash2.default.includes(state.chosen, action.id);
       return _extends({}, state, {
-        chosen: index >= 0 ? state.chosen.filter(function (record) {
-          return record.id !== action.record.id;
-        }) : [].concat(_toConsumableArray(state.chosen), [action.record])
+        chosen: included ? _lodash2.default.without(state.chosen, action.id) : [].concat(_toConsumableArray(state.chosen), [action.id])
       });
 
-    case actionTypes.LOAD_REQUEST:
+    case actionTypes.SET:
       return _extends({}, state, {
-        status: 'loading'
-      });
-
-    case actionTypes.LOAD_SUCCESS:
-      return _extends({}, state, {
-        status: 'success',
-        chosen: action.result.data
-      });
-
-    case actionTypes.LOAD_FAILURE:
-      return _extends({}, state, {
-        status: 'failure'
+        chosen: action.ids
       });
 
     default:
