@@ -4,25 +4,29 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _list = require('../list');
-
-var _list2 = _interopRequireDefault(_list);
-
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _infinite = require('../infinite');
+
+var _infinite2 = _interopRequireDefault(_infinite);
+
+var _format = require('../format');
+
+var _format2 = _interopRequireDefault(_format);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30,149 +34,221 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Search = function (_React$Component) {
-  _inherits(Search, _React$Component);
+var Options = function (_React$Component) {
+  _inherits(Options, _React$Component);
 
-  function Search() {
-    _classCallCheck(this, Search);
+  function Options() {
+    _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
   }
 
-  _createClass(Search, [{
+  _createClass(Options, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
-          label = _props.label,
-          query = _props.query,
-          results = _props.results,
-          status = _props.status;
+          name = _props.name,
+          format = _props.format,
+          multiple = _props.multiple,
+          options = _props.options,
+          results = _props.results;
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-search' },
+        { className: 'reframe-filter-body' },
         _react2.default.createElement(
           'div',
-          { className: 'reframe-search-form' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-search-input' },
-            _react2.default.createElement(
+          { className: 'reframe-filter-results' },
+          options.map(function (option, index) {
+            return _react2.default.createElement(
               'div',
-              { className: 'ui input' },
-              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), value: query, ref: 'query' })
-            ),
-            query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleResetSearch.bind(this) })
-          )
-        ),
-        status === 'loading' && !results && _react2.default.createElement(
-          'div',
-          { className: 'reframe-search-loader' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-loader' },
-            _react2.default.createElement(
-              'div',
-              { className: 'ui active inverted dimmer' },
+              { key: 'filter_' + index, className: 'reframe-filter-item', onClick: _this2._handleChoose.bind(_this2, option.value, option.text, option.token) },
               _react2.default.createElement(
                 'div',
-                { className: 'ui large text loader' },
-                'Loading'
+                { className: 'reframe-filter-item-label' },
+                _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
+              ),
+              option.description && _react2.default.createElement(
+                'div',
+                { className: 'reframe-filter-item-description' },
+                option.description
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-filter-item-icon' },
+                _this2._checked(name, multiple, results, option) ? _react2.default.createElement('i', { className: 'green check icon' }) : null
               )
-            )
-          )
-        ),
-        results && results.length === 0 && _react2.default.createElement(
-          'div',
-          { className: 'reframe-search-empty' },
-          _react2.default.createElement(
-            'div',
-            { className: 'reframe-search-empty-message' },
-            _react2.default.createElement(
-              'h2',
-              null,
-              _react2.default.createElement('i', { className: 'circular remove icon' })
-            ),
-            _react2.default.createElement(
-              'h3',
-              null,
-              'No Results Found'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'No ',
-              label,
-              ' match your query'
-            )
-          )
-        ),
-        results && results.length > 0 && _react2.default.createElement(
-          'div',
-          { className: 'reframe-search-results' },
-          _react2.default.createElement(_list2.default, this._getList())
+            );
+          })
         )
       );
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
+    key: '_checked',
+    value: function _checked(name, multiple, results, option) {
+      if (multiple) {
+        return results[name] && _lodash2.default.find(results[name], { key: option.value });
+      } else {
+        return results[name] && results[name].key == option.value;
+      }
+    }
+  }, {
+    key: '_handleChoose',
+    value: function _handleChoose(key, value, token) {
       var _props2 = this.props,
-          sort = _props2.sort,
-          endpoint = _props2.endpoint,
-          onLookup = _props2.onLookup;
+          name = _props2.name,
+          multiple = _props2.multiple,
+          results = _props2.results,
+          onUpdate = _props2.onUpdate;
 
-      this._handleLookup = _lodash2.default.throttle(onLookup.bind(this), 500);
-      setTimeout(function () {
-        return _this2.refs.query.focus();
-      }, 500);
-      onLookup(endpoint, { $filter: { q: '' }, $sort: sort });
+      var values = null;
+      if (multiple) {
+        values = results[name] || [];
+        values = _lodash2.default.find(values, { key: key }) ? _lodash2.default.filter(values, function (item) {
+          return item.key !== key;
+        }) : [].concat(_toConsumableArray(values), [{ key: key, value: token || value }]);
+      } else {
+        if (!results[name] || results[name].key !== key) {
+          values = { key: key, value: token || value };
+        }
+      }
+      onUpdate(name, values);
+    }
+  }]);
+
+  return Options;
+}(_react2.default.Component);
+
+var Dynamic = function (_React$Component2) {
+  _inherits(Dynamic, _React$Component2);
+
+  function Dynamic() {
+    _classCallCheck(this, Dynamic);
+
+    return _possibleConstructorReturn(this, (Dynamic.__proto__ || Object.getPrototypeOf(Dynamic)).apply(this, arguments));
+  }
+
+  _createClass(Dynamic, [{
+    key: 'render',
+    value: function render() {
+      var records = this.props.records;
+
+      return records ? _react2.default.createElement(Options, this._getOptions()) : null;
     }
   }, {
-    key: '_handleType',
-    value: function _handleType(event) {
+    key: '_getOptions',
+    value: function _getOptions() {
       var _props3 = this.props,
-          sort = _props3.sort,
-          endpoint = _props3.endpoint;
+          format = _props3.format,
+          multiple = _props3.multiple,
+          name = _props3.name,
+          records = _props3.records,
+          results = _props3.results,
+          text = _props3.text,
+          value = _props3.value,
+          status = _props3.status,
+          onUpdate = _props3.onUpdate;
 
-      var q = event.target.value;
-      var query = { $filter: { q: q }, $sort: sort };
-      this.props.onType(q);
-      this._handleLookup(endpoint, query);
-    }
-  }, {
-    key: '_handleResetSearch',
-    value: function _handleResetSearch() {
-      var _props4 = this.props,
-          sort = _props4.sort,
-          endpoint = _props4.endpoint,
-          onType = _props4.onType,
-          onLookup = _props4.onLookup;
-
-      onType('');
-      onLookup(endpoint, { $filter: { q: '' }, $sort: sort });
-    }
-  }, {
-    key: '_getList',
-    value: function _getList() {
-      var _props5 = this.props,
-          results = _props5.results,
-          itemMap = _props5.itemMap;
-
+      var options = records.map(function (record) {
+        return {
+          value: _lodash2.default.get(record, value),
+          text: _lodash2.default.get(record, text),
+          record: record
+        };
+      });
       return {
-        items: itemMap(results)
+        name: name,
+        format: format,
+        multiple: multiple,
+        options: options,
+        results: results,
+        status: status,
+        onUpdate: onUpdate
       };
     }
   }]);
 
-  return Search;
+  return Dynamic;
 }(_react2.default.Component);
 
-Search.PropTypes = {
-  status: _propTypes2.default.string,
-  results: _propTypes2.default.array,
-  itemMap: _propTypes2.default.func
-};
-exports.default = Search;
+var Container = function (_React$Component3) {
+  _inherits(Container, _React$Component3);
+
+  function Container() {
+    _classCallCheck(this, Container);
+
+    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
+  }
+
+  _createClass(Container, [{
+    key: 'render',
+    value: function render() {
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          label = _props4.label,
+          query = _props4.query;
+
+      if (endpoint) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'reframe-filter-search' },
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-filter-search-form ui form' },
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-filter-search-input' },
+              _react2.default.createElement('i', { className: 'search icon' }),
+              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'results', value: query }),
+              query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
+            )
+          ),
+          _react2.default.createElement(_infinite2.default, this._getInfinite())
+        );
+      } else {
+        return _react2.default.createElement(Options, this.props);
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this._handleLookup = _lodash2.default.throttle(this.props.onLookup, 500);
+    }
+  }, {
+    key: '_getInfinite',
+    value: function _getInfinite() {
+      var _this5 = this;
+
+      var _props5 = this.props,
+          endpoint = _props5.endpoint,
+          sort = _props5.sort,
+          q = _props5.q;
+
+      return {
+        endpoint: endpoint,
+        filter: { q: q },
+        layout: function layout(props) {
+          return _react2.default.createElement(Dynamic, _extends({}, _this5.props, props));
+        },
+        sort: sort
+      };
+    }
+  }, {
+    key: '_handleType',
+    value: function _handleType(event) {
+      this.props.onType(event.target.value);
+      this._handleLookup(event.target.value);
+    }
+  }, {
+    key: '_handleAbort',
+    value: function _handleAbort() {
+      this.props.onAbort();
+    }
+  }]);
+
+  return Container;
+}(_react2.default.Component);
+
+exports.default = Container;

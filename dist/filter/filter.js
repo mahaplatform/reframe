@@ -50,6 +50,7 @@ var Filter = function (_React$Component) {
 
       var _props = this.props,
           fields = _props.fields,
+          query = _props.query,
           results = _props.results;
 
       return _react2.default.createElement(
@@ -68,9 +69,9 @@ var Filter = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'ui input' },
-                _react2.default.createElement('input', { type: 'text', placeholder: 'Search', ref: 'query' })
+                _react2.default.createElement('input', { type: 'text', placeholder: 'Search', onChange: this._handleType.bind(this), ref: 'query', value: query })
               ),
-              false && _react2.default.createElement('i', { className: 'remove circle icon' })
+              query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
             )
           ),
           _react2.default.createElement(
@@ -82,13 +83,13 @@ var Filter = function (_React$Component) {
         Object.keys(results).length > 0 && _react2.default.createElement(
           'div',
           { className: 'reframe-filter-tokens' },
-          fields.map(function (field) {
+          fields.map(function (field, fieldIndex) {
             if (results[field.name]) {
               if (_lodash2.default.isArray(results[field.name])) {
                 return results[field.name].map(function (filter, index) {
                   return _react2.default.createElement(
                     'span',
-                    { key: 'filter_' + index, className: 'ui small basic button' },
+                    { key: 'filter_' + fieldIndex + '_' + index, className: 'ui small basic button' },
                     _react2.default.createElement(
                       'span',
                       { className: 'label', onClick: _this2._handleOpen.bind(_this2) },
@@ -100,7 +101,7 @@ var Filter = function (_React$Component) {
               } else if (_lodash2.default.isObject(results[field.name])) {
                 return _react2.default.createElement(
                   'span',
-                  { key: 'filter_remove', className: 'ui small basic button' },
+                  { key: 'filter_remove_' + fieldIndex, className: 'ui small basic button' },
                   _react2.default.createElement(
                     'span',
                     { className: 'label', onClick: _this2._handleOpen.bind(_this2) },
@@ -117,14 +118,17 @@ var Filter = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this._handleLookup = _lodash2.default.throttle(this.props.onLookup, 500);
       this._loadFilters();
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var results = this.props.results;
+      var _props2 = this.props,
+          q = _props2.q,
+          results = _props2.results;
 
-      if (results !== prevProps.results) {
+      if (!_lodash2.default.isEqual(prevProps.q, q) || !_lodash2.default.isEqual(results, prevProps.results)) {
         this._handleChange();
       }
     }
@@ -136,11 +140,11 @@ var Filter = function (_React$Component) {
   }, {
     key: '_loadFilters',
     value: function _loadFilters() {
-      var _props2 = this.props,
-          fields = _props2.fields,
-          filters = _props2.filters,
-          onLoad = _props2.onLoad,
-          onSet = _props2.onSet;
+      var _props3 = this.props,
+          fields = _props3.fields,
+          filters = _props3.filters,
+          onLoad = _props3.onLoad,
+          onSet = _props3.onSet;
 
       if (fields && filters) {
         fields.map(function (field) {
@@ -159,21 +163,22 @@ var Filter = function (_React$Component) {
     value: function _handleChange() {
       var _this3 = this;
 
-      var _props3 = this.props,
-          results = _props3.results,
-          onChange = _props3.onChange;
+      var _props4 = this.props,
+          results = _props4.results,
+          onChange = _props4.onChange,
+          q = _props4.q;
 
       var filters = Object.keys(results).reduce(function (filters, key) {
         return _extends({}, filters, _defineProperty({}, key, _this3._getValue(key)));
-      }, {});
+      }, { q: q });
       onChange(filters);
     }
   }, {
     key: '_getValue',
     value: function _getValue(key) {
-      var _props4 = this.props,
-          results = _props4.results,
-          fields = _props4.fields;
+      var _props5 = this.props,
+          results = _props5.results,
+          fields = _props5.fields;
 
       var field = _lodash2.default.find(fields, { name: key });
       var value = results[key];
@@ -198,6 +203,17 @@ var Filter = function (_React$Component) {
     key: '_handleRemove',
     value: function _handleRemove(key, index) {
       this.props.onRemove(key, index);
+    }
+  }, {
+    key: '_handleType',
+    value: function _handleType(event) {
+      this.props.onType(event.target.value);
+      this._handleLookup(event.target.value);
+    }
+  }, {
+    key: '_handleAbort',
+    value: function _handleAbort() {
+      this.props.onAbort();
     }
   }]);
 

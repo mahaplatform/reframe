@@ -1,9 +1,9 @@
 .reframe-filters {
   width: 100vw;
   white-space: nowrap;
-  background-color: #DDD;
 }
 .reframe-filters-header {
+  background-color: fadeout(@black, 90);
   display: flex;
 }
 .reframe-filters-header-search {
@@ -69,11 +69,12 @@
 }
 .reframe-filter-tokens {
   .scrollable-x();
-  padding: 0 0 0.5em 0.5em;
-  color: @white;
+  padding: 0.5em 0 0.5em 0.5em;
+  background-color: @white;
+  border-bottom: 1px solid #DDD;
   .ui.basic.button {
     display: inline-block;
-    background: @white !important;
+    background-color: fadeout(@black, 90) !important;
     color: #333333 !important;
     padding: 8px;
     margin: 0 8px 0 0 !important;

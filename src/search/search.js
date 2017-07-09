@@ -1,83 +1,135 @@
+
 import React from 'react'
-import PropTypes from 'prop-types'
-import List from '../list'
 import _ from 'lodash'
+import Infinite from '../infinite'
+import Format from '../format'
 
-class Search extends React.Component {
-
-  static PropTypes = {
-    status: PropTypes.string,
-    results: PropTypes.array,
-    itemMap: PropTypes.func
-  }
+class Options extends React.Component {
 
   render() {
-    const { label, query, results, status } = this.props
+    const { name, format, multiple, options, results } = this.props
     return (
-      <div className="reframe-search">
-        <div className="reframe-search-form">
-          <div className="reframe-search-input">
-            <div className="ui input">
-              <input type="text" placeholder={`Find a ${label}...`} onChange={this._handleType.bind(this)} value={ query } ref="query" />
-            </div>
-            { query.length > 0 && <i className="remove circle icon" onClick={this._handleResetSearch.bind(this)} /> }
-          </div>
-        </div>
-        { status === 'loading' && !results &&
-          <div className="reframe-search-loader">
-            <div className="reframe-loader">
-              <div className="ui active inverted dimmer">
-                <div className="ui large text loader">Loading</div>
+      <div className="reframe-filter-body">
+        <div className="reframe-filter-results">
+          { options.map((option, index) => {
+            return (
+              <div key={`filter_${index}`} className="reframe-filter-item" onClick={ this._handleChoose.bind(this, option.value, option.text, option.token) }>
+                <div className="reframe-filter-item-label">
+                  <Format {...option.record} format={format} value={option.text} />
+                </div>
+                { option.description &&
+                  <div className="reframe-filter-item-description">
+                    { option.description }
+                  </div>
+                }
+                <div className="reframe-filter-item-icon">
+                  { this._checked(name, multiple, results, option) ? <i className="green check icon" /> : null }
+                </div>
               </div>
-            </div>
-          </div>
-        }
-        { results && results.length === 0 &&
-          <div className="reframe-search-empty">
-            <div className="reframe-search-empty-message">
-              <h2><i className="circular remove icon" /></h2>
-              <h3>No Results Found</h3>
-              <p>No { label } match your query</p>
-            </div>
-          </div>
-        }
-        { results && results.length > 0 &&
-          <div className="reframe-search-results">
-            <List { ...this._getList() } />
-          </div>
-        }
+            )
+          }) }
+        </div>
       </div>
     )
   }
 
-  componentDidMount() {
-    const { sort, endpoint, onLookup } = this.props
-    this._handleLookup = _.throttle(onLookup.bind(this), 500)
-    setTimeout(() => this.refs.query.focus(), 500)
-    onLookup(endpoint, { $filter: { q: '' }, $sort: sort })
+  _checked(name, multiple, results, option) {
+    if(multiple) {
+      return results[name] && _.find(results[name], { key: option.value })
+    } else {
+      return results[name] && results[name].key == option.value
+    }
   }
 
-  _handleType(event) {
-    const { sort, endpoint } = this.props
-    const q = event.target.value
-    const query = { $filter: { q }, $sort: sort }
-    this.props.onType(q)
-    this._handleLookup(endpoint, query)
+  _handleChoose(key, value, token) {
+    const { name, multiple, results, onUpdate } = this.props
+    let values = null
+    if(multiple) {
+      values = results[name] || []
+      values = _.find(values, { key }) ? _.filter(values, item => (item.key !== key)) : [ ...values, { key, value: token || value } ]
+    } else {
+      if(!results[name] || results[name].key !== key) {
+        values = { key, value: token || value }
+      }
+    }
+    onUpdate(name, values)
   }
 
-  _handleResetSearch() {
-    const { sort, endpoint, onType, onLookup } = this.props
-    onType('')
-    onLookup(endpoint, { $filter: { q: '' }, $sort: sort })
+}
+
+class Dynamic extends React.Component {
+
+  render() {
+    const { records } = this.props
+    return (records) ? <Options { ...this._getOptions() } /> : null
   }
 
-  _getList() {
-    const { results, itemMap } = this.props
+  _getOptions() {
+    const { format, multiple, name, records, results, text, value, status, onUpdate } = this.props
+    const options = records.map(record => ({
+      value: _.get(record, value),
+      text: _.get(record, text),
+      record
+    }))
     return {
-      items: itemMap(results)
+      name,
+      format,
+      multiple,
+      options,
+      results,
+      status,
+      onUpdate
     }
   }
 
 }
 
-export default Search
+class Container extends React.Component {
+
+  render() {
+    const { endpoint, label, query } = this.props
+    if(endpoint) {
+      return (
+        <div className="reframe-filter-search">
+          <div className="reframe-filter-search-form ui form">
+            <div className="reframe-filter-search-input">
+              <i className="search icon" />
+              <input type="text" placeholder={`Find a ${label}...`} onChange={ this._handleType.bind(this) } ref="results" value={ query } />
+              { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }
+            </div>
+          </div>
+          <Infinite {...this._getInfinite()} />
+        </div>
+
+      )
+    } else {
+      return <Options {...this.props} />
+    }
+  }
+
+  componentDidMount() {
+    this._handleLookup = _.throttle(this.props.onLookup, 500)
+  }
+
+  _getInfinite() {
+    const { endpoint, sort, q } = this.props
+    return {
+      endpoint,
+      filter: { q },
+      layout: (props) => <Dynamic { ...this.props} { ...props } />,
+      sort
+    }
+  }
+
+  _handleType(event) {
+    this.props.onType(event.target.value)
+    this._handleLookup(event.target.value)
+  }
+
+  _handleAbort() {
+    this.props.onAbort()
+  }
+
+}
+
+export default Container

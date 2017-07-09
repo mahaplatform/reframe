@@ -30,7 +30,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { fields, results } = this.props
+    const { fields, query, results } = this.props
     return (
       <div className="reframe-filters">
         <div className="reframe-filters-header">
@@ -38,9 +38,9 @@ class Filter extends React.Component {
             <div className="reframe-filters-header-search-input">
               <i className="search icon" />
               <div className="ui input">
-                <input type="text" placeholder="Search" ref="query"/>
+                <input type="text" placeholder="Search" onChange={ this._handleType.bind(this) } ref="query" value={ query } />
               </div>
-              { false && <i className="remove circle icon" /> }
+              { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }
             </div>
           </div>
           <div className="reframe-filters-header-filter" onClick={ this._handleOpen.bind(this) }>
@@ -49,11 +49,11 @@ class Filter extends React.Component {
         </div>
         { Object.keys(results).length > 0 &&
           <div className="reframe-filter-tokens">
-            { fields.map(field => {
+            { fields.map((field, fieldIndex) => {
               if(results[field.name]) {
                 if(_.isArray(results[field.name])) {
                   return results[field.name].map((filter, index) => (
-                    <span key={`filter_${index}`} className="ui small basic button">
+                    <span key={`filter_${fieldIndex}_${index}`} className="ui small basic button">
                       <span className="label" onClick={ this._handleOpen.bind(this) }>
                         { filter.value }
                       </span>
@@ -62,7 +62,7 @@ class Filter extends React.Component {
                   ))
                 } else if(_.isObject(results[field.name])) {
                   return (
-                    <span key="filter_remove"  className="ui small basic button">
+                    <span key={`filter_remove_${fieldIndex}`} className="ui small basic button">
                       <span className="label" onClick={ this._handleOpen.bind(this) }>
                         { results[field.name].value }
                       </span>
@@ -79,12 +79,13 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
+    this._handleLookup = _.throttle(this.props.onLookup, 500)
     this._loadFilters()
   }
 
   componentDidUpdate(prevProps) {
-    const { results } = this.props
-    if(results !== prevProps.results) {
+    const { q, results } = this.props
+    if(!_.isEqual(prevProps.q, q) || !_.isEqual(results, prevProps.results)) {
       this._handleChange()
     }
   }
@@ -109,11 +110,11 @@ class Filter extends React.Component {
   }
 
   _handleChange() {
-    const { results, onChange } = this.props
+    const { results, onChange, q } = this.props
     const filters = Object.keys(results).reduce((filters, key) => ({
       ...filters,
       [key]: this._getValue(key)
-    }), {})
+    }), { q })
     onChange(filters)
   }
 
@@ -137,6 +138,15 @@ class Filter extends React.Component {
 
   _handleRemove(key, index) {
     this.props.onRemove(key, index)
+  }
+
+  _handleType(event) {
+    this.props.onType(event.target.value)
+    this._handleLookup(event.target.value)
+  }
+
+  _handleAbort() {
+    this.props.onAbort()
   }
 
 }

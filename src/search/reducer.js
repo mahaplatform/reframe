@@ -2,41 +2,30 @@ import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
   query: '',
-  results: null,
-  status: 'ready'
+  q: ''
 }
 
 export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.RESET:
-    return INITIAL_STATE
-
   case actionTypes.TYPE:
     return {
       ...state,
-      query: action.q
+      query: action.query
     }
 
-  case actionTypes.LOOKUP_REQUEST:
+  case actionTypes.LOOKUP:
     return {
       ...state,
-      status: 'loading',
-      query: action.request.params.$filter.q
+      q: action.q
     }
 
-  case actionTypes.LOOKUP_SUCCESS:
+  case actionTypes.ABORT:
     return {
       ...state,
-      status: 'success',
-      results: action.result.data
-    }
-
-  case actionTypes.LOOKUP_FAILURE:
-    return {
-      ...state,
-      status: 'failure'
+      query: '',
+      q: ''
     }
 
   default:

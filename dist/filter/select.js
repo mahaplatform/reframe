@@ -14,9 +14,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _options = require('./options');
+var _search = require('../search');
 
-var _options2 = _interopRequireDefault(_options);
+var _search2 = _interopRequireDefault(_search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,7 +63,7 @@ var Select = function (_React$Component) {
             'Done'
           )
         ),
-        _react2.default.createElement(_options2.default, this.props),
+        _react2.default.createElement(_search2.default, this.props),
         _react2.default.createElement(
           'div',
           { className: 'reframe-filter-footer', onClick: this._handleReset.bind(this) },

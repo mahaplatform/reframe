@@ -23,6 +23,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var INITIAL_STATE = {
   all: null,
   records: null,
+  request_id: null,
   status: 'pending',
   total: null
 };
@@ -36,14 +37,17 @@ exports.default = function () {
 
     case actionTypes.FETCH_REQUEST:
       return _extends({}, state, {
+        request_id: action.request_id,
         status: 'loading'
       });
 
     case actionTypes.FETCH_SUCCESS:
-      if (!_lodash2.default.includes(['loading', 'delayed'], state.status)) return _extends({}, state);
+      if (action.request_id !== state.request_id) return state;
+      if (!_lodash2.default.includes(['loading', 'delayed'], state.status)) return state;
       var loaded = state.records ? state.records.length : 0;
       return _extends({}, state, {
         all: action.result.pagination.all,
+        request_id: null,
         records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records), _toConsumableArray(action.result.data)) : action.result.data,
         total: action.result.pagination.total,
         status: loaded + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'

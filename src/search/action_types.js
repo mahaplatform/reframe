@@ -1,4 +1,3 @@
 export const TYPE = 'TYPE'
-export const LOOKUP_REQUEST = 'LOOKUP_REQUEST'
-export const LOOKUP_SUCCESS = 'LOOKUP_SUCCESS'
-export const LOOKUP_FAILURE = 'LOOKUP_FAILURE'
+export const LOOKUP = 'LOOKUP'
+export const ABORT = 'ABORT'

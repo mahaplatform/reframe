@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Options from './options'
+import Search from '../search'
 
 class Select extends React.Component {
 
@@ -36,7 +36,7 @@ class Select extends React.Component {
             Done
           </div>
         </div>
-        <Options {...this.props} />
+        <Search {...this.props} />
         <div className="reframe-filter-footer" onClick={ this._handleReset.bind(this) }>
           Reset { label }
         </div>

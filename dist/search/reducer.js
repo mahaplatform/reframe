@@ -15,8 +15,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
   query: '',
-  results: null,
-  status: 'ready'
+  q: ''
 };
 
 exports.default = function () {
@@ -26,29 +25,20 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.RESET:
-      return INITIAL_STATE;
-
     case actionTypes.TYPE:
       return _extends({}, state, {
-        query: action.q
+        query: action.query
       });
 
-    case actionTypes.LOOKUP_REQUEST:
+    case actionTypes.LOOKUP:
       return _extends({}, state, {
-        status: 'loading',
-        query: action.request.params.$filter.q
+        q: action.q
       });
 
-    case actionTypes.LOOKUP_SUCCESS:
+    case actionTypes.ABORT:
       return _extends({}, state, {
-        status: 'success',
-        results: action.result.data
-      });
-
-    case actionTypes.LOOKUP_FAILURE:
-      return _extends({}, state, {
-        status: 'failure'
+        query: '',
+        q: ''
       });
 
     default:
