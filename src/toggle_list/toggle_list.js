@@ -9,8 +9,13 @@ class ToggleList extends React.Component {
     chosen: PropTypes.array,
     component: PropTypes.func,
     endpoint: PropTypes.string,
+    filters: PropTypes.array,
     sort: PropTypes.string,
     onChange: PropTypes.func
+  }
+
+  static defaultProps = {
+    filters: []
   }
 
   render() {

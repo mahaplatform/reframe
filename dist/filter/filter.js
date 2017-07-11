@@ -65,16 +65,24 @@ var Filter = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-filters-header-search-input' },
-              _react2.default.createElement('i', { className: 'search icon' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-filters-header-search-input-icon' },
+                _react2.default.createElement('i', { className: 'search icon' })
+              ),
               _react2.default.createElement(
                 'div',
                 { className: 'ui input' },
                 _react2.default.createElement('input', { type: 'text', placeholder: 'Search', onChange: this._handleType.bind(this), ref: 'query', value: query })
               ),
-              query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
+              query.length > 0 && _react2.default.createElement(
+                'div',
+                { className: 'reframe-filters-header-search-input-icon', onClick: this._handleAbort.bind(this) },
+                _react2.default.createElement('i', { className: 'remove circle icon' })
+              )
             )
           ),
-          _react2.default.createElement(
+          fields && fields.length > 0 && _react2.default.createElement(
             'div',
             { className: 'reframe-filters-header-filter', onClick: this._handleOpen.bind(this) },
             _react2.default.createElement('i', { className: 'icon options' })

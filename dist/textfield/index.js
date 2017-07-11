@@ -53,9 +53,9 @@ var TextField = function (_React$Component) {
           input
         );
       }
-      var classes = ['ui', 'labeled', 'input'];
-      if (this.props.prefix) classes.push('left');
-      if (this.props.suffix) classes.push('right');
+      var classes = ['ui', 'input'];
+      if (this.props.prefix) classes.push('left labeled');
+      if (this.props.suffix) classes.push('right labeled');
       return _react2.default.createElement(
         'div',
         { className: 'textfield' },

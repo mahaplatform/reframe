@@ -93,7 +93,9 @@ class Container extends React.Component {
         <div className="reframe-filter-search">
           <div className="reframe-filter-search-form ui form">
             <div className="reframe-filter-search-input">
-              <i className="search icon" />
+              <div className="reframe-filter-search-input-icon">
+                <i className="search icon" />
+              </div>
               <input type="text" placeholder={`Find a ${label}...`} onChange={ this._handleType.bind(this) } ref="results" value={ query } />
               { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }
             </div>

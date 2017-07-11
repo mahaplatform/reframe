@@ -10,32 +10,29 @@
   flex: 1;
   padding: 0.5em;
 }
+.reframe-filters-header-search-input-icon {
+  color: fadeout(@black, 80);
+  flex: 0 0 2em;
+  display: flex;
+  cursor: pointer;
+  font-size: 1.3em;
+  .icon {
+    margin: auto;
+    line-height: 1em;
+  }
+}
+
 .reframe-filters-header-search-input {
   .border-radius(5px);
   background-color: fadeout(@white, 20);
   display: flex;
-  .search.icon {
-    color: fadeout(@black, 80);
-    margin: 8px 0;
-    flex: 0 0 40px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  .remove.icon {
-    color: fadeout(@black, 80);
-    margin: 8px 0;
-    flex: 0 0 30px;
-    cursor: pointer;
-    font-size: 18px !important;
-  }
   .ui.input {
     flex: 1;
-    padding: 0 10px 0 0;
     input {
       padding: 8px;
       width: 100%;
       border-radius: 0;
-      background-color: transparent;
+      background-color: transparent !important;
       color: fadeout(@black, 40);
       border: none !important;
       padding-left: 0;
@@ -150,18 +147,21 @@
   display: flex;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
+  .reframe-filter-search-input-icon {
+    color: #BBBBBB;
+    flex: 0 0 34px;
+    display: flex;
+    cursor: pointer;
+    font-size: 18px;
+    i {
+      margin: auto;
+    }
+  }
   .reframe-filter-search-input {
     .border-radius(5px);
     flex: 1;
     background-color: #EEEEEE;
     display: flex;
-    .icon {
-      color: #BBBBBB;
-      margin: 8px 0;
-      flex: 0 0 34px;
-      cursor: pointer;
-      font-size: 18px;
-    }
     input {
       flex: 1;
       padding: 8px !important;
@@ -182,7 +182,7 @@
   }
 }
 .reframe-filter-item {
-  padding: 15px;
+  padding: 1em;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
   display: flex;

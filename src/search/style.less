@@ -22,12 +22,11 @@
   }
   .ui.input {
     flex: 1;
-    padding-right: 10px;
     input {
       padding: 0;
       width: 100%;
       border-radius: 0;
-      background-color: transparent;
+      background-color: transparent !important;
       color: fadeout(@black, 20);
       border: none !important;
       padding-left: 0;
@@ -90,6 +89,10 @@
   &:hover {
     background-color: darken(@white, 3);
   }
+}
+.reframe-search-result-item {
+  flex: 1;
+  padding: 1em;
 }
 .reframe-search-result-toggle {
   display: flex;

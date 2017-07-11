@@ -11,7 +11,7 @@ class Options extends React.Component {
     return (
       <div className="reframe-lookup-panel-results">
         { options.map((option, index) => (
-          <div key={`result_${index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, option) }>
+          <div key={`result_${index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, option.record) }>
             <div className="reframe-lookup-panel-result-label">
               <Format { ...option.record } format={ format } value={ option.text } />
             </div>
@@ -110,7 +110,7 @@ class Container extends React.Component {
   }
 
   _handleAdd() {
-    this.context.modal.open(<Form {...this._getForm()} />)
+    this.context.modal.open(<Form { ...this._getForm() } />)
   }
 
   _getForm() {

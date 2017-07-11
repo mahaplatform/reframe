@@ -68,7 +68,7 @@ class Form extends React.Component {
                 { instructions && <div className="instructions">{ instructions }</div> }
               </div>
             }
-            { status !== 'loading' &&
+            { !_.includes(['pending', 'loading'], status) ?
               <div className={ classes.join(' ') } ref="form">
                 { sections.map((section, index) => <Section {...section}
                                 key={`section_${index}`}
@@ -76,9 +76,8 @@ class Form extends React.Component {
                                 errors={errors}
                                 onUpdateData={this._handleUpdateData.bind(this)}
                                 onSubmit={this._handleSubmit.bind(this)} />)}
-              </div>
+              </div> : <div className={ classes.join(' ') } />
             }
-            { status === 'loading' && <div className="ui active centered inline loader" /> }
             { after &&
               <div className="reframe-form-footer">
                 <div className="reframe-form-after">{ after }</div>

@@ -100,7 +100,7 @@ var Form = function (_React$Component) {
                 instructions
               )
             ),
-            status !== 'loading' && _react2.default.createElement(
+            !_lodash2.default.includes(['pending', 'loading'], status) ? _react2.default.createElement(
               'div',
               { className: classes.join(' '), ref: 'form' },
               sections.map(function (section, index) {
@@ -111,8 +111,7 @@ var Form = function (_React$Component) {
                   onUpdateData: _this2._handleUpdateData.bind(_this2),
                   onSubmit: _this2._handleSubmit.bind(_this2) }));
               })
-            ),
-            status === 'loading' && _react2.default.createElement('div', { className: 'ui active centered inline loader' }),
+            ) : _react2.default.createElement('div', { className: classes.join(' ') }),
             after && _react2.default.createElement(
               'div',
               { className: 'reframe-form-footer' },

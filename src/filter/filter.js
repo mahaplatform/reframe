@@ -36,16 +36,24 @@ class Filter extends React.Component {
         <div className="reframe-filters-header">
           <div className="reframe-filters-header-search">
             <div className="reframe-filters-header-search-input">
-              <i className="search icon" />
+              <div className="reframe-filters-header-search-input-icon">
+                <i className="search icon" />
+              </div>
               <div className="ui input">
                 <input type="text" placeholder="Search" onChange={ this._handleType.bind(this) } ref="query" value={ query } />
               </div>
-              { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }
+              { query.length > 0 &&
+                <div className="reframe-filters-header-search-input-icon" onClick={ this._handleAbort.bind(this) }>
+                  <i className="remove circle icon" />
+                </div>
+              }
             </div>
           </div>
-          <div className="reframe-filters-header-filter" onClick={ this._handleOpen.bind(this) }>
-            <i className="icon options" />
-          </div>
+          { fields && fields.length > 0 &&
+            <div className="reframe-filters-header-filter" onClick={ this._handleOpen.bind(this) }>
+              <i className="icon options" />
+            </div>
+          }
         </div>
         { Object.keys(results).length > 0 &&
           <div className="reframe-filter-tokens">

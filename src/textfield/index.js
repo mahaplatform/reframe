@@ -48,9 +48,9 @@ class TextField extends React.Component {
     if(!this.props.prefix && !this.props.suffix) {
       return <div className="textfield">{ input }</div>
     }
-    const classes = ['ui','labeled','input']
-    if(this.props.prefix) classes.push('left')
-    if(this.props.suffix) classes.push('right')
+    const classes = ['ui','input']
+    if(this.props.prefix) classes.push('left labeled')
+    if(this.props.suffix) classes.push('right labeled')
     return (
       <div className="textfield">
         <div className={classes.join(' ')}>

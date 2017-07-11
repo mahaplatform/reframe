@@ -200,7 +200,11 @@ var Container = function (_React$Component3) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-filter-search-input' },
-              _react2.default.createElement('i', { className: 'search icon' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-filter-search-input-icon' },
+                _react2.default.createElement('i', { className: 'search icon' })
+              ),
               _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'results', value: query }),
               query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
             )

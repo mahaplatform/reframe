@@ -131,7 +131,11 @@ ToggleList.PropTypes = {
   chosen: _propTypes2.default.array,
   component: _propTypes2.default.func,
   endpoint: _propTypes2.default.string,
+  filters: _propTypes2.default.array,
   sort: _propTypes2.default.string,
   onChange: _propTypes2.default.func
+};
+ToggleList.defaultProps = {
+  filters: []
 };
 exports.default = ToggleList;
