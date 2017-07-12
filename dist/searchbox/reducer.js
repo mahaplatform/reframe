@@ -24,9 +24,14 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.QUERY:
+    case actionTypes.TYPE:
       return _extends({}, state, {
         q: action.q
+      });
+
+    case actionTypes.ABORT:
+      return _extends({}, state, {
+        q: ''
       });
 
     default:

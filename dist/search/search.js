@@ -16,6 +16,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _searchbox = require('../searchbox');
+
+var _searchbox2 = _interopRequireDefault(_searchbox);
+
 var _infinite = require('../infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
@@ -196,18 +200,8 @@ var Container = function (_React$Component3) {
           { className: 'reframe-filter-search' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-filter-search-form ui form' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-filter-search-input' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-filter-search-input-icon' },
-                _react2.default.createElement('i', { className: 'search icon' })
-              ),
-              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'results', value: query }),
-              query.length > 0 && _react2.default.createElement('i', { className: 'remove circle icon', onClick: this._handleAbort.bind(this) })
-            )
+            { className: 'reframe-filter-search-input' },
+            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
           ),
           _react2.default.createElement(_infinite2.default, this._getInfinite())
         );
@@ -221,14 +215,26 @@ var Container = function (_React$Component3) {
       this._handleLookup = _lodash2.default.throttle(this.props.onLookup, 500);
     }
   }, {
+    key: '_getSearchbox',
+    value: function _getSearchbox() {
+      var _props5 = this.props,
+          label = _props5.label,
+          onQuery = _props5.onQuery;
+
+      return {
+        prompt: 'Find a ' + label,
+        onChange: onQuery
+      };
+    }
+  }, {
     key: '_getInfinite',
     value: function _getInfinite() {
       var _this5 = this;
 
-      var _props5 = this.props,
-          endpoint = _props5.endpoint,
-          sort = _props5.sort,
-          q = _props5.q;
+      var _props6 = this.props,
+          endpoint = _props6.endpoint,
+          sort = _props6.sort,
+          q = _props6.q;
 
       return {
         endpoint: endpoint,

@@ -2,7 +2,7 @@ import * as actionTypes from './action_types'
 
 const INITIAL_VALUE = {
   active: false,
-  query: null,
+  q: null,
   chosen: null,
   status: 'ready'
 }
@@ -36,10 +36,10 @@ export default (state = INITIAL_VALUE, action) => {
       chosen: action.chosen
     }
 
-  case actionTypes.TYPE:
+  case actionTypes.QUERY:
     return {
       ...state,
-      query: action.q
+      q: action.q
     }
 
   case actionTypes.LOAD_SUCCESS:

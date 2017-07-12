@@ -84,6 +84,10 @@ var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
 
+var _searchbox = require('./searchbox');
+
+var _searchbox2 = _interopRequireDefault(_searchbox);
+
 var _stack = require('./stack');
 
 var _stack2 = _interopRequireDefault(_stack);
@@ -140,6 +144,7 @@ exports.default = {
   Prompt: _prompt2.default,
   Scrollpane: _scrollpane2.default,
   Search: _search2.default,
+  Searchbox: _searchbox2.default,
   Stack: _stack2.default,
   Table: _table2.default,
   Tabs: _tabs2.default,

@@ -16,6 +16,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _searchbox = require('../searchbox');
+
+var _searchbox2 = _interopRequireDefault(_searchbox);
+
 var _infinite = require('../infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
@@ -159,11 +163,7 @@ var Container = function (_React$Component3) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-lookup-panel-search' },
-            _react2.default.createElement(
-              'div',
-              { className: 'ui form' },
-              _react2.default.createElement('input', { type: 'text', placeholder: 'Find a ' + label + '...', onChange: this._handleType.bind(this), ref: 'query' })
-            )
+            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
           ),
           _react2.default.createElement(_infinite2.default, this._getInfinite()),
           form && _react2.default.createElement(
@@ -194,35 +194,35 @@ var Container = function (_React$Component3) {
           onLookup = _props4.onLookup;
     }
   }, {
+    key: '_getSearchbox',
+    value: function _getSearchbox() {
+      var _props5 = this.props,
+          label = _props5.label,
+          onQuery = _props5.onQuery;
+
+      return {
+        prompt: 'Find a ' + label,
+        onChange: onQuery
+      };
+    }
+  }, {
     key: '_getInfinite',
     value: function _getInfinite() {
       var _this5 = this;
 
-      var _props5 = this.props,
-          endpoint = _props5.endpoint,
-          query = _props5.query,
-          sort = _props5.sort;
+      var _props6 = this.props,
+          endpoint = _props6.endpoint,
+          q = _props6.q,
+          sort = _props6.sort;
 
-      var filter = { q: query };
       return {
         endpoint: endpoint,
-        filter: filter,
+        filter: { q: q },
         layout: function layout(props) {
           return _react2.default.createElement(Dynamic, _extends({}, _this5.props, props));
         },
         sort: sort
       };
-    }
-  }, {
-    key: '_handleType',
-    value: function _handleType(event) {
-      var _props6 = this.props,
-          sort = _props6.sort,
-          endpoint = _props6.endpoint;
-
-      var q = event.target.value;
-      var params = { $filter: { q: q }, $sort: sort };
-      this.props.onType(q);
     }
   }, {
     key: '_handleAdd',

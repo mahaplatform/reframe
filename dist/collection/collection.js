@@ -64,7 +64,7 @@ var Collection = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'reframe-collection-layout' },
-          filters && _react2.default.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'reframe-collection-header' },
             _react2.default.createElement(_filter2.default, this._getFilter())
@@ -89,13 +89,16 @@ var Collection = function (_React$Component) {
     key: '_getFilter',
     value: function _getFilter() {
       var _props3 = this.props,
+          entity = _props3.entity,
           filters = _props3.filters,
           params = _props3.params,
           onFilter = _props3.onFilter;
 
+      var article = _lodash2.default.includes(['a', 'e', 'i', 'o'], entity[0]) ? 'an' : 'a';
       return {
         fields: filters,
         filters: params.filter,
+        prompt: 'Find ' + article + ' ' + entity,
         onChange: onFilter
       };
     }

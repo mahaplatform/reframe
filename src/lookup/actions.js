@@ -17,8 +17,8 @@ export const choose = (chosen) => ({
   chosen
 })
 
-export const type = (q) => ({
-  type: actionTypes.TYPE,
+export const query = (q) => ({
+  type: actionTypes.QUERY,
   q
 })
 

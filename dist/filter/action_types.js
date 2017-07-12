@@ -14,6 +14,4 @@ var RESET = exports.RESET = 'RESET';
 var RESTART = exports.RESTART = 'RESTART';
 var UPDATE = exports.UPDATE = 'UPDATE';
 var REMOVE = exports.REMOVE = 'REMOVE';
-var TYPE = exports.TYPE = 'TYPE';
-var LOOKUP = exports.LOOKUP = 'LOOKUP';
-var ABORT = exports.ABORT = 'ABORT';
+var QUERY = exports.QUERY = 'QUERY';

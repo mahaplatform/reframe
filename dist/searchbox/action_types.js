@@ -3,4 +3,5 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var QUERY = exports.QUERY = 'QUERY';
+var TYPE = exports.TYPE = 'TYPE';
+var ABORT = exports.ABORT = 'ABORT';

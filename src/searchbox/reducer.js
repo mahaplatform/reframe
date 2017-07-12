@@ -8,10 +8,16 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.QUERY:
+  case actionTypes.TYPE:
     return {
       ...state,
       q: action.q
+    }
+
+  case actionTypes.ABORT:
+    return {
+      ...state,
+      q: ''
     }
 
   default:

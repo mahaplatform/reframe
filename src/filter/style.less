@@ -10,51 +10,6 @@
   flex: 1;
   padding: 0.5em;
 }
-.reframe-filters-header-search-input-icon {
-  color: fadeout(@black, 80);
-  flex: 0 0 2em;
-  display: flex;
-  cursor: pointer;
-  font-size: 1.3em;
-  .icon {
-    margin: auto;
-    line-height: 1em;
-  }
-}
-
-.reframe-filters-header-search-input {
-  .border-radius(5px);
-  background-color: fadeout(@white, 20);
-  display: flex;
-  .ui.input {
-    flex: 1;
-    input {
-      padding: 8px;
-      width: 100%;
-      border-radius: 0;
-      background-color: transparent !important;
-      color: fadeout(@black, 40);
-      border: none !important;
-      padding-left: 0;
-      padding-right: 0;
-      &::-webkit-input-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &:-moz-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &::-moz-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &::-webkit-input-placeholder,
-      &:-moz-placeholder,
-      &::-moz-placeholder,
-      &:-ms-input-placeholder {
-        color: fadeout(@black, 60);
-      }
-    }
-  }
-}
 .reframe-filters-header-filter {
   color: fadeout(@black, 60);
   padding: 0.5em 0.5em 0.5em 0;
@@ -64,6 +19,7 @@
     line-height: 1.6em;
   }
 }
+
 .reframe-filter-tokens {
   .scrollable-x();
   padding: 0.5em 0 0.5em 0.5em;
@@ -141,45 +97,9 @@
   display: flex;
   flex-direction: column;
 }
-.reframe-filter-search-form {
-  flex: 0 0 50px;
-  padding: 8px;
-  display: flex;
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EEEEEE;
-  .reframe-filter-search-input-icon {
-    color: #BBBBBB;
-    flex: 0 0 34px;
-    display: flex;
-    cursor: pointer;
-    font-size: 18px;
-    i {
-      margin: auto;
-    }
-  }
-  .reframe-filter-search-input {
-    .border-radius(5px);
-    flex: 1;
-    background-color: #EEEEEE;
-    display: flex;
-    input {
-      flex: 1;
-      padding: 8px !important;
-      width: 100% !important;
-      border-radius: 0 !important;
-      background-color: transparent !important;
-      color: #BBBBBB !important;
-      border: none !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      &::-webkit-input-placeholder,
-      &:-moz-placeholder,
-      &::-moz-placeholder,
-      &:-ms-input-placeholder {
-        color: #BBBBBB !important;
-      }
-    }
-  }
+.reframe-filter-search-input {
+  background-color: fadeout(@black, 90);
+  padding: 0.5em;
 }
 .reframe-filter-item {
   padding: 1em;

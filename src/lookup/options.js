@@ -1,5 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
+import Searchbox from '../searchbox'
 import Infinite from '../infinite'
 import Form from '../form'
 import Format from '../format'
@@ -64,9 +65,7 @@ class Container extends React.Component {
       return (
         <div className="reframe-lookup-panel">
           <div className="reframe-lookup-panel-search">
-            <div className="ui form">
-              <input type="text" placeholder={`Find a ${label}...`} onChange={ this._handleType.bind(this) } ref="query" />
-            </div>
+            <Searchbox { ...this._getSearchbox() } />
           </div>
           <Infinite { ...this._getInfinite() } />
           { form &&
@@ -91,22 +90,22 @@ class Container extends React.Component {
     const { sort, endpoint, onLookup } = this.props
   }
 
-  _getInfinite() {
-    const { endpoint, query, sort } = this.props
-    const filter = { q: query }
+  _getSearchbox() {
+    const { label, onQuery } = this.props
     return {
-      endpoint,
-      filter,
-      layout: (props) => <Dynamic { ...this.props } { ...props } />,
-      sort
+      prompt: `Find a ${label}`,
+      onChange: onQuery
     }
   }
 
-  _handleType(event) {
-    const { sort, endpoint } = this.props
-    const q = event.target.value
-    const params = { $filter: { q }, $sort: sort }
-    this.props.onType(q)
+  _getInfinite() {
+    const { endpoint, q, sort } = this.props
+    return {
+      endpoint,
+      filter: { q },
+      layout: (props) => <Dynamic { ...this.props } { ...props } />,
+      sort
+    }
   }
 
   _handleAdd() {

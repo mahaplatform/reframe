@@ -19,6 +19,7 @@ import Popup from './popup'
 import Prompt from './prompt'
 import Scrollpane from './scrollpane'
 import Search from './search'
+import Searchbox from './searchbox'
 import Stack from './stack'
 import Table from './table'
 import Tabs from './tabs'
@@ -50,6 +51,7 @@ export default {
   Prompt,
   Scrollpane,
   Search,
+  Searchbox,
   Stack,
   Table,
   Tabs,

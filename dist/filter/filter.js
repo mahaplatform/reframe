@@ -20,6 +20,10 @@ var _panel = require('./panel');
 
 var _panel2 = _interopRequireDefault(_panel);
 
+var _searchbox = require('../searchbox');
+
+var _searchbox2 = _interopRequireDefault(_searchbox);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -62,25 +66,7 @@ var Filter = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-filters-header-search' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-filters-header-search-input' },
-              _react2.default.createElement(
-                'div',
-                { className: 'reframe-filters-header-search-input-icon' },
-                _react2.default.createElement('i', { className: 'search icon' })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'ui input' },
-                _react2.default.createElement('input', { type: 'text', placeholder: 'Search', onChange: this._handleType.bind(this), ref: 'query', value: query })
-              ),
-              query.length > 0 && _react2.default.createElement(
-                'div',
-                { className: 'reframe-filters-header-search-input-icon', onClick: this._handleAbort.bind(this) },
-                _react2.default.createElement('i', { className: 'remove circle icon' })
-              )
-            )
+            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
           ),
           fields && fields.length > 0 && _react2.default.createElement(
             'div',
@@ -126,7 +112,6 @@ var Filter = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this._handleLookup = _lodash2.default.throttle(this.props.onLookup, 500);
       this._loadFilters();
     }
   }, {
@@ -146,13 +131,25 @@ var Filter = function (_React$Component) {
       this.props.onResetAll();
     }
   }, {
+    key: '_getSearchbox',
+    value: function _getSearchbox() {
+      var _props3 = this.props,
+          prompt = _props3.prompt,
+          onQuery = _props3.onQuery;
+
+      return {
+        prompt: prompt,
+        onChange: onQuery
+      };
+    }
+  }, {
     key: '_loadFilters',
     value: function _loadFilters() {
-      var _props3 = this.props,
-          fields = _props3.fields,
-          filters = _props3.filters,
-          onLoad = _props3.onLoad,
-          onSet = _props3.onSet;
+      var _props4 = this.props,
+          fields = _props4.fields,
+          filters = _props4.filters,
+          onLoad = _props4.onLoad,
+          onSet = _props4.onSet;
 
       if (fields && filters) {
         fields.map(function (field) {
@@ -171,10 +168,10 @@ var Filter = function (_React$Component) {
     value: function _handleChange() {
       var _this3 = this;
 
-      var _props4 = this.props,
-          results = _props4.results,
-          onChange = _props4.onChange,
-          q = _props4.q;
+      var _props5 = this.props,
+          results = _props5.results,
+          onChange = _props5.onChange,
+          q = _props5.q;
 
       var filters = Object.keys(results).reduce(function (filters, key) {
         return _extends({}, filters, _defineProperty({}, key, _this3._getValue(key)));
@@ -184,9 +181,9 @@ var Filter = function (_React$Component) {
   }, {
     key: '_getValue',
     value: function _getValue(key) {
-      var _props5 = this.props,
-          results = _props5.results,
-          fields = _props5.fields;
+      var _props6 = this.props,
+          results = _props6.results,
+          fields = _props6.fields;
 
       var field = _lodash2.default.find(fields, { name: key });
       var value = results[key];
@@ -212,17 +209,6 @@ var Filter = function (_React$Component) {
     value: function _handleRemove(key, index) {
       this.props.onRemove(key, index);
     }
-  }, {
-    key: '_handleType',
-    value: function _handleType(event) {
-      this.props.onType(event.target.value);
-      this._handleLookup(event.target.value);
-    }
-  }, {
-    key: '_handleAbort',
-    value: function _handleAbort() {
-      this.props.onAbort();
-    }
   }]);
 
   return Filter;
@@ -236,8 +222,8 @@ Filter.propTypes = {
   fields: _propTypes2.default.array,
   filters: _propTypes2.default.object,
   params: _propTypes2.default.object,
+  prompt: _propTypes2.default.string,
   q: _propTypes2.default.string,
-  query: _propTypes2.default.string,
   results: _propTypes2.default.object,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,

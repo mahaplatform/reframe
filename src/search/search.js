@@ -1,6 +1,7 @@
 
 import React from 'react'
 import _ from 'lodash'
+import Searchbox from '../searchbox'
 import Infinite from '../infinite'
 import Format from '../format'
 
@@ -91,14 +92,8 @@ class Container extends React.Component {
     if(endpoint) {
       return (
         <div className="reframe-filter-search">
-          <div className="reframe-filter-search-form ui form">
-            <div className="reframe-filter-search-input">
-              <div className="reframe-filter-search-input-icon">
-                <i className="search icon" />
-              </div>
-              <input type="text" placeholder={`Find a ${label}...`} onChange={ this._handleType.bind(this) } ref="results" value={ query } />
-              { query.length > 0 && <i className="remove circle icon" onClick={ this._handleAbort.bind(this) } /> }
-            </div>
+          <div className="reframe-filter-search-input">
+            <Searchbox { ...this._getSearchbox() } />
           </div>
           <Infinite {...this._getInfinite()} />
         </div>
@@ -111,6 +106,14 @@ class Container extends React.Component {
 
   componentDidMount() {
     this._handleLookup = _.throttle(this.props.onLookup, 500)
+  }
+
+  _getSearchbox() {
+    const { label, onQuery } = this.props
+    return {
+      prompt: `Find a ${label}`,
+      onChange: onQuery
+    }
   }
 
   _getInfinite() {

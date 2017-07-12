@@ -26,7 +26,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var INITIAL_STATE = exports.INITIAL_STATE = {
   active: null,
   q: '',
-  query: '',
   results: {}
 };
 
@@ -90,20 +89,9 @@ exports.default = function () {
         results: _extends({}, state.results, _defineProperty({}, action.key, action.value))
       });
 
-    case actionTypes.TYPE:
-      return _extends({}, state, {
-        query: action.query
-      });
-
-    case actionTypes.LOOKUP:
+    case actionTypes.QUERY:
       return _extends({}, state, {
         q: action.q
-      });
-
-    case actionTypes.ABORT:
-      return _extends({}, state, {
-        query: '',
-        q: ''
       });
 
     default:

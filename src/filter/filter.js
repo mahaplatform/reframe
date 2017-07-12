@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Panel from './panel'
+import Searchbox from '../searchbox'
 import _ from 'lodash'
 
 class Filter extends React.Component {
@@ -14,8 +15,8 @@ class Filter extends React.Component {
     fields: PropTypes.array,
     filters: PropTypes.object,
     params: PropTypes.object,
+    prompt: PropTypes.string,
     q: PropTypes.string,
-    query: PropTypes.string,
     results: PropTypes.object,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
@@ -35,19 +36,7 @@ class Filter extends React.Component {
       <div className="reframe-filters">
         <div className="reframe-filters-header">
           <div className="reframe-filters-header-search">
-            <div className="reframe-filters-header-search-input">
-              <div className="reframe-filters-header-search-input-icon">
-                <i className="search icon" />
-              </div>
-              <div className="ui input">
-                <input type="text" placeholder="Search" onChange={ this._handleType.bind(this) } ref="query" value={ query } />
-              </div>
-              { query.length > 0 &&
-                <div className="reframe-filters-header-search-input-icon" onClick={ this._handleAbort.bind(this) }>
-                  <i className="remove circle icon" />
-                </div>
-              }
-            </div>
+            <Searchbox { ...this._getSearchbox() } />
           </div>
           { fields && fields.length > 0 &&
             <div className="reframe-filters-header-filter" onClick={ this._handleOpen.bind(this) }>
@@ -87,7 +76,6 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    this._handleLookup = _.throttle(this.props.onLookup, 500)
     this._loadFilters()
   }
 
@@ -100,6 +88,14 @@ class Filter extends React.Component {
 
   componentWillUnmount() {
     this.props.onResetAll()
+  }
+
+  _getSearchbox() {
+    const { prompt, onQuery } = this.props
+    return {
+      prompt,
+      onChange: onQuery
+    }
   }
 
   _loadFilters() {
@@ -148,14 +144,6 @@ class Filter extends React.Component {
     this.props.onRemove(key, index)
   }
 
-  _handleType(event) {
-    this.props.onType(event.target.value)
-    this._handleLookup(event.target.value)
-  }
-
-  _handleAbort() {
-    this.props.onAbort()
-  }
 
 }
 

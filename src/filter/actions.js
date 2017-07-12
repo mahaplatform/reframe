@@ -51,16 +51,7 @@ export const remove = (key, index) => ({
   index
 })
 
-export const type = (query) => ({
-  type: actionTypes.TYPE,
-  query
-})
-
-export const lookup = (q) => ({
-  type: actionTypes.LOOKUP,
+export const query = (q) => ({
+  type: actionTypes.QUERY,
   q
-})
-
-export const abort = () => ({
-  type: actionTypes.ABORT
 })

@@ -55,11 +55,9 @@ class Collection extends React.Component {
     return (
       <div className="reframe-collection">
         <div className="reframe-collection-layout">
-          { filters &&
-            <div className="reframe-collection-header">
-              <Filter { ...this._getFilter() } />
-            </div>
-          }
+          <div className="reframe-collection-header">
+            <Filter { ...this._getFilter() } />
+          </div>
           { records ? <Results { ...this.props } /> : <Infinite { ...this._getInfinite() } /> }
         </div>
       </div>
@@ -75,10 +73,12 @@ class Collection extends React.Component {
   }
 
   _getFilter() {
-    const { filters, params, onFilter } = this.props
+    const { entity, filters, params, onFilter } = this.props
+    const article = _.includes(['a','e','i','o'], entity[0]) ? 'an' : 'a'
     return {
       fields: filters,
       filters: params.filter,
+      prompt: `Find ${article} ${entity}`,
       onChange: onFilter
     }
   }

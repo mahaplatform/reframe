@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.abort = exports.lookup = exports.type = exports.remove = exports.update = exports.reset = exports.resetAll = exports.restart = exports.back = exports.choose = exports.set = exports.load = undefined;
+exports.query = exports.remove = exports.update = exports.reset = exports.resetAll = exports.restart = exports.back = exports.choose = exports.set = exports.load = undefined;
 
 var _action_types = require('./action_types');
 
@@ -80,22 +80,9 @@ var remove = exports.remove = function remove(key, index) {
   };
 };
 
-var type = exports.type = function type(query) {
+var query = exports.query = function query(q) {
   return {
-    type: actionTypes.TYPE,
-    query: query
-  };
-};
-
-var lookup = exports.lookup = function lookup(q) {
-  return {
-    type: actionTypes.LOOKUP,
+    type: actionTypes.QUERY,
     q: q
-  };
-};
-
-var abort = exports.abort = function abort() {
-  return {
-    type: actionTypes.ABORT
   };
 };

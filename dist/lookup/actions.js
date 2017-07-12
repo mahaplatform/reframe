@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.load = exports.type = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
+exports.load = exports.query = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
 
 var _action_types = require('./action_types');
 
@@ -36,9 +36,9 @@ var choose = exports.choose = function choose(chosen) {
   };
 };
 
-var type = exports.type = function type(q) {
+var query = exports.query = function query(q) {
   return {
-    type: actionTypes.TYPE,
+    type: actionTypes.QUERY,
     q: q
   };
 };

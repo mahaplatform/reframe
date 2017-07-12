@@ -14,7 +14,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var INITIAL_VALUE = {
   active: false,
-  query: null,
+  q: null,
   chosen: null,
   status: 'ready'
 };
@@ -47,9 +47,9 @@ exports.default = function () {
         chosen: action.chosen
       });
 
-    case actionTypes.TYPE:
+    case actionTypes.QUERY:
       return _extends({}, state, {
-        query: action.q
+        q: action.q
       });
 
     case actionTypes.LOAD_SUCCESS:
