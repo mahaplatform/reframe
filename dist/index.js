@@ -12,6 +12,10 @@ var _collection = require('./collection');
 
 var _collection2 = _interopRequireDefault(_collection);
 
+var _colorfield = require('./colorfield');
+
+var _colorfield2 = _interopRequireDefault(_colorfield);
+
 var _control = require('./control');
 
 var _control2 = _interopRequireDefault(_control);
@@ -125,6 +129,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   Checkbox: _checkbox2.default,
   Collection: _collection2.default,
+  Colorfield: _colorfield2.default,
   Control: _control2.default,
   Datefield: _details2.default,
   Details: _details2.default,

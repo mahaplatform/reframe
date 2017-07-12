@@ -22,6 +22,10 @@ var _checkbox = require('../checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
+var _colorfield = require('../colorfield');
+
+var _colorfield2 = _interopRequireDefault(_colorfield);
+
 var _datefield = require('../datefield');
 
 var _datefield2 = _interopRequireDefault(_datefield);
@@ -61,7 +65,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import Dynamic from '../dynamic'
 
 // // import Checkboxes from '../checkboxes'
-// // import ColorField from '../colorfield'
 
 // // import MultiSelect from './multiselect'
 // // import Radios from './radios'
@@ -73,7 +76,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var standardControls = {
   'checkbox': _checkbox2.default,
   // 'checkboxes': Checkboxes,
-  // 'colorfield': ColorField,
+  'colorfield': _colorfield2.default,
   'datefield': _datefield2.default,
   'filefield': _filefield2.default,
   'lookup': _lookup2.default,
@@ -102,7 +105,7 @@ var Control = function (_React$Component) {
     value: function render() {
       var type = this.props.type;
 
-      var Element = _lodash2.default.isString(this.props.type) ? _lodash2.default.get(standardControls, type) : type;
+      var Element = _lodash2.default.isString(this.props.type) ? _lodash2.default.get(standardControls, type) || standardControls.textfield : type;
       return _react2.default.createElement(
         'div',
         { className: 'control' },

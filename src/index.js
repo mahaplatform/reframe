@@ -1,5 +1,6 @@
 import Checkbox from './checkbox'
 import Collection from './collection'
+import Colorfield from './colorfield'
 import Control from './control'
 import Datefield from './details'
 import Details from './details'
@@ -32,6 +33,7 @@ import Tray from './tray'
 export default {
   Checkbox,
   Collection,
+  Colorfield,
   Control,
   Datefield,
   Details,

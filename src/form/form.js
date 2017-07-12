@@ -45,7 +45,7 @@ class Form extends React.Component {
 
   render() {
     const { after, before, data, errors, instructions, status, sections, title } = this.props
-    let classes = ['ui', 'form', 'reframe-form', status]
+    let classes = ['ui', 'form', status]
     if(_.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading')
     return (
       <div className="reframe-modal-panel">

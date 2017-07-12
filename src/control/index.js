@@ -5,7 +5,7 @@ import _ from 'lodash'
 // import Dynamic from '../dynamic'
 import Checkbox from '../checkbox'
 // // import Checkboxes from '../checkboxes'
-// // import ColorField from '../colorfield'
+import ColorField from '../colorfield'
 import DateField from '../datefield'
 import Filefield from '../filefield'
 import Lookup from '../lookup'
@@ -22,7 +22,7 @@ import Password from '../password'
 const standardControls = {
   'checkbox': Checkbox,
   // 'checkboxes': Checkboxes,
-  // 'colorfield': ColorField,
+  'colorfield': ColorField,
   'datefield': DateField,
   'filefield': Filefield,
   'lookup': Lookup,
@@ -56,7 +56,7 @@ class Control extends React.Component {
 
   render() {
     const { type } = this.props
-    const Element = (_.isString(this.props.type)) ? _.get(standardControls, type) : type
+    const Element = (_.isString(this.props.type)) ? (_.get(standardControls, type) || standardControls.textfield) : type
     return (
       <div className="control">
         <Element {...this.props} />

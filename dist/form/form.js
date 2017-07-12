@@ -56,7 +56,7 @@ var Form = function (_React$Component) {
           sections = _props.sections,
           title = _props.title;
 
-      var classes = ['ui', 'form', 'reframe-form', status];
+      var classes = ['ui', 'form', status];
       if (_lodash2.default.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading');
       return _react2.default.createElement(
         'div',
