@@ -27,13 +27,20 @@ class ColorField extends React.Component {
       <div className="reframe-colorfield">
         { colors.map((color, index) => {
           return (
-            <div className="reframe-color" style={{ backgroundColor: color.value }} onClick={ this._handleSet.bind(this, color.name) }>
+            <div key={`color_${index}`} className="reframe-color" style={{ backgroundColor: color.value }} onClick={ this._handleSet.bind(this, color.name) }>
               { color.name === this.props.color && <i className="check icon" /> }
             </div>
           )
         }) }
       </div>
     )
+  }
+
+  componentDidMount() {
+    const { defaultValue, onSet } = this.props
+    if(defaultValue) {
+      onSet(defaultValue)
+    }
   }
 
   componentDidUpdate(prevProps) {

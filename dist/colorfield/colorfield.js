@@ -43,18 +43,29 @@ var ColorField = function (_React$Component) {
         colors.map(function (color, index) {
           return _react2.default.createElement(
             'div',
-            { className: 'reframe-color', style: { backgroundColor: color.value }, onClick: _this2._handleSet.bind(_this2, color.name) },
+            { key: 'color_' + index, className: 'reframe-color', style: { backgroundColor: color.value }, onClick: _this2._handleSet.bind(_this2, color.name) },
             color.name === _this2.props.color && _react2.default.createElement('i', { className: 'check icon' })
           );
         })
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props = this.props,
+          defaultValue = _props.defaultValue,
+          onSet = _props.onSet;
+
+      if (defaultValue) {
+        onSet(defaultValue);
+      }
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var _props = this.props,
-          color = _props.color,
-          onChange = _props.onChange;
+      var _props2 = this.props,
+          color = _props2.color,
+          onChange = _props2.onChange;
 
       if (prevProps.color !== color) {
         onChange(color);
