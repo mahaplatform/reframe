@@ -3,14 +3,6 @@ import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 
-class Outlet extends React.Component {
-
-  render() {
-    return <div className="reframe-modal-outlet">{ this.props.children }</div>
-  }
-
-}
-
 class Modal extends React.Component {
 
   static childContextTypes = {
@@ -32,7 +24,7 @@ class Modal extends React.Component {
     return (
       <div className="reframe-modal">
         { children }
-        <CSSTransitionGroup component={ Outlet } transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
+        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
           { component && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
           { component &&
             <div className="reframe-modal-window">

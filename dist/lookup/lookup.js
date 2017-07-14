@@ -38,31 +38,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LookupOutlet = function (_React$Component) {
-  _inherits(LookupOutlet, _React$Component);
-
-  function LookupOutlet() {
-    _classCallCheck(this, LookupOutlet);
-
-    return _possibleConstructorReturn(this, (LookupOutlet.__proto__ || Object.getPrototypeOf(LookupOutlet)).apply(this, arguments));
-  }
-
-  _createClass(LookupOutlet, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'reframe-lookup-search-outlet' },
-        this.props.children
-      );
-    }
-  }]);
-
-  return LookupOutlet;
-}(_react2.default.Component);
-
-var Lookup = function (_React$Component2) {
-  _inherits(Lookup, _React$Component2);
+var Lookup = function (_React$Component) {
+  _inherits(Lookup, _React$Component);
 
   function Lookup() {
     _classCallCheck(this, Lookup);
@@ -102,7 +79,7 @@ var Lookup = function (_React$Component2) {
           placeholder: prompt }),
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { component: LookupOutlet, transitionName: 'cover', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
+          { transitionName: 'cover', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           active && _react2.default.createElement(_search2.default, this.props)
         )
       );

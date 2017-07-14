@@ -3,14 +3,6 @@ import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
 import _ from 'lodash'
 
-class Outlet extends React.Component {
-
-  render() {
-    return <div className="reframe-tray-outlet">{ this.props.children }</div>
-  }
-
-}
-
 class Tray extends React.Component {
 
   static childContextTypes = {
@@ -28,7 +20,7 @@ class Tray extends React.Component {
     return (
       <div className="reframe-tray">
         { children }
-        <CSSTransitionGroup component={ Outlet } transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
           { component && <div className="reframe-tray-overlay" onClick={this._handleCloseTray.bind(this)} /> }
           { component &&
             <div className="reframe-tray-panel">

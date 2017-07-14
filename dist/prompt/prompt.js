@@ -24,31 +24,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Outlet = function (_React$Component) {
-  _inherits(Outlet, _React$Component);
-
-  function Outlet() {
-    _classCallCheck(this, Outlet);
-
-    return _possibleConstructorReturn(this, (Outlet.__proto__ || Object.getPrototypeOf(Outlet)).apply(this, arguments));
-  }
-
-  _createClass(Outlet, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'reframe-prompt-outlet' },
-        this.props.children
-      );
-    }
-  }]);
-
-  return Outlet;
-}(_react2.default.Component);
-
-var Prompt = function (_React$Component2) {
-  _inherits(Prompt, _React$Component2);
+var Prompt = function (_React$Component) {
+  _inherits(Prompt, _React$Component);
 
   function Prompt() {
     _classCallCheck(this, Prompt);
@@ -59,7 +36,7 @@ var Prompt = function (_React$Component2) {
   _createClass(Prompt, [{
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _props = this.props,
           children = _props.children,
@@ -72,7 +49,7 @@ var Prompt = function (_React$Component2) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { component: Outlet, transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
+          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
           message && _react2.default.createElement('div', { className: 'reframe-prompt-overlay', onClick: this._handleClosePrompt.bind(this) }),
           message && _react2.default.createElement(
             'div',
@@ -85,7 +62,7 @@ var Prompt = function (_React$Component2) {
             options && options.map(function (option, index) {
               return _react2.default.createElement(
                 'div',
-                { key: 'option_' + index, className: 'reframe-prompt-option', onClick: _this3._handleChooseOption.bind(_this3, index) },
+                { key: 'option_' + index, className: 'reframe-prompt-option', onClick: _this2._handleChooseOption.bind(_this2, index) },
                 option.label
               );
             })

@@ -24,31 +24,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Outlet = function (_React$Component) {
-  _inherits(Outlet, _React$Component);
-
-  function Outlet() {
-    _classCallCheck(this, Outlet);
-
-    return _possibleConstructorReturn(this, (Outlet.__proto__ || Object.getPrototypeOf(Outlet)).apply(this, arguments));
-  }
-
-  _createClass(Outlet, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'reframe-tasks-outlet' },
-        this.props.children
-      );
-    }
-  }]);
-
-  return Outlet;
-}(_react2.default.Component);
-
-var Tasks = function (_React$Component2) {
-  _inherits(Tasks, _React$Component2);
+var Tasks = function (_React$Component) {
+  _inherits(Tasks, _React$Component);
 
   function Tasks() {
     _classCallCheck(this, Tasks);
@@ -59,7 +36,7 @@ var Tasks = function (_React$Component2) {
   _createClass(Tasks, [{
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _props = this.props,
           children = _props.children,
@@ -71,7 +48,7 @@ var Tasks = function (_React$Component2) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { component: Outlet, transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
+          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
           items && _react2.default.createElement('div', { className: 'reframe-tasks-overlay', onClick: this._handleClose.bind(this) }),
           items && _react2.default.createElement(
             'div',
@@ -79,7 +56,7 @@ var Tasks = function (_React$Component2) {
             items.map(function (item, index) {
               return _react2.default.createElement(
                 'div',
-                { key: 'task_' + index, className: 'reframe-tasks-item', onClick: _this3._handleChoose.bind(_this3, index) },
+                { key: 'task_' + index, className: 'reframe-tasks-item', onClick: _this2._handleChoose.bind(_this2, index) },
                 item.label
               );
             }),

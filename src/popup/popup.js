@@ -3,14 +3,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
 
-class Outlet extends React.Component {
-
-  render() {
-    return <div className="reframe-popup-outlet">{ this.props.children }</div>
-  }
-
-}
-
 export class Popup extends React.Component {
 
   static childContextTypes = {
@@ -28,7 +20,7 @@ export class Popup extends React.Component {
     return (
       <div className="reframe-popup">
         { children }
-        <CSSTransitionGroup component={ Outlet } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
           { component &&
             <div className="reframe-popup-panel">
               <div className="reframe-popup-panel-item">

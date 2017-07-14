@@ -28,31 +28,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Outlet = function (_React$Component) {
-  _inherits(Outlet, _React$Component);
-
-  function Outlet() {
-    _classCallCheck(this, Outlet);
-
-    return _possibleConstructorReturn(this, (Outlet.__proto__ || Object.getPrototypeOf(Outlet)).apply(this, arguments));
-  }
-
-  _createClass(Outlet, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'reframe-drawer-outlet' },
-        this.props.children
-      );
-    }
-  }]);
-
-  return Outlet;
-}(_react2.default.Component);
-
-var Drawer = function (_React$Component2) {
-  _inherits(Drawer, _React$Component2);
+var Drawer = function (_React$Component) {
+  _inherits(Drawer, _React$Component);
 
   function Drawer() {
     _classCallCheck(this, Drawer);
@@ -74,7 +51,7 @@ var Drawer = function (_React$Component2) {
         children,
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransitionGroup,
-          { component: Outlet, transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
+          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
           component && _react2.default.createElement('div', { className: 'reframe-drawer-overlay', onClick: this._handleClose.bind(this) }),
           component && _react2.default.createElement(
             'div',

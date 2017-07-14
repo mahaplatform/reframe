@@ -5,14 +5,6 @@ import _ from 'lodash'
 import Format from '../format'
 import Search from './search'
 
-class LookupOutlet extends React.Component {
-
-  render() {
-    return <div className="reframe-lookup-search-outlet">{ this.props.children }</div>
-  }
-
-}
-
 class Lookup extends React.Component {
 
   static propTypes = {
@@ -63,7 +55,7 @@ class Lookup extends React.Component {
                  value={ value }
                  placeholder={ prompt } />
        }
-       <CSSTransitionGroup component={ LookupOutlet } transitionName="cover" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
+       <CSSTransitionGroup transitionName="cover" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
          { active && <Search { ...this.props } />}
        </CSSTransitionGroup>
      </div>

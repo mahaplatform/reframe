@@ -2,14 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
 
-class Outlet extends React.Component {
-
-  render() {
-    return <div className="reframe-prompt-outlet">{ this.props.children }</div>
-  }
-
-}
-
 class Prompt extends React.Component {
 
   static childContextTypes = {
@@ -40,7 +32,7 @@ class Prompt extends React.Component {
     return (
       <div className="reframe-prompt">
         { children }
-        <CSSTransitionGroup component={ Outlet } transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
+        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
           { message && <div className="reframe-prompt-overlay" onClick={ this._handleClosePrompt.bind(this) } /> }
           { message &&
             <div className="reframe-prompt-options">
