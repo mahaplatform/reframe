@@ -210,11 +210,6 @@ var Container = function (_React$Component3) {
       }
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._handleLookup = _lodash2.default.throttle(this.props.onLookup, 500);
-    }
-  }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
       var _props5 = this.props,
@@ -244,17 +239,6 @@ var Container = function (_React$Component3) {
         },
         sort: sort
       };
-    }
-  }, {
-    key: '_handleType',
-    value: function _handleType(event) {
-      this.props.onType(event.target.value);
-      this._handleLookup(event.target.value);
-    }
-  }, {
-    key: '_handleAbort',
-    value: function _handleAbort() {
-      this.props.onAbort();
     }
   }]);
 

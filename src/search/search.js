@@ -104,10 +104,6 @@ class Container extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this._handleLookup = _.throttle(this.props.onLookup, 500)
-  }
-
   _getSearchbox() {
     const { label, onQuery } = this.props
     return {
@@ -124,15 +120,6 @@ class Container extends React.Component {
       layout: (props) => <Dynamic { ...this.props} { ...props } />,
       sort
     }
-  }
-
-  _handleType(event) {
-    this.props.onType(event.target.value)
-    this._handleLookup(event.target.value)
-  }
-
-  _handleAbort() {
-    this.props.onAbort()
   }
 
 }
