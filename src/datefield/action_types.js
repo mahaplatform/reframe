@@ -1,0 +1,8 @@
+export const SET_CURRENT = 'SET_CURRENT'
+export const SET_VALUE = 'SET_VALUE'
+export const PREVIOUS = 'PREVIOUS'
+export const NEXT = 'NEXT'
+export const BEGIN = 'BEGIN'
+export const CANCEL = 'CANCEL'
+export const CHOOSE = 'CHOOSE'
+export const CLEAR = 'CLEAR'

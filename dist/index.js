@@ -20,6 +20,10 @@ var _control = require('./control');
 
 var _control2 = _interopRequireDefault(_control);
 
+var _datefield = require('./datefield');
+
+var _datefield2 = _interopRequireDefault(_datefield);
+
 var _details = require('./details');
 
 var _details2 = _interopRequireDefault(_details);
@@ -131,7 +135,7 @@ exports.default = {
   Collection: _collection2.default,
   Colorfield: _colorfield2.default,
   Control: _control2.default,
-  Datefield: _details2.default,
+  Datefield: _datefield2.default,
   Details: _details2.default,
   Drawer: _drawer2.default,
   Filefield: _filefield2.default,

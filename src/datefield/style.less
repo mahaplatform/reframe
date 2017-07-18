@@ -1,5 +1,124 @@
-.datefield {
-  .calendar.icon {
-    margin: 0;
+.reframe-datefield-input {
+  border: 1px solid rgba(34,36,38,.15);
+  background-color: @white;
+  border-radius: 5px;
+  display: flex;
+}
+.reframe-datefield-icon {
+  flex: 0 0 2.5em;
+  display: flex;
+  background-color: #E8E8E8;
+  .icon {
+    margin: auto;
+    line-height: 1em;
+    color: fadeout(@black, 40);
+  }
+}
+.reframe-datefield-field {
+  padding: .4em 1em;
+  flex: 1;
+  span {
+    color: lighten(@black, 80);
+  }
+}
+.reframe-datefield-remove {
+  flex: 0 0 2.5em;
+  display: flex;
+  .icon {
+    margin: auto;
+    font-size: 1.4em;
+    line-height: 1.1em;
+    color: fadeout(@black, 80);
+    cursor: pointer;
+    &:hover {
+      color: fadeout(@black, 70);
+    }
+  }
+}
+.reframe-datefield-chooser {
+  padding: 1em;
+}
+.reframe-datefield-month {
+  display: flex;
+  flex-direction: column;
+}
+.reframe-datefield-header {
+  background-color: fadeout(@black, 80);
+  flex: 1;
+  display: flex;
+}
+.reframe-datefield-weekdays {
+  background-color: fadeout(@black, 90);
+  flex: 1;
+  display: flex;
+}
+.reframe-datefield-previous,
+.reframe-datefield-title,
+.reframe-datefield-next,
+.reframe-datefield-weekday,
+.reframe-datefield-day {
+  flex: 0 0 calc(100% / 7);
+  border: 1px solid @white;
+  text-align: center;
+}
+.reframe-datefield-weekday {
+  padding: 0.5em 0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+.reframe-datefield-previous,
+.reframe-datefield-title,
+.reframe-datefield-next,
+.reframe-datefield-day {
+  padding: 0.5em 0;
+  text-align: center;
+}
+.reframe-datefield-previous,
+.reframe-datefield-next {
+  cursor: pointer;
+  &:hover {
+    background-color: fadeout(@black, 85);
+  }
+}
+.reframe-datefield-title {
+  flex: 1;
+}
+.reframe-datefield-week {
+  flex: 1;
+  display: flex;
+}
+.reframe-datefield-day {
+  flex: 1;
+  background-color: fadeout(@black, 95);
+  cursor: pointer;
+  color: fadeout(@black, 30);
+  &.notmonth {
+    color: fadeout(@black, 80);
+  }
+  &.today {
+    color: @black;
+    font-weight: bold;
+  }
+  &.selected {
+    background-color: fadeout(@yellow, 85);
+    &:hover {
+      background-color: fadeout(@yellow, 80);
+    }
+  }
+  &:hover {
+    background-color: fadeout(@black, 90);
+  }
+}
+.error {
+  .reframe-datefield-input {
+    border-color: #DB2828 !important;
+    background-color: #FFF6F6;
+    border-radius: 5px 5px 0 0;
+  }
+  .reframe-datefield-icon {
+    background-color: #DB2828 !important;
+    .icon {
+      color: #FFF !important;
+    }
   }
 }
