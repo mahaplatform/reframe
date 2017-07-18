@@ -1,24 +1,40 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Table from '../table'
 import _ from 'lodash'
 import pluralize from 'pluralize'
 
-export const Empty = (props) => (
-  <div className="reframe-message">
-    <div className="reframe-message-panel">
-      <h2><i className={`circular ${props.empty && props.empty.icon ? props.empty.icon : 'warning sign'} icon`} /></h2>
-      <h3>No { _.startCase(pluralize(props.entity.replace('_', ' '))) }</h3>
-      { !props.empty || (props.empty && !props.empty.message) && <p>You have not yet created any { pluralize(props.entity.replace('_', ' ')) }</p>}
-      { props.empty && props.empty.message && <p>{ props.empty.message }</p>}
-      { props.empty.modal &&
-        <div className="ui basic button red" onClick={ props.onAddNew.bind(this)}>
-          <i className="plus icon" />
-          Create New {_.startCase(props.entity.replace('_', ' '))}
+export class Empty extends React.Component {
+
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
+  render() {
+    const { empty, entity } = this.props
+    return (
+      <div className="reframe-message">
+        <div className="reframe-message-panel">
+          <h2><i className={`circular ${empty && empty.icon ? empty.icon : 'warning sign'} icon`} /></h2>
+          <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
+          { !empty || (empty && !empty.message) && <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>}
+          { empty && empty.message && <p>{ empty.message }</p>}
+          { empty.modal &&
+            <div className="ui basic button red" onClick={ this._handleAddNew.bind(this)}>
+              <i className="plus icon" />
+              Create New {_.startCase(entity.replace('_', ' '))}
+            </div>
+          }
         </div>
-      }
-    </div>
-  </div>
-)
+      </div>
+    )
+  }
+
+  _handleAddNew() {
+    this.context.modal.open(this.props.empty.modal)
+  }
+
+}
 
 export class Results extends React.Component {
 

@@ -13,6 +13,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _table = require('../table');
 
 var _table2 = _interopRequireDefault(_table);
@@ -33,48 +37,76 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Empty = exports.Empty = function Empty(props) {
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-message' },
-    _react2.default.createElement(
-      'div',
-      { className: 'reframe-message-panel' },
-      _react2.default.createElement(
-        'h2',
-        null,
-        _react2.default.createElement('i', { className: 'circular ' + (props.empty && props.empty.icon ? props.empty.icon : 'warning sign') + ' icon' })
-      ),
-      _react2.default.createElement(
-        'h3',
-        null,
-        'No ',
-        _lodash2.default.startCase((0, _pluralize2.default)(props.entity.replace('_', ' ')))
-      ),
-      !props.empty || props.empty && !props.empty.message && _react2.default.createElement(
-        'p',
-        null,
-        'You have not yet created any ',
-        (0, _pluralize2.default)(props.entity.replace('_', ' '))
-      ),
-      props.empty && props.empty.message && _react2.default.createElement(
-        'p',
-        null,
-        props.empty.message
-      ),
-      props.empty.modal && _react2.default.createElement(
+var Empty = exports.Empty = function (_React$Component) {
+  _inherits(Empty, _React$Component);
+
+  function Empty() {
+    _classCallCheck(this, Empty);
+
+    return _possibleConstructorReturn(this, (Empty.__proto__ || Object.getPrototypeOf(Empty)).apply(this, arguments));
+  }
+
+  _createClass(Empty, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          empty = _props.empty,
+          entity = _props.entity;
+
+      return _react2.default.createElement(
         'div',
-        { className: 'ui basic button red', onClick: props.onAddNew.bind(undefined) },
-        _react2.default.createElement('i', { className: 'plus icon' }),
-        'Create New ',
-        _lodash2.default.startCase(props.entity.replace('_', ' '))
-      )
-    )
-  );
+        { className: 'reframe-message' },
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-message-panel' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            _react2.default.createElement('i', { className: 'circular ' + (empty && empty.icon ? empty.icon : 'warning sign') + ' icon' })
+          ),
+          _react2.default.createElement(
+            'h3',
+            null,
+            'No ',
+            _lodash2.default.startCase((0, _pluralize2.default)(entity.replace('_', ' ')))
+          ),
+          !empty || empty && !empty.message && _react2.default.createElement(
+            'p',
+            null,
+            'You have not yet created any ',
+            (0, _pluralize2.default)(entity.replace('_', ' '))
+          ),
+          empty && empty.message && _react2.default.createElement(
+            'p',
+            null,
+            empty.message
+          ),
+          empty.modal && _react2.default.createElement(
+            'div',
+            { className: 'ui basic button red', onClick: this._handleAddNew.bind(this) },
+            _react2.default.createElement('i', { className: 'plus icon' }),
+            'Create New ',
+            _lodash2.default.startCase(entity.replace('_', ' '))
+          )
+        )
+      );
+    }
+  }, {
+    key: '_handleAddNew',
+    value: function _handleAddNew() {
+      this.context.modal.open(this.props.empty.modal);
+    }
+  }]);
+
+  return Empty;
+}(_react2.default.Component);
+
+Empty.contextTypes = {
+  modal: _propTypes2.default.object
 };
 
-var Results = exports.Results = function (_React$Component) {
-  _inherits(Results, _React$Component);
+var Results = exports.Results = function (_React$Component2) {
+  _inherits(Results, _React$Component2);
 
   function Results() {
     _classCallCheck(this, Results);
@@ -85,9 +117,9 @@ var Results = exports.Results = function (_React$Component) {
   _createClass(Results, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          columns = _props.columns,
-          layout = _props.layout;
+      var _props2 = this.props,
+          columns = _props2.columns,
+          layout = _props2.layout;
 
       if (columns) return _react2.default.createElement(_table2.default, this._getTable());
       if (layout) return _react2.default.createElement(layout, _extends({}, this._getCustomLayout()));
@@ -102,16 +134,16 @@ var Results = exports.Results = function (_React$Component) {
   }, {
     key: '_getTable',
     value: function _getTable() {
-      var _props2 = this.props,
-          columns = _props2.columns,
-          handler = _props2.handler,
-          link = _props2.link,
-          modal = _props2.modal,
-          params = _props2.params,
-          records = _props2.records,
-          status = _props2.status,
-          onLoadMore = _props2.onLoadMore,
-          onSort = _props2.onSort;
+      var _props3 = this.props,
+          columns = _props3.columns,
+          handler = _props3.handler,
+          link = _props3.link,
+          modal = _props3.modal,
+          params = _props3.params,
+          records = _props3.records,
+          status = _props3.status,
+          onLoadMore = _props3.onLoadMore,
+          onSort = _props3.onSort;
       var sort = params.sort;
 
       return {
@@ -130,12 +162,12 @@ var Results = exports.Results = function (_React$Component) {
   }, {
     key: '_getCustomLayout',
     value: function _getCustomLayout() {
-      var _props3 = this.props,
-          records = _props3.records,
-          sort = _props3.sort,
-          status = _props3.status,
-          onLoadMore = _props3.onLoadMore,
-          onSort = _props3.onSort;
+      var _props4 = this.props,
+          records = _props4.records,
+          sort = _props4.sort,
+          status = _props4.status,
+          onLoadMore = _props4.onLoadMore,
+          onSort = _props4.onSort;
 
       return {
         records: records,
