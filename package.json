@@ -34,24 +34,26 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.6.0",
-    "react-api-request": "^1.0.2",
+    "react-api-request": "^1.5.0",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^1.1.2",
     "redux": "^3.6.0",
-    "redux-rubberstamp": "^1.3.3",
+    "redux-rubberstamp": "^1.6.0",
     "reselect": "^3.0.0",
     "resumablejs": "^1.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.3.0",
     "sinon": "^2.2.0"
   }
