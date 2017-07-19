@@ -34,11 +34,11 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.6.0",
-    "react-api-request": "^1.5.0",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^1.1.2",
     "redux": "^3.6.0",
+    "redux-api-request": "^1.5.0",
     "redux-rubberstamp": "^1.6.0",
     "reselect": "^3.0.0",
     "resumablejs": "^1.0.2"
