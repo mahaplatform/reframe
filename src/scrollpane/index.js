@@ -89,7 +89,7 @@ class Scrollpane extends React.Component {
         if(!header.fixed && index > this.fixed && scrollpane.scrollTop >= header.top) {
           scrollpane.style.paddingTop = `${node.offsetHeight}px`
           node.style.position = 'fixed'
-          node.style.top = `${scrollpane.offsetTop}px`
+          node.style.top = `${scrollpane.getBoundingClientRect().top}px`
           node.style.left = 0
           node.style.right = 0
           node.style.zIndex = 2
