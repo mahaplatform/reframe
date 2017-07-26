@@ -63,7 +63,6 @@ class Scrollpane extends React.Component {
     const { scrollpane } = this.refs
     const childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'))
     return childNodes.reduce((headers, node) => {
-      console.log(node.getBoundingClientRect().top, scrollpane.getBoundingClientRect().top)
       const top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top)
       return [
         ...headers,

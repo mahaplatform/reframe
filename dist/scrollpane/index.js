@@ -98,7 +98,6 @@ var Scrollpane = function (_React$Component) {
 
       var childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'));
       return childNodes.reduce(function (headers, node) {
-        console.log(node.getBoundingClientRect().top, scrollpane.getBoundingClientRect().top);
         var top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top);
         return [].concat(_toConsumableArray(headers), [{
           node: node,
@@ -133,7 +132,6 @@ var Scrollpane = function (_React$Component) {
             node.style.left = 0;
             node.style.right = 0;
             node.style.zIndex = 2;
-            node.style.border = '1px solid #000';
             _this2.fixed = index;
             _this2.headers[index].fixed = true;
           } else if (header.fixed && index <= _this2.fixed && scrollpane.scrollTop < header.top) {
