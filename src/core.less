@@ -80,21 +80,6 @@ body {
 .backface-visibility(@value) {
 	backface-visibility: @value;
 }
-.colorize(@class, @property: background-color) {
-  .red .@{class} { @{property}: @red; }
-  .orange .@{class} { @{property}: @orange; }
-  .yellow .@{class} { @{property}: @yellow; }
-	.olive .@{class} { @{property}: @olive; }
-	.green .@{class} { @{property}: @green; }
-	.teal .@{class} { @{property}: @teal; }
-  .blue .@{class} { @{property}: @blue; }
-	.violet .@{class} { @{property}: @violet; }
-  .purple .@{class} { @{property}: @purple; }
-	.pink .@{class} { @{property}: @pink; }
-	.brown .@{class} { @{property}: @brown; }
-	.grey .@{class} { @{property}: @grey; }
-  .black .@{class} { @{property}: @black; }
-}
 .expanded(@begin, @end) {
   &.expanded-appear,
   &.expanded-enter,

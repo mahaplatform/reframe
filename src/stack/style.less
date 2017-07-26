@@ -1,45 +1,6 @@
 .reframe-stack {
   flex: 1;
   position: relative;
-  .reframe-stack-card {
-    transition: transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-    background-color: @white;
-    .reframe-stack-card-cover {
-      background-color: @black;
-      transition: opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-      .opacity(0);
-    }
-    &.stack-enter, &.stack-leave.stack-leave-active {
-      .translateX(100%) !important;
-    }
-    &.stack-leave, &.stack-enter.stack-enter-active {
-      .translateX(0) !important;
-    }
-    &.active {
-      .translateX(0);
-    }
-    &.mounting {
-      .translateX(100%);
-    }
-    &.unmounting {
-      .translateX(100%);
-    }
-    &.covered {
-      .translateX(-25%);
-      .reframe-stack-card-cover {
-        .opacity(.2);
-      }
-    }
-    &.covered, &.covering, &.uncovering {
-      .reframe-stack-card-cover {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
 }
 .reframe-stack-card {
   position: absolute;
@@ -48,4 +9,39 @@
   bottom: 0;
   left: 0;
   display: flex;
+  background-color: @white;
+  @media (max-width: 1024px) {
+    transition: transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+    .reframe-stack-card-cover {
+      transition: opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+    }
+  }
+  .reframe-stack-card-cover {
+    background-color: @black;
+    .opacity(0);
+  }
+  &.active {
+    .translateX(0);
+  }
+  &.mounting {
+    .translateX(100%);
+  }
+  &.unmounting {
+    .translateX(100%);
+  }
+  &.covered {
+    .translateX(-25%);
+    .reframe-stack-card-cover {
+      .opacity(.2);
+    }
+  }
+  &.covered, &.covering, &.uncovering {
+    .reframe-stack-card-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

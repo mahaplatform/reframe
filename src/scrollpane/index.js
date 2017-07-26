@@ -23,8 +23,10 @@ class Scrollpane extends React.Component {
   render() {
     const { children } = this.props
     return (
-      <div className="reframe-scrollpane" ref="scrollpane">
-        { children }
+      <div className="reframe-scrollpane">
+        <div className="reframe-scrollpane-inner" ref="scrollpane">
+          { children }
+        </div>
       </div>
     )
   }
@@ -61,8 +63,8 @@ class Scrollpane extends React.Component {
     const { scrollpane } = this.refs
     const childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'))
     return childNodes.reduce((headers, node) => {
-      // if(!node.className.match(/reframe-scrollpane-header/)) return headers
-      const top = node.offsetTop - node.offsetHeight
+      console.log(node.getBoundingClientRect().top, scrollpane.getBoundingClientRect().top)
+      const top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top)
       return [
         ...headers,
         {
@@ -88,15 +90,15 @@ class Scrollpane extends React.Component {
         const node = header.node
         if(!header.fixed && index > this.fixed && scrollpane.scrollTop >= header.top) {
           scrollpane.style.paddingTop = `${node.offsetHeight}px`
-          node.style.position = 'fixed'
-          node.style.top = `${scrollpane.getBoundingClientRect().top}px`
+          node.style.position = 'absolute'
+          node.style.top = 0
           node.style.left = 0
           node.style.right = 0
           node.style.zIndex = 2
           this.fixed = index
           this.headers[index].fixed = true
         } else if(header.fixed && index <= this.fixed && scrollpane.scrollTop < header.top) {
-          scrollpane.removeAttribute('style')
+          if(index === 0) scrollpane.removeAttribute('style')
           node.removeAttribute('style')
           this.headers[index].fixed = false
           this.fixed = this.fixed - 1

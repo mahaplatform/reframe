@@ -48,8 +48,12 @@ var Scrollpane = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-scrollpane', ref: 'scrollpane' },
-        children
+        { className: 'reframe-scrollpane' },
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-scrollpane-inner', ref: 'scrollpane' },
+          children
+        )
       );
     }
   }, {
@@ -94,8 +98,8 @@ var Scrollpane = function (_React$Component) {
 
       var childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'));
       return childNodes.reduce(function (headers, node) {
-        // if(!node.className.match(/reframe-scrollpane-header/)) return headers
-        var top = node.offsetTop - node.offsetHeight;
+        console.log(node.getBoundingClientRect().top, scrollpane.getBoundingClientRect().top);
+        var top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top);
         return [].concat(_toConsumableArray(headers), [{
           node: node,
           top: top,
@@ -124,15 +128,16 @@ var Scrollpane = function (_React$Component) {
           var node = header.node;
           if (!header.fixed && index > _this2.fixed && scrollpane.scrollTop >= header.top) {
             scrollpane.style.paddingTop = node.offsetHeight + 'px';
-            node.style.position = 'fixed';
-            node.style.top = scrollpane.getBoundingClientRect().top + 'px';
+            node.style.position = 'absolute';
+            node.style.top = 0;
             node.style.left = 0;
             node.style.right = 0;
             node.style.zIndex = 2;
+            node.style.border = '1px solid #000';
             _this2.fixed = index;
             _this2.headers[index].fixed = true;
           } else if (header.fixed && index <= _this2.fixed && scrollpane.scrollTop < header.top) {
-            scrollpane.removeAttribute('style');
+            if (index === 0) scrollpane.removeAttribute('style');
             node.removeAttribute('style');
             _this2.headers[index].fixed = false;
             _this2.fixed = _this2.fixed - 1;
