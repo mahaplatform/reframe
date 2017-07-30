@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf ./dist && babel ./src --out-dir ./dist",
     "eslint": "eslint ./src",
-    "test": "NODE_ENV=test NODE_PATH=./src mocha --recursive --require babel-core/register ./src/**/tests.js"
+    "test": "NODE_ENV=test NODE_PATH=./src nyc --reporter=lcov --reporter=text --recursive --require babel-core/register mocha ./src/**/tests.js"
   },
   "description": "A collection of react components for rapidly prototyping and building responsive web applications",
   "homepage": "https://github.com/mahaplatform/reframe#readme",
@@ -56,6 +56,7 @@
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.3.0",
+    "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.6.0",
     "sinon": "^2.2.0"
   }
