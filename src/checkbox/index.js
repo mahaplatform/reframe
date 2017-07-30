@@ -15,19 +15,10 @@ class Checkbox extends React.Component {
     onChange: () => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: props.defaultValue
-    }
-  }
-
   render() {
-    const { style } = this.props
+    const { disabled } = this.props
     let classes = ['ui', 'checkbox']
-    if(style) {
-      classes.push(style)
-    }
+    if(disabled) classes.push('disabled')
     return (
       <div className="control">
         <div className={classes.join(' ')}>
@@ -35,6 +26,15 @@ class Checkbox extends React.Component {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    const { defaultValue } = this.props
+    if(defaultValue) {
+      this.setState({
+        value: defaultValue
+      })
+    }
   }
 
   _handleChange(value) {

@@ -12,6 +12,8 @@ class Datefield extends React.Component {
     month: PropTypes.number,
     placeholder: PropTypes.string,
     year: PropTypes.number,
+    value: PropTypes.instanceOf(Date),
+    onBegin: PropTypes.func,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
@@ -51,7 +53,6 @@ class Datefield extends React.Component {
 
   componentDidMount() {
     const { defaultValue, onSetCurrent, onSetValue } = this.props
-    console.log(defaultValue)
     if(defaultValue) onSetValue(moment(defaultValue))
     const current = defaultValue ? moment(defaultValue) : moment()
     onSetCurrent(parseInt(current.format('MM')) - 1, parseInt(current.format('YYYY')))

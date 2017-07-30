@@ -6,6 +6,7 @@ class ColorField extends React.Component {
   static propTypes = {
     color: PropTypes.string,
     colors: PropTypes.string,
+    defaultValue: PropTypes.string,
     onChange: PropTypes.func,
     onSet: PropTypes.func
   }
@@ -21,7 +22,7 @@ class ColorField extends React.Component {
       { name: 'blue', value: '#2185D0' },
       { name: 'violet', value: '#6435C9' },
       { name: 'purple', value: '#A333C8' },
-      { name: 'pink', value: '#E03997' },
+      { name: 'pink', value: '#E03997' }
     ]
     return (
       <div className="reframe-colorfield">

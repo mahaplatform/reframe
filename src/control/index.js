@@ -46,7 +46,9 @@ class Control extends React.Component {
     ]).isRequired,
     endpoint: PropTypes.string,
     defaultValue: PropTypes.any,
-    options: PropTypes.array
+    options: PropTypes.array,
+    text: PropTypes.string,
+    value: PropTypes.string
   }
 
   static defaultProps = {

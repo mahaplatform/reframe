@@ -1,7 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 class Chooser extends React.Component {
+
+  static propTypes = {
+    month: PropTypes.number,
+    value: PropTypes.instanceOf(Date),
+    year: PropTypes.number,
+    onCancel: PropTypes.func,
+    onChoose: PropTypes.func,
+    onNext: PropTypes.func,
+    onPrevious: PropTypes.func,
+    onSetCurrent: PropTypes.func
+  }
 
   render() {
     const { month, value, year } = this.props

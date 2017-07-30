@@ -10,6 +10,11 @@ export class Empty extends React.Component {
     modal: PropTypes.object
   }
 
+  static propTypes = {
+    empty: PropTypes.object,
+    entity: PropTypes.string
+  }
+
   render() {
     const { empty, entity } = this.props
     return (
@@ -37,6 +42,21 @@ export class Empty extends React.Component {
 }
 
 export class Results extends React.Component {
+
+  static propTypes = {
+    columns: PropTypes.object,
+    export: PropTypes.object,
+    handler: PropTypes.func,
+    layout: PropTypes.any,
+    link: PropTypes.string,
+    modal: PropTypes.func,
+    params: PropTypes.object,
+    records: PropTypes.array,
+    sort: PropTypes.string,
+    status: PropTypes.string,
+    onLoadMore: PropTypes.func,
+    onSort: PropTypes.func
+  }
 
   render() {
     const { columns, layout } = this.props

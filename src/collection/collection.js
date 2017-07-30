@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import pluralize from 'pluralize'
 import Filter from '../filter'
 import _ from 'lodash'
 import Infinite from '../infinite'
@@ -12,10 +11,11 @@ class Collection extends React.Component {
     modal: PropTypes.object
   }
 
-  static PropTypes = {
+  static propTypes = {
     all: PropTypes.number,
     columns: PropTypes.array,
     data: PropTypes.array,
+    endpoint: PropTypes.string,
     entity: PropTypes.object,
     empty: PropTypes.oneOfType([
       PropTypes.func,
@@ -43,7 +43,11 @@ class Collection extends React.Component {
     params: PropTypes.object,
     records: PropTypes.array,
     sort: PropTypes.object,
-    total: PropTypes.number
+    total: PropTypes.number,
+    onFetch: PropTypes.func,
+    onFilter: PropTypes.func,
+    onSetParams: PropTypes.func,
+    onSetRecords: PropTypes.func
   }
 
   static defaultProps = {
@@ -51,7 +55,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { filters, records } = this.props
+    const { records } = this.props
     return (
       <div className="reframe-collection">
         <div className="reframe-collection-layout">
