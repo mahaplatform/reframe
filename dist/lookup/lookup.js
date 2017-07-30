@@ -18,10 +18,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactTransitionGroup = require('react-transition-group');
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
@@ -55,8 +51,7 @@ var Lookup = function (_React$Component) {
           chosen = _props.chosen,
           disabled = _props.disabled,
           format = _props.format,
-          prompt = _props.prompt,
-          text = _props.text;
+          prompt = _props.prompt;
 
       var value = chosen ? chosen.text : '';
       return _react2.default.createElement(
@@ -146,6 +141,7 @@ Lookup.propTypes = {
   onBegin: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onCancel: _propTypes2.default.func,
+  onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
   onType: _propTypes2.default.func,
   onLoad: _propTypes2.default.func,

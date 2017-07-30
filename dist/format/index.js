@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -80,6 +84,12 @@ var Format = function (_React$Component) {
 
   return Format;
 }(_react2.default.Component);
+
+Format.propTypes = {
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
+  value: _propTypes2.default.any
+};
+
 
 var Default = function Default(props) {
   return _react2.default.createElement(

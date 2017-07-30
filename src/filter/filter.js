@@ -21,9 +21,11 @@ class Filter extends React.Component {
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
     onLoad: PropTypes.func,
+    onQuery: PropTypes.func,
     onRemove: PropTypes.func,
     onResetAll: PropTypes.func,
-    onSet: PropTypes.func
+    onSet: PropTypes.func,
+    onUpdate: PropTypes.func
   }
 
   static defaultProps = {
@@ -31,7 +33,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { fields, query, results } = this.props
+    const { fields, results } = this.props
     return (
       <div className="reframe-filters">
         <div className="reframe-filters-header">

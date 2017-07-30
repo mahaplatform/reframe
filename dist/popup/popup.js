@@ -83,6 +83,7 @@ Popup.childContextTypes = {
   popup: _propTypes2.default.object
 };
 Popup.propTypes = {
+  children: _propTypes2.default.any,
   component: _propTypes2.default.func,
   onOpen: _propTypes2.default.func.isRequired,
   onClose: _propTypes2.default.func.isRequired

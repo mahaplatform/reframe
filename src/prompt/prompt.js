@@ -15,7 +15,8 @@ class Prompt extends React.Component {
     history: PropTypes.object
   }
 
-  static propsTypes = {
+  static propTypes = {
+    children: PropTypes.any,
     message: PropTypes.string,
     options: PropTypes.arrayOf(
       PropTypes.shape({

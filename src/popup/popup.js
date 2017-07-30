@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
@@ -10,6 +9,7 @@ export class Popup extends React.Component {
   }
 
   static propTypes = {
+    children: PropTypes.any,
     component: PropTypes.func,
     onOpen: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired

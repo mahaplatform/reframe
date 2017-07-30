@@ -104,6 +104,10 @@ var Empty = exports.Empty = function (_React$Component) {
 Empty.contextTypes = {
   modal: _propTypes2.default.object
 };
+Empty.propTypes = {
+  empty: _propTypes2.default.object,
+  entity: _propTypes2.default.string
+};
 
 var Results = exports.Results = function (_React$Component2) {
   _inherits(Results, _React$Component2);
@@ -181,3 +185,18 @@ var Results = exports.Results = function (_React$Component2) {
 
   return Results;
 }(_react2.default.Component);
+
+Results.propTypes = {
+  columns: _propTypes2.default.array,
+  export: _propTypes2.default.object,
+  handler: _propTypes2.default.func,
+  layout: _propTypes2.default.any,
+  link: _propTypes2.default.string,
+  modal: _propTypes2.default.func,
+  params: _propTypes2.default.object,
+  records: _propTypes2.default.array,
+  sort: _propTypes2.default.object,
+  status: _propTypes2.default.string,
+  onLoadMore: _propTypes2.default.func,
+  onSort: _propTypes2.default.func
+};

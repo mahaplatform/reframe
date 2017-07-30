@@ -1,9 +1,6 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import Infinite from '../infinite'
-import Format from '../format'
 
 class Searchbox extends React.Component {
 
@@ -13,7 +10,7 @@ class Searchbox extends React.Component {
     onAbort: PropTypes.func,
     onChange: PropTypes.func,
     onLookup: PropTypes.func,
-    onType: PropTypes.func,
+    onType: PropTypes.func
   }
 
   static defaultProps = {
@@ -29,7 +26,7 @@ class Searchbox extends React.Component {
         </div>
         <div className="reframe-searchbox-input">
           <div className="ui input">
-            <input type="text" placeholder={ prompt } onChange={ this._handleType.bind(this) } ref="query" value={ q } />
+            <input type="text" placeholder={ prompt } onChange={ this._handleType.bind(this) } ref={ (node) => this.query = node } value={ q } />
           </div>
         </div>
         { q.length > 0 &&
@@ -46,7 +43,7 @@ class Searchbox extends React.Component {
   }
 
   _handleType() {
-    const q = this.refs.query.value
+    const q = this.query.value
     this.props.onType(q)
     this._handleLookup(q)
   }

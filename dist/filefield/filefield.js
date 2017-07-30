@@ -71,7 +71,9 @@ var FileField = function (_React$Component) {
                 { className: 'reframe-filefield-progress' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'ui green progress', ref: 'filefield_' + file.uniqueIdentifier + '_progress' },
+                  { className: 'ui green progress', ref: function ref(node) {
+                      return _this2['filefield_' + file.uniqueIdentifier + '_progress'];
+                    } },
                   _react2.default.createElement('div', { className: 'bar' })
                 ),
                 _react2.default.createElement(
@@ -110,7 +112,9 @@ var FileField = function (_React$Component) {
         }),
         (files.length === 0 || multiple === true) && _react2.default.createElement(
           'div',
-          { ref: 'browseButton', className: 'ui browse button' },
+          { ref: function ref(node) {
+              return _this2.button = node;
+            }, className: 'ui browse button' },
           prompt
         )
       );
@@ -142,7 +146,7 @@ var FileField = function (_React$Component) {
       }
       files.map(function (file, index) {
         if (!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-          $(_this3.refs['filefield_' + file.uniqueIdentifier + '_progress']).progress({
+          $(_this3['filefield_' + file.uniqueIdentifier + '_progress']).progress({
             percent: file.progress
           });
         }
@@ -169,7 +173,7 @@ var FileField = function (_React$Component) {
       this.resumable.on('fileSuccess', this._handleUploadSuccess.bind(this));
       this.resumable.on('error', this._handleUploadFailure.bind(this));
       this.resumable.on('complete', this._handleUploadComplete.bind(this));
-      this.resumable.assignBrowse(this.refs.browseButton);
+      this.resumable.assignBrowse(this.button);
     }
   }, {
     key: '_handleFileAdded',
@@ -217,6 +221,7 @@ var FileField = function (_React$Component) {
 }(_react2.default.Component);
 
 FileField.propTypes = {
+  defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.array]),
   endpoint: _propTypes2.default.string,
   files: _propTypes2.default.array,
   multiple: _propTypes2.default.bool,
@@ -224,13 +229,16 @@ FileField.propTypes = {
   status: _propTypes2.default.string,
   token: _propTypes2.default.string,
   onAddFile: _propTypes2.default.func,
+  onChange: _propTypes2.default.func,
+  onChangeFile: _propTypes2.default.func,
+  onLoadFiles: _propTypes2.default.func,
   onUploadBegin: _propTypes2.default.func,
+  onUploadComplete: _propTypes2.default.func,
   onUploadProgress: _propTypes2.default.func,
   onUploadProcess: _propTypes2.default.func,
   onUploadSuccess: _propTypes2.default.func,
   onUploadFailure: _propTypes2.default.func,
-  onRemoveFile: _propTypes2.default.func,
-  onChangeFile: _propTypes2.default.func
+  onRemoveFile: _propTypes2.default.func
 };
 FileField.defaultProps = {
   prompt: 'Choose File(s)',

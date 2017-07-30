@@ -90,7 +90,6 @@ var Datefield = function (_React$Component) {
           onSetCurrent = _props2.onSetCurrent,
           onSetValue = _props2.onSetValue;
 
-      console.log(defaultValue);
       if (defaultValue) onSetValue((0, _moment2.default)(defaultValue));
       var current = defaultValue ? (0, _moment2.default)(defaultValue) : (0, _moment2.default)();
       onSetCurrent(parseInt(current.format('MM')) - 1, parseInt(current.format('YYYY')));
@@ -145,6 +144,8 @@ Datefield.propTypes = {
   month: _propTypes2.default.number,
   placeholder: _propTypes2.default.string,
   year: _propTypes2.default.number,
+  value: _propTypes2.default.instanceOf(Date),
+  onBegin: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,

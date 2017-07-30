@@ -138,7 +138,8 @@ Prompt.contextTypes = {
   modal: _propTypes2.default.object,
   history: _propTypes2.default.object
 };
-Prompt.propsTypes = {
+Prompt.propTypes = {
+  children: _propTypes2.default.any,
   message: _propTypes2.default.string,
   options: _propTypes2.default.arrayOf(_propTypes2.default.shape({
     handler: _propTypes2.default.func,

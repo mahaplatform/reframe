@@ -97,7 +97,12 @@ Select.contextTypes = {
 };
 Select.propTypes = {
   endpoint: _propTypes2.default.string,
-  sort: _propTypes2.default.object
+  label: _propTypes2.default.string,
+  name: _propTypes2.default.string,
+  sort: _propTypes2.default.object,
+  onBack: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func,
+  onReset: _propTypes2.default.func
 };
 Select.defaultProps = {
   sort: {

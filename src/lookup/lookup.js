@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
-import _ from 'lodash'
 import Format from '../format'
 import Search from './search'
 
@@ -27,6 +26,7 @@ class Lookup extends React.Component {
     onBegin: PropTypes.func,
     onClear: PropTypes.func,
     onCancel: PropTypes.func,
+    onChange: PropTypes.func,
     onChoose: PropTypes.func,
     onType: PropTypes.func,
     onLoad: PropTypes.func,
@@ -34,7 +34,7 @@ class Lookup extends React.Component {
   }
 
   render() {
-    const { active, chosen, disabled, format, prompt, text } = this.props
+    const { active, chosen, disabled, format, prompt } = this.props
     const value = chosen ? chosen.text : ''
     return (
       <div className="reframe-lookup-field">

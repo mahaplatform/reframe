@@ -7,6 +7,10 @@ import bytes from 'bytes'
 class FileField extends React.Component {
 
   static propTypes = {
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.array
+    ]),
     endpoint: PropTypes.string,
     files: PropTypes.array,
     multiple: PropTypes.bool,
@@ -14,13 +18,16 @@ class FileField extends React.Component {
     status: PropTypes.string,
     token: PropTypes.string,
     onAddFile: PropTypes.func,
+    onChange: PropTypes.func,
+    onChangeFile: PropTypes.func,
+    onLoadFiles: PropTypes.func,
     onUploadBegin: PropTypes.func,
+    onUploadComplete: PropTypes.func,
     onUploadProgress: PropTypes.func,
     onUploadProcess: PropTypes.func,
     onUploadSuccess: PropTypes.func,
     onUploadFailure: PropTypes.func,
-    onRemoveFile: PropTypes.func,
-    onChangeFile: PropTypes.func
+    onRemoveFile: PropTypes.func
   }
 
   static defaultProps = {
@@ -42,7 +49,7 @@ class FileField extends React.Component {
                 }
                 { file.status === 'uploading' &&
                   <div className="reframe-filefield-progress">
-                    <div className="ui green progress" ref={`filefield_${file.uniqueIdentifier}_progress`}>
+                    <div className="ui green progress" ref={ (node) => this[`filefield_${file.uniqueIdentifier}_progress`] }>
                       <div className="bar" />
                     </div>
                     <p>
@@ -68,7 +75,7 @@ class FileField extends React.Component {
           )
         }) }
         { (files.length === 0 || multiple === true) &&
-          <div ref="browseButton" className="ui browse button">
+          <div ref={ (node) => this.button = node } className="ui browse button">
             { prompt }
           </div>
         }
@@ -94,7 +101,7 @@ class FileField extends React.Component {
     }
     files.map((file, index) => {
       if(!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-        $(this.refs[`filefield_${file.uniqueIdentifier}_progress`]).progress({
+        $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
           percent: file.progress
         })
       }
@@ -116,7 +123,7 @@ class FileField extends React.Component {
     this.resumable.on('fileSuccess', this._handleUploadSuccess.bind(this))
     this.resumable.on('error', this._handleUploadFailure.bind(this))
     this.resumable.on('complete', this._handleUploadComplete.bind(this))
-    this.resumable.assignBrowse(this.refs.browseButton)
+    this.resumable.assignBrowse(this.button)
   }
 
   _handleFileAdded(file) {

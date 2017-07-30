@@ -54,7 +54,6 @@ var Filter = function (_React$Component) {
 
       var _props = this.props,
           fields = _props.fields,
-          query = _props.query,
           results = _props.results;
 
       return _react2.default.createElement(
@@ -228,9 +227,11 @@ Filter.propTypes = {
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
   onLoad: _propTypes2.default.func,
+  onQuery: _propTypes2.default.func,
   onRemove: _propTypes2.default.func,
   onResetAll: _propTypes2.default.func,
-  onSet: _propTypes2.default.func
+  onSet: _propTypes2.default.func,
+  onUpdate: _propTypes2.default.func
 };
 Filter.defaultProps = {
   onChange: function onChange() {}

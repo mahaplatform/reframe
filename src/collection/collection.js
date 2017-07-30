@@ -16,7 +16,7 @@ class Collection extends React.Component {
     columns: PropTypes.array,
     data: PropTypes.array,
     endpoint: PropTypes.string,
-    entity: PropTypes.object,
+    entity: PropTypes.string,
     empty: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.element,

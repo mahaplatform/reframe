@@ -1,11 +1,23 @@
-
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
 import Format from '../format'
 
 class Options extends React.Component {
+
+  static propTypes = {
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
+    name: PropTypes.string,
+    multiple: PropTypes.bool,
+    options: PropTypes.array,
+    results: PropTypes.array
+  }
 
   render() {
     const { name, format, multiple, options, results } = this.props
@@ -60,13 +72,30 @@ class Options extends React.Component {
 
 class Dynamic extends React.Component {
 
+  static propTypes = {
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
+    name: PropTypes.string,
+    multiple: PropTypes.bool,
+    options: PropTypes.array,
+    records: PropTypes.array,
+    results: PropTypes.array,
+    status: PropTypes.string,
+    text: PropTypes.string,
+    value: PropTypes.string,
+    onUpdate: PropTypes.func
+  }
+
   render() {
     const { records } = this.props
     return (records) ? <Options { ...this._getOptions() } /> : null
   }
 
   _getOptions() {
-    const { format, multiple, name, records, results, text, value, status, onUpdate } = this.props
+    const { format, multiple, name, records, results, status, text, value, onUpdate } = this.props
     const options = records.map(record => ({
       value: _.get(record, value),
       text: _.get(record, text),
@@ -87,8 +116,16 @@ class Dynamic extends React.Component {
 
 class Container extends React.Component {
 
+  static propTypes = {
+    endpoint: PropTypes.string,
+    label: PropTypes.string,
+    q: PropTypes.string,
+    sort: PropTypes.string,
+    onQuery: PropTypes.func
+  }
+
   render() {
-    const { endpoint, label, query } = this.props
+    const { endpoint } = this.props
     if(endpoint) {
       return (
         <div className="reframe-filter-search">

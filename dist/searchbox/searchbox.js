@@ -18,14 +18,6 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _infinite = require('../infinite');
-
-var _infinite2 = _interopRequireDefault(_infinite);
-
-var _format = require('../format');
-
-var _format2 = _interopRequireDefault(_format);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46,6 +38,8 @@ var Searchbox = function (_React$Component) {
   _createClass(Searchbox, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
           prompt = _props.prompt,
           q = _props.q;
@@ -64,7 +58,9 @@ var Searchbox = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'ui input' },
-            _react2.default.createElement('input', { type: 'text', placeholder: prompt, onChange: this._handleType.bind(this), ref: 'query', value: q })
+            _react2.default.createElement('input', { type: 'text', placeholder: prompt, onChange: this._handleType.bind(this), ref: function ref(node) {
+                return _this2.query = node;
+              }, value: q })
           )
         ),
         q.length > 0 && _react2.default.createElement(
@@ -82,7 +78,7 @@ var Searchbox = function (_React$Component) {
   }, {
     key: '_handleType',
     value: function _handleType() {
-      var q = this.refs.query.value;
+      var q = this.query.value;
       this.props.onType(q);
       this._handleLookup(q);
     }

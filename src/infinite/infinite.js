@@ -6,7 +6,7 @@ import { Delayed, Empty, Failure, Loading, Timeout } from './results'
 
 class Infinite extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
     all: PropTypes.number,
     cacheKey: PropTypes.string,
     delayed: PropTypes.oneOfType([
@@ -29,6 +29,10 @@ class Infinite extends React.Component {
       PropTypes.element
     ]),
     records: PropTypes.array,
+    sort: PropTypes.shape({
+      key: PropTypes.string,
+      order: PropTypes.string
+    }),
     status: PropTypes.string,
     timeout: PropTypes.oneOfType([
       PropTypes.func,

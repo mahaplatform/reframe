@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransitionGroup } from 'react-transition-group'
@@ -10,6 +9,7 @@ export class Flash extends React.Component {
   }
 
   static propTypes = {
+    children: PropTypes.any,
     message: PropTypes.string,
     style: PropTypes.string,
     onSet: PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export class Flash extends React.Component {
     return (
       <div className="reframe-flash">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 250 } transitionLeaveTimeout={ 250 }>
           { message &&
             <div className={`reframe-flash-popup ${style}`} key={`flash_${message}`}>
               <div className="reframe-flash-popup-panel">

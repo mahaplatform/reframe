@@ -1,10 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Options from './options'
 
 class Search extends React.Component {
 
+  static propTypes = {
+    label: PropTypes.string,
+    selected: PropTypes.number,
+    onCancel: PropTypes.func
+  }
+
   render() {
-    const { label, results, status, selected, text, form, format } = this.props
+    const { label } = this.props
     return (
       <div className="reframe-modal-panel">
        <div className="reframe-modal-panel-header">

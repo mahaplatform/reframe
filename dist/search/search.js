@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -125,6 +129,14 @@ var Options = function (_React$Component) {
   return Options;
 }(_react2.default.Component);
 
+Options.propTypes = {
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
+  name: _propTypes2.default.string,
+  multiple: _propTypes2.default.bool,
+  options: _propTypes2.default.array,
+  results: _propTypes2.default.array
+};
+
 var Dynamic = function (_React$Component2) {
   _inherits(Dynamic, _React$Component2);
 
@@ -150,9 +162,9 @@ var Dynamic = function (_React$Component2) {
           name = _props3.name,
           records = _props3.records,
           results = _props3.results,
+          status = _props3.status,
           text = _props3.text,
           value = _props3.value,
-          status = _props3.status,
           onUpdate = _props3.onUpdate;
 
       var options = records.map(function (record) {
@@ -177,6 +189,19 @@ var Dynamic = function (_React$Component2) {
   return Dynamic;
 }(_react2.default.Component);
 
+Dynamic.propTypes = {
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
+  name: _propTypes2.default.string,
+  multiple: _propTypes2.default.bool,
+  options: _propTypes2.default.array,
+  records: _propTypes2.default.array,
+  results: _propTypes2.default.array,
+  status: _propTypes2.default.string,
+  text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
+  onUpdate: _propTypes2.default.func
+};
+
 var Container = function (_React$Component3) {
   _inherits(Container, _React$Component3);
 
@@ -189,10 +214,7 @@ var Container = function (_React$Component3) {
   _createClass(Container, [{
     key: 'render',
     value: function render() {
-      var _props4 = this.props,
-          endpoint = _props4.endpoint,
-          label = _props4.label,
-          query = _props4.query;
+      var endpoint = this.props.endpoint;
 
       if (endpoint) {
         return _react2.default.createElement(
@@ -212,9 +234,9 @@ var Container = function (_React$Component3) {
   }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
-      var _props5 = this.props,
-          label = _props5.label,
-          onQuery = _props5.onQuery;
+      var _props4 = this.props,
+          label = _props4.label,
+          onQuery = _props4.onQuery;
 
       return {
         prompt: 'Find a ' + label,
@@ -226,10 +248,10 @@ var Container = function (_React$Component3) {
     value: function _getInfinite() {
       var _this5 = this;
 
-      var _props6 = this.props,
-          endpoint = _props6.endpoint,
-          sort = _props6.sort,
-          q = _props6.q;
+      var _props5 = this.props,
+          endpoint = _props5.endpoint,
+          sort = _props5.sort,
+          q = _props5.q;
 
       return {
         endpoint: endpoint,
@@ -245,4 +267,11 @@ var Container = function (_React$Component3) {
   return Container;
 }(_react2.default.Component);
 
+Container.propTypes = {
+  endpoint: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  q: _propTypes2.default.string,
+  sort: _propTypes2.default.string,
+  onQuery: _propTypes2.default.func
+};
 exports.default = Container;

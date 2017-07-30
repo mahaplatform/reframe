@@ -121,6 +121,7 @@ Flash.childContextTypes = {
   flash: _propTypes2.default.object
 };
 Flash.propTypes = {
+  children: _propTypes2.default.any,
   message: _propTypes2.default.string,
   style: _propTypes2.default.string,
   onSet: _propTypes2.default.func.isRequired,

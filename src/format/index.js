@@ -1,9 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import moment from 'moment'
 import numeral from 'numeral'
 
 class Format extends React.Component {
+
+  static propTypes = {
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
+    value: PropTypes.any
+  }
 
   render() {
     const { format } = this.props
@@ -43,7 +53,7 @@ class Format extends React.Component {
 }
 
 const Default = (props) => {
-  return <span>{props.value}</span>
+  return <span>{ props.value }</span>
 }
 
 const Element = (props) => {
@@ -51,15 +61,15 @@ const Element = (props) => {
 }
 
 const Raw = (props) => {
-  return <span dangerouslySetInnerHTML={{__html: props.value}}></span>
+  return <span dangerouslySetInnerHTML={{ __html: props.value }}></span>
 }
 
 const Empty = () => {
-  return <span dangerouslySetInnerHTML={{__html: '&nbsp;'}}></span>
+  return <span dangerouslySetInnerHTML={{ __html: '&nbsp;' }}></span>
 }
 
 const Status = (props) => {
-  return (props.value) ? <span className={props.value.toLowerCase()}>{props.value.toUpperCase()}</span> : <span />
+  return props.value ? <span className={ props.value.toLowerCase() }>{ props.value.toUpperCase() }</span> : <span />
 }
 
 const Check = (props, times) => {
@@ -69,27 +79,27 @@ const Check = (props, times) => {
 }
 
 const YesNo = (props) => {
-  return (props.value === false) ? <span className="no">NO</span> : <span className="yes">YES</span>
+  return props.value === false ? <span className="no">NO</span> : <span className="yes">YES</span>
 }
 
 const Currency = (props) => {
-  return <span>{numeral(props.value).format('$0,0.00')}</span>
+  return <span>{ numeral(props.value).format('$0,0.00') }</span>
 }
 
 const Date = (props, format) => {
-  return <span>{(props.value) ? moment(props.value).format(format) : ''}</span>
+  return <span>{ props.value ? moment(props.value).format(format) : '' }</span>
 }
 
 const Capitalize = (props) => {
-  return <span>{props.value.toUpperCase()}</span>
+  return <span>{ props.value.toUpperCase() }</span>
 }
 
 const Email = (props) => {
-  return <a href={`mailto:${props.value}`}>{props.value}</a>
+  return <a href={ `mailto:${ props.value }` }>{ props.value }</a>
 }
 
 const Link = (props) => {
-  return <a href={props.value} target="_blank">{props.value}</a>
+  return <a href={ props.value } target="_blank">{ props.value }</a>
 }
 
 export default Format

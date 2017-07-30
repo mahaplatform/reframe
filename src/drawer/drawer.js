@@ -10,6 +10,7 @@ class Drawer extends React.Component {
   }
 
   static propTypes = {
+    children: PropTypes.any,
     component: PropTypes.func,
     location: PropTypes.string,
     onOpen: PropTypes.func,

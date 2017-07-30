@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _options = require('./options');
 
 var _options2 = _interopRequireDefault(_options);
@@ -34,14 +38,7 @@ var Search = function (_React$Component) {
   _createClass(Search, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          label = _props.label,
-          results = _props.results,
-          status = _props.status,
-          selected = _props.selected,
-          text = _props.text,
-          form = _props.form,
-          format = _props.format;
+      var label = this.props.label;
 
       return _react2.default.createElement(
         'div',
@@ -76,4 +73,9 @@ var Search = function (_React$Component) {
   return Search;
 }(_react2.default.Component);
 
+Search.propTypes = {
+  label: _propTypes2.default.string,
+  selected: _propTypes2.default.number,
+  onCancel: _propTypes2.default.func
+};
 exports.default = Search;

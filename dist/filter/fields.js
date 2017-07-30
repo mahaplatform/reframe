@@ -141,6 +141,8 @@ Fields.contextTypes = {
 };
 Fields.propTypes = {
   fields: _propTypes2.default.array,
-  results: _propTypes2.default.object
+  results: _propTypes2.default.object,
+  onChoose: _propTypes2.default.func,
+  onResetAll: _propTypes2.default.func
 };
 exports.default = Fields;

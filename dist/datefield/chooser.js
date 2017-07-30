@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -187,4 +191,14 @@ var Chooser = function (_React$Component) {
   return Chooser;
 }(_react2.default.Component);
 
+Chooser.propTypes = {
+  month: _propTypes2.default.number,
+  value: _propTypes2.default.instanceOf(Date),
+  year: _propTypes2.default.number,
+  onCancel: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func,
+  onNext: _propTypes2.default.func,
+  onPrevious: _propTypes2.default.func,
+  onSetCurrent: _propTypes2.default.func
+};
 exports.default = Chooser;

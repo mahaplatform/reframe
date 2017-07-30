@@ -44,6 +44,8 @@ var Scrollpane = function (_React$Component) {
   _createClass(Scrollpane, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var children = this.props.children;
 
       return _react2.default.createElement(
@@ -51,7 +53,9 @@ var Scrollpane = function (_React$Component) {
         { className: 'reframe-scrollpane' },
         _react2.default.createElement(
           'div',
-          { className: 'reframe-scrollpane-inner', ref: 'scrollpane' },
+          { className: 'reframe-scrollpane-inner', ref: function ref(node) {
+              return _this2.scrollpane = node;
+            } },
           children
         )
       );
@@ -77,28 +81,24 @@ var Scrollpane = function (_React$Component) {
   }, {
     key: '_attachScrollListener',
     value: function _attachScrollListener() {
-      var scrollpane = this.refs.scrollpane;
-
-      scrollpane.addEventListener('scroll', this.listener, true);
-      scrollpane.addEventListener('resize', this.listener, true);
+      this.scrollpane.addEventListener('scroll', this.listener, true);
+      this.scrollpane.addEventListener('resize', this.listener, true);
       this._scrollListener();
     }
   }, {
     key: '_detachScrollListener',
     value: function _detachScrollListener() {
-      var scrollpane = this.refs.scrollpane;
-
-      scrollpane.removeEventListener('scroll', this.listener, true);
-      scrollpane.removeEventListener('resize', this.listener, true);
+      this.scrollpane.removeEventListener('scroll', this.listener, true);
+      this.scrollpane.removeEventListener('resize', this.listener, true);
     }
   }, {
     key: '_getHeaders',
     value: function _getHeaders() {
-      var scrollpane = this.refs.scrollpane;
+      var _this3 = this;
 
-      var childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'));
+      var childNodes = Array.from(this.scrollpane.getElementsByClassName('reframe-scrollpane-header'));
       return childNodes.reduce(function (headers, node) {
-        var top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top);
+        var top = parseInt(node.getBoundingClientRect().top - _this3.scrollpane.getBoundingClientRect().top);
         return [].concat(_toConsumableArray(headers), [{
           node: node,
           top: top,
@@ -109,15 +109,14 @@ var Scrollpane = function (_React$Component) {
   }, {
     key: '_scrollListener',
     value: function _scrollListener() {
-      var _this2 = this;
+      var _this4 = this;
 
-      var scrollpane = this.refs.scrollpane;
       var _props = this.props,
           notificationPercent = _props.notificationPercent,
           onReachBottom = _props.onReachBottom;
 
-      var bottomPosition = scrollpane.scrollHeight - (scrollpane.scrollTop + scrollpane.offsetHeight);
-      var percentRemaining = bottomPosition / scrollpane.scrollHeight * 100;
+      var bottomPosition = this.scrollpane.scrollHeight - (this.scrollpane.scrollTop + this.scrollpane.offsetHeight);
+      var percentRemaining = bottomPosition / this.scrollpane.scrollHeight * 100;
       if (!this.notified && percentRemaining <= notificationPercent) {
         if (onReachBottom) onReachBottom();
         this.notified = true;
@@ -125,20 +124,20 @@ var Scrollpane = function (_React$Component) {
       if (this.headers.length > 0) {
         this.headers.map(function (header, index) {
           var node = header.node;
-          if (!header.fixed && index > _this2.fixed && scrollpane.scrollTop >= header.top) {
-            scrollpane.style.paddingTop = node.offsetHeight + 'px';
+          if (!header.fixed && index > _this4.fixed && _this4.scrollpane.scrollTop >= header.top) {
+            _this4.scrollpane.style.paddingTop = node.offsetHeight + 'px';
             node.style.position = 'absolute';
             node.style.top = 0;
             node.style.left = 0;
             node.style.right = 0;
             node.style.zIndex = 2;
-            _this2.fixed = index;
-            _this2.headers[index].fixed = true;
-          } else if (header.fixed && index <= _this2.fixed && scrollpane.scrollTop < header.top) {
-            if (index === 0) scrollpane.removeAttribute('style');
+            _this4.fixed = index;
+            _this4.headers[index].fixed = true;
+          } else if (header.fixed && index <= _this4.fixed && _this4.scrollpane.scrollTop < header.top) {
+            if (index === 0) _this4.scrollpane.removeAttribute('style');
             node.removeAttribute('style');
-            _this2.headers[index].fixed = false;
-            _this2.fixed = _this2.fixed - 1;
+            _this4.headers[index].fixed = false;
+            _this4.fixed = _this4.fixed - 1;
           }
         });
       }
@@ -148,7 +147,8 @@ var Scrollpane = function (_React$Component) {
   return Scrollpane;
 }(_react2.default.Component);
 
-Scrollpane.PropTypes = {
+Scrollpane.propTypes = {
+  children: _propTypes2.default.any,
   notificationPercent: _propTypes2.default.number,
   onReachBottom: _propTypes2.default.func
 };

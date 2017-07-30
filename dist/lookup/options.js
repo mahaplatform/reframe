@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -91,6 +95,14 @@ var Options = function (_React$Component) {
   return Options;
 }(_react2.default.Component);
 
+Options.propTypes = {
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
+  options: _propTypes2.default.array,
+  selected: _propTypes2.default.number,
+  onChange: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func
+};
+
 var Dynamic = function (_React$Component2) {
   _inherits(Dynamic, _React$Component2);
 
@@ -139,6 +151,16 @@ var Dynamic = function (_React$Component2) {
   return Dynamic;
 }(_react2.default.Component);
 
+Dynamic.propTypes = {
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
+  records: _propTypes2.default.array,
+  text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
+  selected: _propTypes2.default.number,
+  onChange: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func
+};
+
 var Container = function (_React$Component3) {
   _inherits(Container, _React$Component3);
 
@@ -186,19 +208,11 @@ var Container = function (_React$Component3) {
       }
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props4 = this.props,
-          sort = _props4.sort,
-          endpoint = _props4.endpoint,
-          onLookup = _props4.onLookup;
-    }
-  }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
-      var _props5 = this.props,
-          label = _props5.label,
-          onQuery = _props5.onQuery;
+      var _props4 = this.props,
+          label = _props4.label,
+          onQuery = _props4.onQuery;
 
       return {
         prompt: 'Find a ' + label,
@@ -210,10 +224,10 @@ var Container = function (_React$Component3) {
     value: function _getInfinite() {
       var _this5 = this;
 
-      var _props6 = this.props,
-          endpoint = _props6.endpoint,
-          q = _props6.q,
-          sort = _props6.sort;
+      var _props5 = this.props,
+          endpoint = _props5.endpoint,
+          q = _props5.q,
+          sort = _props5.sort;
 
       return {
         endpoint: endpoint,
@@ -249,4 +263,15 @@ var Container = function (_React$Component3) {
   return Container;
 }(_react2.default.Component);
 
+Container.propTypes = {
+  endpoint: _propTypes2.default.string,
+  form: _propTypes2.default.object,
+  label: _propTypes2.default.string,
+  q: _propTypes2.default.string,
+  sort: _propTypes2.default.string,
+  value: _propTypes2.default.string,
+  onChange: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func,
+  onQuery: _propTypes2.default.func
+};
 exports.default = Container;

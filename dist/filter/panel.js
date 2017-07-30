@@ -76,41 +76,60 @@ var Panel = function (_React$Component) {
   }, {
     key: '_getFields',
     value: function _getFields() {
+      var _props2 = this.props,
+          fields = _props2.fields,
+          results = _props2.results,
+          onChoose = _props2.onChoose,
+          onResetAll = _props2.onResetAll;
+
       return {
-        fields: this.props.fields,
-        results: this.props.results,
-        onChoose: this.props.onChoose,
-        onResetAll: this.props.onResetAll
+        fields: fields,
+        results: results,
+        onChoose: onChoose,
+        onResetAll: onResetAll
       };
     }
   }, {
     key: '_getSelect',
     value: function _getSelect() {
-      return _extends({}, this.props.fields[this.props.active], {
-        q: this.props.q,
-        query: this.props.query,
-        results: this.props.results,
-        onBack: this.props.onBack,
-        onAbort: this.props.onAbort,
-        onType: this.props.onType,
-        onLookup: this.props.onLookup,
-        onUpdate: this.props.onUpdate,
-        onReset: this.props.onReset
+      var _props3 = this.props,
+          active = _props3.active,
+          fields = _props3.fields,
+          q = _props3.q,
+          results = _props3.results,
+          onBack = _props3.onBack,
+          onChoose = _props3.onChoose,
+          onReset = _props3.onReset,
+          onUpdate = _props3.onUpdate;
+
+      return _extends({}, fields[active], {
+        q: q,
+        results: results,
+        onBack: onBack,
+        onChoose: onChoose,
+        onReset: onReset,
+        onUpdate: onUpdate
       });
     }
   }, {
     key: '_getDateRange',
     value: function _getDateRange() {
-      return _extends({}, this.props.fields[this.props.active], {
-        q: this.props.q,
-        query: this.props.query,
-        results: this.props.results,
-        onBack: this.props.onBack,
-        onAbort: this.props.onAbort,
-        onType: this.props.onType,
-        onLookup: this.props.onLookup,
-        onUpdate: this.props.onUpdate,
-        onReset: this.props.onReset
+      var _props4 = this.props,
+          active = _props4.active,
+          fields = _props4.fields,
+          q = _props4.q,
+          results = _props4.results,
+          onBack = _props4.onBack,
+          onReset = _props4.onReset,
+          onUpdate = _props4.onUpdate;
+
+      return _extends({}, fields[active], {
+        q: q,
+        results: results,
+        onBack: onBack,
+        onChoose: onChoose,
+        onReset: onReset,
+        onUpdate: onUpdate
       });
     }
   }, {
@@ -125,9 +144,18 @@ var Panel = function (_React$Component) {
 }(_react2.default.Component);
 
 Panel.propTypes = {
+  active: _propTypes2.default.number,
   fields: _propTypes2.default.array,
   path: _propTypes2.default.array,
-  state: _propTypes2.default.string
+  q: _propTypes2.default.string,
+  results: _propTypes2.default.object,
+  state: _propTypes2.default.string,
+  onBack: _propTypes2.default.func,
+  onChoose: _propTypes2.default.func,
+  onReset: _propTypes2.default.func,
+  onResetAll: _propTypes2.default.func,
+  onRestart: _propTypes2.default.func,
+  onUpdate: _propTypes2.default.func
 };
 
 

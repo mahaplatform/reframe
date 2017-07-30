@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
@@ -6,6 +7,18 @@ import Form from '../form'
 import Format from '../format'
 
 class Options extends React.Component {
+
+  static propTypes = {
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
+    options: PropTypes.array,
+    selected: PropTypes.number,
+    onChange: PropTypes.func,
+    onChoose: PropTypes.func
+  }
 
   render() {
     const { format, options, selected } = this.props
@@ -34,6 +47,20 @@ class Options extends React.Component {
 
 class Dynamic extends React.Component {
 
+  static propTypes = {
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
+    records: PropTypes.array,
+    text: PropTypes.string,
+    value: PropTypes.string,
+    selected: PropTypes.number,
+    onChange: PropTypes.func,
+    onChoose: PropTypes.func
+  }
+
   render() {
     const { records } = this.props
     return (records) ? <Options { ...this._getOptions() } /> : null
@@ -58,6 +85,18 @@ class Dynamic extends React.Component {
 }
 
 class Container extends React.Component {
+
+  static propTypes = {
+    endpoint: PropTypes.string,
+    form: PropTypes.object,
+    label: PropTypes.string,
+    q: PropTypes.string,
+    sort: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    onChoose: PropTypes.func,
+    onQuery: PropTypes.func
+  }
 
   render() {
     const { endpoint, label, form } = this.props
@@ -84,10 +123,6 @@ class Container extends React.Component {
         </div>
       )
     }
-  }
-
-  componentDidMount() {
-    const { sort, endpoint, onLookup } = this.props
   }
 
   _getSearchbox() {

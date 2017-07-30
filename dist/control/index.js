@@ -131,7 +131,9 @@ Control.propTypes = {
   type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
   endpoint: _propTypes2.default.string,
   defaultValue: _propTypes2.default.any,
-  options: _propTypes2.default.array
+  options: _propTypes2.default.array,
+  text: _propTypes2.default.string,
+  value: _propTypes2.default.string
 };
 Control.defaultProps = {
   type: 'textfield',

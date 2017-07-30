@@ -90,6 +90,7 @@ Drawer.childContextTypes = {
   drawer: _propTypes2.default.object
 };
 Drawer.propTypes = {
+  children: _propTypes2.default.any,
   component: _propTypes2.default.func,
   location: _propTypes2.default.string,
   onOpen: _propTypes2.default.func,

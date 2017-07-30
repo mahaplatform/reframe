@@ -84,6 +84,7 @@ var ColorField = function (_React$Component) {
 ColorField.propTypes = {
   color: _propTypes2.default.string,
   colors: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onSet: _propTypes2.default.func
 };

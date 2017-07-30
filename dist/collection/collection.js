@@ -16,10 +16,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _pluralize = require('pluralize');
-
-var _pluralize2 = _interopRequireDefault(_pluralize);
-
 var _filter = require('../filter');
 
 var _filter2 = _interopRequireDefault(_filter);
@@ -54,9 +50,7 @@ var Collection = function (_React$Component) {
   _createClass(Collection, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          filters = _props.filters,
-          records = _props.records;
+      var records = this.props.records;
 
       return _react2.default.createElement(
         'div',
@@ -76,9 +70,9 @@ var Collection = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props2 = this.props,
-          data = _props2.data,
-          onSetRecords = _props2.onSetRecords;
+      var _props = this.props,
+          data = _props.data,
+          onSetRecords = _props.onSetRecords;
 
       var filter = this.props.filter || {};
       var sort = this.props.sort || { key: 'created_at', order: 'desc' };
@@ -88,11 +82,11 @@ var Collection = function (_React$Component) {
   }, {
     key: '_getFilter',
     value: function _getFilter() {
-      var _props3 = this.props,
-          entity = _props3.entity,
-          filters = _props3.filters,
-          params = _props3.params,
-          onFilter = _props3.onFilter;
+      var _props2 = this.props,
+          entity = _props2.entity,
+          filters = _props2.filters,
+          params = _props2.params,
+          onFilter = _props2.onFilter;
 
       var article = _lodash2.default.includes(['a', 'e', 'i', 'o'], entity[0]) ? 'an' : 'a';
       return {
@@ -107,12 +101,12 @@ var Collection = function (_React$Component) {
     value: function _getInfinite() {
       var _this2 = this;
 
-      var _props4 = this.props,
-          endpoint = _props4.endpoint,
-          params = _props4.params,
-          loading = _props4.loading,
-          empty = _props4.empty,
-          failure = _props4.failure;
+      var _props3 = this.props,
+          endpoint = _props3.endpoint,
+          params = _props3.params,
+          loading = _props3.loading,
+          empty = _props3.empty,
+          failure = _props3.failure;
       var filter = params.filter,
           sort = params.sort;
 
@@ -132,12 +126,12 @@ var Collection = function (_React$Component) {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var _props5 = this.props,
-          endpoint = _props5.endpoint,
-          records = _props5.records,
-          params = _props5.params,
-          total = _props5.total,
-          onFetch = _props5.onFetch;
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          records = _props4.records,
+          params = _props4.params,
+          total = _props4.total,
+          onFetch = _props4.onFetch;
 
       if (!endpoint) return;
       var filter = params.filter,
@@ -163,11 +157,12 @@ var Collection = function (_React$Component) {
 Collection.contextTypes = {
   modal: _propTypes2.default.object
 };
-Collection.PropTypes = {
+Collection.propTypes = {
   all: _propTypes2.default.number,
   columns: _propTypes2.default.array,
   data: _propTypes2.default.array,
-  entity: _propTypes2.default.object,
+  endpoint: _propTypes2.default.string,
+  entity: _propTypes2.default.string,
   empty: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element, _propTypes2.default.shape({
     icon: _propTypes2.default.string,
     message: _propTypes2.default.string,
@@ -184,7 +179,11 @@ Collection.PropTypes = {
   params: _propTypes2.default.object,
   records: _propTypes2.default.array,
   sort: _propTypes2.default.object,
-  total: _propTypes2.default.number
+  total: _propTypes2.default.number,
+  onFetch: _propTypes2.default.func,
+  onFilter: _propTypes2.default.func,
+  onSetParams: _propTypes2.default.func,
+  onSetRecords: _propTypes2.default.func
 };
 Collection.defaultProps = {
   entity: 'record'

@@ -25,26 +25,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Checkbox = function (_React$Component) {
   _inherits(Checkbox, _React$Component);
 
-  function Checkbox(props) {
+  function Checkbox() {
     _classCallCheck(this, Checkbox);
 
-    var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props));
-
-    _this.state = {
-      value: props.defaultValue
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
   }
 
   _createClass(Checkbox, [{
     key: 'render',
     value: function render() {
-      var style = this.props.style;
+      var disabled = this.props.disabled;
 
       var classes = ['ui', 'checkbox'];
-      if (style) {
-        classes.push(style);
-      }
+      if (disabled) classes.push('disabled');
       return _react2.default.createElement(
         'div',
         { className: 'control' },
@@ -54,6 +47,17 @@ var Checkbox = function (_React$Component) {
           _react2.default.createElement('i', { className: 'toggle ' + (this.state.value ? 'on' : 'off') + ' icon', onClick: this._handleChange.bind(this) })
         )
       );
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var defaultValue = this.props.defaultValue;
+
+      if (defaultValue) {
+        this.setState({
+          value: defaultValue
+        });
+      }
     }
   }, {
     key: '_handleChange',

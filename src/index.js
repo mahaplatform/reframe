@@ -3,19 +3,16 @@ import Collection from './collection'
 import Colorfield from './colorfield'
 import Control from './control'
 import Datefield from './datefield'
-import Details from './details'
 import Drawer from './drawer'
 import Flash from './flash'
 import Filefield from './filefield'
 import Filter from './filter'
 import Form from './form'
 import Format from './format'
-import History from './history'
 import Infinite from './infinite'
 import Lookup from './lookup'
 import List from './list'
 import Modal from './modal'
-import Platform from './platform'
 import Popup from './popup'
 import Prompt from './prompt'
 import Scrollpane from './scrollpane'
@@ -36,19 +33,16 @@ export default {
   Colorfield,
   Control,
   Datefield,
-  Details,
   Drawer,
   Filefield,
   Filter,
   Flash,
   Form,
   Format,
-  History,
   Infinite,
   Lookup,
   List,
   Modal,
-  Platform,
   Popup,
   Prompt,
   Scrollpane,

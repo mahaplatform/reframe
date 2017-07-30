@@ -10,7 +10,12 @@ class Select extends React.Component {
 
   static propTypes = {
     endpoint: PropTypes.string,
-    sort: PropTypes.object
+    label: PropTypes.string,
+    name: PropTypes.string,
+    sort: PropTypes.object,
+    onBack: PropTypes.func,
+    onChoose: PropTypes.func,
+    onReset: PropTypes.func
   }
 
   static defaultProps = {

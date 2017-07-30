@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -46,6 +50,11 @@ var DateRange = function (_React$Component) {
     value: function render() {
       var include = this.props.include;
 
+      return _react2.default.createElement(_select2.default, _extends({}, this.props, { options: this._getOptions(include) }));
+    }
+  }, {
+    key: '_getOptions',
+    value: function _getOptions(include) {
       var options = [];
       if (_lodash2.default.includes(include, 'this')) options.push({ value: 'this_week', description: this.description(0, 'week'), text: 'This Week' });
       if (_lodash2.default.includes(include, 'last')) options.push({ value: 'last_week', description: this.description(-1, 'week'), text: 'Last Week' });
@@ -60,7 +69,7 @@ var DateRange = function (_React$Component) {
       if (_lodash2.default.includes(include, 'last')) options.push({ value: 'last_year', description: this.description(-1, 'year'), text: 'Last Year' });
       if (_lodash2.default.includes(include, 'next')) options.push({ value: 'next_year', description: this.description(1, 'year'), text: 'Next Year' });
       options.push({ value: 'custom', text: 'Custom' });
-      return _react2.default.createElement(_select2.default, _extends({}, this.props, { options: options }));
+      return options;
     }
   }, {
     key: 'description',
@@ -76,4 +85,7 @@ var DateRange = function (_React$Component) {
   return DateRange;
 }(_react2.default.Component);
 
+DateRange.propTypes = {
+  include: _propTypes2.default.array
+};
 exports.default = DateRange;

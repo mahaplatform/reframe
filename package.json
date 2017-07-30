@@ -24,23 +24,15 @@
     "node": ">= 7.2.1",
     "npm": ">= 3.7npm list graceful-fs"
   },
-  "dependencies": {
-    "bytes": "^2.5.0",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1",
-    "numeral": "^2.0.6",
-    "pluralize": "^5.0.0",
-    "prop-types": "^15.5.8",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.1.2",
-    "redux": "^3.6.0",
-    "redux-api-request": "^1.6.0",
-    "redux-rubberstamp": "^1.7.0",
-    "reselect": "^3.0.0",
-    "resumablejs": "^1.0.2"
+  "peerDependencies": {
+    "react": "^15.x || ^16.x",
+    "react-redux": "^5.x",
+    "react-router-dom": "^4.x",
+    "react-transition-group": "^1.x || ^2.x",
+    "redux": "^3.x",
+    "redux-api-request": "*",
+    "redux-rubberstamp": "*",
+    "reselet": "^2.x || ^3.x"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -58,5 +50,14 @@
     "nyc": "^11.1.0",
     "react-addons-test-utils": "^15.6.0",
     "sinon": "^2.2.0"
+  },
+  "dependencies": {
+    "bytes": "^2.5.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "numeral": "^2.0.6",
+    "pluralize": "^5.0.0",
+    "prop-types": "^15.5.8",
+    "resumablejs": "^1.0.2"
   }
 }

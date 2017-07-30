@@ -44,7 +44,7 @@ export class Empty extends React.Component {
 export class Results extends React.Component {
 
   static propTypes = {
-    columns: PropTypes.object,
+    columns: PropTypes.array,
     export: PropTypes.object,
     handler: PropTypes.func,
     layout: PropTypes.any,
@@ -52,7 +52,7 @@ export class Results extends React.Component {
     modal: PropTypes.func,
     params: PropTypes.object,
     records: PropTypes.array,
-    sort: PropTypes.string,
+    sort: PropTypes.object,
     status: PropTypes.string,
     onLoadMore: PropTypes.func,
     onSort: PropTypes.func

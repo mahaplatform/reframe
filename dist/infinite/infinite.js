@@ -155,7 +155,7 @@ var Infinite = function (_React$Component) {
   return Infinite;
 }(_react2.default.Component);
 
-Infinite.PropTypes = {
+Infinite.propTypes = {
   all: _propTypes2.default.number,
   cacheKey: _propTypes2.default.string,
   delayed: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
@@ -166,6 +166,10 @@ Infinite.PropTypes = {
   layout: _propTypes2.default.func,
   loading: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   records: _propTypes2.default.array,
+  sort: _propTypes2.default.shape({
+    key: _propTypes2.default.string,
+    order: _propTypes2.default.string
+  }),
   status: _propTypes2.default.string,
   timeout: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   total: _propTypes2.default.number,

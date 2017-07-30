@@ -9,9 +9,18 @@ import DateRange from './daterange'
 class Panel extends React.Component {
 
   static propTypes = {
+    active: PropTypes.number,
     fields: PropTypes.array,
     path: PropTypes.array,
-    state: PropTypes.string
+    q: PropTypes.string,
+    results: PropTypes.object,
+    state: PropTypes.string,
+    onBack: PropTypes.func,
+    onChoose: PropTypes.func,
+    onReset: PropTypes.func,
+    onResetAll: PropTypes.func,
+    onRestart: PropTypes.func,
+    onUpdate: PropTypes.func
   }
 
   render() {
@@ -32,41 +41,38 @@ class Panel extends React.Component {
   }
 
   _getFields() {
+    const { fields, results, onChoose, onResetAll } = this.props
     return {
-      fields: this.props.fields,
-      results: this.props.results,
-      onChoose: this.props.onChoose,
-      onResetAll: this.props.onResetAll
+      fields,
+      results,
+      onChoose,
+      onResetAll
     }
   }
 
   _getSelect() {
+    const { active, fields, q, results, onBack, onChoose, onReset, onUpdate } = this.props
     return {
-      ...this.props.fields[this.props.active],
-      q: this.props.q,
-      query: this.props.query,
-      results: this.props.results,
-      onBack: this.props.onBack,
-      onAbort: this.props.onAbort,
-      onType: this.props.onType,
-      onLookup: this.props.onLookup,
-      onUpdate: this.props.onUpdate,
-      onReset: this.props.onReset
+      ...fields[active],
+      q,
+      results,
+      onBack,
+      onChoose,
+      onReset,
+      onUpdate
     }
   }
 
   _getDateRange() {
+    const { active, fields, q, results, onBack, onReset, onUpdate } = this.props
     return {
-      ...this.props.fields[this.props.active],
-      q: this.props.q,
-      query: this.props.query,
-      results: this.props.results,
-      onBack: this.props.onBack,
-      onAbort: this.props.onAbort,
-      onType: this.props.onType,
-      onLookup: this.props.onLookup,
-      onUpdate: this.props.onUpdate,
-      onReset: this.props.onReset
+      ...fields[active],
+      q,
+      results,
+      onBack,
+      onChoose,
+      onReset,
+      onUpdate
     }
   }
 

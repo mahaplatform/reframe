@@ -1,12 +1,21 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import _ from 'lodash'
 import Select from './select'
 
 class DateRange extends React.Component {
 
+  static propTypes = {
+    include: PropTypes.array
+  }
+
   render() {
     const { include } = this.props
+    return <Select { ...this.props } options={ this._getOptions(include) } />
+  }
+
+  _getOptions(include) {
     const options = []
     if(_.includes(include, 'this')) options.push({ value: 'this_week', description: this.description(0, 'week'), text: 'This Week' })
     if(_.includes(include, 'last')) options.push({ value: 'last_week', description: this.description(-1, 'week'), text: 'Last Week' })
@@ -21,7 +30,7 @@ class DateRange extends React.Component {
     if(_.includes(include, 'last')) options.push({ value: 'last_year', description: this.description(-1, 'year'), text: 'Last Year' })
     if(_.includes(include, 'next')) options.push({ value: 'next_year', description: this.description(1, 'year'), text: 'Next Year' })
     options.push({ value: 'custom', text: 'Custom' })
-    return <Select {...this.props} options={options} />
+    return options
   }
 
   description(quantity, unit) {

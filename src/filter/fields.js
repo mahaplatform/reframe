@@ -9,7 +9,9 @@ class Fields extends React.Component {
 
   static propTypes = {
     fields: PropTypes.array,
-    results: PropTypes.object
+    results: PropTypes.object,
+    onChoose: PropTypes.func,
+    onResetAll: PropTypes.func
   }
 
   render() {

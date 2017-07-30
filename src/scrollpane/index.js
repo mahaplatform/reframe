@@ -4,7 +4,8 @@ import _ from 'lodash'
 
 class Scrollpane extends React.Component {
 
-  static PropTypes = {
+  static propTypes = {
+    children: PropTypes.any,
     notificationPercent: PropTypes.number,
     onReachBottom: PropTypes.func
   }
@@ -24,7 +25,7 @@ class Scrollpane extends React.Component {
     const { children } = this.props
     return (
       <div className="reframe-scrollpane">
-        <div className="reframe-scrollpane-inner" ref="scrollpane">
+        <div className="reframe-scrollpane-inner" ref={ (node) => this.scrollpane = node}>
           { children }
         </div>
       </div>
@@ -47,23 +48,20 @@ class Scrollpane extends React.Component {
   }
 
   _attachScrollListener() {
-    const { scrollpane } = this.refs
-    scrollpane.addEventListener('scroll', this.listener, true)
-    scrollpane.addEventListener('resize', this.listener, true)
+    this.scrollpane.addEventListener('scroll', this.listener, true)
+    this.scrollpane.addEventListener('resize', this.listener, true)
     this._scrollListener()
   }
 
   _detachScrollListener() {
-    const { scrollpane } = this.refs
-    scrollpane.removeEventListener('scroll', this.listener, true)
-    scrollpane.removeEventListener('resize', this.listener, true)
+    this.scrollpane.removeEventListener('scroll', this.listener, true)
+    this.scrollpane.removeEventListener('resize', this.listener, true)
   }
 
   _getHeaders() {
-    const { scrollpane } = this.refs
-    const childNodes = Array.from(scrollpane.getElementsByClassName('reframe-scrollpane-header'))
+    const childNodes = Array.from(this.scrollpane.getElementsByClassName('reframe-scrollpane-header'))
     return childNodes.reduce((headers, node) => {
-      const top = parseInt(node.getBoundingClientRect().top - scrollpane.getBoundingClientRect().top)
+      const top = parseInt(node.getBoundingClientRect().top - this.scrollpane.getBoundingClientRect().top)
       return [
         ...headers,
         {
@@ -76,10 +74,9 @@ class Scrollpane extends React.Component {
   }
 
   _scrollListener() {
-    const { scrollpane } = this.refs
     const { notificationPercent, onReachBottom } = this.props
-    const bottomPosition = scrollpane.scrollHeight - (scrollpane.scrollTop + scrollpane.offsetHeight)
-    const percentRemaining = (bottomPosition / scrollpane.scrollHeight) * 100
+    const bottomPosition = this.scrollpane.scrollHeight - (this.scrollpane.scrollTop + this.scrollpane.offsetHeight)
+    const percentRemaining = (bottomPosition / this.scrollpane.scrollHeight) * 100
     if(!this.notified && percentRemaining <= notificationPercent) {
       if(onReachBottom) onReachBottom()
       this.notified = true
@@ -87,8 +84,8 @@ class Scrollpane extends React.Component {
     if(this.headers.length > 0) {
       this.headers.map((header, index) => {
         const node = header.node
-        if(!header.fixed && index > this.fixed && scrollpane.scrollTop >= header.top) {
-          scrollpane.style.paddingTop = `${node.offsetHeight}px`
+        if(!header.fixed && index > this.fixed && this.scrollpane.scrollTop >= header.top) {
+          this.scrollpane.style.paddingTop = `${node.offsetHeight}px`
           node.style.position = 'absolute'
           node.style.top = 0
           node.style.left = 0
@@ -96,8 +93,8 @@ class Scrollpane extends React.Component {
           node.style.zIndex = 2
           this.fixed = index
           this.headers[index].fixed = true
-        } else if(header.fixed && index <= this.fixed && scrollpane.scrollTop < header.top) {
-          if(index === 0) scrollpane.removeAttribute('style')
+        } else if(header.fixed && index <= this.fixed && this.scrollpane.scrollTop < header.top) {
+          if(index === 0) this.scrollpane.removeAttribute('style')
           node.removeAttribute('style')
           this.headers[index].fixed = false
           this.fixed = this.fixed - 1
