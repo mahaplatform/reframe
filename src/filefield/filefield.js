@@ -101,9 +101,9 @@ class FileField extends React.Component {
     }
     files.map((file, index) => {
       if(!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-        $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
-          percent: file.progress
-        })
+        // $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
+        //   percent: file.progress
+        // })
       }
     })
   }

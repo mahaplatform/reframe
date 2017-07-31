@@ -135,8 +135,6 @@ var FileField = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
-
       var files = this.props.files;
 
       if (files.length > prevProps.files.length) {
@@ -146,9 +144,9 @@ var FileField = function (_React$Component) {
       }
       files.map(function (file, index) {
         if (!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-          $(_this3['filefield_' + file.uniqueIdentifier + '_progress']).progress({
-            percent: file.progress
-          });
+          // $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
+          //   percent: file.progress
+          // })
         }
       });
     }
