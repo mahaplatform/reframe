@@ -16,7 +16,7 @@ class Options extends React.Component {
     name: PropTypes.string,
     multiple: PropTypes.bool,
     options: PropTypes.array,
-    results: PropTypes.array
+    results: PropTypes.object
   }
 
   render() {
@@ -82,7 +82,7 @@ class Dynamic extends React.Component {
     multiple: PropTypes.bool,
     options: PropTypes.array,
     records: PropTypes.array,
-    results: PropTypes.array,
+    results: PropTypes.object,
     status: PropTypes.string,
     text: PropTypes.string,
     value: PropTypes.string,
@@ -120,7 +120,7 @@ class Container extends React.Component {
     endpoint: PropTypes.string,
     label: PropTypes.string,
     q: PropTypes.string,
-    sort: PropTypes.string,
+    sort: PropTypes.object,
     onQuery: PropTypes.func
   }
 

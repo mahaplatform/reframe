@@ -84,17 +84,17 @@ var Stack = function (_React$Component) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState, prevContext) {
+    value: function componentDidUpdate(prevProps, prevState) {
       var _this3 = this;
 
       var _props2 = this.props,
+          pathname = _props2.pathname,
           onPop = _props2.onPop,
           onPush = _props2.onPush;
       var router = this.context.router;
-      var pathname = router.route.location.pathname;
       var mounted = this.state.mounted;
 
-      if (prevContext.router.route.location.pathname !== pathname) {
+      if (prevProps.pathname !== pathname) {
         if (router.history.action === 'PUSH') {
           onPush(pathname);
           setTimeout(function () {
@@ -207,9 +207,40 @@ Stack.propTypes = {
   initialRoute: _propTypes2.default.string.isRequired,
   cards: _propTypes2.default.array,
   location: _propTypes2.default.object,
+  pathname: _propTypes2.default.string,
   routes: _propTypes2.default.object,
   onPop: _propTypes2.default.func,
   onPush: _propTypes2.default.func,
   onSet: _propTypes2.default.func
 };
-exports.default = Stack;
+
+var StackWrapper = function (_React$Component2) {
+  _inherits(StackWrapper, _React$Component2);
+
+  function StackWrapper() {
+    _classCallCheck(this, StackWrapper);
+
+    return _possibleConstructorReturn(this, (StackWrapper.__proto__ || Object.getPrototypeOf(StackWrapper)).apply(this, arguments));
+  }
+
+  _createClass(StackWrapper, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        Stack,
+        _extends({}, this.props, { pathname: this.context.router.history.location.pathname }),
+        this.props.children
+      );
+    }
+  }]);
+
+  return StackWrapper;
+}(_react2.default.Component);
+
+StackWrapper.contextTypes = {
+  router: _propTypes2.default.object
+};
+StackWrapper.propTypes = {
+  children: _propTypes2.default.any
+};
+exports.default = StackWrapper;

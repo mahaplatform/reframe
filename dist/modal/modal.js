@@ -42,6 +42,7 @@ var Modal = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
+          open = _props.open,
           component = _props.component;
 
       return _react2.default.createElement(
@@ -49,16 +50,31 @@ var Modal = function (_React$Component) {
         { className: 'reframe-modal' },
         children,
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          component && _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) }),
-          component && _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) })
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
             'div',
             { className: 'reframe-modal-window' },
             _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : component
           )
         )
       );
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props2 = this.props,
+          open = _props2.open,
+          onClear = _props2.onClear;
+
+      if (open !== prevProps.open && !open) {
+        setTimeout(onClear, 500);
+      }
     }
   }, {
     key: '_handleClose',
@@ -68,9 +84,9 @@ var Modal = function (_React$Component) {
   }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      var _props2 = this.props,
-          onClose = _props2.onClose,
-          onOpen = _props2.onOpen;
+      var _props3 = this.props,
+          onClose = _props3.onClose,
+          onOpen = _props3.onOpen;
 
       return {
         modal: {
@@ -90,6 +106,8 @@ Modal.childContextTypes = {
 Modal.propTypes = {
   children: _propTypes2.default.any,
   component: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
+  open: _propTypes2.default.bool,
+  onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,
   onOpen: _propTypes2.default.func
 };

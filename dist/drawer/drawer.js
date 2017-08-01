@@ -43,23 +43,39 @@ var Drawer = function (_React$Component) {
       var _props = this.props,
           children = _props.children,
           component = _props.component,
-          location = _props.location;
+          location = _props.location,
+          open = _props.open;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-drawer' },
         children,
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          component && _react2.default.createElement('div', { className: 'reframe-drawer-overlay', onClick: this._handleClose.bind(this) }),
-          component && _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement('div', { className: 'reframe-drawer-overlay', onClick: this._handleClose.bind(this) })
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
             'div',
             { className: 'reframe-drawer-panel reframe-drawer-panel-' + location },
-            _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : _react2.default.cloneElement(component)
+            _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : component
           )
         )
       );
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props2 = this.props,
+          open = _props2.open,
+          onClear = _props2.onClear;
+
+      if (open !== prevProps.open && !open) {
+        setTimeout(onClear, 500);
+      }
     }
   }, {
     key: 'getChildContext',
@@ -93,7 +109,9 @@ Drawer.propTypes = {
   children: _propTypes2.default.any,
   component: _propTypes2.default.func,
   location: _propTypes2.default.string,
-  onOpen: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
+  open: _propTypes2.default.bool,
+  onClear: _propTypes2.default.func,
+  onClose: _propTypes2.default.func,
+  onOpen: _propTypes2.default.func
 };
 exports.default = Drawer;

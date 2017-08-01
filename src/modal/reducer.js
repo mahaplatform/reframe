@@ -1,7 +1,8 @@
 import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
-  component: null
+  component: null,
+  open: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,13 +11,18 @@ export default (state = INITIAL_STATE, action) => {
 
   case actionTypes.OPEN:
     return {
-      component: action.component
+      component: action.component,
+      open: true
     }
 
   case actionTypes.CLOSE:
     return {
-      component: null
+      ...state,
+      open: false
     }
+
+  case actionTypes.CLEAR:
+    return INITIAL_STATE
 
   default:
     return state

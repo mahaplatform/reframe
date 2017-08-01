@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Flash = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25,7 +24,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Flash = exports.Flash = function (_React$Component) {
+var Flash = function (_React$Component) {
   _inherits(Flash, _React$Component);
 
   function Flash() {
@@ -47,11 +46,11 @@ var Flash = exports.Flash = function (_React$Component) {
         { className: 'reframe-flash' },
         children,
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250 },
-          message && _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': message !== null, classNames: 'expanded', timeout: 250, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
             'div',
-            { className: 'reframe-flash-popup ' + style, key: 'flash_' + message },
+            { className: 'reframe-flash-popup ' + style },
             _react2.default.createElement(
               'div',
               { className: 'reframe-flash-popup-panel' },
@@ -82,7 +81,7 @@ var Flash = exports.Flash = function (_React$Component) {
           onClear = _props2.onClear;
 
       if (prevProps.message !== message && message) {
-        window.setTimeout(onClear, 2000);
+        setTimeout(onClear, 2000);
       }
     }
   }, {

@@ -61,10 +61,18 @@ var Panel = function (_React$Component) {
         { className: 'reframe-filter' },
         _react2.default.createElement(_fields2.default, this._getFields()),
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'stack', component: this._firstChild, transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          active !== null && fields[active].type === 'select' && _react2.default.createElement(_select2.default, this._getSelect()),
-          active !== null && fields[active].type === 'daterange' && _react2.default.createElement(_daterange2.default, this._getDateRange())
+          _reactTransitionGroup.TransitionGroup,
+          null,
+          active !== null && fields[active] && fields[active].type === 'select' && _react2.default.createElement(
+            _reactTransitionGroup.CSSTransition,
+            { classNames: 'stack', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+            _react2.default.createElement(_select2.default, this._getSelect())
+          ),
+          active !== null && fields[active] && fields[active].type === 'daterange' && _react2.default.createElement(
+            _reactTransitionGroup.CSSTransition,
+            { classNames: 'stack', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+            _react2.default.createElement(_daterange2.default, this._getDateRange())
+          )
         )
       );
     }
@@ -120,6 +128,7 @@ var Panel = function (_React$Component) {
           q = _props4.q,
           results = _props4.results,
           onBack = _props4.onBack,
+          onChoose = _props4.onChoose,
           onReset = _props4.onReset,
           onUpdate = _props4.onUpdate;
 

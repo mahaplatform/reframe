@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import _ from 'lodash'
 
 class Modal extends React.Component {
@@ -15,25 +15,34 @@ class Modal extends React.Component {
       PropTypes.element,
       PropTypes.func
     ]),
+    open: PropTypes.bool,
+    onClear: PropTypes.func,
     onClose: PropTypes.func,
     onOpen: PropTypes.func
   }
 
   render() {
-    const { children, component } = this.props
+    const { children, open, component } = this.props
     return (
       <div className="reframe-modal">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-          { component && <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} /> }
-          { component &&
-            <div className="reframe-modal-window">
-              { _.isFunction(component) ? React.createElement(component) : component }
-            </div>
-          }
-        </CSSTransitionGroup>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} />
+        </CSSTransition>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-modal-window">
+            { _.isFunction(component) ? React.createElement(component) : component }
+          </div>
+        </CSSTransition>
       </div>
     )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
+    }
   }
 
   _handleClose() {

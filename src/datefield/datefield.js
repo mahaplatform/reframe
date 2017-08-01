@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import Chooser from './chooser'
 import moment from 'moment'
 
@@ -44,9 +44,9 @@ class Datefield extends React.Component {
             </div>
           }
         </div>
-        <CSSTransitionGroup transitionName="cover" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-          { active && <Chooser { ...this.props } /> }
-        </CSSTransitionGroup>
+        <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <Chooser { ...this.props } />
+        </CSSTransition>
       </div>
     )
   }

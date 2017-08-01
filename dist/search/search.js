@@ -134,7 +134,7 @@ Options.propTypes = {
   name: _propTypes2.default.string,
   multiple: _propTypes2.default.bool,
   options: _propTypes2.default.array,
-  results: _propTypes2.default.array
+  results: _propTypes2.default.object
 };
 
 var Dynamic = function (_React$Component2) {
@@ -195,7 +195,7 @@ Dynamic.propTypes = {
   multiple: _propTypes2.default.bool,
   options: _propTypes2.default.array,
   records: _propTypes2.default.array,
-  results: _propTypes2.default.array,
+  results: _propTypes2.default.object,
   status: _propTypes2.default.string,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
@@ -271,7 +271,7 @@ Container.propTypes = {
   endpoint: _propTypes2.default.string,
   label: _propTypes2.default.string,
   q: _propTypes2.default.string,
-  sort: _propTypes2.default.string,
+  sort: _propTypes2.default.object,
   onQuery: _propTypes2.default.func
 };
 exports.default = Container;

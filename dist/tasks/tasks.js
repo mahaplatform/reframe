@@ -40,20 +40,25 @@ var Tasks = function (_React$Component) {
 
       var _props = this.props,
           children = _props.children,
-          items = _props.items;
+          items = _props.items,
+          open = _props.open;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-tasks' },
         children,
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 250, transitionLeaveTimeout: 250, transitionAppear: true, transitionAppearTimeout: 250 },
-          items && _react2.default.createElement('div', { className: 'reframe-tasks-overlay', onClick: this._handleClose.bind(this) }),
-          items && _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 250, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement('div', { className: 'reframe-tasks-overlay', onClick: this._handleClose.bind(this) })
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 250, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
             'div',
             { className: 'reframe-tasks-list' },
-            items.map(function (item, index) {
+            items && items.map(function (item, index) {
               return _react2.default.createElement(
                 'div',
                 { key: 'task_' + index, className: 'reframe-tasks-item', onClick: _this2._handleChoose.bind(_this2, index) },
@@ -70,11 +75,22 @@ var Tasks = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props2 = this.props,
+          open = _props2.open,
+          onClear = _props2.onClear;
+
+      if (open !== prevProps.open && !open) {
+        setTimeout(onClear, 500);
+      }
+    }
+  }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      var _props2 = this.props,
-          onOpen = _props2.onOpen,
-          onClose = _props2.onClose;
+      var _props3 = this.props,
+          onOpen = _props3.onOpen,
+          onClose = _props3.onClose;
 
       return {
         tasks: {
@@ -121,8 +137,11 @@ Tasks.contextTypes = {
   modal: _propTypes2.default.object,
   history: _propTypes2.default.object
 };
-Tasks.propsTypes = {
+Tasks.propTypes = {
+  children: _propTypes2.default.any,
   items: _propTypes2.default.array,
+  open: _propTypes2.default.bool,
+  onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,
   onOpen: _propTypes2.default.func
 };

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import _ from 'lodash'
 
 class Drawer extends React.Component {
@@ -13,25 +13,34 @@ class Drawer extends React.Component {
     children: PropTypes.any,
     component: PropTypes.func,
     location: PropTypes.string,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func
+    open: PropTypes.bool,
+    onClear: PropTypes.func,
+    onClose: PropTypes.func,
+    onOpen: PropTypes.func
   }
 
   render() {
-    const { children, component, location } = this.props
+    const { children, component, location, open } = this.props
     return (
       <div className="reframe-drawer">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-          { component && <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} /> }
-          { component &&
-            <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>
-              { _.isFunction(component) ? React.createElement(component) : React.cloneElement(component) }
-            </div>
-          }
-        </CSSTransitionGroup>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} />
+        </CSSTransition>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>
+            { _.isFunction(component) ? React.createElement(component) : component }
+          </div>
+        </CSSTransition>
       </div>
     )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
+    }
   }
 
   getChildContext() {

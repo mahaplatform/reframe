@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import _ from 'lodash'
 
 class Tray extends React.Component {
@@ -10,26 +10,36 @@ class Tray extends React.Component {
   }
 
   static propTypes = {
+    children: PropTypes.any,
     component: PropTypes.element,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func
+    open: PropTypes.bool,
+    onClear: PropTypes.func,
+    onClose: PropTypes.func,
+    onOpen: PropTypes.func
   }
 
   render() {
-    const { children, component } = this.props
+    const { children, component, open } = this.props
     return (
       <div className="reframe-tray">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-          { component && <div className="reframe-tray-overlay" onClick={this._handleCloseTray.bind(this)} /> }
-          { component &&
-            <div className="reframe-tray-panel">
-              { _.isFunction(component) ? React.createElement(component) : component }
-            </div>
-          }
-        </CSSTransitionGroup>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-tray-overlay" onClick={ this._handleCloseTray.bind(this) } />
+        </CSSTransition>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-tray-panel">
+            { _.isFunction(component) ? React.createElement(component) : component }
+          </div>
+        </CSSTransition>
       </div>
     )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
+    }
   }
 
   getChildContext() {

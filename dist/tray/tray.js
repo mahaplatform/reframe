@@ -42,23 +42,39 @@ var Tray = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          component = _props.component;
+          component = _props.component,
+          open = _props.open;
 
       return _react2.default.createElement(
         'div',
         { className: 'reframe-tray' },
         children,
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'expanded', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          component && _react2.default.createElement('div', { className: 'reframe-tray-overlay', onClick: this._handleCloseTray.bind(this) }),
-          component && _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement('div', { className: 'reframe-tray-overlay', onClick: this._handleCloseTray.bind(this) })
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': open, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
             'div',
             { className: 'reframe-tray-panel' },
             _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : component
           )
         )
       );
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props2 = this.props,
+          open = _props2.open,
+          onClear = _props2.onClear;
+
+      if (open !== prevProps.open && !open) {
+        setTimeout(onClear, 500);
+      }
     }
   }, {
     key: 'getChildContext',
@@ -89,8 +105,11 @@ Tray.childContextTypes = {
   tray: _propTypes2.default.object
 };
 Tray.propTypes = {
+  children: _propTypes2.default.any,
   component: _propTypes2.default.element,
-  onOpen: _propTypes2.default.func,
-  onClose: _propTypes2.default.func
+  open: _propTypes2.default.bool,
+  onClear: _propTypes2.default.func,
+  onClose: _propTypes2.default.func,
+  onOpen: _propTypes2.default.func
 };
 exports.default = Tray;

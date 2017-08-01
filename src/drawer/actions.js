@@ -9,3 +9,7 @@ export const open = (component, location) => ({
 export const close = () => ({
   type: actionTypes.CLOSE
 })
+
+export const clear = () => ({
+  type: actionTypes.CLEAR
+})

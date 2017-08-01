@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 
 class Prompt extends React.Component {
 
@@ -33,25 +33,25 @@ class Prompt extends React.Component {
     return (
       <div className="reframe-prompt">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
-          { message && <div className="reframe-prompt-overlay" onClick={ this._handleClosePrompt.bind(this) } /> }
-          { message &&
-            <div className="reframe-prompt-options">
-              { message &&
-                <div className="reframe-prompt-header">
-                  { message }
+        <CSSTransition in={ message } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-prompt-overlay" onClick={ this._handleClosePrompt.bind(this) } />
+        </CSSTransition>
+        <CSSTransition in={ message } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-prompt-options">
+            { message &&
+              <div className="reframe-prompt-header">
+                { message }
+              </div>
+            }
+            { options && options.map((option, index) => {
+              return (
+                <div key={`option_${index}`} className="reframe-prompt-option" onClick={ this._handleChooseOption.bind(this, index) }>
+                  { option.label }
                 </div>
-              }
-              { options && options.map((option, index) => {
-                return (
-                  <div key={`option_${index}`} className="reframe-prompt-option" onClick={ this._handleChooseOption.bind(this, index) }>
-                    { option.label }
-                  </div>
-                )
-              }) }
-            </div>
-          }
-        </CSSTransitionGroup>
+              )
+            }) }
+          </div>
+        </CSSTransition>
       </div>
     )
   }

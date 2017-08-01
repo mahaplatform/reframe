@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import Format from '../format'
 import Search from './search'
 
@@ -55,9 +55,9 @@ class Lookup extends React.Component {
                  value={ value }
                  placeholder={ prompt } />
        }
-       <CSSTransitionGroup transitionName="cover" transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-         { active && <Search { ...this.props } />}
-       </CSSTransitionGroup>
+       <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+         <Search { ...this.props } />
+       </CSSTransition>
      </div>
     )
   }

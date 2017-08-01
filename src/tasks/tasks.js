@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 
 class Tasks extends React.Component {
 
@@ -14,36 +14,44 @@ class Tasks extends React.Component {
     history: PropTypes.object
   }
 
-  static propsTypes = {
+  static propTypes = {
+    children: PropTypes.any,
     items: PropTypes.array,
+    open: PropTypes.bool,
+    onClear: PropTypes.func,
     onClose: PropTypes.func,
     onOpen: PropTypes.func
   }
 
   render() {
-    const { children, items } = this.props
+    const { children, items, open } = this.props
     return (
       <div className="reframe-tasks">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={250} transitionLeaveTimeout={250} transitionAppear={true} transitionAppearTimeout={250}>
-          { items && <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } /> }
-          { items &&
-            <div className="reframe-tasks-list">
-              {items.map((item, index) => {
-                return (
-                  <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
-                    { item.label }
-                  </div>
-                )
-              })}
-              <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
-                Cancel
+        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } />
+        </CSSTransition>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-tasks-list">
+            { items && items.map((item, index) => (
+              <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
+                { item.label }
               </div>
+            )) }
+            <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
+              Cancel
             </div>
-          }
-        </CSSTransitionGroup>
+          </div>
+        </CSSTransition>
       </div>
     )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
+    }
   }
 
   getChildContext() {

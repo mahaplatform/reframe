@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Scrollpane from '../scrollpane'
 import _ from 'lodash'
 
-export class Tabs extends React.Component {
+class Tabs extends React.Component {
 
   static contextTypes = {
     stack: PropTypes.object

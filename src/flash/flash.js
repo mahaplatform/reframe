@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 
-export class Flash extends React.Component {
+class Flash extends React.Component {
 
   static childContextTypes = {
     flash: PropTypes.object
@@ -21,20 +21,18 @@ export class Flash extends React.Component {
     return (
       <div className="reframe-flash">
         { children }
-        <CSSTransitionGroup transitionName="expanded" transitionEnterTimeout={ 250 } transitionLeaveTimeout={ 250 }>
-          { message &&
-            <div className={`reframe-flash-popup ${style}`} key={`flash_${message}`}>
-              <div className="reframe-flash-popup-panel">
-                <div className="reframe-flash-popup-icon">
-                  { this._getIcon(style) }
-                </div>
-                <div className="reframe-flash-popup-message">
-                  <p>{ message }</p>
-                </div>
+        <CSSTransition in={ message !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className={`reframe-flash-popup ${style}`}>
+            <div className="reframe-flash-popup-panel">
+              <div className="reframe-flash-popup-icon">
+                { this._getIcon(style) }
+              </div>
+              <div className="reframe-flash-popup-message">
+                <p>{ message }</p>
               </div>
             </div>
-          }
-        </CSSTransitionGroup>
+          </div>
+        </CSSTransition>
       </div>
     )
   }
@@ -42,7 +40,7 @@ export class Flash extends React.Component {
   componentDidUpdate(prevProps) {
     const { message, onClear } = this.props
     if(prevProps.message !== message && message) {
-      window.setTimeout(onClear, 2000)
+      setTimeout(onClear, 2000)
     }
   }
 

@@ -41,7 +41,7 @@ class Select extends React.Component {
             Done
           </div>
         </div>
-        <Search {...this.props} />
+        <Search { ...this.props } />
         <div className="reframe-filter-footer" onClick={ this._handleReset.bind(this) }>
           Reset { label }
         </div>

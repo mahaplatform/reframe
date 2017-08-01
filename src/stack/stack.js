@@ -16,6 +16,7 @@ class Stack extends React.Component {
     initialRoute: PropTypes.string.isRequired,
     cards: PropTypes.array,
     location: PropTypes.object,
+    pathname: PropTypes.string,
     routes: PropTypes.object,
     onPop: PropTypes.func,
     onPush: PropTypes.func,
@@ -59,12 +60,11 @@ class Stack extends React.Component {
     this.setState({ mounted: cards.length })
   }
 
-  componentDidUpdate(prevProps, prevState, prevContext) {
-    const { onPop, onPush } = this.props
+  componentDidUpdate(prevProps, prevState) {
+    const { pathname, onPop, onPush } = this.props
     const { router } = this.context
-    const { pathname } = router.route.location
     const { mounted } = this.state
-    if(prevContext.router.route.location.pathname !== pathname) {
+    if(prevProps.pathname !== pathname) {
       if(router.history.action === 'PUSH') {
         onPush(pathname)
         setTimeout(() => this.setState({ mounted: mounted + 1 }), 50)
@@ -145,4 +145,24 @@ class Stack extends React.Component {
 
 }
 
-export default Stack
+class StackWrapper extends React.Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  static propTypes = {
+    children: PropTypes.any
+  }
+
+  render() {
+    return (
+      <Stack { ...this.props } pathname={ this.context.router.history.location.pathname }>
+        { this.props.children }
+      </Stack>
+    )
+  }
+
+}
+
+export default StackWrapper

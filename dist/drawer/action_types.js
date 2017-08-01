@@ -5,3 +5,4 @@ Object.defineProperty(exports, "__esModule", {
 });
 var OPEN = exports.OPEN = 'OPEN';
 var CLOSE = exports.CLOSE = 'CLOSE';
+var CLEAR = exports.CLEAR = 'CLEAR';

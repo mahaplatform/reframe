@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import Fields from './fields'
 import Select from './select'
@@ -28,10 +28,18 @@ class Panel extends React.Component {
     return (
       <div className="reframe-filter">
         <Fields { ...this._getFields() } />
-        <CSSTransitionGroup transitionName='stack' component={ this._firstChild } transitionEnterTimeout={ 500 } transitionLeaveTimeout={ 500 }>
-          { active !== null && fields[active].type === 'select' && <Select { ...this._getSelect() } /> }
-          { active !== null && fields[active].type === 'daterange' && <DateRange { ...this._getDateRange() } /> }
-        </CSSTransitionGroup>
+        <TransitionGroup>
+          { active !== null && fields[active] && fields[active].type === 'select' &&
+            <CSSTransition classNames='stack' timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+              <Select { ...this._getSelect() } />
+            </CSSTransition>
+          }
+          { active !== null && fields[active] && fields[active].type === 'daterange' &&
+            <CSSTransition classNames='stack' timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+              <DateRange { ...this._getDateRange() } />
+            </CSSTransition>
+          }
+        </TransitionGroup>
       </div>
     )
   }
@@ -64,7 +72,7 @@ class Panel extends React.Component {
   }
 
   _getDateRange() {
-    const { active, fields, q, results, onBack, onReset, onUpdate } = this.props
+    const { active, fields, q, results, onBack, onChoose, onReset, onUpdate } = this.props
     return {
       ...fields[active],
       q,

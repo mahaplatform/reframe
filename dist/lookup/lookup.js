@@ -73,9 +73,9 @@ var Lookup = function (_React$Component) {
           value: value,
           placeholder: prompt }),
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'cover', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          active && _react2.default.createElement(_search2.default, this.props)
+          _reactTransitionGroup.CSSTransition,
+          { 'in': active, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(_search2.default, this.props)
         )
       );
     }

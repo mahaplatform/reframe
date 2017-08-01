@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.close = exports.open = undefined;
+exports.clear = exports.close = exports.open = undefined;
 
 var _action_types = require('./action_types');
 
@@ -22,5 +22,11 @@ var open = exports.open = function open(component, location) {
 var close = exports.close = function close() {
   return {
     type: actionTypes.CLOSE
+  };
+};
+
+var clear = exports.clear = function clear() {
+  return {
+    type: actionTypes.CLEAR
   };
 };

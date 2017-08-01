@@ -76,9 +76,9 @@ var Datefield = function (_React$Component) {
           )
         ),
         _react2.default.createElement(
-          _reactTransitionGroup.CSSTransitionGroup,
-          { transitionName: 'cover', transitionEnterTimeout: 500, transitionLeaveTimeout: 500 },
-          active && _react2.default.createElement(_chooser2.default, this.props)
+          _reactTransitionGroup.CSSTransition,
+          { 'in': active, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(_chooser2.default, this.props)
         )
       );
     }
