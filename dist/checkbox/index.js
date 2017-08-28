@@ -25,10 +25,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Checkbox = function (_React$Component) {
   _inherits(Checkbox, _React$Component);
 
-  function Checkbox() {
+  function Checkbox(props) {
     _classCallCheck(this, Checkbox);
 
-    return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props));
+
+    _this.state = {
+      value: 'off'
+    };
+    return _this;
   }
 
   _createClass(Checkbox, [{

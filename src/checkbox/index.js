@@ -15,6 +15,13 @@ class Checkbox extends React.Component {
     onChange: () => {}
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: false
+    }
+  }
+
   render() {
     const { disabled } = this.props
     let classes = ['ui', 'checkbox']

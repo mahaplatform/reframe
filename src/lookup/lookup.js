@@ -23,6 +23,7 @@ class Lookup extends React.Component {
     sort: PropTypes.string,
     status: PropTypes.string,
     text: PropTypes.string,
+    value: PropTypes.string,
     onBegin: PropTypes.func,
     onClear: PropTypes.func,
     onCancel: PropTypes.func,

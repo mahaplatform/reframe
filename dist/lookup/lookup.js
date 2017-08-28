@@ -138,6 +138,7 @@ Lookup.propTypes = {
   sort: _propTypes2.default.string,
   status: _propTypes2.default.string,
   text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
   onBegin: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onCancel: _propTypes2.default.func,
