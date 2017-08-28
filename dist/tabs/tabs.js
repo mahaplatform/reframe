@@ -53,14 +53,18 @@ var Tabs = function (_React$Component) {
       var _this2 = this;
 
       var _props = this.props,
-          children = _props.children,
           chosen = _props.chosen,
-          tabs = _props.tabs;
+          header = _props.header,
+          items = _props.items;
 
       return _react2.default.createElement(
         _scrollpane2.default,
         null,
-        children,
+        header && _react2.default.createElement(
+          'div',
+          { className: 'reframe-tabs-header' },
+          _lodash2.default.isFunction() ? _react2.default.createElement(header) : header
+        ),
         _react2.default.createElement(
           'div',
           { className: 'reframe-scrollpane-header' },
@@ -70,13 +74,13 @@ var Tabs = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-tabs-items' },
-              tabs.map(function (tab, index) {
+              items.map(function (item, index) {
                 var klass = ['reframe-tabs-item'];
                 if (index === chosen) klass.push('active');
                 return _react2.default.createElement(
                   'a',
                   { key: 'tab_' + index, onClick: _this2._handleChoose.bind(_this2, index), className: klass.join(' ') },
-                  tab.label
+                  item.label
                 );
               })
             )
@@ -85,14 +89,14 @@ var Tabs = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'reframe-tab' },
-          tabs.map(function (tab, index) {
+          items.map(function (item, index) {
             return _react2.default.createElement(
               'div',
               { key: 'tab_body_' + index, className: 'reframe-tab-wrapper ' + _this2._getStatus(index) },
               _react2.default.createElement(
                 'div',
                 { className: 'reframe-tab-body' },
-                _lodash2.default.isFunction() ? _react2.default.createElement(tab.component) : tab.component
+                _lodash2.default.isFunction() ? _react2.default.createElement(item.component) : item.component
               )
             );
           })
@@ -143,6 +147,8 @@ Tabs.contextTypes = {
 };
 Tabs.propTypes = {
   chosen: _propTypes2.default.number,
-  tabs: _propTypes2.default.array
+  children: _propTypes2.default.any,
+  header: _propTypes2.default.any,
+  items: _propTypes2.default.array
 };
 exports.default = Tabs;

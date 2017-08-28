@@ -103,16 +103,20 @@ var Tasks = function (_React$Component) {
     key: '_handleChoose',
     value: function _handleChoose(index) {
       var items = this.props.items;
+      var _context = this.context,
+          drawer = _context.drawer,
+          modal = _context.modal,
+          router = _context.router;
 
       if (items[index].route) {
-        this.context.history.push(items[index].route);
+        router.history.push(items[index].route);
         this._handleClose();
       } else if (items[index].modal) {
-        this.context.modal.open(items[index].modal);
+        modal.open(items[index].modal);
         this._handleClose();
       } else if (items[index].drawer) {
         var location = items[index].location || 'right';
-        this.context.drawer.open(items[index].drawer, location);
+        drawer.open(items[index].drawer, location);
         this._handleClose();
       } else if (items[index].handler) {
         var done = this._handleClose.bind(this);
@@ -135,7 +139,7 @@ Tasks.childContextTypes = {
 Tasks.contextTypes = {
   drawer: _propTypes2.default.object,
   modal: _propTypes2.default.object,
-  history: _propTypes2.default.object
+  router: _propTypes2.default.object
 };
 Tasks.propTypes = {
   children: _propTypes2.default.any,

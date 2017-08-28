@@ -87,7 +87,8 @@ var Options = function (_React$Component) {
   }, {
     key: '_handleChoose',
     value: function _handleChoose(chosen) {
-      this.props.onChoose(chosen.record);
+      var record = chosen.record || chosen;
+      this.props.onChoose(record);
       this.props.onChange(chosen.value);
     }
   }]);

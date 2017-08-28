@@ -39,7 +39,8 @@ class Options extends React.Component {
   }
 
   _handleChoose(chosen) {
-    this.props.onChoose(chosen.record)
+    const record = chosen.record || chosen
+    this.props.onChoose(record)
     this.props.onChange(chosen.value)
   }
 

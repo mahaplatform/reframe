@@ -3,6 +3,13 @@ import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import Format from '../format'
 import Search from './search'
+import _ from 'lodash'
+
+const ValueToken = ({ value }) => (
+  <div className="reframe-value-token">
+    { value }
+  </div>
+)
 
 class Lookup extends React.Component {
 
@@ -34,9 +41,13 @@ class Lookup extends React.Component {
     onLoookup: PropTypes.func
   }
 
+  static defaultProps = {
+    format: ValueToken
+  }
+
   render() {
-    const { active, chosen, disabled, format, prompt } = this.props
-    const value = chosen ? chosen.text : ''
+    const { active, chosen, disabled, format, prompt, text } = this.props
+    const value = chosen ? _.get(chosen, text) : ''
     return (
       <div className="reframe-lookup-field">
         { chosen &&

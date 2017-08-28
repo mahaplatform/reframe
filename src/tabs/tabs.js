@@ -11,7 +11,9 @@ class Tabs extends React.Component {
 
   static propTypes = {
     chosen: PropTypes.number,
-    tabs: PropTypes.array
+    children: PropTypes.any,
+    header: PropTypes.any,
+    items: PropTypes.array
   }
 
   constructor(props) {
@@ -23,19 +25,23 @@ class Tabs extends React.Component {
   }
 
   render() {
-    const { children, chosen, tabs } = this.props
+    const { chosen, header, items } = this.props
     return (
       <Scrollpane>
-        { children }
+        { header &&
+          <div className="reframe-tabs-header">
+            { _.isFunction() ? React.createElement(header) : header }
+          </div>
+        }
         <div className="reframe-scrollpane-header">
           <div className="reframe-tabs">
             <div className="reframe-tabs-items">
-              { tabs.map((tab, index) => {
+              { items.map((item, index) => {
                 const klass = ['reframe-tabs-item']
                 if(index === chosen) klass.push('active')
                 return (
                   <a key={`tab_${index}`} onClick={ this._handleChoose.bind(this, index) } className={klass.join(' ')}>
-                    { tab.label }
+                    { item.label }
                   </a>
                 )
               }) }
@@ -43,11 +49,11 @@ class Tabs extends React.Component {
           </div>
         </div>
         <div className="reframe-tab">
-          { tabs.map((tab, index) => {
+          { items.map((item, index) => {
             return (
               <div key={`tab_body_${index}`} className={`reframe-tab-wrapper ${this._getStatus(index)}`}>
                 <div className="reframe-tab-body">
-                  { _.isFunction() ? React.createElement(tab.component) : tab.component }
+                  { _.isFunction() ? React.createElement(item.component) : item.component }
                 </div>
               </div>
             )

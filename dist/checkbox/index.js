@@ -31,7 +31,7 @@ var Checkbox = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props));
 
     _this.state = {
-      value: 'off'
+      value: false
     };
     return _this;
   }
