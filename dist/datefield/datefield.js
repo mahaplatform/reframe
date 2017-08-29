@@ -144,7 +144,7 @@ Datefield.propTypes = {
   month: _propTypes2.default.number,
   placeholder: _propTypes2.default.string,
   year: _propTypes2.default.number,
-  value: _propTypes2.default.instanceOf(Date),
+  value: _propTypes2.default.any,
   onBegin: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onChange: _propTypes2.default.func,

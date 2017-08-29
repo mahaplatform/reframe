@@ -99,11 +99,17 @@ var Lookup = function (_React$Component) {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
           endpoint = _props2.endpoint,
+          options = _props2.options,
+          onChoose = _props2.onChoose,
           onLoad = _props2.onLoad;
 
       if (defaultValue) {
-        var params = { $ids: [defaultValue] };
-        onLoad(params, endpoint);
+        if (endpoint) {
+          onLoad({ $ids: [defaultValue] }, endpoint);
+        } else {
+          var chosen = _lodash2.default.find(options, { value: defaultValue });
+          onChoose(chosen);
+        }
       }
     }
   }, {
@@ -145,6 +151,7 @@ Lookup.propTypes = {
   defaultValue: _propTypes2.default.number,
   endpoint: _propTypes2.default.string,
   format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
+  options: _propTypes2.default.array,
   prompt: _propTypes2.default.string,
   query: _propTypes2.default.string,
   results: _propTypes2.default.array,
@@ -163,6 +170,7 @@ Lookup.propTypes = {
   onLoookup: _propTypes2.default.func
 };
 Lookup.defaultProps = {
-  format: ValueToken
+  format: ValueToken,
+  text: 'text'
 };
 exports.default = Lookup;

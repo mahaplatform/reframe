@@ -47,6 +47,7 @@ var List = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          alert = _props.alert,
           empty = _props.empty,
           items = _props.items,
           sections = _props.sections;
@@ -54,6 +55,11 @@ var List = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'reframe-list' },
+        alert && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-alert ' + alert.color },
+          alert.message
+        ),
         sections && sections.map(function (section, index) {
           return _react2.default.createElement(Section, _extends({}, section, { key: 'list_section_' + index }));
         }),
@@ -66,6 +72,10 @@ var List = function (_React$Component) {
 }(_react2.default.Component);
 
 List.propTypes = {
+  alert: _propTypes2.default.shape({
+    color: _propTypes2.default.string,
+    message: _propTypes2.default.string
+  }),
   empty: _propTypes2.default.string,
   items: _propTypes2.default.array,
   sections: _propTypes2.default.array

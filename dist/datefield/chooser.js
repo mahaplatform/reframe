@@ -193,7 +193,7 @@ var Chooser = function (_React$Component) {
 
 Chooser.propTypes = {
   month: _propTypes2.default.number,
-  value: _propTypes2.default.instanceOf(Date),
+  value: _propTypes2.default.any,
   year: _propTypes2.default.number,
   onCancel: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,

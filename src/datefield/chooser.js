@@ -6,7 +6,7 @@ class Chooser extends React.Component {
 
   static propTypes = {
     month: PropTypes.number,
-    value: PropTypes.instanceOf(Date),
+    value: PropTypes.any,
     year: PropTypes.number,
     onCancel: PropTypes.func,
     onChoose: PropTypes.func,

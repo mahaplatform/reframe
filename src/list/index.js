@@ -7,17 +7,28 @@ import { Link } from 'react-router-dom'
 class List extends React.Component {
 
   static propTypes = {
+    alert: PropTypes.shape({
+      color: PropTypes.string,
+      message: PropTypes.string
+    }),
     empty: PropTypes.string,
     items: PropTypes.array,
     sections: PropTypes.array
   }
 
   render() {
-    const { empty, items, sections } = this.props
+    const { alert, empty, items, sections } = this.props
     return (
       <div className="reframe-list">
-        { sections && sections.map((section, index) => <Section { ...section } key={`list_section_${index}`} />) }
-        { items && <Section items={ items } empty={ empty } /> }
+        { alert &&
+          <div className={`reframe-list-alert ${alert.color}`}>{ alert.message }</div>
+        }
+        { sections &&
+          sections.map((section, index) => <Section { ...section } key={`list_section_${index}`} />)
+        }
+        { items &&
+          <Section items={ items } empty={ empty } />
+        }
       </div>
     )
   }

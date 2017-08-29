@@ -23,6 +23,7 @@ class Lookup extends React.Component {
       PropTypes.string,
       PropTypes.func
     ]),
+    options: PropTypes.array,
     prompt: PropTypes.string,
     query: PropTypes.string,
     results: PropTypes.array,
@@ -42,7 +43,8 @@ class Lookup extends React.Component {
   }
 
   static defaultProps = {
-    format: ValueToken
+    format: ValueToken,
+    text: 'text'
   }
 
   render() {
@@ -75,10 +77,14 @@ class Lookup extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, endpoint, onLoad } = this.props
+    const { defaultValue, endpoint, options, onChoose, onLoad } = this.props
     if(defaultValue) {
-      const params = { $ids: [ defaultValue ] }
-      onLoad(params, endpoint)
+      if(endpoint) {
+        onLoad({ $ids: [ defaultValue ] }, endpoint)
+      } else {
+        const chosen = _.find(options, { value: defaultValue })
+        onChoose(chosen)
+      }
     }
   }
 

@@ -45,6 +45,7 @@ export default (state = INITIAL_VALUE, action) => {
   case actionTypes.LOAD_SUCCESS:
     return {
       ...state,
+      chosen: action.result.data[0],
       status: 'success'
     }
 

@@ -12,7 +12,7 @@ class Datefield extends React.Component {
     month: PropTypes.number,
     placeholder: PropTypes.string,
     year: PropTypes.number,
-    value: PropTypes.instanceOf(Date),
+    value: PropTypes.any,
     onBegin: PropTypes.func,
     onClear: PropTypes.func,
     onChange: PropTypes.func,

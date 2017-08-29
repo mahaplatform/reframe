@@ -54,6 +54,7 @@ exports.default = function () {
 
     case actionTypes.LOAD_SUCCESS:
       return _extends({}, state, {
+        chosen: action.result.data[0],
         status: 'success'
       });
 
