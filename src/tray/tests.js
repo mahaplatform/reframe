@@ -15,6 +15,7 @@ describe('tray component', () => {
 
       const expected = {
         type: actionTypes.OPEN,
+        location: 'right',
         component: 'foo'
       }
 
@@ -39,7 +40,8 @@ describe('tray component', () => {
     it('can set default state', () => {
 
       const expected = {
-        component: null
+        component: null,
+        open: false
       }
 
       expect(reducer(undefined, '')).to.eql(expected)
@@ -58,7 +60,8 @@ describe('tray component', () => {
       }
 
       const expected = {
-        component: 'foo'
+        component: 'foo',
+        open: true
       }
 
       expect(reducer(state, action)).to.eql(expected)
@@ -76,7 +79,8 @@ describe('tray component', () => {
       }
 
       const expected = {
-        component: null
+        component: 'foo',
+        open: false
       }
 
       expect(reducer(state, action)).to.eql(expected)

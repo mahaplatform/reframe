@@ -39,7 +39,8 @@ describe('tasks component', () => {
     it('can set default state', () => {
 
       const expected = {
-        items: null
+        items: null,
+        open: false
       }
 
       expect(reducer(undefined, '')).to.eql(expected)
@@ -66,7 +67,8 @@ describe('tasks component', () => {
           { foo: '1' },
           { bar: '2' },
           { baz: '3' }
-        ]
+        ],
+        open: true
       }
 
       expect(reducer(state, action)).to.eql(expected)
@@ -88,7 +90,12 @@ describe('tasks component', () => {
       }
 
       const expected = {
-        items: null
+        items: [
+          { foo: '1' },
+          { bar: '2' },
+          { baz: '3' }
+        ],
+        open: false
       }
 
       expect(reducer(state, action)).to.eql(expected)

@@ -41,7 +41,8 @@ describe('drawer component', () => {
 
       const expected = {
         component: null,
-        location: null
+        location: null,
+        open: false
       }
 
       expect(reducer(undefined, '')).to.eql(expected)
@@ -63,7 +64,8 @@ describe('drawer component', () => {
 
       const expected = {
         component: 'foo',
-        location: 'right'
+        location: 'right',
+        open: true
       }
 
       expect(reducer(state, action)).to.eql(expected)
@@ -82,8 +84,9 @@ describe('drawer component', () => {
       }
 
       const expected = {
-        component: null,
-        location: null
+        component: 'foo',
+        location: 'right',
+        open: false
       }
 
       expect(reducer(state, action)).to.eql(expected)
