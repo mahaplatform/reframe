@@ -61,7 +61,8 @@ describe('drawer component', function () {
 
       var expected = {
         component: null,
-        location: null
+        location: null,
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(undefined, '')).to.eql(expected);
@@ -82,7 +83,8 @@ describe('drawer component', function () {
 
       var expected = {
         component: 'foo',
-        location: 'right'
+        location: 'right',
+        open: true
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);
@@ -100,8 +102,9 @@ describe('drawer component', function () {
       };
 
       var expected = {
-        component: null,
-        location: null
+        component: 'foo',
+        location: 'right',
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);

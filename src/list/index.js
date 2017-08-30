@@ -87,6 +87,7 @@ class Item extends React.Component {
       PropTypes.element
     ]),
     content: PropTypes.any,
+    className: PropTypes.string,
     extra: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.element
@@ -103,9 +104,11 @@ class Item extends React.Component {
   }
 
   render() {
-    const { component, content, extra, format, handler, icon, label, link } = this.props
+    const { className, component, content, extra, format, handler, icon, label, link } = this.props
+    const classes = ['reframe-list-item']
+    if(className) classes.push(className)
     const item = (
-      <div className="reframe-list-item">
+      <div className={classes.join(' ')}>
         { icon &&
           <div className="reframe-list-item-icon">
             <i className={`${icon} icon`} />
@@ -117,7 +120,7 @@ class Item extends React.Component {
         { !component &&
           <div className="reframe-list-item-content">
             { label && <strong>{ label }<br /></strong> }
-            { !component && <Format { ...content } format={ format } value={ content } /> }
+            <Format { ...content } format={ format } value={ content } />
           </div>
         }
         { extra &&

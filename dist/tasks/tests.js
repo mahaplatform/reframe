@@ -59,7 +59,8 @@ describe('tasks component', function () {
     it('can set default state', function () {
 
       var expected = {
-        items: null
+        items: null,
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(undefined, '')).to.eql(expected);
@@ -77,7 +78,8 @@ describe('tasks component', function () {
       };
 
       var expected = {
-        items: [{ foo: '1' }, { bar: '2' }, { baz: '3' }]
+        items: [{ foo: '1' }, { bar: '2' }, { baz: '3' }],
+        open: true
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);
@@ -94,7 +96,8 @@ describe('tasks component', function () {
       };
 
       var expected = {
-        items: null
+        items: [{ foo: '1' }, { bar: '2' }, { baz: '3' }],
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);

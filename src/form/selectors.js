@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import _ from 'lodash'
 
 const sectionsSelector = state => state.config
 
@@ -11,7 +12,8 @@ export const filtered = createSelector(
     let entity = {}
     _mapFields(sections, field => {
       if(field.include !== false) {
-        entity[field.name] = data[field.name]
+        const value = !_.isNil(data[field.name]) ? data[field.name] : null
+        entity[field.name] = value
       }
     })
     return entity

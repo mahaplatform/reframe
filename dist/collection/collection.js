@@ -102,6 +102,7 @@ var Collection = function (_React$Component) {
       var _this2 = this;
 
       var _props3 = this.props,
+          cacheKey = _props3.cacheKey,
           endpoint = _props3.endpoint,
           params = _props3.params,
           loading = _props3.loading,
@@ -111,6 +112,7 @@ var Collection = function (_React$Component) {
           sort = params.sort;
 
       return {
+        cacheKey: cacheKey,
         endpoint: endpoint,
         filter: filter,
         loading: loading,
@@ -159,6 +161,7 @@ Collection.contextTypes = {
 };
 Collection.propTypes = {
   all: _propTypes2.default.number,
+  cacheKey: _propTypes2.default.string,
   columns: _propTypes2.default.array,
   data: _propTypes2.default.array,
   endpoint: _propTypes2.default.string,
@@ -186,6 +189,7 @@ Collection.propTypes = {
   onSetRecords: _propTypes2.default.func
 };
 Collection.defaultProps = {
+  cacheKey: null,
   entity: 'record'
 };
 exports.default = Collection;

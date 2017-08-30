@@ -55,7 +55,7 @@ exports.default = function () {
     case actionTypes.SET_DATA:
       return _extends({}, state, {
         status: 'ready',
-        data: action.data
+        data: _extends({}, state.data, _lodash2.default.omitBy(action.data, _lodash2.default.isNil))
       });
 
     case actionTypes.FETCH_DATA_FAILURE:

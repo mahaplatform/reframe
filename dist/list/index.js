@@ -158,6 +158,7 @@ var Item = function (_React$Component3) {
     key: 'render',
     value: function render() {
       var _props3 = this.props,
+          className = _props3.className,
           component = _props3.component,
           content = _props3.content,
           extra = _props3.extra,
@@ -167,9 +168,11 @@ var Item = function (_React$Component3) {
           label = _props3.label,
           link = _props3.link;
 
+      var classes = ['reframe-list-item'];
+      if (className) classes.push(className);
       var item = _react2.default.createElement(
         'div',
-        { className: 'reframe-list-item' },
+        { className: classes.join(' ') },
         icon && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item-icon' },
@@ -185,7 +188,7 @@ var Item = function (_React$Component3) {
             label,
             _react2.default.createElement('br', null)
           ),
-          !component && _react2.default.createElement(_format2.default, _extends({}, content, { format: format, value: content }))
+          _react2.default.createElement(_format2.default, _extends({}, content, { format: format, value: content }))
         ),
         extra && _react2.default.createElement(
           'div',
@@ -218,6 +221,7 @@ var Item = function (_React$Component3) {
 Item.propTypes = {
   component: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   content: _propTypes2.default.any,
+  className: _propTypes2.default.string,
   extra: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
   format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func, _propTypes2.default.element]),
   handler: _propTypes2.default.func,

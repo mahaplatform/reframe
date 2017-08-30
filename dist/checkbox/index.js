@@ -58,11 +58,8 @@ var Checkbox = function (_React$Component) {
     value: function componentDidMount() {
       var defaultValue = this.props.defaultValue;
 
-      if (defaultValue) {
-        this.setState({
-          value: defaultValue
-        });
-      }
+      var value = defaultValue || false;
+      this.setValue(value);
     }
   }, {
     key: '_handleChange',

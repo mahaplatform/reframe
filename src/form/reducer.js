@@ -37,7 +37,10 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       status: 'ready',
-      data: action.data
+      data: {
+        ...state.data,
+        ..._.omitBy(action.data, _.isNil)
+      }
     }
 
   case actionTypes.FETCH_DATA_FAILURE:

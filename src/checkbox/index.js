@@ -37,11 +37,8 @@ class Checkbox extends React.Component {
 
   componentDidMount() {
     const { defaultValue } = this.props
-    if(defaultValue) {
-      this.setState({
-        value: defaultValue
-      })
-    }
+    const value = defaultValue || false
+    this.setValue(value)
   }
 
   _handleChange(value) {

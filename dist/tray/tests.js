@@ -38,6 +38,7 @@ describe('tray component', function () {
 
       var expected = {
         type: actionTypes.OPEN,
+        location: 'right',
         component: 'foo'
       };
 
@@ -59,7 +60,8 @@ describe('tray component', function () {
     it('can set default state', function () {
 
       var expected = {
-        component: null
+        component: null,
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(undefined, '')).to.eql(expected);
@@ -77,7 +79,8 @@ describe('tray component', function () {
       };
 
       var expected = {
-        component: 'foo'
+        component: 'foo',
+        open: true
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);
@@ -94,7 +97,8 @@ describe('tray component', function () {
       };
 
       var expected = {
-        component: null
+        component: 'foo',
+        open: false
       };
 
       (0, _chai.expect)((0, _reducer2.default)(state, action)).to.eql(expected);

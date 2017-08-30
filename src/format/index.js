@@ -79,7 +79,9 @@ const Check = (props, times) => {
 }
 
 const YesNo = (props) => {
-  return props.value === false ? <span className="no">NO</span> : <span className="yes">YES</span>
+  if(props.value === false) return <span className="no">NO</span>
+  if(props.value === true) return <span className="yes">YES</span>
+  return null
 }
 
 const Currency = (props) => {

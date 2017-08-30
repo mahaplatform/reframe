@@ -126,15 +126,17 @@ var Check = function Check(props, times) {
 };
 
 var YesNo = function YesNo(props) {
-  return props.value === false ? _react2.default.createElement(
+  if (props.value === false) return _react2.default.createElement(
     'span',
     { className: 'no' },
     'NO'
-  ) : _react2.default.createElement(
+  );
+  if (props.value === true) return _react2.default.createElement(
     'span',
     { className: 'yes' },
     'YES'
   );
+  return null;
 };
 
 var Currency = function Currency(props) {

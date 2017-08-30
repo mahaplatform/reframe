@@ -7,6 +7,12 @@ exports.defaults = exports.filtered = undefined;
 
 var _reselect = require('reselect');
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var sectionsSelector = function sectionsSelector(state) {
   return state.config;
 };
@@ -19,7 +25,8 @@ var filtered = exports.filtered = (0, _reselect.createSelector)(sectionsSelector
   var entity = {};
   _mapFields(sections, function (field) {
     if (field.include !== false) {
-      entity[field.name] = data[field.name];
+      var value = !_lodash2.default.isNil(data[field.name]) ? data[field.name] : null;
+      entity[field.name] = value;
     }
   });
   return entity;

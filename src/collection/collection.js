@@ -13,6 +13,7 @@ class Collection extends React.Component {
 
   static propTypes = {
     all: PropTypes.number,
+    cacheKey: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.array,
     endpoint: PropTypes.string,
@@ -51,6 +52,7 @@ class Collection extends React.Component {
   }
 
   static defaultProps = {
+    cacheKey: null,
     entity: 'record'
   }
 
@@ -88,9 +90,10 @@ class Collection extends React.Component {
   }
 
   _getInfinite() {
-    const { endpoint, params, loading, empty, failure } = this.props
+    const { cacheKey, endpoint, params, loading, empty, failure } = this.props
     const { filter, sort } = params
     return {
+      cacheKey,
       endpoint,
       filter,
       loading,
