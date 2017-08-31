@@ -124,12 +124,14 @@ class Lookup extends React.Component {
   }
 
   _getForm() {
+    const { form, value, onChoose, onChange, onHideForm } = this.props
     return {
-      ...this.props.form,
-      onCancel: () => this.props.onHideForm(),
+      ...form,
+      onCancel: () => onHideForm(),
       onSuccess: (chosen) => {
-        this.props.onChoose(chosen)
-        this.props.onHideForm()
+        onChoose(chosen)
+        onChange(_.get(chosen, value))
+        onHideForm()
       }
     }
   }

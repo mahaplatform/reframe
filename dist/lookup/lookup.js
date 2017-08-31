@@ -158,15 +158,21 @@ var Lookup = function (_React$Component) {
   }, {
     key: '_getForm',
     value: function _getForm() {
-      var _this2 = this;
+      var _props5 = this.props,
+          form = _props5.form,
+          value = _props5.value,
+          onChoose = _props5.onChoose,
+          onChange = _props5.onChange,
+          onHideForm = _props5.onHideForm;
 
-      return _extends({}, this.props.form, {
+      return _extends({}, form, {
         onCancel: function onCancel() {
-          return _this2.props.onHideForm();
+          return onHideForm();
         },
         onSuccess: function onSuccess(chosen) {
-          _this2.props.onChoose(chosen);
-          _this2.props.onHideForm();
+          onChoose(chosen);
+          onChange(_lodash2.default.get(chosen, value));
+          onHideForm();
         }
       });
     }
