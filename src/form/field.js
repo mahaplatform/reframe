@@ -105,6 +105,7 @@ class Field extends React.Component {
       token,
       type,
       value,
+      onSet: this._handleUpdateData.bind(this),
       onChange: this._handleUpdateData.bind(this),
       onSubmit
     }

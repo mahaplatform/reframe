@@ -26,6 +26,10 @@ var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
 
+var _form = require('../form');
+
+var _form2 = _interopRequireDefault(_form);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -50,10 +54,15 @@ var ValueToken = function ValueToken(_ref) {
 var Lookup = function (_React$Component) {
   _inherits(Lookup, _React$Component);
 
-  function Lookup() {
+  function Lookup(props) {
     _classCallCheck(this, Lookup);
 
-    return _possibleConstructorReturn(this, (Lookup.__proto__ || Object.getPrototypeOf(Lookup)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Lookup.__proto__ || Object.getPrototypeOf(Lookup)).call(this, props));
+
+    _this.state = {
+      cacheKey: null
+    };
+    return _this;
   }
 
   _createClass(Lookup, [{
@@ -61,11 +70,13 @@ var Lookup = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           active = _props.active,
+          adding = _props.adding,
           chosen = _props.chosen,
           disabled = _props.disabled,
           format = _props.format,
           prompt = _props.prompt,
           text = _props.text;
+      var cacheKey = this.state.cacheKey;
 
       var value = chosen ? _lodash2.default.get(chosen, text) : '';
       return _react2.default.createElement(
@@ -89,7 +100,12 @@ var Lookup = function (_React$Component) {
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransition,
           { 'in': active, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
-          _react2.default.createElement(_search2.default, this.props)
+          _react2.default.createElement(_search2.default, _extends({}, this.props, { cacheKey: cacheKey }))
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': adding, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(_form2.default, this._getForm())
         )
       );
     }
@@ -139,6 +155,21 @@ var Lookup = function (_React$Component) {
       onClear();
       onChange();
     }
+  }, {
+    key: '_getForm',
+    value: function _getForm() {
+      var _this2 = this;
+
+      return _extends({}, this.props.form, {
+        onCancel: function onCancel() {
+          return _this2.props.onHideForm();
+        },
+        onSuccess: function onSuccess(chosen) {
+          _this2.props.onChoose(chosen);
+          _this2.props.onHideForm();
+        }
+      });
+    }
   }]);
 
   return Lookup;
@@ -146,11 +177,13 @@ var Lookup = function (_React$Component) {
 
 Lookup.propTypes = {
   active: _propTypes2.default.bool,
+  adding: _propTypes2.default.bool,
   chosen: _propTypes2.default.object,
   disabled: _propTypes2.default.bool,
   defaultValue: _propTypes2.default.number,
   endpoint: _propTypes2.default.string,
   format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
+  form: _propTypes2.default.object,
   options: _propTypes2.default.array,
   prompt: _propTypes2.default.string,
   query: _propTypes2.default.string,
@@ -165,12 +198,15 @@ Lookup.propTypes = {
   onCancel: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
+  onHideForm: _propTypes2.default.func,
   onType: _propTypes2.default.func,
   onLoad: _propTypes2.default.func,
-  onLoookup: _propTypes2.default.func
+  onLoookup: _propTypes2.default.func,
+  onShowForm: _propTypes2.default.func
 };
 Lookup.defaultProps = {
   format: ValueToken,
-  text: 'text'
+  text: 'text',
+  value: 'value'
 };
 exports.default = Lookup;

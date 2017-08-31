@@ -11,7 +11,7 @@ export const filtered = createSelector(
   (sections, data) => {
     let entity = {}
     _mapFields(sections, field => {
-      if(field.include !== false) {
+      if(field.include !== false && field.type !== 'text') {
         const value = !_.isNil(data[field.name]) ? data[field.name] : null
         entity[field.name] = value
       }

@@ -4,7 +4,8 @@ const INITIAL_VALUE = {
   active: false,
   q: null,
   chosen: null,
-  status: 'ready'
+  status: 'ready',
+  adding: false
 }
 
 export default (state = INITIAL_VALUE, action) => {
@@ -49,6 +50,17 @@ export default (state = INITIAL_VALUE, action) => {
       status: 'success'
     }
 
+  case actionTypes.SHOW_FORM:
+    return {
+      ...state,
+      adding: true
+    }
+
+  case actionTypes.HIDE_FORM:
+    return {
+      ...state,
+      adding: false
+    }
   default:
     return state
 

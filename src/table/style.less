@@ -27,10 +27,12 @@ a.reframe-table-body-row {
 .reframe-table-head-cell,
 .reframe-table-body-cell {
   display: table-cell;
-  padding: 1em;
   border-bottom: 1px solid @table_border_color;
   &.collapsing {
     width: 1px;
+  }
+  &.padded {
+    padding: 1em;
   }
 }
 .reframe-table-head-cell {

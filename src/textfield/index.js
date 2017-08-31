@@ -69,12 +69,14 @@ class TextField extends React.Component {
   }
 
   _getControl() {
+    const { autoComplete, disabled, placeholder } = this.props
     const { value } = this.state
     return {
       type: 'text',
+      disabled,
       value,
-      autoComplete: this.props.autoComplete,
-      placeholder: this.props.placeholder,
+      autoComplete,
+      placeholder,
       onChange: this._handleChange.bind(this),
       onBlur: this._handleBlur.bind(this),
       onFocus: this._handleFocus.bind(this),

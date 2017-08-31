@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
-import Form from '../form'
 import Format from '../format'
 
 class Options extends React.Component {
@@ -16,18 +15,20 @@ class Options extends React.Component {
     ]),
     options: PropTypes.array,
     selected: PropTypes.number,
+    text: PropTypes.string,
+    value: PropTypes.string,
     onChange: PropTypes.func,
     onChoose: PropTypes.func
   }
 
   render() {
-    const { format, options, selected } = this.props
+    const { format, options, selected, text } = this.props
     return (
       <div className="reframe-lookup-panel-results">
         { options.map((option, index) => (
           <div key={`result_${index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, option) }>
             <div className="reframe-lookup-panel-result-label">
-              <Format { ...option.record } format={ format } value={ option.text } />
+              <Format { ...option } format={ format } value={ _.get(option, text) } />
             </div>
             <div className="reframe-lookup-panel-result-icon">
               { index === selected ? <i className="green check icon" /> : null }
@@ -39,9 +40,9 @@ class Options extends React.Component {
   }
 
   _handleChoose(chosen) {
-    const record = chosen.record || chosen
-    this.props.onChoose(record)
-    this.props.onChange(chosen.value)
+    const { onChoose, onChange, value } = this.props
+    onChoose(chosen)
+    onChange(_.get(chosen, value))
   }
 
 }
@@ -68,16 +69,13 @@ class Dynamic extends React.Component {
   }
 
   _getOptions() {
-    const { format, selected, records, value, text, onChoose, onChange } = this.props
-    const options = records.map(record => ({
-      value: _.get(record, value),
-      text: _.get(record, text),
-      record
-    }))
+    const { format, selected, records, text, value, onChoose, onChange } = this.props
     return {
       format,
       selected,
-      options,
+      options: records,
+      text,
+      value,
       onChoose,
       onChange
     }
@@ -87,16 +85,23 @@ class Dynamic extends React.Component {
 
 class Container extends React.Component {
 
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
   static propTypes = {
+    cacheKey: PropTypes.string,
     endpoint: PropTypes.string,
     form: PropTypes.object,
     label: PropTypes.string,
     q: PropTypes.string,
     sort: PropTypes.string,
+    text: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
-    onQuery: PropTypes.func
+    onQuery: PropTypes.func,
+    onShowForm: PropTypes.func
   }
 
   render() {
@@ -135,31 +140,20 @@ class Container extends React.Component {
   }
 
   _getInfinite() {
-    const { endpoint, q, sort } = this.props
+    const { cacheKey, endpoint, q, sort, text, value } = this.props
     return {
+      cacheKey,
       endpoint,
       filter: { q },
       layout: (props) => <Dynamic { ...this.props } { ...props } />,
-      sort
+      sort,
+      text,
+      value
     }
   }
 
   _handleAdd() {
-    this.context.modal.open(<Form { ...this._getForm() } />)
-  }
-
-  _getForm() {
-    return {
-      ...this.props.form,
-      onCancel: this.context.modal.close,
-      onSuccess: (chosen) => {
-        const value = _.get(chosen, this.props.value)
-        this.props.onChoose(0)
-        this.props.onChange(value)
-        this.context.modal.close()
-      }
-    }
-
+    this.props.onShowForm()
   }
 
 }

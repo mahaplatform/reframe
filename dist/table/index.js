@@ -96,6 +96,7 @@ var Table = function (_React$Component) {
                 if (column.primary === true) klass.push('mobile');
                 if (column.collapsing === true) klass.push('collapsing');
                 if (column.centered === true) klass.push('centered');
+                if (!column.format) klass.push('padded');
                 return _react2.default.createElement(
                   'div',
                   { key: 'cell_' + rowIndex + '_' + columnIndex, className: klass.join(' ') },

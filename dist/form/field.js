@@ -156,6 +156,7 @@ var Field = function (_React$Component) {
         token: token,
         type: type,
         value: value,
+        onSet: this._handleUpdateData.bind(this),
         onChange: this._handleUpdateData.bind(this),
         onSubmit: onSubmit
       };

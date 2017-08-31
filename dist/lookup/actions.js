@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.load = exports.query = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
+exports.hideForm = exports.showForm = exports.load = exports.query = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
 
 var _action_types = require('./action_types');
 
@@ -52,5 +52,17 @@ var load = exports.load = function load(query, endpoint) {
     request: actionTypes.LOAD_REQUEST,
     success: actionTypes.LOAD_SUCCESS,
     failure: actionTypes.LOAD_FAILURE
+  };
+};
+
+var showForm = exports.showForm = function showForm() {
+  return {
+    type: actionTypes.SHOW_FORM
+  };
+};
+
+var hideForm = exports.hideForm = function hideForm() {
+  return {
+    type: actionTypes.HIDE_FORM
   };
 };

@@ -16,7 +16,8 @@ var INITIAL_VALUE = {
   active: false,
   q: null,
   chosen: null,
-  status: 'ready'
+  status: 'ready',
+  adding: false
 };
 
 exports.default = function () {
@@ -58,6 +59,15 @@ exports.default = function () {
         status: 'success'
       });
 
+    case actionTypes.SHOW_FORM:
+      return _extends({}, state, {
+        adding: true
+      });
+
+    case actionTypes.HIDE_FORM:
+      return _extends({}, state, {
+        adding: false
+      });
     default:
       return state;
 

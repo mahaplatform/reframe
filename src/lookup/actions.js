@@ -31,3 +31,11 @@ export const load = (query, endpoint) => ({
   success: actionTypes.LOAD_SUCCESS,
   failure: actionTypes.LOAD_FAILURE
 })
+
+export const showForm = () => ({
+  type: actionTypes.SHOW_FORM
+})
+
+export const hideForm = () => ({
+  type: actionTypes.HIDE_FORM
+})

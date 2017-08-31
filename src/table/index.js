@@ -53,6 +53,7 @@ class Table extends React.Component {
                 if(column.primary === true) klass.push('mobile')
                 if(column.collapsing === true) klass.push('collapsing')
                 if(column.centered === true) klass.push('centered')
+                if(!column.format) klass.push('padded')
                 return (
                   <div key={ `cell_${rowIndex}_${columnIndex}` } className={ klass.join(' ') }>
                     <Format {...record} format={column.format} value={value} />

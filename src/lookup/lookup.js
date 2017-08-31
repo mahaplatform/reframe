@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import Format from '../format'
 import Search from './search'
+import Form from '../form'
 import _ from 'lodash'
 
 const ValueToken = ({ value }) => (
@@ -15,6 +16,7 @@ class Lookup extends React.Component {
 
   static propTypes = {
     active: PropTypes.bool,
+    adding: PropTypes.bool,
     chosen: PropTypes.object,
     disabled: PropTypes.bool,
     defaultValue: PropTypes.number,
@@ -23,6 +25,7 @@ class Lookup extends React.Component {
       PropTypes.string,
       PropTypes.func
     ]),
+    form: PropTypes.object,
     options: PropTypes.array,
     prompt: PropTypes.string,
     query: PropTypes.string,
@@ -37,18 +40,29 @@ class Lookup extends React.Component {
     onCancel: PropTypes.func,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
+    onHideForm: PropTypes.func,
     onType: PropTypes.func,
     onLoad: PropTypes.func,
-    onLoookup: PropTypes.func
+    onLoookup: PropTypes.func,
+    onShowForm: PropTypes.func
   }
 
   static defaultProps = {
     format: ValueToken,
-    text: 'text'
+    text: 'text',
+    value: 'value'
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      cacheKey: null
+    }
   }
 
   render() {
-    const { active, chosen, disabled, format, prompt, text } = this.props
+    const { active, adding, chosen, disabled, format, prompt, text } = this.props
+    const { cacheKey } = this.state
     const value = chosen ? _.get(chosen, text) : ''
     return (
       <div className="reframe-lookup-field">
@@ -70,7 +84,10 @@ class Lookup extends React.Component {
                  placeholder={ prompt } />
        }
        <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-         <Search { ...this.props } />
+         <Search { ...this.props } cacheKey={ cacheKey } />
+       </CSSTransition>
+       <CSSTransition in={ adding } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+         <Form { ...this._getForm() } />
        </CSSTransition>
      </div>
     )
@@ -106,6 +123,16 @@ class Lookup extends React.Component {
     onChange()
   }
 
+  _getForm() {
+    return {
+      ...this.props.form,
+      onCancel: () => this.props.onHideForm(),
+      onSuccess: (chosen) => {
+        this.props.onChoose(chosen)
+        this.props.onHideForm()
+      }
+    }
+  }
 }
 
 export default Lookup

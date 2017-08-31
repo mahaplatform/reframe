@@ -28,10 +28,6 @@ var _infinite = require('../infinite');
 
 var _infinite2 = _interopRequireDefault(_infinite);
 
-var _form = require('../form');
-
-var _form2 = _interopRequireDefault(_form);
-
 var _format = require('../format');
 
 var _format2 = _interopRequireDefault(_format);
@@ -61,7 +57,8 @@ var Options = function (_React$Component) {
       var _props = this.props,
           format = _props.format,
           options = _props.options,
-          selected = _props.selected;
+          selected = _props.selected,
+          text = _props.text;
 
       return _react2.default.createElement(
         'div',
@@ -73,7 +70,7 @@ var Options = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-lookup-panel-result-label' },
-              _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
+              _react2.default.createElement(_format2.default, _extends({}, option, { format: format, value: _lodash2.default.get(option, text) }))
             ),
             _react2.default.createElement(
               'div',
@@ -87,9 +84,13 @@ var Options = function (_React$Component) {
   }, {
     key: '_handleChoose',
     value: function _handleChoose(chosen) {
-      var record = chosen.record || chosen;
-      this.props.onChoose(record);
-      this.props.onChange(chosen.value);
+      var _props2 = this.props,
+          onChoose = _props2.onChoose,
+          onChange = _props2.onChange,
+          value = _props2.value;
+
+      onChoose(chosen);
+      onChange(_lodash2.default.get(chosen, value));
     }
   }]);
 
@@ -100,6 +101,8 @@ Options.propTypes = {
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
   options: _propTypes2.default.array,
   selected: _propTypes2.default.number,
+  text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func
 };
@@ -123,26 +126,21 @@ var Dynamic = function (_React$Component2) {
   }, {
     key: '_getOptions',
     value: function _getOptions() {
-      var _props2 = this.props,
-          format = _props2.format,
-          selected = _props2.selected,
-          records = _props2.records,
-          value = _props2.value,
-          text = _props2.text,
-          onChoose = _props2.onChoose,
-          onChange = _props2.onChange;
+      var _props3 = this.props,
+          format = _props3.format,
+          selected = _props3.selected,
+          records = _props3.records,
+          text = _props3.text,
+          value = _props3.value,
+          onChoose = _props3.onChoose,
+          onChange = _props3.onChange;
 
-      var options = records.map(function (record) {
-        return {
-          value: _lodash2.default.get(record, value),
-          text: _lodash2.default.get(record, text),
-          record: record
-        };
-      });
       return {
         format: format,
         selected: selected,
-        options: options,
+        options: records,
+        text: text,
+        value: value,
         onChoose: onChoose,
         onChange: onChange
       };
@@ -174,10 +172,10 @@ var Container = function (_React$Component3) {
   _createClass(Container, [{
     key: 'render',
     value: function render() {
-      var _props3 = this.props,
-          endpoint = _props3.endpoint,
-          label = _props3.label,
-          form = _props3.form;
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          label = _props4.label,
+          form = _props4.form;
 
       if (endpoint) {
         return _react2.default.createElement(
@@ -211,9 +209,9 @@ var Container = function (_React$Component3) {
   }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
-      var _props4 = this.props,
-          label = _props4.label,
-          onQuery = _props4.onQuery;
+      var _props5 = this.props,
+          label = _props5.label,
+          onQuery = _props5.onQuery;
 
       return {
         prompt: 'Find a ' + label,
@@ -225,54 +223,51 @@ var Container = function (_React$Component3) {
     value: function _getInfinite() {
       var _this5 = this;
 
-      var _props5 = this.props,
-          endpoint = _props5.endpoint,
-          q = _props5.q,
-          sort = _props5.sort;
+      var _props6 = this.props,
+          cacheKey = _props6.cacheKey,
+          endpoint = _props6.endpoint,
+          q = _props6.q,
+          sort = _props6.sort,
+          text = _props6.text,
+          value = _props6.value;
 
       return {
+        cacheKey: cacheKey,
         endpoint: endpoint,
         filter: { q: q },
         layout: function layout(props) {
           return _react2.default.createElement(Dynamic, _extends({}, _this5.props, props));
         },
-        sort: sort
+        sort: sort,
+        text: text,
+        value: value
       };
     }
   }, {
     key: '_handleAdd',
     value: function _handleAdd() {
-      this.context.modal.open(_react2.default.createElement(_form2.default, this._getForm()));
-    }
-  }, {
-    key: '_getForm',
-    value: function _getForm() {
-      var _this6 = this;
-
-      return _extends({}, this.props.form, {
-        onCancel: this.context.modal.close,
-        onSuccess: function onSuccess(chosen) {
-          var value = _lodash2.default.get(chosen, _this6.props.value);
-          _this6.props.onChoose(0);
-          _this6.props.onChange(value);
-          _this6.context.modal.close();
-        }
-      });
+      this.props.onShowForm();
     }
   }]);
 
   return Container;
 }(_react2.default.Component);
 
+Container.contextTypes = {
+  modal: _propTypes2.default.object
+};
 Container.propTypes = {
+  cacheKey: _propTypes2.default.string,
   endpoint: _propTypes2.default.string,
   form: _propTypes2.default.object,
   label: _propTypes2.default.string,
   q: _propTypes2.default.string,
   sort: _propTypes2.default.string,
+  text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
-  onQuery: _propTypes2.default.func
+  onQuery: _propTypes2.default.func,
+  onShowForm: _propTypes2.default.func
 };
 exports.default = Container;

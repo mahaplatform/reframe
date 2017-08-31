@@ -86,13 +86,18 @@ var TextField = function (_React$Component) {
   }, {
     key: '_getControl',
     value: function _getControl() {
+      var _props = this.props,
+          autoComplete = _props.autoComplete,
+          disabled = _props.disabled,
+          placeholder = _props.placeholder;
       var value = this.state.value;
 
       return {
         type: 'text',
+        disabled: disabled,
         value: value,
-        autoComplete: this.props.autoComplete,
-        placeholder: this.props.placeholder,
+        autoComplete: autoComplete,
+        placeholder: placeholder,
         onChange: this._handleChange.bind(this),
         onBlur: this._handleBlur.bind(this),
         onFocus: this._handleFocus.bind(this),

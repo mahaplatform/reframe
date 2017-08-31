@@ -13,7 +13,7 @@ import Lookup from '../lookup'
 // // import Radios from './radios'
 // import Select from '../select'
 // // import TableField from './tablefield'
-// import Text from '../text'
+import Text from '../text'
 import TextArea from '../textarea'
 import TextField from '../textfield'
 import ToggleList from '../toggle_list'
@@ -32,6 +32,7 @@ const standardControls = {
   // 'text': Text,
   'textfield': TextField,
   'password': Password,
+  'text': Text,
   'textarea': TextArea,
   // 'tablefield': TableField
   'togglelist': ToggleList
@@ -48,7 +49,9 @@ class Control extends React.Component {
     defaultValue: PropTypes.any,
     options: PropTypes.array,
     text: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    onSet: PropTypes.func
   }
 
   static defaultProps = {

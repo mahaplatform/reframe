@@ -6,13 +6,15 @@ class Checkbox extends React.Component {
   static propTypes = {
     disabled: PropTypes.bool,
     defaultValue: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onSet: PropTypes.func
   }
 
   static defaultProps = {
     disabled: false,
     defaultValue: false,
-    onChange: () => {}
+    onChange: () => {},
+    onSet: () => {}
   }
 
   constructor(props) {
@@ -38,7 +40,8 @@ class Checkbox extends React.Component {
   componentDidMount() {
     const { defaultValue } = this.props
     const value = defaultValue || false
-    this.setValue(value)
+    this.setState({ value })
+    this.props.onSet(value)
   }
 
   _handleChange(value) {

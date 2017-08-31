@@ -24,7 +24,7 @@ var dataSelector = function dataSelector(state) {
 var filtered = exports.filtered = (0, _reselect.createSelector)(sectionsSelector, dataSelector, function (sections, data) {
   var entity = {};
   _mapFields(sections, function (field) {
-    if (field.include !== false) {
+    if (field.include !== false && field.type !== 'text') {
       var value = !_lodash2.default.isNil(data[field.name]) ? data[field.name] : null;
       entity[field.name] = value;
     }

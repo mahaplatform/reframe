@@ -38,6 +38,10 @@ var _lookup = require('../lookup');
 
 var _lookup2 = _interopRequireDefault(_lookup);
 
+var _text = require('../text');
+
+var _text2 = _interopRequireDefault(_text);
+
 var _textarea = require('../textarea');
 
 var _textarea2 = _interopRequireDefault(_textarea);
@@ -70,7 +74,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // // import Radios from './radios'
 // import Select from '../select'
 // // import TableField from './tablefield'
-// import Text from '../text'
 
 
 var standardControls = {
@@ -86,6 +89,7 @@ var standardControls = {
   // 'text': Text,
   'textfield': _textfield2.default,
   'password': _password2.default,
+  'text': _text2.default,
   'textarea': _textarea2.default,
   // 'tablefield': TableField
   'togglelist': _toggle_list2.default
@@ -133,7 +137,9 @@ Control.propTypes = {
   defaultValue: _propTypes2.default.any,
   options: _propTypes2.default.array,
   text: _propTypes2.default.string,
-  value: _propTypes2.default.string
+  value: _propTypes2.default.string,
+  onChange: _propTypes2.default.func,
+  onSet: _propTypes2.default.func
 };
 Control.defaultProps = {
   type: 'textfield',
