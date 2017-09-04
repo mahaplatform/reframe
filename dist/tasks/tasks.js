@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -59,6 +61,7 @@ var Tasks = function (_React$Component) {
             'div',
             { className: 'reframe-tasks-list' },
             items && items.map(function (item, index) {
+              if (item.show === false) return;
               return _react2.default.createElement(
                 'div',
                 { key: 'task_' + index, className: 'reframe-tasks-item', onClick: _this2._handleChoose.bind(_this2, index) },
@@ -111,6 +114,8 @@ var Tasks = function (_React$Component) {
       if (items[index].route) {
         router.history.push(items[index].route);
         this._handleClose();
+      } else if (items[index].request) {
+        this._handleRequest(items[index].request);
       } else if (items[index].modal) {
         modal.open(items[index].modal);
         this._handleClose();
@@ -127,6 +132,25 @@ var Tasks = function (_React$Component) {
     key: '_handleClose',
     value: function _handleClose() {
       this.props.onClose();
+    }
+  }, {
+    key: '_handleRequest',
+    value: function _handleRequest(itemRequest) {
+      var _props4 = this.props,
+          onClose = _props4.onClose,
+          onRequest = _props4.onRequest;
+
+      var request = _extends({}, itemRequest, {
+        onFailure: function onFailure(result) {
+          if (itemRequest.onFailure) itemRequest.onFailure(result);
+          onClose();
+        },
+        onSuccess: function onSuccess(result) {
+          if (itemRequest.onSuccess) itemRequest.onSuccess(result);
+          onClose();
+        }
+      });
+      onRequest(request);
     }
   }]);
 
@@ -147,6 +171,7 @@ Tasks.propTypes = {
   open: _propTypes2.default.bool,
   onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,
-  onOpen: _propTypes2.default.func
+  onOpen: _propTypes2.default.func,
+  onRequest: _propTypes2.default.func
 };
 exports.default = Tasks;

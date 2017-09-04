@@ -69,7 +69,7 @@ var Table = function (_React$Component) {
               'div',
               { className: 'reframe-table-head-row', ref: 'head' },
               columns.map(function (column, columnIndex) {
-                var klass = ['reframe-table-head-cell'];
+                var klass = ['reframe-table-head-cell', 'padded'];
                 if (column.primary === true) klass.push('mobile');
                 if (column.collapsing === true) klass.push('collapsing');
                 return _react2.default.createElement(
@@ -113,7 +113,7 @@ var Table = function (_React$Component) {
                   row,
                   _react2.default.createElement(
                     'div',
-                    { className: 'reframe-table-body-cell icon mobile collapsing centered' },
+                    { className: 'reframe-table-body-cell icon mobile collapsing centered padded' },
                     _react2.default.createElement('i', { className: 'chevron right icon' })
                   )
                 );

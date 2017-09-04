@@ -1,3 +1,6 @@
 export const OPEN = 'OPEN'
 export const CLOSE = 'CLOSE'
 export const CLEAR = 'CLEAR'
+export const REQUEST_REQUEST = 'REQUEST_REQUEST'
+export const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
+export const REQUEST_FAILURE = 'REQUEST_FAILURE'

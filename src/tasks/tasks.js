@@ -20,7 +20,8 @@ class Tasks extends React.Component {
     open: PropTypes.bool,
     onClear: PropTypes.func,
     onClose: PropTypes.func,
-    onOpen: PropTypes.func
+    onOpen: PropTypes.func,
+    onRequest: PropTypes.func
   }
 
   render() {
@@ -33,11 +34,14 @@ class Tasks extends React.Component {
         </CSSTransition>
         <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-tasks-list">
-            { items && items.map((item, index) => (
-              <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
-                { item.label }
-              </div>
-            )) }
+            { items && items.map((item, index) => {
+              if(item.show === false) return
+              return (
+                <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
+                  { item.label }
+                </div>
+              )
+            }) }
             <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
               Cancel
             </div>
@@ -70,6 +74,8 @@ class Tasks extends React.Component {
     if(items[index].route) {
       router.history.push(items[index].route)
       this._handleClose()
+    } else if(items[index].request){
+      this._handleRequest(items[index].request)
     } else if(items[index].modal){
       modal.open(items[index].modal)
       this._handleClose()
@@ -85,6 +91,22 @@ class Tasks extends React.Component {
 
   _handleClose() {
     this.props.onClose()
+  }
+
+  _handleRequest(itemRequest) {
+    const { onClose, onRequest } = this.props
+    const request = {
+      ...itemRequest,
+      onFailure: (result) => {
+        if(itemRequest.onFailure) itemRequest.onFailure(result)
+        onClose()
+      },
+      onSuccess: (result) => {
+        if(itemRequest.onSuccess) itemRequest.onSuccess(result)
+        onClose()
+      }
+    }
+    onRequest(request)
   }
 
 }

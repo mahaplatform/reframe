@@ -28,7 +28,7 @@ class Table extends React.Component {
           <div className="reframe-table-head-wrapper">
             <div className="reframe-table-head-row" ref="head">
               { columns.map((column, columnIndex) => {
-                let klass = ['reframe-table-head-cell']
+                let klass = ['reframe-table-head-cell', 'padded']
                 if(column.primary === true) klass.push('mobile')
                 if(column.collapsing === true) klass.push('collapsing')
                 return (
@@ -67,7 +67,7 @@ class Table extends React.Component {
                 return (
                   <Link key={ `record_${rowIndex}` } className="reframe-table-body-row" to={to}>
                     { row }
-                    <div className="reframe-table-body-cell icon mobile collapsing centered">
+                    <div className="reframe-table-body-cell icon mobile collapsing centered padded">
                       <i className="chevron right icon" />
                     </div>
                   </Link>

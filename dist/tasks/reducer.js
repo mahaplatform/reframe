@@ -14,8 +14,10 @@ var actionTypes = _interopRequireWildcard(_action_types);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
+  error: null,
   items: null,
-  open: false
+  open: false,
+  status: 'pending'
 };
 
 exports.default = function () {
@@ -34,6 +36,22 @@ exports.default = function () {
     case actionTypes.CLOSE:
       return _extends({}, state, {
         open: false
+      });
+
+    case actionTypes.SUBMIT_REQUEST:
+      return _extends({}, state, {
+        status: 'submitting'
+      });
+
+    case actionTypes.SUBMIT_FAILURE:
+      return _extends({}, state, {
+        status: 'failure',
+        error: action.result.error.message
+      });
+
+    case actionTypes.SUBMIT_SUCCESS:
+      return _extends({}, state, {
+        status: 'success'
       });
 
     case actionTypes.CLEAR:
