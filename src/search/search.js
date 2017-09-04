@@ -25,9 +25,11 @@ class Options extends React.Component {
       <div className="reframe-filter-body">
         <div className="reframe-filter-results">
           { options.map((option, index) => {
+            const classes = ['reframe-filter-item-label']
+            if(!format) classes.push('padded')
             return (
               <div key={`filter_${index}`} className="reframe-filter-item" onClick={ this._handleChoose.bind(this, option.value, option.text, option.token) }>
-                <div className="reframe-filter-item-label">
+                <div className={ classes.join(' ') }>
                   <Format {...option.record} format={format} value={option.text} />
                 </div>
                 { option.description &&

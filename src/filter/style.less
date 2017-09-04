@@ -102,7 +102,6 @@
   padding: 0.5em;
 }
 .reframe-filter-item {
-  padding: 1em;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EEEEEE;
   display: flex;
@@ -116,16 +115,21 @@
   align-items: center;
   color: #444444;
   flex: 0 1 100px;
+  padding: 1em 0 1em 1em;
 }
 .reframe-filter-item-label {
   align-items: center;
   flex: 1;
+  &.padded {
+    padding: 1em;
+  }
 }
 .reframe-filter-item-description {
   flex: 2;
   color: green;
   line-height: 16px;
   font-size: 13px;
+  padding: 1em;
 }
 .reframe-filter-item-values {
   flex: 1;
@@ -157,7 +161,10 @@
   display: flex;
   align-items: center;
   font-size: 0.8em;
+  line-height: 1em;
+  padding: 1em;
   .icon {
+    margin: auto;
     color: #BBB;
   }
 }

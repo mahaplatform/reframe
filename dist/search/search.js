@@ -70,12 +70,14 @@ var Options = function (_React$Component) {
           'div',
           { className: 'reframe-filter-results' },
           options.map(function (option, index) {
+            var classes = ['reframe-filter-item-label'];
+            if (!format) classes.push('padded');
             return _react2.default.createElement(
               'div',
               { key: 'filter_' + index, className: 'reframe-filter-item', onClick: _this2._handleChoose.bind(_this2, option.value, option.text, option.token) },
               _react2.default.createElement(
                 'div',
-                { className: 'reframe-filter-item-label' },
+                { className: classes.join(' ') },
                 _react2.default.createElement(_format2.default, _extends({}, option.record, { format: format, value: option.text }))
               ),
               option.description && _react2.default.createElement(
