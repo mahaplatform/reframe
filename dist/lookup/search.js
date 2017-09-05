@@ -66,7 +66,7 @@ var Search = function (_React$Component) {
   }, {
     key: '_handleCancel',
     value: function _handleCancel() {
-      this.props.onCancel();
+      this.props.onEnd();
     }
   }]);
 
@@ -76,6 +76,7 @@ var Search = function (_React$Component) {
 Search.propTypes = {
   label: _propTypes2.default.string,
   selected: _propTypes2.default.number,
-  onCancel: _propTypes2.default.func
+  onCancel: _propTypes2.default.func,
+  onEnd: _propTypes2.default.func
 };
 exports.default = Search;

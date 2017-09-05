@@ -11,18 +11,17 @@ class Modal extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
-    component: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
+    components: PropTypes.array,
     open: PropTypes.bool,
     onClear: PropTypes.func,
     onClose: PropTypes.func,
-    onOpen: PropTypes.func
+    onOpen: PropTypes.func,
+    onPop: PropTypes.func,
+    onPush: PropTypes.func
   }
 
   render() {
-    const { children, open, component } = this.props
+    const { children, components, open } = this.props
     return (
       <div className="reframe-modal">
         { children }
@@ -31,17 +30,25 @@ class Modal extends React.Component {
         </CSSTransition>
         <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-modal-window">
-            { _.isFunction(component) ? React.createElement(component) : component }
+            { components.length > 0 && (_.isFunction(components[0]) ? React.createElement(components[0]) : React.cloneElement(components[0])) }
+            { components.length > 1 && components.slice(1).map((component, index) => (
+              <CSSTransition key={`component_${index}`}  in={ components.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+                { _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` }) }
+              </CSSTransition>
+            )) }
           </div>
         </CSSTransition>
       </div>
     )
   }
 
-  componentDidUpdate(prevProps) {
-    const { open, onClear } = this.props
-    if(open !== prevProps.open && !open) {
-      setTimeout(onClear, 500)
+  _handlePop() {
+    const { components, onPop, onClear } = this.props
+    if(components.length === 1) {
+      onClear()
+      setTimeout(onPop, 500)
+    } else {
+      onPop()
     }
   }
 
@@ -50,11 +57,13 @@ class Modal extends React.Component {
   }
 
   getChildContext() {
-    const { onClose, onOpen } = this.props
+    const { onPush } = this.props
     return {
       modal: {
-        open: onOpen,
-        close: onClose
+        open: onPush,
+        close: this._handlePop.bind(this),
+        pop: this._handlePop.bind(this),
+        push: onPush
       }
     }
   }

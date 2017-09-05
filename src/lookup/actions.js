@@ -4,6 +4,10 @@ export const begin = () => ({
   type: actionTypes.BEGIN
 })
 
+export const end = () => ({
+  type: actionTypes.END
+})
+
 export const clear = () => ({
   type: actionTypes.CLEAR
 })

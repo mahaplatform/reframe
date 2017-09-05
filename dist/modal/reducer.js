@@ -13,8 +13,10 @@ var actionTypes = _interopRequireWildcard(_action_types);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var INITIAL_STATE = exports.INITIAL_STATE = {
-  component: null,
+  components: [],
   open: false
 };
 
@@ -25,19 +27,21 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.OPEN:
+    case actionTypes.PUSH:
       return {
-        component: action.component,
+        components: [].concat(_toConsumableArray(state.components), [action.component]),
         open: true
       };
 
-    case actionTypes.CLOSE:
+    case actionTypes.POP:
       return _extends({}, state, {
-        open: false
+        components: state.components.slice(0, state.components.length - 1)
       });
 
     case actionTypes.CLEAR:
-      return INITIAL_STATE;
+      return _extends({}, state, {
+        open: false
+      });
 
     default:
       return state;

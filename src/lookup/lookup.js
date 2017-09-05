@@ -14,6 +14,10 @@ const ValueToken = ({ value }) => (
 
 class Lookup extends React.Component {
 
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
   static propTypes = {
     active: PropTypes.bool,
     adding: PropTypes.bool,
@@ -53,16 +57,8 @@ class Lookup extends React.Component {
     value: 'value'
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      cacheKey: null
-    }
-  }
-
   render() {
-    const { active, adding, chosen, disabled, format, prompt, text } = this.props
-    const { cacheKey } = this.state
+    const { chosen, format, prompt, text } = this.props
     const value = chosen ? _.get(chosen, text) : ''
     return (
       <div className="reframe-lookup-field">
@@ -81,12 +77,6 @@ class Lookup extends React.Component {
             { prompt }
           </div>
         }
-       <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-         <Search { ...this.props } cacheKey={ cacheKey } />
-       </CSSTransition>
-       <CSSTransition in={ adding } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-         <Form { ...this._getForm() } />
-       </CSSTransition>
      </div>
     )
   }
@@ -104,15 +94,17 @@ class Lookup extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { disabled, onClear } = this.props
+    const { modal } = this.context
+    const { active, adding, disabled, onClear } = this.props
     if(prevProps.disabled !== disabled) onClear()
+    if(!prevProps.active && active) modal.push(<Search { ...this.props } />)
+    if(prevProps.active && !active) modal.pop()
+    if(!prevProps.adding && adding) modal.push(<Form { ...this._getForm() } />)
+    if(prevProps.adding && !adding) modal.pop()
   }
 
-  _handleBegin(e) {
+  _handleBegin() {
     this.props.onBegin()
-    e.target.blur()
-    e.preventDefault()
-    return false
   }
 
   _handleClear() {
@@ -128,11 +120,12 @@ class Lookup extends React.Component {
       onCancel: () => onHideForm(),
       onSuccess: (chosen) => {
         onChoose(chosen)
-        onChange(_.get(chosen, value))
         onHideForm()
+        onChange(_.get(chosen, value))
       }
     }
   }
+
 }
 
 export default Lookup

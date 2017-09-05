@@ -7,7 +7,8 @@ class Search extends React.Component {
   static propTypes = {
     label: PropTypes.string,
     selected: PropTypes.number,
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
+    onEnd: PropTypes.func
   }
 
   render() {
@@ -30,7 +31,7 @@ class Search extends React.Component {
   }
 
   _handleCancel() {
-    this.props.onCancel()
+    this.props.onEnd()
   }
 
 }

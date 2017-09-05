@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var BEGIN = exports.BEGIN = 'BEGIN';
+var END = exports.END = 'END';
 var CLEAR = exports.CLEAR = 'CLEAR';
 var CANCEL = exports.CANCEL = 'CANCEL';
 var CHOOSE = exports.CHOOSE = 'CHOOSE';

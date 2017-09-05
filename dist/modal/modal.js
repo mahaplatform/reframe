@@ -42,8 +42,8 @@ var Modal = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           children = _props.children,
-          open = _props.open,
-          component = _props.component;
+          components = _props.components,
+          open = _props.open;
 
       return _react2.default.createElement(
         'div',
@@ -60,20 +60,31 @@ var Modal = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-modal-window' },
-            _lodash2.default.isFunction(component) ? _react2.default.createElement(component) : component
+            components.length > 0 && (_lodash2.default.isFunction(components[0]) ? _react2.default.createElement(components[0]) : _react2.default.cloneElement(components[0])),
+            components.length > 1 && components.slice(1).map(function (component, index) {
+              return _react2.default.createElement(
+                _reactTransitionGroup.CSSTransition,
+                { key: 'component_' + index, 'in': components.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+                _lodash2.default.isFunction(component) ? _react2.default.createElement(component, { key: 'modal_panel_' + index }) : _react2.default.cloneElement(component, { key: 'modal_panel_' + index })
+              );
+            })
           )
         )
       );
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
+    key: '_handlePop',
+    value: function _handlePop() {
       var _props2 = this.props,
-          open = _props2.open,
+          components = _props2.components,
+          onPop = _props2.onPop,
           onClear = _props2.onClear;
 
-      if (open !== prevProps.open && !open) {
-        setTimeout(onClear, 500);
+      if (components.length === 1) {
+        onClear();
+        setTimeout(onPop, 500);
+      } else {
+        onPop();
       }
     }
   }, {
@@ -84,14 +95,14 @@ var Modal = function (_React$Component) {
   }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      var _props3 = this.props,
-          onClose = _props3.onClose,
-          onOpen = _props3.onOpen;
+      var onPush = this.props.onPush;
 
       return {
         modal: {
-          open: onOpen,
-          close: onClose
+          open: onPush,
+          close: this._handlePop.bind(this),
+          pop: this._handlePop.bind(this),
+          push: onPush
         }
       };
     }
@@ -105,10 +116,12 @@ Modal.childContextTypes = {
 };
 Modal.propTypes = {
   children: _propTypes2.default.any,
-  component: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
+  components: _propTypes2.default.array,
   open: _propTypes2.default.bool,
   onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,
-  onOpen: _propTypes2.default.func
+  onOpen: _propTypes2.default.func,
+  onPop: _propTypes2.default.func,
+  onPush: _propTypes2.default.func
 };
 exports.default = Modal;

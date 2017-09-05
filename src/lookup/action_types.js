@@ -1,4 +1,5 @@
 export const BEGIN = 'BEGIN'
+export const END = 'END'
 export const CLEAR = 'CLEAR'
 export const CANCEL = 'CANCEL'
 export const CHOOSE = 'CHOOSE'

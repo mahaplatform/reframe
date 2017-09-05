@@ -32,6 +32,11 @@ exports.default = function () {
         active: true
       });
 
+    case actionTypes.END:
+      return _extends({}, state, {
+        active: false
+      });
+
     case actionTypes.CLEAR:
       return _extends({}, state, {
         chosen: null

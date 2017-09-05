@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.hideForm = exports.showForm = exports.load = exports.query = exports.choose = exports.cancel = exports.clear = exports.begin = undefined;
+exports.hideForm = exports.showForm = exports.load = exports.query = exports.choose = exports.cancel = exports.clear = exports.end = exports.begin = undefined;
 
 var _action_types = require('./action_types');
 
@@ -14,6 +14,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var begin = exports.begin = function begin() {
   return {
     type: actionTypes.BEGIN
+  };
+};
+
+var end = exports.end = function end() {
+  return {
+    type: actionTypes.END
   };
 };
 
