@@ -9,25 +9,31 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
+  case actionTypes.OPEN:
+    return {
+      ...state,
+      open: true
+    }
+
+  case actionTypes.CLOSE:
+    return {
+      ...state,
+      open: false
+    }
+
   case actionTypes.PUSH:
     return {
+      ...state,
       components: [
         ...state.components,
         action.component
-      ],
-      open: true
+      ]
     }
 
   case actionTypes.POP:
     return {
       ...state,
-      components: state.components.slice(0, state.components.length - 1)
-    }
-
-  case actionTypes.CLEAR:
-    return {
-      ...state,
-      open: false
+      components: state.components.slice(0, state.components.length - action.panels)
     }
 
   default:

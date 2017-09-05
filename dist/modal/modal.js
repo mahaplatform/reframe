@@ -31,15 +31,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Modal = function (_React$Component) {
   _inherits(Modal, _React$Component);
 
-  function Modal() {
+  function Modal(props) {
     _classCallCheck(this, Modal);
 
-    return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+
+    _this.state = {
+      count: 0
+    };
+    return _this;
   }
 
   _createClass(Modal, [{
     key: 'render',
     value: function render() {
+      var count = this.state.count;
       var _props = this.props,
           children = _props.children,
           components = _props.components,
@@ -60,11 +66,10 @@ var Modal = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-modal-window' },
-            components.length > 0 && (_lodash2.default.isFunction(components[0]) ? _react2.default.createElement(components[0]) : _react2.default.cloneElement(components[0])),
-            components.length > 1 && components.slice(1).map(function (component, index) {
+            components.map(function (component, index) {
               return _react2.default.createElement(
                 _reactTransitionGroup.CSSTransition,
-                { key: 'component_' + index, 'in': components.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+                { key: 'component_' + index, 'in': index + 1 <= count || index === 0, classNames: 'cover', timeout: 500, appear: index > 0, mountOnEnter: index > 0, unmountOnExit: index > 0 },
                 _lodash2.default.isFunction(component) ? _react2.default.createElement(component, { key: 'modal_panel_' + index }) : _react2.default.cloneElement(component, { key: 'modal_panel_' + index })
               );
             })
@@ -73,36 +78,67 @@ var Modal = function (_React$Component) {
       );
     }
   }, {
-    key: '_handlePop',
-    value: function _handlePop() {
-      var _props2 = this.props,
-          components = _props2.components,
-          onPop = _props2.onPop,
-          onClear = _props2.onClear;
-
-      if (components.length === 1) {
-        onClear();
-        setTimeout(onPop, 500);
-      } else {
-        onPop();
-      }
-    }
-  }, {
     key: '_handleClose',
     value: function _handleClose() {
-      this.props.onClose();
+      var _this2 = this;
+
+      var count = this.state.count;
+      var _props2 = this.props,
+          onClose = _props2.onClose,
+          onPop = _props2.onPop;
+
+      onClose();
+      setTimeout(function () {
+        onPop(count);
+        _this2.setState({ count: 0 });
+      }, 500);
+    }
+  }, {
+    key: '_handlePush',
+    value: function _handlePush(component) {
+      var count = this.state.count;
+      var _props3 = this.props,
+          onOpen = _props3.onOpen,
+          onPush = _props3.onPush,
+          open = _props3.open;
+
+      this.setState({ count: count + 1 });
+      onPush(component);
+      if (!open) onOpen();
+    }
+  }, {
+    key: '_handlePop',
+    value: function _handlePop() {
+      var _this3 = this;
+
+      var panels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var count = this.state.count;
+      var _props4 = this.props,
+          onClose = _props4.onClose,
+          onPop = _props4.onPop;
+
+      if (count > 1) {
+        this.setState({ count: count - panels });
+        setTimeout(function () {
+          onPop(panels);
+        }, 500);
+      } else {
+        onClose();
+        setTimeout(function () {
+          _this3.setState({ count: count - panels });
+          onPop(panels);
+        }, 500);
+      }
     }
   }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      var onPush = this.props.onPush;
-
       return {
         modal: {
-          open: onPush,
+          open: this._handlePush.bind(this),
           close: this._handlePop.bind(this),
           pop: this._handlePop.bind(this),
-          push: onPush
+          push: this._handlePush.bind(this)
         }
       };
     }
@@ -118,7 +154,6 @@ Modal.propTypes = {
   children: _propTypes2.default.any,
   components: _propTypes2.default.array,
   open: _propTypes2.default.bool,
-  onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,
   onOpen: _propTypes2.default.func,
   onPop: _propTypes2.default.func,

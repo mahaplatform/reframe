@@ -163,13 +163,13 @@ body {
 	.translateX(0);
 }
 
-.cover-enter, .cover-exit {
+.cover-enter, .cover-appear, .cover-exit {
 	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
 }
-.cover-enter {
+.cover-enter, .cover-appear {
 	.translateX(100%);
 }
-.cover-enter.cover-enter-active {
+.cover-enter.cover-enter-active, .cover-appear.cover-appear-active {
 	.translateX(0);
 }
 .cover-exit {

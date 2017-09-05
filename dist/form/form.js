@@ -222,23 +222,26 @@ var Form = function (_React$Component) {
 Form.contextTypes = {
   modal: _propTypes2.default.object
 };
-Form.PropTypes = {
+Form.propTypes = {
   action: _propTypes2.default.string,
   after: _propTypes2.default.string,
   before: _propTypes2.default.string,
   defaults: _propTypes2.default.object,
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
+  entity: _propTypes2.default.object,
   fields: _propTypes2.default.array,
   instructions: _propTypes2.default.string,
   method: _propTypes2.default.string,
   sections: _propTypes2.default.array,
   status: _propTypes2.default.string,
   title: _propTypes2.default.string,
+  onCancel: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChangeField: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onFailure: _propTypes2.default.func,
+  onSetSections: _propTypes2.default.func,
   onSuccess: _propTypes2.default.func,
   onValidateForm: _propTypes2.default.func,
   onResetForm: _propTypes2.default.func,

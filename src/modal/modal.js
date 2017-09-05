@@ -13,14 +13,21 @@ class Modal extends React.Component {
     children: PropTypes.any,
     components: PropTypes.array,
     open: PropTypes.bool,
-    onClear: PropTypes.func,
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
     onPop: PropTypes.func,
     onPush: PropTypes.func
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      count: 0
+    }
+  }
+
   render() {
+    const { count } = this.state
     const { children, components, open } = this.props
     return (
       <div className="reframe-modal">
@@ -30,40 +37,61 @@ class Modal extends React.Component {
         </CSSTransition>
         <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-modal-window">
-            { components.length > 0 && (_.isFunction(components[0]) ? React.createElement(components[0]) : React.cloneElement(components[0])) }
-            { components.length > 1 && components.slice(1).map((component, index) => (
-              <CSSTransition key={`component_${index}`}  in={ components.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-                { _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` }) }
-              </CSSTransition>
-            )) }
+            { components.map((component, index) => {
+              return (
+                <CSSTransition key={`component_${index}`} in={ index + 1 <= count || index === 0 } classNames="cover" timeout={ 500 } appear={ index > 0 } mountOnEnter={ index > 0 } unmountOnExit={ index > 0 }>
+                  { _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` }) }
+                </CSSTransition>
+              )
+            }) }
           </div>
         </CSSTransition>
       </div>
     )
   }
 
-  _handlePop() {
-    const { components, onPop, onClear } = this.props
-    if(components.length === 1) {
-      onClear()
-      setTimeout(onPop, 500)
+  _handleClose() {
+    const { count } = this.state
+    const { onClose, onPop } = this.props
+    onClose()
+    setTimeout(() => {
+      onPop(count)
+      this.setState({ count: 0 })
+    }, 500)
+  }
+
+  _handlePush(component) {
+    const { count } = this.state
+    const { onOpen, onPush, open } = this.props
+    this.setState({ count: count + 1 })
+    onPush(component)
+    if(!open) onOpen()
+  }
+
+  _handlePop(panels = 1) {
+    const { count } = this.state
+    const { onClose, onPop } = this.props
+    if(count > 1) {
+      this.setState({ count: count - panels })
+      setTimeout(() => {
+        onPop(panels)
+      }, 500)
     } else {
-      onPop()
+      onClose()
+      setTimeout(() => {
+        this.setState({ count: count - panels })
+        onPop(panels)
+      }, 500)
     }
   }
 
-  _handleClose() {
-    this.props.onClose()
-  }
-
   getChildContext() {
-    const { onPush } = this.props
     return {
       modal: {
-        open: onPush,
+        open: this._handlePush.bind(this),
         close: this._handlePop.bind(this),
         pop: this._handlePop.bind(this),
-        push: onPush
+        push: this._handlePush.bind(this)
       }
     }
   }

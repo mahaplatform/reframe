@@ -27,20 +27,24 @@ exports.default = function () {
 
   switch (action.type) {
 
-    case actionTypes.PUSH:
-      return {
-        components: [].concat(_toConsumableArray(state.components), [action.component]),
+    case actionTypes.OPEN:
+      return _extends({}, state, {
         open: true
-      };
+      });
+
+    case actionTypes.CLOSE:
+      return _extends({}, state, {
+        open: false
+      });
+
+    case actionTypes.PUSH:
+      return _extends({}, state, {
+        components: [].concat(_toConsumableArray(state.components), [action.component])
+      });
 
     case actionTypes.POP:
       return _extends({}, state, {
-        components: state.components.slice(0, state.components.length - 1)
-      });
-
-    case actionTypes.CLEAR:
-      return _extends({}, state, {
-        open: false
+        components: state.components.slice(0, state.components.length - action.panels)
       });
 
     default:

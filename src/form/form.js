@@ -9,23 +9,26 @@ class Form extends React.Component {
     modal: PropTypes.object
   }
 
-  static PropTypes = {
+  static propTypes = {
     action: PropTypes.string,
     after: PropTypes.string,
     before: PropTypes.string,
     defaults: PropTypes.object,
     data: PropTypes.object,
     errors: PropTypes.object,
+    entity: PropTypes.object,
     fields: PropTypes.array,
     instructions: PropTypes.string,
     method: PropTypes.string,
     sections: PropTypes.array,
     status: PropTypes.string,
     title: PropTypes.string,
+    onCancel: PropTypes.func,
     onChange: PropTypes.func,
     onChangeField: PropTypes.func,
     onSubmit: PropTypes.func,
     onFailure: PropTypes.func,
+    onSetSections: PropTypes.func,
     onSuccess: PropTypes.func,
     onValidateForm: PropTypes.func,
     onResetForm: PropTypes.func,

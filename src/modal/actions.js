@@ -1,7 +1,11 @@
 import * as actionTypes from './action_types'
 
-export const clear = () => ({
-  type: actionTypes.CLEAR
+export const close = () => ({
+  type: actionTypes.CLOSE
+})
+
+export const open = () => ({
+  type: actionTypes.OPEN
 })
 
 export const push = (component) => ({
@@ -9,6 +13,7 @@ export const push = (component) => ({
   component
 })
 
-export const pop = () => ({
-  type: actionTypes.POP
+export const pop = (panels) => ({
+  type: actionTypes.POP,
+  panels
 })
