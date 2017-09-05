@@ -92,11 +92,11 @@ var Lookup = function (_React$Component) {
           { className: 'reframe-lookup-field-clear' },
           _react2.default.createElement('i', { className: 'icon circle remove', onClick: this._handleClear.bind(this) })
         ),
-        !chosen && _react2.default.createElement('input', { type: 'text',
-          disabled: disabled,
-          onFocus: this._handleBegin.bind(this),
-          value: value,
-          placeholder: prompt }),
+        !chosen && _react2.default.createElement(
+          'div',
+          { className: 'reframe-lookup-field-prompt', onClick: this._handleBegin.bind(this) },
+          prompt
+        ),
         _react2.default.createElement(
           _reactTransitionGroup.CSSTransition,
           { 'in': active, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },

@@ -77,12 +77,10 @@ class Lookup extends React.Component {
           </div>
         }
         { !chosen &&
-          <input type="text"
-                 disabled={ disabled }
-                 onFocus={ this._handleBegin.bind(this) }
-                 value={ value }
-                 placeholder={ prompt } />
-       }
+          <div className="reframe-lookup-field-prompt" onClick={ this._handleBegin.bind(this) }>
+            { prompt }
+          </div>
+        }
        <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
          <Search { ...this.props } cacheKey={ cacheKey } />
        </CSSTransition>
