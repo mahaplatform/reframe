@@ -38,6 +38,10 @@ var _lookup = require('../lookup');
 
 var _lookup2 = _interopRequireDefault(_lookup);
 
+var _moneyfield = require('../moneyfield');
+
+var _moneyfield2 = _interopRequireDefault(_moneyfield);
+
 var _text = require('../text');
 
 var _text2 = _interopRequireDefault(_text);
@@ -65,15 +69,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import Checkboxes from '../checkboxes'
 
-// import Dynamic from '../dynamic'
-
-// // import Checkboxes from '../checkboxes'
-
-// // import MultiSelect from './multiselect'
-// // import Radios from './radios'
+// import MultiSelect from './multiselect'
+// import Radios from './radios'
 // import Select from '../select'
-// // import TableField from './tablefield'
+// import TableField from './tablefield'
 
 
 var standardControls = {
@@ -83,6 +84,7 @@ var standardControls = {
   'datefield': _datefield2.default,
   'filefield': _filefield2.default,
   'lookup': _lookup2.default,
+  'moneyfield': _moneyfield2.default,
   // 'multiselect': MultiSelect,
   // 'radios': Radios,
   // 'select': Select,

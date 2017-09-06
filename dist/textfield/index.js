@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -45,7 +43,7 @@ var TextField = function (_React$Component) {
   _createClass(TextField, [{
     key: 'render',
     value: function render() {
-      var input = _react2.default.createElement('input', _extends({ ref: 'control' }, this._getControl()));
+      var input = _react2.default.createElement('input', this._getControl());
       if (!this.props.prefix && !this.props.suffix) {
         return _react2.default.createElement(
           'div',
@@ -109,8 +107,14 @@ var TextField = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange(event) {
-      this.setValue(event.target.value);
-      this.props.onChange(event.target.value);
+      var trimmed = this.props.trim ? event.target.value.trim() : event.target.value;
+      var sanitized = this.props.sanitize(trimmed);
+      if (!this.props.validate(sanitized)) {
+        event.preventDefault();
+        return false;
+      }
+      this.setValue(sanitized);
+      this.props.onChange(sanitized);
     }
   }, {
     key: '_handleBlur',
@@ -155,32 +159,44 @@ var TextField = function (_React$Component) {
 
 TextField.propTypes = {
   autoComplete: _propTypes2.default.string,
-  maxLength: _propTypes2.default.number,
-  prefix: _propTypes2.default.string,
-  suffix: _propTypes2.default.string,
-  disabled: _propTypes2.default.bool,
-  placeholder: _propTypes2.default.string,
   defaultValue: _propTypes2.default.string,
+  disabled: _propTypes2.default.bool,
+  maxLength: _propTypes2.default.number,
+  placeholder: _propTypes2.default.string,
+  prefix: _propTypes2.default.string,
+  sanitize: _propTypes2.default.func,
+  suffix: _propTypes2.default.string,
+  trim: _propTypes2.default.bool,
+  validate: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onFocus: _propTypes2.default.func,
   onBlur: _propTypes2.default.func,
   onKeyPress: _propTypes2.default.func,
   onKeyUp: _propTypes2.default.func,
-  onKeyDown: _propTypes2.default.func
+  onKeyDown: _propTypes2.default.func,
+  onSubmit: _propTypes2.default.func
 };
 TextField.defaultProps = {
   autoComplete: 'off',
-  maxLength: null,
-  prefix: null,
-  suffix: null,
-  disabled: false,
-  placeholder: '',
   defaultValue: '',
+  disabled: false,
+  maxLength: null,
+  placeholder: '',
+  prefix: null,
+  sanitize: function sanitize(value) {
+    return value;
+  },
+  suffix: null,
+  trim: true,
+  validate: function validate(value) {
+    return true;
+  },
   onChange: function onChange() {},
   onFocus: function onFocus() {},
   onBlur: function onBlur() {},
   onKeyPress: function onKeyPress() {},
   onKeyUp: function onKeyUp() {},
-  onKeyDown: function onKeyDown() {}
+  onKeyDown: function onKeyDown() {},
+  onSubmit: function onSubmit() {}
 };
 exports.default = TextField;

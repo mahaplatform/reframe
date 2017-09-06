@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-
-// import Dynamic from '../dynamic'
 import Checkbox from '../checkbox'
-// // import Checkboxes from '../checkboxes'
+// import Checkboxes from '../checkboxes'
 import ColorField from '../colorfield'
 import DateField from '../datefield'
 import Filefield from '../filefield'
 import Lookup from '../lookup'
-// // import MultiSelect from './multiselect'
-// // import Radios from './radios'
+import MoneyField from '../moneyfield'
+// import MultiSelect from './multiselect'
+// import Radios from './radios'
 // import Select from '../select'
-// // import TableField from './tablefield'
+// import TableField from './tablefield'
 import Text from '../text'
 import TextArea from '../textarea'
 import TextField from '../textfield'
@@ -26,6 +25,7 @@ const standardControls = {
   'datefield': DateField,
   'filefield': Filefield,
   'lookup': Lookup,
+  'moneyfield': MoneyField,
   // 'multiselect': MultiSelect,
   // 'radios': Radios,
   // 'select': Select,

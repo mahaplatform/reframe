@@ -6,34 +6,42 @@ class TextField extends React.Component {
 
   static propTypes = {
     autoComplete: PropTypes.string,
-    maxLength: PropTypes.number,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string,
-    disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
+    disabled: PropTypes.bool,
+    maxLength: PropTypes.number,
+    placeholder: PropTypes.string,
+    prefix: PropTypes.string,
+    sanitize: PropTypes.func,
+    suffix: PropTypes.string,
+    trim: PropTypes.bool,
+    validate: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
+    onSubmit: PropTypes.func
   }
 
   static defaultProps = {
     autoComplete: 'off',
-    maxLength: null,
-    prefix: null,
-    suffix: null,
-    disabled: false,
-    placeholder: '',
     defaultValue: '',
+    disabled: false,
+    maxLength: null,
+    placeholder: '',
+    prefix: null,
+    sanitize: value => value,
+    suffix: null,
+    trim: true,
+    validate: value => true,
     onChange: () => {},
     onFocus: () => {},
     onBlur: () => {},
     onKeyPress: () => {},
     onKeyUp: () => {},
-    onKeyDown: () => {}
+    onKeyDown: () => {},
+    onSubmit: () => {}
   }
 
   constructor(props) {
@@ -44,7 +52,7 @@ class TextField extends React.Component {
   }
 
   render() {
-    const input = <input ref="control" { ...this._getControl() } />
+    const input = <input { ...this._getControl() } />
     if(!this.props.prefix && !this.props.suffix) {
       return <div className="textfield">{ input }</div>
     }
@@ -87,8 +95,14 @@ class TextField extends React.Component {
   }
 
   _handleChange(event) {
-    this.setValue(event.target.value)
-    this.props.onChange(event.target.value)
+    const trimmed = this.props.trim ? event.target.value.trim() : event.target.value
+    const sanitized = this.props.sanitize(trimmed)
+    if(!this.props.validate(sanitized)) {
+      event.preventDefault()
+      return false
+    }
+    this.setValue(sanitized)
+    this.props.onChange(sanitized)
   }
 
   _handleBlur(event) {
