@@ -24,6 +24,7 @@ class Form extends React.Component {
     filtered: PropTypes.object,
     instructions: PropTypes.string,
     isReady: PropTypes.bool,
+    isBusy: PropTypes.bool,
     method: PropTypes.string,
     ready: PropTypes.array,
     sections: PropTypes.array,
@@ -57,13 +58,19 @@ class Form extends React.Component {
     onSuccess: (entity) => {}
   }
 
+  constructor(props) {
+    super(props)
+    this._debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
+  }
 
   render() {
-    const { after, before, busy, config, instructions, isReady, status, title } = this.props
+    const { after, before, config, instructions, isBusy, isReady, status, title } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     const submitting = status === 'submitting'
     let classes = ['ui', 'form', status]
     if(configuring || !isReady || submitting) classes.push('loading')
+    let saveClasses = ['reframe-modal-panel-header-proceed']
+    if(isBusy) saveClasses.push('disabled')
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
@@ -73,14 +80,9 @@ class Form extends React.Component {
           <div className="reframe-modal-panel-header-title">
             { title }
           </div>
-          { busy.length === 0 ?
-            <div className="reframe-modal-panel-header-proceed" onClick={ this._handleSubmit.bind(this) }>
-              Save
-            </div> :
-            <div className="reframe-modal-panel-header-proceed disabled">
-              Save
-            </div>
-          }
+          <div className={saveClasses.join(' ')} onClick={ this._debouncedSubmit }>
+            Save
+          </div>
         </div>
         <div className="reframe-modal-panel-body">
           <div className="reframe-form">
@@ -171,7 +173,8 @@ class Form extends React.Component {
   }
 
   _handleSubmit() {
-    const { action, filtered, method, onSubmit, onSubmitForm } = this.props
+    const { action, filtered, isBusy, method, onSubmit, onSubmitForm } = this.props
+    if(isBusy) return
     if(action) return onSubmitForm(method, action, filtered)
     if(onSubmit) {
       if(onSubmit(filtered)) return this._handleSuccess()

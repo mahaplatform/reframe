@@ -35,10 +35,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Form = function (_React$Component) {
   _inherits(Form, _React$Component);
 
-  function Form() {
+  function Form(props) {
     _classCallCheck(this, Form);
 
-    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
+
+    _this._debouncedSubmit = _lodash2.default.debounce(_this._handleSubmit.bind(_this), 2500, { leading: true });
+    return _this;
   }
 
   _createClass(Form, [{
@@ -49,9 +52,9 @@ var Form = function (_React$Component) {
       var _props = this.props,
           after = _props.after,
           before = _props.before,
-          busy = _props.busy,
           config = _props.config,
           instructions = _props.instructions,
+          isBusy = _props.isBusy,
           isReady = _props.isReady,
           status = _props.status,
           title = _props.title;
@@ -60,6 +63,8 @@ var Form = function (_React$Component) {
       var submitting = status === 'submitting';
       var classes = ['ui', 'form', status];
       if (configuring || !isReady || submitting) classes.push('loading');
+      var saveClasses = ['reframe-modal-panel-header-proceed'];
+      if (isBusy) saveClasses.push('disabled');
       return _react2.default.createElement(
         'div',
         { className: 'reframe-modal-panel' },
@@ -76,13 +81,9 @@ var Form = function (_React$Component) {
             { className: 'reframe-modal-panel-header-title' },
             title
           ),
-          busy.length === 0 ? _react2.default.createElement(
+          _react2.default.createElement(
             'div',
-            { className: 'reframe-modal-panel-header-proceed', onClick: this._handleSubmit.bind(this) },
-            'Save'
-          ) : _react2.default.createElement(
-            'div',
-            { className: 'reframe-modal-panel-header-proceed disabled' },
+            { className: saveClasses.join(' '), onClick: this._debouncedSubmit },
             'Save'
           )
         ),
@@ -221,10 +222,12 @@ var Form = function (_React$Component) {
       var _props7 = this.props,
           action = _props7.action,
           filtered = _props7.filtered,
+          isBusy = _props7.isBusy,
           method = _props7.method,
           onSubmit = _props7.onSubmit,
           onSubmitForm = _props7.onSubmitForm;
 
+      if (isBusy) return;
       if (action) return onSubmitForm(method, action, filtered);
       if (onSubmit) {
         if (onSubmit(filtered)) return this._handleSuccess();
@@ -265,6 +268,7 @@ Form.propTypes = {
   filtered: _propTypes2.default.object,
   instructions: _propTypes2.default.string,
   isReady: _propTypes2.default.bool,
+  isBusy: _propTypes2.default.bool,
   method: _propTypes2.default.string,
   ready: _propTypes2.default.array,
   sections: _propTypes2.default.array,

@@ -54,3 +54,8 @@ export const isReady = createSelector(
     return _.includes(ready, field.name)
   }, true)
 )
+
+export const isBusy = createSelector(
+  busy,
+  (busy) => busy.length > 0
+)

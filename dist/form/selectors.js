@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isReady = exports.filtered = exports.defaults = exports.fields = undefined;
+exports.isBusy = exports.isReady = exports.filtered = exports.defaults = exports.fields = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -64,4 +64,8 @@ var isReady = exports.isReady = (0, _reselect.createSelector)(fields, ready, fun
     if (!isReady) return false;
     return _lodash2.default.includes(ready, field.name);
   }, true);
+});
+
+var isBusy = exports.isBusy = (0, _reselect.createSelector)(busy, function (busy) {
+  return busy.length > 0;
 });
