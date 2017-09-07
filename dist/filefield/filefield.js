@@ -127,7 +127,6 @@ var FileField = function (_React$Component) {
           onLoadFiles = _props2.onLoadFiles,
           onSetReady = _props2.onSetReady;
 
-      console.log(defaultValue);
       if (defaultValue) {
         var ids = !_lodash2.default.isArray(defaultValue) ? [defaultValue] : defaultValue;
         onLoadFiles('/api/admin/team/assets', ids);

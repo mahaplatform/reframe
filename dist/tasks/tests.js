@@ -59,8 +59,10 @@ describe('tasks component', function () {
     it('can set default state', function () {
 
       var expected = {
+        error: null,
         items: null,
-        open: false
+        open: false,
+        status: 'pending'
       };
 
       (0, _chai.expect)((0, _reducer2.default)(undefined, '')).to.eql(expected);
