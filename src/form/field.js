@@ -23,6 +23,7 @@ class Field extends React.Component {
       PropTypes.func
     ]).isRequired,
     show: PropTypes.bool,
+    onBusy: PropTypes.func,
     onReady: PropTypes.func,
     onSubmit: PropTypes.func,
     onUpdateData: PropTypes.func
@@ -37,6 +38,8 @@ class Field extends React.Component {
     options: [],
     required: false,
     show: true,
+    onBusy: () => {},
+    onReady: () => {},
     onUpdateData: () => {}
   }
 
@@ -106,11 +109,16 @@ class Field extends React.Component {
       token,
       type,
       value,
-      onSet: this._handleUpdateData.bind(this),
-      onReady: this._handleReady.bind(this),
+      onBusy: this._handleBusy.bind(this),
       onChange: this._handleUpdateData.bind(this),
+      onReady: this._handleReady.bind(this),
+      onSet: this._handleUpdateData.bind(this),
       onSubmit
     }
+  }
+
+  _handleBusy() {
+    this.props.onBusy(this.props.name)
   }
 
   _handleReady() {

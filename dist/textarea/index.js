@@ -99,6 +99,7 @@ TextArea.propTypes = {
   disabled: _propTypes2.default.bool,
   maxLength: _propTypes2.default.number,
   placeholder: _propTypes2.default.string,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
@@ -108,6 +109,7 @@ TextArea.defaultProps = {
   disabled: false,
   maxLength: null,
   placeholder: '',
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

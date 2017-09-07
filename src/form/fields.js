@@ -6,6 +6,7 @@ class Fields extends React.Component {
 
   static propTypes = {
     fields: PropTypes.array,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func,
     onSubmit: PropTypes.func,
@@ -14,6 +15,7 @@ class Fields extends React.Component {
 
   static defaultProps = {
     fields: [],
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSubmit: () => {},

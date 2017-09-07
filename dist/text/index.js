@@ -62,6 +62,7 @@ Text.propTypes = {
   defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   format: _propTypes2.default.any,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
@@ -70,6 +71,7 @@ Text.defaultProps = {
   defaultValue: '',
   disabled: false,
   format: null,
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

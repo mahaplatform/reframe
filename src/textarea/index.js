@@ -9,6 +9,7 @@ class TextArea extends React.Component {
     disabled: PropTypes.bool,
     maxLength: PropTypes.number,
     placeholder: PropTypes.string,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func,
     onSet: PropTypes.func
@@ -19,6 +20,7 @@ class TextArea extends React.Component {
     disabled: false,
     maxLength: null,
     placeholder: '',
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

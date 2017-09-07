@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.submitForm = exports.updateData = exports.setReady = exports.setData = exports.fetchData = exports.fetchSections = exports.setSections = undefined;
+exports.submitForm = exports.updateData = exports.toggleBusy = exports.setReady = exports.setData = exports.fetchData = exports.fetchSections = exports.setSections = undefined;
 
 var _action_types = require('./action_types');
 
@@ -50,6 +50,13 @@ var setData = exports.setData = function setData(data) {
 var setReady = exports.setReady = function setReady(field) {
   return {
     type: actionTypes.SET_READY,
+    field: field
+  };
+};
+
+var toggleBusy = exports.toggleBusy = function toggleBusy(field) {
+  return {
+    type: actionTypes.TOGGLE_BUSY,
     field: field
   };
 };

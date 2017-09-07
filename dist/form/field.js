@@ -156,11 +156,17 @@ var Field = function (_React$Component) {
         token: token,
         type: type,
         value: value,
-        onSet: this._handleUpdateData.bind(this),
-        onReady: this._handleReady.bind(this),
+        onBusy: this._handleBusy.bind(this),
         onChange: this._handleUpdateData.bind(this),
+        onReady: this._handleReady.bind(this),
+        onSet: this._handleUpdateData.bind(this),
         onSubmit: onSubmit
       };
+    }
+  }, {
+    key: '_handleBusy',
+    value: function _handleBusy() {
+      this.props.onBusy(this.props.name);
     }
   }, {
     key: '_handleReady',
@@ -191,6 +197,7 @@ Field.propTypes = {
   required: _propTypes2.default.bool,
   type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
   show: _propTypes2.default.bool,
+  onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
@@ -204,6 +211,8 @@ Field.defaultProps = {
   options: [],
   required: false,
   show: true,
+  onBusy: function onBusy() {},
+  onReady: function onReady() {},
   onUpdateData: function onUpdateData() {}
 };
 exports.default = Field;

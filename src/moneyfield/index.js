@@ -9,6 +9,7 @@ class MoneyField extends React.Component {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,

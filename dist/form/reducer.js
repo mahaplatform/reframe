@@ -28,7 +28,8 @@ var INITIAL_STATE = {
   entity: {},
   data: {},
   errors: {},
-  ready: []
+  ready: [],
+  busy: []
 };
 
 exports.default = function () {
@@ -77,9 +78,9 @@ exports.default = function () {
         data: action.result.data
       });
 
-    case actionTypes.SET_READY:
+    case actionTypes.TOGGLE_BUSY:
       return _extends({}, state, {
-        status: 'ready'
+        busy: _lodash2.default.includes(state.busy, action.field) ? _lodash2.default.without(state.busy, action.field) : [].concat(_toConsumableArray(state.busy), [action.field])
       });
 
     case actionTypes.UPDATE_DATA:

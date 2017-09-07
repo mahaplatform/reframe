@@ -182,6 +182,7 @@ Lookup.propTypes = {
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onBegin: _propTypes2.default.func,
+  onBusy: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onCancel: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
@@ -199,6 +200,7 @@ Lookup.defaultProps = {
   format: _value_token2.default,
   text: 'text',
   value: 'value',
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

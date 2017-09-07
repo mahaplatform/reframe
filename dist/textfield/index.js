@@ -157,9 +157,10 @@ TextField.propTypes = {
   suffix: _propTypes2.default.string,
   trim: _propTypes2.default.bool,
   validate: _propTypes2.default.func,
+  onBlur: _propTypes2.default.func,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onFocus: _propTypes2.default.func,
-  onBlur: _propTypes2.default.func,
   onKeyPress: _propTypes2.default.func,
   onKeyUp: _propTypes2.default.func,
   onKeyDown: _propTypes2.default.func,
@@ -182,9 +183,10 @@ TextField.defaultProps = {
   validate: function validate(value) {
     return true;
   },
+  onBlur: function onBlur() {},
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onFocus: function onFocus() {},
-  onBlur: function onBlur() {},
   onKeyPress: function onKeyPress() {},
   onKeyUp: function onKeyUp() {},
   onKeyDown: function onKeyDown() {},

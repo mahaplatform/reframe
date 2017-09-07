@@ -33,6 +33,11 @@ export const setReady = (field) => ({
   field
 })
 
+export const toggleBusy = (field) => ({
+  type: actionTypes.TOGGLE_BUSY ,
+  field
+})
+
 export const updateData = (key, value) => ({
   type: actionTypes.UPDATE_DATA,
   key,

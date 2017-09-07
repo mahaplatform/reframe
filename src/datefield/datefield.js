@@ -15,6 +15,7 @@ class Datefield extends React.Component {
     year: PropTypes.number,
     value: PropTypes.any,
     onBegin: PropTypes.func,
+    onBusy: PropTypes.func,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
@@ -29,6 +30,7 @@ class Datefield extends React.Component {
     defaultValue: null,
     disabled: false,
     placeholder: 'Choose a date...',
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

@@ -49,6 +49,7 @@ var Form = function (_React$Component) {
       var _props = this.props,
           after = _props.after,
           before = _props.before,
+          busy = _props.busy,
           config = _props.config,
           instructions = _props.instructions,
           isReady = _props.isReady,
@@ -75,9 +76,13 @@ var Form = function (_React$Component) {
             { className: 'reframe-modal-panel-header-title' },
             title
           ),
-          _react2.default.createElement(
+          busy.length === 0 ? _react2.default.createElement(
             'div',
             { className: 'reframe-modal-panel-header-proceed', onClick: this._handleSubmit.bind(this) },
+            'Save'
+          ) : _react2.default.createElement(
+            'div',
+            { className: 'reframe-modal-panel-header-proceed disabled' },
             'Save'
           )
         ),
@@ -158,9 +163,10 @@ var Form = function (_React$Component) {
       return _extends({}, section, {
         data: data,
         errors: errors,
-        onUpdateData: this._handleUpdateData.bind(this),
+        onBusy: this._handleToggleBusy.bind(this),
         onReady: this._handleSetReady.bind(this),
-        onSubmit: this._handleSubmit.bind(this)
+        onSubmit: this._handleSubmit.bind(this),
+        onUpdateData: this._handleUpdateData.bind(this)
       });
     }
   }, {
@@ -183,16 +189,17 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleSetReady',
     value: function _handleSetReady(key) {
-      var onSetReady = this.props.onSetReady;
-
-      onSetReady(key);
+      this.props.onSetReady(key);
+    }
+  }, {
+    key: '_handleToggleBusy',
+    value: function _handleToggleBusy(key) {
+      this.props.onToggleBusy(key);
     }
   }, {
     key: '_handleUpdateData',
     value: function _handleUpdateData(key, value) {
-      var onUpdateData = this.props.onUpdateData;
-
-      onUpdateData(key, value);
+      this.props.onUpdateData(key, value);
     }
   }, {
     key: '_handleChange',
@@ -247,6 +254,7 @@ Form.propTypes = {
   action: _propTypes2.default.string,
   after: _propTypes2.default.string,
   before: _propTypes2.default.string,
+  busy: _propTypes2.default.array,
   defaults: _propTypes2.default.object,
   config: _propTypes2.default.array,
   data: _propTypes2.default.object,
@@ -258,6 +266,7 @@ Form.propTypes = {
   instructions: _propTypes2.default.string,
   isReady: _propTypes2.default.bool,
   method: _propTypes2.default.string,
+  ready: _propTypes2.default.array,
   sections: _propTypes2.default.array,
   status: _propTypes2.default.string,
   title: _propTypes2.default.string,
@@ -269,12 +278,13 @@ Form.propTypes = {
   onFailure: _propTypes2.default.func,
   onFetchData: _propTypes2.default.func,
   onFetchSections: _propTypes2.default.func,
+  onResetForm: _propTypes2.default.func,
   onSetData: _propTypes2.default.func,
   onSetReady: _propTypes2.default.func,
   onSetSections: _propTypes2.default.func,
   onSuccess: _propTypes2.default.func,
+  onToggleBusy: _propTypes2.default.func,
   onValidateForm: _propTypes2.default.func,
-  onResetForm: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Form.defaultProps = {

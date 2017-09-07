@@ -12,6 +12,7 @@ class Section extends React.Component {
     fields: PropTypes.array,
     data: PropTypes.object,
     errors: PropTypes.object,
+    onBusy: PropTypes.func,
     onSubmit: PropTypes.func,
     onReady: PropTypes.func,
     onUpdateData: PropTypes.func
@@ -28,7 +29,7 @@ class Section extends React.Component {
   }
 
   render() {
-    const { collapsing, data, errors, fields, instructions, label } = this.props
+    const { collapsing, fields, instructions, label } = this.props
     const { collapsed } = this.state
     let classes = ['ui', 'basic', 'segment']
     if(collapsing) {
@@ -54,11 +55,12 @@ class Section extends React.Component {
   }
 
   _getField(field) {
-    const { data, errors, onReady, onSubmit, onUpdateData } = this.props
+    const { data, errors, onBusy, onReady, onSubmit, onUpdateData } = this.props
     return {
       ...field,
       data,
       errors,
+      onBusy,
       onReady,
       onSubmit,
       onUpdateData

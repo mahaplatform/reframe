@@ -64,6 +64,7 @@ MoneyField.propTypes = {
   disabled: _propTypes2.default.bool,
   placeholder: _propTypes2.default.string,
   defaultValue: _propTypes2.default.string,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onFocus: _propTypes2.default.func,
   onBlur: _propTypes2.default.func,

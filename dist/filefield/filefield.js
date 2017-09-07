@@ -147,7 +147,11 @@ var FileField = function (_React$Component) {
         onReady();
       }
       if (files.length > prevProps.files.length) {
-        this._handleUploadBegin();
+        if (files.filter(function (file) {
+          return file.status === 'added';
+        }).length > 0) {
+          this._handleUploadBegin();
+        }
       } else if (files.length < prevProps.files.length) {
         this._initializeResumable();
       }
@@ -198,6 +202,7 @@ var FileField = function (_React$Component) {
     value: function _handleUploadBegin() {
       this.resumable.upload();
       this.props.onUploadBegin();
+      this.props.onBusy();
     }
   }, {
     key: '_handleUploadProgress',
@@ -208,6 +213,7 @@ var FileField = function (_React$Component) {
     key: '_handleUploadFailure',
     value: function _handleUploadFailure(file, message) {
       this.props.onUploadFailure(message);
+      this.props.onBusy();
     }
   }, {
     key: '_handleUploadSuccess',
@@ -215,6 +221,7 @@ var FileField = function (_React$Component) {
       var asset = JSON.parse(message);
       this.props.onUploadSuccess(file.file.uniqueIdentifier, asset);
       this.props.onChange(asset.data.id);
+      this.props.onBusy();
     }
   }, {
     key: '_handleRemoveFile',
@@ -252,6 +259,7 @@ FileField.propTypes = {
   onUploadProcess: _propTypes2.default.func,
   onUploadSuccess: _propTypes2.default.func,
   onUploadFailure: _propTypes2.default.func,
+  onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onRemoveFile: _propTypes2.default.func,
   onSetReady: _propTypes2.default.func
@@ -261,6 +269,7 @@ FileField.defaultProps = {
   disabled: false,
   multiple: false,
   prompt: 'Choose File(s)',
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

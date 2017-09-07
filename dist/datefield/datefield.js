@@ -149,6 +149,7 @@ Datefield.propTypes = {
   year: _propTypes2.default.number,
   value: _propTypes2.default.any,
   onBegin: _propTypes2.default.func,
+  onBusy: _propTypes2.default.func,
   onClear: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
@@ -162,6 +163,7 @@ Datefield.defaultProps = {
   defaultValue: null,
   disabled: false,
   placeholder: 'Choose a date...',
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

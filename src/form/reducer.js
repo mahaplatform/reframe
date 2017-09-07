@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   entity: {},
   data: {},
   errors: {},
-  ready: []
+  ready: [],
+  busy: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -66,10 +67,10 @@ export default (state = INITIAL_STATE, action) => {
       data: action.result.data
     }
 
-  case actionTypes.SET_READY:
+  case actionTypes.TOGGLE_BUSY:
     return {
       ...state,
-      status: 'ready'
+      busy: _.includes(state.busy, action.field) ? _.without(state.busy, action.field) : [ ...state.busy, action.field ]
     }
 
   case actionTypes.UPDATE_DATA:

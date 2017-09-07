@@ -70,9 +70,12 @@
 .reframe-modal-panel-header-proceed {
   flex: 0 0 100px;
   display: block;
-  color: #FFF;
+  color: @white;
   padding: 1em;
   cursor: pointer;
+  &.disabled {
+    color: fadeout(@white, 40);
+  }
 }
 .reframe-modal-panel-header-title {
   flex: 1;

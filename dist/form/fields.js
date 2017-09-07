@@ -76,6 +76,7 @@ var Fields = function (_React$Component) {
 
 Fields.propTypes = {
   fields: _propTypes2.default.array,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
@@ -83,6 +84,7 @@ Fields.propTypes = {
 };
 Fields.defaultProps = {
   fields: [],
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSubmit: function onSubmit() {},

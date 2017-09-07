@@ -8,6 +8,7 @@ class ColorField extends React.Component {
     colors: PropTypes.string,
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func,
     onSet: PropTypes.func
@@ -16,6 +17,7 @@ class ColorField extends React.Component {
   static defaultProps = {
     defaultValue: null,
     disabled: false,
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

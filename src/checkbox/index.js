@@ -6,6 +6,7 @@ class Checkbox extends React.Component {
   static propTypes = {
     disabled: PropTypes.bool,
     defaultValue: PropTypes.bool,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func,
     onSet: PropTypes.func
@@ -14,6 +15,7 @@ class Checkbox extends React.Component {
   static defaultProps = {
     defaultValue: false,
     disabled: false,
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

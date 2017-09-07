@@ -85,6 +85,7 @@ var Checkbox = function (_React$Component) {
 Checkbox.propTypes = {
   disabled: _propTypes2.default.bool,
   defaultValue: _propTypes2.default.bool,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
@@ -92,6 +93,7 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   defaultValue: false,
   disabled: false,
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

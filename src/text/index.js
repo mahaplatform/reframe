@@ -9,6 +9,7 @@ class Text extends React.Component {
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     format: PropTypes.any,
+    onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func,
     onSet: PropTypes.func
@@ -18,6 +19,7 @@ class Text extends React.Component {
     defaultValue: '',
     disabled: false,
     format: null,
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

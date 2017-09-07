@@ -34,6 +34,7 @@ class Lookup extends React.Component {
     text: PropTypes.string,
     value: PropTypes.string,
     onBegin: PropTypes.func,
+    onBusy: PropTypes.func,
     onClear: PropTypes.func,
     onCancel: PropTypes.func,
     onChange: PropTypes.func,
@@ -52,6 +53,7 @@ class Lookup extends React.Component {
     format: ValueToken,
     text: 'text',
     value: 'value',
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}

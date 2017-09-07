@@ -28,6 +28,7 @@ class FileField extends React.Component {
     onUploadProcess: PropTypes.func,
     onUploadSuccess: PropTypes.func,
     onUploadFailure: PropTypes.func,
+    onBusy: PropTypes.func,
     onReady: PropTypes.func,
     onRemoveFile: PropTypes.func,
     onSetReady: PropTypes.func
@@ -38,6 +39,7 @@ class FileField extends React.Component {
     disabled: false,
     multiple: false,
     prompt: 'Choose File(s)',
+    onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
     onSet: () => {}
@@ -108,7 +110,9 @@ class FileField extends React.Component {
       onReady()
     }
     if(files.length > prevProps.files.length) {
-      this._handleUploadBegin()
+      if(files.filter(file => file.status === 'added').length > 0) {
+        this._handleUploadBegin()
+      }
     } else if(files.length < prevProps.files.length) {
       this._initializeResumable()
     }
@@ -151,6 +155,7 @@ class FileField extends React.Component {
   _handleUploadBegin() {
     this.resumable.upload()
     this.props.onUploadBegin()
+    this.props.onBusy()
   }
 
   _handleUploadProgress(file) {
@@ -159,12 +164,14 @@ class FileField extends React.Component {
 
   _handleUploadFailure(file, message) {
     this.props.onUploadFailure(message)
+    this.props.onBusy()
   }
 
   _handleUploadSuccess(file, message) {
     const asset = JSON.parse(message)
     this.props.onUploadSuccess(file.file.uniqueIdentifier, asset)
     this.props.onChange(asset.data.id)
+    this.props.onBusy()
   }
 
   _handleRemoveFile(uniqueIdentifier) {

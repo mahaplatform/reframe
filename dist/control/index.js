@@ -140,6 +140,7 @@ Control.propTypes = {
   options: _propTypes2.default.array,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func

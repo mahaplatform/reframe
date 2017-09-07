@@ -13,6 +13,7 @@ class Form extends React.Component {
     action: PropTypes.string,
     after: PropTypes.string,
     before: PropTypes.string,
+    busy: PropTypes.array,
     defaults: PropTypes.object,
     config: PropTypes.array,
     data: PropTypes.object,
@@ -24,6 +25,7 @@ class Form extends React.Component {
     instructions: PropTypes.string,
     isReady: PropTypes.bool,
     method: PropTypes.string,
+    ready: PropTypes.array,
     sections: PropTypes.array,
     status: PropTypes.string,
     title: PropTypes.string,
@@ -35,12 +37,13 @@ class Form extends React.Component {
     onFailure: PropTypes.func,
     onFetchData: PropTypes.func,
     onFetchSections: PropTypes.func,
+    onResetForm: PropTypes.func,
     onSetData: PropTypes.func,
     onSetReady: PropTypes.func,
     onSetSections: PropTypes.func,
     onSuccess: PropTypes.func,
+    onToggleBusy: PropTypes.func,
     onValidateForm: PropTypes.func,
-    onResetForm: PropTypes.func,
     onUpdateData: PropTypes.func
   }
 
@@ -56,7 +59,7 @@ class Form extends React.Component {
 
 
   render() {
-    const { after, before, config, instructions, isReady, status, title } = this.props
+    const { after, before, busy, config, instructions, isReady, status, title } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     const submitting = status === 'submitting'
     let classes = ['ui', 'form', status]
@@ -70,9 +73,14 @@ class Form extends React.Component {
           <div className="reframe-modal-panel-header-title">
             { title }
           </div>
-          <div className="reframe-modal-panel-header-proceed" onClick={ this._handleSubmit.bind(this) }>
-            Save
-          </div>
+          { busy.length === 0 ?
+            <div className="reframe-modal-panel-header-proceed" onClick={ this._handleSubmit.bind(this) }>
+              Save
+            </div> :
+            <div className="reframe-modal-panel-header-proceed disabled">
+              Save
+            </div>
+          }
         </div>
         <div className="reframe-modal-panel-body">
           <div className="reframe-form">
@@ -123,9 +131,10 @@ class Form extends React.Component {
       ...section,
       data,
       errors,
-      onUpdateData: this._handleUpdateData.bind(this),
+      onBusy: this._handleToggleBusy.bind(this),
       onReady: this._handleSetReady.bind(this),
-      onSubmit: this._handleSubmit.bind(this)
+      onSubmit: this._handleSubmit.bind(this),
+      onUpdateData: this._handleUpdateData.bind(this)
     }
   }
 
@@ -140,13 +149,15 @@ class Form extends React.Component {
   }
 
   _handleSetReady(key) {
-    const { onSetReady } = this.props
-    onSetReady(key)
+    this.props.onSetReady(key)
+  }
+
+  _handleToggleBusy(key) {
+    this.props.onToggleBusy(key)
   }
 
   _handleUpdateData(key, value) {
-    const { onUpdateData } = this.props
-    onUpdateData(key, value)
+    this.props.onUpdateData(key, value)
   }
 
   _handleChange(previous, current) {

@@ -86,6 +86,7 @@ ColorField.propTypes = {
   colors: _propTypes2.default.string,
   defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
+  onBusy: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
@@ -93,6 +94,7 @@ ColorField.propTypes = {
 ColorField.defaultProps = {
   defaultValue: null,
   disabled: false,
+  onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}

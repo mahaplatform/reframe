@@ -48,8 +48,6 @@ var Section = function (_React$Component) {
 
       var _props = this.props,
           collapsing = _props.collapsing,
-          data = _props.data,
-          errors = _props.errors,
           fields = _props.fields,
           instructions = _props.instructions,
           label = _props.label;
@@ -89,6 +87,7 @@ var Section = function (_React$Component) {
       var _props2 = this.props,
           data = _props2.data,
           errors = _props2.errors,
+          onBusy = _props2.onBusy,
           onReady = _props2.onReady,
           onSubmit = _props2.onSubmit,
           onUpdateData = _props2.onUpdateData;
@@ -96,6 +95,7 @@ var Section = function (_React$Component) {
       return _extends({}, field, {
         data: data,
         errors: errors,
+        onBusy: onBusy,
         onReady: onReady,
         onSubmit: onSubmit,
         onUpdateData: onUpdateData
@@ -119,6 +119,7 @@ Section.propTypes = {
   fields: _propTypes2.default.array,
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
+  onBusy: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
