@@ -135,8 +135,11 @@ var Form = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _props3 = this.props,
           data = _props3.data,
-          status = _props3.status;
+          sections = _props3.sections,
+          status = _props3.status,
+          onSetSections = _props3.onSetSections;
 
+      if (!_lodash2.default.isEqual(prevProps.sections, sections)) onSetSections(sections);
       if (prevProps.status !== status) {
         if (status === 'sections_loaded') this._handleLoadData();
         if (status === 'validated') this._handleSubmit();

@@ -106,7 +106,8 @@ class Form extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { data, status } = this.props
+    const { data, sections, status, onSetSections } = this.props
+    if(!_.isEqual(prevProps.sections, sections)) onSetSections(sections)
     if(prevProps.status !== status) {
       if(status === 'sections_loaded') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
