@@ -1,7 +1,7 @@
 import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
-  color: ''
+  color: null
 }
 
 export default (state = INITIAL_STATE, action) => {

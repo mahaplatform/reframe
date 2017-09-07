@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -75,6 +75,11 @@ var TextField = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.onReady();
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       if (prevProps.defaultValue != this.props.defaultValue) {
@@ -87,7 +92,11 @@ var TextField = function (_React$Component) {
       var _props = this.props,
           autoComplete = _props.autoComplete,
           disabled = _props.disabled,
-          placeholder = _props.placeholder;
+          placeholder = _props.placeholder,
+          onBlur = _props.onBlur,
+          onFocus = _props.onFocus,
+          onKeyPress = _props.onKeyPress,
+          onKeyDown = _props.onKeyDown;
       var value = this.state.value;
 
       return {
@@ -97,11 +106,11 @@ var TextField = function (_React$Component) {
         autoComplete: autoComplete,
         placeholder: placeholder,
         onChange: this._handleChange.bind(this),
-        onBlur: this._handleBlur.bind(this),
-        onFocus: this._handleFocus.bind(this),
-        onKeyPress: this._handleKeyPress.bind(this),
+        onBlur: onBlur,
+        onFocus: onFocus,
+        onKeyPress: onKeyPress,
         onKeyUp: this._handleKeyUp.bind(this),
-        onKeyDown: this._handleKeyDown.bind(this)
+        onKeyDown: onKeyDown
       };
     }
   }, {
@@ -117,21 +126,6 @@ var TextField = function (_React$Component) {
       this.props.onChange(sanitized);
     }
   }, {
-    key: '_handleBlur',
-    value: function _handleBlur(event) {
-      this.props.onBlur(this.state.value);
-    }
-  }, {
-    key: '_handleFocus',
-    value: function _handleFocus(event) {
-      this.props.onFocus(this.state.value);
-    }
-  }, {
-    key: '_handleKeyPress',
-    value: function _handleKeyPress(event) {
-      this.props.onKeyPress(this.state.value);
-    }
-  }, {
     key: '_handleKeyUp',
     value: function _handleKeyUp(event) {
       this.props.onKeyUp(this.state.value);
@@ -139,11 +133,6 @@ var TextField = function (_React$Component) {
         event.preventDefault();
         this.props.onSubmit();
       }
-    }
-  }, {
-    key: '_handleKeyDown',
-    value: function _handleKeyDown(event) {
-      this.props.onKeyDown(this.state.value);
     }
   }, {
     key: 'setValue',
@@ -174,6 +163,8 @@ TextField.propTypes = {
   onKeyPress: _propTypes2.default.func,
   onKeyUp: _propTypes2.default.func,
   onKeyDown: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
+  onSet: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func
 };
 TextField.defaultProps = {
@@ -197,6 +188,8 @@ TextField.defaultProps = {
   onKeyPress: function onKeyPress() {},
   onKeyUp: function onKeyUp() {},
   onKeyDown: function onKeyDown() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {},
   onSubmit: function onSubmit() {}
 };
 exports.default = TextField;

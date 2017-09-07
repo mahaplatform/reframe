@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
 class TextField extends React.Component {
@@ -21,6 +21,8 @@ class TextField extends React.Component {
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func,
+    onReady: PropTypes.func,
+    onSet: PropTypes.func,
     onSubmit: PropTypes.func
   }
 
@@ -31,16 +33,18 @@ class TextField extends React.Component {
     maxLength: null,
     placeholder: '',
     prefix: null,
-    sanitize: value => value,
+    sanitize: (value) => value,
     suffix: null,
     trim: true,
-    validate: value => true,
+    validate: (value) => true,
     onChange: () => {},
     onFocus: () => {},
     onBlur: () => {},
     onKeyPress: () => {},
     onKeyUp: () => {},
     onKeyDown: () => {},
+    onReady: () => {},
+    onSet: () => {},
     onSubmit: () => {}
   }
 
@@ -70,6 +74,10 @@ class TextField extends React.Component {
     )
   }
 
+  componentDidMount() {
+    this.props.onReady()
+  }
+
   componentDidUpdate(prevProps) {
     if(prevProps.defaultValue != this.props.defaultValue) {
       this.setValue(this.props.defaultValue)
@@ -77,7 +85,7 @@ class TextField extends React.Component {
   }
 
   _getControl() {
-    const { autoComplete, disabled, placeholder } = this.props
+    const { autoComplete, disabled, placeholder, onBlur, onFocus, onKeyPress, onKeyDown } = this.props
     const { value } = this.state
     return {
       type: 'text',
@@ -86,11 +94,11 @@ class TextField extends React.Component {
       autoComplete,
       placeholder,
       onChange: this._handleChange.bind(this),
-      onBlur: this._handleBlur.bind(this),
-      onFocus: this._handleFocus.bind(this),
-      onKeyPress: this._handleKeyPress.bind(this),
+      onBlur,
+      onFocus,
+      onKeyPress,
       onKeyUp: this._handleKeyUp.bind(this),
-      onKeyDown: this._handleKeyDown.bind(this)
+      onKeyDown
     }
   }
 
@@ -105,28 +113,12 @@ class TextField extends React.Component {
     this.props.onChange(sanitized)
   }
 
-  _handleBlur(event) {
-    this.props.onBlur(this.state.value)
-  }
-
-  _handleFocus(event) {
-    this.props.onFocus(this.state.value)
-  }
-
-  _handleKeyPress(event) {
-    this.props.onKeyPress(this.state.value)
-  }
-
   _handleKeyUp(event) {
     this.props.onKeyUp(this.state.value)
     if(event.which == 13) {
       event.preventDefault()
       this.props.onSubmit()
     }
-  }
-
-  _handleKeyDown(event) {
-    this.props.onKeyDown(this.state.value)
   }
 
   setValue(value) {

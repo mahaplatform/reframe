@@ -8,15 +8,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactTransitionGroup = require('react-transition-group');
 
 var _format = require('../format');
 
@@ -30,6 +24,10 @@ var _form = require('../form');
 
 var _form2 = _interopRequireDefault(_form);
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -41,15 +39,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ValueToken = function ValueToken(_ref) {
-  var value = _ref.value;
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-value-token' },
-    value
-  );
-};
 
 var Lookup = function (_React$Component) {
   _inherits(Lookup, _React$Component);
@@ -98,16 +87,14 @@ var Lookup = function (_React$Component) {
           endpoint = _props2.endpoint,
           options = _props2.options,
           onChoose = _props2.onChoose,
-          onLoad = _props2.onLoad;
+          onLoad = _props2.onLoad,
+          onReady = _props2.onReady;
 
-      if (defaultValue) {
-        if (endpoint) {
-          onLoad({ $ids: [defaultValue] }, endpoint);
-        } else {
-          var chosen = _lodash2.default.find(options, { value: defaultValue });
-          onChoose(chosen);
-        }
-      }
+      if (!defaultValue) return onReady();
+      if (endpoint) return onLoad({ $ids: [defaultValue] }, endpoint);
+      var chosen = _lodash2.default.find(options, { value: defaultValue });
+      onChoose(chosen);
+      onReady();
     }
   }, {
     key: 'componentDidUpdate',
@@ -117,8 +104,11 @@ var Lookup = function (_React$Component) {
           active = _props3.active,
           adding = _props3.adding,
           disabled = _props3.disabled,
-          onClear = _props3.onClear;
+          status = _props3.status,
+          onClear = _props3.onClear,
+          onReady = _props3.onReady;
 
+      if (prevProps.status !== status && status === 'success') onReady();
       if (prevProps.disabled !== disabled) onClear();
       if (!prevProps.active && active) modal.push(_react2.default.createElement(_search2.default, this.props));
       if (prevProps.active && !active) modal.pop();
@@ -196,11 +186,28 @@ Lookup.propTypes = {
   onType: _propTypes2.default.func,
   onLoad: _propTypes2.default.func,
   onLoookup: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onShowForm: _propTypes2.default.func
 };
 Lookup.defaultProps = {
+  defaultValue: false,
+  disabled: false,
   format: ValueToken,
   text: 'text',
-  value: 'value'
+  value: 'value',
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
+
+
+var ValueToken = function ValueToken(_ref) {
+  var value = _ref.value;
+  return _react2.default.createElement(
+    'div',
+    { className: 'reframe-value-token' },
+    value
+  );
+};
+
 exports.default = Lookup;

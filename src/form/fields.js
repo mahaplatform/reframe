@@ -7,6 +7,7 @@ class Fields extends React.Component {
   static propTypes = {
     fields: PropTypes.array,
     onChange: PropTypes.func,
+    onReady: PropTypes.func,
     onSubmit: PropTypes.func,
     onUpdateData: PropTypes.func
   }
@@ -14,23 +15,33 @@ class Fields extends React.Component {
   static defaultProps = {
     fields: [],
     onChange: () => {},
+    onReady: () => {},
+    onSubmit: () => {},
     onUpdateData: () => {}
   }
 
   render() {
-    const { fields, onChange, onSubmit, onUpdateData } = this.props
+    const { fields } = this.props
     const numbers = ['zero','one','two','three','four','five','six']
     return (
       <div className={`${numbers[fields.length]} fields`}>
         {fields.map((field, index) => {
-          return <Field {...field}
-                        key={`field_${index}`}
-                        onChange={onChange}
-                        onSubmit={onSubmit}
-                        onUpdateData={onUpdateData} />
+          return <Field key={`field_${index}`} { ...this._getField(field) } />
         })}
       </div>
     )
+  }
+
+  _getField(field) {
+    const { onChange, onReady, onSubmit, onUpdateData } = this.props
+    return {
+      ...field,
+      onChange,
+      onReady,
+      onSubmit,
+      onUpdateData
+    }
+
   }
 
 }

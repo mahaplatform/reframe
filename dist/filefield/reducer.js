@@ -22,7 +22,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var INITIAL_VALUE = {
   files: [],
-  status: 'ready'
+  status: 'pending'
 };
 
 exports.default = function () {
@@ -32,8 +32,14 @@ exports.default = function () {
 
   switch (action.type) {
 
+    case actionTypes.SET_READY:
+      return _extends({}, state, {
+        status: 'ready'
+      });
+
     case actionTypes.LOAD_FILES_SUCCESS:
       return _extends({}, state, {
+        status: 'ready',
         files: action.result.data.map(function (file) {
           return {
             fileName: file.file_name,

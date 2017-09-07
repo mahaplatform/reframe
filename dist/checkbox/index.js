@@ -56,11 +56,15 @@ var Checkbox = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var defaultValue = this.props.defaultValue;
+      var _props = this.props,
+          defaultValue = _props.defaultValue,
+          onSet = _props.onSet,
+          onReady = _props.onReady;
 
       var value = defaultValue || false;
       this.setState({ value: value });
-      this.props.onSet(value);
+      onSet(value);
+      onReady();
     }
   }, {
     key: '_handleChange',
@@ -82,12 +86,14 @@ Checkbox.propTypes = {
   disabled: _propTypes2.default.bool,
   defaultValue: _propTypes2.default.bool,
   onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
 };
 Checkbox.defaultProps = {
-  disabled: false,
   defaultValue: false,
+  disabled: false,
   onChange: function onChange() {},
+  onReady: function onReady() {},
   onSet: function onSet() {}
 };
 exports.default = Checkbox;

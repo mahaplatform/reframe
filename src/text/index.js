@@ -7,7 +7,20 @@ class Text extends React.Component {
 
   static propTypes = {
     defaultValue: PropTypes.string,
-    format: PropTypes.any
+    disabled: PropTypes.bool,
+    format: PropTypes.any,
+    onChange: PropTypes.func,
+    onReady: PropTypes.func,
+    onSet: PropTypes.func
+  }
+
+  static defaultProps = {
+    defaultValue: '',
+    disabled: false,
+    format: null,
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   render() {

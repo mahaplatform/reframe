@@ -60,33 +60,16 @@ var MoneyField = function (_React$Component) {
 }(_react2.default.Component);
 
 MoneyField.propTypes = {
-  autoComplete: _propTypes2.default.string,
   maxLength: _propTypes2.default.number,
-  prefix: _propTypes2.default.string,
-  suffix: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   placeholder: _propTypes2.default.string,
   defaultValue: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onFocus: _propTypes2.default.func,
   onBlur: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onKeyPress: _propTypes2.default.func,
   onKeyUp: _propTypes2.default.func,
   onKeyDown: _propTypes2.default.func
-};
-MoneyField.defaultProps = {
-  autoComplete: 'off',
-  maxLength: null,
-  prefix: null,
-  suffix: null,
-  disabled: false,
-  placeholder: '',
-  defaultValue: '',
-  onChange: function onChange() {},
-  onFocus: function onFocus() {},
-  onBlur: function onBlur() {},
-  onKeyPress: function onKeyPress() {},
-  onKeyUp: function onKeyUp() {},
-  onKeyDown: function onKeyDown() {}
 };
 exports.default = MoneyField;

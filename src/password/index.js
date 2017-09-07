@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
 class Password extends React.Component {
@@ -9,15 +9,17 @@ class Password extends React.Component {
     maxLength: PropTypes.number,
     prefix: PropTypes.string,
     suffix: PropTypes.string,
+    defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
+    onReady: PropTypes.func,
+    onSet: PropTypes.func
   }
 
   static defaultProps = {
@@ -33,7 +35,9 @@ class Password extends React.Component {
     onBlur: () => {},
     onKeyPress: () => {},
     onKeyUp: () => {},
-    onKeyDown: () => {}
+    onKeyDown: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   constructor(props) {
@@ -46,19 +50,13 @@ class Password extends React.Component {
   render() {
     return (
       <div className="password">
-        <input ref="control"
-               type="password"
-               value={this.state.value}
-               autoComplete={this.props.autoComplete}
-               placeholder={this.props.placeholder}
-               onChange={this._handleChange.bind(this)}
-               onBlur={this._handleBlur.bind(this)}
-               onFocus={this._handleFocus.bind(this)}
-               onKeyPress={this._handleKeyPress.bind(this)}
-               onKeyUp={this._handleKeyUp.bind(this)}
-               onKeyDown={this._handleKeyDown.bind(this)} />
+        <input { ...this._getInput() } />
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.props.onReady()
   }
 
   componentDidUpdate(prevProps) {
@@ -67,29 +65,26 @@ class Password extends React.Component {
     }
   }
 
+  _getInput() {
+    const { value } = this.state
+    const { autoComplete, placeholder, onBlur, onFocus, onKeyPress, onKeyUp, onKeyDown } = this.props
+    return {
+      type: 'password',
+      value,
+      autoComplete,
+      placeholder,
+      onChange: this._handleChange.bind(this),
+      onBlur,
+      onFocus,
+      onKeyPress,
+      onKeyUp,
+      onKeyDown
+    }
+  }
+
   _handleChange(event) {
     this.setValue(event.target.value)
     this.props.onChange(event.target.value)
-  }
-
-  _handleBlur(event) {
-    this.props.onBlur(this.state.value)
-  }
-
-  _handleFocus(event) {
-    this.props.onFocus(this.state.value)
-  }
-
-  _handleKeyPress(event) {
-    this.props.onKeyPress(this.state.value)
-  }
-
-  _handleKeyUp(event) {
-    this.props.onKeyUp(this.state.value)
-  }
-
-  _handleKeyDown(event) {
-    this.props.onKeyDown(this.state.value)
   }
 
   setValue(value) {

@@ -49,15 +49,16 @@ var Form = function (_React$Component) {
       var _props = this.props,
           after = _props.after,
           before = _props.before,
-          data = _props.data,
-          errors = _props.errors,
+          config = _props.config,
           instructions = _props.instructions,
+          isReady = _props.isReady,
           status = _props.status,
-          sections = _props.sections,
           title = _props.title;
 
+      var configuring = _lodash2.default.includes(['pending', 'loading_sections', 'sections_loaded', 'loading_data'], status);
+      var submitting = status === 'submitting';
       var classes = ['ui', 'form', status];
-      if (_lodash2.default.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading');
+      if (configuring || !isReady || submitting) classes.push('loading');
       return _react2.default.createElement(
         'div',
         { className: 'reframe-modal-panel' },
@@ -100,18 +101,13 @@ var Form = function (_React$Component) {
                 instructions
               )
             ),
-            !_lodash2.default.includes(['pending', 'loading'], status) ? _react2.default.createElement(
+            _react2.default.createElement(
               'div',
-              { className: classes.join(' '), ref: 'form' },
-              sections.map(function (section, index) {
-                return _react2.default.createElement(_section2.default, _extends({}, section, {
-                  key: 'section_' + index,
-                  data: data,
-                  errors: errors,
-                  onUpdateData: _this2._handleUpdateData.bind(_this2),
-                  onSubmit: _this2._handleSubmit.bind(_this2) }));
+              { className: classes.join(' ') },
+              !configuring && config.map(function (section, index) {
+                return _react2.default.createElement(_section2.default, _extends({ key: 'section_' + index }, _this2._getSection(section)));
               })
-            ) : _react2.default.createElement('div', { className: classes.join(' ') }),
+            ),
             after && _react2.default.createElement(
               'div',
               { className: 'reframe-form-footer' },
@@ -142,12 +138,27 @@ var Form = function (_React$Component) {
           status = _props3.status;
 
       if (prevProps.status !== status) {
-        if (status === 'configured') this._handleLoadData();
+        if (status === 'sections_loaded') this._handleLoadData();
         if (status === 'validated') this._handleSubmit();
         if (status === 'success') this._handleSuccess();
         if (status === 'failure') this._handleFailure();
       }
       if (prevProps.data != data) this._handleChange(prevProps.data, data);
+    }
+  }, {
+    key: '_getSection',
+    value: function _getSection(section) {
+      var _props4 = this.props,
+          data = _props4.data,
+          errors = _props4.errors;
+
+      return _extends({}, section, {
+        data: data,
+        errors: errors,
+        onUpdateData: this._handleUpdateData.bind(this),
+        onReady: this._handleSetReady.bind(this),
+        onSubmit: this._handleSubmit.bind(this)
+      });
     }
   }, {
     key: '_handleCancel',
@@ -157,14 +168,21 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleLoadData',
     value: function _handleLoadData() {
-      var _props4 = this.props,
-          defaults = _props4.defaults,
-          endpoint = _props4.endpoint,
-          onFetchData = _props4.onFetchData,
-          onSetData = _props4.onSetData;
+      var _props5 = this.props,
+          defaults = _props5.defaults,
+          endpoint = _props5.endpoint,
+          onFetchData = _props5.onFetchData,
+          onSetData = _props5.onSetData;
 
       if (endpoint) return onFetchData(endpoint);
       onSetData(defaults);
+    }
+  }, {
+    key: '_handleSetReady',
+    value: function _handleSetReady(key) {
+      var onSetReady = this.props.onSetReady;
+
+      onSetReady(key);
     }
   }, {
     key: '_handleUpdateData',
@@ -176,9 +194,9 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange(previous, current) {
-      var _props5 = this.props,
-          onChangeField = _props5.onChangeField,
-          onChange = _props5.onChange;
+      var _props6 = this.props,
+          onChangeField = _props6.onChangeField,
+          onChange = _props6.onChange;
 
       if (onChangeField) {
         _lodash2.default.forOwn(current, function (value, code) {
@@ -190,12 +208,12 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleSubmit',
     value: function _handleSubmit() {
-      var _props6 = this.props,
-          action = _props6.action,
-          filtered = _props6.filtered,
-          method = _props6.method,
-          onSubmit = _props6.onSubmit,
-          onSubmitForm = _props6.onSubmitForm;
+      var _props7 = this.props,
+          action = _props7.action,
+          filtered = _props7.filtered,
+          method = _props7.method,
+          onSubmit = _props7.onSubmit,
+          onSubmitForm = _props7.onSubmitForm;
 
       if (action) return onSubmitForm(method, action, filtered);
       if (onSubmit) {
@@ -227,11 +245,15 @@ Form.propTypes = {
   after: _propTypes2.default.string,
   before: _propTypes2.default.string,
   defaults: _propTypes2.default.object,
+  config: _propTypes2.default.array,
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
+  endpoint: _propTypes2.default.string,
   entity: _propTypes2.default.object,
   fields: _propTypes2.default.array,
+  filtered: _propTypes2.default.object,
   instructions: _propTypes2.default.string,
+  isReady: _propTypes2.default.bool,
   method: _propTypes2.default.string,
   sections: _propTypes2.default.array,
   status: _propTypes2.default.string,
@@ -240,7 +262,12 @@ Form.propTypes = {
   onChange: _propTypes2.default.func,
   onChangeField: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
+  onSubmitForm: _propTypes2.default.func,
   onFailure: _propTypes2.default.func,
+  onFetchData: _propTypes2.default.func,
+  onFetchSections: _propTypes2.default.func,
+  onSetData: _propTypes2.default.func,
+  onSetReady: _propTypes2.default.func,
   onSetSections: _propTypes2.default.func,
   onSuccess: _propTypes2.default.func,
   onValidateForm: _propTypes2.default.func,

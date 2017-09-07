@@ -5,40 +5,21 @@ import TextField from '../textfield'
 class MoneyField extends React.Component {
 
   static propTypes = {
-    autoComplete: PropTypes.string,
     maxLength: PropTypes.number,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
+    onReady: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func
   }
 
-  static defaultProps = {
-    autoComplete: 'off',
-    maxLength: null,
-    prefix: null,
-    suffix: null,
-    disabled: false,
-    placeholder: '',
-    defaultValue: '',
-    onChange: () => {},
-    onFocus: () => {},
-    onBlur: () => {},
-    onKeyPress: () => {},
-    onKeyUp: () => {},
-    onKeyDown: () => {}
-  }
-
   render() {
     return <TextField { ...this._getTextField() } />
-
   }
 
   _getTextField() {

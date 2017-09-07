@@ -7,8 +7,18 @@ class ColorField extends React.Component {
     color: PropTypes.string,
     colors: PropTypes.string,
     defaultValue: PropTypes.string,
+    disabled: PropTypes.bool,
     onChange: PropTypes.func,
+    onReady: PropTypes.func,
     onSet: PropTypes.func
+  }
+
+  static defaultProps = {
+    defaultValue: null,
+    disabled: false,
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   render() {
@@ -26,22 +36,19 @@ class ColorField extends React.Component {
     ]
     return (
       <div className="reframe-colorfield">
-        { colors.map((color, index) => {
-          return (
-            <div key={`color_${index}`} className="reframe-color" style={{ backgroundColor: color.value }} onClick={ this._handleSet.bind(this, color.name) }>
-              { color.name === this.props.color && <i className="check icon" /> }
-            </div>
-          )
-        }) }
+        { colors.map((color, index) => (
+          <div key={`color_${index}`} className="reframe-color" style={{ backgroundColor: color.value }} onClick={ this._handleSet.bind(this, color.name) }>
+            { color.name === this.props.color && <i className="check icon" /> }
+          </div>
+        )) }
       </div>
     )
   }
 
   componentDidMount() {
-    const { defaultValue, onSet } = this.props
-    if(defaultValue) {
-      onSet(defaultValue)
-    }
+    const { defaultValue, onReady, onSet } = this.props
+    if(defaultValue) onSet(defaultValue)
+    onReady()
   }
 
   componentDidUpdate(prevProps) {

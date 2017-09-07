@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -43,19 +43,16 @@ var TextArea = function (_React$Component) {
   _createClass(TextArea, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          placeholder = _props.placeholder,
-          disabled = _props.disabled;
-      var value = this.state.value;
-
       return _react2.default.createElement(
         'div',
         { className: 'textarea' },
-        _react2.default.createElement('textarea', { placeholder: placeholder,
-          disabled: disabled,
-          defaultValue: value,
-          onChange: this.handleChange.bind(this) })
+        _react2.default.createElement('textarea', this._getTextarea())
       );
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.onReady();
     }
   }, {
     key: 'componentDidUpdate',
@@ -65,8 +62,23 @@ var TextArea = function (_React$Component) {
       }
     }
   }, {
-    key: 'handleChange',
-    value: function handleChange(event) {
+    key: '_getTextarea',
+    value: function _getTextarea() {
+      var _props = this.props,
+          placeholder = _props.placeholder,
+          disabled = _props.disabled;
+      var value = this.state.value;
+
+      return {
+        placeholder: placeholder,
+        disabled: disabled,
+        defaultValue: value,
+        onChange: this._handleChange.bind(this)
+      };
+    }
+  }, {
+    key: '_handleChange',
+    value: function _handleChange(event) {
       this.setValue(event.target.value);
       this.props.onChange(event.target.value);
     }
@@ -83,16 +95,21 @@ var TextArea = function (_React$Component) {
 }(_react2.default.Component);
 
 TextArea.propTypes = {
-  maxLength: _propTypes2.default.number,
+  defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
+  maxLength: _propTypes2.default.number,
   placeholder: _propTypes2.default.string,
-  defaultValue: _propTypes2.default.string
+  onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
+  onSet: _propTypes2.default.func
 };
 TextArea.defaultProps = {
+  defaultValue: false,
   disabled: false,
   maxLength: null,
   placeholder: '',
-  defaultValue: '',
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = TextArea;

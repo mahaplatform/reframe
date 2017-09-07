@@ -124,19 +124,29 @@ var FileField = function (_React$Component) {
     value: function componentDidMount() {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
-          onLoadFiles = _props2.onLoadFiles;
+          onLoadFiles = _props2.onLoadFiles,
+          onSetReady = _props2.onSetReady;
 
+      console.log(defaultValue);
       if (defaultValue) {
         var ids = !_lodash2.default.isArray(defaultValue) ? [defaultValue] : defaultValue;
         onLoadFiles('/api/admin/team/assets', ids);
+      } else {
+        onSetReady();
       }
       this._initializeResumable();
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var files = this.props.files;
+      var _props3 = this.props,
+          files = _props3.files,
+          status = _props3.status,
+          onReady = _props3.onReady;
 
+      if (status !== prevProps.status && prevProps.status === 'pending') {
+        onReady();
+      }
       if (files.length > prevProps.files.length) {
         this._handleUploadBegin();
       } else if (files.length < prevProps.files.length) {
@@ -151,12 +161,18 @@ var FileField = function (_React$Component) {
       });
     }
   }, {
+    key: '_handleReady',
+    value: function _handleReady() {
+      this.props.onReady();
+      this._initializeResumable();
+    }
+  }, {
     key: '_initializeResumable',
     value: function _initializeResumable() {
-      var _props3 = this.props,
-          endpoint = _props3.endpoint,
-          multiple = _props3.multiple,
-          token = _props3.token;
+      var _props4 = this.props,
+          endpoint = _props4.endpoint,
+          multiple = _props4.multiple,
+          token = _props4.token;
 
       this.resumable = new _resumablejs2.default({
         target: endpoint,
@@ -220,6 +236,7 @@ var FileField = function (_React$Component) {
 
 FileField.propTypes = {
   defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.array]),
+  disabled: _propTypes2.default.bool,
   endpoint: _propTypes2.default.string,
   files: _propTypes2.default.array,
   multiple: _propTypes2.default.bool,
@@ -236,10 +253,17 @@ FileField.propTypes = {
   onUploadProcess: _propTypes2.default.func,
   onUploadSuccess: _propTypes2.default.func,
   onUploadFailure: _propTypes2.default.func,
-  onRemoveFile: _propTypes2.default.func
+  onReady: _propTypes2.default.func,
+  onRemoveFile: _propTypes2.default.func,
+  onSetReady: _propTypes2.default.func
 };
 FileField.defaultProps = {
+  defaultValue: null,
+  disabled: false,
+  multiple: false,
   prompt: 'Choose File(s)',
-  multiple: false
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = FileField;

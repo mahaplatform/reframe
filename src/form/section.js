@@ -13,6 +13,7 @@ class Section extends React.Component {
     data: PropTypes.object,
     errors: PropTypes.object,
     onSubmit: PropTypes.func,
+    onReady: PropTypes.func,
     onUpdateData: PropTypes.func
   }
 
@@ -22,14 +23,12 @@ class Section extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      collapsed: (props.collapsed !== null) ? props.collapsed : props.collapsing
-    }
+    const collapsed = (props.collapsed !== null) ? props.collapsed : props.collapsing
+    this.state = { collapsed }
   }
 
   render() {
     const { collapsing, data, errors, fields, instructions, label } = this.props
-    const { onSubmit, onUpdateData } = this.props
     const { collapsed } = this.state
     let classes = ['ui', 'basic', 'segment']
     if(collapsing) {
@@ -39,27 +38,34 @@ class Section extends React.Component {
     return (
       <div className={classes.join(' ')}>
         { label &&
-          <h4 className="ui header" onClick={ this.toggle.bind(this)} >
+          <h4 className="ui header" onClick={ this._handleToggle.bind(this)} >
             { label }
             { collapsed ? <i className="plus icon" /> : <i className="minus icon" /> }
           </h4>
         }
         <div className="section">
           { instructions && <div className="instructions">{ instructions }</div> }
-          { fields.map((field, index) => {
-            return <Field {...field}
-                          data={data}
-                          errors={errors}
-                          key={`field_${index}`}
-                          onSubmit={onSubmit}
-                          onUpdateData={onUpdateData} />
-          })}
+          { fields.map((field, index) => (
+            <Field key={`field_${index}`} {...this._getField(field) } />
+          ))}
         </div>
       </div>
     )
   }
 
-  toggle() {
+  _getField(field) {
+    const { data, errors, onReady, onSubmit, onUpdateData } = this.props
+    return {
+      ...field,
+      data,
+      errors,
+      onReady,
+      onSubmit,
+      onUpdateData
+    }
+  }
+
+  _handleToggle() {
     this.setState({collapsed: !this.state.collapsed})
   }
 

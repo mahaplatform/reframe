@@ -1,22 +1,27 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
 class TextArea extends React.Component {
 
   static propTypes = {
-    maxLength: PropTypes.number,
+    defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
+    maxLength: PropTypes.number,
     placeholder: PropTypes.string,
-    defaultValue: PropTypes.string
+    onChange: PropTypes.func,
+    onReady: PropTypes.func,
+    onSet: PropTypes.func
   }
 
   static defaultProps = {
+    defaultValue: false,
     disabled: false,
     maxLength: null,
     placeholder: '',
-    defaultValue: '',
-    onChange: () => {}
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   constructor(props) {
@@ -27,16 +32,15 @@ class TextArea extends React.Component {
   }
 
   render() {
-    const { placeholder, disabled } = this.props
-    const { value } = this.state
     return (
       <div className="textarea">
-        <textarea placeholder={placeholder}
-                  disabled={disabled}
-                  defaultValue={value}
-                  onChange={this.handleChange.bind(this)} />
+        <textarea { ...this._getTextarea() } />
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.props.onReady()
   }
 
   componentDidUpdate(prevProps) {
@@ -45,7 +49,18 @@ class TextArea extends React.Component {
     }
   }
 
-  handleChange(event) {
+  _getTextarea() {
+    const { placeholder, disabled } = this.props
+    const { value } = this.state
+    return {
+      placeholder,
+      disabled,
+      defaultValue: value,
+      onChange: this._handleChange.bind(this)
+    }
+  }
+
+  _handleChange(event) {
     this.setValue(event.target.value)
     this.props.onChange(event.target.value)
   }

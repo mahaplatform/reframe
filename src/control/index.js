@@ -51,6 +51,7 @@ class Control extends React.Component {
     text: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    onReady: PropTypes.func,
     onSet: PropTypes.func
   }
 

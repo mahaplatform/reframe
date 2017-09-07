@@ -39,8 +39,10 @@ describe('tasks component', () => {
     it('can set default state', () => {
 
       const expected = {
+        error: null,
         items: null,
-        open: false
+        open: false,
+        status: 'pending'
       }
 
       expect(reducer(undefined, '')).to.eql(expected)

@@ -60,6 +60,18 @@ var Text = function (_React$Component) {
 
 Text.propTypes = {
   defaultValue: _propTypes2.default.string,
-  format: _propTypes2.default.any
+  disabled: _propTypes2.default.bool,
+  format: _propTypes2.default.any,
+  onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
+  onSet: _propTypes2.default.func
+};
+Text.defaultProps = {
+  defaultValue: '',
+  disabled: false,
+  format: null,
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = Text;

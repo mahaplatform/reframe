@@ -141,6 +141,7 @@ Control.propTypes = {
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
 };
 Control.defaultProps = {

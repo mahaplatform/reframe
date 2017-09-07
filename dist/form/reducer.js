@@ -20,12 +20,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var INITIAL_STATE = {
   status: 'pending',
   config: [],
   entity: {},
   data: {},
-  errors: {}
+  errors: {},
+  ready: []
 };
 
 exports.default = function () {
@@ -38,30 +41,45 @@ exports.default = function () {
     case actionTypes.SET_SECTIONS:
       return _extends({}, state, {
         config: action.sections,
-        status: 'configured'
+        status: 'sections_loaded'
       });
 
-    case actionTypes.FETCH_DATA_REQUEST:
+    case actionTypes.FETCH_SECTIONS_REQUEST:
       return _extends({}, state, {
-        status: 'loading'
+        status: 'loading_sections'
       });
 
-    case actionTypes.FETCH_DATA_SUCCESS:
+    case actionTypes.FETCH_SECTIONS_SUCCESS:
       return _extends({}, state, {
-        status: 'ready',
-        data: action.result.data
+        status: 'sections_loaded',
+        config: action.result.data
       });
 
     case actionTypes.SET_DATA:
       return _extends({}, state, {
-        status: 'ready',
+        status: 'data_loaded',
         data: _extends({}, state.data, _lodash2.default.omitBy(action.data, _lodash2.default.isNil))
       });
 
-    case actionTypes.FETCH_DATA_FAILURE:
+    case actionTypes.SET_READY:
       return _extends({}, state, {
-        status: 'failure',
-        errors: action.result.errors
+        ready: [].concat(_toConsumableArray(state.ready), [action.field])
+      });
+
+    case actionTypes.FETCH_DATA_REQUEST:
+      return _extends({}, state, {
+        status: 'loading_data'
+      });
+
+    case actionTypes.FETCH_DATA_SUCCESS:
+      return _extends({}, state, {
+        status: 'data_loaded',
+        data: action.result.data
+      });
+
+    case actionTypes.SET_READY:
+      return _extends({}, state, {
+        status: 'ready'
       });
 
     case actionTypes.UPDATE_DATA:
@@ -81,6 +99,8 @@ exports.default = function () {
         entity: action.result.data
       });
 
+    case actionTypes.FETCH_SECTIONS_FAILURE:
+    case actionTypes.FETCH_DATA_FAILURE:
     case actionTypes.SUBMIT_FAILURE:
       return _extends({}, state, {
         status: 'failure',

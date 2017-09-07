@@ -6,15 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
+var _reactTransitionGroup = require('react-transition-group');
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactTransitionGroup = require('react-transition-group');
 
 var _chooser = require('./chooser');
 
@@ -23,6 +19,10 @@ var _chooser2 = _interopRequireDefault(_chooser);
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -87,12 +87,14 @@ var Datefield = function (_React$Component) {
     value: function componentDidMount() {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
+          onReady = _props2.onReady,
           onSetCurrent = _props2.onSetCurrent,
           onSetValue = _props2.onSetValue;
 
       if (defaultValue) onSetValue((0, _moment2.default)(defaultValue));
       var current = defaultValue ? (0, _moment2.default)(defaultValue) : (0, _moment2.default)();
       onSetCurrent(parseInt(current.format('MM')) - 1, parseInt(current.format('YYYY')));
+      onReady();
     }
   }, {
     key: 'componentDidUpdate',
@@ -141,6 +143,7 @@ var Datefield = function (_React$Component) {
 Datefield.propTypes = {
   active: _propTypes2.default.bool,
   defaultValue: _propTypes2.default.string,
+  disabled: _propTypes2.default.bool,
   month: _propTypes2.default.number,
   placeholder: _propTypes2.default.string,
   year: _propTypes2.default.number,
@@ -149,12 +152,18 @@ Datefield.propTypes = {
   onClear: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func,
-  onPrevious: _propTypes2.default.func,
   onNext: _propTypes2.default.func,
+  onPrevious: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onSetCurrent: _propTypes2.default.func,
   onSetValue: _propTypes2.default.func
 };
 Datefield.defaultProps = {
-  placeholder: 'Choose a date...'
+  defaultValue: null,
+  disabled: false,
+  placeholder: 'Choose a date...',
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = Datefield;

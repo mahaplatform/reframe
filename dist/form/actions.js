@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.submitForm = exports.updateData = exports.setReady = exports.setData = exports.fetchData = exports.setSections = undefined;
+exports.submitForm = exports.updateData = exports.setReady = exports.setData = exports.fetchData = exports.fetchSections = exports.setSections = undefined;
 
 var _action_types = require('./action_types');
 
@@ -15,6 +15,17 @@ var setSections = exports.setSections = function setSections(sections) {
   return {
     type: actionTypes.SET_SECTIONS,
     sections: sections
+  };
+};
+
+var fetchSections = exports.fetchSections = function fetchSections(endpoint) {
+  return {
+    type: 'API_REQUEST',
+    method: 'GET',
+    endpoint: endpoint,
+    request: actionTypes.FETCH_SECTIONS_REQUEST,
+    success: actionTypes.FETCH_SECTIONS_SUCCESS,
+    failure: actionTypes.FETCH_SECTIONS_FAILURE
   };
 };
 
@@ -36,9 +47,10 @@ var setData = exports.setData = function setData(data) {
   };
 };
 
-var setReady = exports.setReady = function setReady() {
+var setReady = exports.setReady = function setReady(field) {
   return {
-    type: actionTypes.SET_READY
+    type: actionTypes.SET_READY,
+    field: field
   };
 };
 

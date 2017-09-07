@@ -1,14 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
 import Chooser from './chooser'
 import moment from 'moment'
+import React from 'react'
 
 class Datefield extends React.Component {
 
   static propTypes = {
     active: PropTypes.bool,
     defaultValue: PropTypes.string,
+    disabled: PropTypes.bool,
     month: PropTypes.number,
     placeholder: PropTypes.string,
     year: PropTypes.number,
@@ -17,14 +18,20 @@ class Datefield extends React.Component {
     onClear: PropTypes.func,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
-    onPrevious: PropTypes.func,
     onNext: PropTypes.func,
+    onPrevious: PropTypes.func,
+    onReady: PropTypes.func,
     onSetCurrent: PropTypes.func,
     onSetValue: PropTypes.func
   }
 
   static defaultProps = {
-    placeholder: 'Choose a date...'
+    defaultValue: null,
+    disabled: false,
+    placeholder: 'Choose a date...',
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   render() {
@@ -52,10 +59,11 @@ class Datefield extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, onSetCurrent, onSetValue } = this.props
+    const { defaultValue, onReady, onSetCurrent, onSetValue } = this.props
     if(defaultValue) onSetValue(moment(defaultValue))
     const current = defaultValue ? moment(defaultValue) : moment()
     onSetCurrent(parseInt(current.format('MM')) - 1, parseInt(current.format('YYYY')))
+    onReady()
   }
 
   componentDidUpdate(prevProps) {

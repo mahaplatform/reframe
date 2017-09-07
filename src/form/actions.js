@@ -5,6 +5,15 @@ export const setSections = (sections) => ({
   sections
 })
 
+export const fetchSections = (endpoint) => ({
+  type: 'API_REQUEST',
+  method: 'GET',
+  endpoint,
+  request: actionTypes.FETCH_SECTIONS_REQUEST,
+  success: actionTypes.FETCH_SECTIONS_SUCCESS,
+  failure: actionTypes.FETCH_SECTIONS_FAILURE
+})
+
 export const fetchData = (endpoint) => ({
   type: 'API_REQUEST',
   method: 'GET',
@@ -19,8 +28,9 @@ export const setData = (data) => ({
   data
 })
 
-export const setReady = () => ({
-  type: actionTypes.SET_READY
+export const setReady = (field) => ({
+  type: actionTypes.SET_READY,
+  field
 })
 
 export const updateData = (key, value) => ({

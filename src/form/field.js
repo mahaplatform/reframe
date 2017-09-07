@@ -23,6 +23,7 @@ class Field extends React.Component {
       PropTypes.func
     ]).isRequired,
     show: PropTypes.bool,
+    onReady: PropTypes.func,
     onSubmit: PropTypes.func,
     onUpdateData: PropTypes.func
   }
@@ -106,9 +107,14 @@ class Field extends React.Component {
       type,
       value,
       onSet: this._handleUpdateData.bind(this),
+      onReady: this._handleReady.bind(this),
       onChange: this._handleUpdateData.bind(this),
       onSubmit
     }
+  }
+
+  _handleReady() {
+    this.props.onReady(this.props.name)
   }
 
   _handleUpdateData(value) {

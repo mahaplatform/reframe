@@ -36,15 +36,16 @@ var Section = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Section.__proto__ || Object.getPrototypeOf(Section)).call(this, props));
 
-    _this.state = {
-      collapsed: props.collapsed !== null ? props.collapsed : props.collapsing
-    };
+    var collapsed = props.collapsed !== null ? props.collapsed : props.collapsing;
+    _this.state = { collapsed: collapsed };
     return _this;
   }
 
   _createClass(Section, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
           collapsing = _props.collapsing,
           data = _props.data,
@@ -52,9 +53,6 @@ var Section = function (_React$Component) {
           fields = _props.fields,
           instructions = _props.instructions,
           label = _props.label;
-      var _props2 = this.props,
-          onSubmit = _props2.onSubmit,
-          onUpdateData = _props2.onUpdateData;
       var collapsed = this.state.collapsed;
 
       var classes = ['ui', 'basic', 'segment'];
@@ -67,7 +65,7 @@ var Section = function (_React$Component) {
         { className: classes.join(' ') },
         label && _react2.default.createElement(
           'h4',
-          { className: 'ui header', onClick: this.toggle.bind(this) },
+          { className: 'ui header', onClick: this._handleToggle.bind(this) },
           label,
           collapsed ? _react2.default.createElement('i', { className: 'plus icon' }) : _react2.default.createElement('i', { className: 'minus icon' })
         ),
@@ -80,19 +78,32 @@ var Section = function (_React$Component) {
             instructions
           ),
           fields.map(function (field, index) {
-            return _react2.default.createElement(_field2.default, _extends({}, field, {
-              data: data,
-              errors: errors,
-              key: 'field_' + index,
-              onSubmit: onSubmit,
-              onUpdateData: onUpdateData }));
+            return _react2.default.createElement(_field2.default, _extends({ key: 'field_' + index }, _this2._getField(field)));
           })
         )
       );
     }
   }, {
-    key: 'toggle',
-    value: function toggle() {
+    key: '_getField',
+    value: function _getField(field) {
+      var _props2 = this.props,
+          data = _props2.data,
+          errors = _props2.errors,
+          onReady = _props2.onReady,
+          onSubmit = _props2.onSubmit,
+          onUpdateData = _props2.onUpdateData;
+
+      return _extends({}, field, {
+        data: data,
+        errors: errors,
+        onReady: onReady,
+        onSubmit: onSubmit,
+        onUpdateData: onUpdateData
+      });
+    }
+  }, {
+    key: '_handleToggle',
+    value: function _handleToggle() {
       this.setState({ collapsed: !this.state.collapsed });
     }
   }]);
@@ -109,6 +120,7 @@ Section.propTypes = {
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
   onSubmit: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Section.defaultProps = {

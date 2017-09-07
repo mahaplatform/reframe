@@ -3,16 +3,23 @@ import _ from 'lodash'
 
 const INITIAL_VALUE = {
   files: [],
-  status: 'ready'
+  status: 'pending'
 }
 
 export default (state = INITIAL_VALUE, action) => {
 
   switch (action.type) {
 
+  case actionTypes.SET_READY:
+    return {
+      ...state,
+      status: 'ready'
+    }
+
   case actionTypes.LOAD_FILES_SUCCESS:
     return {
       ...state,
+      status: 'ready',
       files: action.result.data.map(file => ({
         fileName: file.file_name,
         fileSize: file.file_size,

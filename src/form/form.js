@@ -14,11 +14,15 @@ class Form extends React.Component {
     after: PropTypes.string,
     before: PropTypes.string,
     defaults: PropTypes.object,
+    config: PropTypes.array,
     data: PropTypes.object,
     errors: PropTypes.object,
+    endpoint: PropTypes.string,
     entity: PropTypes.object,
     fields: PropTypes.array,
+    filtered: PropTypes.object,
     instructions: PropTypes.string,
+    isReady: PropTypes.bool,
     method: PropTypes.string,
     sections: PropTypes.array,
     status: PropTypes.string,
@@ -27,7 +31,12 @@ class Form extends React.Component {
     onChange: PropTypes.func,
     onChangeField: PropTypes.func,
     onSubmit: PropTypes.func,
+    onSubmitForm: PropTypes.func,
     onFailure: PropTypes.func,
+    onFetchData: PropTypes.func,
+    onFetchSections: PropTypes.func,
+    onSetData: PropTypes.func,
+    onSetReady: PropTypes.func,
     onSetSections: PropTypes.func,
     onSuccess: PropTypes.func,
     onValidateForm: PropTypes.func,
@@ -47,9 +56,11 @@ class Form extends React.Component {
 
 
   render() {
-    const { after, before, data, errors, instructions, status, sections, title } = this.props
+    const { after, before, config, instructions, isReady, status, title } = this.props
+    const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
+    const submitting = status === 'submitting'
     let classes = ['ui', 'form', status]
-    if(_.includes(['pending', 'loading', 'submitting'], status)) classes.push('loading')
+    if(configuring || !isReady || submitting) classes.push('loading')
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
@@ -71,16 +82,13 @@ class Form extends React.Component {
                 { instructions && <div className="instructions">{ instructions }</div> }
               </div>
             }
-            { !_.includes(['pending', 'loading'], status) ?
-              <div className={ classes.join(' ') } ref="form">
-                { sections.map((section, index) => <Section {...section}
-                                key={`section_${index}`}
-                                data={data}
-                                errors={errors}
-                                onUpdateData={this._handleUpdateData.bind(this)}
-                                onSubmit={this._handleSubmit.bind(this)} />)}
-              </div> : <div className={ classes.join(' ') } />
-            }
+            <div className={ classes.join(' ') }>
+              { !configuring &&
+                config.map((section, index) => (
+                  <Section key={`section_${index}`} { ...this._getSection(section) } />
+                ))
+              }
+            </div>
             { after &&
               <div className="reframe-form-footer">
                 <div className="reframe-form-after">{ after }</div>
@@ -100,12 +108,24 @@ class Form extends React.Component {
   componentDidUpdate(prevProps) {
     const { data, status } = this.props
     if(prevProps.status !== status) {
-      if(status === 'configured') this._handleLoadData()
+      if(status === 'sections_loaded') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
       if(status === 'success') this._handleSuccess()
       if(status === 'failure') this._handleFailure()
     }
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
+  }
+
+  _getSection(section) {
+    const { data, errors } = this.props
+    return {
+      ...section,
+      data,
+      errors,
+      onUpdateData: this._handleUpdateData.bind(this),
+      onReady: this._handleSetReady.bind(this),
+      onSubmit: this._handleSubmit.bind(this)
+    }
   }
 
   _handleCancel() {
@@ -116,6 +136,11 @@ class Form extends React.Component {
     const { defaults, endpoint, onFetchData, onSetData } = this.props
     if(endpoint) return onFetchData(endpoint)
     onSetData(defaults)
+  }
+
+  _handleSetReady(key) {
+    const { onSetReady } = this.props
+    onSetReady(key)
   }
 
   _handleUpdateData(key, value) {

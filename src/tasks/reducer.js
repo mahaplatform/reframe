@@ -23,20 +23,20 @@ export default (state = INITIAL_STATE, action) => {
       open: false
     }
 
-  case actionTypes.SUBMIT_REQUEST:
+  case actionTypes.REQUEST_REQUEST:
     return {
       ...state,
       status: 'submitting'
     }
 
-  case actionTypes.SUBMIT_FAILURE:
+  case actionTypes.REQUEST_FAILURE:
     return {
       ...state,
       status: 'failure',
       error: action.result.error.message
     }
 
-  case actionTypes.SUBMIT_SUCCESS:
+  case actionTypes.REQUEST_SUCCESS:
     return {
       ...state,
       status: 'success'

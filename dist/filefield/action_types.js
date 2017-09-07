@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var SET_READY = exports.SET_READY = 'SET_READY';
 var LOAD_FILES_REQUEST = exports.LOAD_FILES_REQUEST = 'LOAD_FILES_REQUEST';
 var LOAD_FILES_SUCCESS = exports.LOAD_FILES_SUCCESS = 'LOAD_FILES_SUCCESS';
 var LOAD_FILES_FAILURE = exports.LOAD_FILES_FAILURE = 'LOAD_FILES_FAILURE';

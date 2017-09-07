@@ -1,16 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
 import Format from '../format'
 import Search from './search'
 import Form from '../form'
+import React from 'react'
 import _ from 'lodash'
-
-const ValueToken = ({ value }) => (
-  <div className="reframe-value-token">
-    { value }
-  </div>
-)
 
 class Lookup extends React.Component {
 
@@ -48,13 +41,19 @@ class Lookup extends React.Component {
     onType: PropTypes.func,
     onLoad: PropTypes.func,
     onLoookup: PropTypes.func,
+    onReady: PropTypes.func,
     onShowForm: PropTypes.func
   }
 
   static defaultProps = {
+    defaultValue: false,
+    disabled: false,
     format: ValueToken,
     text: 'text',
-    value: 'value'
+    value: 'value',
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   render() {
@@ -82,20 +81,18 @@ class Lookup extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, endpoint, options, onChoose, onLoad } = this.props
-    if(defaultValue) {
-      if(endpoint) {
-        onLoad({ $ids: [ defaultValue ] }, endpoint)
-      } else {
-        const chosen = _.find(options, { value: defaultValue })
-        onChoose(chosen)
-      }
-    }
+    const { defaultValue, endpoint, options, onChoose, onLoad, onReady } = this.props
+    if(!defaultValue) return onReady()
+    if(endpoint) return onLoad({ $ids: [ defaultValue ] }, endpoint)
+    const chosen = _.find(options, { value: defaultValue })
+    onChoose(chosen)
+    onReady()
   }
 
   componentDidUpdate(prevProps) {
     const { modal } = this.context
-    const { active, adding, disabled, onClear } = this.props
+    const { active, adding, disabled, status, onClear, onReady } = this.props
+    if(prevProps.status !== status && status === 'success') onReady()
     if(prevProps.disabled !== disabled) onClear()
     if(!prevProps.active && active) modal.push(<Search { ...this.props } />)
     if(prevProps.active && !active) modal.pop()
@@ -127,5 +124,11 @@ class Lookup extends React.Component {
   }
 
 }
+
+const ValueToken = ({ value }) => (
+  <div className="reframe-value-token">
+    { value }
+  </div>
+)
 
 export default Lookup

@@ -11,6 +11,7 @@ class FileField extends React.Component {
       PropTypes.number,
       PropTypes.array
     ]),
+    disabled: PropTypes.bool,
     endpoint: PropTypes.string,
     files: PropTypes.array,
     multiple: PropTypes.bool,
@@ -27,12 +28,19 @@ class FileField extends React.Component {
     onUploadProcess: PropTypes.func,
     onUploadSuccess: PropTypes.func,
     onUploadFailure: PropTypes.func,
-    onRemoveFile: PropTypes.func
+    onReady: PropTypes.func,
+    onRemoveFile: PropTypes.func,
+    onSetReady: PropTypes.func
   }
 
   static defaultProps = {
+    defaultValue: null,
+    disabled: false,
+    multiple: false,
     prompt: 'Choose File(s)',
-    multiple: false
+    onChange: () => {},
+    onReady: () => {},
+    onSet: () => {}
   }
 
   render() {
@@ -84,16 +92,21 @@ class FileField extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, onLoadFiles } = this.props
+    const { defaultValue, onLoadFiles, onSetReady } = this.props
     if(defaultValue) {
       const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
       onLoadFiles('/api/admin/team/assets', ids)
+    } else {
+      onSetReady()
     }
     this._initializeResumable()
   }
 
   componentDidUpdate(prevProps) {
-    const { files } = this.props
+    const { files, status, onReady } = this.props
+    if(status !== prevProps.status && prevProps.status === 'pending') {
+      onReady()
+    }
     if(files.length > prevProps.files.length) {
       this._handleUploadBegin()
     } else if(files.length < prevProps.files.length) {
@@ -106,6 +119,11 @@ class FileField extends React.Component {
         // })
       }
     })
+  }
+
+  _handleReady() {
+    this.props.onReady()
+    this._initializeResumable()
   }
 
   _initializeResumable() {

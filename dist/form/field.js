@@ -157,9 +157,15 @@ var Field = function (_React$Component) {
         type: type,
         value: value,
         onSet: this._handleUpdateData.bind(this),
+        onReady: this._handleReady.bind(this),
         onChange: this._handleUpdateData.bind(this),
         onSubmit: onSubmit
       };
+    }
+  }, {
+    key: '_handleReady',
+    value: function _handleReady() {
+      this.props.onReady(this.props.name);
     }
   }, {
     key: '_handleUpdateData',
@@ -185,6 +191,7 @@ Field.propTypes = {
   required: _propTypes2.default.bool,
   type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
   show: _propTypes2.default.bool,
+  onReady: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };

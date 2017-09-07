@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   config: [],
   entity: {},
   data: {},
-  errors: {}
+  errors: {},
+  ready: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,37 +18,58 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       config: action.sections,
-      status: 'configured'
+      status: 'sections_loaded'
     }
 
-  case actionTypes.FETCH_DATA_REQUEST:
+  case actionTypes.FETCH_SECTIONS_REQUEST:
     return {
       ...state,
-      status: 'loading'
+      status: 'loading_sections'
     }
 
-  case actionTypes.FETCH_DATA_SUCCESS:
+  case actionTypes.FETCH_SECTIONS_SUCCESS:
     return {
       ...state,
-      status: 'ready',
-      data: action.result.data
+      status: 'sections_loaded',
+      config: action.result.data
     }
 
   case actionTypes.SET_DATA:
     return {
       ...state,
-      status: 'ready',
+      status: 'data_loaded',
       data: {
         ...state.data,
         ..._.omitBy(action.data, _.isNil)
       }
     }
 
-  case actionTypes.FETCH_DATA_FAILURE:
+  case actionTypes.SET_READY:
     return {
       ...state,
-      status: 'failure',
-      errors: action.result.errors
+      ready: [
+        ...state.ready,
+        action.field
+      ]
+    }
+
+  case actionTypes.FETCH_DATA_REQUEST:
+    return {
+      ...state,
+      status: 'loading_data'
+    }
+
+  case actionTypes.FETCH_DATA_SUCCESS:
+    return {
+      ...state,
+      status: 'data_loaded',
+      data: action.result.data
+    }
+
+  case actionTypes.SET_READY:
+    return {
+      ...state,
+      status: 'ready'
     }
 
   case actionTypes.UPDATE_DATA:
@@ -73,6 +95,8 @@ export default (state = INITIAL_STATE, action) => {
       entity: action.result.data
     }
 
+  case actionTypes.FETCH_SECTIONS_FAILURE:
+  case actionTypes.FETCH_DATA_FAILURE:
   case actionTypes.SUBMIT_FAILURE:
     return {
       ...state,

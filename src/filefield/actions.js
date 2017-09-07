@@ -1,5 +1,9 @@
 import * as actionTypes from './action_types'
 
+export const setReady = () => ({
+  type: actionTypes.SET_READY
+})
+
 export const loadFiles = (endpoint, $ids) => ({
   type: 'API_REQUEST',
   method: 'GET',

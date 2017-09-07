@@ -54,11 +54,11 @@ var ColorField = function (_React$Component) {
     value: function componentDidMount() {
       var _props = this.props,
           defaultValue = _props.defaultValue,
+          onReady = _props.onReady,
           onSet = _props.onSet;
 
-      if (defaultValue) {
-        onSet(defaultValue);
-      }
+      if (defaultValue) onSet(defaultValue);
+      onReady();
     }
   }, {
     key: 'componentDidUpdate',
@@ -85,7 +85,16 @@ ColorField.propTypes = {
   color: _propTypes2.default.string,
   colors: _propTypes2.default.string,
   defaultValue: _propTypes2.default.string,
+  disabled: _propTypes2.default.bool,
   onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onSet: _propTypes2.default.func
+};
+ColorField.defaultProps = {
+  defaultValue: null,
+  disabled: false,
+  onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = ColorField;

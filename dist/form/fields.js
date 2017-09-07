@@ -40,24 +40,34 @@ var Fields = function (_React$Component) {
   _createClass(Fields, [{
     key: 'render',
     value: function render() {
-      var _props = this.props,
-          fields = _props.fields,
-          onChange = _props.onChange,
-          onSubmit = _props.onSubmit,
-          onUpdateData = _props.onUpdateData;
+      var _this2 = this;
+
+      var fields = this.props.fields;
 
       var numbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
       return _react2.default.createElement(
         'div',
         { className: numbers[fields.length] + ' fields' },
         fields.map(function (field, index) {
-          return _react2.default.createElement(_field2.default, _extends({}, field, {
-            key: 'field_' + index,
-            onChange: onChange,
-            onSubmit: onSubmit,
-            onUpdateData: onUpdateData }));
+          return _react2.default.createElement(_field2.default, _extends({ key: 'field_' + index }, _this2._getField(field)));
         })
       );
+    }
+  }, {
+    key: '_getField',
+    value: function _getField(field) {
+      var _props = this.props,
+          onChange = _props.onChange,
+          onReady = _props.onReady,
+          onSubmit = _props.onSubmit,
+          onUpdateData = _props.onUpdateData;
+
+      return _extends({}, field, {
+        onChange: onChange,
+        onReady: onReady,
+        onSubmit: onSubmit,
+        onUpdateData: onUpdateData
+      });
     }
   }]);
 
@@ -67,12 +77,15 @@ var Fields = function (_React$Component) {
 Fields.propTypes = {
   fields: _propTypes2.default.array,
   onChange: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Fields.defaultProps = {
   fields: [],
   onChange: function onChange() {},
+  onReady: function onReady() {},
+  onSubmit: function onSubmit() {},
   onUpdateData: function onUpdateData() {}
 };
 exports.default = Fields;

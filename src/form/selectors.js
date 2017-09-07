@@ -1,46 +1,54 @@
 import { createSelector } from 'reselect'
 import _ from 'lodash'
 
-const sectionsSelector = state => state.config
+const sections = state => state.config
 
-const dataSelector = state => state.data
+const data = state => state.data
 
-export const filtered = createSelector(
-  sectionsSelector,
-  dataSelector,
-  (sections, data) => {
-    let entity = {}
-    _mapFields(sections, field => {
-      if(field.include !== false && field.type !== 'text') {
-        const value = !_.isNil(data[field.name]) ? data[field.name] : null
-        entity[field.name] = value
-      }
-    })
-    return entity
-  }
+const ready = state => state.ready
+
+export const fields = createSelector(
+  sections,
+  (sections) => sections.reduce((fields, section) => [
+    ...fields,
+    ...section.fields.reduce((fields, field) => [
+      ...fields,
+      (field.type === 'fields') ? field.fields.reduce((fields, field) => [
+        ...fields,
+        field
+      ], []) : field
+    ], [])
+  ], [])
 )
 
 export const defaults = createSelector(
-  sectionsSelector,
-  (sections) => {
-    let defaults = {}
-    _mapFields(sections, field => {
-      if(field.include !== false) {
-        defaults[field.name] = field.defaultValue
-      }
-    })
-    return defaults
-  }
+  fields,
+  (fields) => fields.reduce((defaults, field) => {
+    if(field.include === false) return defaults
+    return {
+      ...defaults,
+      [field.name]: field.defaultValue
+    }
+  }, {})
 )
 
-const _mapFields = (sections, callback) => {
-  sections.map(section => {
-    section.fields.map(field => {
-      if(field.type === 'fields') {
-        field.fields.map(callback)
-      } else {
-        callback(field)
-      }
-    })
-  })
-}
+export const filtered = createSelector(
+  fields,
+  data,
+  (fields, data) => fields.reduce((entity, field) => {
+    if(field.include === false || field.type == 'text') return entity
+    return {
+      ...entity,
+      [field.name]: !_.isNil(data[field.name]) ? data[field.name] : null
+    }
+  }, {})
+)
+
+export const isReady = createSelector(
+  fields,
+  ready,
+  (fields, ready) => fields.reduce((isReady, field) => {
+    if(!isReady) return false
+    return _.includes(ready, field.name)
+  }, true)
+)

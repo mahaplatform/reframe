@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -46,18 +46,13 @@ var Password = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'password' },
-        _react2.default.createElement('input', { ref: 'control',
-          type: 'password',
-          value: this.state.value,
-          autoComplete: this.props.autoComplete,
-          placeholder: this.props.placeholder,
-          onChange: this._handleChange.bind(this),
-          onBlur: this._handleBlur.bind(this),
-          onFocus: this._handleFocus.bind(this),
-          onKeyPress: this._handleKeyPress.bind(this),
-          onKeyUp: this._handleKeyUp.bind(this),
-          onKeyDown: this._handleKeyDown.bind(this) })
+        _react2.default.createElement('input', this._getInput())
       );
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.onReady();
     }
   }, {
     key: 'componentDidUpdate',
@@ -67,35 +62,36 @@ var Password = function (_React$Component) {
       }
     }
   }, {
+    key: '_getInput',
+    value: function _getInput() {
+      var value = this.state.value;
+      var _props = this.props,
+          autoComplete = _props.autoComplete,
+          placeholder = _props.placeholder,
+          onBlur = _props.onBlur,
+          onFocus = _props.onFocus,
+          onKeyPress = _props.onKeyPress,
+          onKeyUp = _props.onKeyUp,
+          onKeyDown = _props.onKeyDown;
+
+      return {
+        type: 'password',
+        value: value,
+        autoComplete: autoComplete,
+        placeholder: placeholder,
+        onChange: this._handleChange.bind(this),
+        onBlur: onBlur,
+        onFocus: onFocus,
+        onKeyPress: onKeyPress,
+        onKeyUp: onKeyUp,
+        onKeyDown: onKeyDown
+      };
+    }
+  }, {
     key: '_handleChange',
     value: function _handleChange(event) {
       this.setValue(event.target.value);
       this.props.onChange(event.target.value);
-    }
-  }, {
-    key: '_handleBlur',
-    value: function _handleBlur(event) {
-      this.props.onBlur(this.state.value);
-    }
-  }, {
-    key: '_handleFocus',
-    value: function _handleFocus(event) {
-      this.props.onFocus(this.state.value);
-    }
-  }, {
-    key: '_handleKeyPress',
-    value: function _handleKeyPress(event) {
-      this.props.onKeyPress(this.state.value);
-    }
-  }, {
-    key: '_handleKeyUp',
-    value: function _handleKeyUp(event) {
-      this.props.onKeyUp(this.state.value);
-    }
-  }, {
-    key: '_handleKeyDown',
-    value: function _handleKeyDown(event) {
-      this.props.onKeyDown(this.state.value);
     }
   }, {
     key: 'setValue',
@@ -114,15 +110,17 @@ Password.propTypes = {
   maxLength: _propTypes2.default.number,
   prefix: _propTypes2.default.string,
   suffix: _propTypes2.default.string,
+  defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   placeholder: _propTypes2.default.string,
-  defaultValue: _propTypes2.default.string,
   onChange: _propTypes2.default.func,
   onFocus: _propTypes2.default.func,
   onBlur: _propTypes2.default.func,
   onKeyPress: _propTypes2.default.func,
   onKeyUp: _propTypes2.default.func,
-  onKeyDown: _propTypes2.default.func
+  onKeyDown: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
+  onSet: _propTypes2.default.func
 };
 Password.defaultProps = {
   autoComplete: 'off',
@@ -137,6 +135,8 @@ Password.defaultProps = {
   onBlur: function onBlur() {},
   onKeyPress: function onKeyPress() {},
   onKeyUp: function onKeyUp() {},
-  onKeyDown: function onKeyDown() {}
+  onKeyDown: function onKeyDown() {},
+  onReady: function onReady() {},
+  onSet: function onSet() {}
 };
 exports.default = Password;
