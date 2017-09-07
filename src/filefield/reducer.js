@@ -59,14 +59,12 @@ export default (state = INITIAL_VALUE, action) => {
   case actionTypes.UPLOAD_PROGRESS:
     return {
       ...state,
-      files: state.files.map(file => {
-        return (file.uniqueIdentifier === action.uniqueIdentifier) ? {
-          ...file,
-          status: 'uploading',
-          progress: Math.floor(action.progress * 100),
-          uploadedChunks: state.uploadedChunks + 1
-        } : file
-      })
+      files: state.files.map(file => (file.uniqueIdentifier === action.uniqueIdentifier) ? {
+        ...file,
+        status: 'uploading',
+        progress: Math.floor(action.progress * 100),
+        uploadedChunks: state.uploadedChunks + 1
+      } : file)
     }
 
   case actionTypes.UPLOAD_PROCESS_REQUEST:

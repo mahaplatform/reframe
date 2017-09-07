@@ -71,10 +71,8 @@ var FileField = function (_React$Component) {
                 { className: 'reframe-filefield-progress' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'ui green progress', ref: function ref(node) {
-                      return _this2['filefield_' + file.uniqueIdentifier + '_progress'];
-                    } },
-                  _react2.default.createElement('div', { className: 'bar' })
+                  { className: 'ui green progress' },
+                  _react2.default.createElement('div', { className: 'bar', style: { width: file.progress + '%' } })
                 ),
                 _react2.default.createElement(
                   'p',
@@ -155,13 +153,6 @@ var FileField = function (_React$Component) {
       } else if (files.length < prevProps.files.length) {
         this._initializeResumable();
       }
-      files.map(function (file, index) {
-        if (!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-          // $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
-          //   percent: file.progress
-          // })
-        }
-      });
     }
   }, {
     key: '_handleReady',

@@ -59,8 +59,8 @@ class FileField extends React.Component {
                 }
                 { file.status === 'uploading' &&
                   <div className="reframe-filefield-progress">
-                    <div className="ui green progress" ref={ (node) => this[`filefield_${file.uniqueIdentifier}_progress`] }>
-                      <div className="bar" />
+                    <div className="ui green progress">
+                      <div className="bar" style={{ width: `${file.progress}%`}} />
                     </div>
                     <p>
                       { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })
@@ -116,13 +116,6 @@ class FileField extends React.Component {
     } else if(files.length < prevProps.files.length) {
       this._initializeResumable()
     }
-    files.map((file, index) => {
-      if(!prevProps.files[index] || prevProps.files[index].progress < file.progress) {
-        // $(this[`filefield_${file.uniqueIdentifier}_progress`]).progress({
-        //   percent: file.progress
-        // })
-      }
-    })
   }
 
   _handleReady() {
