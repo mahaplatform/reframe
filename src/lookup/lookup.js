@@ -1,3 +1,4 @@
+import ValueToken from './value_token'
 import PropTypes from 'prop-types'
 import Format from '../format'
 import Search from './search'
@@ -46,7 +47,7 @@ class Lookup extends React.Component {
   }
 
   static defaultProps = {
-    defaultValue: false,
+    defaultValue: null,
     disabled: false,
     format: ValueToken,
     text: 'text',
@@ -124,11 +125,5 @@ class Lookup extends React.Component {
   }
 
 }
-
-const ValueToken = ({ value }) => (
-  <div className="reframe-value-token">
-    { value }
-  </div>
-)
 
 export default Lookup

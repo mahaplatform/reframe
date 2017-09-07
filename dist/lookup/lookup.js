@@ -8,6 +8,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _value_token = require('./value_token');
+
+var _value_token2 = _interopRequireDefault(_value_token);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -190,24 +194,13 @@ Lookup.propTypes = {
   onShowForm: _propTypes2.default.func
 };
 Lookup.defaultProps = {
-  defaultValue: false,
+  defaultValue: null,
   disabled: false,
-  format: ValueToken,
+  format: _value_token2.default,
   text: 'text',
   value: 'value',
   onChange: function onChange() {},
   onReady: function onReady() {},
   onSet: function onSet() {}
 };
-
-
-var ValueToken = function ValueToken(_ref) {
-  var value = _ref.value;
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-value-token' },
-    value
-  );
-};
-
 exports.default = Lookup;
