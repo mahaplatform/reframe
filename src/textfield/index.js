@@ -105,8 +105,7 @@ class TextField extends React.Component {
   }
 
   _handleChange(event) {
-    const trimmed = this.props.trim ? event.target.value.trim() : event.target.value
-    const sanitized = this.props.sanitize(trimmed)
+    const sanitized = this.props.sanitize(event.target.value)
     if(!this.props.validate(sanitized)) {
       event.preventDefault()
       return false
