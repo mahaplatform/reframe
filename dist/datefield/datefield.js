@@ -57,16 +57,11 @@ var Datefield = function (_React$Component) {
           { className: 'reframe-datefield-input' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-datefield-icon' },
-            _react2.default.createElement('i', { className: 'calendar icon' })
-          ),
-          _react2.default.createElement(
-            'div',
             { className: 'reframe-datefield-field', onClick: this._handleBegin.bind(this) },
             value ? value.format('dddd, MMMM DD, YYYY') : _react2.default.createElement(
               'span',
               null,
-              placeholder
+              prompt
             )
           ),
           value && _react2.default.createElement(
@@ -145,7 +140,7 @@ Datefield.propTypes = {
   defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   month: _propTypes2.default.number,
-  placeholder: _propTypes2.default.string,
+  prompt: _propTypes2.default.string,
   year: _propTypes2.default.number,
   value: _propTypes2.default.any,
   onBegin: _propTypes2.default.func,
@@ -162,7 +157,7 @@ Datefield.propTypes = {
 Datefield.defaultProps = {
   defaultValue: null,
   disabled: false,
-  placeholder: 'Choose a date...',
+  prompt: 'Choose a date',
   onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},

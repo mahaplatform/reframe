@@ -14,7 +14,8 @@ class Searchbox extends React.Component {
   }
 
   static defaultProps = {
-    prompt: 'Search...'
+    prompt: 'Search...',
+    onChange: (q) => {}
   }
 
   render() {

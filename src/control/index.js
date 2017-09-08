@@ -15,6 +15,7 @@ import MoneyField from '../moneyfield'
 import Text from '../text'
 import TextArea from '../textarea'
 import TextField from '../textfield'
+import TimeField from '../timefield'
 import ToggleList from '../toggle_list'
 import Password from '../password'
 
@@ -35,6 +36,7 @@ const standardControls = {
   'text': Text,
   'textarea': TextArea,
   // 'tablefield': TableField
+  'timefield': TimeField,
   'togglelist': ToggleList
 }
 

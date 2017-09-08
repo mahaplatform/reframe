@@ -202,7 +202,12 @@ var Container = function (_React$Component3) {
         return _react2.default.createElement(
           'div',
           { className: 'reframe-lookup-panel' },
-          _react2.default.createElement(Options, this.props)
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-lookup-panel-search' },
+            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
+          ),
+          _react2.default.createElement(Options, this._getStaticOptions())
         );
       }
     }
@@ -248,6 +253,19 @@ var Container = function (_React$Component3) {
     value: function _handleAdd() {
       this.props.onShowForm();
     }
+  }, {
+    key: '_getStaticOptions',
+    value: function _getStaticOptions() {
+      var _props7 = this.props,
+          options = _props7.options,
+          q = _props7.q;
+
+      return _extends({}, this.props, {
+        options: options.filter(function (options) {
+          return q === null || options.text.search(q) >= 0;
+        })
+      });
+    }
   }]);
 
   return Container;
@@ -261,6 +279,7 @@ Container.propTypes = {
   endpoint: _propTypes2.default.string,
   form: _propTypes2.default.object,
   label: _propTypes2.default.string,
+  options: _propTypes2.default.array,
   q: _propTypes2.default.string,
   sort: _propTypes2.default.string,
   text: _propTypes2.default.string,

@@ -17,34 +17,44 @@ class Format extends React.Component {
 
   render() {
     const { format } = this.props
-    if(_.isFunction(format)) {
+    if(_.isString(format)) {
+      const [,style,details] = format.match(/([^\|]*)\|?(.*)/)
+      if(style === 'status') {
+        return Status(this.props)
+      } else if(style === 'currency') {
+        return Currency(this.props)
+      } else if(style === 'date') {
+        const template = details || 'MM/DD/YY'
+        return Date(this.props, template)
+      } else if(style === 'datetime') {
+        const template = details || 'MM/DD/YY @ hh:mm A'
+        return Date(this.props, template)
+      } else if(style === 'time') {
+        const template = details || 'hh:mm A'
+        return Date(this.props, template)
+      } else if(style === 'check_times') {
+        return Check(this.props, true)
+      } else if(style === 'yes_no') {
+        return YesNo(this.props, true)
+      } else if(style === 'check') {
+        return Check(this.props, false)
+      } else if(style === 'capitalize') {
+        return Capitalize(this.props)
+      } else if(style === 'email') {
+        return Email(this.props)
+      } else if(style === 'link') {
+        return Link(this.props)
+      } else if(style === 'raw') {
+        return Raw(this.props)
+      } else if(style === 'element') {
+        return Element(this.props)
+      } else if(this.props.value === '') {
+        return Empty(this.props)
+      } else {
+        return Default(this.props)
+      }
+    } else if(_.isFunction(format)) {
       return format(this.props)
-    } else if(format === 'status') {
-      return Status(this.props)
-    } else if(format === 'currency') {
-      return Currency(this.props)
-    } else if(format === 'date') {
-      return Date(this.props, 'MM/DD/YY')
-    } else if(format === 'datetime') {
-      return Date(this.props, 'MM/DD/YY @ hh:mm A')
-    } else if(format === 'check_times') {
-      return Check(this.props, true)
-    } else if(format === 'yes_no') {
-      return YesNo(this.props, true)
-    } else if(format === 'check') {
-      return Check(this.props, false)
-    } else if(format === 'capitalize') {
-      return Capitalize(this.props)
-    } else if(format === 'email') {
-      return Email(this.props)
-    } else if(format === 'link') {
-      return Link(this.props)
-    } else if(format === 'raw') {
-      return Raw(this.props)
-    } else if(format === 'element') {
-      return Element(this.props)
-    } else if(this.props.value === '') {
-      return Empty(this.props)
     } else {
       return Default(this.props)
     }
@@ -89,7 +99,20 @@ const Currency = (props) => {
 }
 
 const Date = (props, format) => {
-  return <span>{ props.value ? moment(props.value).format(format) : '' }</span>
+
+  const _parseDate = (value) => {
+    const dateStr = value.toString()
+    if(dateStr.match(/^\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2}$/)) {
+      return moment(value, 'YYYY-MM-DD hh:mm:ss')
+    } else if(dateStr.toString().match(/^\d{2}\:\d{2}\:\d{2}$/)) {
+      return moment(value, 'hh:mm:ss')
+    } else {
+      return moment(value)
+    }
+  }
+
+  return <span>{ props.value ? _parseDate(props.value).format(format) : '' }</span>
+
 }
 
 const Capitalize = (props) => {

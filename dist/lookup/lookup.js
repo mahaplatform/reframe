@@ -8,6 +8,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _reactTransitionGroup = require('react-transition-group');
+
 var _value_token = require('./value_token');
 
 var _value_token2 = _interopRequireDefault(_value_token);
@@ -57,6 +59,8 @@ var Lookup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          active = _props.active,
+          adding = _props.adding,
           chosen = _props.chosen,
           format = _props.format,
           prompt = _props.prompt,
@@ -80,6 +84,16 @@ var Lookup = function (_React$Component) {
           'div',
           { className: 'reframe-lookup-field-prompt', onClick: this._handleBegin.bind(this) },
           prompt
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': active, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(_search2.default, this.props)
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': adding, classNames: 'cover', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(_form2.default, this._getForm())
         )
       );
     }
@@ -103,10 +117,7 @@ var Lookup = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var modal = this.context.modal;
       var _props3 = this.props,
-          active = _props3.active,
-          adding = _props3.adding,
           disabled = _props3.disabled,
           status = _props3.status,
           onClear = _props3.onClear,
@@ -114,10 +125,6 @@ var Lookup = function (_React$Component) {
 
       if (prevProps.status !== status && status === 'success') onReady();
       if (prevProps.disabled !== disabled) onClear();
-      if (!prevProps.active && active) modal.push(_react2.default.createElement(_search2.default, this.props));
-      if (prevProps.active && !active) modal.pop();
-      if (!prevProps.adding && adding) modal.push(_react2.default.createElement(_form2.default, this._getForm()));
-      if (prevProps.adding && !adding) modal.pop();
     }
   }, {
     key: '_handleBegin',
@@ -160,15 +167,12 @@ var Lookup = function (_React$Component) {
   return Lookup;
 }(_react2.default.Component);
 
-Lookup.contextTypes = {
-  modal: _propTypes2.default.object
-};
 Lookup.propTypes = {
   active: _propTypes2.default.bool,
   adding: _propTypes2.default.bool,
   chosen: _propTypes2.default.object,
   disabled: _propTypes2.default.bool,
-  defaultValue: _propTypes2.default.number,
+  defaultValue: _propTypes2.default.any,
   endpoint: _propTypes2.default.string,
   format: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
   form: _propTypes2.default.object,

@@ -94,6 +94,7 @@ class Container extends React.Component {
     endpoint: PropTypes.string,
     form: PropTypes.object,
     label: PropTypes.string,
+    options: PropTypes.array,
     q: PropTypes.string,
     sort: PropTypes.string,
     text: PropTypes.string,
@@ -125,7 +126,10 @@ class Container extends React.Component {
     } else {
       return (
         <div className="reframe-lookup-panel">
-          <Options { ...this.props } />
+          <div className="reframe-lookup-panel-search">
+            <Searchbox { ...this._getSearchbox() } />
+          </div>
+          <Options { ...this._getStaticOptions() } />
         </div>
       )
     }
@@ -154,6 +158,14 @@ class Container extends React.Component {
 
   _handleAdd() {
     this.props.onShowForm()
+  }
+
+  _getStaticOptions() {
+    const { options, q } = this.props
+    return {
+      ...this.props,
+      options: options.filter(options => q === null || options.text.search(q) >= 0)
+    }
   }
 
 }

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -48,34 +50,48 @@ var Format = function (_React$Component) {
     value: function render() {
       var format = this.props.format;
 
-      if (_lodash2.default.isFunction(format)) {
+      if (_lodash2.default.isString(format)) {
+        var _format$match = format.match(/([^\|]*)\|?(.*)/),
+            _format$match2 = _slicedToArray(_format$match, 3),
+            style = _format$match2[1],
+            details = _format$match2[2];
+
+        if (style === 'status') {
+          return Status(this.props);
+        } else if (style === 'currency') {
+          return Currency(this.props);
+        } else if (style === 'date') {
+          var template = details || 'MM/DD/YY';
+          return Date(this.props, template);
+        } else if (style === 'datetime') {
+          var _template = details || 'MM/DD/YY @ hh:mm A';
+          return Date(this.props, _template);
+        } else if (style === 'time') {
+          var _template2 = details || 'hh:mm A';
+          return Date(this.props, _template2);
+        } else if (style === 'check_times') {
+          return Check(this.props, true);
+        } else if (style === 'yes_no') {
+          return YesNo(this.props, true);
+        } else if (style === 'check') {
+          return Check(this.props, false);
+        } else if (style === 'capitalize') {
+          return Capitalize(this.props);
+        } else if (style === 'email') {
+          return Email(this.props);
+        } else if (style === 'link') {
+          return Link(this.props);
+        } else if (style === 'raw') {
+          return Raw(this.props);
+        } else if (style === 'element') {
+          return Element(this.props);
+        } else if (this.props.value === '') {
+          return Empty(this.props);
+        } else {
+          return Default(this.props);
+        }
+      } else if (_lodash2.default.isFunction(format)) {
         return format(this.props);
-      } else if (format === 'status') {
-        return Status(this.props);
-      } else if (format === 'currency') {
-        return Currency(this.props);
-      } else if (format === 'date') {
-        return Date(this.props, 'MM/DD/YY');
-      } else if (format === 'datetime') {
-        return Date(this.props, 'MM/DD/YY @ hh:mm A');
-      } else if (format === 'check_times') {
-        return Check(this.props, true);
-      } else if (format === 'yes_no') {
-        return YesNo(this.props, true);
-      } else if (format === 'check') {
-        return Check(this.props, false);
-      } else if (format === 'capitalize') {
-        return Capitalize(this.props);
-      } else if (format === 'email') {
-        return Email(this.props);
-      } else if (format === 'link') {
-        return Link(this.props);
-      } else if (format === 'raw') {
-        return Raw(this.props);
-      } else if (format === 'element') {
-        return Element(this.props);
-      } else if (this.props.value === '') {
-        return Empty(this.props);
       } else {
         return Default(this.props);
       }
@@ -148,10 +164,22 @@ var Currency = function Currency(props) {
 };
 
 var Date = function Date(props, format) {
+
+  var _parseDate = function _parseDate(value) {
+    var dateStr = value.toString();
+    if (dateStr.match(/^\d{4}-\d{2}-\d{2} \d{2}\:\d{2}\:\d{2}$/)) {
+      return (0, _moment2.default)(value, 'YYYY-MM-DD hh:mm:ss');
+    } else if (dateStr.toString().match(/^\d{2}\:\d{2}\:\d{2}$/)) {
+      return (0, _moment2.default)(value, 'hh:mm:ss');
+    } else {
+      return (0, _moment2.default)(value);
+    }
+  };
+
   return _react2.default.createElement(
     'span',
     null,
-    props.value ? (0, _moment2.default)(props.value).format(format) : ''
+    props.value ? _parseDate(props.value).format(format) : ''
   );
 };
 

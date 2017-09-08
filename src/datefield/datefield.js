@@ -11,7 +11,7 @@ class Datefield extends React.Component {
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     month: PropTypes.number,
-    placeholder: PropTypes.string,
+    prompt: PropTypes.string,
     year: PropTypes.number,
     value: PropTypes.any,
     onBegin: PropTypes.func,
@@ -29,7 +29,7 @@ class Datefield extends React.Component {
   static defaultProps = {
     defaultValue: null,
     disabled: false,
-    placeholder: 'Choose a date...',
+    prompt: 'Choose a date',
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
@@ -41,11 +41,8 @@ class Datefield extends React.Component {
     return (
       <div className="reframe-datefield">
         <div className="reframe-datefield-input">
-          <div className="reframe-datefield-icon">
-            <i className="calendar icon" />
-          </div>
           <div className="reframe-datefield-field" onClick={ this._handleBegin.bind(this) }>
-            { value ? value.format('dddd, MMMM DD, YYYY') : <span>{ placeholder }</span> }
+            { value ? value.format('dddd, MMMM DD, YYYY') : <span>{ prompt }</span> }
           </div>
           { value  &&
             <div className="reframe-datefield-remove" onClick={ this._handleClear.bind(this) }>

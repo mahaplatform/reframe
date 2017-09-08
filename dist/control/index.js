@@ -54,6 +54,10 @@ var _textfield = require('../textfield');
 
 var _textfield2 = _interopRequireDefault(_textfield);
 
+var _timefield = require('../timefield');
+
+var _timefield2 = _interopRequireDefault(_timefield);
+
 var _toggle_list = require('../toggle_list');
 
 var _toggle_list2 = _interopRequireDefault(_toggle_list);
@@ -94,6 +98,7 @@ var standardControls = {
   'text': _text2.default,
   'textarea': _textarea2.default,
   // 'tablefield': TableField
+  'timefield': _timefield2.default,
   'togglelist': _toggle_list2.default
 };
 

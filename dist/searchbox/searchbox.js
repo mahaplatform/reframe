@@ -102,6 +102,7 @@ Searchbox.propTypes = {
   onType: _propTypes2.default.func
 };
 Searchbox.defaultProps = {
-  prompt: 'Search...'
+  prompt: 'Search...',
+  onChange: function onChange(q) {}
 };
 exports.default = Searchbox;

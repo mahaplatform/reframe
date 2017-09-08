@@ -108,6 +108,10 @@ var _textfield = require('./textfield');
 
 var _textfield2 = _interopRequireDefault(_textfield);
 
+var _timefield = require('./timefield');
+
+var _timefield2 = _interopRequireDefault(_timefield);
+
 var _toggle_list = require('./toggle_list');
 
 var _toggle_list2 = _interopRequireDefault(_toggle_list);
@@ -145,6 +149,7 @@ exports.default = {
   Tasks: _tasks2.default,
   Textarea: _textarea2.default,
   Textfield: _textfield2.default,
+  Timefield: _timefield2.default,
   ToggleList: _toggle_list2.default,
   Tray: _tray2.default
 };
