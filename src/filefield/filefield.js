@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Resumable from 'resumablejs'
-import bytes from 'bytes'
+import Preview from './preview'
 
 class FileField extends React.Component {
 
@@ -45,8 +45,16 @@ class FileField extends React.Component {
     onSet: () => {}
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      preview: null
+    }
+  }
+
   render() {
     const { files, multiple, prompt, status } = this.props
+    const { preview } = this.state
     let classes = ['filefield', status]
     return (
       <div className={classes.join(' ')}>
@@ -59,24 +67,15 @@ class FileField extends React.Component {
                 }
                 { file.status === 'uploading' &&
                   <div className="reframe-filefield-progress">
+                    { preview && <Preview file={ file } preview={ preview } /> }
                     <div className="ui green progress">
-                      <div className="bar" style={{ width: `${file.progress}%`}} />
-                    </div>
-                    <p>
-                      { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })
-                    </p>
-                  </div>
-                }
-                { file.status === 'success' &&
-                  <div className="reframe-filefield-preview">
-                    <img src={`/imagecache/fit=cover&w=300&h=300${file.asset.path}`} title={ file.asset.original_file_name } />
-                    <div className="reframe-filefield-preview-caption">
-                      <p>
-                        { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })
-                      </p>
+                      <div className="bar" style={{ width: `${file.progress}%`}}>
+                        <div className="progress">{ file.progress }%</div>
+                      </div>
                     </div>
                   </div>
                 }
+                { file.status === 'success' && <Preview file={ file } preview={ preview } /> }
               </div>
               <div className="reframe-filefield-remove">
                 <i className="remove circle icon" onClick={ this._handleRemoveFile.bind(this, file.uniqueIdentifier) }/>
@@ -142,8 +141,17 @@ class FileField extends React.Component {
   }
 
   _handleFileAdded(file) {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(file.file)
+    fileReader.onload = this._handleImagePreview.bind(this)
     this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length)
   }
+
+  _handleImagePreview(event) {
+    const preview = event.target.result
+    this.setState({ preview })
+  }
+
 
   _handleUploadBegin() {
     this.resumable.upload()

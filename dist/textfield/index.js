@@ -116,8 +116,7 @@ var TextField = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange(event) {
-      var trimmed = this.props.trim ? event.target.value.trim() : event.target.value;
-      var sanitized = this.props.sanitize(trimmed);
+      var sanitized = this.props.sanitize(event.target.value);
       if (!this.props.validate(sanitized)) {
         event.preventDefault();
         return false;

@@ -3,7 +3,7 @@
   flex: 1;
   border: 1px solid #DDD;
   background-color: #FFF;
-  padding: 5px 0 5px 5px;
+  padding: 0.5em 0 0.5em 0.5em;
   line-height: 1.4285em;
   display: flex;
   width: 100%;
@@ -14,6 +14,7 @@
   margin: 0;
   vertical-align: middle;
   position: relative;
+  max-width: 300px;
 }
 .reframe-filefield-preview {
   .border-radius(5px);
@@ -26,6 +27,15 @@
   img {
     width: 100%;
   }
+}
+.reframe-filefield-preview-image {
+  width: 300px;
+  height: 300px;
+  display: block;
+  background: #333;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .reframe-filefield-preview-caption {
   .border-radius(0 0 5px 5px);
@@ -41,23 +51,18 @@
     line-height: 12px;
   }
 }
-
 .reframe-filefield-progress {
   margin: 0;
-  position: relative;
   .ui.progress {
     margin: 0 !important;
     background: #333;
+    position: absolute;
+    bottom: ~"calc(50% - 12px)";
+    left: 1em;
+    right: 1em;
   }
   .bar {
     transition-duration: 300ms;
-  }
-  p {
-    margin: 0;
-    position: absolute;
-    top: 2px;
-    left: 5px;
-    color: #FFF;
   }
 }
 .reframe-filefield-remove {

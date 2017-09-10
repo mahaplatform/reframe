@@ -34,13 +34,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Preview = function Preview(_ref) {
+  var file = _ref.file,
+      preview = _ref.preview;
+  return _react2.default.createElement(
+    'div',
+    { className: 'reframe-filefield-preview' },
+    preview ? _react2.default.createElement('div', { className: 'reframe-filefield-preview-image', style: { backgroundImage: 'url(\'' + preview + '\')' } }) : _react2.default.createElement('img', { src: '/imagecache/fit=cover&w=300&h=300' + file.asset.path, title: file.asset.original_file_name }),
+    _react2.default.createElement(
+      'div',
+      { className: 'reframe-filefield-preview-caption' },
+      _react2.default.createElement(
+        'p',
+        null,
+        file.fileName,
+        ' (',
+        (0, _bytes2.default)(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase(),
+        ')'
+      )
+    )
+  );
+};
+
 var FileField = function (_React$Component) {
   _inherits(FileField, _React$Component);
 
-  function FileField() {
+  function FileField(props) {
     _classCallCheck(this, FileField);
 
-    return _possibleConstructorReturn(this, (FileField.__proto__ || Object.getPrototypeOf(FileField)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (FileField.__proto__ || Object.getPrototypeOf(FileField)).call(this, props));
+
+    _this.state = {
+      preview: null
+    };
+    return _this;
   }
 
   _createClass(FileField, [{
@@ -53,6 +80,7 @@ var FileField = function (_React$Component) {
           multiple = _props.multiple,
           prompt = _props.prompt,
           status = _props.status;
+      var preview = this.state.preview;
 
       var classes = ['filefield', status];
       return _react2.default.createElement(
@@ -69,37 +97,23 @@ var FileField = function (_React$Component) {
               file.status === 'uploading' && _react2.default.createElement(
                 'div',
                 { className: 'reframe-filefield-progress' },
+                preview && _react2.default.createElement(Preview, { file: file, preview: preview }),
                 _react2.default.createElement(
                   'div',
                   { className: 'ui green progress' },
-                  _react2.default.createElement('div', { className: 'bar', style: { width: file.progress + '%' } })
-                ),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  file.fileName,
-                  ' (',
-                  (0, _bytes2.default)(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase(),
-                  ')'
-                )
-              ),
-              file.status === 'success' && _react2.default.createElement(
-                'div',
-                { className: 'reframe-filefield-preview' },
-                _react2.default.createElement('img', { src: '/imagecache/fit=cover&w=300&h=300' + file.asset.path, title: file.asset.original_file_name }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'reframe-filefield-preview-caption' },
                   _react2.default.createElement(
-                    'p',
-                    null,
-                    file.fileName,
-                    ' (',
-                    (0, _bytes2.default)(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase(),
-                    ')'
+                    'div',
+                    { className: 'bar', style: { width: file.progress + '%' } },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'progress' },
+                      file.progress,
+                      '%'
+                    )
                   )
                 )
-              )
+              ),
+              file.status === 'success' && _react2.default.createElement(Preview, { file: file, preview: preview })
             ),
             _react2.default.createElement(
               'div',
@@ -186,7 +200,17 @@ var FileField = function (_React$Component) {
   }, {
     key: '_handleFileAdded',
     value: function _handleFileAdded(file) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(file.file);
+      fileReader.onload = this._handleImagePreview.bind(this);
+      console.log(file);
       this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length);
+    }
+  }, {
+    key: '_handleImagePreview',
+    value: function _handleImagePreview(event) {
+      var preview = event.target.result;
+      this.setState({ preview: preview });
     }
   }, {
     key: '_handleUploadBegin',
