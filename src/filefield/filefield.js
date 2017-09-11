@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Resumable from 'resumablejs'
 import Preview from './preview'
-import Jimp from 'jimp/browser/lib/jimp.min'
+import Jimp from 'jimp/browser/lib/jimp'
 
 class FileField extends React.Component {
 
@@ -149,6 +149,7 @@ class FileField extends React.Component {
   }
 
   _handleImagePreview(event) {
+    console.log(Jimp)
     Jimp.read(event.data).then(function (image) {
       image.exifRotate().getBase64(Jimp.AUTO, function (err, preview) {
         if (err) throw err

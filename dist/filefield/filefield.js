@@ -26,7 +26,7 @@ var _preview = require('./preview');
 
 var _preview2 = _interopRequireDefault(_preview);
 
-var _jimp = require('jimp/browser/lib/jimp.min');
+var _jimp = require('jimp/browser/lib/jimp');
 
 var _jimp2 = _interopRequireDefault(_jimp);
 
@@ -190,6 +190,7 @@ var FileField = function (_React$Component) {
   }, {
     key: '_handleImagePreview',
     value: function _handleImagePreview(event) {
+      console.log(_jimp2.default);
       _jimp2.default.read(event.data).then(function (image) {
         image.exifRotate().getBase64(_jimp2.default.AUTO, function (err, preview) {
           if (err) throw err;
