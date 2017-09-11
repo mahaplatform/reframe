@@ -113,13 +113,14 @@ var FileField = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _props2 = this.props,
+          endpoint = _props2.endpoint,
           defaultValue = _props2.defaultValue,
           onLoadFiles = _props2.onLoadFiles,
           onSetReady = _props2.onSetReady;
 
       if (defaultValue) {
         var ids = !_lodash2.default.isArray(defaultValue) ? [defaultValue] : defaultValue;
-        onLoadFiles('/api/admin/team/assets', ids);
+        onLoadFiles(endpoint, ids);
       } else {
         onSetReady();
       }
@@ -156,12 +157,12 @@ var FileField = function (_React$Component) {
     key: '_initializeResumable',
     value: function _initializeResumable() {
       var _props4 = this.props,
-          endpoint = _props4.endpoint,
+          action = _props4.action,
           multiple = _props4.multiple,
           token = _props4.token;
 
       this.resumable = new _resumablejs2.default({
-        target: endpoint,
+        target: action,
         chunkSize: 1024 * 128,
         maxFiles: multiple ? undefined : 1,
         headers: {
@@ -233,6 +234,7 @@ var FileField = function (_React$Component) {
 }(_react2.default.Component);
 
 FileField.propTypes = {
+  action: _propTypes2.default.string,
   defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.array]),
   disabled: _propTypes2.default.bool,
   endpoint: _propTypes2.default.string,

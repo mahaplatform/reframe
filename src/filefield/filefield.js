@@ -7,6 +7,7 @@ import Preview from './preview'
 class FileField extends React.Component {
 
   static propTypes = {
+    action: PropTypes.string,
     defaultValue: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.array
@@ -93,10 +94,10 @@ class FileField extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, onLoadFiles, onSetReady } = this.props
+    const { endpoint, defaultValue, onLoadFiles, onSetReady } = this.props
     if(defaultValue) {
       const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
-      onLoadFiles('/api/admin/team/assets', ids)
+      onLoadFiles(endpoint, ids)
     } else {
       onSetReady()
     }
@@ -123,9 +124,9 @@ class FileField extends React.Component {
   }
 
   _initializeResumable() {
-    const { endpoint, multiple, token } = this.props
+    const { action, multiple, token } = this.props
     this.resumable = new Resumable({
-      target: endpoint,
+      target: action,
       chunkSize: 1024 * 128,
       maxFiles: multiple ? undefined : 1,
       headers: {
