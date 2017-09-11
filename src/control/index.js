@@ -73,11 +73,6 @@ class Control extends React.Component {
     )
   }
 
-  _getDynamic() {
-    const { endpoint, value, text } = this.props
-    return { endpoint, value, text }
-  }
-
 }
 
 export default Control

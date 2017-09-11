@@ -114,6 +114,7 @@ var Field = function (_React$Component) {
     key: '_getControl',
     value: function _getControl() {
       var _props4 = this.props,
+          action = _props4.action,
           columns = _props4.columns,
           component = _props4.component,
           data = _props4.data,
@@ -138,6 +139,7 @@ var Field = function (_React$Component) {
 
       var defaultValue = _lodash2.default.get(data, name);
       return {
+        action: action,
         columns: columns,
         component: component,
         defaultValue: defaultValue,
@@ -184,6 +186,7 @@ var Field = function (_React$Component) {
 }(_react2.default.Component);
 
 Field.propTypes = {
+  action: _propTypes2.default.array,
   columns: _propTypes2.default.array,
   data: _propTypes2.default.object,
   endpoint: _propTypes2.default.string,

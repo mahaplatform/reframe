@@ -7,6 +7,7 @@ import _ from 'lodash'
 class Field extends React.Component {
 
   static propTypes = {
+    action: PropTypes.array,
     columns: PropTypes.array,
     data: PropTypes.object,
     endpoint: PropTypes.string,
@@ -86,11 +87,12 @@ class Field extends React.Component {
   }
 
   _getControl() {
-    const { columns, component, data, disabled, endpoint, filters, form, format, label, name } = this.props
+    const { action, columns, component, data, disabled, endpoint, filters, form, format, label, name } = this.props
     const { options, prompt, prefix, sort, suffix, type, text, token, value } = this.props
     const { onSubmit } = this.props
     const defaultValue = _.get(data, name)
     return {
+      action,
       columns,
       component,
       defaultValue,

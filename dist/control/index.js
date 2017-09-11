@@ -123,16 +123,6 @@ var Control = function (_React$Component) {
         _react2.default.createElement(Element, this.props)
       );
     }
-  }, {
-    key: '_getDynamic',
-    value: function _getDynamic() {
-      var _props = this.props,
-          endpoint = _props.endpoint,
-          value = _props.value,
-          text = _props.text;
-
-      return { endpoint: endpoint, value: value, text: text };
-    }
   }]);
 
   return Control;
