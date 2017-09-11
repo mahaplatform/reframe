@@ -26,10 +26,6 @@ var _preview = require('./preview');
 
 var _preview2 = _interopRequireDefault(_preview);
 
-var _jimp = require('jimp/browser/lib/jimp');
-
-var _jimp2 = _interopRequireDefault(_jimp);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -183,20 +179,15 @@ var FileField = function (_React$Component) {
     key: '_handleFileAdded',
     value: function _handleFileAdded(file) {
       var fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(file.file);
+      fileReader.readAsDataURL(file.file);
       fileReader.onload = this._handleImagePreview.bind(this);
       this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length);
     }
   }, {
     key: '_handleImagePreview',
     value: function _handleImagePreview(event) {
-      console.log(_jimp2.default);
-      _jimp2.default.read(event.data).then(function (image) {
-        image.exifRotate().getBase64(_jimp2.default.AUTO, function (err, preview) {
-          if (err) throw err;
-          this.setState({ preview: preview });
-        });
-      });
+      var preview = event.target.result;
+      this.setState({ preview: preview });
     }
   }, {
     key: '_handleUploadBegin',

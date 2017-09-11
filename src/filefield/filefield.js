@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Resumable from 'resumablejs'
 import Preview from './preview'
-import Jimp from 'jimp/browser/lib/jimp'
 
 class FileField extends React.Component {
 
@@ -143,19 +142,14 @@ class FileField extends React.Component {
 
   _handleFileAdded(file) {
     const fileReader = new FileReader()
-    fileReader.readAsArrayBuffer(file.file)
+    fileReader.readAsDataURL(file.file)
     fileReader.onload = this._handleImagePreview.bind(this)
     this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length)
-  }
 
+  }
   _handleImagePreview(event) {
-    console.log(Jimp)
-    Jimp.read(event.data).then(function (image) {
-      image.exifRotate().getBase64(Jimp.AUTO, function (err, preview) {
-        if (err) throw err
-        this.setState({ preview })
-      })
-    })
+    const preview = event.target.result
+    this.setState({ preview })
   }
 
   _handleUploadBegin() {
