@@ -22,9 +22,13 @@ var _resumablejs = require('resumablejs');
 
 var _resumablejs2 = _interopRequireDefault(_resumablejs);
 
-var _bytes = require('bytes');
+var _preview = require('./preview');
 
-var _bytes2 = _interopRequireDefault(_bytes);
+var _preview2 = _interopRequireDefault(_preview);
+
+var _jimp = require('jimp/browser/lib/jimp.min');
+
+var _jimp2 = _interopRequireDefault(_jimp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,28 +37,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Preview = function Preview(_ref) {
-  var file = _ref.file,
-      preview = _ref.preview;
-  return _react2.default.createElement(
-    'div',
-    { className: 'reframe-filefield-preview' },
-    preview ? _react2.default.createElement('div', { className: 'reframe-filefield-preview-image', style: { backgroundImage: 'url(\'' + preview + '\')' } }) : _react2.default.createElement('img', { src: '/imagecache/fit=cover&w=300&h=300' + file.asset.path, title: file.asset.original_file_name }),
-    _react2.default.createElement(
-      'div',
-      { className: 'reframe-filefield-preview-caption' },
-      _react2.default.createElement(
-        'p',
-        null,
-        file.fileName,
-        ' (',
-        (0, _bytes2.default)(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase(),
-        ')'
-      )
-    )
-  );
-};
 
 var FileField = function (_React$Component) {
   _inherits(FileField, _React$Component);
@@ -97,7 +79,7 @@ var FileField = function (_React$Component) {
               file.status === 'uploading' && _react2.default.createElement(
                 'div',
                 { className: 'reframe-filefield-progress' },
-                preview && _react2.default.createElement(Preview, { file: file, preview: preview }),
+                preview && _react2.default.createElement(_preview2.default, { file: file, preview: preview }),
                 _react2.default.createElement(
                   'div',
                   { className: 'ui green progress' },
@@ -113,7 +95,7 @@ var FileField = function (_React$Component) {
                   )
                 )
               ),
-              file.status === 'success' && _react2.default.createElement(Preview, { file: file, preview: preview })
+              file.status === 'success' && _react2.default.createElement(_preview2.default, { file: file, preview: preview })
             ),
             _react2.default.createElement(
               'div',
@@ -201,16 +183,19 @@ var FileField = function (_React$Component) {
     key: '_handleFileAdded',
     value: function _handleFileAdded(file) {
       var fileReader = new FileReader();
-      fileReader.readAsDataURL(file.file);
+      fileReader.readAsArrayBuffer(file.file);
       fileReader.onload = this._handleImagePreview.bind(this);
-      console.log(file);
       this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length);
     }
   }, {
     key: '_handleImagePreview',
     value: function _handleImagePreview(event) {
-      var preview = event.target.result;
-      this.setState({ preview: preview });
+      _jimp2.default.read(event.data).then(function (image) {
+        image.exifRotate().getBase64(_jimp2.default.AUTO, function (err, preview) {
+          if (err) throw err;
+          this.setState({ preview: preview });
+        });
+      });
     }
   }, {
     key: '_handleUploadBegin',

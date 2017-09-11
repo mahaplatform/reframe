@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "bytes": "^2.5.0",
+    "jimp": "^0.2.27",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
