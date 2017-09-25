@@ -145,6 +145,7 @@ var Results = exports.Results = function (_React$Component2) {
           modal = _props3.modal,
           params = _props3.params,
           records = _props3.records,
+          recordTasks = _props3.recordTasks,
           status = _props3.status,
           onLoadMore = _props3.onLoadMore,
           onSort = _props3.onSort;
@@ -157,6 +158,7 @@ var Results = exports.Results = function (_React$Component2) {
         link: link,
         modal: modal,
         records: records,
+        recordTasks: recordTasks,
         sort: sort,
         status: status,
         onLoadMore: onLoadMore,
@@ -195,6 +197,7 @@ Results.propTypes = {
   modal: _propTypes2.default.func,
   params: _propTypes2.default.object,
   records: _propTypes2.default.array,
+  recordTasks: _propTypes2.default.array,
   sort: _propTypes2.default.object,
   status: _propTypes2.default.string,
   onLoadMore: _propTypes2.default.func,

@@ -181,6 +181,7 @@ Collection.propTypes = {
   modal: _propTypes2.default.string,
   params: _propTypes2.default.object,
   records: _propTypes2.default.array,
+  recordTasks: _propTypes2.default.array,
   sort: _propTypes2.default.object,
   total: _propTypes2.default.number,
   onFetch: _propTypes2.default.func,

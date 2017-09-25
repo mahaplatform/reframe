@@ -6,11 +6,18 @@ import Format from '../format'
 
 class Table extends React.Component {
 
-  static PropTypes = {
+  static contextTypes = {
+    tasks: PropTypes.object
+  }
+
+  static propTypes = {
     columns: PropTypes.array,
+    export: PropTypes.array,
+    handler: PropTypes.func,
     link: PropTypes.string,
     modal: PropTypes.element,
     records: PropTypes.array,
+    recordTasks: PropTypes.array,
     sort: PropTypes.shape({
       key: PropTypes.string,
       order: PropTypes.string
@@ -21,12 +28,12 @@ class Table extends React.Component {
   }
 
   render() {
-    const { columns, handler, link, modal, records, sort } = this.props
+    const { columns, handler, link, modal, records, recordTasks, sort } = this.props
     return (
       <div className="reframe-table">
         <div className="reframe-table-head reframe-scrollpane-header">
           <div className="reframe-table-head-wrapper">
-            <div className="reframe-table-head-row" ref="head">
+            <div className="reframe-table-head-row" ref={ (node) => this.head = node }>
               { columns.map((column, columnIndex) => {
                 let klass = ['reframe-table-head-cell', 'padded']
                 if(column.primary === true) klass.push('mobile')
@@ -45,7 +52,7 @@ class Table extends React.Component {
           </div>
         </div>
         <div className="reframe-table-body">
-          <div className="reframe-table-body-wrapper" ref="body">
+          <div className="reframe-table-body-wrapper" ref={ (node) => this.body = node }>
             { records.map((record, rowIndex) => {
               const row = columns.map((column, columnIndex) => {
                 const value = _.get(record, column.key)
@@ -84,6 +91,15 @@ class Table extends React.Component {
                     { row }
                   </div>
                 )
+              } else if(recordTasks) {
+                return (
+                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
+                    { row }
+                    <div className="reframe-table-body-cell icon mobile collapsing centered padded" onClick={ this._handleTasks.bind(this, record.id) }>
+                      <i className="ellipsis vertical icon" />
+                    </div>
+                  </div>
+                )
               } else {
                 return (
                   <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
@@ -108,7 +124,7 @@ class Table extends React.Component {
   }
 
   _resizeColumns() {
-    const rows = this.refs.body.childNodes
+    const rows = this.body.childNodes
     if(rows.length === 0) return
     Array.from(rows[0].childNodes).map((cell, index) => {
       cell.style.width = `${cell.offsetWidth}px`
@@ -122,6 +138,19 @@ class Table extends React.Component {
 
   _handleHandler(id) {
     this.props.handler(id)
+  }
+
+  _handleTasks(id) {
+    const { recordTasks } = this.props
+    const tasks = recordTasks.map(task => {
+      if(task.modal) {
+        return {
+          ...task,
+          modal: () => <task.modal id={ id } />
+        }
+      }
+    })
+    this.context.tasks.open(tasks)
   }
 
 }

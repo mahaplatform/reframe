@@ -29,7 +29,7 @@ class TextArea extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: _.toString(props.defaultValue)
+      value: props.defaultValue ? _.toString(props.defaultValue) : null
     }
   }
 

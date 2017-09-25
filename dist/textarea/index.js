@@ -35,7 +35,7 @@ var TextArea = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (TextArea.__proto__ || Object.getPrototypeOf(TextArea)).call(this, props));
 
     _this.state = {
-      value: _lodash2.default.toString(props.defaultValue)
+      value: props.defaultValue ? _lodash2.default.toString(props.defaultValue) : null
     };
     return _this;
   }

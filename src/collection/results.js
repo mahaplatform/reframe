@@ -52,6 +52,7 @@ export class Results extends React.Component {
     modal: PropTypes.func,
     params: PropTypes.object,
     records: PropTypes.array,
+    recordTasks: PropTypes.array,
     sort: PropTypes.object,
     status: PropTypes.string,
     onLoadMore: PropTypes.func,
@@ -71,7 +72,7 @@ export class Results extends React.Component {
   }
 
   _getTable() {
-    const { columns, handler, link, modal, params, records, status, onLoadMore, onSort } = this.props
+    const { columns, handler, link, modal, params, records, recordTasks, status, onLoadMore, onSort } = this.props
     const { sort } = params
     return {
       columns,
@@ -80,6 +81,7 @@ export class Results extends React.Component {
       link,
       modal,
       records,
+      recordTasks,
       sort,
       status,
       onLoadMore,

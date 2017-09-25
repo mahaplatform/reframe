@@ -54,6 +54,7 @@ var Table = function (_React$Component) {
           link = _props.link,
           modal = _props.modal,
           records = _props.records,
+          recordTasks = _props.recordTasks,
           sort = _props.sort;
 
       return _react2.default.createElement(
@@ -67,7 +68,9 @@ var Table = function (_React$Component) {
             { className: 'reframe-table-head-wrapper' },
             _react2.default.createElement(
               'div',
-              { className: 'reframe-table-head-row', ref: 'head' },
+              { className: 'reframe-table-head-row', ref: function ref(node) {
+                  return _this2.head = node;
+                } },
               columns.map(function (column, columnIndex) {
                 var klass = ['reframe-table-head-cell', 'padded'];
                 if (column.primary === true) klass.push('mobile');
@@ -88,7 +91,9 @@ var Table = function (_React$Component) {
           { className: 'reframe-table-body' },
           _react2.default.createElement(
             'div',
-            { className: 'reframe-table-body-wrapper', ref: 'body' },
+            { className: 'reframe-table-body-wrapper', ref: function ref(node) {
+                return _this2.body = node;
+              } },
             records.map(function (record, rowIndex) {
               var row = columns.map(function (column, columnIndex) {
                 var value = _lodash2.default.get(record, column.key);
@@ -129,6 +134,17 @@ var Table = function (_React$Component) {
                   { key: 'record_' + rowIndex, className: 'reframe-table-body-row', onClick: _this2._handleHandler.bind(_this2, record.id) },
                   row
                 );
+              } else if (recordTasks) {
+                return _react2.default.createElement(
+                  'div',
+                  { key: 'record_' + rowIndex, className: 'reframe-table-body-row' },
+                  row,
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'reframe-table-body-cell icon mobile collapsing centered padded', onClick: _this2._handleTasks.bind(_this2, record.id) },
+                    _react2.default.createElement('i', { className: 'ellipsis vertical icon' })
+                  )
+                );
               } else {
                 return _react2.default.createElement(
                   'div',
@@ -154,7 +170,7 @@ var Table = function (_React$Component) {
   }, {
     key: '_resizeColumns',
     value: function _resizeColumns() {
-      var rows = this.refs.body.childNodes;
+      var rows = this.body.childNodes;
       if (rows.length === 0) return;
       Array.from(rows[0].childNodes).map(function (cell, index) {
         cell.style.width = cell.offsetWidth + 'px';
@@ -171,16 +187,38 @@ var Table = function (_React$Component) {
     value: function _handleHandler(id) {
       this.props.handler(id);
     }
+  }, {
+    key: '_handleTasks',
+    value: function _handleTasks(id) {
+      var recordTasks = this.props.recordTasks;
+
+      var tasks = recordTasks.map(function (task) {
+        if (task.modal) {
+          return _extends({}, task, {
+            modal: function modal() {
+              return _react2.default.createElement(task.modal, { id: id });
+            }
+          });
+        }
+      });
+      this.context.tasks.open(tasks);
+    }
   }]);
 
   return Table;
 }(_react2.default.Component);
 
-Table.PropTypes = {
+Table.contextTypes = {
+  tasks: _propTypes2.default.object
+};
+Table.propTypes = {
   columns: _propTypes2.default.array,
+  export: _propTypes2.default.array,
+  handler: _propTypes2.default.func,
   link: _propTypes2.default.string,
   modal: _propTypes2.default.element,
   records: _propTypes2.default.array,
+  recordTasks: _propTypes2.default.array,
   sort: _propTypes2.default.shape({
     key: _propTypes2.default.string,
     order: _propTypes2.default.string

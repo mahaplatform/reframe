@@ -43,6 +43,7 @@ class Collection extends React.Component {
     modal: PropTypes.string,
     params: PropTypes.object,
     records: PropTypes.array,
+    recordTasks: PropTypes.array,
     sort: PropTypes.object,
     total: PropTypes.number,
     onFetch: PropTypes.func,

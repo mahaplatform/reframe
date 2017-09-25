@@ -62,9 +62,15 @@ a.reframe-table-body-row {
   &.centered {
     text-align: center;
   }
-  &.icon {
-    color: #CCCCCC !important;
+  .icon {
+    color: fadeout(@black, 90) !important;
+    margin: 0;
+  }
+  .chevron {
     font-size: 0.8em;
+  }
+  .ellipsis {
+    font-size: 1.2em;
   }
 }
 @media only screen and (max-width: 767px) {
