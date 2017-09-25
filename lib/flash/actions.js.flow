@@ -1,0 +1,5 @@
+// @flow
+
+import type {Set, Clear} from "./types";
+declare export function clear(): {type: "CLEAR"};
+declare export function set(style: string, message: string): {message: string, style: string, type: "SET"};

@@ -1,2 +1,4 @@
-export const TYPE = 'TYPE'
-export const ABORT = 'ABORT'
+// @flow
+
+export const TYPE: string = 'TYPE'
+export const ABORT: string = 'ABORT'

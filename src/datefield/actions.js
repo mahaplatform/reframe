@@ -1,37 +1,40 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const setValue = (value) => ({
-  type: actionTypes.SET_VALUE,
+import type { SetValue, SetCurrent, Previous, Next, Begin, Cancel, Choose, Clear } from './types'
+
+export const setValue = (value: string): SetValue => ({
+  type: 'SET_VALUE',
   value
 })
 
-export const setCurrent = (month, year) => ({
-  type: actionTypes.SET_CURRENT,
+export const setCurrent = (month: number, year: number): SetCurrent => ({
+  type: 'SET_CURRENT',
   month,
   year
 })
 
-export const previous = () => ({
-  type: actionTypes.PREVIOUS
+export const previous = (): Previous => ({
+  type: 'PREVIOUS'
 })
 
-export const next = () => ({
-  type: actionTypes.NEXT
+
+export const next = (): Next => ({
+  type: 'NEXT'
 })
 
-export const begin = () => ({
-  type: actionTypes.BEGIN
+export const begin = (): Begin => ({
+  type: 'BEGIN'
 })
 
-export const cancel = () => ({
-  type: actionTypes.CANCEL
+export const cancel = (): Cancel => ({
+  type: 'CANCEL'
 })
 
-export const choose = (value) => ({
-  type: actionTypes.CHOOSE,
+export const choose = (value: string): Choose => ({
+  type: 'CHOOSE',
   value
 })
 
-export const clear = () => ({
-  type: actionTypes.CLEAR
+export const clear = (): Clear => ({
+  type: 'CLEAR'
 })

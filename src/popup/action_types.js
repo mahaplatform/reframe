@@ -1,2 +1,4 @@
-export const OPEN = 'OPEN'
-export const CLOSE = 'CLOSE'
+// @flow
+
+export const OPEN: string = 'OPEN'
+export const CLOSE: string = 'CLOSE'

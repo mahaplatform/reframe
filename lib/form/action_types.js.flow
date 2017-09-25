@@ -1,0 +1,16 @@
+// @flow
+
+declare export var FETCH_DATA_FAILURE: string;
+declare export var FETCH_DATA_REQUEST: string;
+declare export var FETCH_DATA_SUCCESS: string;
+declare export var FETCH_SECTIONS_FAILURE: string;
+declare export var FETCH_SECTIONS_REQUEST: string;
+declare export var FETCH_SECTIONS_SUCCESS: string;
+declare export var SET_DATA: string;
+declare export var SET_READY: string;
+declare export var SET_SECTIONS: string;
+declare export var SUBMIT_FAILURE: string;
+declare export var SUBMIT_REQUEST: string;
+declare export var SUBMIT_SUCCESS: string;
+declare export var TOGGLE_BUSY: string;
+declare export var UPDATE_DATA: string;

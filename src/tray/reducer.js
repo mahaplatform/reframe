@@ -1,31 +1,43 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const INITIAL_STATE = {
+import type { Open, Close, Clear, Action, State } from './types'
+
+const INITIAL_STATE: State = {
   component: null,
   open: false
 }
 
-export default (state = INITIAL_STATE, action) => {
+const open = (state: State, action: Open): State => ({
+  component: action.component,
+  open: true
+})
+
+const close = (state: State, action: Close): State => ({
+  ...state,
+  open: false
+})
+
+const clear = (state: State, action: Clear): State => ({
+  ...INITIAL_STATE
+})
+
+const reducer = (state: State = INITIAL_STATE, action: Action): State => {
 
   switch (action.type) {
 
-  case actionTypes.OPEN:
-    return {
-      component: action.component,
-      open: true
-    }
+  case 'OPEN':
+    return open(state, action)
 
-  case actionTypes.CLOSE:
-    return {
-      ...state,
-      open: false
-    }
+  case 'CLOSE':
+    return close(state, action)
 
-  case actionTypes.CLEAR:
-    return INITIAL_STATE
+  case 'CLEAR':
+    return clear(state, action)
 
   default:
     return state
   }
 
 }
+
+export default reducer

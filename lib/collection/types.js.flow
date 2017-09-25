@@ -1,0 +1,10 @@
+// @flow
+
+export type Actions = {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"};
+export type Filter = {filter: Object, type: "FILTER"};
+export type SetParams = {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"};
+export type SetRecords = {records: Array<Object>, type: "SET_RECORDS"};
+export type Sort = {key: string, type: "SORT"};
+export type State = {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>};
+
+declare module.exports: {};

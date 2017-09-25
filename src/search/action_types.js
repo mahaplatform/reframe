@@ -1,1 +1,3 @@
-export const QUERY = 'QUERY'
+// @flow
+
+export const QUERY: string = 'QUERY'

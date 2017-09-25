@@ -19,11 +19,8 @@ class Modal extends React.Component {
     onPush: PropTypes.func
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      count: 0
-    }
+  state = {
+    count: 0
   }
 
   render() {

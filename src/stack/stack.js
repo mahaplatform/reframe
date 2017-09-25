@@ -23,12 +23,13 @@ class Stack extends React.Component {
     onSet: PropTypes.func
   }
 
+  state = {
+    mounted: 1
+  }
+
   constructor(props) {
     super(props)
     this.routes = this._collapseRoutes(props.routes, props.routes.path)
-    this.state = {
-      mounted: 1
-    }
   }
 
   render() {

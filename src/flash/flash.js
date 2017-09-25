@@ -1,8 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
+// @flow
 
-class Flash extends React.Component {
+import type { Props } from './types'
+import type { Element } from 'react'
+
+import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+class Flash extends React.Component<Props> {
 
   static childContextTypes = {
     flash: PropTypes.object
@@ -37,26 +42,26 @@ class Flash extends React.Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { message, onClear } = this.props
     if(prevProps.message !== message && message) {
       setTimeout(onClear, 2000)
     }
   }
 
-  _getIcon(style) {
+  _getIcon(style: string): Element<'i'> {
     if(style == 'success') {
       return <i className="fa fa-check-circle" />
-    } else if(style == 'info') {
-      return <i className="fa fa-info-circle" />
     } else if(style == 'warning') {
       return <i className="fa fa-warning" />
     } else if(style == 'error') {
       return <i className="fa fa-times-circle" />
+    } else {
+      return <i className="fa fa-info-circle" />
     }
   }
 
-  getChildContext() {
+  getChildContext(): any {
     const { onSet, onClear } = this.props
     return {
       flash: {

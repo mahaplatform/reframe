@@ -1,7 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
 
-class ColorField extends React.Component {
+import type { Props } from './types'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+class ColorField extends React.Component<Props> {
 
   static propTypes = {
     color: PropTypes.string,
@@ -15,16 +18,7 @@ class ColorField extends React.Component {
   }
 
   static defaultProps = {
-    defaultValue: null,
-    disabled: false,
-    onBusy: () => {},
-    onChange: () => {},
-    onReady: () => {},
-    onSet: () => {}
-  }
-
-  render() {
-    const colors = [
+    colors: [
       { name: 'red', value: '#DB2828' },
       { name: 'orange', value: '#F2711C' },
       { name: 'yellow', value: '#FBBD08' },
@@ -35,7 +29,17 @@ class ColorField extends React.Component {
       { name: 'violet', value: '#6435C9' },
       { name: 'purple', value: '#A333C8' },
       { name: 'pink', value: '#E03997' }
-    ]
+    ],
+    defaultValue: null,
+    disabled: false,
+    onBusy: () => {},
+    onChange: (value) => {},
+    onReady: () => {},
+    onSet: (value) => {}
+  }
+
+  render() {
+    const { colors } = this.props
     return (
       <div className="reframe-colorfield">
         { colors.map((color, index) => (
@@ -47,20 +51,18 @@ class ColorField extends React.Component {
     )
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { defaultValue, onReady, onSet } = this.props
     if(defaultValue) onSet(defaultValue)
     onReady()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { color, onChange } = this.props
-    if(prevProps.color !== color) {
-      onChange(color)
-    }
+    if(prevProps.color !== color) onChange(color)
   }
 
-  _handleSet(color) {
+  _handleSet(color: string): void {
     this.props.onSet(color)
   }
 

@@ -1,0 +1,4 @@
+// @flow
+
+import type {Set} from "./types";
+declare export function set(color: string): any;

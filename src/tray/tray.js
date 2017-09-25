@@ -51,8 +51,8 @@ class Tray extends React.Component {
     }
   }
 
-  _handleOpenTray(component, location) {
-    this.props.onOpen(component, location)
+  _handleOpenTray(component) {
+    this.props.onOpen(component)
   }
 
   _handleCloseTray() {

@@ -1,9 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import type { Component, Location, Props, ChildContext } from './types'
+
 import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
-class Drawer extends React.Component {
+class Drawer extends React.Component<Props> {
 
   static childContextTypes = {
     drawer: PropTypes.object
@@ -36,14 +40,14 @@ class Drawer extends React.Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { open, onClear } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClear, 500)
     }
   }
 
-  getChildContext() {
+  getChildContext(): ChildContext {
     return {
       drawer: {
         open: this._handleOpen.bind(this),
@@ -52,11 +56,11 @@ class Drawer extends React.Component {
     }
   }
 
-  _handleOpen(component, location) {
+  _handleOpen(component: Component, location: Location): void {
     this.props.onOpen(component, location)
   }
 
-  _handleClose() {
+  _handleClose(): void {
     this.props.onClose()
   }
 

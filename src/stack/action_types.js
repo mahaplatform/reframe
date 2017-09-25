@@ -1,3 +1,5 @@
-export const SET = 'SET'
-export const PUSH = 'PUSH'
-export const POP = 'POP'
+// @flow
+
+export const SET: string = 'SET'
+export const PUSH: string = 'PUSH'
+export const POP: string = 'POP'

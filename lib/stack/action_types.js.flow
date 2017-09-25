@@ -1,0 +1,5 @@
+// @flow
+
+declare export var POP: string;
+declare export var PUSH: string;
+declare export var SET: string;

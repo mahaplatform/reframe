@@ -46,11 +46,8 @@ class FileField extends React.Component {
     onSet: () => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      preview: null
-    }
+  state = {
+    preview: null
   }
 
   render() {

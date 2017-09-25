@@ -1,0 +1,4 @@
+// @flow
+
+declare export var ABORT: string;
+declare export var TYPE: string;

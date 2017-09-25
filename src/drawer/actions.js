@@ -1,15 +1,17 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const open = (component, location) => ({
-  type: actionTypes.OPEN,
+import type { Component, Location, Open, Close, Clear } from './types'
+
+export const open = (component: Component, location: Location): Open => ({
+  type: 'OPEN',
   component,
   location
 })
 
-export const close = () => ({
-  type: actionTypes.CLOSE
+export const close = (): Close => ({
+  type: 'CLOSE'
 })
 
-export const clear = () => ({
-  type: actionTypes.CLEAR
+export const clear = (): Clear => ({
+  type: 'CLEAR'
 })

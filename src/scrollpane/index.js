@@ -15,11 +15,9 @@ class Scrollpane extends React.Component {
     onReachBottom: null
   }
 
-  constructor(props) {
-    super(props)
-    this.headers = []
-    this.notified = false
-  }
+  headers = []
+
+  notified = false
 
   render() {
     const { children } = this.props

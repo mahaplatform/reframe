@@ -1,22 +1,24 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const setParams = (filter, sort) => ({
-  type: actionTypes.SET_PARAMS,
+import type { SetParams, Sort, Filter, SetRecords } from './types'
+
+export const setParams = (filter: Object, sort: Object): SetParams => ({
+  type: 'SET_PARAMS',
   filter,
   sort
 })
 
-export const sort = (key) => ({
-  type: actionTypes.SORT,
+export const sort = (key: string): Sort => ({
+  type: 'SORT',
   key
 })
 
-export const filter = (filter) => ({
-  type: actionTypes.FILTER,
+export const filter = (filter: Object): Filter => ({
+  type: 'FILTER',
   filter
 })
 
-export const setRecords = (records) => ({
+export const setRecords = (records: Array<Object>): SetRecords => ({
   type: 'SET_RECORDS',
   records
 })

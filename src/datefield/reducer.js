@@ -1,67 +1,85 @@
-import * as actionTypes from './action_types'
+// @flow
 
-const INITIAL_VALUE = {
+import type { SetValue, SetCurrent, Previous, Next, Begin, Cancel, Choose, Clear, Action, State } from './types'
+
+const INITIAL_VALUE: State = {
   active: false,
   value: null,
   month: null,
   year: null
 }
 
-export default (state = INITIAL_VALUE, action) => {
+const setCurrent = (state: State, action: SetCurrent): State => ({
+  ...state,
+  month: action.month,
+  year: action.year
+})
+
+const setValue = (state: State, action: SetValue): State => ({
+  ...state,
+  value: action.value
+})
+
+const previous = (state: State, action: Previous): State => ({
+  ...state,
+  month: state.month ? (state.month === 0 ? 11 : state.month - 1) : null,
+  year: state.year ? (state.month === 0 ? state.year - 1 : state.year) : null
+})
+
+const next = (state: State, action: Next): State => ({
+  ...state,
+  month: state.month ? (state.month === 11 ? 0 : state.month + 1) : null,
+  year: state.year ? (state.month === 11 ? state.year + 1 : state.year) : null
+})
+
+const begin = (state: State, action: Begin): State => ({
+  ...state,
+  active: true
+})
+
+const cancel = (state: State, action: Cancel): State => ({
+  ...state,
+  active: false
+})
+
+const choose = (state: State, action: Choose): State => ({
+  ...state,
+  value: action.value,
+  active: false
+})
+
+const clear = (state: State, action: Clear): State => ({
+  ...state,
+  value: null
+})
+
+const reducer = (state: State = INITIAL_VALUE, action: Action): State => {
 
   switch (action.type) {
 
-  case actionTypes.SET_CURRENT:
-    return {
-      ...state,
-      month: action.month,
-      year: action.year
-    }
+  case 'SET_CURRENT':
+    return setCurrent(state, action)
 
-  case actionTypes.SET_VALUE:
-    return {
-      ...state,
-      value: action.value
-    }
+  case 'SET_VALUE':
+    return setValue(state, action)
 
-  case actionTypes.PREVIOUS:
-    return {
-      ...state,
-      month: state.month === 0 ? 11 : state.month - 1,
-      year: state.month === 0 ? state.year - 1 : state.year
-    }
+  case 'PREVIOUS':
+    return previous(state, action)
 
-  case actionTypes.NEXT:
-    return {
-      ...state,
-      month: state.month === 11 ? 0 : state.month + 1,
-      year: state.month === 11 ? state.year + 1 : state.year
-    }
+  case 'NEXT':
+    return next(state, action)
 
-  case actionTypes.BEGIN:
-    return {
-      ...state,
-      active: true
-    }
+  case 'BEGIN':
+    return begin(state, action)
 
-  case actionTypes.CANCEL:
-    return {
-      ...state,
-      active: false
-    }
+  case 'CANCEL':
+    return cancel(state, action)
 
-  case actionTypes.CHOOSE:
-    return {
-      ...state,
-      value: action.value,
-      active: false
-    }
+  case 'CHOOSE':
+    return choose(state, action)
 
-  case actionTypes.CLEAR:
-    return {
-      ...state,
-      value: null
-    }
+  case 'CLEAR':
+    return clear(state, action)
 
   default:
     return state
@@ -69,3 +87,5 @@ export default (state = INITIAL_VALUE, action) => {
   }
 
 }
+
+export default reducer

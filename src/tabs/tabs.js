@@ -16,12 +16,9 @@ class Tabs extends React.Component {
     items: PropTypes.array
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      visted: [],
-      transitioning: false
-    }
+  state = {
+    visted: [],
+    transitioning: false
   }
 
   render() {

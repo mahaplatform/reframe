@@ -1,8 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import { spy } from 'sinon'
-import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
 import Flash from './flash'
@@ -14,7 +12,7 @@ describe('flash component', () => {
     it('can dispatch set', () => {
 
       const expected = {
-        type: actionTypes.SET,
+        type: 'SET',
         style: 'success',
         message: 'good job'
       }
@@ -26,7 +24,7 @@ describe('flash component', () => {
     it('can dispatch clear', () => {
 
       const expected = {
-        type: actionTypes.CLEAR
+        type: 'CLEAR'
       }
 
       expect(actions.clear()).to.eql(expected)
@@ -56,7 +54,7 @@ describe('flash component', () => {
       }
 
       const action = {
-        type: actionTypes.SET,
+        type: 'SET',
         style: 'success',
         message: 'good job'
       }
@@ -78,7 +76,7 @@ describe('flash component', () => {
       }
 
       const action = {
-        type: actionTypes.CLEAR
+        type: 'CLEAR'
       }
 
       const expected = {

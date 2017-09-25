@@ -1,0 +1,8 @@
+// @flow
+
+declare export var CLEAR: string;
+declare export var CLOSE: string;
+declare export var OPEN: string;
+declare export var REQUEST_FAILURE: string;
+declare export var REQUEST_REQUEST: string;
+declare export var REQUEST_SUCCESS: string;

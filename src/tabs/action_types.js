@@ -1,1 +1,3 @@
-export const CHOOSE = 'CHOOSE'
+// @flow
+
+export const CHOOSE: string = 'CHOOSE'

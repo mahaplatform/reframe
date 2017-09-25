@@ -1,7 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
 
-class Checkbox extends React.Component {
+import type { Props, State } from './types'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+class Checkbox extends React.Component<Props, State> {
 
   static propTypes = {
     disabled: PropTypes.bool,
@@ -16,46 +19,50 @@ class Checkbox extends React.Component {
     defaultValue: false,
     disabled: false,
     onBusy: () => {},
-    onChange: () => {},
+    onChange: (value: boolean): void => {},
     onReady: () => {},
-    onSet: () => {}
+    onSet: (value: boolean): void => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: false
-    }
+  state: State = {
+    value: false
   }
 
   render() {
-    const { disabled } = this.props
-    let classes = ['ui', 'checkbox']
-    if(disabled) classes.push('disabled')
     return (
-      <div className="control">
-        <div className={classes.join(' ')}>
-          <i className={`toggle ${this.state.value ? 'on' : 'off'} icon`} onClick={ this._handleChange.bind(this) } />
+      <div className="reframe-checkbox">
+        <div className={ this._getClass() }>
+          <i className={ this._getToggleClass() } onClick={ this._handleChange.bind(this) } />
         </div>
       </div>
     )
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { defaultValue, onSet, onReady } = this.props
     const value = defaultValue || false
     this.setState({ value })
-    onSet(value)
-    onReady()
+    if(onSet) onSet(value)
+    if(onReady) onReady()
   }
 
-  _handleChange(value) {
+  _getClass(): string {
+    const { disabled } = this.props
+    return disabled ? 'ui disabled checkbox' : 'ui checkbox'
+  }
+
+  _getToggleClass(): string {
+    return `toggle ${this.state.value ? 'on' : 'off'} icon`
+  }
+
+  _handleChange(value: boolean): void {
     this.setValue(!this.state.value)
   }
 
-  setValue(value) {
+  setValue(value: boolean): void {
+    const { onChange } = this.props
     this.setState({ value })
-    this.props.onChange(value)
+    if(onChange) onChange(value)
   }
 
 }

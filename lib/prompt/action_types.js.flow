@@ -1,0 +1,4 @@
+// @flow
+
+declare export var CLOSE: string;
+declare export var OPEN: string;

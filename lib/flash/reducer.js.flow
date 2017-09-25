@@ -1,0 +1,4 @@
+// @flow
+
+import type {Set, Clear, Action, State} from "./types";
+declare export default function(state?: {message: ?string, style: ?string}, action: {message: string, style: string, type: "SET"} | {type: "CLEAR"}): {message: ?string, style: ?string} | {message: ?string, style: ?string} | {message: ?string, style: ?string};

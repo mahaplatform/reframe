@@ -58,15 +58,16 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { records } = this.props
+    const { endpoint, filter, records } = this.props
     return (
       <div className="reframe-collection">
-        <div className="reframe-collection-layout">
+        { filter &&
           <div className="reframe-collection-header">
             <Filter { ...this._getFilter() } />
           </div>
-          { records ? <Results { ...this.props } /> : <Infinite { ...this._getInfinite() } /> }
-        </div>
+        }
+        { records && <Results { ...this.props } /> }
+        { endpoint && <Infinite { ...this._getInfinite() } /> }
       </div>
     )
   }

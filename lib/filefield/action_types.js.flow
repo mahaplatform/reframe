@@ -1,0 +1,16 @@
+// @flow
+
+declare export var ADD_FILE: string;
+declare export var LOAD_FILES_FAILURE: string;
+declare export var LOAD_FILES_REQUEST: string;
+declare export var LOAD_FILES_SUCCESS: string;
+declare export var REMOVE_FILE: string;
+declare export var SET_READY: string;
+declare export var UPLOAD_BEGIN: string;
+declare export var UPLOAD_COMPLETE: string;
+declare export var UPLOAD_FAILURE: string;
+declare export var UPLOAD_PROCESS_FAILURE: string;
+declare export var UPLOAD_PROCESS_REQUEST: string;
+declare export var UPLOAD_PROCESS_SUCCESS: string;
+declare export var UPLOAD_PROGRESS: string;
+declare export var UPLOAD_SUCCESS: string;

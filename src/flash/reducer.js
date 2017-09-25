@@ -1,25 +1,32 @@
-import * as actionTypes from './action_types'
+// @flow
+
+import type { Set, Clear, Action, State } from './types'
 
 const INITIAL_STATE = {
   message: null,
   style: null
 }
 
-export default (state = INITIAL_STATE, action) => {
+export default (state: State = INITIAL_STATE, action: Action) => {
 
   switch (action.type) {
 
-  case actionTypes.SET:
-    return {
-      style: action.style,
-      message: action.message
-    }
+  case 'SET':
+    return set(state, action)
 
-  case actionTypes.CLEAR:
-    return INITIAL_STATE
+  case 'CLEAR':
+    return clear(state, action)
 
   default:
     return state
   }
 
 }
+
+const set = (state: State, action: Set): State => ({
+  style: action.style,
+  message: action.message
+})
+
+
+const clear = (state: State, action: Clear): State => INITIAL_STATE

@@ -1,0 +1,4 @@
+// @flow
+
+import type {SetParams, Sort, Filter, SetRecords, Actions, State} from "./types";
+declare export default function(state?: {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>}, action: {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"}): {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>};

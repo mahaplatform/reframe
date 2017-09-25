@@ -18,6 +18,9 @@
   "plugins": [
     "react"
   ],
+  "settings": {
+    "flowVersion": "0.55"
+  },
   "globals": {
     "$": true,
     "process": true

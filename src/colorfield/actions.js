@@ -1,6 +1,8 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const set = (color) => ({
-  type: actionTypes.SET,
+import type { Set } from './types'
+
+export const set = (color: string): Set => ({
+  type: 'SET',
   color
 })

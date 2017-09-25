@@ -1,0 +1,6 @@
+// @flow
+
+declare export var CLOSE: string;
+declare export var OPEN: string;
+declare export var POP: string;
+declare export var PUSH: string;

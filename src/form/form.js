@@ -58,19 +58,11 @@ class Form extends React.Component {
     onSuccess: (entity) => {}
   }
 
-  constructor(props) {
-    super(props)
-    this._debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
-  }
+  _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, isBusy, isReady, status, title } = this.props
+    const { after, before, config, instructions, status, title } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
-    const submitting = status === 'submitting'
-    let classes = ['ui', 'form', status]
-    if(configuring || !isReady || submitting) classes.push('loading')
-    let saveClasses = ['reframe-modal-panel-header-proceed']
-    if(isBusy) saveClasses.push('disabled')
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
@@ -80,7 +72,7 @@ class Form extends React.Component {
           <div className="reframe-modal-panel-header-title">
             { title }
           </div>
-          <div className={saveClasses.join(' ')} onClick={ this._debouncedSubmit }>
+          <div className={ this._getButtonClasses() } onClick={ this._debouncedSubmit }>
             Save
           </div>
         </div>
@@ -92,7 +84,7 @@ class Form extends React.Component {
                 { instructions && <div className="instructions">{ instructions }</div> }
               </div>
             }
-            <div className={ classes.join(' ') }>
+            <div className={ this._getFormClasses() }>
               { !configuring &&
                 config.map((section, index) => (
                   <Section key={`section_${index}`} { ...this._getSection(section) } />
@@ -125,6 +117,22 @@ class Form extends React.Component {
       if(status === 'failure') this._handleFailure()
     }
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
+  }
+
+  _getFormClasses() {
+    const { isReady, status } = this.props
+    const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
+    const submitting = status === 'submitting'
+    let classes = ['ui', 'form', status]
+    if(configuring || !isReady || submitting) classes.push('loading')
+    return classes.join(' ')
+  }
+
+  _getButtonClasses() {
+    const { isBusy } = this.props
+    let saveClasses = ['reframe-modal-panel-header-proceed']
+    if(isBusy) saveClasses.push('disabled')
+    return saveClasses.join(' ')
   }
 
   _getSection(section) {

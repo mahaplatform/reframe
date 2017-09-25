@@ -1,0 +1,4 @@
+// @flow
+
+declare export var SET: string;
+declare export var TOGGLE: string;

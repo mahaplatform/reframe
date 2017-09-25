@@ -1,0 +1,14 @@
+// @flow
+
+export type Action = {month: number, type: "SET_CURRENT", year: number} | {type: "SET_VALUE", value: string} | {type: "PREVIOUS"} | {type: "NEXT"} | {type: "BEGIN"} | {type: "CANCEL"} | {type: "CHOOSE", value: string} | {type: "CLEAR"};
+export type Begin = {type: "BEGIN"};
+export type Cancel = {type: "CANCEL"};
+export type Choose = {type: "CHOOSE", value: string};
+export type Clear = {type: "CLEAR"};
+export type Next = {type: "NEXT"};
+export type Previous = {type: "PREVIOUS"};
+export type SetCurrent = {month: number, type: "SET_CURRENT", year: number};
+export type SetValue = {type: "SET_VALUE", value: string};
+export type State = {active: boolean, month: ?number, value: ?string, year: ?number};
+
+declare module.exports: {};
