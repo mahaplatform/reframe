@@ -1,6 +1,7 @@
 // @flow
 
 import type { Component, Location, Props, ChildContext } from './types'
+import type { Node } from 'react'
 
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
@@ -15,7 +16,10 @@ class Drawer extends React.Component<Props> {
 
   static propTypes = {
     children: PropTypes.any,
-    component: PropTypes.func,
+    component: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
     location: PropTypes.string,
     open: PropTypes.bool,
     onClear: PropTypes.func,
@@ -23,7 +27,7 @@ class Drawer extends React.Component<Props> {
     onOpen: PropTypes.func
   }
 
-  render() {
+  render(): Node {
     const { children, component, location, open } = this.props
     return (
       <div className="reframe-drawer">

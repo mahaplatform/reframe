@@ -1,3 +1,5 @@
+// @flow
+
 export type Props = {
   disabled?: boolean,
   defaultValue?: boolean,
