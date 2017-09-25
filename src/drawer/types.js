@@ -32,13 +32,13 @@ export type State = {
 }
 
 export type Props = {
-  children: any,
-  component: Component,
-  location: Location,
-  open: boolean,
-  onClear: () => void,
-  onClose: () => void,
-  onOpen: (component: Component, location: Location) => Open
+  +children: any,
+  +component: Component,
+  +location: Location,
+  +open: boolean,
+  +onClear: () => void,
+  +onClose: () => void,
+  +onOpen: (component: Component, location: Location) => Open
 }
 
 export type ChildContext = {

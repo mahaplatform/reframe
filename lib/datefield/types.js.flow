@@ -9,6 +9,6 @@ export type Next = {type: "NEXT"};
 export type Previous = {type: "PREVIOUS"};
 export type SetCurrent = {month: number, type: "SET_CURRENT", year: number};
 export type SetValue = {type: "SET_VALUE", value: string};
-export type State = {active: boolean, month: ?number, value: ?string, year: ?number};
+export type State = {+active: boolean, +month: ?number, +value: ?string, +year: ?number};
 
 declare module.exports: {};

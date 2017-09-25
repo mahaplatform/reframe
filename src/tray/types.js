@@ -23,6 +23,6 @@ export type Action =
   | Clear
 
 export type State = {
-  component: ?Component,
-  open: boolean
+  +component: ?Component,
+  +open: boolean
 }

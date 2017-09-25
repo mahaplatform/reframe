@@ -47,8 +47,8 @@ export type Action =
   | Clear
 
 export type State = {
-  active: boolean,
-  value: ?string,
-  month: ?number,
-  year: ?number
+  +active: boolean,
+  +value: ?string,
+  +month: ?number,
+  +year: ?number
 }

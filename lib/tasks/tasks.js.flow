@@ -1,0 +1,24 @@
+// @flow
+
+import {CSSTransition} from "react-transition-group";
+import PropTypes from "prop-types";
+import React from "react";
+import type {Handler, Props, ChildContext} from "./types";
+import type {Location} from "../drawer/types";
+import type {Component, Node, ApiRequest} from "../types";
+declare export default class extends React$Component<any> {
+  static childContextTypes: any;
+  static contextTypes: any;
+  static propTypes: {children: any, items: any, onClear: any, onClose: any, onOpen: any, onRequest: any, open: any} | any;
+
+  _handleChoose(index: number): void;
+  _handleClose(): void;
+  _handleDrawer(component: any, location: "left" | "right"): void;
+  _handleFunction(handler: any): void;
+  _handleModal(component: any): void;
+  _handleRequest(itemRequest: any): void;
+  _handleRoute(route: string): void;
+  componentDidUpdate(prevProps: any): void;
+  getChildContext(): any;
+  render(): any;
+}

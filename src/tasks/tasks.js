@@ -1,8 +1,14 @@
+// @flow
+
+import type { Component, Node, ApiRequest } from '../types'
+import type { Location } from '../drawer/types'
+import type { Handler, Props, ChildContext } from './types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
-class Tasks extends React.Component {
+class Tasks extends React.Component<Props> {
 
   static childContextTypes = {
     tasks: PropTypes.object
@@ -24,7 +30,7 @@ class Tasks extends React.Component {
     onRequest: PropTypes.func
   }
 
-  render() {
+  render(): Node {
     const { children, items, open } = this.props
     return (
       <div className="reframe-tasks">
@@ -51,14 +57,14 @@ class Tasks extends React.Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { open, onClear } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClear, 500)
     }
   }
 
-  getChildContext() {
+  getChildContext(): ChildContext {
     const { onOpen, onClose } = this.props
     return {
       tasks: {
@@ -68,45 +74,53 @@ class Tasks extends React.Component {
     }
   }
 
-  _handleChoose(index) {
+  _handleChoose(index: number): void {
     const { items } = this.props
-    const { drawer, modal, router } = this.context
-    if(items[index].route) {
-      router.history.push(items[index].route)
-      this._handleClose()
-    } else if(items[index].request){
-      this._handleRequest(items[index].request)
-    } else if(items[index].modal){
-      modal.open(items[index].modal)
-      this._handleClose()
-    } else if(items[index].drawer){
-      const location = items[index].location || 'right'
-      drawer.open(items[index].drawer, location)
-      this._handleClose()
-    } else if(items[index].handler){
-      const done = this._handleClose.bind(this)
-      items[index].handler(done)
-    }
+    if(items[index].route) this._handleRoute(items[index].route)
+    if(items[index].request) this._handleRequest(items[index].request)
+    if(items[index].modal) this._handleModal(items[index].modal)
+    if(items[index].drawer) this._handleDrawer(items[index].drawer, items[index].location)
+    if(items[index].handler) this._handleFunction(items[index].handler)
+  }
+
+  _handleRoute(route: string): void {
+    const { router } = this.context
+    router.history.push(route)
+    this._handleClose()
+  }
+
+  _handleModal(component: Component): void {
+    const { modal } = this.context
+    modal.open(component)
+    this._handleClose()
+  }
+
+  _handleDrawer(component: Component, location: Location): void {
+    const { drawer } = this.context
+    drawer.open(component, location)
+    this._handleClose()
+  }
+
+  _handleFunction(handler: Handler): void {
+    const done = this._handleClose.bind(this)
+    handler(done)
   }
 
   _handleClose() {
     this.props.onClose()
   }
 
-  _handleRequest(itemRequest) {
+  _handleRequest(itemRequest: ApiRequest): void {
     const { onClose, onRequest } = this.props
-    const request = {
-      ...itemRequest,
-      onFailure: (result) => {
-        if(itemRequest.onFailure) itemRequest.onFailure(result)
-        onClose()
-      },
-      onSuccess: (result) => {
-        if(itemRequest.onSuccess) itemRequest.onSuccess(result)
-        onClose()
-      }
+    const onFailure = (result) => {
+      if(itemRequest.onFailure) itemRequest.onFailure(result)
+      onClose()
     }
-    onRequest(request)
+    const onSuccess = (result) => {
+      if(itemRequest.onSuccess) itemRequest.onSuccess(result)
+      onClose()
+    }
+    onRequest(itemRequest.method, itemRequest.endpoint, onSuccess, onFailure)
   }
 
 }

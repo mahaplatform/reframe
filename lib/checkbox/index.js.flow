@@ -3,11 +3,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import type {Props, State} from "./types";
-declare export default class extends React$Component<any, any> {
+declare export default class extends React$Component<{defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onReady?: () => void, onSet?: (value?: boolean) => void}, {value: boolean}> {
   static defaultProps: {defaultValue: boolean, disabled: boolean, onBusy: () => void, onChange: (value: boolean) => void, onReady: () => void, onSet: (value: boolean) => void};
   static propTypes: {defaultValue: any, disabled: any, onBusy: any, onChange: any, onReady: any, onSet: any} | any;
 
-  state: any;
+  state: {value: boolean};
   _getClass(): string;
   _getToggleClass(): string;
   _handleChange(value: boolean): void;

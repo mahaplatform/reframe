@@ -4,6 +4,6 @@ export type Action = {message: string, style: string, type: "SET"} | {type: "CLE
 export type Clear = {type: "CLEAR"};
 export type Props = {children: any, message: string, onClear: () => void, onSet: (style: string, message: string) => void, style: string};
 export type Set = {message: string, style: string, type: "SET"};
-export type State = {message: ?string, style: ?string};
+export type State = {+message: ?string, +style: ?string};
 
 declare module.exports: {};

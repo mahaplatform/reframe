@@ -15,8 +15,8 @@ export type Action =
   | Clear
 
 export type State = {
-  message: ?string,
-  style: ?string
+  +message: ?string,
+  +style: ?string
 }
 
 export type Props = {

@@ -7,7 +7,7 @@ export type Action =
   | Set
 
 export type State = {
-  color: ?string
+  +color: ?string
 }
 
 export type Props = {

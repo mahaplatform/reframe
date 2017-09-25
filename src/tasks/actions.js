@@ -1,25 +1,28 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const open = (items) => ({
-  type: actionTypes.OPEN,
+import type { Method, OnSuccess, OnFailure } from '../types'
+import type { Items, Open, Close, Clear, Request } from './types'
+
+export const open = (items: Items): Open => ({
+  type: 'OPEN',
   items
 })
 
-export const close = () => ({
-  type: actionTypes.CLOSE
+export const close = (): Close => ({
+  type: 'CLOSE'
 })
 
-export const clear = () => ({
-  type: actionTypes.CLEAR
+export const clear = (): Clear => ({
+  type: 'CLEAR'
 })
 
-export const request = ({ method, endpoint, onSuccess, onFailure}) => ({
+export const request = (method: Method, endpoint: string, onSuccess: OnSuccess, onFailure: OnFailure): Request => ({
   type: 'API_REQUEST',
   method,
   endpoint,
-  request: actionTypes.REQUEST_REQUEST,
-  success: actionTypes.REQUEST_SUCCESS,
-  failure: actionTypes.REQUEST_FAILURE,
+  request: 'REQUEST_REQUEST',
+  success: 'REQUEST_SUCCESS',
+  failure: 'REQUEST_FAILURE',
   onSuccess,
   onFailure
 })

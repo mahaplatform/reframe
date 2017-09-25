@@ -2,7 +2,6 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import { spy } from 'sinon'
-import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
 import Tasks from './tasks'
@@ -14,7 +13,7 @@ describe('tasks component', () => {
     it('can dispatch open', () => {
 
       const expected = {
-        type: actionTypes.OPEN,
+        type: 'OPEN',
         items: []
       }
 
@@ -25,10 +24,20 @@ describe('tasks component', () => {
     it('can dispatch close', () => {
 
       const expected = {
-        type: actionTypes.CLOSE
+        type: 'CLOSE'
       }
 
       expect(actions.close()).to.eql(expected)
+
+    })
+
+    it('can dispatch clear', () => {
+
+      const expected = {
+        type: 'CLEAR'
+      }
+
+      expect(actions.clear()).to.eql(expected)
 
     })
 
@@ -42,6 +51,7 @@ describe('tasks component', () => {
         error: null,
         items: null,
         open: false,
+        result: null,
         status: 'pending'
       }
 
@@ -51,12 +61,10 @@ describe('tasks component', () => {
 
     it('can open tasks', () => {
 
-      const state = {
-        tasks: null
-      }
+      const state = {}
 
       const action = {
-        type: actionTypes.OPEN,
+        type: 'OPEN',
         items:[
           { foo: '1' },
           { bar: '2' },
@@ -88,7 +96,7 @@ describe('tasks component', () => {
       }
 
       const action = {
-        type: actionTypes.CLOSE
+        type: 'CLOSE'
       }
 
       const expected = {
@@ -98,6 +106,32 @@ describe('tasks component', () => {
           { baz: '3' }
         ],
         open: false
+      }
+
+      expect(reducer(state, action)).to.eql(expected)
+
+    })
+
+    it('can clear tasks', () => {
+
+      const state = {
+        items: [
+          { foo: '1' },
+          { bar: '2' },
+          { baz: '3' }
+        ]
+      }
+
+      const action = {
+        type: 'CLEAR'
+      }
+
+      const expected = {
+        error: null,
+        items: null,
+        open: false,
+        result: null,
+        status: 'pending'
       }
 
       expect(reducer(state, action)).to.eql(expected)

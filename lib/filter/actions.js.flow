@@ -1,0 +1,13 @@
+// @flow
+
+import type {Load, Set, Choose, Back, Restart, ResetAll, Reset, Update, Remove, Query} from "./types";
+declare export function back(): {type: "BACK"};
+declare export function choose(index: number): {index: number, type: "CHOOSE"};
+declare export function load(key: string, endpoint: string, value: string, text: string, ids: Array<number>): {endpoint: string, failure: string, meta: {key: string, text: string, value: string}, method: string, query: {$ids: ?Array<number>}, request: string, success: string, type: "API_REQUEST"};
+declare export function query(q: string): {q: string, type: "QUERY"};
+declare export function remove(key: string, index: number): {index: number, key: string, type: "REMOVE"};
+declare export function reset(key: string): {key: string, type: "RESET"};
+declare export function resetAll(): {type: "RESET_ALL"};
+declare export function restart(): {type: "RESTART"};
+declare export function set(key: string, value: string): {key: string, type: "SET", value: string};
+declare export function update(key: string, value: string): {key: string, type: "UPDATE", value: string};

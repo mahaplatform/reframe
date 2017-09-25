@@ -1,4 +1,4 @@
 // @flow
 
 import type {SetValue, SetCurrent, Previous, Next, Begin, Cancel, Choose, Clear, Action, State} from "./types";
-declare export default function(state?: {active: boolean, month: ?number, value: ?string, year: ?number}, action: {month: number, type: "SET_CURRENT", year: number} | {type: "SET_VALUE", value: string} | {type: "PREVIOUS"} | {type: "NEXT"} | {type: "BEGIN"} | {type: "CANCEL"} | {type: "CHOOSE", value: string} | {type: "CLEAR"}): {active: boolean, month: ?number, value: ?string, year: ?number};
+declare export default function(state?: {+active: boolean, +month: ?number, +value: ?string, +year: ?number}, action: {month: number, type: "SET_CURRENT", year: number} | {type: "SET_VALUE", value: string} | {type: "PREVIOUS"} | {type: "NEXT"} | {type: "BEGIN"} | {type: "CANCEL"} | {type: "CHOOSE", value: string} | {type: "CLEAR"}): {+active: boolean, +month: ?number, +value: ?string, +year: ?number};

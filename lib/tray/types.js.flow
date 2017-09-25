@@ -6,6 +6,6 @@ export type Clear = {type: "CLEAR"};
 export type Close = {type: "CLOSE"};
 export type Component = any;
 export type Open = {component: any, type: "OPEN"};
-export type State = {component: ?any, open: boolean};
+export type State = {+component: ?any, +open: boolean};
 
 declare module.exports: {};

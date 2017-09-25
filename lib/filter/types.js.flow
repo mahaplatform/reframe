@@ -1,0 +1,14 @@
+// @flow
+
+export type Back = {type: "BACK"};
+export type Choose = {index: number, type: "CHOOSE"};
+export type Load = {endpoint: string, failure: string, meta: {key: string, text: string, value: string}, method: string, query: {$ids: ?Array<number>}, request: string, success: string, type: "API_REQUEST"};
+export type Query = {q: string, type: "QUERY"};
+export type Remove = {index: number, key: string, type: "REMOVE"};
+export type Reset = {key: string, type: "RESET"};
+export type ResetAll = {type: "RESET_ALL"};
+export type Restart = {type: "RESTART"};
+export type Set = {key: string, type: "SET", value: string};
+export type Update = {key: string, type: "UPDATE", value: string};
+
+declare module.exports: {};

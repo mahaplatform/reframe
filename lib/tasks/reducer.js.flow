@@ -1,0 +1,4 @@
+// @flow
+
+import type {Open, Close, Clear, RequestRequest, RequestFailure, RequestSuccess, Action, State} from "./types";
+declare export default function(state?: any, action: any): any;
