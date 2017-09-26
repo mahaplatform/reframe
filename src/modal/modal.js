@@ -11,21 +11,18 @@ class Modal extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
-    components: PropTypes.array,
+    component: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
     open: PropTypes.bool,
     onClose: PropTypes.func,
-    onOpen: PropTypes.func,
-    onPop: PropTypes.func,
-    onPush: PropTypes.func
-  }
-
-  state = {
-    count: 0
+    onClear: PropTypes.func,
+    onOpen: PropTypes.func
   }
 
   render() {
-    const { count } = this.state
-    const { children, components, open } = this.props
+    const { children, component, open } = this.props
     return (
       <div className="reframe-modal">
         { children }
@@ -34,63 +31,35 @@ class Modal extends React.Component {
         </CSSTransition>
         <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-modal-window">
-            { components.map((component, index) => {
-              return (
-                <CSSTransition key={`component_${index}`} in={ index + 1 <= count || index === 0 } classNames="cover" timeout={ 500 } appear={ index > 0 } mountOnEnter={ index > 0 } unmountOnExit={ index > 0 }>
-                  { _.isFunction(component) ? React.createElement(component, { key: `modal_panel_${index}` }) : React.cloneElement(component, { key: `modal_panel_${index}` }) }
-                </CSSTransition>
-              )
-            }) }
+            { _.isFunction(component) ? React.createElement(component) : component }
           </div>
         </CSSTransition>
       </div>
     )
   }
 
-  _handleClose() {
-    const { count } = this.state
-    const { onClose, onPop } = this.props
-    onClose()
-    setTimeout(() => {
-      onPop(count)
-      this.setState({ count: 0 })
-    }, 500)
-  }
-
-  _handlePush(component) {
-    const { count } = this.state
-    const { onOpen, onPush, open } = this.props
-    this.setState({ count: count + 1 })
-    onPush(component)
-    if(!open) onOpen()
-  }
-
-  _handlePop(panels = 1) {
-    const { count } = this.state
-    const { onClose, onPop } = this.props
-    if(count > 1) {
-      this.setState({ count: count - panels })
-      setTimeout(() => {
-        onPop(panels)
-      }, 500)
-    } else {
-      onClose()
-      setTimeout(() => {
-        this.setState({ count: count - panels })
-        onPop(panels)
-      }, 500)
+  componentDidUpdate(prevProps) {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
     }
   }
 
   getChildContext() {
     return {
       modal: {
-        open: this._handlePush.bind(this),
-        close: this._handlePop.bind(this),
-        pop: this._handlePop.bind(this),
-        push: this._handlePush.bind(this)
+        open: this._handleOpen.bind(this),
+        close: this._handleClose.bind(this)
       }
     }
+  }
+
+  _handleOpen(component) {
+    this.props.onOpen(component)
+  }
+
+  _handleClose() {
+    this.props.onClose()
   }
 
 }
