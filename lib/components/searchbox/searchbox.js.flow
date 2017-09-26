@@ -1,0 +1,17 @@
+// @flow
+
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
+import type {Props} from "./types";
+import type {Node, Event} from "../../types";
+declare export default class extends React$Component<{onAbort: ?() => {type: "ABORT"}, onChange: ?(q: string) => void, onType: ?(q: string) => {q: string, type: "TYPE"}, prompt: ?string, q: ?string}> {
+  static defaultProps: {onAbort: () => void, onChange: (q: any) => void, onType: (q: any) => void, prompt: string, q: string};
+  static propTypes: {onAbort: any, onChange: any, onType: any, prompt: any, q: any} | any;
+
+  _handleChange: any;
+  _handleAbort(): void;
+  _handleType(e: any): void;
+  constructor(props: {onAbort: ?() => {type: "ABORT"}, onChange: ?(q: string) => void, onType: ?(q: string) => {q: string, type: "TYPE"}, prompt: ?string, q: ?string}): void;
+  render(): any;
+}

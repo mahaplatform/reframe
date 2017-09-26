@@ -1,0 +1,18 @@
+// @flow
+
+import React from "react";
+import Task from "../task";
+import PropTypes from "prop-types";
+import {CSSTransition} from "react-transition-group";
+import type {Props, ChildContext} from "./types";
+import type {Node} from "../../types";
+declare export default class extends React$Component<{children: any, items: Array<Object>, onClear: () => void, onClose: () => void, onOpen: (items: Array<Object>) => void, open: boolean}> {
+  static childContextTypes: any;
+  static contextTypes: any;
+  static propTypes: {children: any, items: any, onClear: any, onClose: any, onOpen: any, open: any} | any;
+
+  _handleClose(): void;
+  componentDidUpdate(prevProps: {children: any, items: Array<Object>, onClear: () => void, onClose: () => void, onOpen: (items: Array<Object>) => void, open: boolean}): void;
+  getChildContext(): {tasks: {close: () => void, open: (items: Array<Object>) => void}};
+  render(): any;
+}
