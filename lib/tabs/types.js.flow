@@ -1,0 +1,11 @@
+// @flow
+
+export type Action = {index: number, type: "CHOOSE"};
+export type Choose = {index: number, type: "CHOOSE"};
+export type ComponentState = {transitioning: boolean, visited: Array<any>};
+export type Item = Object;
+export type OnChoose = (index: number) => {index: number, type: "CHOOSE"};
+export type Props = {children: any, chosen: number, header: any, items: Array<Object>, onChoose: (index: number) => {index: number, type: "CHOOSE"}};
+export type State = {+chosen: ?number};
+
+declare module.exports: {};

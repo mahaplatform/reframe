@@ -1,21 +1,27 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const INITIAL_STATE = {
+import type { Choose, State, Action } from './types'
+
+export const INITIAL_STATE: State = {
   chosen: null
 }
 
-export default (state = INITIAL_STATE, action) => {
+const choose = (state: State, action: Choose): State => ({
+  ...state,
+  chosen: action.index
+})
+
+const reducer = (state: State = INITIAL_STATE, action: Action): State => {
 
   switch (action.type) {
 
-  case actionTypes.CHOOSE:
-    return {
-      ...state,
-      chosen: action.index
-    }
+  case 'CHOOSE':
+    return choose(state, action)
 
   default:
     return state
   }
 
 }
+
+export default reducer

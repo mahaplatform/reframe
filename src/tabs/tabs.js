@@ -1,9 +1,14 @@
+// @flow
+
+import type { Node } from '../types'
+import type { Props, ComponentState } from './types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import Scrollpane from '../scrollpane'
 import _ from 'lodash'
 
-class Tabs extends React.Component {
+class Tabs extends React.Component<Props, ComponentState> {
 
   static contextTypes = {
     stack: PropTypes.object
@@ -13,15 +18,23 @@ class Tabs extends React.Component {
     chosen: PropTypes.number,
     children: PropTypes.any,
     header: PropTypes.any,
-    items: PropTypes.array
+    items: PropTypes.array,
+    onChoose: PropTypes.func
+  }
+
+  static defaultProps = {
+    chosen: null,
+    header: null,
+    items: [],
+    onChoose: (index) => {}
   }
 
   state = {
-    visted: [],
+    visited: [],
     transitioning: false
   }
 
-  render() {
+  render(): Node {
     const { chosen, header, items } = this.props
     return (
       <Scrollpane>
@@ -60,19 +73,20 @@ class Tabs extends React.Component {
     )
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.props.onChoose(0)
   }
 
-  _handleChoose(index) {
+  _handleChoose(index: number): void {
     const { onChoose } = this.props
-    const visited = _.uniq([...this.state.visted, index ])
-    this.setState({ visited, transitioning: true })
+    const visited = _.uniq([ ...this.state.visited, index ])
+    const transitioning = true
+    this.setState({ visited, transitioning })
     setTimeout(() => onChoose(index), 20)
     setTimeout(() => this.setState({ transitioning: false }), 520)
   }
 
-  _getStatus(index) {
+  _getStatus(index: number): string {
     const { transitioning } = this.state
     const { chosen } = this.props
     const statuses = []

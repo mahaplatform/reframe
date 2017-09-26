@@ -1,0 +1,4 @@
+// @flow
+
+import type {Choose} from "./types";
+declare export function choose(index: number): {index: number, type: "CHOOSE"};

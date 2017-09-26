@@ -1,6 +1,8 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const choose = (index) => ({
-  type: actionTypes.CHOOSE,
+import type { Choose } from './types'
+
+export const choose = (index: number): Choose => ({
+  type: 'CHOOSE',
   index
 })
