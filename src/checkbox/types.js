@@ -5,8 +5,7 @@ export type Props = {
   defaultValue?: boolean,
   onBusy?: () => void,
   onChange?: (value?: boolean) => void,
-  onReady?: () => void,
-  onSet?: (value?: boolean) => void
+  onReady?: () => void
 }
 
 export type State = {

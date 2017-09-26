@@ -19,8 +19,7 @@ class Password extends React.Component {
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onReady: PropTypes.func
   }
 
   static defaultProps = {
@@ -38,8 +37,7 @@ class Password extends React.Component {
     onKeyPress: () => {},
     onKeyUp: () => {},
     onKeyDown: () => {},
-    onReady: () => {},
-    onSet: () => {}
+    onReady: () => {}
   }
 
   constructor(props) {

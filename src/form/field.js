@@ -114,7 +114,6 @@ class Field extends React.Component {
       onBusy: this._handleBusy.bind(this),
       onChange: this._handleUpdateData.bind(this),
       onReady: this._handleReady.bind(this),
-      onSet: this._handleUpdateData.bind(this),
       onSubmit
     }
   }

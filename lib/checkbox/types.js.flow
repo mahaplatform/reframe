@@ -1,6 +1,6 @@
 // @flow
 
-export type Props = {defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onReady?: () => void, onSet?: (value?: boolean) => void};
+export type Props = {defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onReady?: () => void};
 export type State = {value: boolean};
 
 declare module.exports: {};

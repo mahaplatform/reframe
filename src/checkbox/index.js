@@ -12,8 +12,7 @@ class Checkbox extends React.Component<Props, State> {
     defaultValue: PropTypes.bool,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onReady: PropTypes.func
   }
 
   static defaultProps = {
@@ -21,8 +20,7 @@ class Checkbox extends React.Component<Props, State> {
     disabled: false,
     onBusy: () => {},
     onChange: (value: boolean): void => {},
-    onReady: () => {},
-    onSet: (value: boolean): void => {}
+    onReady: () => {}
   }
 
   state: State = {
@@ -40,10 +38,9 @@ class Checkbox extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    const { defaultValue, onSet, onReady } = this.props
+    const { defaultValue, onReady } = this.props
     const value = defaultValue || false
     this.setState({ value })
-    if(onSet) onSet(value)
     if(onReady) onReady()
   }
 

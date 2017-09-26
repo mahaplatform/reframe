@@ -23,7 +23,6 @@ class TextField extends React.Component {
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func,
     onReady: PropTypes.func,
-    onSet: PropTypes.func,
     onSubmit: PropTypes.func
   }
 
@@ -46,7 +45,6 @@ class TextField extends React.Component {
     onKeyUp: () => {},
     onKeyDown: () => {},
     onReady: () => {},
-    onSet: () => {},
     onSubmit: () => {}
   }
 

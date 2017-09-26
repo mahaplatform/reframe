@@ -46,14 +46,6 @@ describe('checkbox', () => {
 
     })
 
-    it('calls onSet', () => {
-
-      const onSet = spy()
-      shallow(<Checkbox onSet={ onSet } />, { lifecycleExperimental: true })
-      expect(onSet.calledOnce).to.be.true
-
-    })
-
     it('calls onReady', () => {
 
       const onReady = spy()

@@ -1,0 +1,5 @@
+// @flow
+
+import type {Ids, Set, Toggle} from "./types";
+declare export function set(ids: Array<number>): {ids: Array<number>, type: "SET"};
+declare export function toggle(id: number): {id: number, type: "TOGGLE"};

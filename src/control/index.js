@@ -54,8 +54,7 @@ class Control extends React.Component {
     value: PropTypes.string,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onReady: PropTypes.func
   }
 
   static defaultProps = {
@@ -64,13 +63,16 @@ class Control extends React.Component {
   }
 
   render() {
-    const { type } = this.props
-    const Element = (_.isString(this.props.type)) ? (_.get(standardControls, type) || standardControls.textfield) : type
     return (
       <div className="control">
-        <Element {...this.props} />
+        { React.createElement(this._getElement(), this.props) }
       </div>
     )
+  }
+
+  _getElement() {
+    const { type } = this.props
+    return _.isString(type) ? _.get(standardControls, type) : type
   }
 
 }

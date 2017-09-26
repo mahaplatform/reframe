@@ -11,8 +11,7 @@ class TextArea extends React.Component {
     placeholder: PropTypes.string,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onReady: PropTypes.func
   }
 
   static defaultProps = {
@@ -22,8 +21,7 @@ class TextArea extends React.Component {
     placeholder: '',
     onBusy: () => {},
     onChange: () => {},
-    onReady: () => {},
-    onSet: () => {}
+    onReady: () => {}
   }
 
   constructor(props) {

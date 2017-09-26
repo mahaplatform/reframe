@@ -52,8 +52,7 @@ class Lookup extends React.Component {
     value: 'value',
     onBusy: () => {},
     onChange: () => {},
-    onReady: () => {},
-    onSet: () => {}
+    onReady: () => {}
   }
 
   render() {

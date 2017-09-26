@@ -1,0 +1,13 @@
+// @flow
+
+import {Component} from "../types";
+export type Action = {ids: Array<number>, type: "SET"} | {id: number, type: "TOGGLE"};
+export type Filter = Object;
+export type Filters = Array<Object>;
+export type Ids = Array<number>;
+export type Props = {chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string};
+export type Set = {ids: Array<number>, type: "SET"};
+export type State = {+chosen: Array<number>};
+export type Toggle = {id: number, type: "TOGGLE"};
+
+declare module.exports: {};

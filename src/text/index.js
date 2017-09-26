@@ -11,8 +11,7 @@ class Text extends React.Component {
     format: PropTypes.any,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onReady: PropTypes.func
   }
 
   static defaultProps = {
@@ -21,8 +20,7 @@ class Text extends React.Component {
     format: null,
     onBusy: () => {},
     onChange: () => {},
-    onReady: () => {},
-    onSet: () => {}
+    onReady: () => {}
   }
 
   render() {

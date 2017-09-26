@@ -38,7 +38,7 @@ export type Props = {
   open: boolean,
   onClear: () => void,
   onClose: () => void,
-  onOpen: (component: Component, location: Location) => Open
+  onOpen: (component: Component, location: Location) => void
 }
 
 export type ChildContext = {

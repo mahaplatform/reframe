@@ -1,5 +1,7 @@
 // @flow
 
+import { Component } from '../types'
+
 export type SetParams = {
   type: 'SET_PARAMS',
   filter: Object,
@@ -39,4 +41,11 @@ export type State = {
     +filter: Object
   },
   +records: ?Array<Object>
+}
+
+export type Props = {
+  endpoint: ?string,
+  filters: ?Array<Object>,
+  layout: Component,
+  sort: string
 }

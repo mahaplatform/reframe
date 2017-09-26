@@ -1,7 +1,0 @@
-// @flow
-
-declare export var FETCH_DELAY: string;
-declare export var FETCH_FAILURE: string;
-declare export var FETCH_REQUEST: string;
-declare export var FETCH_SUCCESS: string;
-declare export var FETCH_TIMEOUT: string;

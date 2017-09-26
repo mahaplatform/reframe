@@ -1,0 +1,6 @@
+// @flow
+
+import _ from "lodash";
+import type {Set, Toggle, State, Action} from "./types";
+declare export var INITIAL_STATE: {+chosen: Array<number>};
+declare export default function(state?: {+chosen: Array<number>}, action: {ids: Array<number>, type: "SET"} | {id: number, type: "TOGGLE"}): {+chosen: Array<number>};

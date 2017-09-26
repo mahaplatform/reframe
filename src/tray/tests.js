@@ -17,7 +17,7 @@ describe('tray component', () => {
         component: <div>Foo</div>
       }
 
-      expect(actions.open(<div>Foo</div>, 'right')).to.eql(expected)
+      expect(actions.open(<div>Foo</div>)).to.eql(expected)
 
     })
 
