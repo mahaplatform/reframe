@@ -2,12 +2,12 @@
 
 import * as GlobalTypes from "../../types";
 export type Action = {component: any, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"};
-export type ChildContext = {drawer: {close: () => void, open: (component: any) => void}};
+export type ChildContext = {modal: {close: () => void, open: (component: any) => void}};
 export type Clear = {type: "CLEAR"};
 export type Close = {type: "CLOSE"};
 export type Component = any;
 export type Open = {component: any, type: "OPEN"};
-export type Props = {+children: any, +component: any, +onClear: () => void, +onClose: () => void, +onOpen: (component: any) => {component: any, type: "OPEN"}, +open: boolean};
-export type State = {component: ?any, open: boolean};
+export type Props = {children: any, component: any, onClear: () => void, onClose: () => void, onOpen: (component: any) => {component: any, type: "OPEN"}, open: boolean};
+export type State = {+component: ?any, +open: boolean};
 
 declare module.exports: {};

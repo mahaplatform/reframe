@@ -1,0 +1,17 @@
+// @flow
+
+import _ from "lodash";
+import {CSSTransition} from "react-transition-group";
+import PropTypes from "prop-types";
+import React from "react";
+import type {Props, ChildContext} from "./types";
+import type {Component, Node} from "../../types";
+declare export default class extends React$Component<{children: any, component: any, onClear: () => void, onClose: () => void, onOpen: (component: any) => {component: any, type: "OPEN"}, open: boolean}, void> {
+  static childContextTypes: any;
+
+  _handleClose(): void;
+  _handleOpen(component: any): void;
+  componentDidUpdate(prevProps: {children: any, component: any, onClear: () => void, onClose: () => void, onOpen: (component: any) => {component: any, type: "OPEN"}, open: boolean}): void;
+  getChildContext(): {modal: {close: () => void, open: (component: any) => void}};
+  render(): any;
+}

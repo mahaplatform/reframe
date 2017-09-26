@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import Task from '../task'
 import React from 'react'
 
-class Tasks extends React.Component<Props> {
+class Tasks extends React.Component<Props, void> {
 
   static childContextTypes = {
     tasks: PropTypes.object
@@ -18,15 +18,6 @@ class Tasks extends React.Component<Props> {
     drawer: PropTypes.object,
     modal: PropTypes.object,
     router: PropTypes.object
-  }
-
-  static propTypes = {
-    children: PropTypes.any,
-    items: PropTypes.array,
-    open: PropTypes.bool,
-    onClear: PropTypes.func,
-    onClose: PropTypes.func,
-    onOpen: PropTypes.func
   }
 
   render(): Node {

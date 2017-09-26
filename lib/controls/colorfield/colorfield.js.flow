@@ -1,11 +1,9 @@
 // @flow
 
 import React from "react";
-import PropTypes from "prop-types";
 import type {Props} from "./types";
-declare export default class extends React$Component<any> {
+declare export default class extends React$Component<any, void> {
   static defaultProps: {colors: [{name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}, {name: string, value: string}], defaultValue: null, disabled: boolean, onBusy: () => void, onChange: (value: any) => void, onReady: () => void, onSet: (value: any) => void};
-  static propTypes: {color: any, colors: any, defaultValue: any, disabled: any, onBusy: any, onChange: any, onReady: any, onSet: any} | any;
 
   _handleSet(color: string): void;
   componentDidMount(): void;

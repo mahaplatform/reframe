@@ -14,14 +14,6 @@ class Tabs extends React.Component<Props, ComponentState> {
     stack: PropTypes.object
   }
 
-  static propTypes = {
-    chosen: PropTypes.number,
-    children: PropTypes.any,
-    header: PropTypes.any,
-    items: PropTypes.array,
-    onChoose: PropTypes.func
-  }
-
   static defaultProps = {
     chosen: null,
     header: null,

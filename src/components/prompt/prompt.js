@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import Task from '../task'
 import React from 'react'
 
-class Prompt extends React.Component<Props> {
+class Prompt extends React.Component<Props, void> {
 
   static childContextTypes = {
     confirm: PropTypes.object,
@@ -18,22 +18,6 @@ class Prompt extends React.Component<Props> {
     drawer: PropTypes.object,
     modal: PropTypes.object,
     history: PropTypes.object
-  }
-
-  static propTypes = {
-    cancel: PropTypes.bool,
-    children: PropTypes.any,
-    message: PropTypes.string,
-    open: PropTypes.bool,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        handler: PropTypes.func,
-        label: PropTypes.string
-      })
-    ),
-    onOpen: PropTypes.func,
-    onClear: PropTypes.func,
-    onClose: PropTypes.func
   }
 
   static defaultProps = {

@@ -3,20 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import * as Controls from '../../controls'
 
-const standardControls = {
-  'checkbox': Controls.Checkbox,
-  'colorfield': Controls.ColorField,
-  'datefield': Controls.DateField,
-  'filefield': Controls.FileField,
-  'lookup': Controls.Lookup,
-  'moneyfield': Controls.MoneyField,
-  'textfield': Controls.TextField,
-  'password': Controls.Password,
-  'text': Controls.Text,
-  'textarea': Controls.TextArea,
-  'timefield': Controls.TimeField,
-  'togglelist': Controls.ToggleList
-}
+const standard = Object.keys(Controls).reduce((standard, name) => ({
+  ...standard,
+  [name.toLowerCase()]: Controls[name]
+}), {})
 
 class Control extends React.Component {
 
@@ -42,7 +32,7 @@ class Control extends React.Component {
 
   render() {
     return (
-      <div className="control">
+      <div className="reframe-control">
         { React.createElement(this._getElement(), this.props) }
       </div>
     )
@@ -50,7 +40,7 @@ class Control extends React.Component {
 
   _getElement() {
     const { type } = this.props
-    return _.isString(type) ? _.get(standardControls, type) : type
+    return _.isString(type) ? _.get(standard, type) : type
   }
 
 }

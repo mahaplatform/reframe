@@ -4,18 +4,9 @@ import type { Node, Event } from '../../types'
 import type { Props } from './types'
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-class Searchbox extends React.Component<Props> {
-
-  static propTypes = {
-    q: PropTypes.string,
-    prompt: PropTypes.string,
-    onAbort: PropTypes.func,
-    onChange: PropTypes.func,
-    onType: PropTypes.func
-  }
+class Searchbox extends React.Component<Props, void> {
 
   static defaultProps = {
     prompt: 'Search...',

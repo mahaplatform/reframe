@@ -2,14 +2,12 @@
 
 import _ from "lodash";
 import React from "react";
-import PropTypes from "prop-types";
 import Collection from "../../components/collection";
 import type {Props as CollectionProps} from "../../components/collection/types";
 import type {Props} from "./types";
 import type {Component, Node} from "../../types";
-declare export default class extends React$Component<{chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}> {
+declare export default class extends React$Component<{chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}, void> {
   static defaultProps: {filters: []};
-  static propTypes: {chosen: any, component: any, defaultValue: any, endpoint: any, filters: any, onChange: any, onSet: any, onToggle: any, sort: any} | any;
 
   _getCollection(): {endpoint: ?string, filters: ?Array<Object>, layout: any, sort: string};
   _getLayout(): any;

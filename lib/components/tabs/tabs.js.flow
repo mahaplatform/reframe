@@ -9,7 +9,6 @@ import type {Node} from "../../types";
 declare export default class extends React$Component<{children: any, chosen: number, header: any, items: Array<Object>, onChoose: (index: number) => {index: number, type: "CHOOSE"}}, {transitioning: boolean, visited: Array<any>}> {
   static contextTypes: any;
   static defaultProps: {chosen: null, header: null, items: [], onChoose: (index: any) => void};
-  static propTypes: {children: any, chosen: any, header: any, items: any, onChoose: any} | any;
 
   state: {transitioning: boolean, visited: Array<any>};
   _getStatus(index: number): string;

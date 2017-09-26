@@ -42,7 +42,7 @@
     "chai": "^3.5.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react": "^7.4.0",
     "flow-bin": "^0.55.0",
     "jsdom": "^11.2.0",
     "jsdom-global": "^3.0.2",

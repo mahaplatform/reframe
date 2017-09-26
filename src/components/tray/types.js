@@ -26,3 +26,19 @@ export type State = {
   +component: ?Component,
   +open: boolean
 }
+
+export type Props = {
+  children: any,
+  component: Component,
+  open: boolean,
+  onClear: () => void,
+  onClose: () => void,
+  onOpen: (component: Component) => Open
+}
+
+export type ChildContext = {
+  tray: {
+    open: (component: Component) => void,
+    close: () => void
+  }
+}

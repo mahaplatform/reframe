@@ -1,21 +1,9 @@
 // @flow
 
 import type { Props } from './types'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-class ColorField extends React.Component<Props> {
-
-  static propTypes = {
-    color: PropTypes.string,
-    colors: PropTypes.array,
-    defaultValue: PropTypes.string,
-    disabled: PropTypes.bool,
-    onBusy: PropTypes.func,
-    onChange: PropTypes.func,
-    onReady: PropTypes.func,
-    onSet: PropTypes.func
-  }
+class ColorField extends React.Component<Props, void> {
 
   static defaultProps = {
     colors: [

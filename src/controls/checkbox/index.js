@@ -2,18 +2,9 @@
 
 import type { Props, State } from './types'
 
-import PropTypes from 'prop-types'
 import React from 'react'
 
 class Checkbox extends React.Component<Props, State> {
-
-  static propTypes = {
-    disabled: PropTypes.bool,
-    defaultValue: PropTypes.bool,
-    onBusy: PropTypes.func,
-    onChange: PropTypes.func,
-    onReady: PropTypes.func
-  }
 
   static defaultProps = {
     defaultValue: false,

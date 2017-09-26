@@ -5,26 +5,10 @@ import type { Props } from './types'
 import type { Props as CollectionProps } from '../../components/collection/types'
 
 import Collection from '../../components/collection'
-import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
-class ToggleList extends React.Component<Props> {
-
-  static propTypes = {
-    chosen: PropTypes.array,
-    component: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    defaultValue: PropTypes.arrayOf(PropTypes.number),
-    endpoint: PropTypes.string,
-    filters: PropTypes.array,
-    sort: PropTypes.string,
-    onChange: PropTypes.func,
-    onSet: PropTypes.func,
-    onToggle: PropTypes.func
-  }
+class ToggleList extends React.Component<Props, void> {
 
   static defaultProps = {
     filters: []

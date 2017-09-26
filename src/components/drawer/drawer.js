@@ -8,23 +8,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
-class Drawer extends React.Component<Props> {
+class Drawer extends React.Component<Props, void> {
 
   static childContextTypes = {
     drawer: PropTypes.object
-  }
-
-  static propTypes = {
-    children: PropTypes.any,
-    component: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    location: PropTypes.string,
-    open: PropTypes.bool,
-    onClear: PropTypes.func,
-    onClose: PropTypes.func,
-    onOpen: PropTypes.func
   }
 
   render(): Node {

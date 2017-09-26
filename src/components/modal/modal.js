@@ -1,27 +1,20 @@
+// @flow
+
+import type { Component, Node } from '../../types'
+import type { Props, ChildContext } from './types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import _ from 'lodash'
 
-class Modal extends React.Component {
+class Modal extends React.Component<Props, void> {
 
   static childContextTypes = {
     modal: PropTypes.object
   }
 
-  static propTypes = {
-    children: PropTypes.any,
-    component: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    open: PropTypes.bool,
-    onClose: PropTypes.func,
-    onClear: PropTypes.func,
-    onOpen: PropTypes.func
-  }
-
-  render() {
+  render(): Node {
     const { children, component, open } = this.props
     return (
       <div className="reframe-modal">
@@ -38,14 +31,14 @@ class Modal extends React.Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { open, onClear } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClear, 500)
     }
   }
 
-  getChildContext() {
+  getChildContext(): ChildContext {
     return {
       modal: {
         open: this._handleOpen.bind(this),
@@ -54,11 +47,11 @@ class Modal extends React.Component {
     }
   }
 
-  _handleOpen(component) {
+  _handleOpen(component: Component): void {
     this.props.onOpen(component)
   }
 
-  _handleClose() {
+  _handleClose(): void {
     this.props.onClose()
   }
 

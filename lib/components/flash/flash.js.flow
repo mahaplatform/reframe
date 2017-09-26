@@ -5,9 +5,8 @@ import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import type {Element} from "react";
 import type {Props} from "./types";
-declare export default class extends React$Component<{children: any, message: string, onClear: () => void, onSet: (style: string, message: string) => void, style: string}> {
+declare export default class extends React$Component<{children: any, message: string, onClear: () => void, onSet: (style: string, message: string) => void, style: string}, void> {
   static childContextTypes: any;
-  static propTypes: {children: any, message: any, onClear: any, onSet: any, style: any} | any;
 
   _getIcon(style: string): $Exact<{+key: string | number | null, +props: mixed /* UNEXPECTED TYPE: EvalT */, +ref: any, +type: ElementType}>;
   componentDidUpdate<C>(prevProps: {children: any, message: string, onClear: () => void, onSet: (style: string, message: string) => void, style: string}): void;

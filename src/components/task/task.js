@@ -7,35 +7,12 @@ import type { Handler, ItemRequest, Props } from './types'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Task extends React.Component<Props> {
+class Task extends React.Component<Props, void> {
 
   static contextTypes = {
     drawer: PropTypes.object,
     modal: PropTypes.object,
     router: PropTypes.object
-  }
-
-  static propTypes = {
-    drawer: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    handler: PropTypes.func,
-    label: PropTypes.string,
-    location: PropTypes.string,
-    modal: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ]),
-    request: PropTypes.shape({
-      method: PropTypes.string,
-      endpoint: PropTypes.string,
-      onFailure: PropTypes.func,
-      onSuccess: PropTypes.func
-    }),
-    route: PropTypes.string,
-    onRequest: PropTypes.func,
-    onDone: PropTypes.func
   }
 
   render(): Node {

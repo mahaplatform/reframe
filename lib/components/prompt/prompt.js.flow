@@ -5,11 +5,10 @@ import Task from "../task";
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import type {Props, ChildContext, PromptChildContext, ConfirmChildContext} from "./types";
-declare export default class extends React$Component<{cancel: boolean, children: any, message: string, onClear: () => void, onClose: () => void, onOpen: (message: string, options: Array<Object>) => void, open: boolean, options: Array<{drawer: any, handler: () => void, label: string, location: "left" | "right", modal: any, onDone: () => void, onRequest: (itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}) => any, request: {endpoint: string, method: any, onFailure: any, onSuccess: any}, route: string}>}> {
+declare export default class extends React$Component<{cancel: boolean, children: any, message: string, onClear: () => void, onClose: () => void, onOpen: (message: string, options: Array<Object>) => void, open: boolean, options: Array<{drawer: any, handler: () => void, label: string, location: "left" | "right", modal: any, onDone: () => void, onRequest: (itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}) => any, request: {endpoint: string, method: any, onFailure: any, onSuccess: any}, route: string}>}, void> {
   static childContextTypes: any;
   static contextTypes: any;
   static defaultProps: {cancel: boolean};
-  static propTypes: {cancel: any, children: any, message: any, onClear: any, onClose: any, onOpen: any, open: any, options: any} | any;
 
   _getConfirmChildContext(): {confirm: {close: () => void, open: (message: string, yes: () => void, no: () => void) => void}};
   _getPromptChildContext(): {prompt: {close: () => void, open: (message: string, options: Array<Object>) => void}};

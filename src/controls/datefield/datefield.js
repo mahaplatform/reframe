@@ -37,7 +37,7 @@ class Datefield extends React.Component {
   }
 
   render() {
-    const { active, placeholder, value } = this.props
+    const { active, prompt, value } = this.props
     return (
       <div className="reframe-datefield">
         <div className="reframe-datefield-input">
@@ -77,12 +77,12 @@ class Datefield extends React.Component {
   }
 
   _getInput() {
-    const { placeholder, value } = this.props
+    const { prompt, value } = this.props
     return {
       type: 'text',
       value,
       autoComplete: false,
-      placeholder
+      prompt
     }
   }
 
