@@ -1,10 +1,12 @@
-import * as actionTypes from './action_types'
+// @flow
 
-export const type = (q) => ({
-  type: actionTypes.TYPE,
+import type { Type, Abort } from './types'
+
+export const type = (q: string): Type => ({
+  type: 'TYPE',
   q
 })
 
-export const abort = () => ({
-  type: actionTypes.ABORT
+export const abort = (): Abort => ({
+  type: 'ABORT'
 })

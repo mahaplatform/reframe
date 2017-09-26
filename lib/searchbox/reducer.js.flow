@@ -1,0 +1,5 @@
+// @flow
+
+import type {Type, Abort, State, Action} from "./types";
+declare export var INITIAL_STATE: {+q: string};
+declare export default function(state?: {+q: string}, action: {q: string, type: "TYPE"} | {type: "ABORT"}): {+q: string};

@@ -126,7 +126,7 @@ describe('drawer component', () => {
 
   })
 
-  it('handles close', () => {
+  it('handles close on clicked overlay', () => {
 
     const onClose = spy()
 

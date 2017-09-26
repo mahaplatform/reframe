@@ -1,24 +1,38 @@
+// @flow
+
+import type { Node, Event } from '../types'
+import type { Props } from './types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-class Searchbox extends React.Component {
+class Searchbox extends React.Component<Props> {
 
   static propTypes = {
     q: PropTypes.string,
     prompt: PropTypes.string,
     onAbort: PropTypes.func,
     onChange: PropTypes.func,
-    onLookup: PropTypes.func,
     onType: PropTypes.func
   }
 
   static defaultProps = {
     prompt: 'Search...',
-    onChange: (q) => {}
+    q: '',
+    onAbort: () => {},
+    onChange: (q) => {},
+    onType: (q) => {}
   }
 
-  render() {
+  _handleChange: any = null
+
+  constructor(props: Props): void {
+    super(props)
+    this._handleChange = _.throttle(props.onChange, 500)
+  }
+
+  render(): Node {
     const { prompt, q } = this.props
     return (
       <div className="reframe-searchbox">
@@ -27,10 +41,10 @@ class Searchbox extends React.Component {
         </div>
         <div className="reframe-searchbox-input">
           <div className="ui input">
-            <input type="text" placeholder={ prompt } onChange={ this._handleType.bind(this) } ref={ (node) => this.query = node } value={ q } />
+            <input type="text" placeholder={ prompt } onChange={ this._handleType.bind(this) } value={ q } />
           </div>
         </div>
-        { q.length > 0 &&
+        { q && q.length > 0 &&
           <div className="reframe-searchbox-icon" onClick={ this._handleAbort.bind(this) }>
             <i className="remove circle icon" />
           </div>
@@ -39,19 +53,16 @@ class Searchbox extends React.Component {
     )
   }
 
-  componentDidMount() {
-    this._handleLookup = _.throttle(this.props.onChange, 500)
+  _handleType(e: Event): void {
+    const { onType } = this.props
+    if(onType) onType(e.target.value)
+    this._handleChange(e.target.value)
   }
 
-  _handleType() {
-    const q = this.query.value
-    this.props.onType(q)
-    this._handleLookup(q)
-  }
-
-  _handleAbort() {
-    this.props.onAbort()
-    this.props.onChange('')
+  _handleAbort(): void {
+    const { onAbort, onChange } = this.props
+    if(onAbort) onAbort()
+    if(onChange) onChange('')
   }
 
 }

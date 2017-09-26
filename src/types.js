@@ -1,5 +1,11 @@
 // @ flow
 
+export type Event = {
+  target: {
+    value: any
+  }
+}
+
 // import type { ComponentType, ElementType, Node } from 'react'
 //
 // export type Component = ComponentType<any> | ElementType

@@ -41,8 +41,7 @@ class Tasks extends React.Component<Props> {
         <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-tasks-list">
             { items && items.map((item, index) => {
-              if(item.show === false) return
-              return (
+              if(item.show !== false) return (
                 <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
                   { item.label }
                 </div>

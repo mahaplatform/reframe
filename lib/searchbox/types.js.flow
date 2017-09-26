@@ -1,0 +1,12 @@
+// @flow
+
+export type Abort = {type: "ABORT"};
+export type Action = {q: string, type: "TYPE"} | {type: "ABORT"};
+export type OnAbort = () => {type: "ABORT"};
+export type OnChange = (q: string) => void;
+export type OnType = (q: string) => {q: string, type: "TYPE"};
+export type Props = {onAbort: ?() => {type: "ABORT"}, onChange: ?(q: string) => void, onType: ?(q: string) => {q: string, type: "TYPE"}, prompt: ?string, q: ?string};
+export type State = {+q: string};
+export type Type = {q: string, type: "TYPE"};
+
+declare module.exports: {};
