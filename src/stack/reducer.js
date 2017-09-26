@@ -1,5 +1,3 @@
-import * as actionTypes from './action_types'
-
 export const INITIAL_STATE = {
   cards: []
 }
@@ -8,12 +6,12 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.SET:
+  case 'SET':
     return {
       cards: action.cards
     }
 
-  case actionTypes.PUSH:
+  case 'PUSH':
     return {
       cards: [
         ...state.cards,
@@ -21,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
       ]
     }
 
-  case actionTypes.POP:
+  case 'POP':
     return {
       cards: state.cards.slice(0, state.cards.length - 1)
     }

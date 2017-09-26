@@ -1,5 +1,3 @@
-import * as actionTypes from './action_types'
-
 const INITIAL_VALUE = {
   active: false,
   q: null,
@@ -12,57 +10,57 @@ export default (state = INITIAL_VALUE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.BEGIN:
+  case 'BEGIN':
     return {
       ...state,
       active: true
     }
 
-  case actionTypes.END:
+  case 'END':
     return {
       ...state,
       active: false
     }
 
-  case actionTypes.CLEAR:
+  case 'CLEAR':
     return {
       ...state,
       chosen: null
     }
 
-  case actionTypes.CANCEL:
+  case 'CANCEL':
     return {
       ...state,
       active: false
     }
 
-  case actionTypes.CHOOSE:
+  case 'CHOOSE':
     return {
       ...state,
       active: false,
       chosen: action.chosen
     }
 
-  case actionTypes.QUERY:
+  case 'QUERY':
     return {
       ...state,
       q: action.q
     }
 
-  case actionTypes.LOAD_SUCCESS:
+  case 'LOAD_SUCCESS':
     return {
       ...state,
       chosen: action.result.data[0],
       status: 'success'
     }
 
-  case actionTypes.SHOW_FORM:
+  case 'SHOW_FORM':
     return {
       ...state,
       adding: true
     }
 
-  case actionTypes.HIDE_FORM:
+  case 'HIDE_FORM':
     return {
       ...state,
       adding: false

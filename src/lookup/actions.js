@@ -1,28 +1,26 @@
-import * as actionTypes from './action_types'
-
 export const begin = () => ({
-  type: actionTypes.BEGIN
+  type: 'BEGIN'
 })
 
 export const end = () => ({
-  type: actionTypes.END
+  type: 'END'
 })
 
 export const clear = () => ({
-  type: actionTypes.CLEAR
+  type: 'CLEAR'
 })
 
 export const cancel = () => ({
-  type: actionTypes.CANCEL
+  type: 'CANCEL'
 })
 
 export const choose = (chosen) => ({
-  type: actionTypes.CHOOSE,
+  type: 'CHOOSE',
   chosen
 })
 
 export const query = (q) => ({
-  type: actionTypes.QUERY,
+  type: 'QUERY',
   q
 })
 
@@ -31,15 +29,15 @@ export const load = (query, endpoint) => ({
   method: 'GET',
   endpoint,
   query,
-  request: actionTypes.LOAD_REQUEST,
-  success: actionTypes.LOAD_SUCCESS,
-  failure: actionTypes.LOAD_FAILURE
+  request: 'LOAD_REQUEST',
+  success: 'LOAD_SUCCESS',
+  failure: 'LOAD_FAILURE'
 })
 
 export const showForm = () => ({
-  type: actionTypes.SHOW_FORM
+  type: 'SHOW_FORM'
 })
 
 export const hideForm = () => ({
-  type: actionTypes.HIDE_FORM
+  type: 'HIDE_FORM'
 })

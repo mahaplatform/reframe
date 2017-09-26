@@ -1,7 +1,5 @@
-import * as actionTypes from './action_types'
-
 export const setReady = () => ({
-  type: actionTypes.SET_READY
+  type: 'SET_READY'
 })
 
 export const loadFiles = (endpoint, $ids) => ({
@@ -9,13 +7,13 @@ export const loadFiles = (endpoint, $ids) => ({
   method: 'GET',
   endpoint,
   query: { $ids },
-  request: actionTypes.LOAD_FILES_REQUEST,
-  success: actionTypes.LOAD_FILES_SUCCESS,
-  failure: actionTypes.LOAD_FILES_FAILURE
+  request: 'LOAD_FILES_REQUEST',
+  success: 'LOAD_FILES_SUCCESS',
+  failure: 'LOAD_FILES_FAILURE'
 })
 
 export const addFile = (uniqueIdentifier, fileName, fileSize, contentType, totalChunks) => ({
-  type: actionTypes.ADD_FILE,
+  type: 'ADD_FILE',
   uniqueIdentifier,
   fileName,
   fileSize,
@@ -24,30 +22,30 @@ export const addFile = (uniqueIdentifier, fileName, fileSize, contentType, total
 })
 
 export const uploadBegin = () => ({
-  type: actionTypes.UPLOAD_BEGIN
+  type: 'UPLOAD_BEGIN'
 })
 
 export const uploadProgress = (uniqueIdentifier, progress) => ({
-  type: actionTypes.UPLOAD_PROGRESS,
+  type: 'UPLOAD_PROGRESS',
   uniqueIdentifier,
   progress
 })
 
 export const uploadSuccess = (uniqueIdentifier, response) => ({
-  type: actionTypes.UPLOAD_SUCCESS,
+  type: 'UPLOAD_SUCCESS',
   uniqueIdentifier,
   asset: response.data
 })
 
 export const uploadFailure = () => ({
-  type: actionTypes.UPLOAD_FAILURE
+  type: 'UPLOAD_FAILURE'
 })
 
 export const removeFile = (uniqueIdentifier) => ({
-  type: actionTypes.REMOVE_FILE,
+  type: 'REMOVE_FILE',
   uniqueIdentifier
 })
 
 export const uploadComplete = () => ({
-  type: actionTypes.UPLOAD_COMPLETE
+  type: 'UPLOAD_COMPLETE'
 })

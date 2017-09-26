@@ -1,4 +1,3 @@
-import * as actionTypes from './action_types'
 import _ from 'lodash'
 
 const INITIAL_VALUE = {
@@ -10,13 +9,13 @@ export default (state = INITIAL_VALUE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.SET_READY:
+  case 'SET_READY':
     return {
       ...state,
       status: 'ready'
     }
 
-  case actionTypes.LOAD_FILES_SUCCESS:
+  case 'LOAD_FILES_SUCCESS':
     return {
       ...state,
       status: 'ready',
@@ -32,7 +31,7 @@ export default (state = INITIAL_VALUE, action) => {
       }))
     }
 
-  case actionTypes.ADD_FILE:
+  case 'ADD_FILE':
     return {
       ...state,
       files: _.find(state.files, file => { return file.uniqueIdentifier === action.uniqueIdentifier }) ? state.files : [
@@ -50,13 +49,13 @@ export default (state = INITIAL_VALUE, action) => {
       ]
     }
 
-  case actionTypes.UPLOAD_BEGIN:
+  case 'UPLOAD_BEGIN':
     return {
       ...state,
       status: 'uploading'
     }
 
-  case actionTypes.UPLOAD_PROGRESS:
+  case 'UPLOAD_PROGRESS':
     return {
       ...state,
       files: state.files.map(file => (file.uniqueIdentifier === action.uniqueIdentifier) ? {
@@ -67,19 +66,19 @@ export default (state = INITIAL_VALUE, action) => {
       } : file)
     }
 
-  case actionTypes.UPLOAD_PROCESS_REQUEST:
+  case 'UPLOAD_PROCESS_REQUEST':
     return {
       ...state,
       status: 'processing'
     }
 
-  case actionTypes.UPLOAD_PROCESS_SUCCESS:
+  case 'UPLOAD_PROCESS_SUCCESS':
     return {
       ...state,
       status: 'success'
     }
 
-  case actionTypes.UPLOAD_SUCCESS:
+  case 'UPLOAD_SUCCESS':
     return {
       ...state,
       files: state.files.map(file => {
@@ -91,14 +90,14 @@ export default (state = INITIAL_VALUE, action) => {
       })
     }
 
-  case actionTypes.UPLOAD_PROCESS_FAILURE:
-  case actionTypes.UPLOAD_FAILED:
+  case 'UPLOAD_PROCESS_FAILURE':
+  case 'UPLOAD_FAILED':
     return {
       ...state,
       status: 'failed'
     }
 
-  case actionTypes.REMOVE_FILE:
+  case 'REMOVE_FILE':
     const index = _.findIndex(state.files, file => { return file.uniqueIdentifier === action.uniqueIdentifier })
     return {
       ...state,
@@ -108,7 +107,7 @@ export default (state = INITIAL_VALUE, action) => {
       ]
     }
 
-  case actionTypes.UPLOAD_COMPLETE:
+  case 'UPLOAD_COMPLETE':
     return {
       ...state,
       status: 'ready'

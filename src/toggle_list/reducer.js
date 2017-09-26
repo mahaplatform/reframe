@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import * as actionTypes from './action_types'
 
 export const INITIAL_STATE = {
   chosen: []
@@ -9,7 +8,7 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.TOGGLE:
+  case 'TOGGLE':
     const included = _.includes(state.chosen, action.id)
     return {
       ...state,
@@ -19,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
       ]
     }
 
-  case actionTypes.SET:
+  case 'SET':
     return {
       ...state,
       chosen: action.ids

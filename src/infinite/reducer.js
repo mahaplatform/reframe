@@ -1,4 +1,3 @@
-import * as actionTypes from './action_types'
 import _ from 'lodash'
 
 const INITIAL_STATE = {
@@ -13,14 +12,14 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
-  case actionTypes.FETCH_REQUEST:
+  case 'FETCH_REQUEST':
     return {
       ...state,
       request_id: action.request_id,
       status: 'loading'
     }
 
-  case actionTypes.FETCH_SUCCESS:
+  case 'FETCH_SUCCESS':
     if(action.request_id !== state.request_id) return state
     if(!_.includes(['loading','delayed'], state.status)) return state
     const loaded = state.records ? state.records.length : 0
@@ -36,19 +35,19 @@ export default (state = INITIAL_STATE, action) => {
       status: (loaded + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
     }
 
-  case actionTypes.FETCH_FAILURE:
+  case 'FETCH_FAILURE':
     return {
       ...state,
       status: 'failed'
     }
 
-  case actionTypes.FETCH_DELAY:
+  case 'FETCH_DELAY':
     return {
       ...state,
       status: 'delayed'
     }
 
-  case actionTypes.FETCH_TIMEOUT:
+  case 'FETCH_TIMEOUT':
     return {
       ...state,
       status: 'timeout'

@@ -1,10 +1,8 @@
-import * as actionTypes from './action_types'
-
 export const open = (component) => ({
-  type: actionTypes.OPEN,
+  type: 'OPEN',
   component
 })
 
 export const close = () => ({
-  type: actionTypes.CLOSE
+  type: 'CLOSE'
 })
