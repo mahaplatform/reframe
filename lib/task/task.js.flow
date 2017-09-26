@@ -1,0 +1,19 @@
+// @flow
+
+import PropTypes from "prop-types";
+import React from "react";
+import type {Handler, ItemRequest, Props} from "./types";
+import type {Location} from "../drawer/types";
+import type {Component, Node} from "../types";
+declare export default class extends React$Component<{drawer: any, handler: () => void, label: string, location: "left" | "right", modal: any, onDone: () => void, onRequest: (itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}) => any, request: {endpoint: string, method: any, onFailure: any, onSuccess: any}, route: string}> {
+  static contextTypes: any;
+  static propTypes: {drawer: any, handler: any, label: any, location: any, modal: any, onDone: any, onRequest: any, request: any, route: any} | any;
+
+  _handleChoose(index: number): void;
+  _handleDrawer(component: any, location: "left" | "right"): void;
+  _handleFunction(handler: (done: () => void) => void): void;
+  _handleModal(component: any): void;
+  _handleRequest(itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}): void;
+  _handleRoute(route: string): void;
+  render(): any;
+}

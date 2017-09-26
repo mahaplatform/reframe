@@ -1,0 +1,4 @@
+// @flow
+
+import type {Open, Close, Clear, Action, State} from "./types";
+declare export default function(state?: {component: ?any, open: boolean}, action: {component: any, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"}): {component: ?any, open: boolean};

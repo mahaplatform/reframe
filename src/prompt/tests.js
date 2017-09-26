@@ -2,7 +2,6 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import { spy } from 'sinon'
-import * as actionTypes from './action_types'
 import * as actions from './actions'
 import reducer from './reducer'
 import Prompt from './prompt'
@@ -21,7 +20,7 @@ describe('prompt component', () => {
     it('can dispatch open', () => {
 
       const expected = {
-        type: actionTypes.OPEN,
+        type: 'OPEN',
         message,
         options
       }
@@ -33,7 +32,7 @@ describe('prompt component', () => {
     it('can dispatch clear', () => {
 
       const expected = {
-        type: actionTypes.CLOSE
+        type: 'CLOSE'
       }
 
       expect(actions.close()).to.eql(expected)
@@ -48,7 +47,8 @@ describe('prompt component', () => {
 
       const expected = {
         message: null,
-        options: null
+        options: null,
+        open: false
       }
 
       expect(reducer(undefined, '')).to.eql(expected)
@@ -59,18 +59,20 @@ describe('prompt component', () => {
 
       const state = {
         message: null,
-        options: null
+        options: null,
+        open: false
       }
 
       const action = {
-        type: actionTypes.OPEN,
+        type: 'OPEN',
         message,
         options
       }
 
       const expected = {
         message,
-        options
+        options,
+        open: true
       }
 
       expect(reducer(state, action)).to.eql(expected)
@@ -81,16 +83,40 @@ describe('prompt component', () => {
 
       const state = {
         message,
-        options
+        options,
+        open: true
       }
 
       const action = {
-        type: actionTypes.CLOSE
+        type: 'CLOSE'
+      }
+
+      const expected = {
+        message,
+        options,
+        open: false
+      }
+
+      expect(reducer(state, action)).to.eql(expected)
+
+    })
+
+    it('can clear prompt', () => {
+
+      const state = {
+        message,
+        options,
+        open: true
+      }
+
+      const action = {
+        type: 'CLEAR'
       }
 
       const expected = {
         message: null,
-        options: null
+        options: null,
+        open: false
       }
 
       expect(reducer(state, action)).to.eql(expected)
@@ -102,6 +128,45 @@ describe('prompt component', () => {
   describe('component', () => {
 
     it('renders with a default state', () => {
+
+      const prompt = shallow(<Prompt />)
+      expect(prompt.is('div.reframe-prompt')).to.be.true
+
+    })
+
+
+    it('handles onClose on clicked overlay', () => {
+
+      const onClose = spy()
+      const prompt = shallow(<Prompt onClose={ onClose } />)
+      const overlay = prompt.childAt(0).childAt(0)
+      overlay.simulate('click')
+      expect(onClose.calledOnce).to.be.true
+
+    })
+
+    it('handles onClose on clicked cancel', () => {
+
+      const onClose = spy()
+      const prompt = shallow(<Prompt cancel={ true } onClose={ onClose } />)
+      const cancel = prompt.find('div.reframe-prompt-cancel')
+      cancel.simulate('click')
+      expect(onClose.calledOnce).to.be.true
+
+    })
+
+    it('calls onClear', (done) => {
+
+      const onClear = spy()
+
+      const prompt = shallow(<Prompt open={ true } onClear={ onClear } />, { lifecycleExperimental: true })
+
+      prompt.setProps({ open: false })
+
+      setTimeout(() => {
+        expect(onClear.calledOnce).to.be.true
+        done()
+      }, 500)
 
     })
 

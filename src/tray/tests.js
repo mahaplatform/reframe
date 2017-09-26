@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import { spy } from 'sinon'
 import * as actions from './actions'
 import reducer from './reducer'
@@ -112,9 +112,9 @@ describe('tray component', () => {
 
     const component = <div className="foo" />
 
-    const tray = mount(<Tray component={ component } open={ true } />)
+    const tray = shallow(<Tray component={ component } open={ true } />, { lifecycleExperimental: true })
 
-    const panelComponent = tray.childAt(1).childAt(0)
+    const panelComponent = tray.childAt(1).childAt(0).childAt(0)
     expect(panelComponent.is('div.foo')).to.be.true
 
   })
@@ -135,7 +135,7 @@ describe('tray component', () => {
 
     const onClear = spy()
 
-    const tray = mount(<Tray open={ true } onClear={ onClear } />)
+    const tray = shallow(<Tray open={ true } onClear={ onClear } />, { lifecycleExperimental: true })
 
     tray.setProps({ open: false })
 

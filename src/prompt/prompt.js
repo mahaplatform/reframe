@@ -1,8 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
+// @flow
 
-class Prompt extends React.Component {
+import type { Props, ChildContext, PromptChildContext, ConfirmChildContext } from './types'
+
+import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
+import Task from '../task'
+import React from 'react'
+
+class Prompt extends React.Component<Props> {
 
   static childContextTypes = {
     confirm: PropTypes.object,
@@ -16,8 +21,10 @@ class Prompt extends React.Component {
   }
 
   static propTypes = {
+    cancel: PropTypes.bool,
     children: PropTypes.any,
     message: PropTypes.string,
+    open: PropTypes.bool,
     options: PropTypes.arrayOf(
       PropTypes.shape({
         handler: PropTypes.func,
@@ -25,18 +32,23 @@ class Prompt extends React.Component {
       })
     ),
     onOpen: PropTypes.func,
+    onClear: PropTypes.func,
     onClose: PropTypes.func
   }
 
+  static defaultProps = {
+    cancel: false
+  }
+
   render() {
-    const { children, message, options } = this.props
+    const { cancel, children, message, open, options } = this.props
     return (
       <div className="reframe-prompt">
         { children }
-        <CSSTransition in={ message } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-prompt-overlay" onClick={ this._handleClosePrompt.bind(this) } />
+        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="reframe-prompt-overlay" onClick={ this._handleClose.bind(this) } />
         </CSSTransition>
-        <CSSTransition in={ message } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-prompt-options">
             { message &&
               <div className="reframe-prompt-header">
@@ -44,56 +56,60 @@ class Prompt extends React.Component {
               </div>
             }
             { options && options.map((option, index) => {
-              return (
-                <div key={`option_${index}`} className="reframe-prompt-option" onClick={ this._handleChooseOption.bind(this, index) }>
-                  { option.label }
-                </div>
-              )
+              return <Task key={`option_${index}`} { ...option } onDone={ this._handleClose.bind(this) } />
             }) }
+            { cancel &&
+              <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>
+                Cancel
+              </div>
+            }
           </div>
         </CSSTransition>
       </div>
     )
   }
 
-  getChildContext() {
-    return {
-      prompt: this._getPromptChildContext(),
-      confirm: this._getConfirmChildContext()
+  componentDidUpdate(prevProps: Props): void {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
     }
   }
 
-  _getPromptChildContext() {
+  getChildContext(): ChildContext {
+    return {
+      ...this._getPromptChildContext(),
+      ...this._getConfirmChildContext()
+    }
+  }
+
+  _getPromptChildContext(): PromptChildContext {
     const { onOpen, onClose } = this.props
     return {
-      open: onOpen,
-      close: onClose
+      prompt: {
+        open: onOpen,
+        close: onClose
+      }
     }
   }
 
-  _getConfirmChildContext() {
+  _getConfirmChildContext(): ConfirmChildContext {
     const { onOpen, onClose } = this.props
     return {
-      open: (message, yes, no) => {
-        const options = [
-          { label: 'Yes', handler: () => { if(yes) yes() } },
-          { label: 'No', handler: () => { if(no) no() } }
-        ]
-        onOpen(message, options)
-      },
-      close: onClose
+      confirm: {
+        open: (message, yes, no) => {
+          const options = [
+            { label: 'Yes', handler: () => { if(yes) yes() } },
+            { label: 'No', handler: () => { if(no) no() } }
+          ]
+          onOpen(message, options)
+        },
+        close: onClose
+      }
     }
   }
 
-  _handleChooseOption(index) {
-    const { options } = this.props
-    this._handleClosePrompt()
-    if(options[index].handler){
-      options[index].handler()
-    }
-  }
-
-  _handleClosePrompt() {
+  _handleClose() {
     this.props.onClose()
   }
 

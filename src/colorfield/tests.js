@@ -1,5 +1,5 @@
 import 'jsdom-global/register'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import * as actions from './actions'
 import reducer from './reducer'
 import Colorfield from './colorfield'
@@ -119,7 +119,7 @@ describe('collection', () => {
     it('calls onSet', () => {
 
       const onSet = spy()
-      mount(<Colorfield defaultValue="red" onSet={ onSet } />)
+      shallow(<Colorfield defaultValue="red" onSet={ onSet } />, { lifecycleExperimental: true })
       expect(onSet.calledOnce).to.be.true
 
     })
@@ -127,7 +127,7 @@ describe('collection', () => {
     it('calls onReady', () => {
 
       const onReady = spy()
-      mount(<Colorfield onReady={ onReady } />)
+      shallow(<Colorfield onReady={ onReady } />, { lifecycleExperimental: true })
       expect(onReady.calledOnce).to.be.true
 
     })

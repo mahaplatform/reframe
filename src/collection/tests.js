@@ -1,5 +1,5 @@
 import 'jsdom-global/register'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import Collection from './collection'
 import { expect } from 'chai'
 import React from 'react'

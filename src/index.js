@@ -22,6 +22,7 @@ import Stack from './stack'
 import Table from './table'
 import Tabs from './tabs'
 import Tasks from './tasks'
+import Task from './task'
 import Textarea from './textarea'
 import Textfield from './textfield'
 import Timefield from './timefield'
@@ -53,6 +54,7 @@ export default {
   Table,
   Tabs,
   Tasks,
+  Task,
   Textarea,
   Textfield,
   Timefield,

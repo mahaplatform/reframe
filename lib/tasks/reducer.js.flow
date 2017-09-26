@@ -1,4 +1,4 @@
 // @flow
 
-import type {Open, Close, Clear, RequestRequest, RequestFailure, RequestSuccess, Action, State} from "./types";
-declare export default function(state?: {+error: ?Object, +items: ?Array<Object>, +open: boolean, +result: ?any, +status: "pending" | "submitting" | "success" | "failure"}, action: {items: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"} | any | any | any | any): {+error: ?Object, +items: ?Array<Object>, +open: boolean, +result: ?any, +status: "pending" | "submitting" | "success" | "failure"};
+import type {Open, Close, Clear, Action, State} from "./types";
+declare export default function(state?: {+items: ?Array<Object>, +open: boolean}, action: {items: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"}): {+items: ?Array<Object>, +open: boolean};

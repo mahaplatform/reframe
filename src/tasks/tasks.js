@@ -1,12 +1,12 @@
 // @flow
 
-import type { Component, Node } from '../types'
-import type { Location } from '../drawer/types'
-import type { Handler, ItemRequest, Props, ChildContext } from './types'
+import type { Node } from '../types'
+import type { Props, ChildContext } from './types'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
+import Task from '../task'
+import React from 'react'
 
 class Tasks extends React.Component<Props> {
 
@@ -26,8 +26,7 @@ class Tasks extends React.Component<Props> {
     open: PropTypes.bool,
     onClear: PropTypes.func,
     onClose: PropTypes.func,
-    onOpen: PropTypes.func,
-    onRequest: PropTypes.func
+    onOpen: PropTypes.func
   }
 
   render(): Node {
@@ -42,9 +41,7 @@ class Tasks extends React.Component<Props> {
           <div className="reframe-tasks-list">
             { items && items.map((item, index) => {
               if(item.show !== false) return (
-                <div key={`task_${index}`} className="reframe-tasks-item" onClick={ this._handleChoose.bind(this, index) }>
-                  { item.label }
-                </div>
+                <Task key={`task_${index}`} { ...item } onDone={ this._handleClose.bind(this) } />
               )
             }) }
             <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
@@ -73,57 +70,8 @@ class Tasks extends React.Component<Props> {
     }
   }
 
-  _handleChoose(index: number): void {
-    const { items } = this.props
-    if(items[index].route) this._handleRoute(items[index].route)
-    if(items[index].request) this._handleRequest(items[index].request)
-    if(items[index].modal) this._handleModal(items[index].modal)
-    if(items[index].drawer) this._handleDrawer(items[index].drawer, items[index].location)
-    if(items[index].handler) this._handleFunction(items[index].handler)
-  }
-
-  _handleRoute(route: string): void {
-    const { router } = this.context
-    router.history.push(route)
-    this._handleClose()
-  }
-
-  _handleModal(component: Component): void {
-    const { modal } = this.context
-    modal.open(component)
-    this._handleClose()
-  }
-
-  _handleDrawer(component: Component, location: Location): void {
-    const { drawer } = this.context
-    drawer.open(component, location)
-    this._handleClose()
-  }
-
-  _handleFunction(handler: Handler): void {
-    const done = this._handleClose.bind(this)
-    handler(done)
-  }
-
   _handleClose() {
     this.props.onClose()
-  }
-
-  _handleRequest(itemRequest: ItemRequest): void {
-    const { onClose, onRequest } = this.props
-    const onFailure = (result) => {
-      if(itemRequest.onFailure) itemRequest.onFailure(result)
-      onClose()
-    }
-    const onSuccess = (result) => {
-      if(itemRequest.onSuccess) itemRequest.onSuccess(result)
-      onClose()
-    }
-    onRequest({
-      ...itemRequest,
-      onSuccess,
-      onFailure
-    })
   }
 
 }

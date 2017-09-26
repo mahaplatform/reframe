@@ -1,0 +1,20 @@
+// @flow
+
+import type {Props as Task} from "../task/types";
+export type Action = {message: string, options: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"};
+export type ChildContext = mixed /* UNEXPECTED TYPE: EvalT */;
+export type Clear = {type: "CLEAR"};
+export type Close = {type: "CLOSE"};
+export type ConfirmChildContext = {confirm: {close: () => void, open: (message: string, yes: () => void, no: () => void) => void}};
+export type ConfirmHandler = () => void;
+export type OnClear = () => void;
+export type OnClose = () => void;
+export type OnOpen = (message: string, options: Array<Object>) => void;
+export type Open = {message: string, options: Array<Object>, type: "OPEN"};
+export type Option = Object;
+export type Options = Array<Object>;
+export type PromptChildContext = {prompt: {close: () => void, open: (message: string, options: Array<Object>) => void}};
+export type Props = {children: any, message: string, onClear: () => void, onClose: () => void, onOpen: (message: string, options: Array<Object>) => void, open: boolean, options: Array<{drawer: any, handler: () => void, label: string, location: "left" | "right", modal: any, onDone: () => void, onRequest: (itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}) => any, request: {endpoint: string, method: any, onFailure: any, onSuccess: any}, route: string}>};
+export type State = {message: ?string, open: boolean, options: ?Array<Object>};
+
+declare module.exports: {};

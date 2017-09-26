@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import { spy } from 'sinon'
 import * as actions from './actions'
 import reducer from './reducer'
@@ -112,9 +112,9 @@ describe('modal component', () => {
 
     const component = <div className="foo" />
 
-    const modal = mount(<Modal component={ component } open={ true } />)
+    const modal = shallow(<Modal component={ component } open={ true } />, { lifecycleExperimental: true })
 
-    const panelComponent = modal.childAt(1).childAt(0)
+    const panelComponent = modal.childAt(1).childAt(0).childAt(0)
     expect(panelComponent.is('div.foo')).to.be.true
 
   })
@@ -135,7 +135,7 @@ describe('modal component', () => {
 
     const onClear = spy()
 
-    const modal = mount(<Modal open={ true } onClear={ onClear } />)
+    const modal = shallow(<Modal open={ true } onClear={ onClear } />, { lifecycleExperimental: true })
 
     modal.setProps({ open: false })
 

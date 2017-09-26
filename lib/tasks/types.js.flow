@@ -1,20 +1,14 @@
 // @flow
 
-import type {Method, OnFailure, OnSuccess, ApiRequest, ApiRequestRequest, ApiRequestFailure, ApiRequestSuccess} from "../types";
-export type Action = {items: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"} | any | any | any | any;
+export type Action = {items: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"};
 export type ChildContext = {tasks: {close: () => void, open: (items: Array<Object>) => void}};
 export type Clear = {type: "CLEAR"};
 export type Close = {type: "CLOSE"};
 export type Done = () => void;
-export type Handler = (done: () => void) => void;
-export type ItemRequest = {endpoint: string, method: any, onFailure: any, onSuccess: any};
+export type Item = Object;
 export type Items = Array<Object>;
 export type Open = {items: Array<Object>, type: "OPEN"};
-export type Props = {children: any, items: Array<Object>, onClear: () => void, onClose: () => void, onOpen: (items: Array<Object>) => void, onRequest: (itemRequest: {endpoint: string, method: any, onFailure: any, onSuccess: any}) => any, open: boolean};
-export type Request = any;
-export type RequestFailure = any;
-export type RequestRequest = any;
-export type RequestSuccess = any;
-export type State = {+error: ?Object, +items: ?Array<Object>, +open: boolean, +result: ?any, +status: "pending" | "submitting" | "success" | "failure"};
+export type Props = {children: any, items: Array<Object>, onClear: () => void, onClose: () => void, onOpen: (items: Array<Object>) => void, open: boolean};
+export type State = {+items: ?Array<Object>, +open: boolean};
 
 declare module.exports: {};

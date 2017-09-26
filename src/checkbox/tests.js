@@ -1,5 +1,5 @@
 import 'jsdom-global/register'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import Checkbox from './index'
 import { expect } from 'chai'
 import React from 'react'
@@ -32,7 +32,7 @@ describe('checkbox', () => {
 
     it('renders with a on state', () => {
 
-      const control = mount(<Checkbox defaultValue={ true } />)
+      const control = shallow(<Checkbox defaultValue={ true } />, { lifecycleExperimental: true })
       expect(control.find('i').is('i.toggle.on.icon')).to.be.true
 
     })
@@ -49,7 +49,7 @@ describe('checkbox', () => {
     it('calls onSet', () => {
 
       const onSet = spy()
-      mount(<Checkbox onSet={ onSet } />)
+      shallow(<Checkbox onSet={ onSet } />, { lifecycleExperimental: true })
       expect(onSet.calledOnce).to.be.true
 
     })
@@ -57,7 +57,7 @@ describe('checkbox', () => {
     it('calls onReady', () => {
 
       const onReady = spy()
-      mount(<Checkbox onReady={ onReady } />)
+      shallow(<Checkbox onReady={ onReady } />, { lifecycleExperimental: true })
       expect(onReady.calledOnce).to.be.true
 
     })
@@ -65,7 +65,7 @@ describe('checkbox', () => {
     it('calls onChange', () => {
 
       const onChange = spy()
-      const control = mount(<Checkbox onChange={ onChange } />)
+      const control = shallow(<Checkbox onChange={ onChange } />, { lifecycleExperimental: true })
       expect(onChange.called).to.be.false
       control.find('i').simulate('click')
       expect(onChange.callCount).to.eql(1)

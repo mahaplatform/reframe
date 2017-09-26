@@ -26,19 +26,19 @@ export type Action =
   | Clear
 
 export type State = {
-  component: ?Component,
-  location: ?Location,
-  open: boolean
+  +component: ?Component,
+  +location: ?Location,
+  +open: boolean
 }
 
 export type Props = {
-  +children: any,
-  +component: Component,
-  +location: Location,
-  +open: boolean,
-  +onClear: () => void,
-  +onClose: () => void,
-  +onOpen: (component: Component, location: Location) => Open
+  children: any,
+  component: Component,
+  location: Location,
+  open: boolean,
+  onClear: () => void,
+  onClose: () => void,
+  onOpen: (component: Component, location: Location) => Open
 }
 
 export type ChildContext = {

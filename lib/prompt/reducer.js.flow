@@ -1,0 +1,4 @@
+// @flow
+
+import type {Open, Close, Clear, Action, State} from "./types";
+declare export default function(state?: {message: ?string, open: boolean, options: ?Array<Object>}, action: {message: string, options: Array<Object>, type: "OPEN"} | {type: "CLOSE"} | {type: "CLEAR"}): {message: ?string, open: boolean, options: ?Array<Object>};

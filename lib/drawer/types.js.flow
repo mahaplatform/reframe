@@ -8,7 +8,7 @@ export type Close = {type: "CLOSE"};
 export type Component = any;
 export type Location = "left" | "right";
 export type Open = {component: any, location: "left" | "right", type: "OPEN"};
-export type Props = {+children: any, +component: any, +location: "left" | "right", +onClear: () => void, +onClose: () => void, +onOpen: (component: any, location: "left" | "right") => {component: any, location: "left" | "right", type: "OPEN"}, +open: boolean};
-export type State = {component: ?any, location: ?"left" | "right", open: boolean};
+export type Props = {children: any, component: any, location: "left" | "right", onClear: () => void, onClose: () => void, onOpen: (component: any, location: "left" | "right") => {component: any, location: "left" | "right", type: "OPEN"}, open: boolean};
+export type State = {+component: ?any, +location: ?"left" | "right", +open: boolean};
 
 declare module.exports: {};

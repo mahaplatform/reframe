@@ -1,0 +1,6 @@
+// @flow
+
+import type {Component, Open, Close, Clear} from "./types";
+declare export function clear(): {type: "CLEAR"};
+declare export function close(): {type: "CLOSE"};
+declare export function open(component: any): {component: any, type: "OPEN"};

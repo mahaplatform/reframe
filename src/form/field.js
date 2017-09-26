@@ -7,7 +7,7 @@ import _ from 'lodash'
 class Field extends React.Component {
 
   static propTypes = {
-    action: PropTypes.array,
+    action: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.object,
     endpoint: PropTypes.string,

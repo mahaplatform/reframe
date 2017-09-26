@@ -1,0 +1,4 @@
+// @flow
+
+import type {RequestRequest, RequestFailure, RequestSuccess, Action, State} from "./types";
+declare export default function(state?: {+error: ?Object, +result: ?any, +status: "pending" | "submitting" | "success" | "failure"}, action: any | any | any | any): {+error: ?Object, +result: ?any, +status: "pending" | "submitting" | "success" | "failure"};

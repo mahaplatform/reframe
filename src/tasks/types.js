@@ -1,19 +1,10 @@
 // @flow
 
-import type { Method, OnFailure, OnSuccess, ApiRequest, ApiRequestRequest, ApiRequestFailure, ApiRequestSuccess } from '../types'
+export type Item = Object
 
-export type Items = Array<Object>
+export type Items = Array<Item>
 
 export type Done = () => void
-
-export type Handler = (done: Done) => void
-
-export type ItemRequest = {
-  method: Method,
-  endpoint: string,
-  onFailure: OnFailure,
-  onSuccess: OnSuccess
-}
 
 export type Open = {
   type: 'OPEN',
@@ -28,29 +19,14 @@ export type Clear = {
   type: 'CLEAR'
 }
 
-export type Request = ApiRequest
-
-export type RequestRequest = ApiRequestRequest
-
-export type RequestFailure = ApiRequestFailure
-
-export type RequestSuccess = ApiRequestSuccess
-
 export type Action =
   | Open
   | Close
   | Clear
-  | Request
-  | RequestRequest
-  | RequestFailure
-  | RequestSuccess
 
 export type State = {
-  +error: ?Object,
   +items: ?Items,
-  +open: boolean,
-  +result: ?any,
-  +status: 'pending' | 'submitting' | 'success' | 'failure'
+  +open: boolean
 }
 
 export type Props = {
@@ -59,8 +35,7 @@ export type Props = {
   open: boolean,
   onClear: () => void,
   onClose: () => void,
-  onOpen: (items: Items) => void,
-  onRequest: (itemRequest: ItemRequest) => any
+  onOpen: (items: Items) => void
 }
 
 export type ChildContext = {
