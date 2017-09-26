@@ -1,8 +1,7 @@
 // @flow
 
-import type {Items, Open, Close, Clear, Request} from "./types";
-import type {Method, OnSuccess, OnFailure} from "../types";
-declare export function clear(): any;
-declare export function close(): any;
-declare export function open(items: any): any;
-declare export function request(method: any, endpoint: string, onSuccess: any, onFailure: any): any;
+import type {ItemRequest, Items, Open, Close, Clear, Request} from "./types";
+declare export function clear(): {type: "CLEAR"};
+declare export function close(): {type: "CLOSE"};
+declare export function open(items: Array<Object>): {items: Array<Object>, type: "OPEN"};
+declare export function request(_: {endpoint: string, method: any, onFailure: any, onSuccess: any}): any;

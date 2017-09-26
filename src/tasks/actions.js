@@ -1,7 +1,6 @@
 // @flow
 
-import type { Method, OnSuccess, OnFailure } from '../types'
-import type { Items, Open, Close, Clear, Request } from './types'
+import type { ItemRequest, Items, Open, Close, Clear, Request } from './types'
 
 export const open = (items: Items): Open => ({
   type: 'OPEN',
@@ -16,7 +15,7 @@ export const clear = (): Clear => ({
   type: 'CLEAR'
 })
 
-export const request = (method: Method, endpoint: string, onSuccess: OnSuccess, onFailure: OnFailure): Request => ({
+export const request = ({ method, endpoint, onSuccess, onFailure }: ItemRequest): Request => ({
   type: 'API_REQUEST',
   method,
   endpoint,

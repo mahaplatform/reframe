@@ -1,10 +1,19 @@
-import { ApiRequest, ApiRequestRequest, ApiRequestFailure, ApiRequestSuccess } from '../types'
+// @flow
+
+import type { Method, OnFailure, OnSuccess, ApiRequest, ApiRequestRequest, ApiRequestFailure, ApiRequestSuccess } from '../types'
 
 export type Items = Array<Object>
 
 export type Done = () => void
 
 export type Handler = (done: Done) => void
+
+export type ItemRequest = {
+  method: Method,
+  endpoint: string,
+  onFailure: OnFailure,
+  onSuccess: OnSuccess
+}
 
 export type Open = {
   type: 'OPEN',
@@ -38,9 +47,9 @@ export type Action =
 
 export type State = {
   +error: ?Object,
-  +items: Items,
+  +items: ?Items,
   +open: boolean,
-  +result: any,
+  +result: ?any,
   +status: 'pending' | 'submitting' | 'success' | 'failure'
 }
 
@@ -51,12 +60,12 @@ export type Props = {
   onClear: () => void,
   onClose: () => void,
   onOpen: (items: Items) => void,
-  onRequest: () => any
+  onRequest: (itemRequest: ItemRequest) => any
 }
 
 export type ChildContext = {
   tasks: {
-    open: (items: Items) => Open,
-    close: () => Close
+    open: (items: Items) => void,
+    close: () => void
   }
 }

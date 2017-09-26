@@ -1,8 +1,8 @@
 // @flow
 
-import type { Component, Node, ApiRequest } from '../types'
+import type { Component, Node } from '../types'
 import type { Location } from '../drawer/types'
-import type { Handler, Props, ChildContext } from './types'
+import type { Handler, ItemRequest, Props, ChildContext } from './types'
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -110,7 +110,7 @@ class Tasks extends React.Component<Props> {
     this.props.onClose()
   }
 
-  _handleRequest(itemRequest: ApiRequest): void {
+  _handleRequest(itemRequest: ItemRequest): void {
     const { onClose, onRequest } = this.props
     const onFailure = (result) => {
       if(itemRequest.onFailure) itemRequest.onFailure(result)
@@ -120,7 +120,11 @@ class Tasks extends React.Component<Props> {
       if(itemRequest.onSuccess) itemRequest.onSuccess(result)
       onClose()
     }
-    onRequest(itemRequest.method, itemRequest.endpoint, onSuccess, onFailure)
+    onRequest({
+      ...itemRequest,
+      onSuccess,
+      onFailure
+    })
   }
 
 }

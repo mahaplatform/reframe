@@ -10,9 +10,13 @@ export type Node = any
 
 export type Method = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
 
-export type OnSuccess = () => void
+export type SuccessResult = Object
 
-export type OnFailure = () => void
+export type FailureResult = Object
+
+export type OnSuccess = (result: SuccessResult) => void
+
+export type OnFailure = (result: FailureResult) => void
 
 export type ApiRequest = {
   type: 'API_REQUEST',
@@ -33,10 +37,10 @@ export type ApiRequestRequest = {
 
 export type ApiRequestFailure = {
   type: 'REQUEST_REQUEST',
-  result: Object
+  result: FailureResult
 }
 
 export type ApiRequestSuccess = {
   type: 'REQUEST_REQUEST',
-  result: Object
+  result: SuccessResult
 }
