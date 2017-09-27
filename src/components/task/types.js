@@ -1,7 +1,7 @@
 // @flow
 
 import type { Component, Method, OnFailure, OnSuccess, ApiRequest, ApiRequestRequest, ApiRequestFailure, ApiRequestSuccess } from '../../types'
-import type { Location } from '../drawer/types'
+import type { Location } from '../../containers/drawer/types'
 
 export type Done = () => void
 

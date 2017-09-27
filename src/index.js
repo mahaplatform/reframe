@@ -1,4 +1,5 @@
 import * as Components from './components'
+import * as Containers from './containers'
 import * as Controls from './controls'
 import * as Utils from './utils'
 

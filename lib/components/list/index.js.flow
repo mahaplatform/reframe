@@ -1,0 +1,10 @@
+// @flow
+
+import React from "react";
+import Section from "./section";
+import type {ListProps as Props} from "./types";
+import type {Node} from "../../types";
+declare export default class extends React$Component<{alert?: {color: string, message: string}, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string}>, sections?: Array<{component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string}>, title?: string}>}, void> {
+
+  render(): any;
+}

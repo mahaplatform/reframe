@@ -1,8 +1,6 @@
 // @flow
 
-import * as GlobalTypes from '../../types'
-
-export type Component = GlobalTypes.Component
+import { Component } from '../../types'
 
 export type Location = 'left' | 'right'
 

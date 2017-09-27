@@ -1,7 +1,7 @@
 // @flow
 
-import type { Node } from '../../types'
-import type { Component, Location, Props, ChildContext } from './types'
+import type { Component, Node } from '../../types'
+import type { Location, Props, ChildContext } from './types'
 
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'

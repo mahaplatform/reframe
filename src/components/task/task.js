@@ -1,7 +1,7 @@
 // @flow
 
 import type { Component, Node } from '../../types'
-import type { Location } from '../drawer/types'
+import type { Location } from '../../containers/drawer/types'
 import type { Handler, ItemRequest, Props } from './types'
 
 import React from 'react'
