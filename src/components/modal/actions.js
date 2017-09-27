@@ -1,6 +1,7 @@
 // @flow
 
-import type { Component, Open, Close, Clear } from './types'
+import type { Open, Close, Clear } from './types'
+import type { Component } from '../../types'
 
 export const open = (component: Component): Open => ({
   type: 'OPEN',

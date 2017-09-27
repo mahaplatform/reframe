@@ -1,0 +1,7 @@
+// @flow
+
+import type {Query, FetchDelay, FetchTimeout} from "./types";
+import type {ApiRequest} from "../../types";
+declare export function fetch(endpoint: string, query: {$filter: ?Object, $page: ?{skip: ?number}, $sort: string}): any;
+declare export function fetchDelay(): {type: "FETCH_DELAY"};
+declare export function fetchTimeout(): {type: "FETCH_TIMEOUT"};

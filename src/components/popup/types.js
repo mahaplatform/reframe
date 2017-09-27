@@ -31,11 +31,11 @@ export type Props = {
   open: boolean,
   onClear: () => void,
   onClose: () => void,
-  onOpen: (component: Component) => Open
+  onOpen: (component: Component) => void
 }
 
 export type ChildContext = {
-  modal: {
+  popup: {
     open: (component: Component) => void,
     close: () => void
   }

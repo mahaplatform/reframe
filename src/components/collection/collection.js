@@ -12,7 +12,6 @@ class Collection extends React.Component {
   }
 
   static propTypes = {
-    all: PropTypes.number,
     cacheKey: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.array,
@@ -45,7 +44,6 @@ class Collection extends React.Component {
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     sort: PropTypes.object,
-    total: PropTypes.number,
     onFetch: PropTypes.func,
     onFilter: PropTypes.func,
     onSetParams: PropTypes.func,

@@ -1,26 +1,24 @@
+// @flow
+
+import type { Node } from '../../types'
+import type { Props, ChildContext } from './types'
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
-class Popup extends React.Component {
+class Popup extends React.Component<Props, void> {
 
   static childContextTypes = {
     popup: PropTypes.object
   }
 
-  static propTypes = {
-    children: PropTypes.any,
-    component: PropTypes.func,
-    onOpen: PropTypes.func.isRequired,
-    onClose: PropTypes.func.isRequired
-  }
-
-  render() {
-    const { children, component } = this.props
+  render(): Node {
+    const { children, component, open } = this.props
     return (
       <div className="reframe-popup">
         { children }
-        <CSSTransition in={ component !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-popup-panel">
             <div className="reframe-popup-panel-item">
               { component && React.createElement(component) }
@@ -31,7 +29,14 @@ class Popup extends React.Component {
     )
   }
 
-  getChildContext() {
+  componentDidUpdate(prevProps: Props): void {
+    const { open, onClear } = this.props
+    if(open !== prevProps.open && !open) {
+      setTimeout(onClear, 500)
+    }
+  }
+
+  getChildContext(): ChildContext {
     const { onOpen, onClose } = this.props
     return {
       popup: {

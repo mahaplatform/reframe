@@ -1,48 +1,17 @@
+// @flow
+
+import type { Component, Node } from '../../types'
+import type { Props } from './types'
+import type { Props as ScrollpaneProps } from '../scrollpane/types'
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
 import { Delayed, Empty, Failure, Loading, Timeout } from './results'
 
-class Infinite extends React.Component {
+class Infinite extends React.Component<Props, void> {
 
-  static propTypes = {
-    all: PropTypes.number,
-    cacheKey: PropTypes.string,
-    delayed: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element
-    ]),
-    empty: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element
-    ]),
-    endpoint: PropTypes.string,
-    failure: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element
-    ]),
-    filter: PropTypes.object,
-    layout: PropTypes.func,
-    loading: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element
-    ]),
-    records: PropTypes.array,
-    sort: PropTypes.shape({
-      key: PropTypes.string,
-      order: PropTypes.string
-    }),
-    status: PropTypes.string,
-    timeout: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.element
-    ]),
-    total: PropTypes.number,
-    onFetch: PropTypes.func,
-    onFetchDelay: PropTypes.func,
-    onFetchTimeout: PropTypes.func
-  }
+  timeout: any = null
 
   static defaultProps = {
     cacheKey: null,
@@ -58,7 +27,7 @@ class Infinite extends React.Component {
     timeout: Timeout
   }
 
-  render() {
+  render(): Node {
     const { delayed, empty, failure, layout, loading, records, status, timeout } = this.props
     return (
       <div className="reframe-infinite">
@@ -69,7 +38,7 @@ class Infinite extends React.Component {
         { status !== 'failed' && records && records.length === 0 && this._getComponent(empty) }
         { status !== 'failed' && records && records.length > 0 &&
           <Scrollpane { ...this._getScrollpane() }>
-            { _.isFunction(layout) ? React.createElement(layout, this.props) : layout }
+            { this._getComponent(layout) }
             { status === 'loading' &&
               <div className="reframe-infinite-loader">
                 <div className="ui active inverted dimmer">
@@ -83,12 +52,12 @@ class Infinite extends React.Component {
     )
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.timeout = null
     this._handleFetch(0)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props): void {
     const { cacheKey, filter, sort, status } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
       clearTimeout(this.timeout)
@@ -98,39 +67,40 @@ class Infinite extends React.Component {
     }
   }
 
-  _getComponent(component) {
+  _getComponent(component: Component): Component {
     return _.isFunction(component) ? React.createElement(component, this.props) : component
   }
 
-  _getScrollpane() {
+  _getScrollpane(): ScrollpaneProps {
     return {
       onReachBottom: this._handleFetch.bind(this)
     }
   }
 
-  _handleFetch(skip = null) {
+  _handleFetch(skip: ?number = null): void {
     const { endpoint, filter, records, sort, total, onFetch } = this.props
     const loaded = records ? records.length : 0
-    const $page = { skip: skip !== null ? skip : loaded }
-    const query = { $page }
-    if(filter) query.$filter = filter
-    if(sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key
+    const query = {
+      $page: { skip: skip !== null ? skip : loaded },
+      ...(filter ? { $filter: filter } : {}),
+      ...(sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {})
+    }
     if(skip === 0 || total === null || loaded < total) onFetch(endpoint, query)
     this.timeout = setTimeout(this._handleDelay.bind(this), 3000)
   }
 
-  _handleDelay() {
+  _handleDelay(): void {
     if(this.props.status !== 'loading') return
     this.props.onFetchDelay()
     this.timeout = setTimeout(this._handleTimeout.bind(this), 3000)
   }
 
-  _handleTimeout() {
+  _handleTimeout(): void {
     if(this.props.status !== 'delyed') return
     this.props.onFetchTimeout()
   }
 
-  _handleRefresh() {
+  _handleRefresh(): void {
     this.props.onFetchTimeout()
   }
 
