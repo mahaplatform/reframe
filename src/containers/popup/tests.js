@@ -111,7 +111,7 @@ describe('popup component', () => {
       const component = <div className="foo" />
       const popup = shallow(<Popup component={ component } open={ true } />, { lifecycleExperimental: true })
       const panelComponent = popup.childAt(0).childAt(0).childAt(0).childAt(0)
-      expect(panelComponent.node.type.props.className).to.equal('foo')
+      expect(panelComponent.is('div.foo')).to.be.true
 
     })
 

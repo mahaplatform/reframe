@@ -1,8 +1,9 @@
 // @flow
 
-import {CSSTransition} from "react-transition-group";
-import PropTypes from "prop-types";
+import _ from "lodash";
 import React from "react";
+import PropTypes from "prop-types";
+import {CSSTransition} from "react-transition-group";
 import type {Props, ChildContext} from "./types";
 import type {Node} from "../../types";
 declare export default class extends React$Component<{children: any, component: any, onClear: () => void, onClose: () => void, onOpen: (component: any) => void, open: boolean}, void> {

@@ -1,6 +1,7 @@
 .reframe-tabs {
-  background-color: @primary_background_color;
   margin: 0;
+  flex: 1;
+  .scrollable();
 }
 .reframe-tabs-header {
   background-color: @primary_background_color;
@@ -11,6 +12,7 @@
   width: 100%;
   max-width: ~"calc(800px - 2em)";
   display: flex;
+  curosr: pointer;
 }
 .reframe-tabs-item {
   flex: 1;
@@ -25,11 +27,11 @@
     color: @primary_color !important;
   }
 }
-.reframe-tab {
+.reframe-tabs-body {
   position: relative;
   width: 100%;
 }
-.reframe-tab-wrapper {
+.reframe-tab {
   position: absolute;
   top: 0;
   left: 0;
@@ -50,7 +52,7 @@
     .translateX(-100%);
   }
 }
-.reframe-tab-body {
+.reframe-tab-content {
   margin: 0 auto;
   width: 100%;
   max-width: 800px;

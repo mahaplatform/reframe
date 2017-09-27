@@ -3,9 +3,10 @@
 import type { Node } from '../../types'
 import type { Props, ChildContext } from './types'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
+import React from 'react'
+import _ from 'lodash'
 
 class Popup extends React.Component<Props, void> {
 
@@ -21,7 +22,7 @@ class Popup extends React.Component<Props, void> {
         <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
           <div className="reframe-popup-panel">
             <div className="reframe-popup-panel-item">
-              { component && React.createElement(component) }
+              { component && ( _.isFunction(component) ? React.createElement(component) : component ) }
             </div>
           </div>
         </CSSTransition>

@@ -1,0 +1,11 @@
+// @flow
+
+import type {Component} from "../../types";
+export type Column = Object;
+export type Export = Object;
+export type Props = {columns: Array<Object>, export: Array<Object>, handler: (id: number) => void, link: string, modal: any, onLoadMore: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, sort: {key: string, order: string}, total: number};
+export type Sort = {key: string, order: string};
+export type State = {widths: Array<number>};
+export type recordTask = Object;
+
+declare module.exports: {};

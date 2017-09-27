@@ -1,0 +1,27 @@
+// @flow
+
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import Format from "../../utils/format";
+import {Link} from "react-router-dom";
+import type {Props, State, Column, Sort} from "./types";
+import type {Node} from "../../types";
+declare export default class extends React$Component<{columns: Array<Object>, export: Array<Object>, handler: (id: number) => void, link: string, modal: any, onLoadMore: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, sort: {key: string, order: string}, total: number}, {widths: Array<number>}> {
+  static contextTypes: any;
+
+  _handleResize: any;
+  head: any;
+  state: {widths: Array<number>};
+  _getBodyClass(column: Object): string;
+  _getBodyStyle(index: number): Object;
+  _getHeaderClass(column: Object): string;
+  _handleHandler(id: number): void;
+  _handleModal(id: number): void;
+  _handleSort(column: {key: string, order: string}): void;
+  _handleTasks(id: number): void;
+  _resizeColumns(): void;
+  componentDidMount(): void;
+  componentWillUnmount(): void;
+  render(): any;
+}

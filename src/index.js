@@ -5,6 +5,7 @@ import * as Utils from './utils'
 
 export default {
   ...Components,
+  ...Containers,
   ...Controls,
   ...Utils
 }

@@ -1,7 +1,6 @@
 // @flow
 
 import _ from "lodash";
-import Scrollpane from "../scrollpane";
 import PropTypes from "prop-types";
 import React from "react";
 import type {Props, ComponentState} from "./types";
@@ -11,7 +10,8 @@ declare export default class extends React$Component<{children: any, chosen: num
   static defaultProps: {chosen: null, header: null, items: [], onChoose: (index: any) => void};
 
   state: {transitioning: boolean, visited: Array<any>};
-  _getStatus(index: number): string;
+  _getItemClass(index: number): string;
+  _getTabClass(index: number): string;
   _handleChoose(index: number): void;
   componentDidMount(): void;
   render(): any;
