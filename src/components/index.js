@@ -1,6 +1,6 @@
 export Collection from './collection'
 export Control from './control'
-export Filter from './filter'
+export Filters from './filters'
 export Form from './form'
 export Infinite from './infinite'
 export List from './list'

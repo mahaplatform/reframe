@@ -1,0 +1,13 @@
+// @flow
+
+import * as Controls from "../../controls";
+import _ from "lodash";
+import React from "react";
+import type {Props} from "./types";
+import type {Component, Node} from "../../types";
+declare export default class extends React$Component<{defaultValue: any, endpoint: string, onBusy: () => void, onChange: (name: string, value: any) => void, onReady: () => void, options: Array<any>, text: string, type: any | string, value: string}, void> {
+  static defaultProps: {options: [], type: string};
+
+  _getElement(): any;
+  render(): any;
+}

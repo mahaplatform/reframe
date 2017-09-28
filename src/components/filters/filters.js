@@ -4,7 +4,7 @@ import Panel from './panel'
 import Searchbox from '../searchbox'
 import _ from 'lodash'
 
-class Filter extends React.Component {
+class Filters extends React.Component {
 
   static contextTypes = {
     tray: PropTypes.object
@@ -149,4 +149,4 @@ class Filter extends React.Component {
 
 }
 
-export default Filter
+export default Filters

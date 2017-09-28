@@ -1,5 +1,9 @@
+// @flow
+
+import type { Component, Node } from '../../types'
+import type { Props } from './types'
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import _ from 'lodash'
 import * as Controls from '../../controls'
 
@@ -8,29 +12,14 @@ const standard = Object.keys(Controls).reduce((standard, name) => ({
   [name.toLowerCase()]: Controls[name]
 }), {})
 
-class Control extends React.Component {
-
-  static propTypes = {
-    type: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func
-    ]).isRequired,
-    endpoint: PropTypes.string,
-    defaultValue: PropTypes.any,
-    options: PropTypes.array,
-    text: PropTypes.string,
-    value: PropTypes.string,
-    onBusy: PropTypes.func,
-    onChange: PropTypes.func,
-    onReady: PropTypes.func
-  }
+class Control extends React.Component<Props, void> {
 
   static defaultProps = {
     type: 'textfield',
     options: []
   }
 
-  render() {
+  render(): Node {
     return (
       <div className="reframe-control">
         { React.createElement(this._getElement(), this.props) }
@@ -38,7 +27,7 @@ class Control extends React.Component {
     )
   }
 
-  _getElement() {
+  _getElement(): Component {
     const { type } = this.props
     return _.isString(type) ? _.get(standard, type) : type
   }

@@ -49,7 +49,7 @@ class Item extends React.Component<Props, void> {
     return item
   }
 
-  _getClass() {
+  _getClass(): string {
     const { className } = this.props
     const classes = ['reframe-list-item']
     if(className) classes.push(className)

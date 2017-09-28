@@ -1,21 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import type { Option, Props } from './types'
+import type { Node } from '../../types'
+
+import Search from '../../components/search'
 import moment from 'moment'
+import React from 'react'
 import _ from 'lodash'
-import Select from './select'
 
-class DateRange extends React.Component {
+class DateRange extends React.Component<Props, void> {
 
-  static propTypes = {
-    include: PropTypes.array
+  render(): Node {
+    return <Search { ...this._getSearch() } />
   }
 
-  render() {
+  _getSearch() {
+    const { label, name, q, results, onChoose, onUpdate } = this.props
+    const options = this._getOptions()
+    return { label, name, options, q, results, onChoose, onUpdate }
+  }
+
+  _getOptions(): Array<Option> {
     const { include } = this.props
-    return <Select { ...this.props } options={ this._getOptions(include) } />
-  }
-
-  _getOptions(include) {
     const options = []
     if(_.includes(include, 'this')) options.push({ value: 'this_week', description: this.description(0, 'week'), text: 'This Week' })
     if(_.includes(include, 'last')) options.push({ value: 'last_week', description: this.description(-1, 'week'), text: 'Last Week' })
@@ -33,7 +39,7 @@ class DateRange extends React.Component {
     return options
   }
 
-  description(quantity, unit) {
+  description(quantity: number, unit: string): string {
     const start = moment().add(quantity, unit).startOf(unit)
     const end = moment().add(quantity, unit).endOf(unit)
     const startdate = (start.format('YY') !== end.format('YY')) ? start.format('MMM D, YYYY') :  start.format('MMM D')

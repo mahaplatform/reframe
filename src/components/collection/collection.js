@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Filter from '../filter'
+import Filters from '../filters'
 import _ from 'lodash'
 import Infinite from '../infinite'
 import { Empty, Results } from './results'
@@ -61,7 +61,7 @@ class Collection extends React.Component {
       <div className="reframe-collection">
         { filters &&
           <div className="reframe-collection-header">
-            <Filter { ...this._getFilter() } />
+            <Filters { ...this._getFilters() } />
           </div>
         }
         { records && <Results { ...this.props } /> }
@@ -78,7 +78,7 @@ class Collection extends React.Component {
     if(data) onSetRecords(data)
   }
 
-  _getFilter() {
+  _getFilters() {
     const { entity, filters, params, onFilter } = this.props
     const article = _.includes(['a','e','i','o'], entity[0]) ? 'an' : 'a'
     return {

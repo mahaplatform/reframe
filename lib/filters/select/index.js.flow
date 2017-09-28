@@ -1,0 +1,11 @@
+// @flow
+
+import Search from "../../components/search";
+import React from "react";
+import type {Props} from "./types";
+declare export default class extends React$Component<{endpoint?: string, format?: any | string, label?: string, multiple?: boolean, name?: string, onChoose: () => void, onUpdate: () => void, options?: Array<Object>, q: string, results: Object, sort: Object, text: string, value: string}, void> {
+  static defaultProps: {sort: {key: string, order: string}};
+
+  _getSearch(): {endpoint?: string, format?: any | string, label?: string, multiple?: boolean, name?: string, onUpdate: () => void, options?: Array<Object>, q: string, results: Object, sort: Object, text: string, value: string};
+  render(): $Exact<{+key: string | number | null, +props: mixed /* UNEXPECTED TYPE: EvalT */, +ref: any, +type: ElementType}>;
+}

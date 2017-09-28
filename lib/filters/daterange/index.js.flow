@@ -1,0 +1,15 @@
+// @flow
+
+import _ from "lodash";
+import React from "react";
+import moment from "moment";
+import Search from "../../components/search";
+import type {Node} from "../../types";
+import type {Option, Props} from "./types";
+declare export default class extends React$Component<{include: Array<any>, label: string, name: string, onBack: () => void, onChoose: (value: any) => void, onReset: () => void, onUpdate: (value: any) => void, q: string, results: Array<any>}, void> {
+
+  _getOptions(): Array<{description?: string, text: string, value: string}>;
+  _getSearch(): {label: string, name: string, onChoose: (value: any) => void, onUpdate: (value: any) => void, options: Array<{description?: string, text: string, value: string}>, q: string, results: Array<any>};
+  description(quantity: number, unit: string): string;
+  render(): any;
+}

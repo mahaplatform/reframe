@@ -13,7 +13,7 @@ _.templateSettings.interpolate = /#{([\s\S]+?)}/g
 
 class Table extends React.Component<Props, State> {
 
-  _handleResize: any = _.debounce(this._resizeColumns)
+  _handleResize: any = _.debounce(this._resizeColumns, 100)
 
   head: any
 
