@@ -23,6 +23,7 @@ class Fields extends React.Component {
           <div className="reframe-filter-header-title">
             Filters
           </div>
+          <div className="reframe-filter-header-icon" />
         </div>
         <div className="reframe-filter-body">
           { fields.map((field, index) => {

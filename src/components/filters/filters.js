@@ -33,13 +33,14 @@ class Filters extends React.Component {
           { active !== null && fields[active] &&
             <CSSTransition classNames='stack' timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
               <div className="reframe-filter-panel">
-                <div className="reframe-filter-header">
-                  <div className="reframe-filter-header-icon" onClick={ this._handleBack.bind(this) }>
+                <div className="reframe-filter-header" onClick={ this._handleBack.bind(this) }>
+                  <div className="reframe-filter-header-icon">
                     <i className="chevron left icon" />
                   </div>
                   <div className="reframe-filter-header-title">
                     { fields[active].label }
                   </div>
+                  <div className="reframe-filter-header-icon" />
                 </div>
                 <div className="reframe-filter-body">
                   { fields[active].type === 'select' && <Select { ...this._getSelect() } /> }

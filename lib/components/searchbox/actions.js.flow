@@ -1,5 +1,7 @@
 // @flow
 
-import type {Type, Abort} from "./types";
+import type {Begin, End, Type, Abort} from "./types";
 declare export function abort(): {type: "ABORT"};
+declare export function begin(): {type: string};
+declare export function end(): {type: string};
 declare export function type(q: string): {q: string, type: "TYPE"};

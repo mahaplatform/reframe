@@ -1,6 +1,14 @@
 // @flow
 
-import type { Type, Abort } from './types'
+import type { Begin, End, Type, Abort } from './types'
+
+export const begin = () => ({
+  type: 'BEGIN'
+})
+
+export const end = () => ({
+  type: 'END'
+})
 
 export const type = (q: string): Type => ({
   type: 'TYPE',

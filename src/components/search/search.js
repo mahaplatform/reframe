@@ -32,9 +32,9 @@ class Search extends React.Component<Props, void> {
   }
 
   _getSearchbox() {
-    const { label, onQuery } = this.props
+    const { label, prompt, onQuery } = this.props
     return {
-      prompt: `Find a ${label}`,
+      prompt: prompt || `Find a ${label}`,
       onChange: onQuery
     }
   }

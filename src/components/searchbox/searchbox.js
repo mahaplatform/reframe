@@ -1,59 +1,87 @@
-// @flow
-
-import type { Node, Event } from '../../types'
-import type { Props } from './types'
-
+import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
-class Searchbox extends React.Component<Props, void> {
+class Searchbox extends React.Component {
+
+  static propTypes = {
+    active: PropTypes.bool,
+    prompt: PropTypes.string,
+    q: PropTypes.string,
+    onAbort: PropTypes.func,
+    onBegin: PropTypes.func,
+    onChange: PropTypes.func,
+    onEnd: PropTypes.func,
+    onType: PropTypes.func
+  }
 
   static defaultProps = {
     prompt: 'Search...',
     q: '',
-    onAbort: () => {},
-    onChange: (q) => {},
-    onType: (q) => {}
+    onChange: (value) => {}
   }
 
-  _handleChange: any = null
-
-  constructor(props: Props): void {
-    super(props)
-    this._handleChange = _.throttle(props.onChange, 500)
-  }
-
-  render(): Node {
-    const { prompt, q } = this.props
+  render() {
+    const { q } = this.props
     return (
-      <div className="reframe-searchbox">
+      <div className={ this._getClass() }>
         <div className="reframe-searchbox-icon">
-          <i className="search icon" />
+          <i className="fa fa-search" />
         </div>
-        <div className="reframe-searchbox-input">
-          <div className="ui input">
-            <input type="text" placeholder={ prompt } onChange={ this._handleType.bind(this) } value={ q } />
-          </div>
+        <div className="reframe-searchbox-field">
+          <input { ...this._getInput() } />
         </div>
-        { q && q.length > 0 &&
-          <div className="reframe-searchbox-icon" onClick={ this._handleAbort.bind(this) }>
-            <i className="remove circle icon" />
+        { q.length > 0 &&
+          <div className="reframe-searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
+            <i className="fa fa-times-circle" />
           </div>
         }
       </div>
     )
   }
 
-  _handleType(e: Event): void {
-    const { onType } = this.props
-    if(onType) onType(e.target.value)
-    this._handleChange(e.target.value)
+  componentDidMount() {
+    this._handleChange = _.throttle(this.props.onChange, 500)
   }
 
-  _handleAbort(): void {
-    const { onAbort, onChange } = this.props
-    if(onAbort) onAbort()
-    if(onChange) onChange('')
+  _getClass() {
+    const classes = ['reframe-searchbox']
+    if(this.props.active) classes.push('active')
+    return classes.join(' ')
+  }
+
+  _getInput() {
+    const { prompt, q } = this.props
+    return {
+      type: 'text',
+      placeholder: prompt,
+      value: q,
+      onFocus: this._handleBegin.bind(this),
+      onBlur: this._handleEnd.bind(this),
+      onChange: this._handleType.bind(this)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { q } = this.props
+    if(q !== prevProps.q) this._handleChange(q)
+  }
+
+  _handleBegin() {
+    this.props.onBegin()
+  }
+
+  _handleEnd() {
+    this.props.onEnd()
+  }
+
+  _handleType(e) {
+    const { onType } = this.props
+    onType(e.target.value)
+  }
+
+  _handleAbort() {
+    this.props.onAbort()
   }
 
 }

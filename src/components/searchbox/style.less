@@ -1,48 +1,40 @@
 .reframe-searchbox {
-  .border-radius(5px);
-  background-color: fadeout(@white, 20);
+  flex: 1;
+  line-height: 1em;
   display: flex;
-}
-.reframe-searchbox-icon {
-  color: fadeout(@black, 80);
-  flex: 0 0 2em;
-  display: flex;
-  cursor: pointer;
-  font-size: 1.3em;
-  .icon {
-    margin: auto;
-    line-height: 1em;
+  overflow: hidden;
+  &.active .reframe-searchbox-icon {
+    margin-left: -2em;
   }
 }
-.reframe-searchbox-input {
-  display: flex;
+.reframe-searchbox-remove-icon {
+  padding: 0.8em 0.8em 0.8em 0;
+  font-size: 1.25em;
+  line-height: 1em;
+  color: fadeout(@black, 90);
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    color: fadeout(@black, 70);
+  }
+}
+.reframe-searchbox-icon {
+  .transition(margin .1s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  padding: 0.8em 0 0.8em 1em;
+  font-size: 1.25em;
+  line-height: 1em;
+  color: fadeout(@black, 90);
+  overflow: hidden;
+}
+.reframe-searchbox-field {
   flex: 1;
-  .ui.input {
-    flex: 1;
-    input {
-      padding: 8px;
-      width: 100%;
-      border-radius: 0;
-      background-color: transparent !important;
-      color: fadeout(@black, 40);
-      border: none !important;
-      padding-left: 0;
-      padding-right: 0;
-      &::-webkit-input-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &:-moz-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &::-moz-placeholder {
-        color: fadeout(@black, 60);
-      }
-      &::-webkit-input-placeholder,
-      &:-moz-placeholder,
-      &::-moz-placeholder,
-      &:-ms-input-placeholder {
-        color: fadeout(@black, 60);
-      }
-    }
+  input {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0.9em;
+    width: 100%;
+    outline: none;
+    font-size: 1em;
   }
 }

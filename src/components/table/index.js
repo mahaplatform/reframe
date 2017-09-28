@@ -30,7 +30,7 @@ class Table extends React.Component<Props, State> {
     const { columns, handler, link, modal, records, recordTasks, sort } = this.props
     return (
       <div className="reframe-table">
-        <div className="reframe-table-head reframe-scrollpane-header">
+        <div className="reframe-table-head">
           <div className="reframe-table-head-wrapper">
             <div className="reframe-table-head-row" ref={ (node) => this.head = node }>
               { columns.map((column, columnIndex) => (

@@ -24,10 +24,15 @@ a.reframe-table-body-row {
     background: #F9F9F9;
   }
 }
+.reframe-table-head-cell {
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+.reframe-table-body-cell {
+  border-bottom: 1px solid rgba(0,0,0,0.05)
+}
 .reframe-table-head-cell,
 .reframe-table-body-cell {
   display: table-cell;
-  border-bottom: 1px solid @table_border_color;
   &.collapsing {
     width: 1px;
   }
@@ -40,9 +45,6 @@ a.reframe-table-body-row {
   font-weight: bold;
   position: relative;
   cursor: pointer;
-  &:hover {
-    background-color: lighten(@table_header_background_color, -5%);
-  }
   i {
     margin: 0;
   }
@@ -80,5 +82,17 @@ a.reframe-table-body-row {
   .reframe-table-head-cell:not(.mobile),
   .reframe-table-body-cell:not(.mobile) {
     display: none;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .reframe-table-head {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  .reframe-table-body {
+    padding-top: 3.5em;
   }
 }

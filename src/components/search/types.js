@@ -28,6 +28,7 @@ export type SearchProps = {
   name: string,
   multiple: boolean,
   options: Array<Option>,
+  prompt?: string,
   results: Results,
   sort: string,
   q: string,

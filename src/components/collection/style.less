@@ -11,6 +11,7 @@
         right: 0;
         top: 0;
         opacity: 0.4;
+        z-index: 2;
       }
     }
     &:not(.filtering) {
@@ -27,11 +28,10 @@
 }
 .reframe-collection-header-search {
   flex: 1;
-  padding: 0.52em;
 }
 .reframe-collection-header-icon {
   @media (max-width: 1023px) {
-    padding: 1em;
+    padding: 0.8em;
     font-size: 1.25em;
     line-height: 1em;
     border-left: 1px solid fadeout(@black, 90);
@@ -50,6 +50,7 @@
 .reframe-collection-filter {
   display: flex;
   order: 1;
+  z-index: 3;
   @media (max-width: 1023px) {
     .transition(transform .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
     position: fixed;

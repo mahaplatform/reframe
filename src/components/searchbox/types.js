@@ -1,5 +1,13 @@
 // @flow
 
+export type Begin = {
+  type: 'BEGIN'
+}
+
+export type End = {
+  type: 'END'
+}
+
 export type Type = {
   type: 'TYPE',
   q: string
@@ -10,10 +18,13 @@ export type Abort = {
 }
 
 export type Action =
+  | Begin
+  | End
   | Type
   | Abort
 
 export type State = {
+  +active: boolean,
   +q: string
 }
 
