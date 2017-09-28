@@ -1,23 +1,25 @@
-.reframe-filters {
-  width: 100vw;
-  white-space: nowrap;
+.reframe-filter {
+  flex: 1;
+  position: relative;
+  overflow:hidden;
 }
-.reframe-filters-header {
-  background-color: fadeout(@black, 90);
+.reframe-filter-header {
+  border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 95);
+  text-align: center;
+  font-weight: bold;
   display: flex;
 }
-.reframe-filters-header-search {
-  flex: 1;
-  padding: 0.5em;
-}
-.reframe-filters-header-filter {
-  color: fadeout(@black, 60);
-  padding: 0.5em 0.5em 0.5em 0;
-  cursor: pointer;
+.reframe-filter-header-icon {
+  flex: 0 0 3em;
+  display: flex;
   i {
-    font-size: 1.5em;
-    line-height: 1.6em;
+    margin: auto;
   }
+}
+.reframe-filter-header-title {
+  flex: 1;
+  padding: 1em 0;
 }
 
 .reframe-filter-tokens {
@@ -61,27 +63,7 @@
   display: flex;
   flex-direction: column;
 }
-.reframe-filter-header {
-  flex: 0 0 50px;
-  display: flex;
-}
-.reframe-filter-header-back {
-  flex: 0 0 110px;
-  padding: 15px 0 15px 15px;
-  cursor: pointer;
-}
-.reframe-filter-header-title {
-  flex: 1;
-  padding: 15px 0;
-  font-weight: bold;
-  text-align: center;
-}
-.reframe-filter-header-next {
-  flex: 0 0 90px;
-  text-align: right;
-  padding: 15px 15px 15px 0;
-  cursor: pointer;
-}
+
 .reframe-filter-body {
   flex: 1;
   display: flex;
@@ -102,12 +84,11 @@
   padding: 0.5em;
 }
 .reframe-filter-item {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EEEEEE;
+  background-color: @white;
   display: flex;
   cursor: pointer;
   &:hover {
-    background-color: #F9F9F9;
+    background-color: fadeout(@black, 98);
   }
 }
 .reframe-filter-item-field {
@@ -176,23 +157,4 @@
   border-top: 1px solid #EEEEEE;
   color: #444444;
   cursor: pointer;
-}
-
-@media only screen and (min-width: 768px) {
-  .reframe-filter-header,
-  .reframe-filter-header-back,
-  .reframe-filter-header-title,
-  .reframe-filter-header-next {
-    background-color: @primary_background_color;
-    color: @primary_color;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .reframe-filter-header-back,
-  .reframe-filter-header-title,
-  .reframe-filter-header-next {
-    background-color: #F9F9F9;
-    color: #444444;
-    border-bottom: 1px solid #EEEEEE;
-  }
 }

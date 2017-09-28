@@ -19,12 +19,9 @@ class Fields extends React.Component {
     return (
       <div className="reframe-filter-panel">
         <div className="reframe-filter-header">
-          <div className="reframe-filter-header-back" />
+          <div className="reframe-filter-header-icon" />
           <div className="reframe-filter-header-title">
             Filters
-          </div>
-          <div className="reframe-filter-header-next" onClick={ this._handleDone.bind(this) }>
-            Done
           </div>
         </div>
         <div className="reframe-filter-body">

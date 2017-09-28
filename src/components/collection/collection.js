@@ -4,6 +4,7 @@ import Filters from '../filters'
 import _ from 'lodash'
 import Infinite from '../infinite'
 import { Empty, Results } from './results'
+import Header from './header'
 
 class Collection extends React.Component {
 
@@ -15,6 +16,7 @@ class Collection extends React.Component {
     cacheKey: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.array,
+    defaultSort: PropTypes.object,
     endpoint: PropTypes.string,
     entity: PropTypes.string,
     empty: PropTypes.oneOfType([
@@ -30,6 +32,7 @@ class Collection extends React.Component {
       PropTypes.func,
       PropTypes.element
     ]),
+    filtering: PropTypes.bool,
     filter: PropTypes.object,
     filters: PropTypes.array,
     handler: PropTypes.func,
@@ -40,14 +43,16 @@ class Collection extends React.Component {
     ]),
     link: PropTypes.string,
     modal: PropTypes.string,
-    params: PropTypes.object,
+    q: PropTypes.string,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     sort: PropTypes.object,
     onFetch: PropTypes.func,
-    onFilter: PropTypes.func,
+    onSetFilter: PropTypes.func,
     onSetParams: PropTypes.func,
-    onSetRecords: PropTypes.func
+    onSetQuery: PropTypes.func,
+    onSetRecords: PropTypes.func,
+    onToggleFilter: PropTypes.func
   }
 
   static defaultProps = {
@@ -58,44 +63,63 @@ class Collection extends React.Component {
   render() {
     const { endpoint, filters, records } = this.props
     return (
-      <div className="reframe-collection">
+      <div className={ this._getClass() }>
+        <div className="reframe-collection-body">
+          { filters &&
+            <Header { ...this._getHeader() } />
+          }
+          { records && <Results { ...this.props } /> }
+          { endpoint && <Infinite { ...this._getInfinite() } /> }
+        </div>
+        <div className="reframe-collection-canvas" onClick={ this._handleToggleFilter.bind(this) } />
         { filters &&
-          <div className="reframe-collection-header">
+          <div className="reframe-collection-filter">
             <Filters { ...this._getFilters() } />
           </div>
         }
-        { records && <Results { ...this.props } /> }
-        { endpoint && <Infinite { ...this._getInfinite() } /> }
       </div>
     )
   }
 
   componentDidMount() {
-    const { data, onSetRecords } = this.props
+    const { data, defaultSort, onSetParams, onSetRecords } = this.props
     const filter = this.props.filter || {}
-    const sort = this.props.sort || { key: 'created_at', order: 'desc' }
-    this.props.onSetParams(filter, sort)
+    const sort = defaultSort || { key: 'created_at', order: 'desc' }
+    onSetParams(filter, sort)
     if(data) onSetRecords(data)
   }
 
+  _getClass() {
+    const classes = ['reframe-collection']
+    if(this.props.filtering) classes.push('filtering')
+    return classes.join(' ')
+  }
+
+  _getHeader() {
+    const { onSetQuery, onToggleFilter } = this.props
+    return {
+      onSetQuery,
+      onToggleFilter
+    }
+  }
+
   _getFilters() {
-    const { entity, filters, params, onFilter } = this.props
+    const { entity, filters, filter, onSetFilter } = this.props
     const article = _.includes(['a','e','i','o'], entity[0]) ? 'an' : 'a'
     return {
       fields: filters,
-      filters: params.filter,
+      filters: filter,
       prompt: `Find ${article} ${entity}`,
-      onChange: onFilter
+      onChange: onSetFilter
     }
   }
 
   _getInfinite() {
-    const { cacheKey, endpoint, params, loading, empty, failure } = this.props
-    const { filter, sort } = params
+    const { cacheKey, empty, endpoint, failure, filter, loading, q, sort } = this.props
     return {
       cacheKey,
       endpoint,
-      filter,
+      filter: { ...filter, q },
       loading,
       empty: _.isPlainObject(empty) ? <Empty { ...this.props } /> : empty,
       failure,
@@ -104,16 +128,8 @@ class Collection extends React.Component {
     }
   }
 
-  _handleFetch(skip = null) {
-    const { endpoint, records, params, total, onFetch } = this.props
-    if(!endpoint) return
-    const { filter, sort } = params
-    const loaded = records.length
-    const $page = { skip: skip !== null ? skip : loaded }
-    const query = { $page }
-    if(filter) query.$filter = filter
-    if(sort.key) query.$sort = (sort.order === 'desc' ? '-' : '') + sort.key
-    if(skip === 0 || loaded < total) onFetch(endpoint, query)
+  _handleToggleFilter() {
+    this.props.onToggleFilter()
   }
 
   _handleAddNew() {

@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 const recordsSelector = state => state.records
 
-const sortSelector = state => state.params.sort
+const sortSelector = state => state.sort
 
 export const records = createSelector(
   recordsSelector,

@@ -1,4 +1,4 @@
 // @flow
 
-import type {SetParams, Sort, Filter, SetRecords, Actions, State} from "./types";
-declare export default function(state?: {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>}, action: {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"}): {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>};
+import type {SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleFilter, Actions, State} from "./types";
+declare export default function(state?: {+filter: Object, +filtering: boolean, +q: string, +records: ?Array<Object>, +sort: {+key: ?string, +order: ?string}}, action: {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"} | {filter: Object, type: "SET_FILTER"} | {q: string, type: "SET_QUERY"} | {type: "TOGGLE_FILTER"}): {+filter: Object, +filtering: boolean, +q: string, +records: ?Array<Object>, +sort: {+key: ?string, +order: ?string}};

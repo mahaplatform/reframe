@@ -1,12 +1,15 @@
 // @flow
 
 import {Component} from "../../types";
-export type Actions = {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"};
+export type Actions = {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"} | {key: string, type: "SORT"} | {filter: Object, type: "FILTER"} | {records: Array<Object>, type: "SET_RECORDS"} | {filter: Object, type: "SET_FILTER"} | {q: string, type: "SET_QUERY"} | {type: "TOGGLE_FILTER"};
 export type Filter = {filter: Object, type: "FILTER"};
 export type Props = {endpoint: ?string, filters: ?Array<Object>, layout: any, sort: string};
+export type SetFilter = {filter: Object, type: "SET_FILTER"};
 export type SetParams = {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"};
+export type SetQuery = {q: string, type: "SET_QUERY"};
 export type SetRecords = {records: Array<Object>, type: "SET_RECORDS"};
 export type Sort = {key: string, type: "SORT"};
-export type State = {+params: {+filter: Object, +sort: {+key: ?string, +order: ?string}}, +records: ?Array<Object>};
+export type State = {+filter: Object, +filtering: boolean, +q: string, +records: ?Array<Object>, +sort: {+key: ?string, +order: ?string}};
+export type ToggleFilter = {type: "TOGGLE_FILTER"};
 
 declare module.exports: {};

@@ -1,6 +1,6 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleFilter } from './types'
 
 export const setParams = (filter: Object, sort: Object): SetParams => ({
   type: 'SET_PARAMS',
@@ -21,4 +21,18 @@ export const filter = (filter: Object): Filter => ({
 export const setRecords = (records: Array<Object>): SetRecords => ({
   type: 'SET_RECORDS',
   records
+})
+
+export const setFilter = (filter: Object): SetFilter => ({
+  type: 'SET_FILTER',
+  filter
+})
+
+export const setQuery = (q: string): SetQuery => ({
+  type: 'SET_QUERY',
+  q
+})
+
+export const toggleFilter = (): ToggleFilter => ({
+  type: 'TOGGLE_FILTER'
 })

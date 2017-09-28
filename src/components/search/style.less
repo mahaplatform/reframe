@@ -4,13 +4,13 @@
   flex-direction: column;
 }
 .reframe-search-header {
-  background-color: fadeout(@black, 90);
   padding: 0.5em;
+  border-bottom: 1px solid #EEEEEE;
 }
 .reframe-search-body {
   flex: 1;
   display: flex;
-  background-color: #FFFFFF;
+  background-color: @white;
   flex-direction: column;
 }
 .reframe-search-results {
@@ -18,12 +18,11 @@
   flex: 1;
 }
 .reframe-search-item {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #EEEEEE;
+  background-color: @white;
   display: flex;
   cursor: pointer;
   &:hover {
-    background-color: #F9F9F9;
+    background-color: fadeout(@black, 98);
   }
 }
 .reframe-search-item-label {

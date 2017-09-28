@@ -1,7 +1,10 @@
 // @flow
 
-import type {SetParams, Sort, Filter, SetRecords} from "./types";
+import type {SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleFilter} from "./types";
 declare export function filter(filter: Object): {filter: Object, type: "FILTER"};
+declare export function setFilter(filter: Object): {filter: Object, type: "SET_FILTER"};
 declare export function setParams(filter: Object, sort: Object): {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"};
+declare export function setQuery(q: string): {q: string, type: "SET_QUERY"};
 declare export function setRecords(records: Array<Object>): {records: Array<Object>, type: "SET_RECORDS"};
 declare export function sort(key: string): {key: string, type: "SORT"};
+declare export function toggleFilter(): {type: "TOGGLE_FILTER"};
