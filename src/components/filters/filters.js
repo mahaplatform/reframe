@@ -1,6 +1,7 @@
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import DateRange from '../../filters/daterange'
 import Select from '../../filters/select'
+import Toggle from '../../filters/toggle'
 import PropTypes from 'prop-types'
 import Fields from './fields'
 import React from 'react'
@@ -45,6 +46,7 @@ class Filters extends React.Component {
                 <div className="reframe-filter-body">
                   { fields[active].type === 'select' && <Select { ...this._getSelect() } /> }
                   { fields[active].type === 'daterange' && <DateRange { ...this._getDateRange() } />}
+                  { fields[active].type === 'toggle' && <Toggle { ...this._getToggle() } />}
                 </div>
                 <div className="reframe-filter-footer" onClick={ this._handleReset.bind(this) }>
                   Reset { fields[active].label }
@@ -82,6 +84,11 @@ class Filters extends React.Component {
   }
 
   _getDateRange() {
+    const { active, fields, q, results, onChoose, onReset, onUpdate } = this.props
+    return { ...fields[active], q, results, onChoose, onReset, onUpdate }
+  }
+
+  _getToggle() {
     const { active, fields, q, results, onChoose, onReset, onUpdate } = this.props
     return { ...fields[active], q, results, onChoose, onReset, onUpdate }
   }

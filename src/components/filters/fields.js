@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 
 class Fields extends React.Component {
 
-  static contextTypes = {
-    tray: PropTypes.object
-  }
-
   static propTypes = {
     fields: PropTypes.array,
     results: PropTypes.object,
@@ -15,7 +11,7 @@ class Fields extends React.Component {
   }
 
   render() {
-    const { fields, results } = this.props
+    const { fields } = this.props
     return (
       <div className="reframe-filter-panel">
         <div className="reframe-filter-header">
@@ -26,22 +22,16 @@ class Fields extends React.Component {
           <div className="reframe-filter-header-icon" />
         </div>
         <div className="reframe-filter-body">
-          { fields.map((field, index) => {
-            const values = this._values(field, results)
-            return (
-              <div key={`filter_${index}`} className="reframe-filter-item" onClick={ this._handleChoose.bind(this, index) }>
-                <div className="reframe-filter-item-field">
-                  {field.label}
-                </div>
-                <div className="reframe-filter-item-values">
-                  { values && <div className="values">{ values }</div> }
-                </div>
-                <div className="reframe-filter-item-icon">
-                  <i className="chevron right icon" />
-                </div>
+          { fields.map((field, index) => (
+            <div key={`filter_${index}`} className="reframe-filter-item" onClick={ this._handleChoose.bind(this, index) }>
+              <div className="reframe-filter-item-field">
+                {field.label}
               </div>
-            )
-          }) }
+              <div className="reframe-filter-item-icon">
+                <i className="chevron right icon" />
+              </div>
+            </div>
+          )) }
         </div>
         <div className="reframe-filter-footer" onClick={ this._handleResetAll.bind(this) }>
           Reset Filter
@@ -71,10 +61,6 @@ class Fields extends React.Component {
 
   _handleChoose(index) {
     this.props.onChoose(index)
-  }
-
-  _handleDone() {
-    this.context.tray.close()
   }
 
   _handleResetAll() {

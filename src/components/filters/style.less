@@ -2,10 +2,11 @@
   flex: 1;
   position: relative;
   overflow:hidden;
+  background-color: lighten(@black, 95);
 }
 .reframe-filter-header {
-  border-bottom: 1px solid fadeout(@black, 90);
-  background-color: fadeout(@black, 95);
+  border-bottom: 1px solid lighten(@black, 90);
+  background-color: lighten(@black, 95);
   text-align: center;
   font-weight: bold;
   display: flex;
@@ -67,7 +68,6 @@
 .reframe-filter-body {
   flex: 1;
   display: flex;
-  background-color: #FFFFFF;
   flex-direction: column;
 }
 .reframe-filter-results {
@@ -84,9 +84,9 @@
   padding: 0.5em;
 }
 .reframe-filter-item {
-  background-color: @white;
   display: flex;
   cursor: pointer;
+  padding: 0.5em;
   &:hover {
     background-color: fadeout(@black, 98);
   }
@@ -95,55 +95,11 @@
   display: flex;
   align-items: center;
   color: #444444;
-  flex: 0 1 100px;
-  padding: 1em 0 1em 1em;
-}
-.reframe-filter-item-label {
-  align-items: center;
   flex: 1;
-  &.padded {
-    padding: 1em;
-  }
-}
-.reframe-filter-item-description {
-  flex: 2;
-  color: green;
-  line-height: 16px;
-  font-size: 13px;
-  padding: 1em;
-}
-.reframe-filter-item-values {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  .values {
-    margin: auto 15px auto auto;
-    color: green;
-    line-height: 16px;
-    font-size: 13px;
-    text-align: right;
-  }
-}
-.reframe-filter-item-count {
-  flex: 0 0 25px;
-  display: flex;
-  .label {
-    .border-radius(50%);
-    background-color: #CCC;
-    color: #FFFFFF;
-    padding: 3px 6px;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: bold;
-   }
+  padding: 0.5em;
 }
 .reframe-filter-item-icon {
-  flex: 0 0 20px;
-  display: flex;
-  align-items: center;
-  font-size: 0.8em;
-  line-height: 1em;
-  padding: 1em;
+  flex: 0 0 2em;
   .icon {
     margin: auto;
     color: #BBB;

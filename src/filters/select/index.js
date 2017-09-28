@@ -20,8 +20,7 @@ class Select extends React.Component<Props, void> {
 
   _getSearch() {
     const { endpoint, format, label, name, multiple, options, results, sort, q, text, value, onUpdate  } = this.props
-    const prompt = `Search ${label}`
-    return { endpoint, format, label, name, multiple, options, prompt, results, sort, q, text, value, onUpdate }
+    return { endpoint, format, label, name, multiple, options, results, sort, q, text, value, onUpdate }
   }
 
 }

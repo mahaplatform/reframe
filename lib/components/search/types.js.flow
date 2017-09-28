@@ -9,7 +9,7 @@ export type Option = {record?: any, text: string, token?: any, value: string};
 export type OptionsProps = {format: any, multiple: boolean, name: string, onUpdate: (name: string, values: any) => void, options: Array<{record?: any, text: string, token?: any, value: string}>, results: any};
 export type Query = {q: string, type: "QUERY"};
 export type Results = any;
-export type SearchProps = {endpoint: string, format: any, label: string, multiple: boolean, name: string, onQuery: () => void, onUpdate: (name: string, values: any) => void, options: Array<{record?: any, text: string, token?: any, value: string}>, q: string, results: any, sort: string};
+export type SearchProps = {endpoint: string, format: any, label: string, multiple: boolean, name: string, onQuery: () => void, onUpdate: (name: string, values: any) => void, options: Array<{record?: any, text: string, token?: any, value: string}>, prompt?: string, q: string, results: any, sort: string};
 export type State = {q: string};
 
 declare module.exports: {};
