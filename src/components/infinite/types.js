@@ -64,7 +64,7 @@ export type Props = {
   sort: Sort,
   status: string,
   timeout: Component,
-  total:number,
+  total: number,
   onFetch: (endpoint: string, query: Query) => void,
   onFetchDelay: () => void,
   onFetchTimeout: () => void

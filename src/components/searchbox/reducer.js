@@ -2,7 +2,7 @@
 
 import type { Type, Abort, State, Action } from './types'
 
-export const INITIAL_STATE = {
+export const INITIAL_STATE: State = {
   q: ''
 }
 

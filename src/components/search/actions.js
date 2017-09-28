@@ -1,4 +1,8 @@
-export const query = (q) => ({
+//@flow
+
+import type { Query } from './types'
+
+export const query = (q: string): Query => ({
   type: 'QUERY',
   q
 })

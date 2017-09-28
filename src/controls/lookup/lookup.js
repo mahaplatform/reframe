@@ -76,7 +76,7 @@ class Lookup extends React.Component {
           </div>
         }
         <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <Search { ...this.props } />
+          <Search { ...this._getSearch() } />
         </CSSTransition>
         <CSSTransition in={ adding } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
           <Form { ...this._getForm() } />
@@ -99,6 +99,10 @@ class Lookup extends React.Component {
     const { disabled, status, onClear, onReady } = this.props
     if(prevProps.status !== status && status === 'success') onReady()
     if(prevProps.disabled !== disabled) onClear()
+  }
+
+  _getSearch() {
+    return this.props
   }
 
   _handleBegin() {

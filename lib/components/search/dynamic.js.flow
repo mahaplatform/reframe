@@ -1,0 +1,13 @@
+// @flow
+
+import _ from "lodash";
+import Options from "./options";
+import React from "react";
+import type {Node} from "../../types";
+import type {DynamicProps as Props, OptionsProps, Option} from "./types";
+declare export default class extends React$Component<{format: any, multiple: boolean, name: string, onUpdate: (name: string, values: any) => void, options: Array<{record?: any, text: string, token?: any, value: string}>, records: any, results: any, status: string, text: string, value: string}, void> {
+
+  _getOption(record: any): {record?: any, text: string, token?: any, value: string};
+  _getOptions(): {format: any, multiple: boolean, name: string, onUpdate: (name: string, values: any) => void, options: Array<{record?: any, text: string, token?: any, value: string}>, results: any};
+  render(): any;
+}

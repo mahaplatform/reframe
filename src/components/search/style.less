@@ -1,92 +1,47 @@
 .reframe-search {
   flex: 1;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  background-color: #FFF;
 }
-
-.reframe-search-chosen {
-  max-height: 4em;
+.reframe-search-header {
+  background-color: fadeout(@black, 90);
+  padding: 0.5em;
+}
+.reframe-search-body {
+  flex: 1;
+  display: flex;
+  background-color: #FFFFFF;
+  flex-direction: column;
+}
+.reframe-search-results {
   .scrollable();
-  color: @blue;
-  margin: 0.5em 0.5em 0;
-  font-size: 0.8em;
-  span:last-child:after {
-    content: '';
-  }
-  span:after {
-    content: ', ';
-  }
-}
-.reframe-search-filter {
-  flex: 0 0 50px;
-  display: flex;
-  i {
-    margin: auto;
-  }
-}
-.reframe-search-loader {
   flex: 1;
-  display:flex;
-  flex-direction: column;
 }
-.reframe-search-results .reframe-search-result:last_child {
-  border-bottom: none;
-}
-.reframe-search-result {
-  border-bottom: 1px solid darken(@white, 10);
+.reframe-search-item {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EEEEEE;
   display: flex;
-  color: lighten(@black, 40%);
-  position: relative;
   cursor: pointer;
-  strong {
-    color: @black;
-  }
   &:hover {
-    background-color: darken(@white, 3);
+    background-color: #F9F9F9;
   }
 }
-.reframe-search-result-item {
+.reframe-search-item-label {
+  align-items: center;
   flex: 1;
-  padding: 1em;
+  &.padded {
+    padding: 1em;
+  }
 }
-.reframe-search-result-toggle {
+.reframe-search-item-icon {
+  flex: 0 0 20px;
   display: flex;
-  padding: 1em 1em 1em 0;
-  i {
-    margin: auto !important;
-  }
-}
-.reframe-search-empty {
-  flex: 1;
-  display: flex;
-  margin: 1em;
-  border: 3px dashed #DDD;
-  background-color: #F9F9F9;
-}
-.reframe-search-empty-message {
-  margin: auto;
-  text-align: center;
+  align-items: center;
+  font-size: 0.8em;
+  line-height: 1em;
   padding: 1em;
-  h2 {
-    margin: 0 0 20px;
-    font-size: 3.4em;
-    i {
-      background-color: #FFF;
-    }
-  }
-  h3 {
-    font-size: 1.5em;
-    line-height: 1.6em;
-    margin: 0;
-    color: fadeout(@black, 40);
-  }
-  p {
-    margin: 0 0 1em;
-    color: fadeout(@black, 40);
-  }
-  .ui.basic.red.button {
-    display: block;
-    background: @white !important;
+  .icon {
+    margin: auto;
+    color: #BBB;
   }
 }

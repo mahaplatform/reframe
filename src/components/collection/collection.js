@@ -56,10 +56,10 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { endpoint, filter, records } = this.props
+    const { endpoint, filters, records } = this.props
     return (
       <div className="reframe-collection">
-        { filter &&
+        { filters &&
           <div className="reframe-collection-header">
             <Filter { ...this._getFilter() } />
           </div>

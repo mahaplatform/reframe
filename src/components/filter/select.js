@@ -10,12 +10,23 @@ class Select extends React.Component {
 
   static propTypes = {
     endpoint: PropTypes.string,
+    format: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string
+    ]),
     label: PropTypes.string,
+    multiple: PropTypes.bool,
     name: PropTypes.string,
+    q: PropTypes.string,
+    results: PropTypes.object,
     sort: PropTypes.object,
+    text: PropTypes.string,
+    value: PropTypes.string,
     onBack: PropTypes.func,
     onChoose: PropTypes.func,
-    onReset: PropTypes.func
+    onReset: PropTypes.func,
+    onUpdate: PropTypes.func
   }
 
   static defaultProps = {
@@ -41,12 +52,19 @@ class Select extends React.Component {
             Done
           </div>
         </div>
-        <Search { ...this.props } />
+        <div className="reframe-filter-body">
+          <Search { ...this._getSearch() } />
+        </div>
         <div className="reframe-filter-footer" onClick={ this._handleReset.bind(this) }>
           Reset { label }
         </div>
       </div>
     )
+  }
+
+  _getSearch() {
+    const { endpoint, format, label, name, multiple, results, sort, q, text, value, onUpdate  } = this.props
+    return { endpoint, format, label, name, multiple, results, sort, q, text, value, onUpdate }
   }
 
   _handleBack() {

@@ -2,7 +2,7 @@
 
 import type { Set, Clear, Action, State } from './types'
 
-const INITIAL_STATE = {
+const INITIAL_STATE: State = {
   message: null,
   style: null
 }
