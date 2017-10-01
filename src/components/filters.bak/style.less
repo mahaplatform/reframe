@@ -1,0 +1,116 @@
+.reframe-filter {
+  flex: 1;
+  position: relative;
+  overflow:hidden;
+  background-color: lighten(@black, 95);
+}
+.reframe-filter-header {
+  border-bottom: 1px solid lighten(@black, 90);
+  background-color: lighten(@black, 95);
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+}
+.reframe-filter-header-icon {
+  flex: 0 0 3em;
+  display: flex;
+  i {
+    margin: auto;
+  }
+}
+.reframe-filter-header-title {
+  flex: 1;
+  padding: .8em 0;
+  line-height: 1.75em;
+}
+.reframe-filter-tokens {
+  .scrollable-x();
+  padding: 0.5em 0 0.5em 0.5em;
+  background-color: @white;
+  border-bottom: 1px solid #DDD;
+  .ui.basic.button {
+    display: inline-block;
+    background-color: fadeout(@black, 90) !important;
+    color: #333333 !important;
+    padding: 8px;
+    margin: 0 8px 0 0 !important;
+    box-shadow: none;
+    text-shadow: none;
+    &.add {
+      background: transparent !important;
+      border: 1px solid #BBBBBB;
+      color: #BBBBBB !important;
+    }
+    .add {
+      margin: 0 !important;
+    }
+    .remove {
+      margin: 0 !important;
+    }
+  }
+}
+.reframe-filter {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.reframe-filter-panel {
+  position: absolute;
+  background-color: @white;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.reframe-filter-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.reframe-filter-results {
+  .scrollable();
+  flex: 1;
+}
+.reframe-filter-search {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.reframe-filter-search-input {
+  background-color: fadeout(@black, 90);
+  padding: 0.5em;
+}
+.reframe-filter-item {
+  display: flex;
+  cursor: pointer;
+  padding: 0.5em;
+  &:hover {
+    background-color: fadeout(@black, 98);
+  }
+}
+.reframe-filter-item-field {
+  display: flex;
+  align-items: center;
+  color: #444444;
+  flex: 1;
+  padding: 0.5em;
+}
+.reframe-filter-item-icon {
+  flex: 0 0 2em;
+  .icon {
+    margin: auto;
+    color: #BBB;
+  }
+}
+.reframe-filter-footer {
+  flex: 0 0 50px;
+  padding: 15px;
+  text-align: center;
+  background-color: #F9F9F9;
+  border-top: 1px solid #EEEEEE;
+  color: #444444;
+  cursor: pointer;
+}

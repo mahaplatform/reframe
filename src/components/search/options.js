@@ -11,18 +11,18 @@ class Options extends React.Component<Props, void> {
   render() {
     const { format, options } = this.props
     return (
-        <div className="reframe-search-results">
-          { options.map((option, index) => (
-            <div key={`filter_${index}`} className="reframe-search-item" onClick={ this._handleChoose.bind(this, option) }>
-              <div className={ this._getClasses() }>
-                <Format { ...option.record } format={ format } value={ option.text } />
-              </div>
-              <div className="reframe-search-item-icon">
-                { this._getChecked(option) ? <i className="green check icon" /> : null }
-              </div>
+      <div className="reframe-search-results">
+        { options.map((option, index) => (
+          <div key={`filter_${index}`} className="reframe-search-item" onClick={ this._handleChoose.bind(this, option) }>
+            <div className={ this._getClasses() }>
+              <Format { ...option.record } format={ format } value={ option.text } />
             </div>
-          )) }
-        </div>
+            <div className="reframe-search-item-icon">
+              { this._getChecked(option) ? <i className="green check icon" /> : null }
+            </div>
+          </div>
+        )) }
+      </div>
     )
   }
 

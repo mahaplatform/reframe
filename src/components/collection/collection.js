@@ -107,10 +107,10 @@ class Collection extends React.Component {
     const { entity, filters, filter, onSetFilter } = this.props
     const article = _.includes(['a','e','i','o'], entity[0]) ? 'an' : 'a'
     return {
-      fields: filters,
-      filters: filter,
+      filters,
+      values: filter,
       prompt: `Find ${article} ${entity}`,
-      onChange: onSetFilter
+      onUpdate: onSetFilter
     }
   }
 

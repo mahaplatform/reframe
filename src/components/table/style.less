@@ -19,7 +19,7 @@
     border-right: none;
   }
 }
-a.reframe-table-body-row {
+.reframe-table-body-row {
   &:hover {
     background: #F9F9F9;
   }
@@ -27,13 +27,10 @@ a.reframe-table-body-row {
 .reframe-table-head-cell {
   border-bottom: 1px solid rgba(0,0,0,0.1)
 }
-.reframe-table-body-cell {
-  border-bottom: 1px solid rgba(0,0,0,0.05)
-}
 .reframe-table-head-cell,
 .reframe-table-body-cell {
   display: table-cell;
-  line-height: 1.3em;
+  line-height: 1.4em;
   &.collapsing {
     width: 1px;
   }
@@ -69,11 +66,9 @@ a.reframe-table-body-row {
     color: fadeout(@black, 90) !important;
     margin: 0;
   }
-  .chevron {
-    font-size: 0.8em;
-  }
   .ellipsis {
     font-size: 1.2em;
+    cursor: pointer;
   }
 }
 @media only screen and (max-width: 767px) {
