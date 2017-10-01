@@ -23,12 +23,15 @@
   flex: 1;
 }
 .reframe-collection-header-icon {
-  padding: 0.8em;
   font-size: 1.25em;
   line-height: 1em;
-  border-left: 1px solid fadeout(@black, 90);
   color: fadeout(@black, 80);
+  display: flex;
+  flex: 0 0 2em;
   cursor: pointer;
+  i {
+    margin: auto;
+  }
 }
 .reframe-collection-loader {
   flex: 0 0 35.em;

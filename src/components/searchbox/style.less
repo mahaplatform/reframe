@@ -4,11 +4,19 @@
   display: flex;
   overflow: hidden;
   &.active .reframe-searchbox-icon {
-    margin-left: -2em;
+    margin-left: -1.35em;
   }
 }
+.reframe-searchbox-input {
+  display: flex;
+  flex: 1;
+  margin: 0.5em;
+  background-color: fadeout(@black, 95);
+  border-radius: .5em;
+  overflow: hidden;
+}
 .reframe-searchbox-remove-icon {
-  padding: 0.8em 0.8em 0.8em 0;
+  padding: 0.4em 0.4em 0.4em 0;
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
@@ -20,7 +28,7 @@
 }
 .reframe-searchbox-icon {
   .transition(margin .1s cubic-bezier(0.7, 0, 0.175, 1) 0s);
-  padding: 0.8em 0 0.8em 1em;
+  padding: 0.4em 0 0.4em .4em;
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
@@ -32,7 +40,7 @@
     box-shadow: none;
     border: none;
     background: transparent;
-    padding: 1em;
+    padding: 0.5em;
     width: 100%;
     outline: none;
     font-size: 1em;

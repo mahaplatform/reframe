@@ -19,6 +19,9 @@ class Header extends React.Component {
         <div className="reframe-collection-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
           <i className="fa fa-sliders" />
         </div>
+        <div className="reframe-collection-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
+          <i className="fa fa-download" />
+        </div>
       </div>
     )
   }

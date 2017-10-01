@@ -25,17 +25,19 @@ class Searchbox extends React.Component {
     const { q } = this.props
     return (
       <div className={ this._getClass() }>
-        <div className="reframe-searchbox-icon">
-          <i className="fa fa-search" />
-        </div>
-        <div className="reframe-searchbox-field">
-          <input { ...this._getInput() } />
-        </div>
-        { q.length > 0 &&
-          <div className="reframe-searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
-            <i className="fa fa-times-circle" />
+        <div className="reframe-searchbox-input">
+          <div className="reframe-searchbox-icon">
+            <i className="fa fa-search" />
           </div>
-        }
+          <div className="reframe-searchbox-field">
+            <input { ...this._getInput() } />
+          </div>
+          { q.length > 0 &&
+            <div className="reframe-searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
+              <i className="fa fa-times-circle" />
+            </div>
+          }
+        </div>
       </div>
     )
   }
