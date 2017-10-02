@@ -5,21 +5,24 @@ import Searchbox from '../searchbox'
 class Header extends React.Component {
 
   static propTypes = {
-    filter: PropTypes.array,
+    filters: PropTypes.array,
     onSetQuery: PropTypes.func,
     onToggleFilter: PropTypes.func
   }
 
   render() {
+    const { filters } = this.props
     return (
       <div className="reframe-collection-header">
         <div className="reframe-collection-header-search">
           <Searchbox { ...this._getSearchbox() } />
         </div>
-        <div className="reframe-collection-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
-          <i className="fa fa-sliders" />
-        </div>
-        <div className="reframe-collection-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
+        { filters &&
+          <div className="reframe-collection-header-icon" title="Filter Records" onClick={ this._handleToggleFilter.bind(this) }>
+            <i className="fa fa-sliders" />
+          </div>
+        }
+        <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleExport.bind(this) }>
           <i className="fa fa-download" />
         </div>
       </div>
@@ -31,6 +34,10 @@ class Header extends React.Component {
     return {
       onChange: onSetQuery
     }
+  }
+
+  _handleExport() {
+    console.log('export')
   }
 
   _handleToggleFilter() {

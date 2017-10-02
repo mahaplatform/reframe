@@ -49,8 +49,11 @@ body {
 .translateX(@x) {
   transform: translateX(@x);
 }
-.translateY(@x) {
-  transform: translateY(@x);
+.translateY(@y) {
+  transform: translateY(@y);
+}
+.translateXY(@x, @y) {
+  transform: translate(@x, @y);
 }
 .rotateY(@deg) {
   transform: rotateY(@deg);

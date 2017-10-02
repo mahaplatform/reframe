@@ -26,11 +26,14 @@
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
-  display: flex;
-  flex: 0 0 2em;
+  padding: 0.5em 0.5em 0.5em 0;
   cursor: pointer;
   i {
-    margin: auto;
+    padding: .35em;
+    border-radius: .4em;
+    &:hover {
+      background-color: fadeout(@black, 95);
+    }
   }
 }
 .reframe-collection-loader {
@@ -130,6 +133,7 @@
     right: 0;
     background-color: @white;
     z-index: 2;
+    box-shadow: -5px 0 5px fadeout(@black, 95);
   }
   .reframe-collection-filter {
     .reframe-filters-panel {
@@ -140,8 +144,16 @@
     bottom: 0;
     left: 0;
     width: 23em;
-    border-right: 1px solid fadeout(@black, 90);
     overflow: hidden;
     z-index: 1;
   }
-}
+  .reframe-collection-export {
+    background-color: lighten(@black, 95);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 23em;
+    overflow: hidden;
+    z-index: 1;
+  }}

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Export from '../export'
 import Filters from '../filters'
 import _ from 'lodash'
 import Infinite from '../infinite'
@@ -77,6 +78,10 @@ class Collection extends React.Component {
             <Filters { ...this._getFilters() } />
           </div>
         }
+        <div className="reframe-collection-canvas" />
+        <div className="reframe-collection-export">
+          <Export { ...this._getExport() } />
+        </div>
       </div>
     )
   }
@@ -96,8 +101,9 @@ class Collection extends React.Component {
   }
 
   _getHeader() {
-    const { onSetQuery, onToggleFilter } = this.props
+    const { filters, onSetQuery, onToggleFilter } = this.props
     return {
+      filters,
       onSetQuery,
       onToggleFilter
     }
@@ -112,6 +118,10 @@ class Collection extends React.Component {
       prompt: `Find ${article} ${entity}`,
       onUpdate: onSetFilter
     }
+  }
+
+  _getExport() {
+    return {}
   }
 
   _getInfinite() {
