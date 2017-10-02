@@ -45,7 +45,6 @@ export class Results extends React.Component {
 
   static propTypes = {
     columns: PropTypes.array,
-    export: PropTypes.object,
     handler: PropTypes.func,
     layout: PropTypes.any,
     link: PropTypes.string,
@@ -74,7 +73,6 @@ export class Results extends React.Component {
     const { columns, handler, link, modal, records, recordTasks, sort, status, onLoadMore, onSort } = this.props
     return {
       columns,
-      export: this.props.export,
       handler,
       link,
       modal,

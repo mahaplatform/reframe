@@ -1,9 +1,9 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleFilter, Actions, State } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleMode, Actions, State } from './types'
 
 const INITIAL_STATE: State = {
-  filtering: false,
+  mode: null,
   sort: {
     key: null,
     order: null
@@ -47,9 +47,9 @@ const setQuery = (state: State, action: SetQuery): State => ({
   q: action.q
 })
 
-const toggleFilter = (state: State, action: ToggleFilter): State => ({
+const toggleMode = (state: State, action: ToggleMode): State => ({
   ...state,
-  filtering: !state.filtering
+  mode: (state.mode === action.mode) ? null : action.mode
 })
 
 const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
@@ -74,8 +74,8 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
   case 'SET_QUERY':
     return setQuery(state, action)
 
-  case 'TOGGLE_FILTER':
-    return toggleFilter(state, action)
+  case 'TOGGLE_MODE':
+    return toggleMode(state, action)
 
   default:
     return state

@@ -1,5 +1,7 @@
+import { getEmptyImage } from 'react-dnd-html5-backend'
 import { DragSource, DropTarget } from 'react-dnd'
 import React from 'react'
+import DragLayer from './drag_layer'
 
 class Item extends React.Component {
 
@@ -20,17 +22,17 @@ class Item extends React.Component {
     ))
   }
 
-  // componentDidMount() {
-  //   this.props.connectDragPreview(getEmptyImage(), {
-  //     captureDraggingState: true
-  //   })
-  // }
-  //
-  // componentDidUpdate() {
-  //   this.props.connectDragPreview(getEmptyImage(), {
-  //     captureDraggingState: true
-  //   })
-  // }
+  componentDidMount() {
+    this.props.connectDragPreview(<div><DragLayer /></div>, {
+      captureDraggingState: true
+    })
+  }
+
+  componentDidUpdate() {
+    this.props.connectDragPreview(<div><DragLayer /></div>, {
+      captureDraggingState: true
+    })
+  }
 
   _getClass() {
     const { checked, isDragging, isDragLayer } = this.props

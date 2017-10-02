@@ -20,6 +20,9 @@
   background-color: fadeout(@black, 95);
   padding: 0.8em;
 }
+.reframe-export-drag {
+  box-shadow: 0 0 5px fadeout(@black, 50);
+}
 .reframe-export-list {
   position: relative;
 }
@@ -35,9 +38,6 @@
   &.hidden {
     visibility: hidden;
   }
-  &.moving {
-    box-shadow: 0 0 5px fadeout(@black, 50);
-  }
 }
 .reframe-export-label {
   padding: 1em;
@@ -50,5 +50,5 @@
 .reframe-export-icon {
   padding: 1em;
   flex: 0 0 2em;
-  cursor: move;
+  cursor: grab;
 }

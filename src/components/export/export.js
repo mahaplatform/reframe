@@ -1,7 +1,6 @@
 import HTML5Backend from 'react-dnd-html5-backend'
 import PropTypes from 'prop-types'
 import { DragDropContext } from 'react-dnd'
-import DragLayer from './drag_layer'
 import React from 'react'
 import Item from './item'
 import _ from 'lodash'
@@ -61,7 +60,6 @@ class Export extends React.Component {
       $select: items.filter(item => item.checked).map(item => item.key)
     }
     const url = `${endpoint}.csv?token=${token}&download=true&${qs.stringify(query)}`
-    console.log(query)
     window.location.href = url
   }
 

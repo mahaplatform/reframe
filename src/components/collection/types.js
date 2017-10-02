@@ -36,8 +36,9 @@ export type SetQuery = {
   q: string
 }
 
-export type ToggleFilter = {
-  type: 'TOGGLE_FILTER'
+export type ToggleMode = {
+  type: 'TOGGLE_MODE',
+  mode: string
 }
 
 export type Actions =
@@ -47,10 +48,10 @@ export type Actions =
  | SetRecords
  | SetFilter
  | SetQuery
- | ToggleFilter
+ | ToggleMode
 
 export type State = {
-  +filtering: boolean,
+  +mode: ?string,
   +sort: {
     +key: ?string,
     +order: ?string

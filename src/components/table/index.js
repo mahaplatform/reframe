@@ -49,16 +49,11 @@ class Table extends React.Component<Props, State> {
           <div className="reframe-table-body-wrapper">
             { records.map((record, rowIndex) => {
 
-              const rowColumns = columns.map((column, columnIndex) => (
+              const row = columns.map((column, columnIndex) => (
                 <div key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) } style={ this._getBodyStyle(columnIndex) }>
                   <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
                 </div>
               ))
-
-              const row = (this.props.export) ? [
-                ...rowColumns,
-                <div key="cell_extra" className="reframe-table-body-cell mobile" />
-              ] : rowColumns
 
               if(link) {
                 return (

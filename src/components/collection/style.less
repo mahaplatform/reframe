@@ -1,7 +1,7 @@
 .reframe-collection {
   display: flex;
   flex: 1;
-  background-color: @white;
+  background-color: lighten(@black, 95);
 }
 .reframe-collection-body {
   flex: 1;
@@ -80,7 +80,7 @@
 }
 @media (max-width: 1023px) {
   .reframe-collection {
-    &.filtering {
+    &.filter, &.export {
       .reframe-collection-canvas {
         position: fixed;
         bottom: 0;
@@ -90,11 +90,12 @@
         opacity: 0.4;
         z-index: 2;
       }
-    }
-    &:not(.filtering) {
       .reframe-collection-filter {
-        .translateY(100%);
+        .translateY(0);
       }
+    }
+    .reframe-collection-filter {
+      .translateY(-100%);
     }
   }
   .reframe-collection-canvas {
@@ -121,9 +122,19 @@
 @media (min-width: 1024px) {
   .reframe-collection {
     position: relative;
-    &.filtering {
+    &.filter, &.export {
       .reframe-collection-body {
         left: 23em;
+      }
+    }
+    &.filter {
+      .reframe-collection-filter {
+        .translateX(0);
+      }
+    }
+    &.export {
+      .reframe-collection-export {
+        .translateX(0);
       }
     }
   }
@@ -142,16 +153,12 @@
     .reframe-filters-panel {
       background-color: lighten(@black, 95);
     }
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 23em;
-    overflow: hidden;
-    z-index: 1;
   }
+  .reframe-collection-filter,
   .reframe-collection-export {
     background-color: lighten(@black, 95);
+    .transition(transform .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    .translateX(-100%);
     position: absolute;
     top: 0;
     bottom: 0;

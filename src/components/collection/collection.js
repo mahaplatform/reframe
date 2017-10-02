@@ -34,7 +34,6 @@ class Collection extends React.Component {
       PropTypes.func,
       PropTypes.element
     ]),
-    filtering: PropTypes.bool,
     filter: PropTypes.object,
     filters: PropTypes.array,
     handler: PropTypes.func,
@@ -45,6 +44,7 @@ class Collection extends React.Component {
     ]),
     link: PropTypes.string,
     modal: PropTypes.string,
+    mode: PropTypes.string,
     q: PropTypes.string,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
@@ -55,7 +55,7 @@ class Collection extends React.Component {
     onSetParams: PropTypes.func,
     onSetQuery: PropTypes.func,
     onSetRecords: PropTypes.func,
-    onToggleFilter: PropTypes.func
+    onToggleMode: PropTypes.func
   }
 
   static defaultProps = {
@@ -64,7 +64,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { endpoint, filters, records } = this.props
+    const { endpoint, filters, mode, records } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
@@ -99,17 +99,17 @@ class Collection extends React.Component {
 
   _getClass() {
     const classes = ['reframe-collection']
-    if(this.props.filtering) classes.push('filtering')
+    if(this.props.mode) classes.push(this.props.mode)
     return classes.join(' ')
   }
 
   _getHeader() {
-    const { filters, onSetQuery, onToggleFilter } = this.props
+    const { filters, onSetQuery, onToggleMode } = this.props
     return {
       export: this.props.export,
       filters,
       onSetQuery,
-      onToggleFilter
+      onToggleMode
     }
   }
 

@@ -19,12 +19,12 @@ class Header extends React.Component {
           <Searchbox { ...this._getSearchbox() } />
         </div>
         { filters &&
-          <div className="reframe-collection-header-icon" title="Filter Records" onClick={ this._handleToggleFilter.bind(this) }>
+          <div className="reframe-collection-header-icon" title="Filter Records" onClick={ this._handleToggleMode.bind(this, 'filter') }>
             <i className="fa fa-sliders" />
           </div>
         }
         { this.props.export &&
-          <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleExport.bind(this) }>
+          <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleToggleMode.bind(this, 'export') }>
             <i className="fa fa-download" />
           </div>
         }
@@ -39,12 +39,8 @@ class Header extends React.Component {
     }
   }
 
-  _handleExport() {
-    console.log('export')
-  }
-
-  _handleToggleFilter() {
-    this.props.onToggleFilter()
+  _handleToggleMode(mode) {
+    this.props.onToggleMode(mode)
   }
 
 }

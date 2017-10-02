@@ -5,23 +5,25 @@ import Item from './item'
 class TableDragLayer extends React.Component {
 
   render() {
-    const { item, isDragging } = this.props
-    if(!isDragging) return null
+    const { item } = this.props
     return (
-      <div style={ this._getItemStyles(this.props) }>
+      <div className="reframe-export-drag" style={ this._getItemStyles(this.props) }>
         <Item { ...item } />
       </div>
     )
   }
 
   _getItemStyles(props) {
-    const { initialOffset, currentOffset, item } = props
+    const { initialOffset, currentOffset } = props
+    if(!currentOffset) return { display: 'none' }
+    const top = currentOffset.y - initialOffset.y
     return {
       position: 'absolute',
       pointerEvents: 'none',
       zIndex: 100,
+      width: '100%',
       left: 0,
-      top: 0
+      top: `${top}px`
     }
   }
 
