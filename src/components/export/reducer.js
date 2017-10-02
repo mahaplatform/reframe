@@ -1,14 +1,14 @@
 const INITIAL_STATE = {
-  items: [
-    { label: 'Column 1', checked: true },
-    { label: 'Column 2', checked: true },
-    { label: 'Column 3', checked: true },
-    { label: 'Column 4', checked: true },
-    { label: 'Column 5', checked: false },
-    { label: 'Column 6', checked: true },
-    { label: 'Column 7', checked: true }
-  ]
+  items: []
 }
+
+const set = (state, action) => ({
+  ...state,
+  items: action.items.map(item => ({
+    ...item,
+    checked: true
+  }))
+})
 
 const toggle = (state, action) => ({
   ...state,
@@ -41,6 +41,9 @@ const move = (state, action) => {
 const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
+
+  case 'SET':
+    return set(state, action)
 
   case 'TOGGLE':
     return toggle(state, action)

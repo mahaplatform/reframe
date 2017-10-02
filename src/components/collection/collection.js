@@ -29,6 +29,7 @@ class Collection extends React.Component {
         modal: PropTypes.func
       })
     ]),
+    export: PropTypes.array,
     failure: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.element
@@ -48,6 +49,7 @@ class Collection extends React.Component {
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     sort: PropTypes.object,
+    token: PropTypes.string,
     onFetch: PropTypes.func,
     onSetFilter: PropTypes.func,
     onSetParams: PropTypes.func,
@@ -78,10 +80,11 @@ class Collection extends React.Component {
             <Filters { ...this._getFilters() } />
           </div>
         }
-        <div className="reframe-collection-canvas" />
-        <div className="reframe-collection-export">
-          <Export { ...this._getExport() } />
-        </div>
+        { this.props.export &&
+          <div className="reframe-collection-export">
+            <Export { ...this._getExport() } />
+          </div>
+        }
       </div>
     )
   }
@@ -103,6 +106,7 @@ class Collection extends React.Component {
   _getHeader() {
     const { filters, onSetQuery, onToggleFilter } = this.props
     return {
+      export: this.props.export,
       filters,
       onSetQuery,
       onToggleFilter
@@ -121,15 +125,29 @@ class Collection extends React.Component {
   }
 
   _getExport() {
-    return {}
+    const { endpoint, token } = this.props
+    return {
+      defaultValue: this.props.export,
+      endpoint,
+      filter: this._getFilter(),
+      token
+    }
+  }
+
+  _getFilter() {
+    const { filter, q } = this.props
+    return {
+      ...filter,
+      q
+    }
   }
 
   _getInfinite() {
-    const { cacheKey, empty, endpoint, failure, filter, loading, q, sort } = this.props
+    const { cacheKey, empty, endpoint, failure, loading, sort } = this.props
     return {
       cacheKey,
       endpoint,
-      filter: { ...filter, q },
+      filter: this._getFilter(),
       loading,
       empty: _.isPlainObject(empty) ? <Empty { ...this.props } /> : empty,
       failure,

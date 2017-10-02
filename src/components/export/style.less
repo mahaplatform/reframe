@@ -1,4 +1,23 @@
 .reframe-export {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.reframe-export-header {
+  padding: 0.8em;
+  p {
+    line-height: 1.8em;
+    color: fadeout(@black, 30);
+  }
+}
+.reframe-export-body {
+  flex: 1;
+  padding: 0.8em;
+  .scrollable();
+}
+.reframe-export-footer {
+  border-top: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 95);
   padding: 0.8em;
 }
 .reframe-export-list {

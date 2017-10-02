@@ -1,3 +1,8 @@
+export const set = (items) => ({
+  type: 'SET',
+  items
+})
+
 export const toggle = (index) => ({
   type: 'TOGGLE',
   index

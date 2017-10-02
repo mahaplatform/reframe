@@ -5,6 +5,7 @@ import Searchbox from '../searchbox'
 class Header extends React.Component {
 
   static propTypes = {
+    export: PropTypes.array,
     filters: PropTypes.array,
     onSetQuery: PropTypes.func,
     onToggleFilter: PropTypes.func
@@ -22,9 +23,11 @@ class Header extends React.Component {
             <i className="fa fa-sliders" />
           </div>
         }
-        <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleExport.bind(this) }>
-          <i className="fa fa-download" />
-        </div>
+        { this.props.export &&
+          <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleExport.bind(this) }>
+            <i className="fa fa-download" />
+          </div>
+        }
       </div>
     )
   }
