@@ -23,9 +23,6 @@
 .reframe-export-drag {
   box-shadow: 0 0 5px fadeout(@black, 50);
 }
-.reframe-export-list {
-  position: relative;
-}
 .reframe-export-item {
   .transition(opacity .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
   display: flex;
@@ -36,7 +33,7 @@
     opacity: 0.5;
   }
   &.hidden {
-    visibility: hidden;
+    opacity: 0;
   }
 }
 .reframe-export-label {

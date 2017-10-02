@@ -1,12 +1,11 @@
-import { getEmptyImage } from 'react-dnd-html5-backend'
 import { DragSource, DropTarget } from 'react-dnd'
+import { findDOMNode } from 'react-dom'
 import React from 'react'
-import DragLayer from './drag_layer'
 
 class Item extends React.Component {
 
   render() {
-    const { label, connectDragSource, connectDropTarget, connectDragPreview } = this.props
+    const { label, connectDropTarget, connectDragPreview, connectDragSource } = this.props
     return connectDropTarget(connectDragPreview(
       <div className={ this._getClass() } onClick={ this._handleToggle.bind(this) }>
         <div className="reframe-export-label">
@@ -22,24 +21,11 @@ class Item extends React.Component {
     ))
   }
 
-  componentDidMount() {
-    this.props.connectDragPreview(<div><DragLayer /></div>, {
-      captureDraggingState: true
-    })
-  }
-
-  componentDidUpdate() {
-    this.props.connectDragPreview(<div><DragLayer /></div>, {
-      captureDraggingState: true
-    })
-  }
-
   _getClass() {
-    const { checked, isDragging, isDragLayer } = this.props
+    const { checked, isDragging } = this.props
     const classes = ['reframe-export-item']
     if(!checked) classes.push('disabled')
     if(isDragging) classes.push('hidden')
-    if(isDragLayer === true) classes.push('moving')
     return classes.join(' ')
   }
 
@@ -48,13 +34,12 @@ class Item extends React.Component {
   }
 
   _handleToggle() {
-    const { index } = this.props
-    this.props.onToggle(index)
+    this.props.onToggle(this.props.index)
   }
 
 }
 
-const rowSource = {
+const source = {
   beginDrag: (props) => ({
     index: props.index,
     label: props.label,
@@ -62,12 +47,19 @@ const rowSource = {
   })
 }
 
-const rowTarget = {
-  drop: (props, monitor, component) => {
-    const item = monitor.getItem()
-    const fromIndex = item.index
-    const toIndex = props.index
-    props.onMove(fromIndex, toIndex)
+const target = {
+  hover(props, monitor, component) {
+    const dragIndex = monitor.getItem().index
+    const hoverIndex = props.index
+    if (dragIndex === hoverIndex) return
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+    const clientOffset = monitor.getClientOffset()
+    const hoverClientY = clientOffset.y - hoverBoundingRect.top
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return
+    props.onMove(dragIndex, hoverIndex)
+    monitor.getItem().index = hoverIndex
   }
 }
 
@@ -81,7 +73,7 @@ const targetCollector = (connect) => ({
   connectDropTarget: connect.dropTarget()
 })
 
-Item = DragSource('ITEM', rowSource, sourceCollector)(Item)
-Item = DropTarget('ITEM', rowTarget, targetCollector)(Item)
+Item = DragSource('ITEM', source, sourceCollector)(Item)
+Item = DropTarget('ITEM', target, targetCollector)(Item)
 
 export default Item

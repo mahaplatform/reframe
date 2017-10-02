@@ -19,7 +19,7 @@ class Export extends React.Component {
         <div className="reframe-export-body">
           <div className="reframe-export-list">
             { items.map((item, index) => (
-              <Item key={`item_${index}`} { ...this._getItem(item, index) } />
+              <Item key={`item_${item.key}`} { ...this._getItem(item, index) } />
             ))}
           </div>
         </div>
@@ -32,23 +32,18 @@ class Export extends React.Component {
     )
   }
 
-  constructor(props) {
-    super(props)
-    this._handleMove = _.throttle(props.onMove, 250)
-  }
-
   componentDidMount() {
     const { defaultValue, onSet } = this.props
     if(defaultValue) onSet(defaultValue)
   }
 
   _getItem(item, index) {
-    const { onToggle } = this.props
+    const { onMove, onToggle } = this.props
     return {
       label: item.label,
       checked: item.checked,
       index,
-      onMove: this._handleMove.bind(this),
+      onMove: onMove.bind(this),
       onToggle: onToggle.bind(this)
     }
   }
