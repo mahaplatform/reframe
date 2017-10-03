@@ -33,5 +33,6 @@ export type ItemProps = {
   handler?: () => void,
   icon?: string,
   label?: string,
-  link?: string
+  link?: string,
+  units?: string
 }

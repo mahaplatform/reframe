@@ -3,8 +3,8 @@
 import type {Props as Format} from "../../utils/format/types";
 import type {Component} from "../../types";
 export type Alert = {color: string, message: string};
-export type ItemProps = {className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string};
-export type ListProps = {alert?: {color: string, message: string}, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string}>, sections?: Array<{component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string}>, title?: string}>};
-export type SectionProps = {component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string}>, title?: string};
+export type ItemProps = {className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, units?: string};
+export type ListProps = {alert?: {color: string, message: string}, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, units?: string}>, sections?: Array<{component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, units?: string}>, title?: string}>};
+export type SectionProps = {component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, units?: string}>, title?: string};
 
 declare module.exports: {};

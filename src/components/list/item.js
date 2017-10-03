@@ -11,7 +11,7 @@ import _ from 'lodash'
 class Item extends React.Component<Props, void> {
 
   render(): Node {
-    const { component, content, extra, format, handler, icon, label, link } = this.props
+    const { component, content, extra, format, handler, icon, label, link, units } = this.props
     const item = (
       <div className={ this._getClass() }>
         { icon &&
@@ -30,6 +30,7 @@ class Item extends React.Component<Props, void> {
               </strong>
             }
             <Format { ...content } format={ format } value={ content } />
+            &nbsp; { units }
           </div>
         }
         { extra &&
