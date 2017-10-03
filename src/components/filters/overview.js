@@ -2,13 +2,14 @@ import PropTypes from 'prop-types'
 import Lookup from './lookup'
 import Select from './select'
 import Toggle from './toggle'
+import Daterange from './daterange'
 import React from 'react'
 
 class Overview extends React.Component {
 
   static propTypes = {
     filters: PropTypes.array,
-    values: PropTypes.object,
+    results: PropTypes.object,
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
     onRemovePanel: PropTypes.func,
@@ -33,6 +34,7 @@ class Overview extends React.Component {
               if(filter.type === 'toggle') return <Toggle {...this._getToggle(filter) } key={`filter_${index}`} />
               if(filter.type === 'lookup') return <Lookup {...this._getLookup(filter) } key={`filter_${index}`} />
               if(filter.type === 'select') return <Select {...this._getSelect(filter) } key={`filter_${index}`} />
+              if(filter.type === 'daterange') return <Daterange {...this._getDaterange(filter) } key={`filter_${index}`} />
             })}
           </div>
         </div>
@@ -44,21 +46,19 @@ class Overview extends React.Component {
   }
 
   _getToggle(filter) {
-    const { values, onChange } = this.props
-    const value = values[filter.name]
+    const { results, onChange } = this.props
     const { format, label, name } = filter
     return {
       format,
       label,
       name,
-      value,
+      results,
       onChange
     }
   }
 
   _getLookup(filter) {
-    const { values, onAddPanel, onChange, onRemovePanel } = this.props
-    const value = values[filter.name]
+    const { results, onAddPanel, onChange, onRemovePanel } = this.props
     const { format, label, multiple, options } = filter
     return {
       format,
@@ -66,8 +66,7 @@ class Overview extends React.Component {
       multiple,
       name,
       options,
-      values,
-      value,
+      results,
       onAddPanel,
       onChange,
       onRemovePanel
@@ -75,11 +74,21 @@ class Overview extends React.Component {
   }
 
   _getSelect(filter) {
-    const { values, onAddPanel, onChange, onRemovePanel } = this.props
-    const value = values[filter.name]
+    const { results, onAddPanel, onChange, onRemovePanel } = this.props
     return {
       ...filter,
-      value,
+      results,
+      onAddPanel,
+      onChange,
+      onRemovePanel
+    }
+  }
+
+  _getDaterange(filter) {
+    const { results, onAddPanel, onChange, onRemovePanel } = this.props
+    return {
+      ...filter,
+      results,
       onAddPanel,
       onChange,
       onRemovePanel

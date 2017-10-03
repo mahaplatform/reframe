@@ -1,12 +1,12 @@
 export const INITIAL_STATE = {
   panels: [],
-  values: {}
+  results: {}
 }
 
 const change = (state, action) => ({
   ...state,
-  values: {
-    ...state.values,
+  results: {
+    ...state.results,
     [action.name]: action.value
   }
 })
@@ -26,7 +26,7 @@ const removePanel = (state, action) => ({
 
 const reset = (state, action) => ({
   ...state,
-  values: INITIAL_STATE.values
+  results: INITIAL_STATE.results
 })
 
 const reducer = (state = INITIAL_STATE, action) => {

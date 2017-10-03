@@ -11,10 +11,10 @@ class SelectPanel extends React.Component {
     multiple: PropTypes.bool,
     name: PropTypes.string,
     options: PropTypes.array,
+    results: PropTypes.object,
     sort: PropTypes.object,
     text: PropTypes.string,
     value: PropTypes.string,
-    values: PropTypes.object,
     onChange: PropTypes.func,
     onUpdate: PropTypes.func,
     onRemovePanel: PropTypes.func
@@ -44,8 +44,7 @@ class SelectPanel extends React.Component {
   }
 
   _getSearch() {
-    const { endpoint, format, label, name, multiple, options, sort, text, value, values, onChange } = this.props
-    const results = values
+    const { endpoint, format, label, name, multiple, options, sort, text, value, results, onChange } = this.props
     const onUpdate = onChange
     return { endpoint, format, label, name, multiple, options, results, sort, text, value, onUpdate }
   }

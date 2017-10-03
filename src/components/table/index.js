@@ -3,22 +3,20 @@
 import type { Node } from '../../types'
 import type { Props, State, Column } from './types'
 
-import { Link } from 'react-router-dom'
 import Format from '../../utils/format'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import React from 'react'
 
-_.templateSettings.interpolate = /#{([\s\S]+?)}/g
-
 class Table extends React.Component<Props, State> {
 
   _handleResize: any = _.debounce(this._resizeColumns, 100)
 
-  body: any
+  head: any
 
   static contextTypes = {
     modal: PropTypes.object,
+    router: PropTypes.object,
     tasks: PropTypes.object
   }
 
@@ -30,72 +28,85 @@ class Table extends React.Component<Props, State> {
     const { columns, handler, link, modal, records, recordTasks, sort } = this.props
     return (
       <div className="reframe-table">
-        <div className="reframe-table-head">
-          <div className="reframe-table-head-wrapper">
-            <div className="reframe-table-head-row">
+        <table className="reframe-table-pinned">
+          <thead>
+            <tr>
               { columns.map((column, columnIndex) => (
-                <div key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex) } onClick={ this._handleSort.bind(this, column) }>
+                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
-                  { sort && column.key === sort.key &&
+                  { sort && (column.key === sort.key || column.sort === sort.key) &&
                     (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
                   }
-                </div>
+                </td>
               ))}
-              { (link || recordTasks) && <div className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle(columns.length) } /> }
-            </div>
-          </div>
-        </div>
-        <div className="reframe-table-body">
-          <div className="reframe-table-body-wrapper" ref={ (node) => this.body = node }>
+              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle(columns.length) } /> }
+            </tr>
+          </thead>
+        </table>
+        <table className="reframe-table-data">
+          <thead>
+            <tr ref={ (node) => this.head = node }>
+              { columns.map((column, columnIndex) => (
+                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) }>
+                  { column.label }
+                  { sort && (column.key === sort.key || column.sort === sort.key) &&
+                    (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                  }
+                </td>
+              ))}
+              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" /> }
+            </tr>
+          </thead>
+          <tbody>
             { records.map((record, rowIndex) => {
 
               const row = columns.map((column, columnIndex) => (
-                <div key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) }>
+                <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) }>
                   <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
-                </div>
+                </td>
               ))
 
               if(link) {
                 return (
-                  <Link key={ `record_${rowIndex}` } className="reframe-table-body-row" to={ _.template(link)(record) }>
+                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleLink.bind(this, record) }>
                     { row }
-                    <div className="reframe-table-body-cell icon mobile collapsing centered padded">
+                    <td className="reframe-table-body-cell icon mobile collapsing centered padded">
                       <i className="chevron right icon" />
-                    </div>
-                  </Link>
+                    </td>
+                  </tr>
                 )
               } else if(modal) {
                 return (
-                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleModal.bind(this, record.id) }>
+                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleModal.bind(this, record.id) }>
                     { row }
-                  </div>
+                  </tr>
                 )
               } else if(handler) {
                 return (
-                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row" onClick={ this._handleHandler.bind(this, record.id) }>
+                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleHandler.bind(this, record.id) }>
                     { row }
-                  </div>
+                  </tr>
                 )
               } else if(recordTasks) {
                 return (
-                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
+                  <tr key={ `record_${rowIndex}` }>
                     { row }
-                    <div className="reframe-table-body-cell icon mobile collapsing centered padded" onClick={ this._handleTasks.bind(this, record.id) }>
+                    <td className="icon mobile collapsing centered padded" onClick={ this._handleTasks.bind(this, record.id) }>
                       <i className="ellipsis vertical icon" />
-                    </div>
-                  </div>
+                    </td>
+                  </tr>
                 )
               } else {
                 return (
-                  <div key={ `record_${rowIndex}` } className="reframe-table-body-row">
+                  <tr key={ `record_${rowIndex}` }>
                     { row }
-                  </div>
+                  </tr>
                 )
               }
 
             })}
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -110,14 +121,14 @@ class Table extends React.Component<Props, State> {
   }
 
   _getHeaderClass(column: Column): string {
-    let classes = ['reframe-table-head-cell', 'padded']
+    let classes = ['padded']
     if(column.primary === true) classes.push('mobile')
     if(column.collapsing === true) classes.push('collapsing')
     return classes.join(' ')
   }
 
   _getBodyClass(column: Column): string {
-    let classes = ['reframe-table-body-cell']
+    let classes = []
     if(column.primary === true) classes.push('mobile')
     if(column.collapsing === true) classes.push('collapsing')
     if(column.centered === true) classes.push('centered')
@@ -131,11 +142,17 @@ class Table extends React.Component<Props, State> {
   }
 
   _resizeColumns(): void {
-    const firstRow = this.body.childNodes[0]
-    const headerCells = Array.from(firstRow.childNodes)
+    if(!this.head) return
+    const headerCells = Array.from(this.head.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
-    console.log(widths)
     this.setState({ widths })
+  }
+
+  _handleLink(record: Object): void {
+    const { link } = this.props
+    _.templateSettings.interpolate = /#{([\s\S]+?)}/g
+    const path = _.template(link)(record)
+    this.context.router.history.push(path)
   }
 
   _handleSort(column: Column): void {

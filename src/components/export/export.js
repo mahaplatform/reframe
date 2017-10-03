@@ -13,8 +13,7 @@ class Export extends React.Component {
     return (
       <div className="reframe-export">
         <div className="reframe-export-header">
-          <p>Choose from the columns below to customize your export. Drag
-          and drop the columns to adjust their order in the export.</p>
+          Export Results
         </div>
         <div className="reframe-export-body">
           <div className="reframe-export-list">
@@ -25,7 +24,7 @@ class Export extends React.Component {
         </div>
         <div className="reframe-export-footer">
           <div className="ui fluid red button" onClick={ this._handleClick.bind(this) }>
-            Export
+            Download Data
           </div>
         </div>
       </div>

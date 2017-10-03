@@ -10,14 +10,14 @@ class LookupPanel extends React.Component {
     multiple: PropTypes.bool,
     name: PropTypes.string,
     options: PropTypes.array,
-    values: PropTypes.object,
+    results: PropTypes.object,
     onChange: PropTypes.func,
     onRemovePanel: PropTypes.func
   }
 
   render() {
-    const { format, label, multiple, name, options, values } = this.props
-    const value = values[name]
+    const { format, label, multiple, name, options, results } = this.props
+    const value = results[name]
     return (
       <div className="reframe-filters-panel">
         <div className="reframe-filters-header" onClick={ this._handleRemovePanel.bind(this) }>
@@ -50,10 +50,10 @@ class LookupPanel extends React.Component {
   }
 
   _getValue(id) {
-    const { multiple, name, values } = this.props
-    if(!multiple) return values[name] !== id ? id : null
-    if(_.includes(values[name], id)) return _.without(values[name], id)
-    return [ ...values[name], id ]
+    const { multiple, name, results } = this.props
+    if(!multiple) return results[name] !== id ? id : null
+    if(_.includes(results[name], id)) return _.without(results[name], id)
+    return [ ...results[name], id ]
   }
 
   _handleClick(id) {
@@ -81,7 +81,7 @@ class Lookup extends React.Component {
     multiple: PropTypes.bool,
     name: PropTypes.string,
     options: PropTypes.array,
-    values: PropTypes.object,
+    results: PropTypes.object,
     value: PropTypes.number,
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
@@ -111,8 +111,8 @@ class Lookup extends React.Component {
   }
 
   _getLookupPanel() {
-    const { format, label, multiple, name, options, values, onChange, onRemovePanel } = this.props
-    return { format, label, multiple, name, options, values, onChange, onRemovePanel }
+    const { format, label, multiple, name, options, results, onChange, onRemovePanel } = this.props
+    return { format, label, multiple, name, options, results, onChange, onRemovePanel }
   }
 
 

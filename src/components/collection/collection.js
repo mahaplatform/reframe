@@ -74,7 +74,7 @@ class Collection extends React.Component {
           { records && <Results { ...this.props } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
         </div>
-        <div className="reframe-collection-canvas" onClick={ this._handleToggleFilter.bind(this) } />
+        <div className="reframe-collection-canvas" onClick={ this._handleToggleMode.bind(this) } />
         { filters &&
           <div className="reframe-collection-filter">
             <Filters { ...this._getFilters() } />
@@ -162,8 +162,8 @@ class Collection extends React.Component {
     }
   }
 
-  _handleToggleFilter() {
-    this.props.onToggleFilter()
+  _handleToggleMode() {
+    this.props.onToggleMode(this.props.mode)
   }
 
   _handleAddNew() {

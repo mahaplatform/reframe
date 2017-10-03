@@ -4,12 +4,12 @@ import Overview from './overview'
 import React from 'react'
 import _ from 'lodash'
 
-class Filter extends React.Component {
+class Filters extends React.Component {
 
   static propTypes = {
     filters: PropTypes.array,
-    values: PropTypes.object,
     panels: PropTypes.array,
+    results: PropTypes.object,
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
     onUpdate: PropTypes.func,
@@ -33,19 +33,38 @@ class Filter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { values, onUpdate } = this.props
-    if(!_.isEqual(prevProps.values, values)) onUpdate(values)
+    const { results } = this.props
+    if(!_.isEqual(prevProps.results, results)) this._handleChange()
   }
 
   _getPanel() {
-    const { values, onChange, onRemovePanel } = this.props
+    const { results, onChange, onRemovePanel } = this.props
     return {
-      values,
+      results,
       onChange,
       onRemovePanel
     }
   }
 
+  _handleChange() {
+    const { results, onUpdate } = this.props
+    const filters = Object.keys(results).reduce((filters, key) => ({
+      ...filters,
+      [key]: this._getValue(key)
+    }), {})
+    onUpdate(filters)
+  }
+
+  _getValue(key) {
+    const { results, filters } = this.props
+    const field = _.find(filters, { name: key })
+    if(!field) return null
+    const value = results[key]
+    if(field.type === 'daterange') return { $dr: value.key }
+    if(_.isArray(value)) return { $in: value.map(item => item.key) }
+    return { $eq: value.key }
+  }
+
 }
 
-export default Filter
+export default Filters

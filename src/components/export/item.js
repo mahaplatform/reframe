@@ -7,8 +7,8 @@ class Item extends React.Component {
   render() {
     const { label, connectDropTarget, connectDragPreview, connectDragSource } = this.props
     return connectDropTarget(connectDragPreview(
-      <div className={ this._getClass() } onClick={ this._handleToggle.bind(this) }>
-        <div className="reframe-export-label">
+      <div className={ this._getClass() }>
+        <div className="reframe-export-label" onClick={ this._handleToggle.bind(this) }>
           <i className={`fa fa-fw fa-${this._getIcon()}`} />
           { label }
         </div>
