@@ -1,7 +1,7 @@
 // @flow
 
 import type { Node } from '../../types'
-import type { Props, State, Column, Sort } from './types'
+import type { Props, State, Column } from './types'
 
 import { Link } from 'react-router-dom'
 import Format from '../../utils/format'
@@ -15,7 +15,7 @@ class Table extends React.Component<Props, State> {
 
   _handleResize: any = _.debounce(this._resizeColumns, 100)
 
-  head: any
+  body: any
 
   static contextTypes = {
     modal: PropTypes.object,
@@ -32,25 +32,25 @@ class Table extends React.Component<Props, State> {
       <div className="reframe-table">
         <div className="reframe-table-head">
           <div className="reframe-table-head-wrapper">
-            <div className="reframe-table-head-row" ref={ (node) => this.head = node }>
+            <div className="reframe-table-head-row">
               { columns.map((column, columnIndex) => (
-                <div key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } onClick={ this._handleSort.bind(this, column) }>
+                <div key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
                   { sort && column.key === sort.key &&
                     (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
                   }
                 </div>
               ))}
-              { link && <div className="reframe-table-head-cell mobile collapsing" /> }
+              { (link || recordTasks) && <div className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle(columns.length) } /> }
             </div>
           </div>
         </div>
         <div className="reframe-table-body">
-          <div className="reframe-table-body-wrapper">
+          <div className="reframe-table-body-wrapper" ref={ (node) => this.body = node }>
             { records.map((record, rowIndex) => {
 
               const row = columns.map((column, columnIndex) => (
-                <div key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) } style={ this._getBodyStyle(columnIndex) }>
+                <div key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) }>
                   <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
                 </div>
               ))
@@ -121,23 +121,26 @@ class Table extends React.Component<Props, State> {
     if(column.primary === true) classes.push('mobile')
     if(column.collapsing === true) classes.push('collapsing')
     if(column.centered === true) classes.push('centered')
-    if(!column.format) classes.push('padded')
+    if(!_.isFunction(column.format) && !_.isElement(column.format)) classes.push('padded')
     return classes.join(' ')
   }
 
-  _getBodyStyle(index: number): Object {
+  _getHeadStyle(index: number): Object {
     const { widths } = this.state
     return widths[index] ? { width: `${widths[index]}px` } : {}
   }
 
   _resizeColumns(): void {
-    const headerCells = Array.from(this.head.childNodes)
+    const firstRow = this.body.childNodes[0]
+    const headerCells = Array.from(firstRow.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
+    console.log(widths)
     this.setState({ widths })
   }
 
-  _handleSort(column: Sort): void {
-    this.props.onSort(column.key)
+  _handleSort(column: Column): void {
+    const key = column.sort || column.key
+    this.props.onSort(key)
   }
 
   _handleHandler(id: number): void {

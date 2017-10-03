@@ -2,9 +2,13 @@
 
 import type { Component } from '../../types'
 
-export type Column = Object //TODO: fill out column type
-
-export type Export = Object //TODO: fill out column type
+export type Column = {
+  label: string,
+  key: string,
+  sort?: string,
+  format?: string,
+  primary?: boolean
+}
 
 export type recordTask = Object //TODO: fill out column type
 
@@ -15,7 +19,6 @@ export type Sort = {
 
 export type Props = {
   columns: Array<Column>,
-  export: Array<Export>,
   handler: (id: number) => void,
   link: string,
   modal: Component,

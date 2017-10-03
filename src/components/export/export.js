@@ -49,10 +49,14 @@ class Export extends React.Component {
   }
 
   _handleClick() {
-    const { endpoint, filter, token, items } = this.props
+    const { endpoint, filter, sort, token, items } = this.props
     const query = {
       ...filter,
-      $select: items.filter(item => item.checked).map(item => item.key)
+      $sort: sort,
+      $select: items.filter(item => item.checked).reduce((select, item) => ({
+        ...select,
+        [item.label]: item.key
+      }), {})
     }
     const url = `${endpoint}.csv?token=${token}&download=true&${qs.stringify(query)}`
     window.location.href = url

@@ -11,24 +11,23 @@
   display: table;
   width: 100%;
 }
+.reframe-table-body-row:hover {
+  background-color: fadeout(@black, 97);
+}
 .reframe-table-head-row,
 .reframe-table-body-row {
   display: table-row;
+  .reframe-table-head-cell {
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
   .reframe-table-head-cell:last-child,
   .reframe-table-body-cell:last-child {
     border-right: none;
   }
 }
-.reframe-table-body-row {
-  &:hover {
-    background: #F9F9F9;
-  }
-}
-.reframe-table-head-cell {
-  border-bottom: 1px solid rgba(0,0,0,0.1)
-}
 .reframe-table-head-cell,
 .reframe-table-body-cell {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
   display: table-cell;
   line-height: 1.4em;
   &.collapsing {

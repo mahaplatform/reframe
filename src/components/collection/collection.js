@@ -64,7 +64,7 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { endpoint, filters, mode, records } = this.props
+    const { endpoint, filters, records } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
@@ -130,8 +130,14 @@ class Collection extends React.Component {
       defaultValue: this.props.export,
       endpoint,
       filter: this._getFilter(),
+      sort: this._getSort(),
       token
     }
+  }
+
+  _getSort() {
+    const { sort } = this.props
+    return sort.key ? (sort.order === 'desc' ? '-' : '') + sort.key : null
   }
 
   _getFilter() {

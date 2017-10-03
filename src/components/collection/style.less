@@ -127,15 +127,10 @@
         left: 23em;
       }
     }
-    &.filter {
-      .reframe-collection-filter {
-        .translateX(0);
-      }
-    }
-    &.export {
-      .reframe-collection-export {
-        .translateX(0);
-      }
+    &.filter .reframe-collection-filter,
+    &.export .reframe-collection-export {
+      .translateX(0);
+      opacity: 1;
     }
   }
   .reframe-collection-body {
@@ -157,8 +152,9 @@
   .reframe-collection-filter,
   .reframe-collection-export {
     background-color: lighten(@black, 95);
-    .transition(transform .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    transition: transform .25s cubic-bezier(0.7, 0, 0.175, 1) 0s, opacity .25s cubic-bezier(0.7, 0, 0.175, 1) 0s;
     .translateX(-100%);
+    opacity: 1;
     position: absolute;
     top: 0;
     bottom: 0;
