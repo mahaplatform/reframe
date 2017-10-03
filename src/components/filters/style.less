@@ -28,8 +28,24 @@
   text-align: center;
   display: flex;
 }
+.reframe-filters-item-description {
+  flex: 0 0 2em;
+  display: flex;
+  .reframe-filters-item-count {
+    margin: auto;
+    background-color: fadeout(@black, 85);
+    border-radius: 50%;
+    color: @white;
+    text-align: center;
+    display: inline-block;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: .7em;
+    line-height: 2em;
+  }
+}
 .reframe-filters-header-icon {
-  flex: 0 0 3em;
+  flex: 0 0 2em;
   display: flex;
   color: fadeout(@black, 80);
   cursor: pointer;

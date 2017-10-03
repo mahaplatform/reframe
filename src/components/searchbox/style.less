@@ -34,16 +34,18 @@
   color: fadeout(@black, 80);
   overflow: hidden;
 }
+.ui.form .reframe-searchbox-field,
 .reframe-searchbox-field {
   flex: 1;
   input {
-    box-shadow: none;
-    border: none;
-    background: transparent;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
     padding: 0.5em;
     width: 100%;
-    outline: none;
-    font-size: 1em;
-    color: fadeout(@black, 60);
+    outline: none!important;
+    font-size: 1em!important;
+    line-height: 1.3em !important;
+    color: fadeout(@black, 60) !important;
   }
 }

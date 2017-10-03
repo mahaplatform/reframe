@@ -26,7 +26,8 @@
 .reframe-collection-header-search {
   flex: 1;
 }
-.reframe-collection-header-icon {
+.reframe-collection-header-filter,
+.reframe-collection-header-export {
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
@@ -80,6 +81,9 @@
   }
 }
 @media (max-width: 1023px) {
+  .reframe-collection-header-export {
+    display: none;
+  }
   .reframe-collection {
     &.filter, &.export {
       .reframe-collection-canvas {

@@ -69,17 +69,24 @@ class Select extends React.Component {
     mutiple: PropTypes.bool,
     name: PropTypes.string,
     options: PropTypes.array,
+    results: PropTypes.object,
     values: PropTypes.object,
     onAddPanel: PropTypes.func
   }
 
   render() {
-    const { label } = this.props
+    const { label, name, results } = this.props
+    const count = results[name] ? results[name].length : 0
     return (
       <div className="reframe-filters-item" onClick={ this._handleClick.bind(this) }>
         <div className="reframe-filters-item-title">
           { label }
         </div>
+        { count > 0 &&
+          <div className="reframe-filters-item-description">
+            <div className="reframe-filters-item-count">{ count }</div>
+          </div>
+        }
         <div className="reframe-filters-item-icon">
           <i className="fa fa-chevron-right" />
         </div>

@@ -153,7 +153,8 @@ class Form extends React.Component {
   }
 
   _handleLoadData() {
-    const { defaults, endpoint, onFetchData, onSetData } = this.props
+    const { data, defaults, endpoint, onFetchData, onSetData } = this.props
+    if(Object.keys(data).length > 1) return onSetData(data)
     if(endpoint) return onFetchData(endpoint)
     onSetData(defaults)
   }

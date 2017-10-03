@@ -68,9 +68,7 @@ class Collection extends React.Component {
     return (
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
-          { filters &&
-            <Header { ...this._getHeader() } />
-          }
+          <Header { ...this._getHeader() } />
           { records && <Results { ...this.props } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
         </div>

@@ -19,12 +19,12 @@ class Header extends React.Component {
           <Searchbox { ...this._getSearchbox() } />
         </div>
         { filters &&
-          <div className="reframe-collection-header-icon" title="Filter Records" onClick={ this._handleToggleMode.bind(this, 'filter') }>
+          <div className="reframe-collection-header-filter" title="Filter Records" onClick={ this._handleToggleMode.bind(this, 'filter') }>
             <i className="fa fa-sliders" />
           </div>
         }
         { this.props.export &&
-          <div className="reframe-collection-header-icon" title="Export Records" onClick={ this._handleToggleMode.bind(this, 'export') }>
+          <div className="reframe-collection-header-export" title="Export Records" onClick={ this._handleToggleMode.bind(this, 'export') }>
             <i className="fa fa-download" />
           </div>
         }
