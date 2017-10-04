@@ -102,9 +102,10 @@ class Collection extends React.Component {
   }
 
   _getHeader() {
-    const { filters, onSetQuery, onToggleMode } = this.props
+    const { filter, filters, onSetQuery, onToggleMode } = this.props
     return {
       export: this.props.export,
+      filter,
       filters,
       onSetQuery,
       onToggleMode

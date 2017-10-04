@@ -8,27 +8,27 @@ class Toggle extends React.Component {
     format: PropTypes.any,
     name: PropTypes.string,
     label: PropTypes.string,
-    value: PropTypes.bool,
+    results: PropTypes.object,
     onChange: PropTypes.func
   }
 
   render() {
-    const { format, label, value } = this.props
+    const { format, label, name, results } = this.props
     return (
       <div className="reframe-filters-item" onClick={ this._handleChange.bind(this) }>
         <div className="reframe-filters-item-title">
           <Format format={ format } value={ label } />
         </div>
         <div className="reframe-filters-item-icon">
-          { value === true && <i className="fa fa-check" /> }
+          { results[name] && results[name] === true && <i className="fa fa-check" /> }
         </div>
       </div>
     )
   }
 
   _handleChange() {
-    const { name } = this.props
-    const value = this.props.value === true ? null : true
+    const { name, results } = this.props
+    const value = results[name] && results[name] === true ? null : true
     this.props.onChange(name, value)
   }
 

@@ -28,6 +28,7 @@
 }
 .reframe-collection-header-filter,
 .reframe-collection-header-export {
+  position: relative;
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
@@ -40,6 +41,21 @@
       background-color: fadeout(@black, 95);
     }
   }
+}
+.reframe-collection-header-filter-count {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  margin: auto;
+  background-color: fadeout(@black, 75);
+  border-radius: 50%;
+  color: @white;
+  text-align: center;
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  font-size: .6em;
+  line-height: 1.5em;
 }
 .reframe-collection-loader {
   flex: 0 0 35.em;

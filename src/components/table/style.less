@@ -16,10 +16,19 @@
   }
   thead {
     background-color: @white;
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
     tr td {
       font-weight: bold;
       position: relative;
       cursor: pointer;
+      background-color: fadeout(@black, 98);
+      color: fadeout(@black, 70);
+      border-right: 1px solid fadeout(@black, 90);
+      &:last-child {
+        border-right: none;
+      }
       &:hover {
         background-color: fadeout(@black, 97);
       }
@@ -49,7 +58,7 @@
         text-align: center;
       }
       .icon {
-        color: fadeout(@black, 90) !important;
+        color: fadeout(@black, 80) !important;
         margin: 0;
       }
       .ellipsis {
@@ -59,7 +68,7 @@
     }
   }
   tr {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid fadeout(@black, 90);
   }
   td {
     &.collapsing {
@@ -76,93 +85,3 @@
     }
   }
 }
-
-
-// .reframe-table-body {
-//   background-color: @table_body_background_color;
-// }
-// .reframe-table-head-wrapper,
-// .reframe-table-body-wrapper {
-//   display: table;
-//   width: 100%;
-// }
-// .reframe-table-body-row:hover {
-//   background-color: fadeout(@black, 97);
-// }
-// .reframe-table-head-row,
-// .reframe-table-body-row {
-//   display: table-row;
-//   .reframe-table-head-cell {
-//     border-right: 1px solid rgba(0,0,0,0.1);
-//   }
-//   .reframe-table-head-cell:last-child,
-//   .reframe-table-body-cell:last-child {
-//     border-right: none;
-//   }
-// }
-// .reframe-table-head-cell,
-// .reframe-table-body-cell {
-//   border-bottom: 1px solid rgba(0,0,0,0.1);
-//   display: table-cell;
-//   line-height: 1.4em;
-//   &.collapsing {
-//     width: 1px;
-//   }
-//   &.padded {
-//     padding: 0.8em;
-//   }
-// }
-// .reframe-table-head-cell {
-//   background-color: @table_header_background_color;
-//   font-weight: bold;
-//   position: relative;
-//   cursor: pointer;
-//   i {
-//     margin: 0;
-//   }
-//   .chevron {
-//     position: absolute;
-//     right: 1em;
-//     color: fadeout(@black, 80);
-//   }
-// }
-// .reframe-table-body-cell {
-//   line-height: 20px;
-//   vertical-align: middle;
-//   color: @table_body_font_color !important;
-//   strong {
-//     color: @black;
-//   }
-//   &.centered {
-//     text-align: center;
-//   }
-//   .icon {
-//     color: fadeout(@black, 90) !important;
-//     margin: 0;
-//   }
-//   .ellipsis {
-//     font-size: 1.2em;
-//     cursor: pointer;
-//   }
-// }
-// @media only screen and (max-width: 767px) {
-//   .reframe-table-head {
-//     display: none;
-//   }
-//   .reframe-table-head-cell:not(.mobile),
-//   .reframe-table-body-cell:not(.mobile) {
-//     display: none;
-//   }
-// }
-// @media only screen and (min-width: 768px) {
-//   .reframe-table-head {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     z-index: 1;
-//   }
-//   .reframe-table-body {
-//     padding-top: 3em;
-//   }
-// }

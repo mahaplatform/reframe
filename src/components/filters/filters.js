@@ -20,7 +20,7 @@ class Filters extends React.Component {
     const { panels } = this.props
     return (
       <div className="reframe-filters">
-        <Overview { ...this.props } />
+        <Overview { ...this._getOverview() } />
         <TransitionGroup>
           { panels.map((panel, index) => (
             <CSSTransition key={ `filter_panel_${index}` } classNames="slide" timeout={ 500 }>
@@ -35,6 +35,10 @@ class Filters extends React.Component {
   componentDidUpdate(prevProps) {
     const { results } = this.props
     if(!_.isEqual(prevProps.results, results)) this._handleChange()
+  }
+
+  _getOverview() {
+    return this.props
   }
 
   _getPanel() {
@@ -62,7 +66,8 @@ class Filters extends React.Component {
     const value = results[key]
     if(field.type === 'daterange') return { $dr: value.key }
     if(_.isArray(value)) return { $in: value.map(item => item.key) }
-    return { $eq: value.key }
+    if(_.isPlainObject(value)) return { $eq: value.key }
+    return { $eq: value }
   }
 
 }

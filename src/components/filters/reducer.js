@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export const INITIAL_STATE = {
   panels: [],
   results: {}
@@ -5,10 +7,10 @@ export const INITIAL_STATE = {
 
 const change = (state, action) => ({
   ...state,
-  results: {
+  results: action.value ? {
     ...state.results,
     [action.name]: action.value
-  }
+  } : _.omit(state.results, action.name)
 })
 
 const addPanel = (state, action) => ({
