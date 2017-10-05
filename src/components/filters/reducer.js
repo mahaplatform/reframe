@@ -5,6 +5,11 @@ export const INITIAL_STATE = {
   results: {}
 }
 
+const set = (state, action) => ({
+  ...state,
+  results: action.results
+})
+
 const change = (state, action) => ({
   ...state,
   results: action.value ? {
@@ -34,6 +39,9 @@ const reset = (state, action) => ({
 const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
+
+  case 'SET':
+    return set(state, action)
 
   case 'CHANGE':
     return change(state, action)

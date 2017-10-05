@@ -13,7 +13,13 @@ class Export extends React.Component {
     return (
       <div className="reframe-export">
         <div className="reframe-export-header">
-          Export Results
+          <div className="reframe-export-header-icon" onClick={ this._handleDone.bind(this) }>
+            <i className="fa fa-chevron-left" />
+          </div>
+          <div className="reframe-export-header-title">
+            Export Results
+          </div>
+          <div className="reframe-export-header-icon" />
         </div>
         <div className="reframe-export-body">
           <div className="reframe-export-list">
@@ -45,6 +51,10 @@ class Export extends React.Component {
       onMove: onMove.bind(this),
       onToggle: onToggle.bind(this)
     }
+  }
+
+  _handleDone() {
+    this.props.onDone()
   }
 
   _handleClick() {

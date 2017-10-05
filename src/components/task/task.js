@@ -15,10 +15,15 @@ class Task extends React.Component<Props, void> {
     router: PropTypes.object
   }
 
+  static defaultProps = {
+    onDone: PropTypes.func
+  }
+
   render(): Node {
-    const { label } = this.props
+    const { icon, label } = this.props
     return (
       <div className="reframe-task" onClick={ this._handleChoose.bind(this) }>
+        { icon && <i className={`fa fa-fw fa-${icon}`} /> }
         { label }
       </div>
     )

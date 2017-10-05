@@ -1,6 +1,7 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleMode } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel } from './types'
+import { Component } from '../../types'
 
 export const setParams = (filter: Object, sort: Object): SetParams => ({
   type: 'SET_PARAMS',
@@ -33,7 +34,19 @@ export const setQuery = (q: string): SetQuery => ({
   q
 })
 
-export const toggleMode = (mode: string): ToggleMode => ({
-  type: 'TOGGLE_MODE',
-  mode
+export const toggleTasks = (): ToggleTasks => ({
+  type: 'TOGGLE_TASKS'
+})
+
+export const addPanel = (panel: Component): AddPanel => ({
+  type: 'ADD_PANEL',
+  panel
+})
+
+export const removePanel = (panel: Component): RemovePanel => ({
+  type: 'REMOVE_PANEL'
+})
+
+export const clearPanel = (panel: Component): ClearPanel => ({
+  type: 'CLEAR_PANEL'
 })

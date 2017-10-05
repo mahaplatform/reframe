@@ -13,7 +13,8 @@ class Filters extends React.Component {
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
     onUpdate: PropTypes.func,
-    onRemovePanel: PropTypes.func
+    onRemovePanel: PropTypes.func,
+    onSet: PropTypes.func
   }
 
   render() {
@@ -30,6 +31,10 @@ class Filters extends React.Component {
         </TransitionGroup>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.props.onSet(this.props.values)
   }
 
   componentDidUpdate(prevProps) {
@@ -51,24 +56,9 @@ class Filters extends React.Component {
   }
 
   _handleChange() {
-    const { results, onUpdate } = this.props
-    const filters = Object.keys(results).reduce((filters, key) => ({
-      ...filters,
-      [key]: this._getValue(key)
-    }), {})
-    onUpdate(filters)
+    this.props.onUpdate(this.props.results)
   }
 
-  _getValue(key) {
-    const { results, filters } = this.props
-    const field = _.find(filters, { name: key })
-    if(!field) return null
-    const value = results[key]
-    if(field.type === 'daterange') return { $dr: value.key }
-    if(_.isArray(value)) return { $in: value.map(item => item.key) }
-    if(_.isPlainObject(value)) return { $eq: value.key }
-    return { $eq: value }
-  }
 
 }
 

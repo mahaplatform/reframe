@@ -1,16 +1,18 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleMode, Actions, State } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, Actions, State } from './types'
 
 const INITIAL_STATE: State = {
-  mode: null,
+  filter: {},
+  managing: false,
+  open: false,
+  panel: null,
+  q: '',
+  records: null,
   sort: {
     key: null,
     order: null
-  },
-  filter: {},
-  q: '',
-  records: null
+  }
 }
 
 const setParams = (state: State, action: SetParams): State => ({
@@ -47,9 +49,25 @@ const setQuery = (state: State, action: SetQuery): State => ({
   q: action.q
 })
 
-const toggleMode = (state: State, action: ToggleMode): State => ({
+const toggleTasks = (state: State, action: ToggleTasks): State => ({
   ...state,
-  mode: (state.mode === action.mode) ? null : action.mode
+  managing: !state.managing
+})
+
+const addPanel = (state: State, action: AddPanel): State => ({
+  ...state,
+  open: true,
+  panel: action.panel
+})
+
+const removePanel = (state: State, action: RemovePanel): State => ({
+  ...state,
+  open: false
+})
+
+const clearPanel = (state: State, action: ClearPanel): State => ({
+  ...state,
+  panel: null
 })
 
 const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
@@ -74,8 +92,17 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
   case 'SET_QUERY':
     return setQuery(state, action)
 
-  case 'TOGGLE_MODE':
-    return toggleMode(state, action)
+  case 'TOGGLE_TASKS':
+    return toggleTasks(state, action)
+
+  case 'ADD_PANEL':
+    return addPanel(state, action)
+
+  case 'REMOVE_PANEL':
+    return removePanel(state, action)
+
+  case 'CLEAR_PANEL':
+    return clearPanel(state, action)
 
   default:
     return state

@@ -12,6 +12,7 @@ class Overview extends React.Component {
     results: PropTypes.object,
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
+    onDone: PropTypes.func,
     onRemovePanel: PropTypes.func,
     onReset: PropTypes.func,
     onUpdate: PropTypes.func
@@ -22,7 +23,9 @@ class Overview extends React.Component {
     return (
       <div className="reframe-filters-panel">
         <div className="reframe-filters-header">
-          <div className="reframe-filters-header-icon" />
+          <div className="reframe-filters-header-icon" onClick={ this._handleDone.bind(this) }>
+            <i className="fa fa-chevron-left" />
+          </div>
           <div className="reframe-filters-header-title">
             Filter Results
           </div>
@@ -93,6 +96,10 @@ class Overview extends React.Component {
       onChange,
       onRemovePanel
     }
+  }
+
+  _handleDone() {
+    this.props.onDone()
   }
 
   _handleReset() {

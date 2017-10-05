@@ -7,8 +7,21 @@
   border-bottom: 1px solid fadeout(@black, 90);
   background-color: fadeout(@black, 95);
   text-align: center;
-  line-height: 1.8em;
-  padding: 0.8em;
+  display: flex;
+}
+.reframe-export-header-icon {
+  flex: 0 0 3em;
+  display: flex;
+  color: fadeout(@black, 80);
+  cursor: pointer;
+  i {
+    margin: auto;
+  }
+}
+.reframe-export-header-title {
+  flex: 1;
+  padding: 1em 0;
+  line-height: 1.4em;
   color: fadeout(@black, 50)
 }
 .reframe-export-body {

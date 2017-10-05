@@ -1,3 +1,8 @@
+export const set = (results) => ({
+  type: 'SET',
+  results
+})
+
 export const change = (name, value) => ({
   type: 'CHANGE',
   name,

@@ -36,9 +36,21 @@ export type SetQuery = {
   q: string
 }
 
-export type ToggleMode = {
-  type: 'TOGGLE_MODE',
-  mode: string
+export type ToggleTasks = {
+  type: 'TOGGLE_TASKS'
+}
+
+export type AddPanel = {
+  type: 'ADD_PANEL',
+  panel: Component
+}
+
+export type RemovePanel = {
+  type: 'REMOVE_PANEL'
+}
+
+export type ClearPanel = {
+  type: 'CLEAR_PANEL'
 }
 
 export type Actions =
@@ -48,22 +60,31 @@ export type Actions =
  | SetRecords
  | SetFilter
  | SetQuery
- | ToggleMode
+ | ToggleTasks
+ | AddPanel
+ | RemovePanel
+ | ClearPanel
 
 export type State = {
-  +mode: ?string,
+  +filter: Object,
+  +managing: boolean,
+  +open: boolean,
+  +panel?: Component,
+  +q: string,
+  +records: ?Array<Object>,
   +sort: {
     +key: ?string,
     +order: ?string
   },
-  +filter: Object,
-  +q: string,
-  +records: ?Array<Object>
 }
 
 export type Props = {
-  endpoint: ?string,
-  filters: ?Array<Object>,
+  endpoint?: string,
+  filters?: Array<Object>,
   layout: Component,
-  sort: string
+  managing?: boolean,
+  open?: boolean,
+  panel?: Component,
+  sort: string,
+  tasks?: Array<Object>
 }

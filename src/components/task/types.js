@@ -37,6 +37,7 @@ export type State = {
 export type Props = {
   drawer: Component,
   handler: () => void,
+  icon?: string,
   label: string,
   location: Location,
   modal: Component,

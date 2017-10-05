@@ -8,12 +8,13 @@ class Header extends React.Component {
     export: PropTypes.array,
     filters: PropTypes.array,
     filter: PropTypes.object,
+    tasks: PropTypes.array,
     onSetQuery: PropTypes.func,
-    onToggleFilter: PropTypes.func
+    onToggleTasks: PropTypes.func
   }
 
   render() {
-    const { filters, filter } = this.props
+    const { filters, filter, tasks } = this.props
     const count = Object.keys(filter).reduce((count, key) => {
       if(filter[key].$eq) return count + 1
       if(filter[key].$in) return count + filter[key].$in.length
@@ -24,15 +25,9 @@ class Header extends React.Component {
         <div className="reframe-collection-header-search">
           <Searchbox { ...this._getSearchbox() } />
         </div>
-        { filters &&
-          <div className="reframe-collection-header-filter" title="Filter Records" onClick={ this._handleToggleMode.bind(this, 'filter') }>
+        { (filter || this.props.export || tasks) &&
+          <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
             <i className="fa fa-sliders" />
-            { count > 0 && <div className="reframe-collection-header-filter-count">{ count }</div> }
-          </div>
-        }
-        { this.props.export &&
-          <div className="reframe-collection-header-export" title="Export Records" onClick={ this._handleToggleMode.bind(this, 'export') }>
-            <i className="fa fa-download" />
           </div>
         }
       </div>
@@ -40,14 +35,12 @@ class Header extends React.Component {
   }
 
   _getSearchbox() {
-    const { onSetQuery } = this.props
-    return {
-      onChange: onSetQuery
-    }
+    const onChange = this.props.onSetQuery
+    return { onChange }
   }
 
-  _handleToggleMode(mode) {
-    this.props.onToggleMode(mode)
+  _handleToggleTasks() {
+    this.props.onToggleTasks()
   }
 
 }
