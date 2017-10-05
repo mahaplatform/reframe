@@ -2,6 +2,8 @@
 
 import { Component } from '../../types'
 
+export type Column = Object
+
 export type SetParams = {
   type: 'SET_PARAMS',
   filter: Object,
@@ -9,6 +11,11 @@ export type SetParams = {
     key: string,
     order: string
   }
+}
+
+export type SetColumns = {
+  type: 'SET_COLUMNS',
+  columns: Array<Column>
 }
 
 export type Sort = {
@@ -55,6 +62,7 @@ export type ClearPanel = {
 
 export type Actions =
  | SetParams
+ | SetColumns
  | Sort
  | Filter
  | SetRecords

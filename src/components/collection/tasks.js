@@ -1,6 +1,7 @@
 import { CSSTransition } from 'react-transition-group'
+import Columns from './columns'
 import Filters from '../filters'
-import Export from '../export'
+import Export from './export'
 import Task from '../task'
 import React from 'react'
 import _ from 'lodash'
@@ -8,37 +9,47 @@ import _ from 'lodash'
 class Tasks extends React.Component {
 
   render() {
-    const { filters, open, panel, tasks } = this.props
+    const { columns, filters, open, panel, tasks } = this.props
     return (
       <div className="reframe-collection-tasks">
         <div className="reframe-collection-tasks-inner">
-          <div className="reframe-collection-tasks-panel">
-            <div className="reframe-collection-tasks-panel-header">
-              Tasks
-            </div>
-            <div className="reframe-collection-tasks-panel-body">
-              { filters &&
-                <div className="reframe-collection-tasks-panel-item" onClick={ this._handleFilter.bind(this) }>
-                  <i className="fa fa-fw fa-filter" />Filter Records
+          <div className="reframe-collection-tasks-panel-container">
+            <div className="reframe-collection-tasks-panel">
+              <div className="reframe-collection-tasks-panel-header mobile">
+                <div className="reframe-collection-tasks-panel-header-title">
+                  Tasks
                 </div>
-              }
-              { this.props.export &&
-                <div className="reframe-collection-tasks-panel-item" onClick={ this._handleExport.bind(this) }>
-                  <i className="fa fa-fw fa-download" />Export Records
-                </div>
-              }
-              { tasks && tasks.map((task, index) => (
-                <Task key={`task_${index}`} { ...this._getTask(task) } />
-              )) }
+              </div>
+              <div className="reframe-collection-tasks-panel-body">
+                { columns &&
+                  <div className="reframe-collection-tasks-panel-item" onClick={ this._handleColumns.bind(this) }>
+                    <i className="fa fa-fw fa-table" />Manage Columns
+                  </div>
+                }
+                { filters &&
+                  <div className="reframe-collection-tasks-panel-item" onClick={ this._handleFilter.bind(this) }>
+                    <i className="fa fa-fw fa-filter" />Filter Records
+                  </div>
+                }
+                { this.props.export &&
+                  <div className="reframe-collection-tasks-panel-item" onClick={ this._handleExport.bind(this) }>
+                    <i className="fa fa-fw fa-download" />Export Records
+                  </div>
+                }
+                { tasks && tasks.map((task, index) => (
+                  <Task key={`task_${index}`} { ...this._getTask(task) } />
+                )) }
+              </div>
             </div>
           </div>
           <CSSTransition in={ open } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-            <div className="reframe-collection-tasks-panel" key="foo">
+            <div className="reframe-collection-tasks-panel-container">
               { _.isFunction(panel) ? React.createElement(panel, this.props) : panel }
             </div>
           </CSSTransition>
         </div>
       </div>
+
     )
   }
 
@@ -47,6 +58,18 @@ class Tasks extends React.Component {
     if(open !== prevProps.open && !open) {
       setTimeout(onClearPanel, 500)
     }
+  }
+
+  _handleColumns() {
+    this.props.onAddPanel((props) => {
+      const { columns, onSetColumns } = props
+      return React.createElement(Columns, {
+        columns,
+        onSetColumns,
+        onDone: () => this.props.onRemovePanel()
+      })
+    })
+
   }
 
   _handleFilter() {

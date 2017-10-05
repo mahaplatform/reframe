@@ -1,12 +1,17 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel } from './types'
+import type { Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns } from './types'
 import { Component } from '../../types'
 
 export const setParams = (filter: Object, sort: Object): SetParams => ({
   type: 'SET_PARAMS',
   filter,
   sort
+})
+
+export const setColumns = (columns: Array<Column>): SetColumns => ({
+  type: 'SET_COLUMNS',
+  columns
 })
 
 export const sort = (key: string): Sort => ({

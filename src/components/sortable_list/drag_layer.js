@@ -7,7 +7,7 @@ class TableDragLayer extends React.Component {
   render() {
     const { item } = this.props
     return (
-      <div className="reframe-export-drag" style={ this._getItemStyles(this.props) }>
+      <div className="reframe-sortable-list-drag-layer" style={ this._getItemStyles(this.props) }>
         <Item { ...item } />
       </div>
     )

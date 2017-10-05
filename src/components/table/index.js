@@ -31,7 +31,7 @@ class Table extends React.Component<Props, State> {
         <table className="reframe-table-pinned">
           <thead>
             <tr>
-              { columns.map((column, columnIndex) => (
+              { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
                 <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
                   { sort && (column.key === sort.key || column.sort === sort.key) &&
@@ -39,14 +39,14 @@ class Table extends React.Component<Props, State> {
                   }
                 </td>
               ))}
-              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle(columns.length) } /> }
+              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle() } /> }
             </tr>
           </thead>
         </table>
         <table className="reframe-table-data">
           <thead>
             <tr ref={ (node) => this.head = node }>
-              { columns.map((column, columnIndex) => (
+              { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
                 <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) }>
                   { column.label }
                   { sort && (column.key === sort.key || column.sort === sort.key) &&
@@ -60,7 +60,7 @@ class Table extends React.Component<Props, State> {
           <tbody>
             { records.map((record, rowIndex) => {
 
-              const row = columns.map((column, columnIndex) => (
+              const row = columns.filter(column => column.visible !== false).map((column, columnIndex) => (
                 <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) }>
                   <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
                 </td>
@@ -116,6 +116,11 @@ class Table extends React.Component<Props, State> {
     window.addEventListener('resize', this._handleResize.bind(this))
   }
 
+  componentDidUpdate(prevProps: Props): void {
+    const { columns } = this.props
+    if(!_.isEqual(prevProps.columns, columns)) this._resizeColumns()
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this._handleResize.bind(this))
   }
@@ -136,15 +141,17 @@ class Table extends React.Component<Props, State> {
     return classes.join(' ')
   }
 
-  _getHeadStyle(index: number): Object {
+  _getHeadStyle(index?: number): Object {
     const { widths } = this.state
-    return widths[index] ? { width: `${widths[index]}px` } : {}
+    const width = (typeof index !== 'undefined') ? widths[index] : widths[widths.length - 1]
+    return width ? { width: `${width}px` } : {}
   }
 
   _resizeColumns(): void {
     if(!this.head) return
     const headerCells = Array.from(this.head.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
+    console.log(widths)
     this.setState({ widths })
   }
 

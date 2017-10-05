@@ -1,8 +1,9 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, Actions, State } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Actions, State } from './types'
 
 const INITIAL_STATE: State = {
+  columns: [],
   filter: {},
   managing: false,
   open: false,
@@ -19,6 +20,11 @@ const setParams = (state: State, action: SetParams): State => ({
   ...state,
   filter: action.filter,
   sort: action.sort
+})
+
+const setColumns = (state: State, action: SetColumns): State => ({
+  ...state,
+  columns: action.columns
 })
 
 const filter = (state: State, action: Filter): State => ({
@@ -76,6 +82,9 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
 
   case 'SET_PARAMS':
     return setParams(state, action)
+
+  case 'SET_COLUMNS':
+    return setColumns(state, action)
 
   case 'FILTER':
     return filter(state, action)

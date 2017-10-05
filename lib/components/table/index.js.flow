@@ -6,22 +6,23 @@ import PropTypes from "prop-types";
 import Format from "../../utils/format";
 import type {Props, State, Column} from "./types";
 import type {Node} from "../../types";
-declare export default class extends React$Component<{columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string}>, handler: (id: number) => void, link: string, modal: any, onLoadMore: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, sort: {key: string, order: string}, total: number}, {widths: Array<number>}> {
+declare export default class extends React$Component<{columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, modal: any, onLoadMore: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, sort: {key: string, order: string}, total: number}, {widths: Array<number>}> {
   static contextTypes: any;
 
   _handleResize: any;
   head: any;
   state: {widths: Array<number>};
-  _getBodyClass(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string}): string;
-  _getHeadStyle(index: number): Object;
-  _getHeaderClass(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string}): string;
+  _getBodyClass(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}): string;
+  _getHeadStyle(index?: number): Object;
+  _getHeaderClass(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}): string;
   _handleHandler(id: number): void;
   _handleLink(record: Object): void;
   _handleModal(id: number): void;
-  _handleSort(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string}): void;
+  _handleSort(column: {format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}): void;
   _handleTasks(id: number): void;
   _resizeColumns(): void;
   componentDidMount(): void;
+  componentDidUpdate(prevProps: {columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, modal: any, onLoadMore: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, sort: {key: string, order: string}, total: number}): void;
   componentWillUnmount(): void;
   render(): any;
 }

@@ -7,7 +7,8 @@ export type Column = {
   key: string,
   sort?: string,
   format?: string,
-  primary?: boolean
+  primary?: boolean,
+  visible?: boolean
 }
 
 export type recordTask = Object //TODO: fill out column type

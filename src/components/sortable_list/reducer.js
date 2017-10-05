@@ -4,10 +4,7 @@ const INITIAL_STATE = {
 
 const set = (state, action) => ({
   ...state,
-  items: action.items.map(item => ({
-    ...item,
-    checked: true
-  }))
+  items: action.items
 })
 
 const toggle = (state, action) => ({

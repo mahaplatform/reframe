@@ -51,12 +51,14 @@ class Collection extends React.Component {
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     sort: PropTypes.object,
+    table: PropTypes.array,
     tasks: PropTypes.array,
     token: PropTypes.string,
     onAddPanel: PropTypes.func,
     onClearPanel: PropTypes.func,
     onFetch: PropTypes.func,
     onRemovePanel: PropTypes.func,
+    onSetColumns: PropTypes.func,
     onSetFilter: PropTypes.func,
     onSetParams: PropTypes.func,
     onSetQuery: PropTypes.func,
@@ -85,10 +87,11 @@ class Collection extends React.Component {
   }
 
   componentDidMount() {
-    const { data, defaultSort, onSetParams, onSetRecords } = this.props
+    const { data, defaultSort, table, onSetParams, onSetColumns, onSetRecords } = this.props
     const filter = this.props.filter || {}
     const sort = defaultSort || { key: 'created_at', order: 'desc' }
     onSetParams(filter, sort)
+    if(table) onSetColumns(table)
     if(data) onSetRecords(data)
   }
 

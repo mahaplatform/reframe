@@ -8,12 +8,12 @@ class Item extends React.Component {
     const { label, connectDropTarget, connectDragPreview, connectDragSource } = this.props
     return connectDropTarget(connectDragPreview(
       <div className={ this._getClass() }>
-        <div className="reframe-export-label" onClick={ this._handleToggle.bind(this) }>
+        <div className="reframe-sortable-list-label" onClick={ this._handleToggle.bind(this) }>
           <i className={`fa fa-fw fa-${this._getIcon()}`} />
           { label }
         </div>
         { connectDragSource(
-          <div className="reframe-export-icon">
+          <div className="reframe-sortable-list-icon">
             <i className="fa fa-bars" />
           </div>
         ) }
@@ -23,7 +23,7 @@ class Item extends React.Component {
 
   _getClass() {
     const { checked, isDragging } = this.props
-    const classes = ['reframe-export-item']
+    const classes = ['reframe-sortable-list-item']
     if(!checked) classes.push('disabled')
     if(isDragging) classes.push('hidden')
     return classes.join(' ')

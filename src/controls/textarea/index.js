@@ -15,10 +15,11 @@ class TextArea extends React.Component {
   }
 
   static defaultProps = {
-    defaultValue: false,
+    defaultValue: '',
     disabled: false,
     maxLength: null,
     placeholder: '',
+    rows: 5,
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {}
@@ -50,12 +51,13 @@ class TextArea extends React.Component {
   }
 
   _getTextarea() {
-    const { placeholder, disabled } = this.props
+    const { placeholder, disabled, rows } = this.props
     const { value } = this.state
     return {
       placeholder,
       disabled,
       defaultValue: value,
+      rows,
       onChange: this._handleChange.bind(this)
     }
   }

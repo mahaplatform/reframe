@@ -27,6 +27,7 @@ class Form extends React.Component {
     isBusy: PropTypes.bool,
     method: PropTypes.string,
     ready: PropTypes.array,
+    saveText: PropTypes.string,
     sections: PropTypes.array,
     status: PropTypes.string,
     title: PropTypes.string,
@@ -50,6 +51,7 @@ class Form extends React.Component {
 
   static defaultProps = {
     method: 'GET',
+    saveText: 'Save',
     onCancel: () => {},
     onChange: () => {},
     onChangeField: () => {},
@@ -61,7 +63,7 @@ class Form extends React.Component {
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, status, title } = this.props
+    const { after, before, config, instructions, saveText, status, title } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
       <div className="reframe-modal-panel">
@@ -73,7 +75,7 @@ class Form extends React.Component {
             { title }
           </div>
           <div className={ this._getButtonClasses() } onClick={ this._debouncedSubmit }>
-            Save
+            { saveText }
           </div>
         </div>
         <div className="reframe-modal-panel-body">
