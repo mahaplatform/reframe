@@ -1,4 +1,5 @@
 import { CSSTransition } from 'react-transition-group'
+import PropTypes from 'prop-types'
 import Columns from './columns'
 import Filters from '../filters'
 import Export from './export'
@@ -8,8 +9,23 @@ import _ from 'lodash'
 
 class Tasks extends React.Component {
 
+  static propTypes = {
+    export: PropTypes.array,
+    filters: PropTypes.array,
+    open: PropTypes.bool,
+    panel: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ]),
+    table: PropTypes.array,
+    tasks: PropTypes.array,
+    onClearPanel: PropTypes.func,
+    onAddPanel: PropTypes.func,
+    onRemovePanel: PropTypes.func
+  }
+
   render() {
-    const { columns, filters, open, panel, tasks } = this.props
+    const { filters, open, panel, table, tasks } = this.props
     return (
       <div className="reframe-collection-tasks">
         <div className="reframe-collection-tasks-inner">
@@ -21,7 +37,7 @@ class Tasks extends React.Component {
                 </div>
               </div>
               <div className="reframe-collection-tasks-panel-body">
-                { columns &&
+                { table &&
                   <div className="reframe-collection-tasks-panel-item" onClick={ this._handleColumns.bind(this) }>
                     <i className="fa fa-fw fa-table" />Manage Columns
                   </div>

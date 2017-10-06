@@ -22,11 +22,7 @@ class Collection extends React.Component {
     empty: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.element,
-      PropTypes.shape({
-        icon: PropTypes.string,
-        message: PropTypes.string,
-        modal: PropTypes.func
-      })
+      PropTypes.string
     ]),
     export: PropTypes.array,
     failure: PropTypes.oneOfType([
@@ -37,6 +33,7 @@ class Collection extends React.Component {
     filtered: PropTypes.object,
     filters: PropTypes.array,
     handler: PropTypes.func,
+    icon: PropTypes.string,
     layout: PropTypes.func,
     loading: PropTypes.oneOfType([
       PropTypes.func,
@@ -45,7 +42,8 @@ class Collection extends React.Component {
     link: PropTypes.string,
     managing: PropTypes.bool,
     modal: PropTypes.string,
-    mode: PropTypes.string,
+    new: PropTypes.func,
+    open: PropTypes.bool,
     panel: PropTypes.any,
     q: PropTypes.string,
     records: PropTypes.array,
@@ -77,7 +75,7 @@ class Collection extends React.Component {
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
           <Header { ...this._getHeader() } />
-          { records && <Results { ...this.props } /> }
+          { records && <Results { ...this._getResuts() } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
         </div>
         <div className="reframe-collection-canvas" onClick={ this._handleToggleTasks.bind(this) } />
@@ -114,6 +112,10 @@ class Collection extends React.Component {
   }
 
   _getTasks() {
+    return this.props
+  }
+
+  _getResults() {
     return {
       ...this.props
     }
@@ -126,7 +128,7 @@ class Collection extends React.Component {
       endpoint,
       filter: filtered,
       loading,
-      empty: _.isPlainObject(empty) ? <Empty { ...this.props } /> : empty,
+      empty: _.isString(empty) ? <Empty { ...this.props } /> : empty,
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort

@@ -151,7 +151,6 @@ class Table extends React.Component<Props, State> {
     if(!this.head) return
     const headerCells = Array.from(this.head.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
-    console.log(widths)
     this.setState({ widths })
   }
 

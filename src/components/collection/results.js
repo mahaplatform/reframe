@@ -11,20 +11,25 @@ export class Empty extends React.Component {
   }
 
   static propTypes = {
-    empty: PropTypes.object,
-    entity: PropTypes.string
+    empty: PropTypes.string,
+    entity: PropTypes.string,
+    icon: PropTypes.string,
+    new: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func
+    ])
   }
 
   render() {
-    const { empty, entity } = this.props
+    const { empty, entity, icon } = this.props
     return (
       <div className="reframe-message">
         <div className="reframe-message-panel">
-          <h2><i className={`circular ${empty && empty.icon ? empty.icon : 'warning sign'} icon`} /></h2>
+          <h2><i className={`circular ${icon ? icon : 'warning sign'} icon`} /></h2>
           <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
-          { !empty || (empty && !empty.message) && <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>}
-          { empty && empty.message && <p>{ empty.message }</p>}
-          { empty.modal &&
+          { !empty && <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>}
+          { empty && <p>{ empty }</p>}
+          { this.props.new &&
             <div className="ui basic button red" onClick={ this._handleAddNew.bind(this)}>
               <i className="plus icon" />
               Create New {_.startCase(entity.replace('_', ' '))}
@@ -36,7 +41,7 @@ export class Empty extends React.Component {
   }
 
   _handleAddNew() {
-    this.context.modal.open(this.props.empty.modal)
+    this.context.modal.open(this.props.new)
   }
 
 }
@@ -53,13 +58,14 @@ export class Results extends React.Component {
     recordTasks: PropTypes.array,
     sort: PropTypes.object,
     status: PropTypes.string,
+    table: PropTypes.array,
     onLoadMore: PropTypes.func,
     onSort: PropTypes.func
   }
 
   render() {
-    const { columns, layout } = this.props
-    if(columns) return <Table { ...this._getTable() } />
+    const { table, layout } = this.props
+    if(table) return <Table { ...this._getTable() } />
     if(layout) return React.createElement(layout, { ...this._getCustomLayout() })
   }
 
