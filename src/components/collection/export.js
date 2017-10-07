@@ -1,5 +1,6 @@
 import SortableList from '../sortable_list'
 import PropTypes from 'prop-types'
+import pluralize from 'pluralize'
 import React from 'react'
 import qs from 'qs'
 
@@ -44,7 +45,7 @@ class Export extends React.Component {
 
   _handleClick() {
     const { items } = this.state
-    const { endpoint, filter, sort, token } = this.props
+    const { endpoint, entity, filter, sort, token } = this.props
     const query = {
       ...filter,
       $sort: sort,
@@ -53,7 +54,8 @@ class Export extends React.Component {
         [item.label]: item.key
       }), {})
     }
-    const url = `${endpoint}.csv?token=${token}&download=true&${qs.stringify(query)}`
+    const entities = pluralize(entity)
+    const url = `${endpoint}.csv?filename=${entities}&token=${token}&download=true&${qs.stringify(query)}`
     window.location.href = url
   }
 
