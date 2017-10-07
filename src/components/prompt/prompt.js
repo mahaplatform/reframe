@@ -26,31 +26,29 @@ class Prompt extends React.Component<Props, void> {
 
   render() {
     const { cancel, children, message, open, options } = this.props
-    return (
-      <div className="reframe-prompt">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-prompt-overlay" onClick={ this._handleClose.bind(this) } />
-        </CSSTransition>
-        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-prompt-options">
-            { message &&
-              <div className="reframe-prompt-header">
-                { message }
-              </div>
-            }
-            { options && options.map((option, index) => {
-              return <Task key={`option_${index}`} { ...option } onDone={ this._handleClose.bind(this) } />
-            }) }
-            { cancel &&
-              <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>
-                Cancel
-              </div>
-            }
-          </div>
-        </CSSTransition>
-      </div>
-    )
+    return ([
+      children,
+      <CSSTransition key="reframe-prompt-overlay" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-prompt-overlay" onClick={ this._handleClose.bind(this) } />
+      </CSSTransition>,
+      <CSSTransition key="reframe-prompt-options" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-prompt-options">
+          { message &&
+            <div className="reframe-prompt-header">
+              { message }
+            </div>
+          }
+          { options && options.map((option, index) => {
+            return <Task key={`option_${index}`} { ...option } onDone={ this._handleClose.bind(this) } />
+          }) }
+          { cancel &&
+            <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>
+              Cancel
+            </div>
+          }
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

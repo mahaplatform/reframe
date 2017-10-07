@@ -16,18 +16,16 @@ class Popup extends React.Component<Props, void> {
 
   render(): Node {
     const { children, component, open } = this.props
-    return (
-      <div className="reframe-popup">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-popup-panel">
-            <div className="reframe-popup-panel-item">
-              { component && ( _.isFunction(component) ? React.createElement(component) : component ) }
-            </div>
+    return ([
+      children,
+      <CSSTransition key="reframe-popup" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-popup-panel">
+          <div className="reframe-popup-panel-item">
+            { component && ( _.isFunction(component) ? React.createElement(component) : component ) }
           </div>
-        </CSSTransition>
-      </div>
-    )
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

@@ -11,5 +11,5 @@ declare export default class extends React$Component<{children: any, message: st
   _getIcon(style: string): $Exact<{+key: string | number | null, +props: mixed /* UNEXPECTED TYPE: EvalT */, +ref: any, +type: ElementType}>;
   componentDidUpdate<C>(prevProps: {children: any, message: string, onClear: () => void, onSet: (style: string, message: string) => void, style: string}): void;
   getChildContext(): any;
-  render(): $Exact<{+key: string | number | null, +props: mixed /* UNEXPECTED TYPE: EvalT */, +ref: any, +type: ElementType}>;
+  render(): [any, $Exact<{+key: string | number | null, +props: mixed /* UNEXPECTED TYPE: EvalT */, +ref: any, +type: ElementType}>];
 }

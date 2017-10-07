@@ -15,23 +15,21 @@ class Flash extends React.Component<Props, void> {
 
   render() {
     const { children, message, style } = this.props
-    return (
-      <div className="reframe-flash">
-        { children }
-        <CSSTransition in={ message !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className={`reframe-flash-popup ${style}`}>
-            <div className="reframe-flash-popup-panel">
-              <div className="reframe-flash-popup-icon">
-                { this._getIcon(style) }
-              </div>
-              <div className="reframe-flash-popup-message">
-                <p>{ message }</p>
-              </div>
+    return ([
+      children,
+      <CSSTransition key="reframe-flash" in={ message !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className={`reframe-flash-popup ${style}`}>
+          <div className="reframe-flash-popup-panel">
+            <div className="reframe-flash-popup-icon">
+              { this._getIcon(style) }
+            </div>
+            <div className="reframe-flash-popup-message">
+              <p>{ message }</p>
             </div>
           </div>
-        </CSSTransition>
-      </div>
-    )
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

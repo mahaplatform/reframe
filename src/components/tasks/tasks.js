@@ -22,26 +22,24 @@ class Tasks extends React.Component<Props, void> {
 
   render(): Node {
     const { children, items, open } = this.props
-    return (
-      <div className="reframe-tasks">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } />
-        </CSSTransition>
-        <CSSTransition in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-tasks-list">
-            { items && items.map((item, index) => {
-              if(item.show !== false) return (
-                <Task key={`task_${index}`} { ...item } onDone={ this._handleClose.bind(this) } />
-              )
-            }) }
-            <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
-              Cancel
-            </div>
+    return ([
+      children,
+      <CSSTransition key="reframe-tasks-overlay" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-tasks-overlay" onClick={ this._handleClose.bind(this) } />
+      </CSSTransition>,
+      <CSSTransition key="reframe-tasks-list" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-tasks-list">
+          { items && items.map((item, index) => {
+            if(item.show !== false) return (
+              <Task key={`task_${index}`} { ...item } onDone={ this._handleClose.bind(this) } />
+            )
+          }) }
+          <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
+            Cancel
           </div>
-        </CSSTransition>
-      </div>
-    )
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

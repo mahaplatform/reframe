@@ -16,19 +16,17 @@ class Drawer extends React.Component<Props, void> {
 
   render(): Node {
     const { children, component, location, open } = this.props
-    return (
-      <div className="reframe-drawer">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} />
-        </CSSTransition>
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>
-            { _.isFunction(component) ? React.createElement(component) : component }
-          </div>
-        </CSSTransition>
-      </div>
-    )
+    return ([
+      children,
+      <CSSTransition key="reframe-drawer-overlay" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-drawer-overlay" onClick={this._handleClose.bind(this)} />
+      </CSSTransition>,
+      <CSSTransition key="reframe-drawer-panel" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className={`reframe-drawer-panel reframe-drawer-panel-${location}`}>
+          { _.isFunction(component) ? React.createElement(component) : component }
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

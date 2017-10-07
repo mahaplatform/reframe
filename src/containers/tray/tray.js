@@ -16,19 +16,17 @@ class Tray extends React.Component<Props, void> {
 
   render(): Node {
     const { children, component, open } = this.props
-    return (
-      <div className="reframe-tray">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-tray-overlay" onClick={ this._handleCloseTray.bind(this) } />
-        </CSSTransition>
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-tray-panel">
-            { _.isFunction(component) ? React.createElement(component) : component }
-          </div>
-        </CSSTransition>
-      </div>
-    )
+    return ([
+      children,
+      <CSSTransition key="reframe-overlay" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-tray-overlay" onClick={ this._handleCloseTray.bind(this) } />
+      </CSSTransition>,
+      <CSSTransition key="reframe-tray-panel" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-tray-panel">
+          { _.isFunction(component) ? React.createElement(component) : component }
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {

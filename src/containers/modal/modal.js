@@ -16,19 +16,17 @@ class Modal extends React.Component<Props, void> {
 
   render(): Node {
     const { children, component, open } = this.props
-    return (
-      <div className="reframe-modal">
-        { children }
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} />
-        </CSSTransition>
-        <CSSTransition in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="reframe-modal-window">
-            { _.isFunction(component) ? React.createElement(component) : component }
-          </div>
-        </CSSTransition>
-      </div>
-    )
+    return ([
+      children,
+      <CSSTransition key="reframe-modal-overlay" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} />
+      </CSSTransition>,
+      <CSSTransition key="reframe-modal-window" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className="reframe-modal-window">
+          { _.isFunction(component) ? React.createElement(component) : component }
+        </div>
+      </CSSTransition>
+    ])
   }
 
   componentDidUpdate(prevProps: Props): void {
