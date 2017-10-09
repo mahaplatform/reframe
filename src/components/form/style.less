@@ -20,18 +20,15 @@
     padding: 0;
     margin: 0 0 1px;
     & > h4 {
-      position: relative;
-      background-color: #EEE;
+      border-top: 1px solid fadeout(@black, 90);
+      border-bottom: 1px solid fadeout(@black, 90);
+      background-color: fadeout(@black, 95);
       padding: 1em;
       font-size: 1em;
-      line-height: 1em;
-      color: #999;
+      line-height: 1.6em;
+      color: @black;
       margin: 0;
-      i {
-        position: absolute;
-        right: 1em;
-        font-size: 1em;
-      }
+      text-transform: uppercase;
     }
     &.collapsing {
       cursor: pointer;

@@ -10,6 +10,8 @@ export type Handler = (done: Done) => void
 export type ItemRequest = {
   method: Method,
   endpoint: string,
+  body: any,
+  params: any,
   onFailure: OnFailure,
   onSuccess: OnSuccess
 }

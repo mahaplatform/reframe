@@ -32,6 +32,9 @@
       &:hover {
         background-color: fadeout(@black, 97);
       }
+      &.padded {
+        padding: ~"0.8em calc(0.8em + 22px) 0.8em 0.8em";
+      }
       i {
         margin: 0;
       }
@@ -57,9 +60,17 @@
       &.centered {
         text-align: center;
       }
+      &.icon {
+        padding: 0.8em;
+      }
+      &.padded {
+        padding: 0.8em;
+      }
       .icon {
-        color: fadeout(@black, 80) !important;
         margin: 0;
+      }
+      .chevron, .ellipsis {
+        color: fadeout(@black, 80) !important;
       }
       .ellipsis {
         font-size: 1.2em;
@@ -73,9 +84,6 @@
   td {
     &.collapsing {
       width: 1px;
-    }
-    &.padded {
-      padding: ~".8em calc(.8em + 22px) .8em .8em";
     }
     @media only screen and (max-width: 767px) {
       &:not(.mobile),

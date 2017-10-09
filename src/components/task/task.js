@@ -72,6 +72,8 @@ class Task extends React.Component<Props, void> {
       onDone()
     }
     onRequest({
+      body: null,
+      params: null,
       ...itemRequest,
       onSuccess,
       onFailure

@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import flatten from 'flat'
 
 const INITIAL_STATE = {
   status: 'pending',
@@ -39,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
       ...state,
       status: 'data_loaded',
       data: {
-        ...state.data,
+        ...flatten(state.data),
         ..._.omitBy(action.data, _.isNil)
       }
     }
@@ -63,7 +64,7 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       status: 'data_loaded',
-      data: action.result.data
+      data: flatten(action.result.data)
     }
 
   case 'TOGGLE_BUSY':

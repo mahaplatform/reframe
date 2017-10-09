@@ -122,13 +122,22 @@ class Tasks extends React.Component {
       return {
         label: task.label,
         icon: task.icon,
+        rights: task.rights,
         handler: () => this.props.onAddPanel(task.panel)
       }
     } else if(task.handler) {
       return {
         label: task.label,
         icon: task.icon,
+        rights: task.rights,
         handler: () => task.handler(this.props)
+      }
+    } else if(task.request) {
+      return {
+        label: task.label,
+        icon: task.icon,
+        rights: task.rights,
+        request: task.request(this.props)
       }
     }
     return task

@@ -70,7 +70,7 @@ class Table extends React.Component<Props, State> {
                 return (
                   <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleLink.bind(this, record) }>
                     { row }
-                    <td className="reframe-table-body-cell icon mobile collapsing centered padded">
+                    <td className="reframe-table-body-cell icon mobile collapsing centered">
                       <i className="chevron right icon" />
                     </td>
                   </tr>
@@ -91,7 +91,7 @@ class Table extends React.Component<Props, State> {
                 return (
                   <tr key={ `record_${rowIndex}` }>
                     { row }
-                    <td className="icon mobile collapsing centered padded" onClick={ this._handleTasks.bind(this, record.id) }>
+                    <td className="icon mobile collapsing centered" onClick={ this._handleTasks.bind(this, record.id) }>
                       <i className="ellipsis vertical icon" />
                     </td>
                   </tr>
@@ -128,15 +128,15 @@ class Table extends React.Component<Props, State> {
   _getHeaderClass(column: Column): string {
     let classes = ['padded']
     if(column.primary === true) classes.push('mobile')
-    if(column.collapsing === true) classes.push('collapsing')
+    if(column.format === 'check' || column.collapsing === true) classes.push('collapsing')
     return classes.join(' ')
   }
 
   _getBodyClass(column: Column): string {
     let classes = []
     if(column.primary === true) classes.push('mobile')
-    if(column.collapsing === true) classes.push('collapsing')
-    if(column.centered === true) classes.push('centered')
+    if(column.format === 'check' || column.collapsing === true) classes.push('collapsing')
+    if(column.format === 'check' || column.centered === true) classes.push('centered')
     if(!_.isFunction(column.format) && !_.isElement(column.format)) classes.push('padded')
     return classes.join(' ')
   }

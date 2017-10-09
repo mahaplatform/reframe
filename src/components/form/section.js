@@ -29,19 +29,13 @@ class Section extends React.Component {
   }
 
   render() {
-    const { collapsing, fields, instructions, label } = this.props
+    const { fields, instructions, label } = this.props
     const { collapsed } = this.state
-    let classes = ['ui', 'basic', 'segment']
-    if(collapsing) {
-      classes.push('collapsing')
-      classes.push(collapsed ? 'collapsed' : 'expanded')
-    }
     return (
-      <div className={classes.join(' ')}>
+      <div className={ this._getClass() }>
         { label &&
           <h4 className="ui header" onClick={ this._handleToggle.bind(this)} >
             { label }
-            { collapsed ? <i className="plus icon" /> : <i className="minus icon" /> }
           </h4>
         }
         <div className="section">
@@ -52,6 +46,18 @@ class Section extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _getClass() {
+    const { collapsing } = this.props
+    const { collapsed } = this.state
+    let classes = ['ui', 'basic', 'segment']
+    if(collapsing) {
+      classes.push('collapsing')
+      classes.push(collapsed ? 'collapsed' : 'expanded')
+    }
+    return classes.join(' ')
+
   }
 
   _getField(field) {

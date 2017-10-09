@@ -22,10 +22,9 @@ class Item extends React.Component {
   }
 
   _getClass() {
-    const { checked, isDragging } = this.props
+    const { checked } = this.props
     const classes = ['reframe-sortable-list-item']
     if(!checked) classes.push('disabled')
-    if(isDragging) classes.push('hidden')
     return classes.join(' ')
   }
 
