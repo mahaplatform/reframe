@@ -20,6 +20,9 @@ class Columns extends React.Component {
         <div className="reframe-collection-tasks-panel-body">
           <SortableList { ...this._getSortableList() } />
         </div>
+        <div className="reframe-collection-tasks-panel-footer" onClick={ this._handleReset.bind(this) }>
+          Reset Columns
+        </div>
       </div>
     )
   }
@@ -36,6 +39,10 @@ class Columns extends React.Component {
         visible: item.checked
       })))
     }
+  }
+
+  _handleReset() {
+    this.props.onSetColumns(this.props.table)
   }
 
   _handleDone() {

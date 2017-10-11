@@ -39,7 +39,7 @@ class Table extends React.Component<Props, State> {
                   }
                 </td>
               ))}
-              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" style={ this._getHeadStyle() } /> }
+              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing next" style={ this._getHeadStyle() } /> }
             </tr>
           </thead>
         </table>
@@ -54,7 +54,7 @@ class Table extends React.Component<Props, State> {
                   }
                 </td>
               ))}
-              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing" /> }
+              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing next" /> }
             </tr>
           </thead>
           <tbody>
@@ -112,7 +112,7 @@ class Table extends React.Component<Props, State> {
   }
 
   componentDidMount(): void {
-    this._resizeColumns()
+    setTimeout(() => this._resizeColumns(), 250)
     window.addEventListener('resize', this._handleResize.bind(this))
   }
 

@@ -11,6 +11,7 @@ class Task extends React.Component<Props, void> {
 
   static contextTypes = {
     drawer: PropTypes.object,
+    mobile: PropTypes.bool,
     modal: PropTypes.object,
     router: PropTypes.object
   }
@@ -22,11 +23,17 @@ class Task extends React.Component<Props, void> {
   render(): Node {
     const { icon, label } = this.props
     return (
-      <div className="reframe-task" onClick={ this._handleChoose.bind(this) }>
+      <div className={ this._getClass() } onClick={ this._handleChoose.bind(this) }>
         { icon && <i className={`fa fa-fw fa-${icon}`} /> }
         { label }
       </div>
     )
+  }
+
+  _getClass() {
+    const classes = ['reframe-task']
+    if(this.props.mobile !== false) classes.push('mobile')
+    return classes.join(' ')
   }
 
   _handleChoose(index: number): void {

@@ -11,7 +11,9 @@ import _ from 'lodash'
 class ToggleList extends React.Component<Props, void> {
 
   static defaultProps = {
-    filters: []
+    filters: [],
+    onReady: () => {},
+    onChange: (value) => {}
   }
 
   render(): Node {
@@ -23,8 +25,9 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   componentDidMount(): void {
-    const { defaultValue, onSet } = this.props
+    const { defaultValue, onReady, onSet } = this.props
     if(defaultValue) onSet(defaultValue)
+    if(onReady) onReady()
   }
 
   componentDidUpdate(prevProps: Props): void {
@@ -47,9 +50,9 @@ class ToggleList extends React.Component<Props, void> {
     return ({ records }) => (
       <div className="reframe-search-results">
         { records.map((record, index) => (
-          <div key={`record_${index}`} className="reframe-search-result" onClick={ this._handleToggle.bind(this, record.id) }>
+          <div key={`record_${index}`} className="reframe-search-item" onClick={ this._handleToggle.bind(this, record.id) }>
             { _.isFunction(component) ? React.createElement(component, record) : component }
-            <div className="reframe-search-result-toggle">
+            <div className="reframe-search-item-icon">
               { _.includes(chosen, record.id) &&
                 <i className="icon green check" />
               }

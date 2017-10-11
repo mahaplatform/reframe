@@ -6,13 +6,13 @@ import Collection from "../../components/collection";
 import type {Props as CollectionProps} from "../../components/collection/types";
 import type {Props} from "./types";
 import type {Component, Node} from "../../types";
-declare export default class extends React$Component<{chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}, void> {
-  static defaultProps: {filters: []};
+declare export default class extends React$Component<{chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onReady?: () => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}, void> {
+  static defaultProps: {filters: [], onChange: (value: any) => void, onReady: () => void};
 
   _getCollection(): {endpoint?: string, filters?: Array<Object>, layout: any, managing?: boolean, open?: boolean, panel?: any, sort: string, tasks?: Array<Object>};
   _getLayout(): any;
   _handleToggle(id: number): void;
   componentDidMount(): void;
-  componentDidUpdate(prevProps: {chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}): void;
+  componentDidUpdate(prevProps: {chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onReady?: () => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}): void;
   render(): any;
 }

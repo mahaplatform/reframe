@@ -34,6 +34,7 @@ export type Props = {
   filters: Filters,
   sort: string,
   onChange: (value: Ids) => void,
+  onReady?: () => void,
   onSet: (value: Ids) => void,
   onToggle: (id: number) => void
 }

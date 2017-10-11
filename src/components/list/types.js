@@ -34,5 +34,6 @@ export type ItemProps = {
   icon?: string,
   label?: string,
   link?: string,
+  tasks?: Array<any>,
   units?: string
 }

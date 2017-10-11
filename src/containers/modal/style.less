@@ -26,12 +26,13 @@
   }
   .reframe-modal-window  {
     .opacity-transition(0, 1, .5s);
-    width: 768px;
-    height: 576px;
+    max-width: ~"calc(1024px - 2em)";
+    max-height: ~"calc(768px - 2em)";
+    width: ~"calc(100% - 2em)";
+    height: ~"calc(100% - 2em)";
     top: 50%;
     left: 50%;
-    margin-top: -288px;
-    margin-left: -384px;
+    .translateXY(-50%, -50%);
   }
 }
 @media only screen and (max-width: 767px) {

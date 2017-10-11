@@ -22,6 +22,7 @@ export type Props = {
   columns: Array<Column>,
   handler: (id: number) => void,
   link: string,
+  managing?: boolean,
   modal: Component,
   records: Array<Object>,
   recordTasks: Array<recordTask>,

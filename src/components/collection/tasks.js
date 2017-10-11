@@ -43,7 +43,7 @@ class Tasks extends React.Component {
                   </div>
                 }
                 { filters &&
-                  <div className="reframe-collection-tasks-panel-item" onClick={ this._handleFilter.bind(this) }>
+                  <div className="reframe-collection-tasks-panel-item mobile" onClick={ this._handleFilter.bind(this) }>
                     <i className="fa fa-fw fa-filter" />Filter Records
                   </div>
                 }
@@ -78,8 +78,9 @@ class Tasks extends React.Component {
 
   _handleColumns() {
     this.props.onAddPanel((props) => {
-      const { columns, onSetColumns } = props
+      const { table, columns, onSetColumns } = props
       return React.createElement(Columns, {
+        table,
         columns,
         onSetColumns,
         onDone: () => this.props.onRemovePanel()
@@ -121,6 +122,7 @@ class Tasks extends React.Component {
     if(task.panel) {
       return {
         label: task.label,
+        mobile: task.mobile,
         icon: task.icon,
         rights: task.rights,
         handler: () => this.props.onAddPanel(task.panel)
@@ -128,6 +130,7 @@ class Tasks extends React.Component {
     } else if(task.handler) {
       return {
         label: task.label,
+        mobile: task.mobile,
         icon: task.icon,
         rights: task.rights,
         handler: () => task.handler(this.props)
@@ -135,6 +138,7 @@ class Tasks extends React.Component {
     } else if(task.request) {
       return {
         label: task.label,
+        mobile: task.mobile,
         icon: task.icon,
         rights: task.rights,
         request: task.request(this.props)

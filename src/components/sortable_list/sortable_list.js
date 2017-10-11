@@ -19,16 +19,13 @@ class SortableList extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, onSet } = this.props
-    if(defaultValue) onSet(defaultValue.map(item => ({
-      ...item,
-      checked: item.checked !== false
-    })))
+    if(this.props.defaultValue) this._handleSet()
   }
 
   componentDidUpdate(prevProps) {
-    const { items, onUpdate } = this.props
+    const { defaultValue, items, onUpdate } = this.props
     if(!_.isEqual(prevProps.items, items)) onUpdate(items)
+    if(!_.isEqual(prevProps.defaultValue, defaultValue)) this._handleSet()
   }
 
   _getItem(item, index) {
@@ -40,6 +37,14 @@ class SortableList extends React.Component {
       onMove: onMove.bind(this),
       onToggle: onToggle.bind(this)
     }
+  }
+
+  _handleSet() {
+    const { defaultValue, onSet } = this.props
+    onSet(defaultValue.map(item => ({
+      ...item,
+      checked: item.checked !== false
+    })))
   }
 
 }

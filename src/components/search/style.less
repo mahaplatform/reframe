@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
 }
+.reframe-search-header {
+  border-bottom: 1px solid fadeout(@black, 90);
+}
 .reframe-search-body {
   flex: 1;
   display: flex;
@@ -15,8 +18,9 @@
 .reframe-search-item {
   display: flex;
   cursor: pointer;
+  border-bottom: 1px solid fadeout(@black, 95);
   &:hover {
-    background-color: fadeout(@black, 95);
+    background-color: fadeout(@black, 97);
   }
 }
 .reframe-search-item-label {

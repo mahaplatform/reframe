@@ -5,13 +5,18 @@ import type { Node } from '../../types'
 
 import Format from '../../utils/format'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
 class Item extends React.Component<Props, void> {
 
+  static contextTypes = {
+    tasks: PropTypes.object
+  }
+
   render(): Node {
-    const { component, content, extra, format, handler, icon, label, link, units } = this.props
+    const { component, content, extra, format, handler, icon, label, link, tasks, units } = this.props
     const item = (
       <div className={ this._getClass() }>
         { icon &&
@@ -24,11 +29,7 @@ class Item extends React.Component<Props, void> {
         }
         { !component &&
           <div className="reframe-list-item-content">
-            { label &&
-              <strong>
-                { label }<br />
-              </strong>
-            }
+            { label && <strong>{ label }<br /></strong> }
             <Format { ...content } format={ format } value={ content } />
             &nbsp; { units }
           </div>
@@ -43,6 +44,11 @@ class Item extends React.Component<Props, void> {
             <i className="chevron right icon" />
           </div>
         }
+        { tasks &&
+          <div className="reframe-list-item-proceed" onClick={ this._handleTasks.bind(this) }>
+            <i className="ellipsis vertical icon" />
+          </div>
+        }
       </div>
     )
     if(link) return <Link to={ link }>{ item }</Link>
@@ -55,6 +61,11 @@ class Item extends React.Component<Props, void> {
     const classes = ['reframe-list-item']
     if(className) classes.push(className)
     return classes.join(' ')
+  }
+
+  _handleTasks(): void {
+    const { tasks } = this.props
+    this.context.tasks.open(tasks)
   }
 
 }

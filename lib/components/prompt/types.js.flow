@@ -14,7 +14,7 @@ export type Open = {message: string, options: Array<Object>, type: "OPEN"};
 export type Option = Object;
 export type Options = Array<Object>;
 export type PromptChildContext = {prompt: {close: () => void, open: (message: string, options: Array<Object>) => void}};
-export type Props = {cancel: boolean, children: any, message: string, onClear: () => void, onClose: () => void, onOpen: (message: string, options: Array<Object>) => void, open: boolean, options: Array<{drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string}>};
+export type Props = {cancel: boolean, children: any, message: string, onClear: () => void, onClose: () => void, onOpen: (message: string, options: Array<Object>) => void, open: boolean, options: Array<{drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", mobile?: boolean, modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string}>};
 export type State = {message: ?string, open: boolean, options: ?Array<Object>};
 
 declare module.exports: {};

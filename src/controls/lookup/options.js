@@ -116,7 +116,7 @@ class Container extends React.Component {
           <Infinite { ...this._getInfinite() } />
           { form &&
             <div className="reframe-lookup-panel-add">
-              <div className="ui fluid blue button" onClick={ this._handleAdd.bind(this)}>
+              <div className="ui fluid red button" onClick={ this._handleAdd.bind(this)}>
                 Add {label}
               </div>
             </div>

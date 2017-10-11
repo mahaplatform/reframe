@@ -42,6 +42,7 @@ export type Props = {
   icon?: string,
   label: string,
   location: Location,
+  mobile?: boolean,
   modal: Component,
   request: ItemRequest,
   route: string,
