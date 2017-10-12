@@ -16,23 +16,30 @@ import _ from 'lodash'
 class ToggleList extends React.Component<Props, void> {
 
   static defaultProps = {
-    filters: [],
     onReady: () => {},
     onChange: (value) => {}
   }
 
   render(): Node {
-    const { chosen, text } = this.props
+    const { chosen, filters, text } = this.props
     return (
-      <div className="reframe-toggle-list">
-        <div className="reframe-toggle-list-filter">
-          <Filters { ...this._getFilters() } />
-        </div>
+      <div className={ this._getClass() }>
+        <div className="reframe-toggle-list-overlay" onClick={ this._handleToggleFilter.bind(this) } />
+        { filters &&
+          <div className="reframe-toggle-list-filter">
+            <Filters { ...this._getFilters() } />
+          </div>
+        }
         <div className="reframe-toggle-list-body">
           <div className="reframe-toggle-list-header">
             <div className="reframe-toggle-list-header-search">
               <Searchbox { ...this._getSearchbox() } />
             </div>
+            { filters &&
+              <div className="reframe-toggle-list-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
+                <i className="fa fa-sliders" />
+              </div>
+            }
           </div>
           { chosen && chosen.length > 0 &&
             <div className="reframe-toggle-list-summary">
@@ -61,6 +68,12 @@ class ToggleList extends React.Component<Props, void> {
       const ids = chosen.map(record => record.id)
       onChange(ids)
     }
+  }
+
+  _getClass(): string {
+    const classes = ['reframe-toggle-list']
+    if(this.props.filtering) classes.push('filtering')
+    return classes.join(' ')
   }
 
   _getFilters(): FiltersProps {
@@ -99,10 +112,10 @@ class ToggleList extends React.Component<Props, void> {
       <div className="reframe-search-results">
         { records.map((record, index) => (
           <div key={`record_${index}`} className={ this._getRecordClass(record) } onClick={ this._handleToggleRecord.bind(this, record) }>
-            <Format format={ format } { ...record } />
             <div className="reframe-search-item-icon">
-              { this._getChecked(record) && <i className="icon green check" /> }
+              { this._getChecked(record) ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
             </div>
+            <Format format={ format } { ...record } />
           </div>
         )) }
       </div>
@@ -123,6 +136,11 @@ class ToggleList extends React.Component<Props, void> {
     const { chosen } = this.props
     const value = this.props.value || 'id'
     return _.find(chosen, { [value]: _.get(record, value) })
+  }
+
+  _handleToggleFilter(): void {
+    const { onToggleFilter } = this.props
+    if(onToggleFilter) onToggleFilter()
   }
 
   _handleToggleRecord(record: any): void {

@@ -6,20 +6,16 @@
   position: relative;
 }
 .reframe-toggle-list-filter {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: ~"calc(100% / 3)";
   display: flex;
 }
 .reframe-toggle-list-body {
+  background-color: @white;
   box-shadow: -5px 0 5px fadeout(@black, 95);
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  left: ~"calc(100% / 3)";
+  left: 0;
   display: flex;
   flex-direction: column;
 }
@@ -28,6 +24,18 @@
   background-color: fadeout(@black, 95);
   text-align: center;
   display: flex;
+}
+.reframe-toggle-list-header-search {
+  flex: 1;
+}
+.reframe-toggle-list-header-icon {
+  flex: 0 0 3em;
+  display: flex;
+  color: fadeout(@black, 80);
+  cursor: pointer;
+  i {
+    margin: auto;
+  }
 }
 .reframe-toggle-list-summary {
   padding: 0.4em;
@@ -51,18 +59,72 @@
     background-color: fadeout(@white, 20);
   }
 }
-.reframe-toggle-list-header-search {
-  flex: 1;
+.reframe-search-item.checkeds {
+  background-color: fadeout(@yellow, 90);
 }
-.reframe-toggle-list-header-icon {
-  flex: 0 0 3em;
-  display: flex;
-  color: fadeout(@black, 80);
-  cursor: pointer;
-  i {
-    margin: auto;
+.reframe-search-item-icon {
+  .fa {
+    font-size: 1.4em;
+  }
+  .fa-circle-o {
+    color: fadeout(@black, 80);
+  }
+  .fa-check-circle {
+    color: @green;
   }
 }
-.reframe-search-item.checked {
-  background-color: fadeout(@yellow, 90);
+
+
+
+@media (max-width: 767px) {
+  .reframe-toggle-list {
+    &.filtering {
+      .reframe-toggle-list-overlay {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        opacity: 0.4;
+      }
+      .reframe-toggle-list-filter {
+        .translateY(0);
+      }
+    }
+  }
+  .reframe-toggle-list-overlay  {
+    .transition(opacity .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    background-color: @black;
+    opacity: 0;
+  }
+  .reframe-toggle-list-filter {
+    .translateY(100%);
+    .transition(transform .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+    position: fixed;
+    top: 3.5em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
+}
+@media (min-width: 768px) {
+  .reframe-toggle-list {
+    &.filtering {
+      .reframe-toggle-list-body {
+        left: ~"calc(100% / 3)";
+      }
+    }
+  }
+  .reframe-toggle-list-body {
+    .transition(left .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  }
+  .reframe-toggle-list-filter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: ~"calc(100% / 3)";
+  }
+
 }

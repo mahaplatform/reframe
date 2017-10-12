@@ -141,8 +141,7 @@ class Collection extends React.Component {
   }
 
   _getFooter() {
-    const entities = pluralize(this.props.entity)
-    return ({ all, total }) => all ? <span>Now showing { total } / { all } { entities }</span> : 'nbsp;'
+    return ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : ''
   }
 
   _handleToggleTasks() {
