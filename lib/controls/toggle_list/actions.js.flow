@@ -1,5 +1,10 @@
 // @flow
 
-import type {Ids, Set, Toggle} from "./types";
-declare export function set(ids: Array<number>): {ids: Array<number>, type: "SET"};
-declare export function toggle(id: number): {id: number, type: "TOGGLE"};
+import type {Chosen, Query, Filter, SetChosen, SetQuery, SetFilter, ToggleFilter, ToggleRecord} from "./types";
+import type {ApiRequest} from "../../types";
+declare export function load(endpoint: string, query: Object): any;
+declare export function setChosen(chosen: Array<Object>): {chosen: Array<Object>, type: "SET_CHOSEN"};
+declare export function setFilter(filter: Object): {filter: Object, type: "SET_FILTER"};
+declare export function setQuery(query: string): {query: string, type: "SET_QUERY"};
+declare export function toggleFilter(id: number): {type: "TOGGLE_FILTER"};
+declare export function toggleRecord(record: any): {record: Object, type: "TOGGLE_RECORD"};

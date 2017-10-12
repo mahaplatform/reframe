@@ -35,9 +35,9 @@ export type OnChange = (q: string) => void
 export type OnType = (q: string) => Type
 
 export type Props = {
-  q: ?string,
-  prompt: ?string,
-  onAbort: ?OnAbort,
-  onChange: ?OnChange,
-  onType: ?OnType
+  q?: string,
+  prompt?: string,
+  onAbort?: OnAbort,
+  onChange?: OnChange,
+  onType?: OnType
 }

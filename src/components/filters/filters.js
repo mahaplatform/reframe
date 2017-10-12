@@ -8,6 +8,7 @@ class Filters extends React.Component {
 
   static propTypes = {
     filters: PropTypes.array,
+    filtered: PropTypes.object,
     panels: PropTypes.array,
     results: PropTypes.object,
     onAddPanel: PropTypes.func,
@@ -56,7 +57,8 @@ class Filters extends React.Component {
   }
 
   _handleChange() {
-    this.props.onUpdate(this.props.results)
+    const { filtered } = this.props
+    this.props.onUpdate(filtered)
   }
 
 

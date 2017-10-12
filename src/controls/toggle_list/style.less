@@ -1,5 +1,68 @@
 .reframe-form .reframe-toggle-list {
   height: ~"calc(100vh - 50px)";
-  display: flex;
+}
+.reframe-toggle-list {
+  flex: 1;
   position: relative;
+}
+.reframe-toggle-list-filter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: ~"calc(100% / 3)";
+  display: flex;
+}
+.reframe-toggle-list-body {
+  box-shadow: -5px 0 5px fadeout(@black, 95);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: ~"calc(100% / 3)";
+  display: flex;
+  flex-direction: column;
+}
+.reframe-toggle-list-header {
+  border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 95);
+  text-align: center;
+  display: flex;
+}
+.reframe-toggle-list-summary {
+  padding: 0.4em;
+  border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 90);
+  color: fadeout(@black, 60);
+  max-height: 8em;
+  line-height: 1.8em;
+  .scrollable();
+}
+.reframe-toggle-list-summary-token {
+  color: fadeout(@black, 60);
+  float: left;
+  margin: 0.4em;
+  background-color: white;
+  padding: 0 0.8em;
+  cursor: pointer;
+  border-radius: 0.4em;
+  font-size: 0.8em;
+  &:hover {
+    background-color: fadeout(@white, 20);
+  }
+}
+.reframe-toggle-list-header-search {
+  flex: 1;
+}
+.reframe-toggle-list-header-icon {
+  flex: 0 0 3em;
+  display: flex;
+  color: fadeout(@black, 80);
+  cursor: pointer;
+  i {
+    margin: auto;
+  }
+}
+.reframe-search-item.checked {
+  background-color: fadeout(@yellow, 90);
 }

@@ -19,6 +19,7 @@ class Infinite extends React.Component<Props, void> {
     empty: Empty,
     failure: Failure,
     filter: {},
+    footer: null,
     loading: Loading,
     sort: {
       key: null,
@@ -28,7 +29,7 @@ class Infinite extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { delayed, empty, failure, layout, loading, records, status, timeout } = this.props
+    const { delayed, empty, failure, footer, layout, loading, records, status, timeout } = this.props
     return (
       <div className="reframe-infinite">
         { status === 'loading' && !records && this._getComponent(loading) }
@@ -47,6 +48,11 @@ class Infinite extends React.Component<Props, void> {
               </div>
             }
           </Scrollpane>
+        }
+        { footer &&
+          <div className="reframe-infinite-footer">
+            { React.createElement(footer, this.props) }
+          </div>
         }
       </div>
     )
@@ -83,25 +89,28 @@ class Infinite extends React.Component<Props, void> {
     const query = {
       $page: { skip: skip !== null ? skip : loaded },
       ...(filter ? { $filter: filter } : {}),
-      ...(sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {})
+      ...(sort && sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {})
     }
-    if(skip === 0 || total === null || loaded < total) onFetch(endpoint, query)
+    if(onFetch && (skip === 0 || total === null || total === undefined || loaded < total)) onFetch(endpoint, query)
     this.timeout = setTimeout(this._handleDelay.bind(this), 3000)
   }
 
   _handleDelay(): void {
-    if(this.props.status !== 'loading') return
-    this.props.onFetchDelay()
+    const { status, onFetchDelay } = this.props
+    if(status !== 'loading') return
+    if(onFetchDelay) onFetchDelay()
     this.timeout = setTimeout(this._handleTimeout.bind(this), 3000)
   }
 
   _handleTimeout(): void {
-    if(this.props.status !== 'delyed') return
-    this.props.onFetchTimeout()
+    const { status, onFetchTimeout } = this.props
+    if(status !== 'delyed') return
+    if(onFetchTimeout) onFetchTimeout()
   }
 
   _handleRefresh(): void {
-    this.props.onFetchTimeout()
+    const { onFetchTimeout } = this.props
+    if(onFetchTimeout) onFetchTimeout()
   }
 
 }

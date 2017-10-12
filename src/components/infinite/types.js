@@ -51,23 +51,25 @@ export type Action =
   | FetchTimeout
 
 export type Props = {
-  all: number,
-  cacheKey: string,
-  delayed: Component,
-  empty: Component,
+  all?: number,
+  cacheKey?: string,
+  delayed?: Component,
+  empty?: Component,
   endpoint: string,
-  failure: Component,
-  filter: Filter,
-  layout: Component,
-  loading: Component,
-  records: Array<Object>,
-  sort: Sort,
-  status: string,
-  timeout: Component,
-  total: number,
-  onFetch: (endpoint: string, query: Query) => void,
-  onFetchDelay: () => void,
-  onFetchTimeout: () => void
+  failure?: Component,
+  filter?: Filter,
+  footer?: Component,
+  layout?: Component,
+  loading?: Component,
+  records?: Array<Object>,
+  request_id?: string,
+  sort?: Sort,
+  status?: string,
+  timeout?: Component,
+  total?: number,
+  onFetch?: (endpoint: string, query: Query) => void,
+  onFetchDelay?: () => void,
+  onFetchTimeout?: () => void
 }
 
 export type Status = 'pending' | 'loading' | 'failed' | 'delayed' | 'timeout' | 'completed' | 'loaded'

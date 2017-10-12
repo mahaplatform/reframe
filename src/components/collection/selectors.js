@@ -5,12 +5,6 @@ const recordsSelector = (state, props) => state.records
 
 const sortSelector = (state, props) => state.sort
 
-const filterSelector = (state, props) => state.filter
-
-const filtersSelector = (state, props) => props.filters
-
-const qSelector = (state, props) => state.q
-
 export const records = createSelector(
   recordsSelector,
   sortSelector,
@@ -27,23 +21,3 @@ export const records = createSelector(
     })
   }
 )
-
-export const filtered = createSelector(
-  filtersSelector,
-  filterSelector,
-  qSelector,
-  (filters, filter, q) => Object.keys(filter).reduce((filtered, key) => ({
-    ...filtered,
-    [key]: _getValue(filters, filter, key)
-  }), { q })
-)
-
-const _getValue = (filters, filter, key) => {
-  const field = _.find(filters, { name: key })
-  if(!field) return null
-  const value = filter[key]
-  if(field.type === 'daterange') return { $dr: value.key }
-  if(_.isArray(value)) return { $in: value.map(item => item.key) }
-  if(_.isPlainObject(value)) return { $eq: value.key }
-  return { $eq: value }
-}

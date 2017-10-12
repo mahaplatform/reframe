@@ -19,13 +19,16 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { filters } = this.props
+    const { filters, onDone } = this.props
     return (
       <div className="reframe-filters-panel">
         <div className="reframe-filters-header">
-          <div className="reframe-filters-header-icon" onClick={ this._handleDone.bind(this) }>
-            <i className="fa fa-chevron-left" />
-          </div>
+          { onDone ?
+            <div className="reframe-filters-header-icon" onClick={ this._handleDone.bind(this) }>
+              <i className="fa fa-chevron-left" />
+            </div> :
+            <div className="reframe-filters-header-icon" />
+          }
           <div className="reframe-filters-header-title">
             Filter Results
           </div>
@@ -41,8 +44,10 @@ class Overview extends React.Component {
             })}
           </div>
         </div>
-        <div className="reframe-filters-footer" onClick={ this._handleReset.bind(this) }>
-          Reset Filters
+        <div className="reframe-filters-footer">
+          <button className="ui red fluid button" onClick={ this._handleReset.bind(this) }>
+            Reset Filters
+          </button>
         </div>
       </div>
     )

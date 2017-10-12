@@ -2,17 +2,27 @@
 
 import _ from "lodash";
 import React from "react";
-import Collection from "../../components/collection";
-import type {Props as CollectionProps} from "../../components/collection/types";
+import Format from "../../utils/format";
+import Filters from "../../components/filters";
+import Infinite from "../../components/infinite";
+import Searchbox from "../../components/searchbox";
+import type {Props as InfiniteProps} from "../../components/infinite/types";
+import type {Props as SearchboxProps} from "../../components/searchbox/types";
+import type {Props as FiltersProps} from "../../components/filters/types";
 import type {Props} from "./types";
 import type {Component, Node} from "../../types";
-declare export default class extends React$Component<{chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onReady?: () => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}, void> {
+declare export default class extends React$Component<{chosen?: Array<Object>, defaultValue: Array<Object>, endpoint: string, filter?: Object, filtering?: boolean, filters: Array<Object>, format: any, onChange?: (value: Array<Object>) => void, onLoad?: (endpoint: string, query: Object) => void, onReady?: () => void, onSetChosen?: (chosen: Array<Object>) => void, onSetFilter?: (value: Object) => void, onSetQuery?: (query: string) => void, onToggleFilter?: () => void, onToggleRecord?: (id: number) => void, query?: string, sort?: string, text?: string, value?: string}, void> {
   static defaultProps: {filters: [], onChange: (value: any) => void, onReady: () => void};
 
-  _getCollection(): {endpoint?: string, filters?: Array<Object>, layout: any, managing?: boolean, open?: boolean, panel?: any, sort: string, tasks?: Array<Object>};
+  _getChecked(record: Object): boolean;
+  _getFilters(): any;
+  _getFooter(): any;
+  _getInfinite(): {all?: number, cacheKey?: string, delayed?: any, empty?: any, endpoint: string, failure?: any, filter?: Object, footer?: any, layout?: any, loading?: any, onFetch?: (endpoint: string, query: {$filter: ?Object, $page: ?{skip: ?number}, $sort: string}) => void, onFetchDelay?: () => void, onFetchTimeout?: () => void, records?: Array<Object>, request_id?: string, sort?: {key: string, order: "asc" | "desc"}, status?: string, timeout?: any, total?: number};
   _getLayout(): any;
-  _handleToggle(id: number): void;
+  _getRecordClass(record: Object): string;
+  _getSearchbox(): {onAbort?: () => {type: "ABORT"}, onChange?: (q: string) => void, onType?: (q: string) => {q: string, type: "TYPE"}, prompt?: string, q?: string};
+  _handleToggleRecord(record: any): void;
   componentDidMount(): void;
-  componentDidUpdate(prevProps: {chosen: Array<number>, component: any, defaultValue: Array<number>, endpoint: string, filters: Array<Object>, onChange: (value: Array<number>) => void, onReady?: () => void, onSet: (value: Array<number>) => void, onToggle: (id: number) => void, sort: string}): void;
+  componentDidUpdate(prevProps: {chosen?: Array<Object>, defaultValue: Array<Object>, endpoint: string, filter?: Object, filtering?: boolean, filters: Array<Object>, format: any, onChange?: (value: Array<Object>) => void, onLoad?: (endpoint: string, query: Object) => void, onReady?: () => void, onSetChosen?: (chosen: Array<Object>) => void, onSetFilter?: (value: Object) => void, onSetQuery?: (query: string) => void, onToggleFilter?: () => void, onToggleRecord?: (id: number) => void, query?: string, sort?: string, text?: string, value?: string}): void;
   render(): any;
 }

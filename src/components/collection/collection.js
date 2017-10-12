@@ -5,6 +5,7 @@ import Infinite from '../infinite'
 import { Empty, Results } from './results'
 import Header from './header'
 import Tasks from './tasks'
+import pluralize from 'pluralize'
 
 class Collection extends React.Component {
 
@@ -30,7 +31,6 @@ class Collection extends React.Component {
       PropTypes.element
     ]),
     filter: PropTypes.object,
-    filtered: PropTypes.object,
     filters: PropTypes.array,
     handler: PropTypes.func,
     icon: PropTypes.string,
@@ -122,17 +122,27 @@ class Collection extends React.Component {
   }
 
   _getInfinite() {
-    const { cacheKey, empty, endpoint, failure, filtered, loading, sort } = this.props
+    const { cacheKey, empty, endpoint, failure, loading, q, sort } = this.props
+    const filter = {
+      ...this.props.filter,
+      q
+    }
     return {
       cacheKey,
       endpoint,
-      filter: filtered,
+      filter,
+      footer: this._getFooter(),
       loading,
       empty: _.isString(empty) ? <Empty { ...this.props } /> : empty,
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort
     }
+  }
+
+  _getFooter() {
+    const entities = pluralize(this.props.entity)
+    return ({ all, total }) => all ? <span>Now showing { total } / { all } { entities }</span> : 'nbsp;'
   }
 
   _handleToggleTasks() {

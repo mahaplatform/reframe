@@ -36,8 +36,10 @@ class SelectPanel extends React.Component {
         <div className="reframe-filters-body">
           <Search { ...this._getSearch() } />
         </div>
-        <div className="reframe-filters-footer" onClick={ this._handleReset.bind(this) }>
-          Reset { label }
+        <div className="reframe-filters-footer">
+          <button className="ui red fluid button" onClick={ this._handleReset.bind(this) }>
+            Reset { label }
+          </button>
         </div>
       </div>
     )
