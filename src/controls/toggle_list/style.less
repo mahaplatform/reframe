@@ -48,15 +48,27 @@
 }
 .reframe-toggle-list-summary-token {
   color: fadeout(@black, 60);
-  float: left;
+  display: inline-block;
   margin: 0.4em;
-  background-color: white;
-  padding: 0 0.8em;
-  cursor: pointer;
+  background-color: @white;
   border-radius: 0.4em;
   font-size: 0.8em;
-  &:hover {
-    background-color: fadeout(@white, 20);
+  position: relative;
+}
+.reframe-toggle-list-summary-token-label {
+  padding: 0 2em 0 .8em;
+}
+.reframe-toggle-list-summary-token-remove {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0.4em 0.4em 0;
+  display: flex;
+  padding: 0.4em;
+  i {
+    margin: auto;
   }
 }
 .reframe-search-item.checkeds {
@@ -64,7 +76,7 @@
 }
 .reframe-search-item-icon {
   .fa {
-    font-size: 1.4em;
+    font-size: 1.5em;
   }
   .fa-circle-o {
     color: fadeout(@black, 80);

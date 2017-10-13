@@ -14,7 +14,6 @@
   display: flex;
 }
 .reframe-collection-tasks-panel-container {
-  background-color: @white;
   position: absolute;
   top: 0;
   right: 0;
@@ -33,13 +32,21 @@
   background-color: fadeout(@black, 95);
   text-align: center;
   display: flex;
+  .reframe-collection-tasks-panel-header-icon {
+    &:first-child {
+      padding: 1em 0 1em 1em;
+    }
+    &:last-child {
+      padding: 1em 1em 1em 0;
+    }
+  }
 }
 .reframe-collection-tasks-panel-header-icon {
   flex: 0 0 3em;
   display: flex;
-  color: fadeout(@black, 80);
   cursor: pointer;
   i {
+    color: fadeout(@black, 80);
     margin: auto;
   }
 }
@@ -64,18 +71,18 @@
 .reframe-collection-tasks-panel .reframe-task,
 .reframe-collection-tasks-panel-item {
   line-height: 1.57em;
-  padding: 1em;
+  padding: 0.8em;
   cursor: pointer;
   color: fadeout(@black, 50);
   i {
     margin-right: 1em;
   }
   &:hover {
-    background-color: fadeout(@black, 98);
+    background-color: fadeout(@black, 95);
   }
 }
 .reframe-collection-header {
-  background: fadeout(@black, 95);
+  background-color: fadeout(@black, 97);
   display: flex;
   border-bottom: 1px solid fadeout(@black, 90);
 }
@@ -185,6 +192,8 @@
     bottom: 0;
     left: 0;
     right: 0;
+  }
+  .reframe-collection-tasks-panel-container {
     background-color: @white;
   }
 }
@@ -212,9 +221,10 @@
     bottom: 0;
     width: 23em;
     left: 0;
-  }
-  .reframe-collection-tasks {
     width: 320px;
+  }
+  .reframe-collection-tasks-panel-container {
+    background-color: lighten(@black, 97);
   }
   .reframe-collection-tasks-panel-header.mobile {
     display: none;

@@ -19,11 +19,14 @@
     @media only screen and (max-width: 767px) {
       display: none;
     }
+    tr {
+      border-bottom: 1px solid fadeout(@black, 90);
+      background-color: fadeout(@black, 97);
+    }
     tr td {
       font-weight: bold;
       position: relative;
       cursor: pointer;
-      background-color: fadeout(@black, 98);
       color: fadeout(@black, 70);
       border-right: 1px solid fadeout(@black, 90);
       &:last-child {
@@ -51,7 +54,7 @@
   tbody {
     tr.reframe-table-link:hover {
       cursor: pointer;
-      background-color: fadeout(@black, 98);
+      background-color: fadeout(@black, 95);
     }
     td {
       line-height: 20px;
@@ -80,9 +83,6 @@
         cursor: pointer;
       }
     }
-  }
-  tr {
-    border-bottom: 1px solid fadeout(@black, 90);
   }
   td {
     &.collapsing {

@@ -5,7 +5,6 @@ import Infinite from '../infinite'
 import { Empty, Results } from './results'
 import Header from './header'
 import Tasks from './tasks'
-import pluralize from 'pluralize'
 
 class Collection extends React.Component {
 
@@ -131,17 +130,13 @@ class Collection extends React.Component {
       cacheKey,
       endpoint,
       filter,
-      footer: this._getFooter(),
+      footer: ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : '',
       loading,
       empty: _.isString(empty) ? <Empty { ...this.props } /> : empty,
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort
     }
-  }
-
-  _getFooter() {
-    return ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : ''
   }
 
   _handleToggleTasks() {

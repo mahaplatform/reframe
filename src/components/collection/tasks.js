@@ -21,7 +21,8 @@ class Tasks extends React.Component {
     tasks: PropTypes.array,
     onClearPanel: PropTypes.func,
     onAddPanel: PropTypes.func,
-    onRemovePanel: PropTypes.func
+    onRemovePanel: PropTypes.func,
+    onToggleTasks: PropTypes.func
   }
 
   render() {
@@ -32,8 +33,12 @@ class Tasks extends React.Component {
           <div className="reframe-collection-tasks-panel-container">
             <div className="reframe-collection-tasks-panel">
               <div className="reframe-collection-tasks-panel-header mobile">
+                <div className="reframe-collection-tasks-panel-header-icon" />
                 <div className="reframe-collection-tasks-panel-header-title">
                   Tasks
+                </div>
+                <div className="reframe-collection-tasks-panel-header-icon " onClick={ this._handleToggleTasks.bind(this) }>
+                  Done
                 </div>
               </div>
               <div className="reframe-collection-tasks-panel-body">
@@ -74,6 +79,10 @@ class Tasks extends React.Component {
     if(open !== prevProps.open && !open) {
       setTimeout(onClearPanel, 500)
     }
+  }
+
+  _handleToggleTasks() {
+    this.props.onToggleTasks()
   }
 
   _handleColumns() {

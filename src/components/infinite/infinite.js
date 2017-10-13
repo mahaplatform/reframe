@@ -39,7 +39,7 @@ class Infinite extends React.Component<Props, void> {
         { status !== 'failed' && records && records.length === 0 && this._getComponent(empty) }
         { status !== 'failed' && records && records.length > 0 &&
           <Scrollpane { ...this._getScrollpane() }>
-            { this._getComponent(layout) }
+            { layout && layout(this.props) }
             { status === 'loading' &&
               <div className="reframe-infinite-loader">
                 <div className="ui active inverted dimmer">

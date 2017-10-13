@@ -44,8 +44,13 @@ class ToggleList extends React.Component<Props, void> {
           { chosen && chosen.length > 0 &&
             <div className="reframe-toggle-list-summary">
               { chosen.map((record, index) => (
-                <div key={`summary_token_${index}`} className="reframe-toggle-list-summary-token" onClick={ this._handleToggleRecord.bind(this, record) }>
-                  { _.get(record, text) }
+                <div key={`summary_token_${index}`} className="reframe-toggle-list-summary-token">
+                  <div className="reframe-toggle-list-summary-token-label">
+                    { _.get(record, text) }
+                  </div>
+                  <div className="reframe-toggle-list-summary-token-remove" onClick={ this._handleToggleRecord.bind(this, record) }>
+                    <i className="fa fa-fw fa-times" />
+                  </div>
                 </div>
               )) }
             </div>
@@ -123,7 +128,7 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   _getFooter(): Component {
-    return ({ all, total }) => <span>Now showing { total } / { all } results</span>
+    return ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : ''
   }
 
   _getRecordClass(record: Object): string {
