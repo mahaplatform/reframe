@@ -3,6 +3,7 @@
 import type { SectionProps as Props } from './types'
 import type { Node } from '../../types'
 
+import Message from '../message'
 import Item from './item'
 import React from 'react'
 import _ from 'lodash'
@@ -33,9 +34,12 @@ class Section extends React.Component<Props, void> {
         }
         { empty && items && items.length === 0 &&
           <div className="reframe-list-item">
-            <div className="reframe-list-item-content">
-              { empty }
-            </div>
+            { _.isPlainObject(empty) ?
+              <Message { ...empty } /> :
+              <div className="reframe-list-item-content">
+                { _.isFunction(empty) ? React.createElement(empty, this.props) : empty }
+              </div>
+            }
           </div>
         }
       </div>

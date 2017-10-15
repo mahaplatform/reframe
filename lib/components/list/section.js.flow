@@ -3,9 +3,10 @@
 import _ from "lodash";
 import React from "react";
 import Item from "./item";
+import Message from "../message";
 import type {Node} from "../../types";
 import type {SectionProps as Props} from "./types";
-declare export default class extends React$Component<{component?: any, content?: any, empty?: string, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, tasks?: Array<any>, units?: string}>, title?: string}, void> {
+declare export default class extends React$Component<{component?: any, content?: any, empty?: any, items?: Array<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, tasks?: Array<any>, units?: string}>, title?: string}, void> {
 
   render(): any;
 }

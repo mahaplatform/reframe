@@ -91,11 +91,20 @@
 }
 .reframe-collection-header-tasks {
   position: relative;
+  display: flex;
   font-size: 1.25em;
   line-height: 1em;
   color: fadeout(@black, 80);
-  padding: .8em .8em .8em .3em;
   cursor: pointer;
+  padding: 0.3em 0.5em;
+  i {
+    margin: auto;
+    padding: 0.5em 0.6em;
+    border-radius: 0.5em;
+    &:hover {
+      background-color: fadeout(@black, 95);
+    }
+  }
 }
 .reframe-collection-loader {
   flex: 0 0 35.em;
@@ -221,7 +230,6 @@
     bottom: 0;
     width: 23em;
     left: 0;
-    width: 320px;
   }
   .reframe-collection-tasks-panel-container {
     background-color: lighten(@black, 97);

@@ -31,7 +31,8 @@ class Task extends React.Component<Props, void> {
   }
 
   _getClass() {
-    const classes = ['reframe-task']
+    const { className } = this.props
+    const classes = [className]
     if(this.props.mobile !== false) classes.push('mobile')
     return classes.join(' ')
   }

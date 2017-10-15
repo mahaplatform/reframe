@@ -1,48 +1,25 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Table from '../table'
-import _ from 'lodash'
 import pluralize from 'pluralize'
+import Message from '../message'
+import Table from '../table'
+import React from 'react'
+import _ from 'lodash'
 
-export class Empty extends React.Component {
+export const Empty = (props) => {
 
-  static contextTypes = {
-    modal: PropTypes.object
+  const { empty, entity, icon } = this.props
+
+  const message = {
+    icon,
+    title: `No ${_.startCase(pluralize(entity.replace('_', ' ')))}`,
+    text: empty,
+    button: {
+      label: `Create New ${_.startCase(entity.replace('_', ' '))}`,
+      modal: this.props.new
+    }
   }
 
-  static propTypes = {
-    empty: PropTypes.string,
-    entity: PropTypes.string,
-    icon: PropTypes.string,
-    new: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.func
-    ])
-  }
-
-  render() {
-    const { empty, entity, icon } = this.props
-    return (
-      <div className="reframe-message">
-        <div className="reframe-message-panel">
-          <h2><i className={`circular ${icon ? icon : 'warning sign'} icon`} /></h2>
-          <h3>No { _.startCase(pluralize(entity.replace('_', ' '))) }</h3>
-          { !empty && <p>You have not yet created any { pluralize(entity.replace('_', ' ')) }</p>}
-          { empty && <p>{ empty }</p>}
-          { this.props.new &&
-            <div className="ui basic button red" onClick={ this._handleAddNew.bind(this)}>
-              <i className="plus icon" />
-              Create New {_.startCase(entity.replace('_', ' '))}
-            </div>
-          }
-        </div>
-      </div>
-    )
-  }
-
-  _handleAddNew() {
-    this.context.modal.open(this.props.new)
-  }
+  return <Message { ...message } />
 
 }
 

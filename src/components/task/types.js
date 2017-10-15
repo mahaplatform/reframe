@@ -37,6 +37,7 @@ export type State = {
 }
 
 export type Props = {
+  className?: string,
   drawer: Component,
   handler: () => void,
   icon?: string,

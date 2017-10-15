@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import _ from 'lodash'
-import Infinite from '../infinite'
 import { Empty, Results } from './results'
+import Infinite from '../infinite'
+import PropTypes from 'prop-types'
 import Header from './header'
 import Tasks from './tasks'
+import React from 'react'
+import _ from 'lodash'
 
 class Collection extends React.Component {
 
@@ -121,7 +121,7 @@ class Collection extends React.Component {
   }
 
   _getInfinite() {
-    const { cacheKey, empty, endpoint, failure, loading, q, sort } = this.props
+    const { cacheKey, endpoint, failure, loading, q, sort } = this.props
     const filter = {
       ...this.props.filter,
       q
@@ -132,11 +132,18 @@ class Collection extends React.Component {
       filter,
       footer: ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : '',
       loading,
-      empty: _.isString(empty) ? <Empty { ...this.props } /> : empty,
+      empty: this._getEmpty(),
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
       sort
     }
+  }
+
+  _getEmpty() {
+    const { empty } = this.props
+    if(_.isString(empty)) return <Empty { ...this.props } />
+    if(_.isFunction(empty)) return React.createElement(empty, this.props)
+    return empty
   }
 
   _handleToggleTasks() {

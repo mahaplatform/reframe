@@ -1,7 +1,7 @@
 // @flow
 
 import type { Node } from '../../types'
-import type { Props, ChildContext } from './types'
+import type { Item, Props, ChildContext } from './types'
 
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
@@ -31,7 +31,7 @@ class Tasks extends React.Component<Props, void> {
         <div className="reframe-tasks-list">
           { items && items.map((item, index) => {
             if(item.show !== false) return (
-              <Task key={`task_${index}`} { ...item } onDone={ this._handleClose.bind(this) } />
+              <Task key={`task_${index}`} { ...this._getTask(item) }/>
             )
           }) }
           <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
@@ -56,6 +56,14 @@ class Tasks extends React.Component<Props, void> {
         open: onOpen,
         close: onClose
       }
+    }
+  }
+
+  _getTask(item: Item): any {
+    return {
+      ...item,
+      className: 'reframe-task',
+      onDone: this._handleClose.bind(this)
     }
   }
 

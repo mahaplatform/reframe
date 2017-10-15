@@ -5,7 +5,7 @@ import React from "react";
 import type {Handler, ItemRequest, Props} from "./types";
 import type {Location} from "../../containers/drawer/types";
 import type {Component, Node} from "../../types";
-declare export default class extends React$Component<{drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", mobile?: boolean, modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string}, void> {
+declare export default class extends React$Component<{className?: string, drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", mobile?: boolean, modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string}, void> {
   static contextTypes: any;
   static defaultProps: {onDone: any};
 
