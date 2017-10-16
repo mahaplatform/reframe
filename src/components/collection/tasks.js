@@ -130,6 +130,7 @@ class Tasks extends React.Component {
   _getTask(task) {
     if(task.panel) {
       return {
+        className: 'reframe-collection-tasks-panel-item',
         label: task.label,
         mobile: task.mobile,
         icon: task.icon,
@@ -138,6 +139,7 @@ class Tasks extends React.Component {
       }
     } else if(task.handler) {
       return {
+        className: 'reframe-collection-tasks-panel-item',
         label: task.label,
         mobile: task.mobile,
         icon: task.icon,
@@ -146,6 +148,7 @@ class Tasks extends React.Component {
       }
     } else if(task.request) {
       return {
+        className: 'reframe-collection-tasks-panel-item',
         label: task.label,
         mobile: task.mobile,
         icon: task.icon,
@@ -153,7 +156,10 @@ class Tasks extends React.Component {
         request: task.request(this.props)
       }
     }
-    return task
+    return {
+      className: 'reframe-collection-tasks-panel-item',
+      ...task
+    }
   }
 
 }

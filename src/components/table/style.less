@@ -20,14 +20,13 @@
       display: none;
     }
     tr {
-      border-bottom: 1px solid fadeout(@black, 90);
-      background-color: fadeout(@black, 97);
+      background-color: fadeout(@black, 90);
     }
     tr td {
       font-weight: bold;
       position: relative;
       cursor: pointer;
-      color: fadeout(@black, 70);
+      color: fadeout(@black, 50);
       border-right: 1px solid fadeout(@black, 90);
       &:last-child {
         border-right: none;
@@ -47,7 +46,7 @@
       .chevron {
         position: absolute;
         right: 1em;
-        color: fadeout(@black, 80);
+        color: fadeout(@black, 50);
       }
     }
   }
@@ -60,6 +59,7 @@
       line-height: 20px;
       vertical-align: middle;
       color: @table_body_font_color !important;
+      border-bottom: 1px solid fadeout(@black, 90);
       strong {
         color: @black;
       }

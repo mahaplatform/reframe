@@ -39,7 +39,7 @@ class Prompt extends React.Component<Props, void> {
             </div>
           }
           { options && options.map((option, index) => {
-            return <Task key={`option_${index}`} { ...option } onDone={ this._handleClose.bind(this) } />
+            return <Task key={`option_${index}`} { ...option } className="reframe-prompt-item" onDone={ this._handleClose.bind(this) } />
           }) }
           { cancel &&
             <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>

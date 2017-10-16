@@ -51,7 +51,7 @@ class Infinite extends React.Component<Props, void> {
             }
           </Scrollpane>
         }
-        { footer &&
+        { footer && total !== null && total !== 0 &&
           <div className="reframe-infinite-footer">
             { React.createElement(footer, this.props) }
           </div>

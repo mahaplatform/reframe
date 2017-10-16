@@ -13,13 +13,15 @@ class Panel extends React.Component {
     const { header, component } = this.props
     return (
       <div className="reframe-panel">
-        <div className="reframe-panel-inner">
-          { header &&
-            <div className="reframe-panel-header">
+        { header &&
+          <div className="reframe-panel-header">
+            <div className="reframe-panel-inner">
               { _.isFunction() ? React.createElement(header) : header }
             </div>
-          }
-          <div className="reframe-panel-body">
+          </div>
+        }
+        <div className="reframe-panel-body">
+          <div className="reframe-panel-inner">
             { _.isFunction(component) ? React.createElement(component) : component }
           </div>
         </div>
