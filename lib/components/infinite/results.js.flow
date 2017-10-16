@@ -1,9 +1,11 @@
 // @flow
 
 import React from "react";
+import Message from "../message";
 import type {Node} from "../../types";
 declare export function Delayed(): any;
 declare export function Empty(): any;
 declare export function Failure(): any;
 declare export function Loading(): any;
+declare export function NotFound(): any;
 declare export function Timeout(): any;

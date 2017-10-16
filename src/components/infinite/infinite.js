@@ -7,7 +7,7 @@ import type { Props as ScrollpaneProps } from '../scrollpane/types'
 import React from 'react'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
-import { Delayed, Empty, Failure, Loading, Timeout } from './results'
+import { Delayed, Empty, Failure, Loading, NotFound, Timeout } from './results'
 
 class Infinite extends React.Component<Props, void> {
 
@@ -21,6 +21,7 @@ class Infinite extends React.Component<Props, void> {
     filter: {},
     footer: null,
     loading: Loading,
+    notFound: NotFound,
     sort: {
       key: null,
       order: null
@@ -29,14 +30,15 @@ class Infinite extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { delayed, empty, failure, footer, layout, loading, records, status, timeout } = this.props
+    const { all, delayed, empty, failure, footer, layout, loading, notFound, records, status, timeout, total } = this.props
     return (
       <div className="reframe-infinite">
         { status === 'loading' && !records && this._getComponent(loading) }
         { status === 'delayed' && this._getComponent(delayed) }
         { status === 'timeout' && this._getComponent(timeout) }
         { status === 'failed' && this._getComponent(failure) }
-        { status !== 'failed' && records && records.length === 0 && this._getComponent(empty) }
+        { status !== 'failed' && total === 0 && all !== 0 && this._getComponent(notFound) }
+        { status !== 'failed' && total === 0 && all === 0 && this._getComponent(empty) }
         { status !== 'failed' && records && records.length > 0 &&
           <Scrollpane { ...this._getScrollpane() }>
             { layout && layout(this.props) }

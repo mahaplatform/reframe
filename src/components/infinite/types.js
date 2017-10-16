@@ -61,6 +61,7 @@ export type Props = {
   footer?: Component,
   layout?: Component,
   loading?: Component,
+  notFound?: Component,
   records?: Array<Object>,
   request_id?: string,
   sort?: Sort,

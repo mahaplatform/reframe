@@ -141,9 +141,8 @@ class Collection extends React.Component {
 
   _getEmpty() {
     const { empty } = this.props
-    if(_.isString(empty)) return <Empty { ...this.props } />
     if(_.isFunction(empty)) return React.createElement(empty, this.props)
-    return empty
+    return <Empty { ...this.props } />
   }
 
   _handleToggleTasks() {

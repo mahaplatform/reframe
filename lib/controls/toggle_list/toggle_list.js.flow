@@ -18,7 +18,7 @@ declare export default class extends React$Component<{chosen?: Array<Object>, de
   _getClass(): string;
   _getFilters(): any;
   _getFooter(): any;
-  _getInfinite(): {all?: number, cacheKey?: string, delayed?: any, empty?: any, endpoint: string, failure?: any, filter?: Object, footer?: any, layout?: any, loading?: any, onFetch?: (endpoint: string, query: {$filter: ?Object, $page: ?{skip: ?number}, $sort: string}) => void, onFetchDelay?: () => void, onFetchTimeout?: () => void, records?: Array<Object>, request_id?: string, sort?: {key: string, order: "asc" | "desc"}, status?: string, timeout?: any, total?: number};
+  _getInfinite(): {all?: number, cacheKey?: string, delayed?: any, empty?: any, endpoint: string, failure?: any, filter?: Object, footer?: any, layout?: any, loading?: any, notFound?: any, onFetch?: (endpoint: string, query: {$filter: ?Object, $page: ?{skip: ?number}, $sort: string}) => void, onFetchDelay?: () => void, onFetchTimeout?: () => void, records?: Array<Object>, request_id?: string, sort?: {key: string, order: "asc" | "desc"}, status?: string, timeout?: any, total?: number};
   _getLayout(): any;
   _getRecordClass(record: Object): string;
   _getSearchbox(): {onAbort?: () => {type: "ABORT"}, onChange?: (q: string) => void, onType?: (q: string) => {q: string, type: "TYPE"}, prompt?: string, q?: string};

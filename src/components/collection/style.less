@@ -82,29 +82,51 @@
   }
 }
 .reframe-collection-header {
-  background-color: fadeout(@black, 97);
+  background-color: @primary_background_color;
   display: flex;
-  border-bottom: 1px solid fadeout(@black, 90);
 }
 .reframe-collection-header-search {
   flex: 1;
+  .reframe-searchbox-input {
+    background-color: fadeout(@white, 50);
+    margin: 0 .5em .5em .5em;
+  }
+  .reframe-searchbox-remove-icon {
+    color: fadeout(@white, 50);
+    &:hover {
+      color: fadeout(@white, 30);
+    }
+  }
+  .reframe-searchbox-icon {
+    color: @white;
+  }
+  input {
+    color: @white !important;
+    &::-webkit-input-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &:-moz-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &::-moz-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder {
+      color: fadeout(@white, 20);
+    }
+  }
 }
 .reframe-collection-header-tasks {
   position: relative;
   display: flex;
   font-size: 1.25em;
   line-height: 1em;
-  color: fadeout(@black, 80);
+  color: @white;
   cursor: pointer;
-  padding: 0.3em 0.5em;
-  i {
-    margin: auto;
-    padding: 0.5em 0.6em;
-    border-radius: 0.5em;
-    &:hover {
-      background-color: fadeout(@black, 95);
-    }
-  }
+  padding: 0.5em 1em 0.5em 0.5em;
 }
 .reframe-collection-loader {
   flex: 0 0 35.em;

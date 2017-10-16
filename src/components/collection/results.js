@@ -7,16 +7,22 @@ import _ from 'lodash'
 
 export const Empty = (props) => {
 
-  const { empty, entity, icon } = this.props
+  const { empty, entity, icon } = props
+
+  const entitities = pluralize(entity.replace('_', ' '))
+
+  const text = empty || `You have not yet created any ${entitities}`
+
+  const button = (props.new) ? {
+    label: `Create New ${_.startCase(entity.replace('_', ' '))}`,
+    modal: props.new
+  } : null
 
   const message = {
     icon,
     title: `No ${_.startCase(pluralize(entity.replace('_', ' ')))}`,
-    text: empty,
-    button: {
-      label: `Create New ${_.startCase(entity.replace('_', ' '))}`,
-      modal: this.props.new
-    }
+    text,
+    button
   }
 
   return <Message { ...message } />
