@@ -32,13 +32,13 @@
   }
   .reframe-prompt-header {
     .border-radius(5px 5px 0 0);
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid fadeout(@black, 90);
     display: block;
     padding: 15px;
-    background-color: #EEE;
-    color: #888888;
+    background-color: fadeout(@black, 92);
+    color: fadeout(@black, 50);
     strong {
-      color: #000000;
+      color: @black;
     }
   }
   .reframe-prompt-item,
@@ -48,6 +48,7 @@
     text-align: center;
     color: #1e70bf;
     cursor: pointer;
+    border-bottom: 1px solid fadeout(@black, 90);
     &:hover {
       background-color: #F9F9F9;
     }

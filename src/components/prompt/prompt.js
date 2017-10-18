@@ -79,10 +79,21 @@ class Prompt extends React.Component<Props, void> {
     const { onOpen, onClose } = this.props
     return {
       confirm: {
-        open: (message, yes, no) => {
+        open: (message, yes = null, no = null) => {
           const options = [
-            { label: 'Yes', handler: () => { if(yes) yes() } },
-            { label: 'No', handler: () => { if(no) no() } }
+            {
+              label: 'Yes',
+              handler: () => {
+                if(yes) yes()
+                onClose()
+              }
+            }, {
+              label: 'No',
+              handler: () => {
+                if(no) no()
+                onClose()
+              }
+            }
           ]
           onOpen(message, options)
         },
