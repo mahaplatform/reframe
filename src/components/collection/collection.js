@@ -47,6 +47,7 @@ class Collection extends React.Component {
     q: PropTypes.string,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
+    search: PropTypes.bool,
     sort: PropTypes.object,
     table: PropTypes.array,
     tasks: PropTypes.array,
@@ -65,7 +66,8 @@ class Collection extends React.Component {
 
   static defaultProps = {
     cacheKey: null,
-    entity: 'record'
+    entity: 'record',
+    search: true
   }
 
   render() {
@@ -99,11 +101,12 @@ class Collection extends React.Component {
   }
 
   _getHeader() {
-    const { filter, filters, tasks, onSetQuery, onToggleTasks } = this.props
+    const { filter, filters, search, tasks, onSetQuery, onToggleTasks } = this.props
     return {
       export: this.props.export,
       filter,
       filters,
+      search,
       tasks,
       onSetQuery,
       onToggleTasks

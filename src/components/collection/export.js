@@ -1,5 +1,4 @@
 import SortableList from '../sortable_list'
-import PropTypes from 'prop-types'
 import pluralize from 'pluralize'
 import React from 'react'
 import qs from 'qs'
@@ -55,7 +54,8 @@ class Export extends React.Component {
       }), {})
     }
     const entities = pluralize(entity)
-    const url = `${endpoint}.csv?filename=${entities}&token=${token}&download=true&${qs.stringify(query)}`
+    const enclosure = encodeURIComponent('"')
+    const url = `${endpoint}.csv?enclosure=${enclosure}&filename=${entities}&token=${token}&download=true&${qs.stringify(query)}`
     window.location.href = url
   }
 

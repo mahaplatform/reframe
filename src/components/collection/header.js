@@ -8,13 +8,15 @@ class Header extends React.Component {
     export: PropTypes.array,
     filters: PropTypes.array,
     filter: PropTypes.object,
+    search: PropTypes.bool,
     tasks: PropTypes.array,
     onSetQuery: PropTypes.func,
     onToggleTasks: PropTypes.func
   }
 
   render() {
-    const { filters, filter, tasks } = this.props
+    const { filters, filter, search, tasks } = this.props
+    if(!filters && !this.props.export && !search && !tasks) return null
     const count = Object.keys(filter).reduce((count, key) => {
       if(filter[key].$eq) return count + 1
       if(filter[key].$in) return count + filter[key].$in.length
@@ -22,10 +24,12 @@ class Header extends React.Component {
     }, 0)
     return (
       <div className="reframe-collection-header">
-        <div className="reframe-collection-header-search">
-          <Searchbox { ...this._getSearchbox() } />
-        </div>
-        { (filter || this.props.export || tasks) &&
+        { search &&
+          <div className="reframe-collection-header-search">
+            <Searchbox { ...this._getSearchbox() } />
+          </div>
+        }
+        { (filters || this.props.export || tasks) &&
           <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
             <i className="fa fa-sliders" />
           </div>

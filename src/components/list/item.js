@@ -25,7 +25,9 @@ class Item extends React.Component<Props, void> {
           </div>
         }
         { component &&
-          _.isFunction(component) ? React.createElement(component, content) : component
+          <div className="reframe-list-item-component">
+            { _.isFunction(component) ? React.createElement(component, content) : component }
+          </div>
         }
         { !component &&
           <div className="reframe-list-item-content">
@@ -36,7 +38,7 @@ class Item extends React.Component<Props, void> {
         }
         { extra &&
           <div className="reframe-list-item-extra">
-            { _.isFunction(extra) ? React.createElement(extra) : extra }
+            { _.isFunction(extra) ? React.createElement(extra, content) : extra }
           </div>
         }
         { link &&

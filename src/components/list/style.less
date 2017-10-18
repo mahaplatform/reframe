@@ -66,6 +66,9 @@
     margin: auto;
   }
 }
+.reframe-list-item-component {
+  flex: 1;
+}
 .reframe-list-item-content {
   padding: 0.8em;
   flex: 1;
@@ -87,12 +90,15 @@
   display: flex;
   padding: 0.8em 0.8em 0.8em 0;
   font-size: 0.8em;
+  margin: 0;
   i {
-    margin: auto !important;
     color: fadeout(@black, 80);
   }
+  .chevron {
+    margin: auto !important;
+  }
   .ellipsis {
-    font-size: 1.2em;
+    font-size: 1.4em;
     cursor: pointer;
   }
 }
