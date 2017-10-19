@@ -9,7 +9,7 @@ import React from 'react'
 class List extends React.Component<Props, void> {
 
   render(): Node {
-    const { alert, empty, items, sections } = this.props
+    const { alert, empty, footer, items, sections } = this.props
     return (
       <div className="reframe-list">
         { alert &&
@@ -24,6 +24,11 @@ class List extends React.Component<Props, void> {
         }
         { items &&
           <Section items={ items } empty={ empty } />
+        }
+        { footer &&
+          <div className="reframe-list-footer">
+            { React.createElement(footer) }
+          </div>
         }
       </div>
     )

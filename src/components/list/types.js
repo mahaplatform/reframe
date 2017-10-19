@@ -13,7 +13,8 @@ export type ListProps = {
   alert?: Alert,
   empty?: any,
   items?: Array<ItemProps>,
-  sections?: Array<SectionProps>
+  sections?: Array<SectionProps>,
+  footer?: any
 }
 
 export type SectionProps = {
