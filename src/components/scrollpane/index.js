@@ -23,7 +23,7 @@ class Scrollpane extends React.Component {
     const { children } = this.props
     return (
       <div className="reframe-scrollpane">
-        <div className="reframe-scrollpane-inner" ref={ (node) => this.scrollpane = node}>
+        <div className="reframe-scrollpane-inner" ref={ (node) => this.scrollpane = node }>
           { children }
         </div>
       </div>
