@@ -5,6 +5,7 @@ import type { ListProps as Props } from './types'
 
 import Section from './section'
 import React from 'react'
+import _ from 'lodash'
 
 class List extends React.Component<Props, void> {
 
@@ -27,7 +28,7 @@ class List extends React.Component<Props, void> {
         }
         { footer &&
           <div className="reframe-list-footer">
-            { React.createElement(footer) }
+            { _.isFunction(footer) ? React.createElement(footer) : footer }
           </div>
         }
       </div>
