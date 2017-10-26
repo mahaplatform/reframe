@@ -1,3 +1,4 @@
+export Carousel from './carousel'
 export Collection from './collection'
 export Control from './control'
 export Filters from './filters'

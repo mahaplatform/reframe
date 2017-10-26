@@ -40,6 +40,17 @@ body {
 	z-index: 0 !important;
 }
 
+::-webkit-scrollbar,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-corner,
+::-webkit-resizer {
+	width: 0;
+	display: none;
+}
+
 .opacity(@opacity: 0.5) {
 	opacity: @opacity;
 }

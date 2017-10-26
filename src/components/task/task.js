@@ -17,7 +17,7 @@ class Task extends React.Component<Props, void> {
   }
 
   static defaultProps = {
-    onDone: PropTypes.func
+    onDone: () => {}
   }
 
   render(): Node {

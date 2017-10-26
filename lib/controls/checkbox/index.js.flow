@@ -2,7 +2,7 @@
 
 import React from "react";
 import type {Props, State} from "./types";
-declare export default class extends React$Component<{defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onReady?: () => void}, {value: boolean}> {
+declare export default class extends React$Component<{defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onClick?: (value?: boolean) => void, onReady?: () => void}, {value: boolean}> {
   static defaultProps: {defaultValue: boolean, disabled: boolean, onBusy: () => void, onChange: (value: boolean) => void, onReady: () => void};
 
   state: {value: boolean};

@@ -33,7 +33,7 @@ class Item extends React.Component<Props, void> {
           <div className="reframe-list-item-content">
             { label && <strong>{ label }<br /></strong> }
             <Format { ...content } format={ format } value={ content } />
-            { units && `&nbsp; ${units}` }
+            { units && ` ${units}` }
           </div>
         }
         { extra &&

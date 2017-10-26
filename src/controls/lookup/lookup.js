@@ -76,12 +76,13 @@ class Lookup extends React.Component {
           </div>
         }
         <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <Search { ...this._getSearch() } />
+          <Search { ...this._getSearch() } key="search" />
         </CSSTransition>
         <CSSTransition in={ adding } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <Form { ...this._getForm() } />
+          <div>
+            <Form { ...this._getForm() } key="form" />
+          </div>
         </CSSTransition>
-
      </div>
     )
   }

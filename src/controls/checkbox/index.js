@@ -45,6 +45,8 @@ class Checkbox extends React.Component<Props, State> {
   }
 
   _handleChange(value: boolean): void {
+    const { onClick } = this.props
+    if(onClick) onClick()
     this.setValue(!this.state.value)
   }
 
