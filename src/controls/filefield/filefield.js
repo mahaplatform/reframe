@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import _ from 'lodash'
 import Resumable from 'resumablejs'
+import PropTypes from 'prop-types'
 import Preview from './preview'
+import bytes from 'bytes'
+import React from 'react'
+import _ from 'lodash'
 
 class FileField extends React.Component {
 
@@ -16,6 +17,7 @@ class FileField extends React.Component {
     endpoint: PropTypes.string,
     files: PropTypes.array,
     multiple: PropTypes.bool,
+    multiplePrompt: PropTypes.string,
     prompt: PropTypes.string,
     status: PropTypes.string,
     token: PropTypes.string,
@@ -39,7 +41,8 @@ class FileField extends React.Component {
     defaultValue: null,
     disabled: false,
     multiple: false,
-    prompt: 'Choose File(s)',
+    prompt: 'Choose File',
+    multiplePrompt: 'Choose Another File',
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
@@ -51,13 +54,13 @@ class FileField extends React.Component {
   }
 
   render() {
-    const { files, multiple, prompt, status } = this.props
+    const { files, multiple, multiplePrompt, prompt, status } = this.props
     const { preview } = this.state
     let classes = ['filefield', status]
     return (
       <div className={classes.join(' ')}>
-        { files.map((file, index) => {
-          return (
+        <div className="reframe-filefield-tokens">
+          { files.map((file, index) => (
             <div key={`filefield_${index}`} className="reframe-filefield-token">
               <div className="reframe-filefield-details">
                 { _.includes(['added'], file.status) &&
@@ -74,16 +77,21 @@ class FileField extends React.Component {
                   </div>
                 }
                 { file.status === 'success' && <Preview file={ file } preview={ preview } /> }
-              </div>
-              <div className="reframe-filefield-remove">
-                <i className="remove circle icon" onClick={ this._handleRemoveFile.bind(this, file.uniqueIdentifier) }/>
+                <div className="reframe-filefield-caption">
+                  <div className="reframe-filefield-caption-text">
+                    { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })
+                  </div>
+                  <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, file.uniqueIdentifier) }>
+                    <i className="remove circle icon" />
+                  </div>
+                </div>
               </div>
             </div>
-          )
-        }) }
-        { (files.length === 0 || multiple === true) &&
+          )) }
+        </div>
+        { status === 'ready' && (files.length === 0 || multiple === true) &&
           <div ref={ (node) => this.button = node } className="ui browse button">
-            { prompt }
+            { files.length === 0 ? prompt :  multiplePrompt }
           </div>
         }
       </div>
@@ -98,13 +106,13 @@ class FileField extends React.Component {
     } else {
       onSetReady()
     }
-    this._initializeResumable()
   }
 
   componentDidUpdate(prevProps) {
     const { files, status, onReady } = this.props
-    if(status !== prevProps.status && prevProps.status === 'pending') {
-      onReady()
+    if(status !== prevProps.status) {
+      if(prevProps.status === 'pending') onReady()
+      if(status === 'ready') this._initializeResumable()
     }
     if(files.length > prevProps.files.length) {
       if(files.filter(file => file.status === 'added').length > 0) {
@@ -115,13 +123,9 @@ class FileField extends React.Component {
     }
   }
 
-  _handleReady() {
-    this.props.onReady()
-    this._initializeResumable()
-  }
-
   _initializeResumable() {
-    const { action, multiple, token } = this.props
+    const { action, multiple, status, token } = this.props
+    if(status !== 'ready') return
     this.resumable = new Resumable({
       target: action,
       chunkSize: 1024 * 128,
@@ -168,7 +172,6 @@ class FileField extends React.Component {
   _handleUploadSuccess(file, message) {
     const asset = JSON.parse(message)
     this.props.onUploadSuccess(file.file.uniqueIdentifier, asset)
-    this.props.onChange(asset.data.id)
     this.props.onBusy()
   }
 
@@ -179,7 +182,10 @@ class FileField extends React.Component {
   }
 
   _handleUploadComplete() {
+    const { files, multiple } = this.props
     this.props.onUploadComplete()
+    const value = multiple ? files.map(file => file.asset.id) : files[0].asset.id
+    this.props.onChange(value)
   }
 
 }

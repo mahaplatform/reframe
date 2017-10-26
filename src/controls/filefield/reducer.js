@@ -81,13 +81,11 @@ export default (state = INITIAL_VALUE, action) => {
   case 'UPLOAD_SUCCESS':
     return {
       ...state,
-      files: state.files.map(file => {
-        return {
-          ...file,
-          asset: action.asset,
-          status: (file.uniqueIdentifier === action.uniqueIdentifier) ? 'success' : file.status
-        }
-      })
+      files: state.files.map(file => ({
+        ...file,
+        asset: (file.uniqueIdentifier === action.uniqueIdentifier) ? action.asset : file.asset,
+        status: (file.uniqueIdentifier === action.uniqueIdentifier) ? 'success' : file.status
+      }))
     }
 
   case 'UPLOAD_PROCESS_FAILURE':

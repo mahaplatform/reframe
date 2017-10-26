@@ -1,7 +1,9 @@
+.reframe-carousel {
+  position: relative;
+}
 .reframe-carousel-theatre {
   position: relative;
   display: flex;
-  margin-bottom: 0.8em;
 }
 .reframe-carousel-previous {
   left: 0
@@ -17,6 +19,7 @@
   width: 3em;
   display: flex;
   z-index: 2;
+  cursor: pointer;
   i {
     font-size: 1.3em;
     color: @white;
@@ -93,6 +96,11 @@
   }
 }
 .reframe-carousel-pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em;
   text-align: center;
 }
 .reframe-carousel-pagination-button {

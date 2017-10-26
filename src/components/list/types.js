@@ -12,6 +12,7 @@ export type Alert = {
 export type ListProps = {
   alert?: Alert,
   empty?: any,
+  header?: any,
   items?: Array<ItemProps>,
   sections?: Array<SectionProps>,
   footer?: any

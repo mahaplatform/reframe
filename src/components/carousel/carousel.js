@@ -5,6 +5,7 @@ class Carousel extends React.Component {
 
   static propTypes = {
     active: PropTypes.number,
+    direction: PropTypes.string,
     slides: PropTypes.array,
     total: PropTypes.number,
     onSetTotal: PropTypes.func,
@@ -76,19 +77,16 @@ class Carousel extends React.Component {
   _getSlideClass(index) {
     const curr = this.state.active
     const next = this.props.active
-    const { total } = this.props
+    const { direction } = this.props
     const { transitioning } = this.state
     const classes = ['reframe-carousel-slide']
-    const last = total - 1
-    const reached_end = curr === last && next === 0
-    const reached_beginning = curr === 0 && next === last
-    const right = next !== curr && (next === curr + 1 || reached_end)
-    const left = next !== curr && (next === curr - 1 || reached_beginning)
+    const right = next !== curr && direction === 'right'
+    const left = next !== curr && direction === 'left'
     if(index === curr) classes.push('active')
-    if(right && index === next) classes.push('next')
-    if(left && index === next) classes.push('prev')
-    if(transitioning && right && (index === next || index === curr)) classes.push('left')
-    if(transitioning && left && (index === next || index === curr)) classes.push('right')
+    if(left && index === next) classes.push('next')
+    if(right && index === next) classes.push('prev')
+    if(transitioning && left && (index === next || index === curr)) classes.push('left')
+    if(transitioning && right && (index === next || index === curr)) classes.push('right')
     return classes.join(' ')
   }
 
@@ -133,7 +131,7 @@ class Carousel extends React.Component {
   _handleTouchEnd(e) {
     const touch = e.changedTouches[0]
     const dist = touch.clientX - this._swipe.x
-    if (this._swipe.swiping && Math.abs(dist) > 50 ) {
+    if (this._swipe.swiping && Math.abs(dist) > 30 ) {
       if(dist > 0) this.props.onPrevious()
       if(dist < 0) this.props.onNext()
     }
