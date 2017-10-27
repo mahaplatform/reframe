@@ -75,21 +75,17 @@
   .scrollable();
 }
 .reframe-filters-footer {
+  .hover(background-color, fadeout(@black, 90));
   text-align: center;
   padding: 0.4em;
   cursor: pointer;
   color: fadeout(@black, 50);
-  &:hover {
-    background-color: fadeout(@black, 90);
-  }
 }
 .reframe-filters-item {
+  .hover(background-color, fadeout(@black, 95));
   display: flex;
   line-height: 1.57em;
   cursor: pointer;
-  &:hover {
-    background-color: fadeout(@black, 95);
-  }
 }
 .reframe-filters-item-content {
   flex: 1;

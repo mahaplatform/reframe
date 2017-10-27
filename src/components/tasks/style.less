@@ -32,6 +32,7 @@
   }
   .reframe-task,
   .reframe-tasks-cancel {
+    .hover(background-color, darken(@white, 5%));
     border-top: 1px solid #CCC;
     display: block;
     padding: 15px;
@@ -44,9 +45,6 @@
     }
     &:last-child {
       border-radius: 0 0 5px 5px;
-    }
-    &:hover {
-      background-color: darken(@white, 5%);
     }
   }
 }

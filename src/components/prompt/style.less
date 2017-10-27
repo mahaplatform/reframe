@@ -43,15 +43,13 @@
   }
   .reframe-prompt-item,
   .reframe-prompt-cancel {
+    .hover(background-color, fadeout(@black, 98));
     display: block;
     padding: 15px;
     text-align: center;
     color: #1e70bf;
     cursor: pointer;
     border-bottom: 1px solid fadeout(@black, 90);
-    &:hover {
-      background-color: #F9F9F9;
-    }
     &:last-child {
       border-bottom: none;
     }

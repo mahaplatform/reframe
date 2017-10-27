@@ -38,6 +38,7 @@
       background-color: fadeout(@black, 90);
     }
     tr td {
+      .hover(background-color, fadeout(@black, 95));
       font-weight: bold;
       position: relative;
       cursor: pointer;
@@ -45,9 +46,6 @@
       border-right: 1px solid fadeout(@black, 90);
       &:last-child {
         border-right: none;
-      }
-      &:hover {
-        background-color: fadeout(@black, 95);
       }
       &.padded {
         padding: ~"0.8em calc(0.8em + 22px) 0.8em 0.8em";
@@ -66,9 +64,9 @@
     }
   }
   tbody {
-    tr.reframe-table-link:hover {
+    .reframe-table-link {
+      .hover(background-color, fadeout(@black, 95));
       cursor: pointer;
-      background-color: fadeout(@black, 95);
     }
     td {
       line-height: 20px;

@@ -51,6 +51,13 @@ body {
 	display: none;
 }
 
+.hover(@property, @value) {
+  &:hover {
+    @media (min-width: 1025px) {
+      @{property}: @value;
+    }
+  }
+}
 .opacity(@opacity: 0.5) {
 	opacity: @opacity;
 }

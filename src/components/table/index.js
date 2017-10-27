@@ -36,7 +36,11 @@ class Table extends React.Component<Props, State> {
         <table className="reframe-table-pinned">
           <thead>
             <tr>
-              { selectable && <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }><i className="fa fa-fw fa-circle-o" /></td> }
+              { selectable &&
+                <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
+                  <i className="fa fa-fw fa-circle-o" />
+                </td>
+              }
               { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
                 <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex + (selectable ? 1 : 0)) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
@@ -45,11 +49,33 @@ class Table extends React.Component<Props, State> {
                   }
                 </td>
               ))}
-              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing next" style={ this._getHeadStyle() } /> }
+              { (link || recordTasks) &&
+                <td className="reframe-table-head-cell mobile collapsing next" style={ this._getHeadStyle() } />
+              }
             </tr>
           </thead>
         </table>
         <table className="reframe-table-data">
+          <thead>
+            <tr ref={ (node) => this.head = node }>
+              { selectable &&
+                <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
+                  <i className="fa fa-fw fa-circle-o" />
+                </td>
+              }
+              { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
+                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex + (selectable ? 1 : 0)) } onClick={ this._handleSort.bind(this, column) }>
+                  { column.label }
+                  { sort && (column.key === sort.key || column.sort === sort.key) &&
+                    (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                  }
+                </td>
+              ))}
+              { (link || recordTasks) &&
+                <td className="reframe-table-head-cell mobile collapsing next" style={ this._getHeadStyle() } />
+              }
+            </tr>
+          </thead>
           <tbody>
             { records.map((record, rowIndex) => (
               <tr key={ `record_${rowIndex}` } className={ this._getBodyRowClass(record) }>

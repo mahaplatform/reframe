@@ -7,7 +7,7 @@ import type { Props as ScrollpaneProps } from '../scrollpane/types'
 import React from 'react'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
-import { Delayed, Empty, Failure, Loading, NotFound, Timeout } from './results'
+import { Delayed, Empty, Failure, Loading, Loader, NotFound, Timeout } from './results'
 
 class Infinite extends React.Component<Props, void> {
 
@@ -45,18 +45,12 @@ class Infinite extends React.Component<Props, void> {
         { status === 'failed' && this._getComponent(failure) }
         { status !== 'failed' && total === 0 && all !== 0 && this._getComponent(notFound) }
         { status !== 'failed' && total === 0 && all === 0 && this._getComponent(empty) }
-        { status !== 'failed' && records && records.length > 0 &&
+        { status !== 'failed' && records && records.length > 0 && layout &&
           <Scrollpane { ...this._getScrollpane() }>
-            { layout && layout(this.props) }
-            { status === 'loading' &&
-              <div className="reframe-infinite-loader">
-                <div className="ui active inverted dimmer">
-                  <div className="ui small loader"></div>
-                </div>
-              </div>
-            }
+            { React.createElement(layout, this.props) }
           </Scrollpane>
         }
+        { status === 'loading' && records && records.length > 0 && this._getComponent(Loader) }
         { footer && total !== null && total !== 0 &&
           <div className="reframe-infinite-footer">
             { React.createElement(footer, this.props) }

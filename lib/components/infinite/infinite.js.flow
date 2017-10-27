@@ -1,6 +1,6 @@
 // @flow
 
-import {Delayed, Empty, Failure, Loading, NotFound, Timeout} from "./results";
+import {Delayed, Empty, Failure, Loading, Loader, NotFound, Timeout} from "./results";
 import Scrollpane from "../scrollpane";
 import _ from "lodash";
 import React from "react";

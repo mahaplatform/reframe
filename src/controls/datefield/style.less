@@ -15,14 +15,12 @@
   flex: 0 0 2.5em;
   display: flex;
   .icon {
+    .hover(color, fadeout(@black, 70));
     margin: auto;
     font-size: 1.4em;
     line-height: 1.1em;
     color: fadeout(@black, 80);
     cursor: pointer;
-    &:hover {
-      color: fadeout(@black, 70);
-    }
   }
 }
 .reframe-datefield-chooser {
@@ -65,10 +63,8 @@
 }
 .reframe-datefield-previous,
 .reframe-datefield-next {
+  .hover(background-color, fadeout(@black, 85));
   cursor: pointer;
-  &:hover {
-    background-color: fadeout(@black, 85);
-  }
 }
 .reframe-datefield-title {
   flex: 1;
@@ -78,6 +74,7 @@
   display: flex;
 }
 .reframe-datefield-day {
+  .hover(background-color, fadeout(@black, 90));
   flex: 1;
   background-color: fadeout(@black, 95);
   cursor: pointer;
@@ -90,13 +87,8 @@
     font-weight: bold;
   }
   &.selected {
+    .hover(background-color, fadeout(@yellow, 80));
     background-color: fadeout(@yellow, 85);
-    &:hover {
-      background-color: fadeout(@yellow, 80);
-    }
-  }
-  &:hover {
-    background-color: fadeout(@black, 90);
   }
 }
 .error {

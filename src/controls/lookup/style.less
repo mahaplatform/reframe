@@ -41,14 +41,12 @@
   flex: 0 0 35px;
   display: flex;
   i {
+    .hover(color, fadeout(@black, 70));
     margin: auto;
     line-height: 18px;
     font-size: 18px;
     color: fadeout(@black, 80);
     cursor: pointer;
-    &:hover {
-      color: fadeout(@black, 70);
-    }
   }
 }
 .reframe-lookup-panel {
@@ -78,6 +76,7 @@
   flex: 1;
 }
 .reframe-lookup-panel-result {
+  .hover(background-color, fadeout(@black, 98));
   border-bottom: 1px solid #EEE;
   background-color: #FFF;
   cursor: pointer;
@@ -88,9 +87,6 @@
   }
   .reframe-lookup-panel-result-icon {
     flex: 0 0 25px;
-  }
-  &:hover {
-    background-color: #F9F9F9;
   }
   strong {
     color: #000;
