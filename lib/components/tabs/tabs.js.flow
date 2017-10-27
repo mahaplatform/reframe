@@ -9,10 +9,15 @@ declare export default class extends React$Component<{children: any, chosen: num
   static contextTypes: any;
   static defaultProps: {chosen: null, header: null, items: [], onChoose: (index: any) => void};
 
+  _swipe: Object;
   state: {transitioning: boolean, visited: Array<any>};
   _getItemClass(index: number): string;
   _getTabClass(index: number): string;
+  _getTabsBody(): {className: string, onTouchEnd: (p0: any) => void, onTouchMove: (p0: any) => void, onTouchStart: (p0: any) => void};
   _handleChoose(index: number): void;
+  _handleTouchEnd(e: any): void;
+  _handleTouchMove(e: any): void;
+  _handleTouchStart(e: any): void;
   componentDidMount(): void;
   render(): any;
 }

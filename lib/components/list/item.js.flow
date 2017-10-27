@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import Format from "../../utils/format";
 import type {Node} from "../../types";
 import type {ItemProps as Props} from "./types";
-declare export default class extends React$Component<{className?: string, component?: any, content?: any, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, tasks?: Array<any>, units?: string}, void> {
+declare export default class extends React$Component<{className?: string, component?: any, content?: any, empty?: string, extra?: any, format?: any, handler?: () => void, icon?: string, label?: string, link?: string, tasks?: Array<any>, units?: string}, void> {
   static contextTypes: any;
 
   _getClass(): string;

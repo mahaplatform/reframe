@@ -20,6 +20,7 @@ class Infinite extends React.Component<Props, void> {
     failure: Failure,
     filter: {},
     footer: null,
+    header: null,
     loading: Loading,
     notFound: NotFound,
     sort: {
@@ -30,9 +31,14 @@ class Infinite extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { all, delayed, empty, failure, footer, layout, loading, notFound, records, status, timeout, total } = this.props
+    const { all, delayed, empty, header, failure, footer, layout, loading, notFound, records, status, timeout, total } = this.props
     return (
       <div className="reframe-infinite">
+        { header &&
+          <div className="reframe-infinite-header">
+            { React.createElement(header, this.props) }
+          </div>
+        }
         { status === 'loading' && !records && this._getComponent(loading) }
         { status === 'delayed' && this._getComponent(delayed) }
         { status === 'timeout' && this._getComponent(timeout) }

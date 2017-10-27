@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import _ from 'lodash'
-import { unflatten } from 'flat'
+// import { unflatten } from 'flat'
 
 const sections = state => state.config
 
@@ -38,13 +38,13 @@ export const defaults = createSelector(
 export const filtered = createSelector(
   fields,
   data,
-  (fields, data) => unflatten(fields.reduce((entity, field) => {
+  (fields, data) => fields.reduce((entity, field) => {
     if(field.include === false || field.type == 'text') return entity
     return {
       ...entity,
       [field.name]: !_.isNil(data[field.name]) ? data[field.name] : null
     }
-  }, {}))
+  }, {})
 )
 
 export const isReady = createSelector(

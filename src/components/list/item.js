@@ -16,7 +16,7 @@ class Item extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { component, content, extra, format, handler, icon, label, link, tasks, units } = this.props
+    const { component, content, empty, extra, format, handler, icon, label, link, tasks, units } = this.props
     const item = (
       <div className={ this._getClass() }>
         { icon &&
@@ -32,8 +32,9 @@ class Item extends React.Component<Props, void> {
         { !component &&
           <div className="reframe-list-item-content">
             { label && <strong>{ label }<br /></strong> }
-            <Format { ...content } format={ format } value={ content } />
-            { units && ` ${units}` }
+            { content && <Format { ...content } format={ format } value={ content } /> }
+            { content && units && ` ${units}` }
+            { !content && empty && <span>{ empty }</span>}
           </div>
         }
         { extra &&

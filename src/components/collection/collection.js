@@ -48,6 +48,7 @@ class Collection extends React.Component {
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     search: PropTypes.bool,
+    selectable: PropTypes.bool,
     sort: PropTypes.object,
     table: PropTypes.array,
     tasks: PropTypes.array,
@@ -56,6 +57,8 @@ class Collection extends React.Component {
     onClearPanel: PropTypes.func,
     onFetch: PropTypes.func,
     onRemovePanel: PropTypes.func,
+    onSelect: PropTypes.func,
+    onSelectAll: PropTypes.func,
     onSetColumns: PropTypes.func,
     onSetFilter: PropTypes.func,
     onSetParams: PropTypes.func,
@@ -67,7 +70,8 @@ class Collection extends React.Component {
   static defaultProps = {
     cacheKey: null,
     entity: 'record',
-    search: true
+    search: true,
+    selectable: false
   }
 
   render() {

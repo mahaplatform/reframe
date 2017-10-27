@@ -1,6 +1,8 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Actions, State } from './types'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Select, SelectAll, Actions, State } from './types'
+
+import _ from 'lodash'
 
 const INITIAL_STATE: State = {
   columns: [],
@@ -10,6 +12,7 @@ const INITIAL_STATE: State = {
   panel: null,
   q: '',
   records: null,
+  selected: [],
   sort: {
     key: null,
     order: null
@@ -76,6 +79,23 @@ const clearPanel = (state: State, action: ClearPanel): State => ({
   panel: null
 })
 
+const select = (state: State, action: Select): State => ({
+  ...state,
+  selected: (!_.includes(state.selected, action.id)) ? [
+    ...state.selected,
+    action.id
+  ] : state.selected.filter(id => id !== action.id)
+})
+
+// TODO: GET RECORDS FROM INFINITE
+const selectAll = (state: State, action: SelectAll): State => {
+  const all = state.records ? state.records.map(record => record.id) : []
+  return {
+    ...state,
+    selected: (_.isEqual(all.sort(), state.selected.sort())) ? [] : all
+  }
+}
+
 const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
 
   switch (action.type) {
@@ -112,6 +132,12 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
 
   case 'CLEAR_PANEL':
     return clearPanel(state, action)
+
+  case 'SELECT':
+    return select(state, action)
+
+  case 'SELECT_ALL':
+    return selectAll(state, action)
 
   default:
     return state

@@ -39,27 +39,25 @@ export class Results extends React.Component {
     modal: PropTypes.func,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
+    selectable: PropTypes.bool,
+    selected: PropTypes.array,
     sort: PropTypes.object,
     status: PropTypes.string,
     table: PropTypes.array,
     onLoadMore: PropTypes.func,
+    onSelect: PropTypes.func,
+    onSelectAll: PropTypes.func,
     onSort: PropTypes.func
   }
 
   render() {
-    const { table, layout } = this.props
+    const { layout, table } = this.props
     if(table) return <Table { ...this._getTable() } />
     if(layout) return React.createElement(layout, { ...this._getCustomLayout() })
   }
 
-  _getScrollpane() {
-    return {
-      onReachBottom: this.props.onLoadMore.bind(this)
-    }
-  }
-
   _getTable() {
-    const { columns, handler, link, modal, records, recordTasks, sort, status, onLoadMore, onSort } = this.props
+    const { columns, handler, link, modal, records, recordTasks, selectable, selected, sort, status, onLoadMore, onSelect, onSelectAll, onSort } = this.props
     return {
       columns,
       handler,
@@ -67,9 +65,13 @@ export class Results extends React.Component {
       modal,
       records,
       recordTasks,
+      selected,
+      selectable,
       sort,
       status,
       onLoadMore,
+      onSelect,
+      onSelectAll,
       onSort
     }
   }

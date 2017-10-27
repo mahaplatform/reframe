@@ -30,6 +30,7 @@ export type ItemProps = {
   className?: string,
   component?: Component,
   content?: any,
+  empty?: string,
   extra?: Component,
   format?: Format,
   handler?: () => void,

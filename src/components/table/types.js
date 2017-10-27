@@ -26,9 +26,13 @@ export type Props = {
   modal: Component,
   records: Array<Object>,
   recordTasks: Array<recordTask>,
+  selected?: Array<number>,
+  selectable?: boolean,
   sort: Sort,
   total: number,
   onLoadMore: () => void,
+  onSelect: (id: number) => void,
+  onSelectAll: () => void,
   onSort: (key: string) => void
 }
 

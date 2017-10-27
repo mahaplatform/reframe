@@ -20,19 +20,25 @@ class Table extends React.Component<Props, State> {
     tasks: PropTypes.object
   }
 
+  static defaultProps = {
+    onSelect: (id) => {},
+    onSelectAll: () => {}
+  }
+
   state = {
     widths: []
   }
 
   render(): Node {
-    const { columns, handler, link, modal, records, recordTasks, sort } = this.props
+    const { columns, link, records, recordTasks, selectable, selected, sort } = this.props
     return (
       <div className="reframe-table">
         <table className="reframe-table-pinned">
           <thead>
             <tr>
+              { selectable && <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }><i className="fa fa-fw fa-circle-o" /></td> }
               { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
-                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex) } onClick={ this._handleSort.bind(this, column) }>
+                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex + (selectable ? 1 : 0)) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
                   { sort && (column.key === sort.key || column.sort === sort.key) &&
                     (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
@@ -44,67 +50,31 @@ class Table extends React.Component<Props, State> {
           </thead>
         </table>
         <table className="reframe-table-data">
-          <thead>
-            <tr ref={ (node) => this.head = node }>
-              { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
-                <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) }>
-                  { column.label }
-                  { sort && (column.key === sort.key || column.sort === sort.key) &&
-                    (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
-                  }
-                </td>
-              ))}
-              { (link || recordTasks) && <td className="reframe-table-head-cell mobile collapsing next" /> }
-            </tr>
-          </thead>
           <tbody>
-            { records.map((record, rowIndex) => {
-
-              const row = columns.filter(column => column.visible !== false).map((column, columnIndex) => (
-                <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) }>
-                  <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
-                </td>
-              ))
-
-              if(link) {
-                return (
-                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleLink.bind(this, record) }>
-                    { row }
-                    <td className="reframe-table-body-cell icon mobile collapsing centered">
-                      <i className="chevron right icon" />
-                    </td>
-                  </tr>
-                )
-              } else if(modal) {
-                return (
-                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleModal.bind(this, record.id) }>
-                    { row }
-                  </tr>
-                )
-              } else if(handler) {
-                return (
-                  <tr key={ `record_${rowIndex}` } className="reframe-table-link" onClick={ this._handleHandler.bind(this, record.id) }>
-                    { row }
-                  </tr>
-                )
-              } else if(recordTasks) {
-                return (
-                  <tr key={ `record_${rowIndex}` }>
-                    { row }
-                    <td className="icon mobile collapsing centered" onClick={ this._handleTasks.bind(this, record.id) }>
-                      <i className="ellipsis vertical icon" />
-                    </td>
-                  </tr>
-                )
-              } else {
-                return (
-                  <tr key={ `record_${rowIndex}` }>
-                    { row }
-                  </tr>
-                )
-              }
-
-            })}
+            { records.map((record, rowIndex) => (
+              <tr key={ `record_${rowIndex}` } className={ this._getBodyRowClass(record) }>
+                { selectable &&
+                  <td key={`cell_${rowIndex}_select`} className="reframe-table-check-cell mobile" onClick={ this._handleSelect.bind(this, record.id) }>
+                    { _.includes(selected, record.id) ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
+                  </td>
+                }
+                { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
+                  <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) } onClick={ this._handleClick.bind(this, record) }>
+                    <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
+                  </td>
+                )) }
+                { recordTasks &&
+                  <td className="icon mobile collapsing centered" onClick={ this._handleTasks.bind(this, record.id) }>
+                    <i className="ellipsis vertical icon" />
+                  </td>
+                }
+                { link &&
+                  <td className="reframe-table-body-cell icon mobile collapsing centered">
+                    <i className="chevron right icon" />
+                  </td>
+                }
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -141,6 +111,13 @@ class Table extends React.Component<Props, State> {
     return classes.join(' ')
   }
 
+  _getBodyRowClass(record: Object): string {
+    const { link, modal, handler, selected } = this.props
+    let classes = []
+    if(link || modal || handler) classes.push('reframe-table-link')
+    return classes.join(' ')
+  }
+
   _getHeadStyle(index?: number): Object {
     const { widths } = this.state
     const width = (typeof index !== 'undefined') ? widths[index] : widths[widths.length - 1]
@@ -152,6 +129,21 @@ class Table extends React.Component<Props, State> {
     const headerCells = Array.from(this.head.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
     this.setState({ widths })
+  }
+
+  _handleClick(record: Object): void {
+    const { link, modal, handler } = this.props
+    if(link) return this._handleLink(record)
+    if(modal) return this._handleModal(record.id)
+    if(handler) return this._handleHandler(record.id)
+  }
+
+  _handleSelect(id: number): void {
+    this.props.onSelect(id)
+  }
+
+  _handleSelectAll(): void {
+    this.props.onSelectAll()
   }
 
   _handleLink(record: Object): void {

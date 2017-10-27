@@ -59,6 +59,7 @@ export type Props = {
   failure?: Component,
   filter?: Filter,
   footer?: Component,
+  header?: Component,
   layout?: Component,
   loading?: Component,
   notFound?: Component,
