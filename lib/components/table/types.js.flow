@@ -2,7 +2,7 @@
 
 import type {Component} from "../../types";
 export type Column = {format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean};
-export type Props = {columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number};
+export type Props = {columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, selectAll?: boolean, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number};
 export type Sort = {key: string, order: string};
 export type State = {widths: Array<number>};
 export type recordTask = Object;

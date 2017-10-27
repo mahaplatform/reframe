@@ -1,13 +1,11 @@
 // @flow
 
 import {Component} from "../../types";
-import type {Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Select, SelectAll} from "./types";
+import type {Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns} from "./types";
 declare export function addPanel(panel: any): {panel: any, type: "ADD_PANEL"};
 declare export function clearPanel(panel: any): {type: "CLEAR_PANEL"};
 declare export function filter(filter: Object): {filter: Object, type: "FILTER"};
 declare export function removePanel(panel: any): {type: "REMOVE_PANEL"};
-declare export function select(id: number): {id: number, type: "SELECT"};
-declare export function selectAll(): {type: "SELECT_ALL"};
 declare export function setColumns(columns: Array<Object>): {columns: Array<Object>, type: "SET_COLUMNS"};
 declare export function setFilter(filter: Object): {filter: Object, type: "SET_FILTER"};
 declare export function setParams(filter: Object, sort: Object): {filter: Object, sort: {key: string, order: string}, type: "SET_PARAMS"};

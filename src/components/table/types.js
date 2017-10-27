@@ -26,6 +26,7 @@ export type Props = {
   modal: Component,
   records: Array<Object>,
   recordTasks: Array<recordTask>,
+  selectAll?: boolean,
   selected?: Array<number>,
   selectable?: boolean,
   sort: Sort,

@@ -1,6 +1,7 @@
 // @flow
 
-import type { Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Select, SelectAll } from './types'
+import type { Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns } from './types'
+
 import { Component } from '../../types'
 
 export const setParams = (filter: Object, sort: Object): SetParams => ({
@@ -54,13 +55,4 @@ export const removePanel = (panel: Component): RemovePanel => ({
 
 export const clearPanel = (panel: Component): ClearPanel => ({
   type: 'CLEAR_PANEL'
-})
-
-export const select = (id: number): Select => ({
-  type: 'SELECT',
-  id
-})
-
-export const selectAll = (): SelectAll => ({
-  type: 'SELECT_ALL'
 })

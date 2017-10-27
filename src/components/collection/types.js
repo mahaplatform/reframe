@@ -60,14 +60,6 @@ export type ClearPanel = {
   type: 'CLEAR_PANEL'
 }
 
-export type Select = {
-  type: 'SELECT',
-  id: number
-}
-
-export type SelectAll = {
-  type: 'SELECT_ALL'
-}
 
 export type Actions =
  | SetParams
@@ -81,8 +73,6 @@ export type Actions =
  | AddPanel
  | RemovePanel
  | ClearPanel
- | Select
- | SelectAll
 
 export type State = {
   +filter: Object,
@@ -91,7 +81,6 @@ export type State = {
   +panel?: Component,
   +q: string,
   +records: ?Array<Object>,
-  +selected: Array<number>,
   +sort: {
     +key: ?string,
     +order: ?string

@@ -1,6 +1,6 @@
 // @flow
 
-import type { FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout, State, Action } from './types'
+import type { FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout, Select, SelectAll, State, Action } from './types'
 
 import _ from 'lodash'
 
@@ -8,6 +8,8 @@ const INITIAL_STATE: State = {
   all: null,
   records: null,
   request_id: null,
+  selectAll: false,
+  selected: [],
   status: 'pending',
   total: null
 }
@@ -50,6 +52,30 @@ const fetchTimeout = (state: State, action: FetchTimeout): State => ({
   status: 'timeout'
 })
 
+const select = (state: State, action: Select): State => {
+  const selected = (!_.includes(state.selected, action.id)) ? [
+    ...state.selected,
+    action.id
+  ] : state.selected.filter(id => id !== action.id)
+  const all = state.records ? state.records.map(record => record.id) : []
+  const selectAll = _.isEqual(all.sort(), selected.sort())
+  return {
+    ...state,
+    selectAll,
+    selected
+  }
+}
+
+const selectAll = (state: State, action: SelectAll): State => {
+  const all = state.records ? state.records.map(record => record.id) : []
+  const selectAll = !_.isEqual(all.sort(), state.selected.sort())
+  return {
+    ...state,
+    selectAll,
+    selected: selectAll ? all : []
+  }
+}
+
 const reducer = (state: State = INITIAL_STATE, action: Action): State => {
 
   switch (action.type) {
@@ -68,6 +94,12 @@ const reducer = (state: State = INITIAL_STATE, action: Action): State => {
 
   case 'FETCH_TIMEOUT':
     return fetchTimeout(state, action)
+
+  case 'SELECT':
+    return select(state, action)
+
+  case 'SELECT_ALL':
+    return selectAll(state, action)
 
   default:
     return state

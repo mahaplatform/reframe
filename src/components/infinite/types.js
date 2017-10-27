@@ -46,9 +46,19 @@ export type FetchTimeout = {
   type: 'FETCH_TIMEOUT'
 }
 
+export type Select = {
+  type: 'SELECT',
+  id: number
+}
+
+export type SelectAll = {
+  type: 'SELECT_ALL'
+}
 export type Action =
   | FetchDelay
   | FetchTimeout
+  | Select
+  | SelectAll
 
 export type Props = {
   all?: number,
@@ -80,6 +90,7 @@ export type State = {
   +all: ?number,
   +records: ?Array<Object>,
   +request_id: ?string,
+  +selected: Array<number>,
   +status: Status,
   +total: ?number
 }

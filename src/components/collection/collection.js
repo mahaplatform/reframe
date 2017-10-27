@@ -5,11 +5,13 @@ import Header from './header'
 import Tasks from './tasks'
 import React from 'react'
 import _ from 'lodash'
+import qs from 'qs'
 
 class Collection extends React.Component {
 
   static contextTypes = {
-    modal: PropTypes.object
+    modal: PropTypes.object,
+    router: PropTypes.object
   }
 
   static propTypes = {
@@ -91,11 +93,27 @@ class Collection extends React.Component {
 
   componentDidMount() {
     const { data, defaultSort, table, onSetParams, onSetColumns, onSetRecords } = this.props
-    const filter = this.props.filter || {}
+    const filter = this._getFilterFromUrl() || this.props.filter || {}
     const sort = defaultSort || { key: 'created_at', order: 'desc' }
     onSetParams(filter, sort)
     if(table) onSetColumns(table)
     if(data) onSetRecords(data)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { filter } = this.props
+    const { router } = this.context
+    if(!_.isEqual(filter, prevProps.filter)) {
+      const query = qs.stringify({ $filter: filter }, { encode: false })
+      router.history.replace(router.route.location.pathname+'?'+query)
+    }
+  }
+
+  _getFilterFromUrl() {
+    const { location } = this.context.router.route
+    if(_.isEmpty(location.search)) return null
+    const query = qs.parse(location.search.substr(1))
+    return query.$filter || null
   }
 
   _getClass() {

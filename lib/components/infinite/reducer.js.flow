@@ -1,5 +1,5 @@
 // @flow
 
 import _ from "lodash";
-import type {FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout, State, Action} from "./types";
-declare export default function(state?: {+all: ?number, +records: ?Array<Object>, +request_id: ?string, +status: "pending" | "loading" | "failed" | "delayed" | "timeout" | "completed" | "loaded", +total: ?number}, action: {type: "FETCH_DELAY"} | {type: "FETCH_TIMEOUT"}): {+all: ?number, +records: ?Array<Object>, +request_id: ?string, +status: "pending" | "loading" | "failed" | "delayed" | "timeout" | "completed" | "loaded", +total: ?number};
+import type {FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout, Select, SelectAll, State, Action} from "./types";
+declare export default function(state?: {+all: ?number, +records: ?Array<Object>, +request_id: ?string, +selected: Array<number>, +status: "pending" | "loading" | "failed" | "delayed" | "timeout" | "completed" | "loaded", +total: ?number}, action: {type: "FETCH_DELAY"} | {type: "FETCH_TIMEOUT"} | {id: number, type: "SELECT"} | {type: "SELECT_ALL"}): {+all: ?number, +records: ?Array<Object>, +request_id: ?string, +selected: Array<number>, +status: "pending" | "loading" | "failed" | "delayed" | "timeout" | "completed" | "loaded", +total: ?number};

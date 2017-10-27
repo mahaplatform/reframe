@@ -1,7 +1,7 @@
 // @flow
 
 import type { ApiRequest } from '../../types'
-import type { Query, FetchDelay, FetchTimeout } from './types'
+import type { Query, FetchDelay, FetchTimeout, Select, SelectAll } from './types'
 
 export const fetch = (endpoint: string, query: Query): ApiRequest => ({
   type: 'API_REQUEST',
@@ -19,4 +19,13 @@ export const fetchDelay = (): FetchDelay => ({
 
 export const fetchTimeout = (): FetchTimeout => ({
   type: 'FETCH_TIMEOUT'
+})
+
+export const select = (id: number): Select => ({
+  type: 'SELECT',
+  id
+})
+
+export const selectAll = (): SelectAll => ({
+  type: 'SELECT_ALL'
 })

@@ -30,7 +30,7 @@ class Table extends React.Component<Props, State> {
   }
 
   render(): Node {
-    const { columns, link, records, recordTasks, selectable, selected, sort } = this.props
+    const { columns, link, records, recordTasks, selectable, selected, selectAll, sort } = this.props
     return (
       <div className="reframe-table">
         <table className="reframe-table-pinned">
@@ -38,7 +38,7 @@ class Table extends React.Component<Props, State> {
             <tr>
               { selectable &&
                 <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
-                  <i className="fa fa-fw fa-circle-o" />
+                  { selectAll ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
                 </td>
               }
               { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
@@ -60,7 +60,7 @@ class Table extends React.Component<Props, State> {
             <tr ref={ (node) => this.head = node }>
               { selectable &&
                 <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
-                  <i className="fa fa-fw fa-circle-o" />
+                  { selectAll ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
                 </td>
               }
               { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
