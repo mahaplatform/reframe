@@ -100,12 +100,10 @@ class FileField extends React.Component {
 
   componentDidMount() {
     const { endpoint, defaultValue, onLoadFiles, onSetReady } = this.props
-    if(defaultValue) {
-      const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
-      onLoadFiles(endpoint, ids)
-    } else {
-      onSetReady()
-    }
+    if(!defaultValue) return onSetReady()
+    const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
+    if(ids.length === 0) return onSetReady()
+    onLoadFiles(endpoint, ids)
   }
 
   componentDidUpdate(prevProps) {

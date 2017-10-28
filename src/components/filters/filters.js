@@ -11,6 +11,7 @@ class Filters extends React.Component {
     filtered: PropTypes.object,
     panels: PropTypes.array,
     results: PropTypes.object,
+    values: PropTypes.object,
     onAddPanel: PropTypes.func,
     onChange: PropTypes.func,
     onUpdate: PropTypes.func,
@@ -35,7 +36,21 @@ class Filters extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onSet(this.props.values)
+    if(this.props.values) this._handleSet(this.props.values)
+  }
+
+  _handleSet(defaultValue) {
+    const values = Object.keys(defaultValue).reduce((values, key) => ({
+      ...values,
+      [key]: this._getValue(defaultValue[key])
+    }), {})
+    this.props.onSet(values)
+  }
+
+  _getValue(value) {
+    if(value.$in) return value.$in.map(key => ({ key: parseInt(key), value: '' }))
+    if(value.$eq) return value.$eq
+    if(value.$dr) return ({ key: value.$dr, value: '' })
   }
 
   componentDidUpdate(prevProps) {

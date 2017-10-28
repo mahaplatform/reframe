@@ -128,37 +128,31 @@ class Tasks extends React.Component {
   }
 
   _getTask(task) {
-    if(task.panel) {
-      return {
-        className: 'reframe-collection-tasks-panel-item',
-        label: task.label,
-        mobile: task.mobile,
-        icon: task.icon,
-        rights: task.rights,
-        handler: () => this.props.onAddPanel(task.panel)
-      }
-    } else if(task.handler) {
-      return {
-        className: 'reframe-collection-tasks-panel-item',
-        label: task.label,
-        mobile: task.mobile,
-        icon: task.icon,
-        rights: task.rights,
-        handler: () => task.handler(this.props)
-      }
-    } else if(task.request) {
-      return {
-        className: 'reframe-collection-tasks-panel-item',
-        label: task.label,
-        mobile: task.mobile,
-        icon: task.icon,
-        rights: task.rights,
-        request: task.request(this.props)
-      }
-    }
     return {
       className: 'reframe-collection-tasks-panel-item',
-      ...task
+      label: task.label,
+      mobile: task.mobile,
+      icon: task.icon,
+      rights: task.rights,
+      ...this._getTaskAction(task)
+    }
+  }
+
+  _getTaskAction(task) {
+    if(task.panel) {
+      return {
+        handler: () => this.props.onAddPanel(task.panel)
+      }
+    }
+    if(task.handler) {
+      return {
+        handler: () => task.handler(this.props)
+      }
+    }
+    if(task.request) {
+      return {
+        request: () => task.request(this.props)
+      }
     }
   }
 

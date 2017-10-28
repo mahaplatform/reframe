@@ -27,7 +27,8 @@ class Infinite extends React.Component<Props, void> {
       key: null,
       order: null
     },
-    timeout: Timeout
+    timeout: Timeout,
+    onUpdateSelected: (ids) => {}
   }
 
   render(): Node {
@@ -66,12 +67,16 @@ class Infinite extends React.Component<Props, void> {
   }
 
   componentDidUpdate(prevProps: Props): void {
-    const { cacheKey, filter, sort, status } = this.props
+    const { cacheKey, filter, records, selected, sort, status, onUpdateSelected } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
       clearTimeout(this.timeout)
     }
     if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
       this._handleFetch(0)
+    }
+    if(selected !== prevProps.selected && selected && records) {
+      const selectedRecords = records.filter(record => _.includes(selected, record.id))
+      if(onUpdateSelected) onUpdateSelected(selectedRecords)
     }
   }
 

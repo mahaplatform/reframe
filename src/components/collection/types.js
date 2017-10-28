@@ -18,6 +18,11 @@ export type SetColumns = {
   columns: Array<Column>
 }
 
+export type SetSelected = {
+  type: 'SET_SELECTED',
+  selected: Array<number>
+}
+
 export type Sort = {
   type: 'SORT',
   key: string
@@ -60,10 +65,10 @@ export type ClearPanel = {
   type: 'CLEAR_PANEL'
 }
 
-
 export type Actions =
  | SetParams
  | SetColumns
+ | SetSelected
  | Sort
  | Filter
  | SetRecords
@@ -81,6 +86,7 @@ export type State = {
   +panel?: Component,
   +q: string,
   +records: ?Array<Object>,
+  +selected: ?Array<number>,
   +sort: {
     +key: ?string,
     +order: ?string
@@ -95,6 +101,7 @@ export type Props = {
   open?: boolean,
   panel?: Component,
   sort: string,
+  selected?: Array<number>,
   selectable?: boolean,
   tasks?: Array<Object>
 }

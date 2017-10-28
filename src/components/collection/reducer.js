@@ -1,8 +1,6 @@
 // @flow
 
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, Actions, State } from './types'
-
-import _ from 'lodash'
+import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, SetSelected, Actions, State } from './types'
 
 const INITIAL_STATE: State = {
   columns: [],
@@ -12,6 +10,7 @@ const INITIAL_STATE: State = {
   panel: null,
   q: '',
   records: null,
+  selected: [],
   sort: {
     key: null,
     order: null
@@ -27,6 +26,11 @@ const setParams = (state: State, action: SetParams): State => ({
 const setColumns = (state: State, action: SetColumns): State => ({
   ...state,
   columns: action.columns
+})
+
+const setSelected = (state: State, action: SetSelected): State => ({
+  ...state,
+  selected: action.selected
 })
 
 const filter = (state: State, action: Filter): State => ({
@@ -87,6 +91,9 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
 
   case 'SET_COLUMNS':
     return setColumns(state, action)
+
+  case 'SET_SELECTED':
+    return setSelected(state, action)
 
   case 'FILTER':
     return filter(state, action)

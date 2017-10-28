@@ -75,13 +75,17 @@ export type Props = {
   notFound?: Component,
   records?: Array<Object>,
   request_id?: string,
+  selected?: Array<number>,
   sort?: Sort,
   status?: string,
   timeout?: Component,
   total?: number,
   onFetch?: (endpoint: string, query: Query) => void,
   onFetchDelay?: () => void,
-  onFetchTimeout?: () => void
+  onFetchTimeout?: () => void,
+  onSelect?: (id: number) => void,
+  onSelectAll?: () => void,
+  onUpdateSelected?: (ids: Array<Object>) => void
 }
 
 export type Status = 'pending' | 'loading' | 'failed' | 'delayed' | 'timeout' | 'completed' | 'loaded'

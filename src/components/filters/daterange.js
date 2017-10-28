@@ -35,8 +35,10 @@ class DaterangePanel extends React.Component {
         <div className="reframe-filters-body">
           <Search { ...this._getSearch() } />
         </div>
-        <div className="reframe-filters-footer" onClick={ this._handleReset.bind(this) }>
-          Reset { label }
+        <div className="reframe-filters-footer">
+          <button className="ui red fluid button" onClick={ this._handleReset.bind(this) }>
+            Reset { label }
+          </button>
         </div>
       </div>
     )
@@ -63,6 +65,14 @@ class DaterangePanel extends React.Component {
     if(_.includes(include, 'this')) options.push({ value: 'this_year', description: this.description(0, 'year'), text: 'This Year' })
     if(_.includes(include, 'last')) options.push({ value: 'last_year', description: this.description(-1, 'year'), text: 'Last Year' })
     if(_.includes(include, 'next')) options.push({ value: 'next_year', description: this.description(1, 'year'), text: 'Next Year' })
+    if(_.includes(include, 'last')) options.push({ value: 'last_30', description: this.description(-1, 'year'), text: 'Last 30 Days' })
+    if(_.includes(include, 'next')) options.push({ value: 'next_30', description: this.description(1, 'year'), text: 'Next 30 Days' })
+    if(_.includes(include, 'last')) options.push({ value: 'last_60', description: this.description(-1, 'year'), text: 'Last 60 Days' })
+    if(_.includes(include, 'next')) options.push({ value: 'next_60', description: this.description(1, 'year'), text: 'Next 60 Days' })
+    if(_.includes(include, 'last')) options.push({ value: 'last_90', description: this.description(-1, 'year'), text: 'Last 90 Days' })
+    if(_.includes(include, 'next')) options.push({ value: 'next_90', description: this.description(1, 'year'), text: 'Next 90 Days' })
+    options.push({ value: 'ytd', description: this.description(1, 'year'), text: 'Year to Date' })
+    options.push({ value: 'ltd', description: this.description(1, 'year'), text: 'Life to Date' })
     return options
   }
 

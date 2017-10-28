@@ -50,6 +50,7 @@ class Collection extends React.Component {
     records: PropTypes.array,
     recordTasks: PropTypes.array,
     search: PropTypes.bool,
+    selected: PropTypes.array,
     selectable: PropTypes.bool,
     sort: PropTypes.object,
     table: PropTypes.array,
@@ -113,7 +114,8 @@ class Collection extends React.Component {
     const { location } = this.context.router.route
     if(_.isEmpty(location.search)) return null
     const query = qs.parse(location.search.substr(1))
-    return query.$filter || null
+    if(!query.$filter) return null
+    return query.$filter
   }
 
   _getClass() {
@@ -146,7 +148,7 @@ class Collection extends React.Component {
   }
 
   _getInfinite() {
-    const { cacheKey, endpoint, failure, loading, q, sort } = this.props
+    const { cacheKey, endpoint, failure, loading, q, sort, onSetSelected } = this.props
     const filter = {
       ...this.props.filter,
       q
@@ -160,7 +162,8 @@ class Collection extends React.Component {
       empty: this._getEmpty(),
       failure,
       layout: (props) => <Results { ...this.props } { ...props } />,
-      sort
+      sort,
+      onUpdateSelected: onSetSelected
     }
   }
 
