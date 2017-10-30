@@ -46,7 +46,8 @@ class Form extends React.Component {
     onSuccess: PropTypes.func,
     onToggleBusy: PropTypes.func,
     onValidateForm: PropTypes.func,
-    onUpdateData: PropTypes.func
+    onUpdateData: PropTypes.func,
+    onUpdateField: PropTypes.func
   }
 
   static defaultProps = {
@@ -110,8 +111,8 @@ class Form extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { data, sections, status, onSetSections } = this.props
-    if(!_.isEqual(prevProps.sections, sections)) onSetSections(sections)
+    const { data, sections, status } = this.props
+    if(!_.isEqual(prevProps.sections, sections)) this._handleUpdateField(prevProps.sections)
     if(prevProps.status !== status) {
       if(status === 'sections_loaded') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
@@ -163,6 +164,17 @@ class Form extends React.Component {
 
   _handleSetReady(key) {
     this.props.onSetReady(key)
+  }
+
+  _handleUpdateField(prevSections) {
+    const { sections, onUpdateField } = this.props
+    sections.map((section, index) => {
+      if(_.isEqual(prevSections[index], sections[index])) return
+      sections[index].fields.map((field, fieldIndex) => {
+        if(_.isEqual(prevSections[index].fields[fieldIndex], sections[index].fields[fieldIndex])) return
+        onUpdateField(index, fieldIndex, field)
+      })
+    })
   }
 
   _handleToggleBusy(key) {

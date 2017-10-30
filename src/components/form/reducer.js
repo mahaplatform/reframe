@@ -82,6 +82,12 @@ export default (state = INITIAL_STATE, action) => {
       errors: _.omit(state.errors, action.key)
     }
 
+  case 'UPDATE_FIELD':
+    return {
+      ...state,
+      config: [..._.set(state.config, `[${action.sectionIndex}].fields[${action.fieldIndex}]`, action.field)]
+    }
+
   case 'SUBMIT_REQUEST':
     return {
       ...state,

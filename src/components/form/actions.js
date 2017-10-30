@@ -42,6 +42,13 @@ export const updateData = (key, value) => ({
   value
 })
 
+export const updateField = (sectionIndex, fieldIndex, field) => ({
+  type: 'UPDATE_FIELD',
+  sectionIndex,
+  fieldIndex,
+  field
+})
+
 export const submitForm = (method, endpoint, body) => ({
   type: 'API_REQUEST',
   method,

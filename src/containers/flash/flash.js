@@ -1,24 +1,30 @@
 // @flow
 
-import type { Props } from './types'
+import type { Props, State } from './types'
 import type { Element } from 'react'
 
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-class Flash extends React.Component<Props, void> {
+class Flash extends React.Component<Props, any> {
 
   static childContextTypes = {
     flash: PropTypes.object
   }
 
+  state = {
+    message: null,
+    style: null
+  }
+
   render() {
-    const { children, message, style } = this.props
+    const { children } = this.props
+    const { message, style } = this.state
     return ([
       children,
-      <CSSTransition key="reframe-flash" in={ message !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-        <div className={`reframe-flash-popup ${style}`}>
+      <CSSTransition key="reframe-flash" in={ this.props.message !== null } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+        <div className={`reframe-flash-popup ${style || ''}`}>
           <div className="reframe-flash-popup-panel">
             <div className="reframe-flash-popup-icon">
               { this._getIcon(style) }
@@ -32,14 +38,19 @@ class Flash extends React.Component<Props, void> {
     ])
   }
 
-  componentDidUpdate(prevProps: Props): void {
-    const { message, onClear } = this.props
-    if(prevProps.message !== message && message) {
-      setTimeout(onClear, 2000)
+  componentDidUpdate(prevProps: Props, prevState: State): void {
+    const { message, style, onClear } = this.props
+    if(prevProps.message !== message) {
+      if(message) {
+        this.setState({ message, style })
+        setTimeout(onClear, 2000)
+      } else {
+        setTimeout(() => this.setState({ message, style }), 250)
+      }
     }
   }
 
-  _getIcon(style: string): Element<'i'> {
+  _getIcon(style: any): Element<'i'> {
     if(style == 'success') {
       return <i className="fa fa-check-circle" />
     } else if(style == 'warning') {
