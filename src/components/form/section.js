@@ -6,7 +6,10 @@ class Section extends React.Component {
 
   static propTypes = {
     label: PropTypes.string,
-    instructions: PropTypes.string,
+    instructions: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ]),
     collapsing: PropTypes.bool,
     collapsed: PropTypes.bool,
     fields: PropTypes.array,

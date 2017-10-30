@@ -12,8 +12,7 @@
   .reframe-form-footer {
     padding: 15px 15px 0;
     .reframe-form-after,
-    .reframe-form-before,
-    .instructions {
+    .reframe-form-before {
       margin-bottom: 15px;
     }
   }
@@ -50,17 +49,11 @@
         margin-bottom: 0;
       }
     }
-    & > .instructions {
-      margin-bottom: 1em;
-    }
   }
   .instructions {
-    color: #AAAAAA;
-    p {
-      color: #AAAAAA;
-      font-size: 1em;
-      line-height: 1em;
-    }
+    color: fadeout(@black, 20);
+    line-height: 1.8em;
+    margin-bottom: 1em;
   }
   :disabled  {
     background-color: #F0F0F0 !important;

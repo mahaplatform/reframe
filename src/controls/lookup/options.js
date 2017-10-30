@@ -96,6 +96,7 @@ class Container extends React.Component {
     label: PropTypes.string,
     options: PropTypes.array,
     q: PropTypes.string,
+    search: PropTypes.bool,
     sort: PropTypes.string,
     text: PropTypes.string,
     value: PropTypes.string,
@@ -106,33 +107,25 @@ class Container extends React.Component {
   }
 
   render() {
-    const { endpoint, label, form } = this.props
-    if(endpoint) {
-      return (
-        <div className="reframe-lookup-panel">
+    const { endpoint, label, form, search } = this.props
+    return (
+      <div className="reframe-lookup-panel">
+        { search &&
           <div className="reframe-lookup-panel-search">
             <Searchbox { ...this._getSearchbox() } />
           </div>
-          <Infinite { ...this._getInfinite() } />
-          { form &&
-            <div className="reframe-lookup-panel-add">
-              <div className="ui fluid red button" onClick={ this._handleAdd.bind(this)}>
-                Add {label}
-              </div>
+        }
+        { endpoint && <Infinite { ...this._getInfinite() } /> }
+        { !endpoint && <Options { ...this._getStaticOptions() } /> }
+        { form &&
+          <div className="reframe-lookup-panel-add">
+            <div className="ui fluid red button" onClick={ this._handleAdd.bind(this)}>
+              Add {label}
             </div>
-          }
-        </div>
-      )
-    } else {
-      return (
-        <div className="reframe-lookup-panel">
-          <div className="reframe-lookup-panel-search">
-            <Searchbox { ...this._getSearchbox() } />
           </div>
-          <Options { ...this._getStaticOptions() } />
-        </div>
-      )
-    }
+        }
+      </div>
+    )
   }
 
   _getSearchbox() {

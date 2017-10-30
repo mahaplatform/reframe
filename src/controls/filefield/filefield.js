@@ -122,7 +122,7 @@ class FileField extends React.Component {
   }
 
   _initializeResumable() {
-    const { action, multiple, status, token } = this.props
+    const { action, files, multiple, status, token } = this.props
     if(status !== 'ready') return
     this.resumable = new Resumable({
       target: action,
@@ -137,7 +137,7 @@ class FileField extends React.Component {
     this.resumable.on('fileSuccess', this._handleUploadSuccess.bind(this))
     this.resumable.on('error', this._handleUploadFailure.bind(this))
     this.resumable.on('complete', this._handleUploadComplete.bind(this))
-    this.resumable.assignBrowse(this.button)
+    if(multiple || (!multiple && files.length === 0)) this.resumable.assignBrowse(this.button)
   }
 
   _handleFileAdded(file) {
