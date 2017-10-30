@@ -31,10 +31,12 @@ class Item extends React.Component<Props, void> {
         }
         { !component &&
           <div className="reframe-list-item-content">
-            { label && <strong>{ label }<br /></strong> }
-            { content && <Format { ...content } format={ format } value={ content } /> }
-            { content && units && ` ${units}` }
-            { !content && empty && <span>{ empty }</span>}
+            { label && <div className="reframe-list-item-content-label">{ label }</div> }
+            <div className="reframe-list-item-content-value">
+              { content && <Format { ...content } format={ format } value={ content } /> }
+              { content && units && ` ${units}` }
+              { !content && empty && <span>{ empty }</span>}
+            </div>
           </div>
         }
         { extra &&

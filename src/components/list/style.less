@@ -72,8 +72,24 @@
   flex: 1;
 }
 .reframe-list-item-content {
-  padding: 0.8em;
   flex: 1;
+  @media (max-width: 767px) { padding: 0.8em; }
+  @media (min-width: 768px) { display: flex; }
+}
+
+.reframe-list-item-content-label {
+  @media (min-width: 768px) {
+    flex: 0 0 10em;
+    padding: 0.8em;
+  }
+  color: @black;
+  font-weight: bold;
+}
+.reframe-list-item-content-value {
+  @media (min-width: 768px) {
+    flex: 1;
+    padding: 0.8em;
+  }
 }
 .reframe-list-item-extra {
   display: flex;

@@ -23,7 +23,9 @@ class Section extends React.Component<Props, void> {
         { content &&
           <div className="reframe-list-item">
             <div className="reframe-list-item-content">
-              { content }
+              <div className="reframe-list-item-content-value">
+                { content }
+              </div>
             </div>
           </div>
         }
@@ -37,7 +39,9 @@ class Section extends React.Component<Props, void> {
             { _.isPlainObject(empty) ?
               <Message { ...empty } /> :
               <div className="reframe-list-item-content">
-                { _.isFunction(empty) ? React.createElement(empty, this.props) : empty }
+                <div className="reframe-list-item-content-value">
+                  { _.isFunction(empty) ? React.createElement(empty, this.props) : empty }
+                </div>
               </div>
             }
           </div>
