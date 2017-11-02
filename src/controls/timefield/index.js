@@ -35,6 +35,7 @@ class TimeField extends React.Component {
   }
 
   _getLookup() {
+
     return {
       ...this.props,
       type: 'lookup',
@@ -69,7 +70,7 @@ class TimeField extends React.Component {
     return [...Array(steps)].reduce((times, i) => {
 
       const value = {
-        value: currTime.format('hh:mm:ss'),
+        value: currTime.format('HH:mm:ss'),
         text: currTime.format('hh:mm A'),
         duration: currTime.diff(startTime) / 1000 / 60 / 60
       }
