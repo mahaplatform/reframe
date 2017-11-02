@@ -87,36 +87,14 @@ class Field extends React.Component {
   }
 
   _getControl() {
-    const { action, columns, component, data, disabled, endpoint, filters, form, format, label, multiple, name } = this.props
-    const { options, prompt, prefix, search, sort, suffix, type, text, token, value } = this.props
-    const { onSubmit } = this.props
+    const { data, name } = this.props
     const defaultValue = _.get(data, name)
     return {
-      action,
-      columns,
-      component,
+      ...this.props,
       defaultValue,
-      disabled,
-      endpoint,
-      filters,
-      form,
-      format,
-      label,
-      multiple,
-      options,
-      prompt,
-      prefix,
-      search,
-      sort,
-      suffix,
-      text,
-      token,
-      type,
-      value,
       onBusy: this._handleBusy.bind(this),
       onChange: this._handleUpdateData.bind(this),
-      onReady: this._handleReady.bind(this),
-      onSubmit
+      onReady: this._handleReady.bind(this)
     }
   }
 

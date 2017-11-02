@@ -73,8 +73,8 @@ class Lookup extends React.Component {
           </div>
         }
         { !chosen &&
-          <div className="reframe-lookup-field-prompt" onClick={ this._handleBegin.bind(this) }>
-            { prompt }
+          <div className="ui input">
+            <input type="text" onFocus={ this._handleBegin.bind(this) } placeholder={ prompt } />
           </div>
         }
         <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>

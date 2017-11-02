@@ -1,14 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Lookup from '../lookup'
+import moment from 'moment'
+import pluralize from 'pluralize'
 
 class TimeField extends React.Component {
 
   static propTypes = {
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
+    duration: PropTypes.bool,
     increment: PropTypes.number,
     prompt: PropTypes.string,
+    start: PropTypes.string,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -21,7 +25,9 @@ class TimeField extends React.Component {
 
   static defaultProps = {
     prompt: 'Choose a time',
-    increment: 15
+    duration: false,
+    increment: 15,
+    start: '0:00'
   }
 
   render() {
@@ -32,35 +38,47 @@ class TimeField extends React.Component {
     return {
       ...this.props,
       type: 'lookup',
-      options: this._getOptions()
+      options: this._getOptions(),
+      format: ({ text, duration }) => (
+        <div className="reframe-timefield-token">
+          { text }
+          { this.props.duration &&
+            <span className="reframe-timefield-token-duration">
+              ({ duration >= 1 ? pluralize('hour', duration, true) : pluralize('mins', duration * 60, true) })
+            </span>
+          }
+        </div>
+      )
     }
   }
 
   _getOptions() {
 
-    const { increment } = this.props
+    const { increment, start } = this.props
 
-    const zeroPad = (number) => (number < 10) ? `0${number}` : number
+    const today = moment().format('YYYY-MM-DD')
 
-    return [...Array(24)].reduce((times, i, hour) => {
+    const startTime = moment(`${today} ${start}`)
 
-      const displayHour = (hour > 12) ? (hour - 12) : (hour > 0 ? hour : 12)
+    const endTime = moment(`${today} 24:00`)
+
+    const steps = (endTime.diff(startTime) / 1000 / 60 / 60)  * (60 / increment)
+
+    const currTime = moment(`${today} ${start}`)
+
+    return [...Array(steps)].reduce((times, i) => {
+
+      const value = {
+        value: currTime.format('hh:mm:ss'),
+        text: currTime.format('hh:mm A'),
+        duration: currTime.diff(startTime) / 1000 / 60 / 60
+      }
+
+      currTime.add(increment, 'minutes')
 
       return [
         ...times,
-        ...[...Array(Math.floor(60 / increment))].map((j, index) => {
-
-          const displayMinute = index * increment
-
-          const displayAPM = (hour > 11) ? 'PM' : 'AM'
-
-          return  {
-            value: `${zeroPad(hour)}:${zeroPad(displayMinute)}:00`,
-            text: `${displayHour}:${zeroPad(displayMinute)} ${displayAPM}`
-          }
-
-        })
-
+        value
       ]
 
     }, [])
