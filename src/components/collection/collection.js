@@ -33,6 +33,7 @@ class Collection extends React.Component {
     ]),
     filter: PropTypes.object,
     filters: PropTypes.array,
+    footer: PropTypes.bool,
     handler: PropTypes.func,
     icon: PropTypes.string,
     layout: PropTypes.func,
@@ -153,11 +154,12 @@ class Collection extends React.Component {
       ...this.props.filter,
       q
     }
+    const footer = this.props.footer ? ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : '' : false
     return {
       cacheKey,
       endpoint,
       filter,
-      footer: ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : '',
+      footer,
       loading,
       empty: this._getEmpty(),
       failure,
