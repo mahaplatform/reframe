@@ -66,6 +66,12 @@ class Infinite extends React.Component<Props, void> {
     this._handleFetch(0)
   }
 
+  shouldComponentUpdate(nextProps: any, nextState: any): boolean {
+    return ['all','records','status','total'].reduce((update, key) => {
+      return update || !_.isEqual(this.props[key], nextProps[key])
+    }, false)
+  }
+
   componentDidUpdate(prevProps: Props): void {
     const { cacheKey, filter, records, selected, sort, status, onUpdateSelected } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
