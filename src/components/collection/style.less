@@ -126,12 +126,16 @@
   color: @white;
   cursor: pointer;
   padding: 0 0 0 0.5em;
-  i {
-    background-color: fadeout(@white, 50);
-    padding: 7.5px 10px;
-    border-radius: .5em 0 0 .5em;
-    color: #FFF;
-    margin-right: 1px;
+}
+.reframe-collection-header-tasks-button {
+  background-color: fadeout(@white, 50);
+  padding: 0.4em 0.6em;
+  border-radius: .5em 0 0 .5em;
+  color: #FFF;
+  margin-right: 1px;
+  line-height: 1em;
+  &:hover {
+    background-color: fadeout(@white, 40);
   }
 }
 .reframe-collection-loader {
