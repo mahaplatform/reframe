@@ -39,6 +39,10 @@ export class Results extends React.Component {
     modal: PropTypes.func,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
+    rowClass: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
+    ]),
     selectable: PropTypes.bool,
     selectAll: PropTypes.bool,
     selected: PropTypes.array,
@@ -58,7 +62,7 @@ export class Results extends React.Component {
   }
 
   _getTable() {
-    const { columns, handler, link, modal, records, recordTasks, selectAll, selectable, selected, sort, status, onLoadMore, onSelect, onSelectAll, onSort } = this.props
+    const { columns, handler, link, modal, records, recordTasks, rowClass, selectAll, selectable, selected, sort, status, onLoadMore, onSelect, onSelectAll, onSort } = this.props
     return {
       columns,
       handler,
@@ -66,6 +70,7 @@ export class Results extends React.Component {
       modal,
       records,
       recordTasks,
+      rowClass,
       selectAll,
       selectable,
       selected,

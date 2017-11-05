@@ -26,6 +26,7 @@ export type Props = {
   modal: Component,
   records: Array<Object>,
   recordTasks: Array<recordTask>,
+  rowClass: (record: Object) => string,
   selectAll?: boolean,
   selected?: Array<number>,
   selectable?: boolean,

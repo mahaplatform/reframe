@@ -67,7 +67,7 @@ class Infinite extends React.Component<Props, void> {
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any): boolean {
-    return ['all','records','status','total'].reduce((update, key) => {
+    return ['all','cacheKey','filter','records','sort','status','selected','total'].reduce((update, key) => {
       return update || !_.isEqual(this.props[key], nextProps[key])
     }, false)
   }

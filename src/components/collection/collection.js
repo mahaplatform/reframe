@@ -50,6 +50,10 @@ class Collection extends React.Component {
     q: PropTypes.string,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
+    rowClass: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
+    ]),
     search: PropTypes.bool,
     selected: PropTypes.array,
     selectable: PropTypes.bool,

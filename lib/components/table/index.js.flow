@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Format from "../../utils/format";
 import type {Props, State, Column} from "./types";
 import type {Node} from "../../types";
-declare export default class extends React$Component<{columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, selectAll?: boolean, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number}, {widths: Array<number>}> {
+declare export default class extends React$Component<{columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, rowClass: (record: Object) => string, selectAll?: boolean, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number}, {widths: Array<number>}> {
   static contextTypes: any;
   static defaultProps: {onSelect: (id: any) => void, onSelectAll: () => void};
 
@@ -27,7 +27,7 @@ declare export default class extends React$Component<{columns: Array<{format?: s
   _handleTasks(id: number): void;
   _resizeColumns(): void;
   componentDidMount(): void;
-  componentDidUpdate(prevProps: {columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, selectAll?: boolean, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number}): void;
+  componentDidUpdate(prevProps: {columns: Array<{format?: string, key: string, label: string, primary?: boolean, sort?: string, visible?: boolean}>, handler: (id: number) => void, link: string, managing?: boolean, modal: any, onLoadMore: () => void, onSelect: (id: number) => void, onSelectAll: () => void, onSort: (key: string) => void, recordTasks: Array<Object>, records: Array<Object>, rowClass: (record: Object) => string, selectAll?: boolean, selectable?: boolean, selected?: Array<number>, sort: {key: string, order: string}, total: number}): void;
   componentWillUnmount(): void;
   render(): any;
 }

@@ -37,7 +37,7 @@ class Table extends React.Component<Props, State> {
           <thead>
             <tr>
               { selectable &&
-                <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
+                <td className="reframe-table-check-cell" onClick={ this._handleSelectAll.bind(this) }>
                   { selectAll ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
                 </td>
               }
@@ -59,7 +59,7 @@ class Table extends React.Component<Props, State> {
           <thead>
             <tr ref={ (node) => this.head = node }>
               { selectable &&
-                <td className="reframe-table-check-cell mobile" onClick={ this._handleSelectAll.bind(this) }>
+                <td className="reframe-table-check-cell" onClick={ this._handleSelectAll.bind(this) }>
                   { selectAll ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
                 </td>
               }
@@ -80,7 +80,7 @@ class Table extends React.Component<Props, State> {
             { records.map((record, rowIndex) => (
               <tr key={ `record_${rowIndex}` } className={ this._getBodyRowClass(record) }>
                 { selectable &&
-                  <td key={`cell_${rowIndex}_select`} className="reframe-table-check-cell mobile" onClick={ this._handleSelect.bind(this, record.id) }>
+                  <td key={`cell_${rowIndex}_select`} className="reframe-table-check-cell" onClick={ this._handleSelect.bind(this, record.id) }>
                     { _.includes(selected, record.id) ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
                   </td>
                 }
@@ -133,14 +133,17 @@ class Table extends React.Component<Props, State> {
     if(column.primary === true) classes.push('mobile')
     if(column.format === 'check' || column.collapsing === true) classes.push('collapsing')
     if(column.format === 'check' || column.centered === true) classes.push('centered')
+    if(column.format === 'currency') classes.push('right')
     if(!_.isFunction(column.format) && !_.isElement(column.format)) classes.push('padded')
     return classes.join(' ')
   }
 
   _getBodyRowClass(record: Object): string {
-    const { link, modal, handler, selected } = this.props
+    const { link, modal, handler, rowClass } = this.props
     let classes = []
     if(link || modal || handler) classes.push('reframe-table-link')
+    if(rowClass && _.isString(rowClass)) classes.push(rowClass)
+    if(rowClass && _.isFunction(rowClass)) classes.push(rowClass(record))
     return classes.join(' ')
   }
 
