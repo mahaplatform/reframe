@@ -87,7 +87,8 @@
   flex: 1;
   .reframe-searchbox-input {
     background-color: fadeout(@white, 50);
-    margin: 0 .5em .5em .5em;
+    border-radius: 0 .5em .5em 0;
+    margin: 0 .5em .5em 0;
     input {
       color: fadeout(@white, 20) !important;
     }
@@ -120,12 +121,18 @@
 }
 .reframe-collection-header-tasks {
   position: relative;
-  display: flex;
   font-size: 1.25em;
   line-height: 1em;
   color: @white;
   cursor: pointer;
-  padding: 0.5em 1em 0.5em 0.5em;
+  padding: 0 0 0 0.5em;
+  i {
+    background-color: fadeout(@white, 50);
+    padding: 7.5px 10px;
+    border-radius: .5em 0 0 .5em;
+    color: #FFF;
+    margin-right: 1px;
+  }
 }
 .reframe-collection-loader {
   flex: 0 0 35.em;

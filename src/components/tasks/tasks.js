@@ -34,6 +34,9 @@ class Tasks extends React.Component<Props, void> {
               <Task key={`task_${index}`} { ...this._getTask(item) }/>
             )
           }) }
+          <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
+            Cancel
+          </div>
         </div>
       </CSSTransition>
     ])

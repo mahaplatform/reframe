@@ -24,14 +24,14 @@ class Header extends React.Component {
     }, 0)
     return (
       <div className="reframe-collection-header">
+        { (filters || this.props.export || tasks) &&
+          <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
+            <i className="fa fa-chevron-down" />
+          </div>
+        }
         { search &&
           <div className="reframe-collection-header-search">
             <Searchbox { ...this._getSearchbox() } />
-          </div>
-        }
-        { (filters || this.props.export || tasks) &&
-          <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
-            <i className="fa fa-sliders" />
           </div>
         }
       </div>
