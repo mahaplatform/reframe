@@ -24,18 +24,18 @@ class Header extends React.Component {
     }, 0)
     return (
       <div className="reframe-collection-header">
-        { (filters || this.props.export || tasks) &&
-          <div className="reframe-collection-header-tasks">
-            <div className="reframe-collection-header-tasks-button" onClick={ this._handleToggleTasks.bind(this) }>
+        <div className="reframe-collection-header-container">
+          { (filters || this.props.export || tasks) &&
+            <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
               <i className="fa fa-sliders" />
             </div>
-          </div>
-        }
-        { search &&
-          <div className="reframe-collection-header-search">
-            <Searchbox { ...this._getSearchbox() } />
-          </div>
-        }
+          }
+          { search &&
+            <div className="reframe-collection-header-search">
+              <Searchbox { ...this._getSearchbox() } />
+            </div>
+          }
+        </div>
       </div>
     )
   }

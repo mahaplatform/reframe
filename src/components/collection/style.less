@@ -82,13 +82,25 @@
 .reframe-collection-header {
   background-color: @primary_background_color;
   display: flex;
+  padding: 0 0.5em 0.5em;
+}
+.reframe-collection-header-container {
+  display: flex;
+  flex: 1;
+  & > div {
+    background-color: fadeout(@white, 50);
+    &:first-child {
+      border-radius: 0.5em 0 0 0.5em;
+    }
+    &:last-child {
+      border-radius: 0 0.5em 0.5em 0;
+    }
+  }
 }
 .reframe-collection-header-search {
   flex: 1;
   .reframe-searchbox-input {
-    background-color: fadeout(@white, 50);
-    border-radius: 0 .5em .5em 0;
-    margin: 0 .5em .5em 0;
+    margin: 0 !important;
     input {
       color: fadeout(@white, 20) !important;
     }
@@ -120,20 +132,17 @@
   }
 }
 .reframe-collection-header-tasks {
-  position: relative;
+  flex: 0 0 2em;
   font-size: 1.25em;
   line-height: 1em;
   color: @white;
   cursor: pointer;
-  padding: 0 0 0 0.5em;
-}
-.reframe-collection-header-tasks-button {
-  background-color: fadeout(@white, 50);
-  padding: 0.4em 0.6em;
-  border-radius: .5em 0 0 .5em;
+  display: flex;
   color: #FFF;
   margin-right: 1px;
-  line-height: 1em;
+  i {
+    margin: auto;
+  }
   &:hover {
     background-color: fadeout(@white, 40);
   }
