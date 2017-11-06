@@ -1,6 +1,6 @@
 // @flow
 
 import type {Component} from "../../types";
-export type Props = {defaultValue: any, endpoint: string, onBusy: () => void, onChange: (name: string, value: any) => void, onReady: () => void, options: Array<any>, text: string, type: any | string, value: string};
+export type Props = {defaultValue: any, endpoint: string, onBusy: () => void, onChange: (name: string, value: any) => void, onReady: () => void, options: Array<any>, tabIndex: number, text: string, type: any | string, value: string};
 
 declare module.exports: {};

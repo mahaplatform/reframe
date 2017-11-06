@@ -13,6 +13,7 @@ class TimeField extends React.Component {
     increment: PropTypes.number,
     prompt: PropTypes.string,
     start: PropTypes.string,
+    tabIndex: PropTypes.number,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -27,7 +28,8 @@ class TimeField extends React.Component {
     prompt: 'Choose a time',
     duration: false,
     increment: 15,
-    start: '12:00AM'
+    start: '12:00AM',
+    tabIndex: 0
   }
 
   render() {

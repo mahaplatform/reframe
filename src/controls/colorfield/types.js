@@ -15,6 +15,7 @@ export type Props = {
   colors: string,
   defaultValue: string,
   disabled: boolean,
+  tabIndex: number,
   onBusy: () => void,
   onChange: (value: string) => void,
   onReady: () => void,

@@ -9,6 +9,7 @@ class Checkbox extends React.Component<Props, State> {
   static defaultProps = {
     defaultValue: false,
     disabled: false,
+    tabIndex: 0,
     onBusy: () => {},
     onChange: (value: boolean): void => {},
     onReady: () => {}
@@ -19,9 +20,10 @@ class Checkbox extends React.Component<Props, State> {
   }
 
   render() {
+    const { tabIndex } = this.props
     return (
       <div className="reframe-checkbox">
-        <div className={ this._getClass() }>
+        <div className={ this._getClass() } tabIndex={ tabIndex }>
           <i className={ this._getToggleClass() } onClick={ this._handleChange.bind(this) } />
         </div>
       </div>

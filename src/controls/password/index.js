@@ -12,6 +12,7 @@ class Password extends React.Component {
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
+    tabIndex: PropTypes.number,
     onBlur: PropTypes.func,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
@@ -30,6 +31,7 @@ class Password extends React.Component {
     disabled: false,
     placeholder: '',
     defaultValue: '',
+    tabIndex: 0,
     onBlur: () => {},
     onBusy: () => {},
     onChange: () => {},
@@ -67,12 +69,13 @@ class Password extends React.Component {
 
   _getInput() {
     const { value } = this.state
-    const { autoComplete, placeholder, onBlur, onFocus, onKeyPress, onKeyUp, onKeyDown } = this.props
+    const { autoComplete, placeholder, tabIndex, onBlur, onFocus, onKeyPress, onKeyUp, onKeyDown } = this.props
     return {
       type: 'password',
       value,
       autoComplete,
       placeholder,
+      tabIndex,
       onChange: this._handleChange.bind(this),
       onBlur,
       onFocus,

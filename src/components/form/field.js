@@ -19,6 +19,7 @@ class Field extends React.Component {
     name: PropTypes.string.isRequired,
     options: PropTypes.array,
     required: PropTypes.bool,
+    tabIndex: PropTypes.number,
     type: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func

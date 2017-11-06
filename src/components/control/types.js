@@ -7,6 +7,7 @@ export type Props = {
   endpoint: string,
   defaultValue: any,
   options: Array<any>,
+  tabIndex: number,
   text: string,
   value: string,
   onBusy: () => void,

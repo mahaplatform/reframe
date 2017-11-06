@@ -9,6 +9,7 @@ class MoneyField extends React.Component {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     defaultValue: PropTypes.string,
+    tabIndex: PropTypes.number,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -17,6 +18,10 @@ class MoneyField extends React.Component {
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func
+  }
+
+  static defaultProps = {
+    tabIndex: 0
   }
 
   render() {

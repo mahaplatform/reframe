@@ -8,16 +8,21 @@ class Select extends React.Component {
     multiple: PropTypes.bool,
     options: PropTypes.array,
     selected: PropTypes.any,
+    tabIndex: PropTypes.number,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
     onReady: PropTypes.func,
     onSet: PropTypes.func
   }
 
+  static defaultProps = {
+    tabIndex: 0
+  }
+
   render() {
-    const { options } = this.props
+    const { options, tabIndex } = this.props
     return (
-      <div className="reframe-select">
+      <div className="reframe-select" tabIndex={ tabIndex }>
         { options.map((option, index) => (
           <div className={ this._getClass(option) } key={`option_${index}`} onClick={ this._handleClick.bind(this, option.value) }>
             <div className="reframe-select-option-icon">

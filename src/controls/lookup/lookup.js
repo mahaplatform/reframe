@@ -29,6 +29,7 @@ class Lookup extends React.Component {
     selected: PropTypes.number,
     sort: PropTypes.string,
     status: PropTypes.string,
+    tabIndex: PropTypes.number,
     text: PropTypes.string,
     value: PropTypes.string,
     onBegin: PropTypes.func,
@@ -50,6 +51,7 @@ class Lookup extends React.Component {
     disabled: false,
     format: ValueToken,
     search: true,
+    tabIndex: 0,
     text: 'text',
     value: 'value',
     onBusy: () => {},
@@ -58,10 +60,10 @@ class Lookup extends React.Component {
   }
 
   render() {
-    const { active, adding, chosen, format, prompt, text } = this.props
+    const { active, adding, chosen, format, prompt, tabIndex, text } = this.props
     const value = chosen ? _.get(chosen, text) : ''
     return (
-      <div className="reframe-lookup-field">
+      <div className="reframe-lookup-field" tabIndex={ tabIndex }>
         { chosen &&
           <div className="reframe-lookup-token" onClick={ this._handleBegin.bind(this) }>
             <Format { ...chosen } format={ format } value={ value } />
@@ -73,8 +75,8 @@ class Lookup extends React.Component {
           </div>
         }
         { !chosen &&
-          <div className="ui input">
-            <input type="text" onFocus={ this._handleBegin.bind(this) } placeholder={ prompt } />
+          <div className="reframe-lookup-field-prompt" onClick={ this._handleBegin.bind(this) }>
+            { prompt }
           </div>
         }
         <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>

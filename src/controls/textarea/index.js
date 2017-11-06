@@ -9,6 +9,8 @@ class TextArea extends React.Component {
     disabled: PropTypes.bool,
     maxLength: PropTypes.number,
     placeholder: PropTypes.string,
+    rows: PropTypes.number,
+    tabIndex: PropTypes.number,
     onBusy: PropTypes.func,
     onChange: PropTypes.func,
     onReady: PropTypes.func
@@ -20,6 +22,7 @@ class TextArea extends React.Component {
     maxLength: null,
     placeholder: '',
     rows: 5,
+    tabIndex: 0,
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {}
@@ -51,13 +54,14 @@ class TextArea extends React.Component {
   }
 
   _getTextarea() {
-    const { placeholder, disabled, rows } = this.props
+    const { placeholder, disabled, rows, tabIndex } = this.props
     const { value } = this.state
     return {
       placeholder,
       disabled,
       defaultValue: value,
       rows,
+      tabIndex,
       onChange: this._handleChange.bind(this)
     }
   }

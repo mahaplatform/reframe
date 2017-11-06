@@ -90,7 +90,7 @@ class Form extends React.Component {
             <div className={ this._getFormClasses() }>
               { !configuring &&
                 config.map((section, index) => (
-                  <Section key={`section_${index}`} { ...this._getSection(section) } />
+                  <Section key={`section_${index}`} { ...this._getSection(section, index) } />
                 ))
               }
             </div>
@@ -138,7 +138,7 @@ class Form extends React.Component {
     return saveClasses.join(' ')
   }
 
-  _getSection(section) {
+  _getSection(section, index) {
     const { data, errors } = this.props
     return {
       ...section,

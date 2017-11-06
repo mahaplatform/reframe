@@ -13,6 +13,7 @@ class TextField extends React.Component {
     prefix: PropTypes.string,
     sanitize: PropTypes.func,
     suffix: PropTypes.string,
+    tabIndex: PropTypes.number,
     trim: PropTypes.bool,
     validate: PropTypes.func,
     onBlur: PropTypes.func,
@@ -35,6 +36,7 @@ class TextField extends React.Component {
     prefix: null,
     sanitize: (value) => value,
     suffix: null,
+    tabIndex: 0,
     trim: true,
     validate: (value) => true,
     onBlur: () => {},
@@ -85,9 +87,10 @@ class TextField extends React.Component {
   }
 
   _getControl() {
-    const { autoComplete, disabled, placeholder, onBlur, onFocus, onKeyPress, onKeyDown } = this.props
+    const { autoComplete, disabled, placeholder, tabIndex, onBlur, onFocus, onKeyPress, onKeyDown } = this.props
     const { value } = this.state
     return {
+      tabIndex,
       type: 'text',
       disabled,
       value,

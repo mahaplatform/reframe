@@ -21,6 +21,7 @@ class FileField extends React.Component {
     prompt: PropTypes.string,
     status: PropTypes.string,
     token: PropTypes.string,
+    tabIndex: PropTypes.number,
     onAddFile: PropTypes.func,
     onChange: PropTypes.func,
     onChangeFile: PropTypes.func,
@@ -41,8 +42,9 @@ class FileField extends React.Component {
     defaultValue: null,
     disabled: false,
     multiple: false,
-    prompt: 'Choose File',
     multiplePrompt: 'Choose Another File',
+    prompt: 'Choose File',
+    tabIndex: 0,
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
@@ -54,11 +56,11 @@ class FileField extends React.Component {
   }
 
   render() {
-    const { files, multiple, multiplePrompt, prompt, status } = this.props
+    const { files, multiple, multiplePrompt, prompt, status, tabIndex } = this.props
     const { preview } = this.state
-    let classes = ['filefield', status]
+    let classes = ['reframe-filefield', status]
     return (
-      <div className={classes.join(' ')}>
+      <div className={classes.join(' ')} tabIndex={ tabIndex }>
         <div className="reframe-filefield-tokens">
           { files.map((file, index) => (
             <div key={`filefield_${index}`} className="reframe-filefield-token">
