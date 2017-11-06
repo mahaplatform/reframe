@@ -67,7 +67,7 @@ class TimeField extends React.Component {
 
     const currTime = moment(`${today} ${start}`)
 
-    return [...Array(steps)].reduce((times, i) => {
+    return Array.apply(null, { length: steps }).reduce((times, i) => {
 
       const value = {
         value: currTime.format('HH:mm:ss'),

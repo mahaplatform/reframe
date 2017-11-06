@@ -22,7 +22,7 @@
     "npm": ">= 3.7npm list graceful-fs"
   },
   "peerDependencies": {
-    "react": "^15.x || ^16.x",
+    "react": "^16.x",
     "react-redux": "^5.x",
     "react-router-dom": "^4.x",
     "react-transition-group": "2.x",
@@ -48,9 +48,8 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^3.3.0",
     "nyc": "^11.1.0",
-    "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0",
-    "react-dom": "^15.6.1",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.0",
