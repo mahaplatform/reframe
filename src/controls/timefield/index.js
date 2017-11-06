@@ -27,7 +27,7 @@ class TimeField extends React.Component {
     prompt: 'Choose a time',
     duration: false,
     increment: 15,
-    start: '0:00'
+    start: '12:00AM'
   }
 
   render() {
@@ -59,13 +59,13 @@ class TimeField extends React.Component {
 
     const today = moment().format('YYYY-MM-DD')
 
-    const startTime = moment(`${today} ${start}`)
+    const startTime = moment(`${today} ${start}`, 'YYYY-MM-DD HH:mm')
 
-    const endTime = moment(`${today} 24:00`)
+    const endTime = moment(`${today} 24:00`, 'YYYY-MM-DD HH:mm')
 
     const steps = (endTime.diff(startTime) / 1000 / 60 / 60)  * (60 / increment)
 
-    const currTime = moment(`${today} ${start}`)
+    const currTime = moment(`${today} ${start}`, 'YYYY-MM-DD HH:mm')
 
     return Array.apply(null, { length: steps }).reduce((times, i) => {
 
