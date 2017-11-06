@@ -132,7 +132,7 @@ body {
   })
 }
 .translate-x-transition(@start, @end, @duration) {
-  .transition(transform @duration cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  .transition(transform @duration ease-in-out 0s);
   .expanded({
     .translateX(@start);
   }, {
@@ -140,7 +140,7 @@ body {
   })
 }
 .translate-y-transition(@start, @end, @duration) {
-  .transition(transform @duration cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  .transition(transform @duration ease-in-out 0s);
   .expanded({
     .translateY(@start);
   }, {

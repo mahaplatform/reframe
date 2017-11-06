@@ -277,3 +277,42 @@
     display: none;
   }
 }
+
+.reframe-collection-footer {
+  .translate-y-transition(100%, 0, .15s);
+  flex: 0 0 4em;
+  display: flex;
+  background-color: @black;
+  padding: 0 0.5em;
+  button.ui.button {
+    &.disabled,
+    &:disabled {
+      opacity: 1 !important;
+      position: relative;
+      overflow: hidden;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: fadeout(@white, 30);
+      }
+    }
+  }
+}
+.reframe-collection-footer-items {
+  margin: auto;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+}
+.reframe-collection-footer-item {
+  flex: 1;
+  display: flex;
+  padding: 0 0.5em;
+  & > * {
+    margin: auto !important;
+  }
+}

@@ -39,6 +39,7 @@ export type State = {
 export type Props = {
   className?: string,
   drawer: Component,
+  disabled?: boolean,
   handler: () => void,
   icon?: string,
   label: string,

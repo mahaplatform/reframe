@@ -1,6 +1,8 @@
+import { CSSTransition } from 'react-transition-group'
 import { Empty, Results } from './results'
 import Infinite from '../infinite'
 import PropTypes from 'prop-types'
+import Buttons from './buttons'
 import Header from './header'
 import Tasks from './tasks'
 import React from 'react'
@@ -15,6 +17,10 @@ class Collection extends React.Component {
   }
 
   static propTypes = {
+    buttons: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.array
+    ]),
     cacheKey: PropTypes.string,
     columns: PropTypes.array,
     data: PropTypes.array,
@@ -83,13 +89,16 @@ class Collection extends React.Component {
   }
 
   render() {
-    const { endpoint, records } = this.props
+    const { buttons, endpoint, records } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
           <Header { ...this._getHeader() } />
           { records && <Results { ...this._getResuts() } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
+          <CSSTransition in={ !_.isNil(buttons) && !_.isNil(buttons(this.props)) } classNames="expanded" timeout={ 150 } mountOnEnter={ true } unmountOnExit={ true }>
+            <Buttons { ...this._getButtons() } />
+          </CSSTransition>
         </div>
         <div className="reframe-collection-canvas" onClick={ this._handleToggleTasks.bind(this) } />
         <Tasks { ...this._getTasks() } />
@@ -140,6 +149,13 @@ class Collection extends React.Component {
       tasks,
       onSetQuery,
       onToggleTasks
+    }
+  }
+
+  _getButtons() {
+    if(!this.props.buttons) return { buttons: null }
+    return {
+      buttons: this.props.buttons(this.props)
     }
   }
 

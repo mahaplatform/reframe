@@ -17,6 +17,7 @@ class Task extends React.Component<Props, void> {
   }
 
   static defaultProps = {
+    disabled: false,
     onDone: () => {}
   }
 
@@ -38,7 +39,8 @@ class Task extends React.Component<Props, void> {
   }
 
   _handleChoose(index: number): void {
-    const { drawer, handler, location, modal, request, route } = this.props
+    const { disabled, drawer, handler, location, modal, request, route } = this.props
+    if(disabled) return
     if(route) this._handleRoute(route)
     if(request) this._handleRequest(request)
     if(modal) this._handleModal(modal)
