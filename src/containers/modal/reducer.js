@@ -1,38 +1,42 @@
-// @flow
-
-import type { Open, Close, Clear, Action, State } from './types'
-
-const INITIAL_STATE: State = {
-  component: null,
-  open: false
+const INITIAL_STATE = {
+  panels: []
 }
 
-const open = (state: State, action: Open): State => ({
-  component: action.component,
-  open: true
+const open = (state, action) => ({
+  panels: [action.component]
 })
 
-const close = (state: State, action: Close): State => ({
+const close = (state, action) => ({
   ...state,
-  open: false
+  panels: []
 })
 
-const clear = (state: State, action: Clear): State => ({
-  ...INITIAL_STATE
+const pop = (state, action) => ({
+  panels: state.panels.slice(0, 0 - action.num)
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const push = (state, action) => ({
+  panels: [
+    ...state.panels,
+    action.component
+  ]
+})
+
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
-
-  case 'OPEN':
-    return open(state, action)
 
   case 'CLOSE':
     return close(state, action)
 
-  case 'CLEAR':
-    return clear(state, action)
+  case 'OPEN':
+    return open(state, action)
+
+  case 'POP':
+    return pop(state, action)
+
+  case 'PUSH':
+    return push(state, action)
 
   default:
     return state

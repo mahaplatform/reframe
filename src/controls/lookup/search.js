@@ -4,6 +4,10 @@ import Options from './options'
 
 class Search extends React.Component {
 
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
   static propTypes = {
     label: PropTypes.string,
     selected: PropTypes.number,
@@ -32,6 +36,7 @@ class Search extends React.Component {
 
   _handleCancel() {
     this.props.onEnd()
+    this.context.modal.pop()
   }
 
 }

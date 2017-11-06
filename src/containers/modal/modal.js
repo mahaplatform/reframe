@@ -1,56 +1,84 @@
-// @flow
-
-import type { Component, Node } from '../../types'
-import type { Props, ChildContext } from './types'
-
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import _ from 'lodash'
 
-class Modal extends React.Component<Props, void> {
+class Modal extends React.Component {
 
   static childContextTypes = {
     modal: PropTypes.object
   }
 
-  render(): Node {
-    const { children, component, open } = this.props
+  static propTypes = {
+    panels: PropTypes.array,
+    onClose: PropTypes.func,
+    onOpen: PropTypes.func,
+    onPop: PropTypes.func,
+    onPush: PropTypes.func
+  }
+
+  state = {
+    panels: []
+  }
+
+  render() {
+    const { panels } = this.props
+    const { children } = this.props
     return ([
       children,
-      <CSSTransition key="reframe-modal-overlay" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="reframe-modal-overlay" in={ panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} />
       </CSSTransition>,
-      <CSSTransition key="reframe-modal-window" in={ open } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="reframe-modal-window" in={ panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-modal-window">
-          { _.isFunction(component) ? React.createElement(component) : component }
+          <TransitionGroup>
+            { panels.map((panel, index) => (
+              <CSSTransition classNames={ index > 0 ? 'stack' : ''} timeout={ 500 } key={ `panel_${index}` }>
+                <div>
+                  { _.isFunction(panel) ? React.createElement(panel) : panel }
+                </div>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </div>
       </CSSTransition>
     ])
   }
 
-  componentDidUpdate(prevProps: Props): void {
-    const { open, onClear } = this.props
-    if(open !== prevProps.open && !open) {
-      setTimeout(onClear, 500)
-    }
+  componentDidUpdate(prevProps, prevState) {
+    const { panels } = this.props
+    // if(panels.length > prevProps.panels.length) {
+    //   this.setState({ panels })
+    // } else if(panels.length < prevProps.panels.length) {
+    //   setTimeout(() => this.setState({ panels }), 500)
+    // }
   }
 
-  getChildContext(): ChildContext {
+  getChildContext() {
     return {
       modal: {
+        close: this._handleClose.bind(this),
         open: this._handleOpen.bind(this),
-        close: this._handleClose.bind(this)
+        pop: this._handlePop.bind(this),
+        push: this._handlePush.bind(this)
       }
     }
   }
 
-  _handleOpen(component: Component): void {
+  _handleClose() {
+    this.props.onClose()
+  }
+
+  _handleOpen(component) {
     this.props.onOpen(component)
   }
 
-  _handleClose(): void {
-    this.props.onClose()
+  _handlePop(num = 1) {
+    this.props.onPop(num)
+  }
+
+  _handlePush(component) {
+    this.props.onPush(component)
   }
 
 }

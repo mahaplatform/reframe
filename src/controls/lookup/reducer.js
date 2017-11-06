@@ -63,6 +63,7 @@ export default (state = INITIAL_VALUE, action) => {
   case 'HIDE_FORM':
     return {
       ...state,
+      active: false,
       adding: false
     }
   default:
