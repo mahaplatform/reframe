@@ -5,6 +5,7 @@ import type { Node } from '../../types'
 
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
+import { digest } from 'json-hash'
 import Dynamic from './dynamic'
 import Options from './options'
 import React from 'react'
@@ -22,7 +23,6 @@ class Search extends React.Component<Props, void> {
           <Infinite {...this._getInfinite()} />
         </div>
       </div>
-
     )
   }
 
@@ -40,8 +40,10 @@ class Search extends React.Component<Props, void> {
   }
 
   _getInfinite(): InfiniteProps {
-    const { endpoint, sort, q } = this.props
+    const { endpoint, q, results, sort } = this.props
+    const cacheKey = digest(results)
     return {
+      cacheKey,
       endpoint,
       filter: { q },
       layout: (props: DynamicProps) => <Dynamic { ...this._getDynamic() } { ...props } />,

@@ -3,6 +3,7 @@
 import React from "react";
 import Options from "./options";
 import Dynamic from "./dynamic";
+import {digest} from "json-hash";
 import Infinite from "../infinite";
 import Searchbox from "../searchbox";
 import type {Node} from "../../types";
