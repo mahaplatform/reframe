@@ -5,7 +5,7 @@
 }
 .reframe-filefield-tokens {
   overflow: hidden;
-  .reframe-filefield-token {
+  .field .reframe-filefield-token {
     @media (max-width: 414px) {
       width: 100%;
       margin-right: none;
@@ -16,15 +16,9 @@
         margin-right: none;
       }
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
+    @media (min-width: 769px) {
       width: ~"calc(100% / 3 - 0.8em * 2)";
       &:nth-child(3n+3) {
-        margin-right: none;
-      }
-    }
-    @media (min-width: 1025px) {
-      width: ~"calc(100% / 4 - 0.8em * 3)";
-      &:nth-child(4n+4) {
         margin-right: none;
       }
     }
@@ -72,7 +66,6 @@
   left: 0;
   right: 0;
   padding: .8em;
-  background: rgba(0,0,0,.6);
 }
 .reframe-filefield-caption-text {
   color: #FFF !important;

@@ -13,6 +13,7 @@ class FileField extends React.Component {
       PropTypes.number,
       PropTypes.array
     ]),
+    button: PropTypes.element,
     disabled: PropTypes.bool,
     endpoint: PropTypes.string,
     files: PropTypes.array,
@@ -56,7 +57,7 @@ class FileField extends React.Component {
   }
 
   render() {
-    const { files, multiple, multiplePrompt, prompt, status, tabIndex } = this.props
+    const { button, files, multiple, multiplePrompt, prompt, status, tabIndex } = this.props
     const { preview } = this.state
     let classes = ['reframe-filefield', status]
     return (
@@ -80,9 +81,6 @@ class FileField extends React.Component {
                 }
                 { file.status === 'success' && <Preview file={ file } preview={ preview } /> }
                 <div className="reframe-filefield-caption">
-                  <div className="reframe-filefield-caption-text">
-                    { file.fileName } ({ bytes(file.fileSize, { decimalPlaces: 2, unitSeparator: ' ' }).toUpperCase() })
-                  </div>
                   <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, file.uniqueIdentifier) }>
                     <i className="remove circle icon" />
                   </div>
@@ -92,20 +90,28 @@ class FileField extends React.Component {
           )) }
         </div>
         { status === 'ready' && (files.length === 0 || multiple === true) &&
-          <div ref={ (node) => this.button = node } className="ui browse button">
-            { files.length === 0 ? prompt :  multiplePrompt }
+          <div ref={ (node) => this.button = node }>
+            { button ? button :
+              <div className="ui browse button">
+                { files.length === 0 ? prompt :  multiplePrompt }
+              </div>
+            }
           </div>
         }
       </div>
     )
   }
 
+  _getButton() {
+
+  }
+
   componentDidMount() {
-    const { endpoint, defaultValue, onLoadFiles, onSetReady } = this.props
+    const { endpoint, defaultValue, token, onLoadFiles, onSetReady } = this.props
     if(!defaultValue) return onSetReady()
     const ids = !_.isArray(defaultValue) ? [defaultValue] : defaultValue
     if(ids.length === 0) return onSetReady()
-    onLoadFiles(endpoint, ids)
+    onLoadFiles(endpoint, token, ids)
   }
 
   componentDidUpdate(prevProps) {

@@ -16,7 +16,11 @@ class Select extends React.Component {
   }
 
   static defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
+    onBusy: () => {},
+    onChange: () => {},
+    onReady: () => {},
+    onSubmit: (selected) => {}
   }
 
   render() {
@@ -25,11 +29,13 @@ class Select extends React.Component {
       <div className="reframe-select" tabIndex={ tabIndex }>
         { options.map((option, index) => (
           <div className={ this._getClass(option) } key={`option_${index}`} onClick={ this._handleClick.bind(this, option.value) }>
-            <div className="reframe-select-option-icon">
-              <i className={`fa fa-fw fa-${option.icon}`} />
-            </div>
+            { option.icon &&
+              <div className="reframe-select-option-icon">
+                <i className={`fa fa-fw fa-${option.icon}`} />
+              </div>
+            }
             <div className="reframe-select-option-label">
-              <strong>{ option.title }</strong><br />
+              { option.title && <strong>{ option.title }<br /></strong> }
               { option.text }
             </div>
           </div>
