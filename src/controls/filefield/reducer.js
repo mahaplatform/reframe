@@ -96,12 +96,11 @@ export default (state = INITIAL_VALUE, action) => {
     }
 
   case 'REMOVE_FILE':
-    const index = _.findIndex(state.files, file => { return file.uniqueIdentifier === action.uniqueIdentifier })
     return {
       ...state,
       files: [
-        ...state.files.slice(0, index),
-        ...state.files.slice(index + 1)
+        ...state.files.slice(0, action.index),
+        ...state.files.slice(action.index + 1)
       ]
     }
 

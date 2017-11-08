@@ -42,9 +42,9 @@ export const uploadFailure = () => ({
   type: 'UPLOAD_FAILURE'
 })
 
-export const removeFile = (uniqueIdentifier) => ({
+export const removeFile = (index) => ({
   type: 'REMOVE_FILE',
-  uniqueIdentifier
+  index
 })
 
 export const uploadComplete = () => ({

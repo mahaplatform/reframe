@@ -1,7 +1,6 @@
 import Resumable from 'resumablejs'
 import PropTypes from 'prop-types'
 import Preview from './preview'
-import bytes from 'bytes'
 import React from 'react'
 import _ from 'lodash'
 
@@ -23,6 +22,10 @@ class FileField extends React.Component {
     status: PropTypes.string,
     token: PropTypes.string,
     tabIndex: PropTypes.number,
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.array
+    ]),
     onAddFile: PropTypes.func,
     onChange: PropTypes.func,
     onChangeFile: PropTypes.func,
@@ -81,7 +84,7 @@ class FileField extends React.Component {
                 }
                 { file.status === 'success' && <Preview file={ file } preview={ preview } /> }
                 <div className="reframe-filefield-caption">
-                  <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, file.uniqueIdentifier) }>
+                  <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, index) }>
                     <i className="remove circle icon" />
                   </div>
                 </div>
@@ -102,10 +105,6 @@ class FileField extends React.Component {
     )
   }
 
-  _getButton() {
-
-  }
-
   componentDidMount() {
     const { endpoint, defaultValue, token, onLoadFiles, onSetReady } = this.props
     if(!defaultValue) return onSetReady()
@@ -115,11 +114,12 @@ class FileField extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { files, status, onReady } = this.props
+    const { files, status, value, onChange, onReady } = this.props
     if(status !== prevProps.status) {
       if(prevProps.status === 'pending') onReady()
       if(status === 'ready') this._initializeResumable()
     }
+    if(!_.isEqual(value, prevProps.value)) onChange(value)
     if(files.length > prevProps.files.length) {
       if(files.filter(file => file.status === 'added').length > 0) {
         this._handleUploadBegin()
@@ -145,7 +145,10 @@ class FileField extends React.Component {
     this.resumable.on('fileSuccess', this._handleUploadSuccess.bind(this))
     this.resumable.on('error', this._handleUploadFailure.bind(this))
     this.resumable.on('complete', this._handleUploadComplete.bind(this))
-    if(multiple || (!multiple && files.length === 0)) this.resumable.assignBrowse(this.button)
+    if(multiple || (!multiple && files.length === 0)) {
+      this.resumable.assignBrowse(this.button)
+      this.resumable.assignDrop(this.button)
+    }
   }
 
   _handleFileAdded(file) {
@@ -181,17 +184,16 @@ class FileField extends React.Component {
     this.props.onBusy()
   }
 
-  _handleRemoveFile(uniqueIdentifier) {
-    const file = this.resumable.getFromUniqueIdentifier(uniqueIdentifier)
-    this.resumable.removeFile(file)
-    this.props.onRemoveFile(uniqueIdentifier)
+  _handleRemoveFile(index) {
+    const file = this.props.files[index]
+    this.props.onRemoveFile(index)
+    if(!file.uniqueIdentifier) return
+    const resumableFile = this.resumable.getFromUniqueIdentifier(file.uniqueIdentifier)
+    this.resumable.removeFile(resumableFile)
   }
 
   _handleUploadComplete() {
-    const { files, multiple } = this.props
     this.props.onUploadComplete()
-    const value = multiple ? files.map(file => file.asset.id) : files[0].asset.id
-    this.props.onChange(value)
   }
 
 }

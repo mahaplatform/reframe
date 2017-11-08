@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import _ from 'lodash'
 
 const recordsSelector = (state, props) => state.records
 
