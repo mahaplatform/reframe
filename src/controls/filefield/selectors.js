@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 const filesSelector = (state, props) => state.files
 
-const multipleSelector = (state, props) => state.multiple
+const multipleSelector = (state, props) => props.multiple
 
 export const value = createSelector(
   filesSelector,
