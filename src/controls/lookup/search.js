@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Options from './options'
+import { connect } from 'react-redux'
 
 class Search extends React.Component {
 
@@ -40,5 +41,10 @@ class Search extends React.Component {
   }
 
 }
+// since we sent this component up to the modal, we need this to communicate
+// back with the parent
+const mapStateToProps = (state, props) => ({
+  q: state.reframe.lookup[props.cid].q
+})
 
-export default Search
+export default connect(mapStateToProps)(Search)
