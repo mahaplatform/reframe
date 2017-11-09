@@ -20,14 +20,14 @@ class Search extends React.Component {
     return (
       <div className="reframe-modal-panel">
        <div className="reframe-modal-panel-header">
-         <div className="reframe-modal-panel-header-cancel" onClick={ this._handleCancel.bind(this) }>
+         <div className="reframe-modal-panel-header-navigation" onClick={ this._handleCancel.bind(this) }>
            <i className="chevron left icon" />
            Cancel
          </div>
          <div className="reframe-modal-panel-header-title">
            Choose {label}
          </div>
-         <div className="reframe-modal-panel-header-proceed" />
+         <div className="reframe-modal-panel-header-navigation" />
        </div>
        <Options { ...this.props } />
      </div>

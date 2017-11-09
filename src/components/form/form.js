@@ -69,7 +69,7 @@ class Form extends React.Component {
     return (
       <div className="reframe-modal-panel">
         <div className="reframe-modal-panel-header">
-          <div className="reframe-modal-panel-header-cancel" onClick={ this._handleCancel.bind(this) }>
+          <div className="reframe-modal-panel-header-navigation" onClick={ this._handleCancel.bind(this) }>
             Cancel
           </div>
           <div className="reframe-modal-panel-header-title">
@@ -133,7 +133,7 @@ class Form extends React.Component {
 
   _getButtonClasses() {
     const { isBusy } = this.props
-    let saveClasses = ['reframe-modal-panel-header-proceed']
+    let saveClasses = ['reframe-modal-panel-header-navigation']
     if(isBusy) saveClasses.push('disabled')
     return saveClasses.join(' ')
   }
