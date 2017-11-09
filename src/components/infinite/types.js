@@ -66,6 +66,7 @@ export type Props = {
   delayed?: Component,
   empty?: Component,
   endpoint: string,
+  exclude_ids?: Array<number>,
   failure?: Component,
   filter?: Filter,
   footer?: Component,

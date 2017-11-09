@@ -67,17 +67,17 @@ class Infinite extends React.Component<Props, void> {
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any): boolean {
-    return ['all','cacheKey','filter','records','sort','status','selected','total'].reduce((update, key) => {
+    return ['all','cacheKey','exclude_ids','filter','records','sort','status','selected','total'].reduce((update, key) => {
       return update || !_.isEqual(this.props[key], nextProps[key])
     }, false)
   }
 
   componentDidUpdate(prevProps: Props): void {
-    const { cacheKey, filter, records, selected, sort, status, onUpdateSelected } = this.props
+    const { cacheKey, exclude_ids, filter, records, selected, sort, status, onUpdateSelected } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
       clearTimeout(this.timeout)
     }
-    if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
+    if(cacheKey !== prevProps.cacheKey || !_.isEqual(prevProps.exclude_ids, exclude_ids)  || !_.isEqual(prevProps.filter, filter) || !_.isEqual(prevProps.sort, sort)) {
       this._handleFetch(0)
     }
     if(selected !== prevProps.selected && selected && records) {
@@ -97,12 +97,13 @@ class Infinite extends React.Component<Props, void> {
   }
 
   _handleFetch(skip: ?number = null): void {
-    const { endpoint, filter, records, sort, total, onFetch } = this.props
+    const { endpoint, exclude_ids, filter, records, sort, total, onFetch } = this.props
     const loaded = records ? records.length : 0
     const query = {
       $page: { skip: skip !== null ? skip : loaded },
       ...(filter ? { $filter: filter } : {}),
-      ...(sort && sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {})
+      ...(sort && sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {}),
+      ...(exclude_ids ? { $exclude_ids: exclude_ids } : {})
     }
     if(onFetch && (skip === 0 || total === null || total === undefined || loaded < total)) onFetch(endpoint, query)
     this.timeout = setTimeout(this._handleDelay.bind(this), 3000)
