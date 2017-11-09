@@ -1,6 +1,0 @@
-// @flow
-
-import type {Options, Open, Close, Clear} from "./types";
-declare export function clear(): {type: "CLEAR"};
-declare export function close(): {type: "CLOSE"};
-declare export function open(message: string, options: Array<Object>): {message: string, options: Array<Object>, type: "OPEN"};

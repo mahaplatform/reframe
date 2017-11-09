@@ -30,22 +30,26 @@
     left: 50%;
     margin-left: -160px;
   }
-  .reframe-prompt-header {
+  .reframe-prompt-title {
     .border-radius(5px 5px 0 0);
     border-bottom: 1px solid fadeout(@black, 90);
     display: block;
-    padding: 15px;
+    padding: 0.8em;
     background-color: fadeout(@black, 92);
     color: fadeout(@black, 50);
-    strong {
-      color: @black;
-    }
+    text-align: center;
+  }
+  .reframe-prompt-message {
+    display: block;
+    padding: 0.8em;
+    text-align: center;
+    border-bottom: 1px solid fadeout(@black, 90);
   }
   .reframe-prompt-item,
   .reframe-prompt-cancel {
     .hover(background-color, fadeout(@black, 98));
     display: block;
-    padding: 15px;
+    padding: 0.8em;
     text-align: center;
     color: #1e70bf;
     cursor: pointer;

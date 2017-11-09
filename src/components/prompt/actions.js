@@ -1,17 +1,14 @@
-// @flow
-
-import type { Options, Open, Close, Clear } from './types'
-
-export const open = (message: string, options: Options): Open => ({
+export const open = (title, message, options) => ({
   type: 'OPEN',
+  title,
   message,
   options
 })
 
-export const close = (): Close => ({
+export const close = () => ({
   type: 'CLOSE'
 })
 
-export const clear = (): Clear => ({
+export const clear = () => ({
   type: 'CLEAR'
 })
