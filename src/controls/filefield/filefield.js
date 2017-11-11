@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Preview from './preview'
 import React from 'react'
 import _ from 'lodash'
+import qs from 'qs'
 
 class FileField extends React.Component {
 
@@ -22,11 +23,13 @@ class FileField extends React.Component {
     status: PropTypes.string,
     token: PropTypes.string,
     tabIndex: PropTypes.number,
+    transforms: PropTypes.array,
     value: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.array
     ]),
     onAddFile: PropTypes.func,
+    onCache: PropTypes.func,
     onChange: PropTypes.func,
     onChangeFile: PropTypes.func,
     onLoadFiles: PropTypes.func,
@@ -60,7 +63,7 @@ class FileField extends React.Component {
   }
 
   render() {
-    const { button, files, multiple, multiplePrompt, prompt, status, tabIndex } = this.props
+    const { button, files, multiple, multiplePrompt, prompt, status, transforms, tabIndex } = this.props
     const { preview } = this.state
     let classes = ['reframe-filefield', status]
     return (
@@ -74,7 +77,7 @@ class FileField extends React.Component {
                 }
                 { file.status === 'uploading' &&
                   <div className="reframe-filefield-progress">
-                    { preview && <Preview file={ file } preview={ preview } /> }
+                    { preview && <Preview file={ file } preview={ preview } transforms={ transforms } /> }
                     <div className="ui green progress">
                       <div className="bar" style={{ width: `${file.progress}%`}}>
                         <div className="progress">{ file.progress }%</div>
@@ -82,7 +85,7 @@ class FileField extends React.Component {
                     </div>
                   </div>
                 }
-                { file.status === 'success' && <Preview file={ file } preview={ preview } /> }
+                { file.status === 'success' && <Preview file={ file } preview={ preview } transforms={ transforms } /> }
                 <div className="reframe-filefield-caption">
                   <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, index) }>
                     <i className="remove circle icon" />

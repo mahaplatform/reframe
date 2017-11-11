@@ -13,6 +13,12 @@ export const loadFiles = (endpoint, token, $ids) => ({
   failure: 'LOAD_FILES_FAILURE'
 })
 
+export const cache = (endpoint) => ({
+  type: 'API_REQUEST',
+  method: 'GET',
+  endpoint
+})
+
 export const addFile = (uniqueIdentifier, fileName, fileSize, contentType, totalChunks) => ({
   type: 'ADD_FILE',
   uniqueIdentifier,
