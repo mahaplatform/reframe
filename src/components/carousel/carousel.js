@@ -30,7 +30,7 @@ class Carousel extends React.Component {
     return (
       <div className="reframe-carousel">
         { total > 0 &&
-          <div { ... this._getTheatre() }>
+          <div { ...this._getTheatre() }>
             { total > 1 &&
               <div className="reframe-carousel-previous" onClick={ this._handlePrevious.bind(this) }>
                 <i className="fa fa-fw fa-chevron-left" />
@@ -67,7 +67,10 @@ class Carousel extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { active } = this.props
+    const { active, slides, onSetTotal } = this.props
+    if(slides.length !== prevProps.slides.length) {
+      onSetTotal(slides.length)
+    }
     if(active != prevProps.active) {
       setTimeout(() => this.setState({ transitioning: true }), 100)
       setTimeout(() => this.setState({ active, transitioning: false }), 600)
