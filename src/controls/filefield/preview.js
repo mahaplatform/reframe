@@ -11,7 +11,7 @@ const Preview = ({ file, preview, transforms }) => (
     }
     { file.asset &&
       <div className="reframe-filefield-preview-cache">
-        { transforms && transforms.map((transform, index) => dpis.map((dpi, index2) => (
+        { transforms && transforms.map((transform, index) => dpis.map((dpi, index) => (
           <img src={`/imagecache/${qs.stringify(transform)}&dpi=${dpi}${file.asset.path}`} key={`image_${index}`} />
         ))) }
       </div>
