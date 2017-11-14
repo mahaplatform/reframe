@@ -5,7 +5,7 @@ const dpis = [1,2]
 
 const Preview = ({ file, preview, transforms }) => (
   <div className="reframe-filefield-preview">
-    { file.asset ?
+    { file.asset && false ?
       <img src={`/imagecache/fit=cover&w=300&h=300${file.asset.path}`} title={ file.asset.original_file_name } /> :
       <div className="reframe-filefield-preview-image" style={{ backgroundImage: 'url(\''+preview+'\')' }} />
     }

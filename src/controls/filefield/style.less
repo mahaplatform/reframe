@@ -5,22 +5,22 @@
 }
 .reframe-filefield-tokens {
   overflow: hidden;
-  .field .reframe-filefield-token {
-    @media (max-width: 414px) {
-      width: 100%;
+}
+.field .reframe-filefield-tokens .reframe-filefield-token {
+  @media (max-width: 414px) {
+    width: 100%;
+    margin-right: none;
+  }
+  @media (min-width: 415px) and (max-width: 768px) {
+    width: ~"calc(100% / 2 - 0.8em)";
+    &:nth-child(2n+2) {
       margin-right: none;
     }
-    @media (min-width: 415px) and (max-width: 768px) {
-      width: ~"calc(100% / 2 - 0.8em)";
-      &:nth-child(2n+2) {
-        margin-right: none;
-      }
-    }
-    @media (min-width: 769px) {
-      width: ~"calc(100% / 3 - 0.8em * 2)";
-      &:nth-child(3n+3) {
-        margin-right: none;
-      }
+  }
+  @media (min-width: 769px) {
+    width: ~"calc(100% / 3 - 0.8em * 2)";
+    &:nth-child(3n+3) {
+      margin-right: none;
     }
   }
 }
