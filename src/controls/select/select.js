@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 class Select extends React.Component {
 
   static propTypes = {
     defaultValue: PropTypes.any,
     multiple: PropTypes.bool,
+    endpoint: PropTypes.string,
+    items: PropTypes.array,
     options: PropTypes.array,
     selected: PropTypes.any,
+    status: PropTypes.string,
     tabIndex: PropTypes.number,
+    text: PropTypes.string,
+    value: PropTypes.string,
     onChange: PropTypes.func,
     onChoose: PropTypes.func,
     onReady: PropTypes.func,
-    onSet: PropTypes.func
+    onFetchItems: PropTypes.func,
+    onSetSelected: PropTypes.func,
+    onSetItems: PropTypes.func
   }
 
   static defaultProps = {
@@ -24,11 +32,11 @@ class Select extends React.Component {
   }
 
   render() {
-    const { options, tabIndex } = this.props
+    const { items, tabIndex } = this.props
     return (
       <div className="reframe-select" tabIndex={ tabIndex }>
-        { options.map((option, index) => (
-          <div className={ this._getClass(option) } key={`option_${index}`} onClick={ this._handleClick.bind(this, option.value) }>
+        { items.map((option, index) => (
+          <div className={ this._getClass(option) } key={`option_${index}`} onClick={ this._handleClick.bind(this, option) }>
             { option.icon &&
               <div className="reframe-select-option-icon">
                 <i className={`fa fa-fw fa-${option.icon}`} />
@@ -45,24 +53,31 @@ class Select extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, onReady, onSet } = this.props
-    if(defaultValue) onSet(defaultValue)
-    onReady()
+    const { defaultValue, endpoint, options, onReady, onFetchItems, onSetSelected, onSetItems } = this.props
+    if(defaultValue) onSetSelected(defaultValue)
+    if(endpoint) return onFetchItems(endpoint)
+    if(options) {
+      onSetItems(options)
+      onReady()
+    }
   }
 
   componentDidUpdate(prevProps) {
-    const { selected, onChange } = this.props
+    const { selected, status, onChange,onReady } = this.props
     if(selected !== prevProps.selected) onChange(selected)
+    if(status !== prevProps.status && status === 'success') onReady()
   }
 
   _getClass(option) {
     const { selected } = this.props
+    const value = _.get(option, this.props.value)
     const classes = ['reframe-select-option']
-    if(option.value === selected) classes.push('selected')
+    if(value === selected) classes.push('selected')
     return classes.join(' ')
   }
 
-  _handleClick(value) {
+  _handleClick(option) {
+    const value = _.get(option, this.props.value)
     this.props.onChoose(value)
   }
 
