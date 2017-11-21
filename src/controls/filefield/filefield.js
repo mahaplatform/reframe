@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Preview from './preview'
 import React from 'react'
 import _ from 'lodash'
-import qs from 'qs'
 
 class FileField extends React.Component {
 
@@ -59,43 +58,20 @@ class FileField extends React.Component {
   }
 
   state = {
-    preview: null
+    previews: {}
   }
 
   render() {
-    const { button, files, multiple, multiplePrompt, prompt, status, transforms, tabIndex } = this.props
-    const { preview } = this.state
+    const { button, files, multiple, multiplePrompt, prompt, status, tabIndex } = this.props
     let classes = ['reframe-filefield', status]
     return (
       <div className={classes.join(' ')} tabIndex={ tabIndex }>
         <div className="reframe-filefield-tokens">
           { files.map((file, index) => (
-            <div key={`filefield_${index}`} className="reframe-filefield-token">
-              <div className="reframe-filefield-details">
-                { _.includes(['added'], file.status) &&
-                  <div className="ui small progress" />
-                }
-                { file.status === 'uploading' &&
-                  <div className="reframe-filefield-progress">
-                    { preview && <Preview file={ file } preview={ preview } transforms={ transforms } /> }
-                    <div className="ui green progress">
-                      <div className="bar" style={{ width: `${file.progress}%`}}>
-                        <div className="progress">{ file.progress }%</div>
-                      </div>
-                    </div>
-                  </div>
-                }
-                { file.status === 'success' && <Preview file={ file } preview={ preview } transforms={ transforms } /> }
-                <div className="reframe-filefield-caption">
-                  <div className="reframe-filefield-remove" onClick={ this._handleRemoveFile.bind(this, index) }>
-                    <i className="remove circle icon" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )) }
+            <Preview key={`filefield_${index}`} { ...this._getFile(file, index) } />
+          ))}
         </div>
-        { status === 'ready' && (files.length === 0 || multiple === true) &&
+        { (files.length === 0 || multiple === true) &&
           <div ref={ (node) => this.button = node }>
             { button ? button :
               <div className="ui browse button">
@@ -106,6 +82,15 @@ class FileField extends React.Component {
         }
       </div>
     )
+  }
+
+  _getFile(file, index) {
+    return {
+      file,
+      preview: this.state.previews[file.uniqueIdentifier],
+      transforms: this.props.transforms,
+      onRemove: this._handleRemoveFile.bind(this, index)
+    }
   }
 
   componentDidMount() {
@@ -119,16 +104,16 @@ class FileField extends React.Component {
   componentDidUpdate(prevProps) {
     const { files, status, value, onChange, onReady } = this.props
     if(status !== prevProps.status) {
-      if(prevProps.status === 'pending') onReady()
-      if(status === 'ready') this._initializeResumable()
+      if(prevProps.status === 'pending') {
+        onReady()
+        this._initializeResumable()
+      }
     }
     if(!_.isEqual(value, prevProps.value)) onChange(value)
     if(files.length > prevProps.files.length) {
       if(files.filter(file => file.status === 'added').length > 0) {
         this._handleUploadBegin()
       }
-    } else if(files.length < prevProps.files.length) {
-      this._initializeResumable()
     }
   }
 
@@ -156,14 +141,19 @@ class FileField extends React.Component {
 
   _handleFileAdded(file) {
     const fileReader = new FileReader()
-    fileReader.readAsDataURL(file.file)
-    fileReader.onload = this._handleImagePreview.bind(this)
     this.props.onAddFile(file.uniqueIdentifier, file.file.name, file.file.size, file.file.type, file.chunks.length)
-
+    if(!file.file.type.match(/image/)) return
+    fileReader.readAsDataURL(file.file)
+    fileReader.onload = this._handleImagePreview.bind(this, file.file.uniqueIdentifier)
   }
-  _handleImagePreview(event) {
-    const preview = event.target.result
-    this.setState({ preview })
+
+  _handleImagePreview(uid, event) {
+    this.setState({
+      previews: {
+        ...this.state.previews,
+        [uid]: event.target.result
+      }
+    })
   }
 
   _handleUploadBegin() {
