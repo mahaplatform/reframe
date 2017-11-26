@@ -9,7 +9,6 @@ class Preview extends React.Component {
   static propTypes = {
     file: PropTypes.object,
     preview: PropTypes.string,
-    transforms: PropTypes.array,
     onRemove: PropTypes.func
   }
 
@@ -17,7 +16,7 @@ class Preview extends React.Component {
 
     const dpis = [1,2]
 
-    const { file, transforms } = this.props
+    const { file } = this.props
 
     const content_type = file.contentType || file.asset.content_type
 
@@ -47,13 +46,6 @@ class Preview extends React.Component {
           { isImage ? <i className="fa fa-fw fa-times-circle" /> : <i className="fa fa-fw fa-times" /> }
         </div>
         { isImage ? <ImageFileToken { ...this._getImageFile() } /> : <PlainFileToken { ...this._getPlainFile() } /> }
-        { isImage && file.asset &&
-          <div className="reframe-filefield-preview-image-cache">
-            { transforms && transforms.map((transform, index) => dpis.map((dpi, index) => (
-              <img src={`/imagecache/${qs.stringify(transform)}&dpi=${dpi}${file.asset.path}`} key={`image_${index}`} />
-            ))) }
-          </div>
-        }
       </div>
     )
   }

@@ -22,7 +22,6 @@ class FileField extends React.Component {
     status: PropTypes.string,
     token: PropTypes.string,
     tabIndex: PropTypes.number,
-    transforms: PropTypes.array,
     value: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.array
@@ -88,7 +87,6 @@ class FileField extends React.Component {
     return {
       file,
       preview: this.state.previews[file.uniqueIdentifier],
-      transforms: this.props.transforms,
       onRemove: this._handleRemoveFile.bind(this, index)
     }
   }
