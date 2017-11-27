@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 class Task extends React.Component<Props, void> {
 
   static contextTypes = {
+    confirm: PropTypes.object,
     drawer: PropTypes.object,
     mobile: PropTypes.bool,
     modal: PropTypes.object,
@@ -39,47 +40,46 @@ class Task extends React.Component<Props, void> {
   }
 
   _handleChoose(index: number): void {
-    const { disabled, drawer, handler, location, modal, request, route } = this.props
+    const { confirm, disabled, drawer, handler, location, modal, request, route } = this.props
     if(disabled) return
-    if(route) this._handleRoute(route)
-    if(request) this._handleRequest(request)
-    if(modal) this._handleModal(modal)
-    if(drawer) this._handleDrawer(drawer, location)
-    if(handler) this._handleFunction(handler)
+    const yesHandler = () => {
+      if(route) this._handleRoute(route)
+      if(request) this._handleRequest(request)
+      if(modal) this._handleModal(modal)
+      if(drawer) this._handleDrawer(drawer, location)
+      if(handler) this._handleFunction(handler)
+    }
+    this.props.onDone()
+    if(confirm) return this.context.confirm.open(confirm, yesHandler)
+    yesHandler()
   }
 
   _handleRoute(route: string): void {
     const { router } = this.context
     router.history.push(route)
-    this.props.onDone()
   }
 
   _handleModal(component: Component): void {
     const { modal } = this.context
     modal.open(component)
-    this.props.onDone()
   }
 
   _handleDrawer(component: Component, location: Location): void {
     const { drawer } = this.context
     drawer.open(component, location)
-    this.props.onDone()
   }
 
   _handleFunction(handler: Handler): void {
-    const done = this.props.onDone.bind(this)
-    handler(done)
+    handler(() => {})
   }
 
   _handleRequest(itemRequest: ItemRequest): void {
-    const { onDone, onRequest } = this.props
+    const { onRequest } = this.props
     const onFailure = (result) => {
       if(itemRequest.onFailure) itemRequest.onFailure(result)
-      onDone()
     }
     const onSuccess = (result) => {
       if(itemRequest.onSuccess) itemRequest.onSuccess(result)
-      onDone()
     }
     onRequest({
       body: null,
