@@ -100,7 +100,7 @@ class FileField extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { files, status, value, onChange, onReady } = this.props
+    const { files, multiple, status, value, onChange, onReady } = this.props
     if(status !== prevProps.status) {
       if(prevProps.status === 'pending') {
         onReady()
@@ -112,7 +112,10 @@ class FileField extends React.Component {
       if(files.filter(file => file.status === 'added').length > 0) {
         this._handleUploadBegin()
       }
+    } else if(files.length < prevProps.files.length && !multiple) {
+      this._initializeResumable()
     }
+
   }
 
   _initializeResumable() {
