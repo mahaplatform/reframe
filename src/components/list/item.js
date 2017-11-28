@@ -35,7 +35,7 @@ class Item extends React.Component<Props, void> {
             <div className="reframe-list-item-content-value">
               { content && <Format { ...content } format={ format } value={ content } /> }
               { content && units && ` ${units}` }
-              { !content && empty && <span>{ empty }</span>}
+              { !content && empty && <span className="reframe-list-item-content-empty">{ empty }</span>}
             </div>
           </div>
         }
