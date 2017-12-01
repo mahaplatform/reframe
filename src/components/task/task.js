@@ -23,11 +23,12 @@ class Task extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { icon, label } = this.props
+    const { icon, component, label } = this.props
     return (
       <div className={ this._getClass() } onClick={ this._handleChoose.bind(this) }>
         { icon && <i className={`fa fa-fw fa-${icon}`} /> }
         { label }
+        { component }
       </div>
     )
   }

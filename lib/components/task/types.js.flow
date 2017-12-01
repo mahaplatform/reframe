@@ -6,7 +6,7 @@ export type Action = any | any | any | any;
 export type Done = () => void;
 export type Handler = (done: () => void) => void;
 export type ItemRequest = {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any};
-export type Props = {className?: string, confirm?: string, disabled?: boolean, drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", mobile?: boolean, modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string};
+export type Props = {className?: string, component: any, confirm?: string, disabled?: boolean, drawer: any, handler: () => void, icon?: string, label: string, location: "left" | "right", mobile?: boolean, modal: any, onDone: () => void, onRequest: (itemRequest: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}) => any, request: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}, route: string};
 export type Request = any;
 export type RequestFailure = any;
 export type RequestRequest = any;
