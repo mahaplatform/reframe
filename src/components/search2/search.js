@@ -5,9 +5,9 @@ import Dynamic from './dynamic'
 import Options from './options'
 import React from 'react'
 
-const BasicToken = () => (
+const BasicToken = ({ value }) => (
   <div className="token">
-     foo
+     { value }
   </div>
 )
 
