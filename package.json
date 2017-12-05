@@ -8,7 +8,7 @@
   "homepage": "https://github.com/mahaplatform/mahaplatform/tree/master/packages/reframe",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npm run build:clean && npm run build:lib && npm run build:flow",
+    "build": "npm run build:clean && npm run build:lib",
     "build:clean": "rm -rf ./lib",
     "build:lib": "babel ./src --out-dir ./lib",
     "build:flow": "flow gen-flow-files ./src --out-dir ./lib",
@@ -60,6 +60,8 @@
   },
   "dependencies": {
     "bytes": "^2.5.0",
+    "draft-convert": "^2.0.1",
+    "draft-js": "^0.10.4",
     "flat": "^4.0.0",
     "jimp": "^0.2.28",
     "json-hash": "^1.2.0",

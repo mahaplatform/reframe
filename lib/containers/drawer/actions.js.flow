@@ -1,7 +1,0 @@
-// @flow
-
-import type {Location, Open, Close, Clear} from "./types";
-import type {Component} from "../../types";
-declare export function clear(): {type: "CLEAR"};
-declare export function close(): {type: "CLOSE"};
-declare export function open(component: any, location: "left" | "right"): {component: any, location: "left" | "right", type: "OPEN"};

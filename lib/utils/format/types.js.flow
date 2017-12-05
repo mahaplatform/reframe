@@ -1,6 +1,0 @@
-// @flow
-
-import type {Component} from "../../types";
-export type Props = any;
-
-declare module.exports: {};

@@ -1,5 +1,0 @@
-// @flow
-
-import type {Choose, State, Action} from "./types";
-declare export var INITIAL_STATE: {+chosen: ?number};
-declare export default function(state?: {+chosen: ?number}, action: {index: number, type: "CHOOSE"}): {+chosen: ?number};

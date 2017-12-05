@@ -1,6 +1,0 @@
-// @flow
-
-import _ from "lodash";
-import type {LoadSuccess, SetChosen, SetQuery, SetFilter, ToggleFilter, ToggleRecord, State, Action} from "./types";
-declare export var INITIAL_STATE: {+chosen: Array<Object>, +filter: Object, +filtering: boolean, +query: string};
-declare export default function(state?: {+chosen: Array<Object>, +filter: Object, +filtering: boolean, +query: string}, action: {chosen: Array<Object>, type: "SET_CHOSEN"} | {filter: Object, type: "SET_FILTER"} | {query: string, type: "SET_QUERY"} | {type: "TOGGLE_FILTER"} | {record: Object, type: "TOGGLE_RECORD"}): {+chosen: Array<Object>, +filter: Object, +filtering: boolean, +query: string};

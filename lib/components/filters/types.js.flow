@@ -1,7 +1,0 @@
-// @flow
-
-export type Filter = Object;
-export type Filters = Array<Object>;
-export type Props = any;
-
-declare module.exports: {};

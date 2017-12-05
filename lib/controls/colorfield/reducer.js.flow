@@ -1,4 +1,0 @@
-// @flow
-
-import type {Set, Action, State} from "./types";
-declare export default function(state?: any, action: any): any;

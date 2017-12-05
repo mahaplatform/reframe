@@ -1,6 +1,0 @@
-// @flow
-
-export type Props = {defaultValue?: boolean, disabled?: boolean, onBusy?: () => void, onChange?: (value?: boolean) => void, onClick?: (value?: boolean) => void, onReady?: () => void, tabIndex: number};
-export type State = {value: boolean};
-
-declare module.exports: {};

@@ -1,4 +1,0 @@
-// @flow
-
-import type {Query} from "./types";
-declare export function query(q: string): {q: string, type: "QUERY"};

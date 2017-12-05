@@ -1,4 +1,0 @@
-// @flow
-
-import type {ItemRequest, Request} from "./types";
-declare export function request(_: {body: any, endpoint: string, method: any, onFailure: any, onSuccess: any, params: any}): any;
