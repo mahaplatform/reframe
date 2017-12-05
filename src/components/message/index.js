@@ -12,6 +12,7 @@ class Message extends React.Component {
     icon: PropTypes.string,
     text: PropTypes.string,
     title: PropTypes.string,
+    component: PropTypes.object,
     button: PropTypes.shape({
       label: PropTypes.string,
       modal: PropTypes.oneOfType([
@@ -22,7 +23,7 @@ class Message extends React.Component {
   }
 
   render() {
-    const { button, icon, text, title } = this.props
+    const { button, component, icon, text, title } = this.props
     return (
       <div className="reframe-message">
         <div className="reframe-message-panel">
@@ -35,6 +36,7 @@ class Message extends React.Component {
           }
           { title && <h3>{ title }</h3> }
           { text && <p>{ text }</p> }
+          { component }
           { button && <Task { ...this._getTask() } /> }
         </div>
       </div>
@@ -46,7 +48,9 @@ class Message extends React.Component {
     return {
       className: 'ui basic red button',
       label: button.label,
-      modal: button.modal
+      modal: button.modal,
+      handler: button.handler,
+      request: button.request
     }
   }
 
