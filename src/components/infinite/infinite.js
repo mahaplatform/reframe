@@ -32,8 +32,7 @@ class Infinite extends React.Component<Props, void> {
   }
 
   render(): Node {
-    const { delayed, empty, failure, filter, footer, header, layout, loading, notFound, records, status, timeout, total } = this.props
-    const is_filtered = filter && Object.keys(filter).length > 0
+    const { all, delayed, empty, failure, footer, header, layout, loading, notFound, records, status, timeout, total } = this.props
     return (
       <div className="reframe-infinite">
         { header &&
@@ -45,8 +44,8 @@ class Infinite extends React.Component<Props, void> {
         { status === 'delayed' && this._getComponent(delayed) }
         { status === 'timeout' && this._getComponent(timeout) }
         { status === 'failed' && this._getComponent(failure) }
-        { status !== 'failed' && total === 0 && is_filtered && this._getComponent(notFound) }
-        { status !== 'failed' && total === 0 && !is_filtered && this._getComponent(empty) }
+        { status !== 'failed' && total === 0 && all !== 0 && this._getComponent(notFound) }
+        { status !== 'failed' && total === 0 && all === 0 && this._getComponent(empty) }
         { status !== 'failed' && records && records.length > 0 && layout &&
           <Scrollpane { ...this._getScrollpane() }>
             { React.createElement(layout, this.props) }
