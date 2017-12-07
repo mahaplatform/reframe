@@ -15,6 +15,7 @@ class Section extends React.Component {
     fields: PropTypes.array,
     data: PropTypes.object,
     errors: PropTypes.object,
+    tabIndexStart: PropTypes.number,
     onBusy: PropTypes.func,
     onSubmit: PropTypes.func,
     onReady: PropTypes.func,
@@ -22,7 +23,8 @@ class Section extends React.Component {
   }
 
   static defaultProps = {
-    collapsing: false
+    collapsing: false,
+    tabIndexStart: 1
   }
 
   constructor(props) {
@@ -63,12 +65,12 @@ class Section extends React.Component {
   }
 
   _getField(field, index) {
-    const { data, errors, onBusy, onReady, onSubmit, onUpdateData } = this.props
+    const { data, errors, tabIndexStart, onBusy, onReady, onSubmit, onUpdateData } = this.props
     return {
       ...field,
       data,
       errors,
-      tabIndex: index,
+      tabIndex: tabIndexStart + index,
       onBusy,
       onReady,
       onSubmit,
