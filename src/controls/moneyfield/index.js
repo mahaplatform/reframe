@@ -32,7 +32,7 @@ class MoneyField extends React.Component {
     return {
       ...this.props,
       sanitize: (value) => value.replace(/[\$,]/g,''),
-      validate: (value) => value.match(/^\d*\.?\d{0,2}$/) !== null
+      validate: (value) => value.match(/^-?\d*\.?\d{0,2}$/) !== null
     }
   }
 
