@@ -69,7 +69,7 @@ class Stack extends React.Component {
       if(router.history.action === 'PUSH') {
         onPush(pathname)
         setTimeout(() => this.setState({ mounted: mounted + 1 }), 50)
-      } else {
+      } else if(router.history.action === 'POP') {
         this.setState({ mounted: mounted - 1 })
         setTimeout(() => onPop(), 500)
       }
