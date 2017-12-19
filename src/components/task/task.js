@@ -34,9 +34,10 @@ class Task extends React.Component<Props, void> {
   }
 
   _getClass() {
-    const { className } = this.props
-    const classes = [className]
-    if(this.props.mobile !== false) classes.push('mobile')
+    const { className, label, mobile } = this.props
+    const classes = []
+    if(label) classes.push(className)
+    if(mobile !== false) classes.push('mobile')
     return classes.join(' ')
   }
 
