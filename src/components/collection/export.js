@@ -46,7 +46,7 @@ class Export extends React.Component {
     const { items } = this.state
     const { endpoint, entity, filter, sort, token } = this.props
     const query = {
-      ...filter,
+      $filter: filter,
       $sort: sort,
       $select: items.filter(item => item.checked).reduce((select, item) => ({
         ...select,

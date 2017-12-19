@@ -114,12 +114,12 @@ class Tasks extends React.Component {
 
   _handleExport() {
     this.props.onAddPanel((props) => {
-      const { endpoint, entity, filtered, sort, token } = props
+      const { endpoint, entity, filter, sort, token } = props
       return React.createElement(Export, {
         defaultValue: this.props.export,
         endpoint,
         entity,
-        filter: filtered,
+        filter,
         sort: sort.key ? (sort.order === 'desc' ? '-' : '') + sort.key : null,
         token,
         onDone: () => this.props.onRemovePanel()
