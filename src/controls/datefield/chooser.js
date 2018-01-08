@@ -1,6 +1,7 @@
-import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import React from 'react'
 
 class Chooser extends React.Component {
 
@@ -100,4 +101,6 @@ class Chooser extends React.Component {
 
 }
 
-export default Chooser
+const mapStateToProps = (state, props) => state.reframe.datefield[props.cid]
+
+export default connect(mapStateToProps)(Chooser)

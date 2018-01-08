@@ -22,14 +22,14 @@ const setValue = (state: State, action: SetValue): State => ({
 
 const previous = (state: State, action: Previous): State => ({
   ...state,
-  month: state.month ? (state.month === 0 ? 11 : state.month - 1) : null,
-  year: state.year ? (state.month === 0 ? state.year - 1 : state.year) : null
+  month: state.month !== null ? (state.month === 0 ? 11 : state.month - 1) : null,
+  year: state.year !== null ? (state.month === 0 ? state.year - 1 : state.year) : null
 })
 
 const next = (state: State, action: Next): State => ({
   ...state,
-  month: state.month ? (state.month === 11 ? 0 : state.month + 1) : null,
-  year: state.year ? (state.month === 11 ? state.year + 1 : state.year) : null
+  month: state.month !== null ? (state.month === 11 ? 0 : state.month + 1) : null,
+  year: state.year !== null ? (state.month === 11 ? state.year + 1 : state.year) : null
 })
 
 const begin = (state: State, action: Begin): State => ({

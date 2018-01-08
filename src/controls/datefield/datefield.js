@@ -6,6 +6,10 @@ import React from 'react'
 
 class Datefield extends React.Component {
 
+  static contextTypes = {
+    modal: PropTypes.object
+  }
+
   static propTypes = {
     active: PropTypes.bool,
     defaultValue: PropTypes.string,
@@ -52,9 +56,6 @@ class Datefield extends React.Component {
             </div>
           }
         </div>
-        <CSSTransition in={ active } classNames="cover" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
-          <Chooser { ...this.props } />
-        </CSSTransition>
       </div>
     )
   }
@@ -68,8 +69,15 @@ class Datefield extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { value, onChange } = this.props
-    if(prevProps.value !== value) {
+    const { active, value, onChange } = this.props
+    const { modal } = this.context
+    if(active !== prevProps.active) {
+      if(active) {
+        modal.push(<Chooser { ...this._getChooser() } />)
+      } else  {
+        modal.pop()
+      }
+    } else if(prevProps.value !== value) {
       if(value) {
         onChange(value.format('YYYY-MM-DD'))
       } else  {
@@ -86,6 +94,10 @@ class Datefield extends React.Component {
       autoComplete: false,
       prompt
     }
+  }
+  
+  _getChooser() {
+    return this.props
   }
 
   _handleBegin() {
