@@ -1,4 +1,3 @@
-import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
 import Chooser from './chooser'
 import moment from 'moment'
@@ -43,7 +42,7 @@ class Datefield extends React.Component {
   }
 
   render() {
-    const { active, prompt, value, tabIndex } = this.props
+    const { prompt, value, tabIndex } = this.props
     return (
       <div className="reframe-datefield">
         <div className="reframe-datefield-input" tabIndex={ tabIndex }>
@@ -71,17 +70,18 @@ class Datefield extends React.Component {
   componentDidUpdate(prevProps) {
     const { active, value, onChange } = this.props
     const { modal } = this.context
+    if(prevProps.value !== value) {
+      if(value) {
+        onChange(value.format('YYYY-MM-DD'))
+      } else  {
+        onChange(value)
+      }
+    }
     if(active !== prevProps.active) {
       if(active) {
         modal.push(<Chooser { ...this._getChooser() } />)
       } else  {
         modal.pop()
-      }
-    } else if(prevProps.value !== value) {
-      if(value) {
-        onChange(value.format('YYYY-MM-DD'))
-      } else  {
-        onChange(value)
       }
     }
   }
@@ -95,7 +95,7 @@ class Datefield extends React.Component {
       prompt
     }
   }
-  
+
   _getChooser() {
     return this.props
   }
