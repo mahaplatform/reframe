@@ -66,11 +66,11 @@ class Infinite extends React.Component<Props, void> {
     this._handleFetch(0)
   }
 
-  shouldComponentUpdate(nextProps: any, nextState: any): boolean {
-    return ['all','cacheKey','exclude_ids','filter','records','sort','status','selected','total'].reduce((update, key) => {
-      return update || !_.isEqual(this.props[key], nextProps[key])
-    }, false)
-  }
+  // shouldComponentUpdate(nextProps: any, nextState: any): boolean {
+  //   return ['all','cacheKey','exclude_ids','filter','records','sort','status','selected','total'].reduce((update, key) => {
+  //     return update || !_.isEqual(this.props[key], nextProps[key])
+  //   }, false)
+  // }
 
   componentDidUpdate(prevProps: Props): void {
     const { cacheKey, exclude_ids, filter, records, selected, sort, status, onUpdateSelected } = this.props
