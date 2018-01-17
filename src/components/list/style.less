@@ -76,7 +76,16 @@
   @media (max-width: 768px) { padding: 0.8em; }
   @media (min-width: 769px) { display: flex; }
 }
-
+.reframe-list-item-content-link {
+  padding: 0.8em;
+  background-color: fadeout(@black, 97); 
+  color: @blue; 
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+    color: darken(@blue, 20);
+  }
+}
 .reframe-list-item-content-label {
   @media (min-width: 769px) {
     flex: 0 0 10em;

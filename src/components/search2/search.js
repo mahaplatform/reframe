@@ -14,10 +14,13 @@ const BasicToken = ({ value }) => (
 class Search extends React.Component  {
 
   static propTypes = {
+    cacheKey: PropTypes.string,
     endpoint: PropTypes.string,
     exclude_ids: PropTypes.array,
+    empty: PropTypes.object,
     format: PropTypes.any,
     label: PropTypes.string,
+    notFound: PropTypes.object,
     options: PropTypes.array,
     prompt: PropTypes.string,
     q: PropTypes.string,
@@ -29,6 +32,9 @@ class Search extends React.Component  {
 
   static defaultProps = {
     format: BasicToken,
+    cacheKey: null,
+    empty: null,
+    notFound: null,
     onChoose: () => {}
   }
 
@@ -60,12 +66,15 @@ class Search extends React.Component  {
   }
 
   _getInfinite() {
-    const { endpoint, exclude_ids, q } = this.props
+    const { cacheKey, empty, endpoint, exclude_ids, notFound, q } = this.props
     return {
+      cacheKey,
+      empty,
       endpoint,
       exclude_ids,
       filter: { q },
-      layout: (props) => <Dynamic { ...this._getDynamic() } { ...props } />
+      layout: (props) => <Dynamic { ...this._getDynamic() } { ...props } />,
+      notFound
     }
   }
 

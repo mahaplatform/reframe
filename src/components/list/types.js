@@ -27,6 +27,7 @@ export type SectionProps = {
 }
 
 export type ItemProps = {
+  alt?: string,
   className?: string,
   component?: Component,
   content?: any,
@@ -35,6 +36,7 @@ export type ItemProps = {
   format?: Format,
   handler?: () => void,
   icon?: string,
+  if?: boolean,
   label?: string,
   link?: string,
   tasks?: Array<any>,
