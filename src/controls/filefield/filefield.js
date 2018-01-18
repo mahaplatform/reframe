@@ -124,6 +124,7 @@ class FileField extends React.Component {
     this.resumable = new Resumable({
       target: action,
       chunkSize: 1024 * 128,
+      permanentErrors: [204, 400, 404, 409, 415, 500, 501],
       maxFiles: multiple ? undefined : 1,
       headers: {
         'Authorization': `Bearer ${token}`
