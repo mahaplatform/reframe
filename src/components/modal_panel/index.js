@@ -6,9 +6,15 @@ class ModalPanel extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     leftEnabled: PropTypes.bool,
-    leftText: PropTypes.string,
+    leftText: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
     rightEnabled: PropTypes.bool,
-    rightText: PropTypes.string,
+    rightText: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
     title: PropTypes.string,
     onLeftClick: PropTypes.func,
     onRightClick: PropTypes.func
