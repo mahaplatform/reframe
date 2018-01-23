@@ -204,6 +204,11 @@ class Table extends React.Component<Props, State> {
           ...task,
           modal: () => <task.modal id={ id } />
         }
+      } else if(task.handler) {
+        return {
+          ...task,
+          handler: () => task.handler(id)
+        }
       }
     })
     this.context.tasks.open(tasks)
