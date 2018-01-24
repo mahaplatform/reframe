@@ -46,7 +46,7 @@ class Item extends React.Component<Props, void> {
             { _.isFunction(extra) ? React.createElement(extra, content) : extra }
           </div>
         }
-        { link &&
+        { (handler || link) &&
           <div className="reframe-list-item-proceed">
             <i className="chevron right icon" />
           </div>
@@ -64,9 +64,10 @@ class Item extends React.Component<Props, void> {
   }
 
   _getClass(): string {
-    const { className } = this.props
+    const { className, handler, link } = this.props
     const classes = ['reframe-list-item']
     if(className) classes.push(className)
+    if(link || handler) classes.push('reframe-list-item-link')
     return classes.join(' ')
   }
 

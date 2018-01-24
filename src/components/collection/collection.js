@@ -94,7 +94,7 @@ class Collection extends React.Component {
       <div className={ this._getClass() }>
         <div className="reframe-collection-body">
           <Header { ...this._getHeader() } />
-          { records && <Results { ...this._getResuts() } /> }
+          { records && <Results { ...this._getResults() } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
           <CSSTransition in={ !_.isNil(buttons) && !_.isNil(buttons(this.props)) } classNames="expanded" timeout={ 150 } mountOnEnter={ true } unmountOnExit={ true }>
             <Buttons { ...this._getButtons() } />

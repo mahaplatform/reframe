@@ -54,6 +54,12 @@
     color: @red;
   }
 }
+.reframe-list-item-link {
+  cursor: pointer;
+  &:hover {
+    background-color: fadeout(@black, 97);
+  }
+}
 .reframe-list-item-unit {
   margin-left: 3px;
 }
@@ -122,6 +128,7 @@
   }
   .chevron {
     margin: auto !important;
+    line-height: 1em;
   }
   .ellipsis {
     font-size: 1.4em;
