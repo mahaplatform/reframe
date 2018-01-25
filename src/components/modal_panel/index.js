@@ -1,51 +1,48 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+import _ from 'lodash'
 
 class ModalPanel extends React.Component {
 
   static propTypes = {
     children: PropTypes.any,
-    leftEnabled: PropTypes.bool,
-    leftText: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string
-    ]),
-    rightEnabled: PropTypes.bool,
-    rightText: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string
-    ]),
-    title: PropTypes.string,
-    onLeftClick: PropTypes.func,
-    onRightClick: PropTypes.func
-  }
-
-  static defaultProps = {
-    leftEnabled: true,
-    rightEnabled: true,
-    onLeftClick: () => {},
-    onRightClick: () => {}
+    className: PropTypes.string,
+    leftItems: PropTypes.array,
+    rightItems: PropTypes.array,
+    title: PropTypes.string
   }
 
   render() {
-    const { leftText, rightText, title } = this.props
+    const { leftItems, rightItems, title } = this.props
     return (
-      <div className="reframe-modal-panel">
+      <div className={ this._getClass() }>
         <div className="reframe-modal-panel-header">
-          { leftText ?
-            <div className="reframe-modal-panel-header-navigation" onClick={ this._handleLeftClick.bind(this) }>
-              { leftText }
-            </div> :
-            <div className="reframe-modal-panel-header-navigation" />
+          { leftItems &&
+            <div className="reframe-modal-panel-header-navigation">
+              { leftItems.map((item,index) => (
+                <div key={`left_${index}`} className="reframe-modal-panel-header-navigation-link" onClick={ item.handler }>
+                  { item.component && ( _.isFunction(item.component) ? React.createElement(item.component) : item.component) }
+                  { item.icon && <i className={`fa fa-fw fa-${item.icon}`} /> }
+                  { item.label && <span>{item.label}</span> }
+                </div>
+              )) }
+            </div>
           }
-          <div className="reframe-modal-panel-header-title">
-            { title }
-          </div>
-          { rightText ?
-            <div className="reframe-modal-panel-header-navigation" onClick={ this._handleRightClick.bind(this) }>
-              { rightText }
-            </div> :
-            <div className="reframe-modal-panel-header-navigation" />
+          { title &&
+            <div className="reframe-modal-panel-header-title">
+              { title }
+            </div>
+          }
+          { rightItems &&
+            <div className="reframe-modal-panel-header-navigation">
+              { rightItems.map((item,index) => (
+                <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-link" onClick={ item.handler }>
+                  { item.component && ( _.isFunction(item.component) ? React.createElement(item.component) : item.component) }
+                  { item.icon && <i className={`fa fa-fw fa-${item.icon}`} /> }
+                  { item.label && <span>{item.label}</span> }
+                </div>
+              )) }
+            </div>
           }
         </div>
         <div className="reframe-modal-panel-body">
@@ -53,6 +50,13 @@ class ModalPanel extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _getClass() {
+    const { className } = this.props
+    const classes = ['reframe-modal-panel']
+    if(className) classes.push(className)
+    return classes.join(' ')
   }
 
   _getLeftClass() {
@@ -67,14 +71,6 @@ class ModalPanel extends React.Component {
     const classes = ['reframe-modal-panel-header-navigation']
     if(!rightEnabled) classes.push('disabled')
     return classes.join(' ')
-  }
-
-  _handleLeftClick() {
-    this.props.onLeftClick()
-  }
-
-  _handleRightClick() {
-    this.props.onRightClick()
   }
 
 }

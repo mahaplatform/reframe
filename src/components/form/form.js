@@ -1,6 +1,7 @@
-import React from 'react'
+import ModalPanel from '../modal_panel'
 import PropTypes from 'prop-types'
 import Section from './section'
+import React from 'react'
 import _ from 'lodash'
 
 class Form extends React.Component {
@@ -64,44 +65,31 @@ class Form extends React.Component {
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, saveText, status, title } = this.props
+    const { after, before, config, instructions, status } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
-      <div className="reframe-modal-panel">
-        <div className="reframe-modal-panel-header">
-          <div className="reframe-modal-panel-header-navigation" onClick={ this._handleCancel.bind(this) }>
-            Cancel
-          </div>
-          <div className="reframe-modal-panel-header-title">
-            { title }
-          </div>
-          <div className={ this._getButtonClasses() } onClick={ this._debouncedSubmit }>
-            { saveText }
-          </div>
-        </div>
-        <div className="reframe-modal-panel-body">
-          <div className="reframe-form">
-            { (before || instructions) &&
-              <div className="reframe-form-header">
-                { before && <div className="reframe-form-before">{ before }</div> }
-                { instructions && <div className="instructions">{ instructions }</div> }
-              </div>
-            }
-            <div className={ this._getFormClasses() }>
-              { !configuring &&
-                config.map((section, index) => (
-                  <Section key={`section_${index}`} { ...this._getSection(config, section, index) } />
-                ))
-              }
+      <ModalPanel { ...this._getPanel() }>
+        <div className="reframe-form">
+          { (before || instructions) &&
+            <div className="reframe-form-header">
+              { before && <div className="reframe-form-before">{ before }</div> }
+              { instructions && <div className="instructions">{ instructions }</div> }
             </div>
-            { after &&
-              <div className="reframe-form-footer">
-                <div className="reframe-form-after">{ after }</div>
-              </div>
+          }
+          <div className={ this._getFormClasses() }>
+            { !configuring &&
+              config.map((section, index) => (
+                <Section key={`section_${index}`} { ...this._getSection(config, section, index) } />
+              ))
             }
           </div>
+          { after &&
+            <div className="reframe-form-footer">
+              <div className="reframe-form-after">{ after }</div>
+            </div>
+          }
         </div>
-      </div>
+      </ModalPanel>
     )
   }
 
@@ -120,6 +108,19 @@ class Form extends React.Component {
       if(status === 'failure') this._handleFailure()
     }
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
+  }
+
+  _getPanel() {
+    const { saveText, title } = this.props
+    return {
+      title,
+      leftItems: [
+        { label: 'Cancel', handler: this._handleCancel.bind(this) }
+      ],
+      rightItems: [
+        { label: saveText, handler: this._debouncedSubmit , className: this._getButtonClasses() }
+      ]
+    }
   }
 
   _getFormClasses() {

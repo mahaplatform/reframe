@@ -6,28 +6,38 @@
 }
 .reframe-modal-panel-header {
   flex: 0 0 3.5em;
-  display: flex;
   background-color: @primary_background_color;
+  position: relative;
+  .reframe-modal-panel-header-navigation:first-child {
+    left: 0;
+  }
   .reframe-modal-panel-header-navigation:last-child {
-    text-align: right;
+    right: 0;
   }
 }
 .reframe-modal-panel-header-navigation {
-  flex: 0 0 7em;
-  display: block;
-  color: @white;
-  padding: 1em;
-  cursor: pointer;
-  i {
-    font-size: 1.3em;
-  }
-  &.disabled {
-    color: fadeout(@white, 40);
+  position: absolute;
+  top: 0;
+  .reframe-modal-panel-header-navigation-link {
+    .hover(color, @white);
+    cursor: pointer;
+    display: inline-block;
+    color: fadeout(@white, 10);
+    padding: 1em;
+    min-width: 3.5em;
+    height: 3.5em;
+    overflow: hidden;
+    i {
+      font-size: 1.3em;
+    }
+    &.disabled {
+      color: fadeout(@white, 40);
+    }
   }
 }
 .reframe-modal-panel-header-title {
   flex: 1;
-  color: #FFF;
+  color: @white;
   padding: 1em 0;
   text-align: center;
 }
