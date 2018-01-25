@@ -7,7 +7,7 @@ import type { Props as ScrollpaneProps } from '../scrollpane/types'
 import React from 'react'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
-import { Delayed, Empty, Failure, Loading, Loader, NotFound, Timeout } from './results'
+import { Delayed, Empty, Failure, Loader, NotFound, Timeout } from './results'
 
 class Infinite extends React.Component<Props, void> {
 
@@ -21,7 +21,7 @@ class Infinite extends React.Component<Props, void> {
     filter: {},
     footer: null,
     header: null,
-    loading: Loading,
+    loading: Loader,
     notFound: NotFound,
     sort: {
       key: null,

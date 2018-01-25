@@ -1,25 +1,10 @@
 // @flow
 
 import type { Node } from '../../types'
+export Loader from '../loader'
 
 import Message from '../message'
 import React from 'react'
-
-export const Loader = (): Node => (
-  <div className="reframe-infinite-loader">
-    <div className="ui active inverted dimmer">
-      <div className="ui small loader"></div>
-    </div>
-  </div>
-)
-
-export const Loading = (): Node => (
-  <div className="reframe-loader">
-    <div className="ui active inverted dimmer">
-      <div className="ui large text loader">Loading</div>
-    </div>
-  </div>
-)
 
 export const Delayed = (): Node => {
 
