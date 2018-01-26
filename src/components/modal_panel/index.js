@@ -20,10 +20,8 @@ class ModalPanel extends React.Component {
           { leftItems &&
             <div className="reframe-modal-panel-header-navigation">
               { leftItems.map((item,index) => (
-                <div key={`left_${index}`} className="reframe-modal-panel-header-navigation-link" onClick={ item.handler }>
-                  { item.component && ( _.isFunction(item.component) ? React.createElement(item.component) : item.component) }
-                  { item.icon && <i className={`fa fa-fw fa-${item.icon}`} /> }
-                  { item.label && <span>{item.label}</span> }
+                <div key={`left_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
+                  { this._getElement(item) }
                 </div>
               )) }
             </div>
@@ -36,10 +34,8 @@ class ModalPanel extends React.Component {
           { rightItems &&
             <div className="reframe-modal-panel-header-navigation">
               { rightItems.map((item,index) => (
-                <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-link" onClick={ item.handler }>
-                  { item.component && ( _.isFunction(item.component) ? React.createElement(item.component) : item.component) }
-                  { item.icon && <i className={`fa fa-fw fa-${item.icon}`} /> }
-                  { item.label && <span>{item.label}</span> }
+                <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
+                { this._getElement(item) }
                 </div>
               )) }
             </div>
@@ -57,6 +53,12 @@ class ModalPanel extends React.Component {
     const classes = ['reframe-modal-panel']
     if(className) classes.push(className)
     return classes.join(' ')
+  }
+
+  _getElement(item) {
+    if(item.component) return _.isFunction(item.component) ? React.createElement(item.component) : item.component
+    if(item.icon) return <div className="reframe-modal-panel-header-navigation-button"><i className={ `fa fa-fw fa-${item.icon}` } /></div>
+    if(item.label) return <div className="reframe-modal-panel-header-navigation-button"><span>{ item.label }</span></div>
   }
 
   _getLeftClass() {

@@ -18,21 +18,34 @@
 .reframe-modal-panel-header-navigation {
   position: absolute;
   top: 0;
-  .reframe-modal-panel-header-navigation-link {
-    .hover(color, @white);
-    cursor: pointer;
-    display: inline-block;
-    color: fadeout(@white, 10);
-    padding: 1em;
-    min-width: 3.5em;
-    height: 3.5em;
-    overflow: hidden;
-    i {
-      font-size: 1.3em;
-    }
-    &.disabled {
-      color: fadeout(@white, 40);
-    }
+}
+.reframe-modal-panel-header-navigation-item {
+  .hover(color, @white);
+  cursor: pointer;
+  display: inline-block;
+  color: fadeout(@white, 10);
+  padding: 0.8em;
+  min-width: 3.5em;
+  height: 3.5em;
+  position: relative;
+  i {
+    font-size: 1.3em;
+  }
+  &.disabled {
+    color: fadeout(@white, 40);
+  }
+}
+.reframe-modal-panel-header-navigation-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  padding: 0.8em;
+  span,
+  .fa {
+    margin: auto;
   }
 }
 .reframe-modal-panel-header-title {

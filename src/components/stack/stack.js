@@ -13,7 +13,6 @@ class Stack extends React.Component {
   }
 
   static propTypes = {
-    initialRoute: PropTypes.string.isRequired,
     cards: PropTypes.array,
     location: PropTypes.object,
     pathname: PropTypes.string,
@@ -24,7 +23,7 @@ class Stack extends React.Component {
   }
 
   state = {
-    mounted: 1
+    mounted: 0
   }
 
   constructor(props) {
@@ -34,6 +33,7 @@ class Stack extends React.Component {
 
   render() {
     const { cards } = this.props
+    if(cards.length === 0) return null
     return (
       <div className="reframe-stack">
         { cards.map((card, index) => {
@@ -53,10 +53,10 @@ class Stack extends React.Component {
 
   componentDidMount() {
     const { pathname } = this.context.router.route.location
-    const { initialRoute, onSet } = this.props
+    const { onSet } = this.props
     const cards = []
-    if(initialRoute) cards.push(initialRoute)
-    if(pathname !== initialRoute) cards.push(pathname)
+    if(pathname === '/') return
+    cards.push(pathname)
     if(cards.length > 0) onSet(cards)
     this.setState({ mounted: cards.length })
   }
@@ -120,8 +120,6 @@ class Stack extends React.Component {
   }
 
   _handlePop() {
-    const { cards, initialRoute } = this.props
-    if(cards.length === 1) return this.context.router.history.replace(initialRoute)
     this.context.router.history.goBack()
   }
 
