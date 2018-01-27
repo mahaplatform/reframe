@@ -60,13 +60,11 @@
   background-color: #FFF;
 }
 .reframe-lookup-panel-search {
-  border-bottom: 1px solid #DDD;
-  background-color: #EEE;
+  border-bottom: 1px solid fadeout(@black, 85);
 }
 .reframe-lookup-panel-add {
   padding: 0.8em;
-  border-top: 1px solid #DDD;
-  background-color: #EEE;
+  border-top: 1px solid fadeout(@black, 85);
 }
 .reframe-lookup-panel-loader {
   flex: 1;
@@ -79,11 +77,10 @@
 }
 .reframe-lookup-panel-result {
   .hover(background-color, fadeout(@black, 98));
-  border-bottom: 1px solid #EEE;
-  background-color: #FFF;
+  border-bottom: 1px solid fadeout(@black, 95);
   cursor: pointer;
   display: flex;
-  color: #888888 !important;
+  color:  fadeout(@black, 30) !important;
   .reframe-lookup-panel-result-label {
     flex: 1;
   }

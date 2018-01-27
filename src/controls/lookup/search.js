@@ -1,7 +1,8 @@
-import React from 'react'
+import ModalPanel from '../../components/modal_panel'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Options from './options'
-import { connect } from 'react-redux'
+import React from 'react'
 
 class Search extends React.Component {
 
@@ -17,22 +18,21 @@ class Search extends React.Component {
   }
 
   render() {
-    const { label } = this.props
     return (
-      <div className="reframe-modal-panel">
-       <div className="reframe-modal-panel-header">
-         <div className="reframe-modal-panel-header-navigation" onClick={ this._handleCancel.bind(this) }>
-           <i className="chevron left icon" />
-           Cancel
-         </div>
-         <div className="reframe-modal-panel-header-title">
-           Choose {label}
-         </div>
-         <div className="reframe-modal-panel-header-navigation" />
-       </div>
-       <Options { ...this.props } />
-     </div>
+      <ModalPanel { ...this._getPanel() }>
+        <Options { ...this.props } />
+      </ModalPanel>
     )
+  }
+
+  _getPanel() {
+    const { label } = this.props
+    return {
+      title: `Choose ${label}`,
+      leftItems: [
+        { label: 'Cancel', handler: this._handleCancel.bind(this) }
+      ]
+    }
   }
 
   _handleCancel() {
@@ -41,6 +41,7 @@ class Search extends React.Component {
   }
 
 }
+
 // since we sent this component up to the modal, we need this to communicate
 // back with the parent
 const mapStateToProps = (state, props) => ({
