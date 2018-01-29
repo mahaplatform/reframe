@@ -61,6 +61,7 @@ export type State = {
 export type Props = {
   chosen?: Chosen,
   defaultValue: Chosen,
+  defaultFilters: Object,
   endpoint: string,
   exclude_ids: Array<number>,
   filtering?: boolean,

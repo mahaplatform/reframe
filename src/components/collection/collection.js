@@ -93,6 +93,8 @@ class Collection extends React.Component {
     const { buttons, endpoint, records } = this.props
     return (
       <div className={ this._getClass() }>
+        <div className="reframe-collection-canvas" onClick={ this._handleToggleTasks.bind(this) } />
+        <Tasks { ...this._getTasks() } />
         <div className="reframe-collection-body">
           <Header { ...this._getHeader() } />
           { records && <Results { ...this._getResults() } /> }
@@ -101,8 +103,6 @@ class Collection extends React.Component {
             <Buttons { ...this._getButtons() } />
           </CSSTransition>
         </div>
-        <div className="reframe-collection-canvas" onClick={ this._handleToggleTasks.bind(this) } />
-        <Tasks { ...this._getTasks() } />
       </div>
     )
   }

@@ -16,6 +16,7 @@ import _ from 'lodash'
 class ToggleList extends React.Component<Props, void> {
 
   static defaultProps = {
+    defaultFilters: [],
     exclude_ids: [],
     onReady: () => {},
     onChange: (value) => {}
@@ -99,8 +100,9 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   _getInfinite(): InfiniteProps {
-    const { endpoint, exclude_ids, query } = this.props
+    const { defaultFilters, endpoint, exclude_ids, query } = this.props
     const filter = {
+      ...defaultFilters,
       ...this.props.filter,
       q: query
     }
@@ -108,8 +110,7 @@ class ToggleList extends React.Component<Props, void> {
       endpoint,
       exclude_ids,
       filter,
-      layout: this._getLayout(),
-      footer: this._getFooter()
+      layout: this._getLayout()
     }
   }
 
@@ -127,10 +128,6 @@ class ToggleList extends React.Component<Props, void> {
         )) }
       </div>
     )
-  }
-
-  _getFooter(): Component {
-    return ({ all, total }) => all ? <span><strong>NOW SHOWING:</strong> { total } / { all } records</span> : ''
   }
 
   _getRecordClass(record: Object): string {

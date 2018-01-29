@@ -1,5 +1,3 @@
-// @flow
-
 import type { FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout, Select, SelectAll, State, Action } from './types'
 
 import _ from 'lodash'
@@ -17,12 +15,12 @@ const INITIAL_STATE: State = {
 const fetchRequest = (state: State, action: FetchRequest): State => ({
   ...state,
   request_id: action.request_id,
-  status: 'loading'
+  status: (status !== 'pending' && action.request.params.$page.skip === 0) ? 'refreshing' : 'loading'
 })
 
 const fetchSuccess = (state: State, action: FetchSuccess): State => {
   if(action.request_id !== state.request_id) return state
-  if(!_.includes(['loading','delayed'], state.status)) return state
+  if(!_.includes(['loading','refreshing','delayed'], state.status)) return state
   const loaded = state.records ? state.records.length : 0
   return {
     ...state,
