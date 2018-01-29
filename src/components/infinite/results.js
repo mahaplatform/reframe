@@ -6,6 +6,14 @@ export Loader from '../loader'
 import Message from '../message'
 import React from 'react'
 
+export const Appending = (): Node => (
+  <div className="reframe-infinite-loader">
+    <div className="ui active inverted dimmer">
+      <div className="ui small loader"></div>
+    </div>
+  </div>
+)
+
 export const Delayed = (): Node => {
 
   const message = {

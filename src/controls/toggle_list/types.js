@@ -62,6 +62,7 @@ export type Props = {
   chosen?: Chosen,
   defaultValue: Chosen,
   endpoint: string,
+  exclude_ids: Array<number>,
   filtering?: boolean,
   filters: Filters,
   filter?: Filter,

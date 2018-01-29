@@ -16,6 +16,7 @@ import _ from 'lodash'
 class ToggleList extends React.Component<Props, void> {
 
   static defaultProps = {
+    exclude_ids: [],
     onReady: () => {},
     onChange: (value) => {}
   }
@@ -98,13 +99,14 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   _getInfinite(): InfiniteProps {
-    const { endpoint, query } = this.props
+    const { endpoint, exclude_ids, query } = this.props
     const filter = {
       ...this.props.filter,
       q: query
     }
     return {
       endpoint,
+      exclude_ids,
       filter,
       layout: this._getLayout(),
       footer: this._getFooter()

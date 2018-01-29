@@ -84,6 +84,7 @@ class Collection extends React.Component {
   static defaultProps = {
     cacheKey: null,
     entity: 'record',
+    footer: true,
     search: true,
     selectable: false
   }
