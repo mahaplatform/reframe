@@ -43,9 +43,10 @@ var toggleFilter = exports.toggleFilter = function toggleFilter(id) {
   };
 };
 
-var toggleRecord = exports.toggleRecord = function toggleRecord(record) {
+var toggleRecord = exports.toggleRecord = function toggleRecord(multiple, record) {
   return {
     type: 'TOGGLE_RECORD',
+    multiple: multiple,
     record: record
   };
 };

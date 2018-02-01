@@ -41,6 +41,7 @@ export type ToggleFilter = {
 
 export type ToggleRecord = {
   type: 'TOGGLE_RECORD',
+  multiple: boolean,
   record: Record
 }
 
@@ -68,6 +69,7 @@ export type Props = {
   filters: Filters,
   filter?: Filter,
   format: Component,
+  multiple: boolean,
   query?: Query,
   sort?: string,
   text?: string,

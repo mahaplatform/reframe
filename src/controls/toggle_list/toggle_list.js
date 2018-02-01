@@ -18,12 +18,13 @@ class ToggleList extends React.Component<Props, void> {
   static defaultProps = {
     defaultFilters: [],
     exclude_ids: [],
+    multiple: false,
     onReady: () => {},
     onChange: (value) => {}
   }
 
   render(): Node {
-    const { chosen, filters, text } = this.props
+    const { chosen, filters, multiple, text } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-toggle-list-overlay" onClick={ this._handleToggleFilter.bind(this) } />
@@ -43,7 +44,7 @@ class ToggleList extends React.Component<Props, void> {
               </div>
             }
           </div>
-          { chosen && chosen.length > 0 &&
+          { multiple && chosen &&
             <div className="reframe-toggle-list-summary">
               { chosen.map((record, index) => (
                 <div key={`summary_token_${index}`} className="reframe-toggle-list-summary-token">
@@ -70,10 +71,10 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   componentDidUpdate(prevProps: Props): void {
-    const { chosen, onChange } = this.props
+    const { chosen, value, onChange } = this.props
     if(onChange && chosen && !_.isEqual(prevProps.chosen, chosen)) {
-      const ids = chosen.map(record => record.id)
-      onChange(ids)
+      const items = chosen.map(record => value ? _.get(record, value) : record)
+      onChange(items)
     }
   }
 
@@ -115,15 +116,24 @@ class ToggleList extends React.Component<Props, void> {
   }
 
   _getLayout(): Component {
-    const { format } = this.props
+    const { format, multiple } = this.props
     return ({ records }) => (
       <div className="reframe-search-results">
         { records.map((record, index) => (
           <div key={`record_${index}`} className={ this._getRecordClass(record) } onClick={ this._handleToggleRecord.bind(this, record) }>
-            <div className="reframe-search-item-icon">
-              { this._getChecked(record) ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
-            </div>
+            { multiple &&
+              <div className="reframe-search-item-icon">
+                <i className={ `fa fa-fw fa-${this._getIcon(record)}` } />
+              </div>
+            }
             <Format format={ format } { ...record } />
+            { !multiple &&
+              <div className="reframe-search-item-icon">
+                { this._getChecked(record) &&
+                  <i className="fa fa-fw fa-check" />
+                }
+              </div>
+            }
           </div>
         )) }
       </div>
@@ -142,14 +152,20 @@ class ToggleList extends React.Component<Props, void> {
     return _.find(chosen, { [value]: _.get(record, value) })
   }
 
+  _getIcon(record: Object): string {
+    const checked = this._getChecked(record)
+    if(checked) return 'check-circle'
+    return 'circle-o'
+  }
+
   _handleToggleFilter(): void {
     const { onToggleFilter } = this.props
     if(onToggleFilter) onToggleFilter()
   }
 
   _handleToggleRecord(record: any): void {
-    const { onToggleRecord } = this.props
-    if(onToggleRecord) onToggleRecord(record)
+    const { multiple, onToggleRecord } = this.props
+    if(onToggleRecord) onToggleRecord(multiple, record)
   }
 
 }

@@ -33,7 +33,8 @@ export const toggleFilter = (id: number): ToggleFilter => ({
   id
 })
 
-export const toggleRecord = (record: any): ToggleRecord => ({
+export const toggleRecord = (multiple: boolean, record: any): ToggleRecord => ({
   type: 'TOGGLE_RECORD',
+  multiple,
   record
 })

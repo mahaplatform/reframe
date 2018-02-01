@@ -53,10 +53,19 @@ var toggleFilter = function toggleFilter(state, action) {
 };
 
 var toggleRecord = function toggleRecord(state, action) {
+
+  var getChosen = function getChosen() {
+    if (!action.multiple) return [action.record];
+    if (_lodash2.default.find(state.chosen, { id: action.record.id }) !== undefined) {
+      return state.chosen.filter(function (record) {
+        return record.id !== action.record.id;
+      });
+    }
+    return [].concat(_toConsumableArray(state.chosen), [action.record]);
+  };
+
   return _extends({}, state, {
-    chosen: _lodash2.default.find(state.chosen, { id: action.record.id }) ? state.chosen.filter(function (record) {
-      return record.id !== action.record.id;
-    }) : [].concat(_toConsumableArray(state.chosen), [action.record])
+    chosen: getChosen()
   });
 };
 

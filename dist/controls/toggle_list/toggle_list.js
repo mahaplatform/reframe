@@ -59,6 +59,7 @@ var ToggleList = function (_React$Component) {
       var _props = this.props,
           chosen = _props.chosen,
           filters = _props.filters,
+          multiple = _props.multiple,
           text = _props.text;
 
       return _react2.default.createElement(
@@ -87,7 +88,7 @@ var ToggleList = function (_React$Component) {
               _react2.default.createElement('i', { className: 'fa fa-sliders' })
             )
           ),
-          chosen && chosen.length > 0 && _react2.default.createElement(
+          multiple && chosen && _react2.default.createElement(
             'div',
             { className: 'reframe-toggle-list-summary' },
             chosen.map(function (record, index) {
@@ -128,13 +129,14 @@ var ToggleList = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _props3 = this.props,
           chosen = _props3.chosen,
+          value = _props3.value,
           onChange = _props3.onChange;
 
       if (onChange && chosen && !_lodash2.default.isEqual(prevProps.chosen, chosen)) {
-        var ids = chosen.map(function (record) {
-          return record.id;
+        var items = chosen.map(function (record) {
+          return value ? _lodash2.default.get(record, value) : record;
         });
-        onChange(ids);
+        onChange(items);
       }
     }
   }, {
@@ -191,7 +193,9 @@ var ToggleList = function (_React$Component) {
     value: function _getLayout() {
       var _this3 = this;
 
-      var format = this.props.format;
+      var _props6 = this.props,
+          format = _props6.format,
+          multiple = _props6.multiple;
 
       return function (_ref) {
         var records = _ref.records;
@@ -202,12 +206,17 @@ var ToggleList = function (_React$Component) {
             return _react2.default.createElement(
               'div',
               { key: 'record_' + index, className: _this3._getRecordClass(record), onClick: _this3._handleToggleRecord.bind(_this3, record) },
-              _react2.default.createElement(
+              multiple && _react2.default.createElement(
                 'div',
                 { className: 'reframe-search-item-icon' },
-                _this3._getChecked(record) ? _react2.default.createElement('i', { className: 'fa fa-fw fa-check-circle' }) : _react2.default.createElement('i', { className: 'fa fa-fw fa-circle-o' })
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-' + _this3._getIcon(record) })
               ),
-              _react2.default.createElement(_format2.default, _extends({ format: format }, record))
+              _react2.default.createElement(_format2.default, _extends({ format: format }, record)),
+              !multiple && _react2.default.createElement(
+                'div',
+                { className: 'reframe-search-item-icon' },
+                _this3._getChecked(record) && _react2.default.createElement('i', { className: 'fa fa-fw fa-check' })
+              )
             );
           })
         );
@@ -229,6 +238,13 @@ var ToggleList = function (_React$Component) {
       return _lodash2.default.find(chosen, _defineProperty({}, value, _lodash2.default.get(record, value)));
     }
   }, {
+    key: '_getIcon',
+    value: function _getIcon(record) {
+      var checked = this._getChecked(record);
+      if (checked) return 'check-circle';
+      return 'circle-o';
+    }
+  }, {
     key: '_handleToggleFilter',
     value: function _handleToggleFilter() {
       var onToggleFilter = this.props.onToggleFilter;
@@ -238,9 +254,11 @@ var ToggleList = function (_React$Component) {
   }, {
     key: '_handleToggleRecord',
     value: function _handleToggleRecord(record) {
-      var onToggleRecord = this.props.onToggleRecord;
+      var _props7 = this.props,
+          multiple = _props7.multiple,
+          onToggleRecord = _props7.onToggleRecord;
 
-      if (onToggleRecord) onToggleRecord(record);
+      if (onToggleRecord) onToggleRecord(multiple, record);
     }
   }]);
 
@@ -250,6 +268,7 @@ var ToggleList = function (_React$Component) {
 ToggleList.defaultProps = {
   defaultFilters: [],
   exclude_ids: [],
+  multiple: false,
   onReady: function onReady() {},
   onChange: function onChange(value) {}
 };

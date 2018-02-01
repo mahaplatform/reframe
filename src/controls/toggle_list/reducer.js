@@ -36,13 +36,25 @@ const toggleFilter = (state: State, action: ToggleFilter): State => ({
   filtering: !state.filtering
 })
 
-const toggleRecord = (state: State, action: ToggleRecord): State => ({
-  ...state,
-  chosen: _.find(state.chosen, { id: action.record.id }) ? state.chosen.filter(record => record.id !== action.record.id) : [
-    ...state.chosen,
-    action.record
-  ]
-})
+const toggleRecord = (state: State, action: ToggleRecord): State => {
+
+  const getChosen = () => {
+    if(!action.multiple) return [action.record]
+    if(_.find(state.chosen, { id: action.record.id }) !== undefined) {
+      return state.chosen.filter(record => record.id !== action.record.id)
+    }
+    return [
+      ...state.chosen,
+      action.record
+    ]
+  }
+
+  return {
+    ...state,
+    chosen: getChosen()
+  }
+
+}
 
 const reducer = (state: State = INITIAL_STATE, action: Action): State => {
 
