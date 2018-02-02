@@ -1,42 +1,38 @@
-// @flow
-
-import type { LoadSuccess, SetChosen, SetQuery, SetFilter, ToggleFilter, ToggleRecord, State, Action} from './types'
-
 import _ from 'lodash'
 
-export const INITIAL_STATE: State = {
+export const INITIAL_STATE = {
   filtering: false,
   filter: {},
   query: '',
   chosen: []
 }
 
-const loadSuccess = (state: State, action: LoadSuccess): State => ({
+const loadSuccess = (state, action) => ({
   ...state,
   chosen: action.result.data
 })
 
-const setChosen = (state: State, action: SetChosen): State => ({
+const setChosen = (state, action) => ({
   ...state,
   chosen: action.chosen
 })
 
-const setQuery = (state: State, action: SetQuery): State => ({
+const setQuery = (state, action) => ({
   ...state,
   query: action.query
 })
 
-const setFilter = (state: State, action: SetFilter): State => ({
+const setFilter = (state, action) => ({
   ...state,
   filter: action.filter
 })
 
-const toggleFilter = (state: State, action: ToggleFilter): State => ({
+const toggleFilter = (state, action) => ({
   ...state,
   filtering: !state.filtering
 })
 
-const toggleRecord = (state: State, action: ToggleRecord): State => {
+const toggleRecord = (state, action) => {
 
   const getChosen = () => {
     if(!action.multiple) return [action.record]
@@ -56,7 +52,7 @@ const toggleRecord = (state: State, action: ToggleRecord): State => {
 
 }
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 

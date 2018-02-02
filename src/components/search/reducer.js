@@ -1,17 +1,13 @@
-// @flow
-
-import type { State, Action, Query } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   q: ''
 }
 
-const query = (state: State, action: Query): State => ({
+const query = (state, action) => ({
   ...state,
   q: action.q
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 

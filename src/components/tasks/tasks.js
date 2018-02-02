@@ -1,14 +1,9 @@
-// @flow
-
-import type { Node } from '../../types'
-import type { Item, Props, ChildContext } from './types'
-
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
 import Task from '../task'
 import React from 'react'
 
-class Tasks extends React.Component<Props, void> {
+class Tasks extends React.Component {
 
   static childContextTypes = {
     tasks: PropTypes.object
@@ -20,7 +15,7 @@ class Tasks extends React.Component<Props, void> {
     router: PropTypes.object
   }
 
-  render(): Node {
+  render() {
     const { children, items, open } = this.props
     return ([
       children,
@@ -42,14 +37,14 @@ class Tasks extends React.Component<Props, void> {
     ])
   }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { open, onClear } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClear, 500)
     }
   }
 
-  getChildContext(): ChildContext {
+  getChildContext() {
     const { onOpen, onClose } = this.props
     return {
       tasks: {
@@ -59,7 +54,7 @@ class Tasks extends React.Component<Props, void> {
     }
   }
 
-  _getTask(item: Item): any {
+  _getTask(item){
     return {
       ...item,
       className: 'reframe-task',

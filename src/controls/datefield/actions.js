@@ -1,40 +1,36 @@
-// @flow
-
-import type { SetValue, SetCurrent, Previous, Next, Begin, Cancel, Choose, Clear } from './types'
-
-export const setValue = (value: string): SetValue => ({
+export const setValue = (value) => ({
   type: 'SET_VALUE',
   value
 })
 
-export const setCurrent = (month: number, year: number): SetCurrent => ({
+export const setCurrent = (month, year) => ({
   type: 'SET_CURRENT',
   month,
   year
 })
 
-export const previous = (): Previous => ({
+export const previous = () => ({
   type: 'PREVIOUS'
 })
 
 
-export const next = (): Next => ({
+export const next = () => ({
   type: 'NEXT'
 })
 
-export const begin = (): Begin => ({
+export const begin = () => ({
   type: 'BEGIN'
 })
 
-export const cancel = (): Cancel => ({
+export const cancel = () => ({
   type: 'CANCEL'
 })
 
-export const choose = (value: string): Choose => ({
+export const choose = (value)=> ({
   type: 'CHOOSE',
   value
 })
 
-export const clear = (): Clear => ({
+export const clear = () => ({
   type: 'CLEAR'
 })

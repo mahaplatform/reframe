@@ -75,7 +75,8 @@ var Task = function (_React$Component) {
           location = _props3.location,
           modal = _props3.modal,
           request = _props3.request,
-          route = _props3.route;
+          route = _props3.route,
+          onDone = _props3.onDone;
 
       if (disabled) return;
       var yesHandler = function yesHandler() {
@@ -85,7 +86,7 @@ var Task = function (_React$Component) {
         if (drawer) _this2._handleDrawer(drawer, location);
         if (handler) _this2._handleFunction(handler);
       };
-      this.props.onDone();
+      onDone();
       if (confirm) return this.context.confirm.open(confirm, yesHandler);
       yesHandler();
     }

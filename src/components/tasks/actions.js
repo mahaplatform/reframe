@@ -1,16 +1,12 @@
-// @flow
-
-import type { Items, Open, Close, Clear } from './types'
-
-export const open = (items: Items): Open => ({
+export const open = (items) => ({
   type: 'OPEN',
   items
 })
 
-export const close = (): Close => ({
+export const close = () => ({
   type: 'CLOSE'
 })
 
-export const clear = (): Clear => ({
+export const clear = () => ({
   type: 'CLEAR'
 })

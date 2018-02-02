@@ -3,10 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.clearPanel = exports.removePanel = exports.addPanel = exports.toggleTasks = exports.setQuery = exports.setFilter = exports.setRecords = exports.filter = exports.sort = exports.setSelected = exports.setColumns = exports.setParams = undefined;
-
-var _types = require('../../types');
-
 var setParams = exports.setParams = function setParams(filter, sort) {
   return {
     type: 'SET_PARAMS',

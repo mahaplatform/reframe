@@ -1,8 +1,4 @@
-// @flow
-
-import type { ItemRequest, Request } from './types'
-
-export const request = ({ method, endpoint, body, onSuccess, onFailure }: ItemRequest): Request => ({
+export const request = ({ method, endpoint, body, onSuccess, onFailure }) => ({
   type: 'API_REQUEST',
   method,
   endpoint,

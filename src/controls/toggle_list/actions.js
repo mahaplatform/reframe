@@ -1,9 +1,4 @@
-// @flow
-
-import type { ApiRequest } from '../../types'
-import type { Chosen, Query, Filter, SetChosen, SetQuery, SetFilter, ToggleFilter, ToggleRecord } from './types'
-
-export const load = (endpoint: string, query: Object): ApiRequest => ({
+export const load = (endpoint, query) => ({
   type: 'API_REQUEST',
   method: 'GET',
   endpoint,
@@ -13,27 +8,27 @@ export const load = (endpoint: string, query: Object): ApiRequest => ({
   failure: 'LOAD_FAILURE'
 })
 
-export const setChosen = (chosen: Chosen): SetChosen => ({
+export const setChosen = (chosen) => ({
   type: 'SET_CHOSEN',
   chosen
 })
 
-export const setQuery = (query: Query): SetQuery => ({
+export const setQuery = (query)=> ({
   type: 'SET_QUERY',
   query
 })
 
-export const setFilter = (filter: Filter): SetFilter => ({
+export const setFilter = (filter) => ({
   type: 'SET_FILTER',
   filter
 })
 
-export const toggleFilter = (id: number): ToggleFilter => ({
+export const toggleFilter = (id: number) => ({
   type: 'TOGGLE_FILTER',
   id
 })
 
-export const toggleRecord = (multiple: boolean, record: any): ToggleRecord => ({
+export const toggleRecord = (multiple, record) => ({
   type: 'TOGGLE_RECORD',
   multiple,
   record

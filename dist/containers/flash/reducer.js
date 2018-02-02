@@ -3,8 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-
 var INITIAL_STATE = {
   message: null,
   style: null

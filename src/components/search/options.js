@@ -1,12 +1,8 @@
-// @flow
-
-import type { OptionsProps as Props, Option } from './types'
-
 import React from 'react'
 import _ from 'lodash'
 import Format from '../../utils/format'
 
-class Options extends React.Component<Props, void> {
+class Options extends React.Component{
 
   render() {
     const { format, options } = this.props
@@ -32,13 +28,13 @@ class Options extends React.Component<Props, void> {
     return classes.join(' ')
   }
 
-  _getChecked(option: Option): boolean {
+  _getChecked(option) {
     const { name, multiple, results } = this.props
     if(multiple) return results[name] && _.find(results[name], { key: option.value })
     return results[name] && results[name].key == option.value
   }
 
-  _handleChoose(option: Option): void {
+  _handleChoose(option) {
     const { value, text, token } = option
     const { name, multiple, results, onUpdate } = this.props
     let values = null

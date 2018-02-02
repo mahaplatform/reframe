@@ -1,8 +1,3 @@
-// @flow
-
-import type { SearchProps as Props, DynamicProps, OptionsProps, InfiniteProps } from './types'
-import type { Node } from '../../types'
-
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
 import { digest } from 'json-hash'
@@ -10,9 +5,9 @@ import Dynamic from './dynamic'
 import Options from './options'
 import React from 'react'
 
-class Search extends React.Component<Props, void> {
+class Search extends React.Component {
 
-  render(): Node {
+  render() {
     if(!this.props.endpoint) return <Options { ...this._getOptions() }  />
     return (
       <div className="reframe-search">
@@ -26,7 +21,7 @@ class Search extends React.Component<Props, void> {
     )
   }
 
-  _getOptions(): OptionsProps {
+  _getOptions() {
     const { format, name, multiple, options, results, onUpdate } = this.props
     return { format, name, multiple, options, results, onUpdate }
   }
@@ -39,14 +34,14 @@ class Search extends React.Component<Props, void> {
     }
   }
 
-  _getInfinite(): InfiniteProps {
+  _getInfinite(){
     const { endpoint, q, results, sort } = this.props
     const cacheKey = digest(results)
     return {
       cacheKey,
       endpoint,
       filter: { q },
-      layout: (props: DynamicProps) => <Dynamic { ...this._getDynamic() } { ...props } />,
+      layout: (props) => <Dynamic { ...this._getDynamic() } { ...props } />,
       sort
     }
   }

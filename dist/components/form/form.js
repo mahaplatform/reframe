@@ -67,11 +67,11 @@ var Form = function (_React$Component) {
 
       var configuring = _lodash2.default.includes(['pending', 'loading_sections', 'sections_loaded', 'loading_data'], status);
       return _react2.default.createElement(
-        _modal_panel2.default,
-        this._getPanel(),
+        'div',
+        { className: 'reframe-form' },
         _react2.default.createElement(
-          'div',
-          { className: 'reframe-form' },
+          _modal_panel2.default,
+          this._getPanel(),
           (before || instructions) && _react2.default.createElement(
             'div',
             { className: 'reframe-form-header' },
@@ -102,7 +102,8 @@ var Form = function (_React$Component) {
               after
             )
           )
-        )
+        ),
+        _react2.default.createElement(_modal_panel2.default, this._getPanel())
       );
     }
   }, {
@@ -130,6 +131,16 @@ var Form = function (_React$Component) {
         if (status === 'failure') this._handleFailure();
       }
       if (prevProps.data != data) this._handleChange(prevProps.data, data);
+    }
+  }, {
+    key: 'childContextTypes',
+    value: function childContextTypes() {
+      return {
+        form: {
+          push: this._hanldePush.bind(this),
+          pop: this._hanldePop.bind(this)
+        }
+      };
     }
   }, {
     key: '_getPanel',
@@ -284,6 +295,9 @@ var Form = function (_React$Component) {
   return Form;
 }(_react2.default.Component);
 
+Form.childContextTypes = {
+  form: _propTypes2.default.object
+};
 Form.contextTypes = {
   modal: _propTypes2.default.object
 };

@@ -1,7 +1,3 @@
-// @flow
-
-import type { Begin, End, Type, Abort } from './types'
-
 export const begin = () => ({
   type: 'BEGIN'
 })
@@ -10,11 +6,11 @@ export const end = () => ({
   type: 'END'
 })
 
-export const type = (q: string): Type => ({
+export const type = (q)=> ({
   type: 'TYPE',
   q
 })
 
-export const abort = (): Abort => ({
+export const abort = () => ({
   type: 'ABORT'
 })

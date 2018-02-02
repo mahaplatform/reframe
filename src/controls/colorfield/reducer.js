@@ -1,16 +1,12 @@
-// @flow
-
-import type { Set, Action, State } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   color: null
 }
 
-const set = (state: State, action: Set): State => ({
+const set = (state, action) => ({
   color: action.color
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 

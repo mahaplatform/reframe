@@ -1,9 +1,6 @@
-// @flow
-
-import type { Props } from './types'
 import React from 'react'
 
-class ColorField extends React.Component<Props, void> {
+class ColorField extends React.Component {
 
   static defaultProps = {
     colors: [
@@ -40,18 +37,18 @@ class ColorField extends React.Component<Props, void> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     const { defaultValue, onReady, onSet } = this.props
     if(defaultValue) onSet(defaultValue)
     onReady()
   }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { color, onChange } = this.props
     if(prevProps.color !== color) onChange(color)
   }
 
-  _handleSet(color: string): void {
+  _handleSet(color) {
     this.props.onSet(color)
   }
 

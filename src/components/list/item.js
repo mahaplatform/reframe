@@ -1,21 +1,16 @@
-// @flow
-
-import type { ItemProps as Props } from './types'
-import type { Node } from '../../types'
-
 import Format from '../../utils/format'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
-class Item extends React.Component<Props, void> {
+class Item extends React.Component {
 
   static contextTypes = {
     tasks: PropTypes.object
   }
 
-  render(): Node {
+  render() {
     const { alt, component, content, empty, extra, format, handler, icon, label, link, tasks, units } = this.props
     if(this.props.if === false) return null
     const item = (
@@ -63,7 +58,7 @@ class Item extends React.Component<Props, void> {
     return item
   }
 
-  _getClass(): string {
+  _getClass() {
     const { className, handler, link } = this.props
     const classes = ['reframe-list-item']
     if(className) classes.push(className)
@@ -71,7 +66,7 @@ class Item extends React.Component<Props, void> {
     return classes.join(' ')
   }
 
-  _handleTasks(): void {
+  _handleTasks() {
     const { tasks } = this.props
     this.context.tasks.open(tasks)
   }

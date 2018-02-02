@@ -1,13 +1,7 @@
-// @flow
-
-import type { Component, Node } from '../../types'
-import type { Location } from '../../containers/drawer/types'
-import type { Handler, ItemRequest, Props } from './types'
-
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Task extends React.Component<Props, void> {
+class Task extends React.Component {
 
   static contextTypes = {
     confirm: PropTypes.object,
@@ -22,7 +16,7 @@ class Task extends React.Component<Props, void> {
     onDone: () => {}
   }
 
-  render(): Node {
+  render() {
     const { icon, component, label } = this.props
     return (
       <div className={ this._getClass() } onClick={ this._handleChoose.bind(this) }>
@@ -41,8 +35,8 @@ class Task extends React.Component<Props, void> {
     return classes.join(' ')
   }
 
-  _handleChoose(index: number): void {
-    const { confirm, disabled, drawer, handler, location, modal, request, route } = this.props
+  _handleChoose(index: number) {
+    const { confirm, disabled, drawer, handler, location, modal, request, route, onDone } = this.props
     if(disabled) return
     const yesHandler = () => {
       if(route) this._handleRoute(route)
@@ -51,31 +45,31 @@ class Task extends React.Component<Props, void> {
       if(drawer) this._handleDrawer(drawer, location)
       if(handler) this._handleFunction(handler)
     }
-    this.props.onDone()
+    onDone()
     if(confirm) return this.context.confirm.open(confirm, yesHandler)
     yesHandler()
   }
 
-  _handleRoute(route: string): void {
+  _handleRoute(route: string) {
     const { router } = this.context
     router.history.push(route)
   }
 
-  _handleModal(component: Component): void {
+  _handleModal(component) {
     const { modal } = this.context
     modal.open(component)
   }
 
-  _handleDrawer(component: Component, location: Location): void {
+  _handleDrawer(component, location) {
     const { drawer } = this.context
     drawer.open(component, location)
   }
 
-  _handleFunction(handler: Handler): void {
+  _handleFunction(handler) {
     handler(() => {})
   }
 
-  _handleRequest(itemRequest: ItemRequest): void {
+  _handleRequest(itemRequest) {
     const { onRequest } = this.props
     const onFailure = (result) => {
       if(itemRequest.onFailure) itemRequest.onFailure(result)

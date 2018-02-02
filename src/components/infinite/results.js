@@ -1,12 +1,8 @@
-// @flow
-
-import type { Node } from '../../types'
 export Loader from '../loader'
-
 import Message from '../message'
 import React from 'react'
 
-export const Appending = (): Node => (
+export const Appending = () => (
   <div className="reframe-infinite-loader">
     <div className="ui active inverted dimmer">
       <div className="ui small loader"></div>
@@ -14,7 +10,7 @@ export const Appending = (): Node => (
   </div>
 )
 
-export const Delayed = (): Node => {
+export const Delayed = () => {
 
   const message = {
     text: 'This is taking longer than we expected...'
@@ -24,23 +20,19 @@ export const Delayed = (): Node => {
 
 }
 
-export const Timeout = (): Node => {
+export const Timeout = () => {
 
   const message = {
     icon: 'hourglass-end',
     title: 'Your request timed out',
-    text: 'It took too long to complete your request',
-    // button: {
-    //   label: 'Try Again',
-    //   handler: () => this._handleFetch.bind(this, 0)
-    // }
+    text: 'It took too long to complete your request'
   }
 
   return <Message { ...message } />
 
 }
 
-export const Empty = (): Node => {
+export const Empty = () => {
 
   const message = {
     icon: 'times',
@@ -52,7 +44,7 @@ export const Empty = (): Node => {
 
 }
 
-export const NotFound = (): Node => {
+export const NotFound = () => {
 
   const message = {
     icon: 'times',
@@ -64,7 +56,7 @@ export const NotFound = (): Node => {
 
 }
 
-export const Failure = (): Node => {
+export const Failure = () => {
 
   const message = {
     icon: 'exclamation-triangle ',

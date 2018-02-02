@@ -11,9 +11,7 @@
     "build": "npm run build:clean && npm run build:dist",
     "build:clean": "rm -rf ./dist",
     "build:dist": "babel ./src --out-dir ./dist",
-    "build:flow": "flow gen-flow-files ./src --out-dir ./dist",
     "coverage": "NODE_ENV=test NODE_PATH=./src nyc --reporter=lcov --reporter=text --recursive --require babel-core/register mocha ./src/**/tests.js",
-    "flow": "flow",
     "test": "NODE_ENV=test NODE_PATH=./src mocha --recursive --require babel-core/register ./src/**/tests.js",
     "watch": "NODE_ENV=test NODE_PATH=./src mocha --watch --reporter min --recursive --require babel-core/register ./src/**/tests.js"
   },

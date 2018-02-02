@@ -1,18 +1,13 @@
-// @flow
-
-import type { Component } from '../../types'
-import type { Location, Open, Close, Clear } from './types'
-
-export const open = (component: Component, location: Location): Open => ({
+export const open = (component, location) => ({
   type: 'OPEN',
   component,
   location
 })
 
-export const close = (): Close => ({
+export const close = () => ({
   type: 'CLOSE'
 })
 
-export const clear = (): Clear => ({
+export const clear = () => ({
   type: 'CLEAR'
 })

@@ -1,33 +1,29 @@
-// @flow
-
-import type { Begin, End, Type, Abort, State, Action } from './types'
-
-export const INITIAL_STATE: State = {
+export const INITIAL_STATE = {
   active: false,
   q: ''
 }
 
-const begin = (state: State, action: Begin): State => ({
+const begin = (state, action) => ({
   ...state,
   active: true
 })
 
-const end = (state: State, action: End): State => ({
+const end = (state, action) => ({
   ...state,
   active: false
 })
 
-const type = (state: State, action: Type): State => ({
+const type = (state, action) => ({
   ...state,
   q: action.q
 })
 
-const abort = (state: State, action: Abort): State => ({
+const abort = (state, action) => ({
   ...state,
   q: ''
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action: Action) => {
 
   switch (action.type) {
 

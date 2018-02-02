@@ -1,8 +1,4 @@
-// @flow
-
-import type { Set } from './types'
-
-export const set = (color: string): Set => ({
+export const set = (color)=> ({
   type: 'SET',
   color
 })

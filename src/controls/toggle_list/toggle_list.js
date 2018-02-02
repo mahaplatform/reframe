@@ -1,11 +1,3 @@
-// @flow
-
-import type { Component, Node } from '../../types'
-import type { Props } from './types'
-import type { Props as FiltersProps } from '../../components/filters/types'
-import type { Props as SearchboxProps } from '../../components/searchbox/types'
-import type { Props as InfiniteProps } from '../../components/infinite/types'
-
 import Searchbox from '../../components/searchbox'
 import Infinite from '../../components/infinite'
 import Filters from '../../components/filters'
@@ -13,7 +5,7 @@ import Format from '../../utils/format'
 import React from 'react'
 import _ from 'lodash'
 
-class ToggleList extends React.Component<Props, void> {
+class ToggleList extends React.Component{
 
   static defaultProps = {
     defaultFilters: [],
@@ -23,7 +15,7 @@ class ToggleList extends React.Component<Props, void> {
     onChange: (value) => {}
   }
 
-  render(): Node {
+  render() {
     const { chosen, filters, multiple, text } = this.props
     return (
       <div className={ this._getClass() }>
@@ -64,13 +56,13 @@ class ToggleList extends React.Component<Props, void> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     const { defaultValue, endpoint, onLoad, onReady } = this.props
     if(onLoad && defaultValue && defaultValue.length > 0) onLoad(endpoint, { $ids: defaultValue })
     if(onReady) onReady()
   }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { chosen, value, onChange } = this.props
     if(onChange && chosen && !_.isEqual(prevProps.chosen, chosen)) {
       const items = chosen.map(record => value ? _.get(record, value) : record)
@@ -78,13 +70,13 @@ class ToggleList extends React.Component<Props, void> {
     }
   }
 
-  _getClass(): string {
+  _getClass() {
     const classes = ['reframe-toggle-list']
     if(this.props.filtering) classes.push('filtering')
     return classes.join(' ')
   }
 
-  _getFilters(): FiltersProps {
+  _getFilters() {
     const { filters, filter, onSetFilter } = this.props
     return {
       filters,
@@ -93,14 +85,14 @@ class ToggleList extends React.Component<Props, void> {
     }
   }
 
-  _getSearchbox(): SearchboxProps {
+  _getSearchbox() {
     const { onSetQuery } = this.props
     return {
       onChange: onSetQuery
     }
   }
 
-  _getInfinite(): InfiniteProps {
+  _getInfinite() {
     const { defaultFilters, endpoint, exclude_ids, query } = this.props
     const filter = {
       ...defaultFilters,
@@ -115,7 +107,7 @@ class ToggleList extends React.Component<Props, void> {
     }
   }
 
-  _getLayout(): Component {
+  _getLayout() {
     const { format, multiple } = this.props
     return ({ records }) => (
       <div className="reframe-search-results">
@@ -140,30 +132,30 @@ class ToggleList extends React.Component<Props, void> {
     )
   }
 
-  _getRecordClass(record: Object): string {
+  _getRecordClass(record) {
     const classes = ['reframe-search-item']
     if(this._getChecked(record)) classes.push('checked')
     return classes.join(' ')
   }
 
-  _getChecked(record: Object): boolean {
+  _getChecked(record) {
     const { chosen } = this.props
     const value = this.props.value || 'id'
     return _.find(chosen, { [value]: _.get(record, value) })
   }
 
-  _getIcon(record: Object): string {
+  _getIcon(record) {
     const checked = this._getChecked(record)
     if(checked) return 'check-circle'
     return 'circle-o'
   }
 
-  _handleToggleFilter(): void {
+  _handleToggleFilter() {
     const { onToggleFilter } = this.props
     if(onToggleFilter) onToggleFilter()
   }
 
-  _handleToggleRecord(record: any): void {
+  _handleToggleRecord(record) {
     const { multiple, onToggleRecord } = this.props
     if(onToggleRecord) onToggleRecord(multiple, record)
   }

@@ -6,6 +6,10 @@ import _ from 'lodash'
 
 class Form extends React.Component {
 
+  static childContextTypes = {
+    form: PropTypes.object
+  }
+
   static contextTypes = {
     modal: PropTypes.object
   }
@@ -68,8 +72,8 @@ class Form extends React.Component {
     const { after, before, config, instructions, status } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
-      <ModalPanel { ...this._getPanel() }>
-        <div className="reframe-form">
+      <div className="reframe-form">
+        <ModalPanel { ...this._getPanel() }>
           { (before || instructions) &&
             <div className="reframe-form-header">
               { before && <div className="reframe-form-before">{ before }</div> }
@@ -88,8 +92,10 @@ class Form extends React.Component {
               <div className="reframe-form-after">{ after }</div>
             </div>
           }
-        </div>
-      </ModalPanel>
+        </ModalPanel>
+        <ModalPanel { ...this._getPanel() }>
+        </ModalPanel>
+      </div>
     )
   }
 
@@ -108,6 +114,15 @@ class Form extends React.Component {
       if(status === 'failure') this._handleFailure()
     }
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
+  }
+
+  childContextTypes() {
+    return {
+      form: {
+        push: this._hanldePush.bind(this),
+        pop: this._hanldePop.bind(this)
+      }
+    }
   }
 
   _getPanel() {

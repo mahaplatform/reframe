@@ -1,27 +1,23 @@
-// @flow
-
-import type { Open, Close, Clear, Action, State } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   component: null,
   open: false
 }
 
-const open = (state: State, action: Open): State => ({
+const open = (state, action) => ({
   component: action.component,
   open: true
 })
 
-const close = (state: State, action: Close): State => ({
+const close = (state, action) => ({
   ...state,
   open: false
 })
 
-const clear = (state: State, action: Clear): State => ({
+const clear = (state, action) => ({
   ...INITIAL_STATE
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 

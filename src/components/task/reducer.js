@@ -1,31 +1,27 @@
-// @flow
-
-import type { RequestRequest, RequestFailure, RequestSuccess, Action, State } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   error: null,
   result: null,
   status: 'pending'
 }
 
-const request_request = (state: State, action: RequestRequest): State => ({
+const request_request = (state, action) => ({
   ...state,
   status: 'submitting'
 })
 
-const request_failure = (state: State, action: RequestFailure): State => ({
+const request_failure = (state, action) => ({
   ...state,
   status: 'failure',
   error: action.result.error.message
 })
 
-const request_success = (state: State, action: RequestSuccess): State => ({
+const request_success = (state, action) => ({
   ...state,
   result: action.result.data,
   status: 'success'
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Action): State => {
+const reducer = (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 

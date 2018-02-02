@@ -1,13 +1,9 @@
-// @flow
-
-import type { Set, Clear, Action, State } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   message: null,
   style: null
 }
 
-export default (state: State = INITIAL_STATE, action: Action) => {
+export default (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
 
@@ -23,10 +19,10 @@ export default (state: State = INITIAL_STATE, action: Action) => {
 
 }
 
-const set = (state: State, action: Set): State => ({
+const set = (state, action) => ({
   style: action.style,
   message: action.message
 })
 
 
-const clear = (state: State, action: Clear): State => INITIAL_STATE
+const clear = (state, action) => INITIAL_STATE

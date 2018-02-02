@@ -1,16 +1,11 @@
-// @flow
-
-import type { SectionProps as Props } from './types'
-import type { Node } from '../../types'
-
 import Message from '../message'
 import Item from './item'
 import React from 'react'
 import _ from 'lodash'
 
-class Section extends React.Component<Props, void> {
+class Section extends React.Component {
 
-  render(): Node {
+  render() {
     const { component, content, empty, items, title } = this.props
     return (
       <div className="reframe-list-section">

@@ -1,14 +1,9 @@
-// @flow
-
-import type { Node } from '../../types'
-import type { Props, State, Column } from './types'
-
 import Format from '../../utils/format'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import React from 'react'
 
-class Table extends React.Component<Props, State> {
+class Table extends React.Component {
 
   _handleResize: any = _.debounce(this._resizeColumns, 100)
 
@@ -29,7 +24,7 @@ class Table extends React.Component<Props, State> {
     widths: []
   }
 
-  render(): Node {
+  render(){
     const { columns, link, records, recordTasks, selectable, selected, selectAll, sort } = this.props
     return (
       <div className="reframe-table">
@@ -107,12 +102,12 @@ class Table extends React.Component<Props, State> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount(){
     setTimeout(() => this._resizeColumns(), 250)
     window.addEventListener('resize', this._handleResize.bind(this))
   }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { columns } = this.props
     if(!_.isEqual(prevProps.columns, columns)) this._resizeColumns()
   }
@@ -121,14 +116,14 @@ class Table extends React.Component<Props, State> {
     window.removeEventListener('resize', this._handleResize.bind(this))
   }
 
-  _getHeaderClass(column: Column): string {
+  _getHeaderClass(column) {
     let classes = ['padded']
     if(column.primary === true) classes.push('mobile')
     if(column.format === 'check' || column.collapsing === true) classes.push('collapsing')
     return classes.join(' ')
   }
 
-  _getBodyClass(column: Column): string {
+  _getBodyClass(column) {
     let classes = []
     if(column.primary === true) classes.push('mobile')
     if(column.format === 'check' || column.collapsing === true) classes.push('collapsing')
@@ -138,7 +133,7 @@ class Table extends React.Component<Props, State> {
     return classes.join(' ')
   }
 
-  _getBodyRowClass(record: Object): string {
+  _getBodyRowClass(record) {
     const { link, modal, handler, rowClass } = this.props
     let classes = []
     if(link || modal || handler) classes.push('reframe-table-link')
@@ -147,56 +142,56 @@ class Table extends React.Component<Props, State> {
     return classes.join(' ')
   }
 
-  _getHeadStyle(index?: number): Object {
+  _getHeadStyle(index){
     const { widths } = this.state
     const width = (typeof index !== 'undefined') ? widths[index] : widths[widths.length - 1]
     return width ? { width: `${width}px` } : {}
   }
 
-  _resizeColumns(): void {
+  _resizeColumns() {
     if(!this.head) return
     const headerCells = Array.from(this.head.childNodes)
     const widths = headerCells.map((cell, index) => cell.offsetWidth)
     this.setState({ widths })
   }
 
-  _handleClick(record: Object): void {
+  _handleClick(record) {
     const { link, modal, handler } = this.props
     if(link) return this._handleLink(record)
     if(modal) return this._handleModal(record.id)
     if(handler) return this._handleHandler(record.id)
   }
 
-  _handleSelect(id: number): void {
+  _handleSelect(id) {
     this.props.onSelect(id)
   }
 
-  _handleSelectAll(): void {
+  _handleSelectAll() {
     this.props.onSelectAll()
   }
 
-  _handleLink(record: Object): void {
+  _handleLink(record) {
     const { link } = this.props
     _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const path = _.template(link)(record)
     this.context.router.history.push(path)
   }
 
-  _handleSort(column: Column): void {
+  _handleSort(column) {
     const key = column.sort || column.key
     this.props.onSort(key)
   }
 
-  _handleHandler(id: number): void {
+  _handleHandler(id) {
     this.props.handler(id)
   }
 
-  _handleModal(id: number): void {
+  _handleModal(id) {
     const { modal } = this.props
     this.context.model.open(modal)
   }
 
-  _handleTasks(id: number): void {
+  _handleTasks(id) {
     const { recordTasks } = this.props
     const tasks = recordTasks.map(task => {
       if(task.modal) {

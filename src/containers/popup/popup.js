@@ -1,20 +1,15 @@
-// @flow
-
-import type { Node } from '../../types'
-import type { Props, ChildContext } from './types'
-
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
-class Popup extends React.Component<Props, void> {
+class Popup extends React.Component{
 
   static childContextTypes = {
     popup: PropTypes.object
   }
 
-  render(): Node {
+  render() {
     const { children, component, open } = this.props
     return ([
       children,
@@ -28,14 +23,14 @@ class Popup extends React.Component<Props, void> {
     ])
   }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { open, onClear } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClear, 500)
     }
   }
 
-  getChildContext(): ChildContext {
+  getChildContext() {
     const { onOpen, onClose } = this.props
     return {
       popup: {

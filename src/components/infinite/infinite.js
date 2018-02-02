@@ -1,15 +1,9 @@
-// @flow
-
-import type { Component, Node } from '../../types'
-import type { Props } from './types'
-import type { Props as ScrollpaneProps } from '../scrollpane/types'
-
 import React from 'react'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
 import { Appending, Delayed, Empty, Failure, Loader, NotFound, Timeout } from './results'
 
-class Infinite extends React.Component<Props, void> {
+class Infinite extends React.Component {
 
   timeout: any = null
 
@@ -61,7 +55,7 @@ class Infinite extends React.Component<Props, void> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount(){
     this.timeout = null
     this._handleFetch(0)
   }
@@ -86,17 +80,17 @@ class Infinite extends React.Component<Props, void> {
     }
   }
 
-  _getComponent(component: Component): Component {
+  _getComponent(component){
     return _.isFunction(component) ? React.createElement(component, this.props) : component
   }
 
-  _getScrollpane(): ScrollpaneProps {
+  _getScrollpane() {
     return {
       onReachBottom: this._handleFetch.bind(this)
     }
   }
 
-  _handleFetch(skip: ?number = null): void {
+  _handleFetch(skip = null) {
     const { endpoint, exclude_ids, filter, records, sort, total, onFetch } = this.props
     const loaded = records ? records.length : 0
     const query = {
@@ -109,20 +103,20 @@ class Infinite extends React.Component<Props, void> {
     this.timeout = setTimeout(this._handleDelay.bind(this), 3000)
   }
 
-  _handleDelay(): void {
+  _handleDelay() {
     const { status, onFetchDelay } = this.props
     if(status !== 'loading') return
     if(onFetchDelay) onFetchDelay()
     this.timeout = setTimeout(this._handleTimeout.bind(this), 3000)
   }
 
-  _handleTimeout(): void {
+  _handleTimeout() {
     const { status, onFetchTimeout } = this.props
     if(status !== 'delyed') return
     if(onFetchTimeout) onFetchTimeout()
   }
 
-  _handleRefresh(): void {
+  _handleRefresh() {
     const { onFetchTimeout } = this.props
     if(onFetchTimeout) onFetchTimeout()
   }

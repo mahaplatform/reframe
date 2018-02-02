@@ -1,63 +1,57 @@
-// @flow
-
-import type { Column, SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, SetSelected } from './types'
-
-import { Component } from '../../types'
-
-export const setParams = (filter: Object, sort: Object): SetParams => ({
+export const setParams = (filter, sort) => ({
   type: 'SET_PARAMS',
   filter,
   sort
 })
 
-export const setColumns = (columns: Array<Column>): SetColumns => ({
+export const setColumns = (columns) => ({
   type: 'SET_COLUMNS',
   columns
 })
 
-export const setSelected = (selected: Array<number>): SetSelected => ({
+export const setSelected = (selected) => ({
   type: 'SET_SELECTED',
   selected
 })
 
-export const sort = (key: string): Sort => ({
+export const sort = (key) => ({
   type: 'SORT',
   key
 })
 
-export const filter = (filter: Object): Filter => ({
+export const filter = (filter) => ({
   type: 'FILTER',
   filter
 })
 
-export const setRecords = (records: Array<Object>): SetRecords => ({
+export const setRecords = (records) => ({
   type: 'SET_RECORDS',
   records
 })
 
-export const setFilter = (filter: Object): SetFilter => ({
+export const setFilter = (filter) => ({
   type: 'SET_FILTER',
   filter
 })
 
-export const setQuery = (q: string): SetQuery => ({
+export const setQuery = (q) => ({
   type: 'SET_QUERY',
   q
 })
 
-export const toggleTasks = (): ToggleTasks => ({
+export const toggleTasks = () => ({
   type: 'TOGGLE_TASKS'
 })
 
-export const addPanel = (panel: Component): AddPanel => ({
+export const addPanel = (panel) => ({
   type: 'ADD_PANEL',
   panel
 })
 
-export const removePanel = (panel: Component): RemovePanel => ({
+export const removePanel = (panel)=> ({
   type: 'REMOVE_PANEL'
 })
 
-export const clearPanel = (panel: Component): ClearPanel => ({
+export const clearPanel = (panel) => ({
   type: 'CLEAR_PANEL'
 })

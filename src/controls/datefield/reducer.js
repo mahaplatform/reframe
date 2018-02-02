@@ -1,59 +1,55 @@
-// @flow
-
-import type { SetValue, SetCurrent, Previous, Next, Begin, Cancel, Choose, Clear, Action, State } from './types'
-
-const INITIAL_VALUE: State = {
+const INITIAL_VALUE = {
   active: false,
   value: null,
   month: null,
   year: null
 }
 
-const setCurrent = (state: State, action: SetCurrent): State => ({
+const setCurrent = (state, action) => ({
   ...state,
   month: action.month,
   year: action.year
 })
 
-const setValue = (state: State, action: SetValue): State => ({
+const setValue = (state, action) => ({
   ...state,
   value: action.value
 })
 
-const previous = (state: State, action: Previous): State => ({
+const previous = (state, action) => ({
   ...state,
   month: state.month !== null ? (state.month === 0 ? 11 : state.month - 1) : null,
   year: state.year !== null ? (state.month === 0 ? state.year - 1 : state.year) : null
 })
 
-const next = (state: State, action: Next): State => ({
+const next = (state, action) => ({
   ...state,
   month: state.month !== null ? (state.month === 11 ? 0 : state.month + 1) : null,
   year: state.year !== null ? (state.month === 11 ? state.year + 1 : state.year) : null
 })
 
-const begin = (state: State, action: Begin): State => ({
+const begin = (state, action) => ({
   ...state,
   active: true
 })
 
-const cancel = (state: State, action: Cancel): State => ({
+const cancel = (state, action) => ({
   ...state,
   active: false
 })
 
-const choose = (state: State, action: Choose): State => ({
+const choose = (state, action) => ({
   ...state,
   value: action.value,
   active: false
 })
 
-const clear = (state: State, action: Clear): State => ({
+const clear = (state, action) => ({
   ...state,
   value: null
 })
 
-const reducer = (state: State = INITIAL_VALUE, action: Action): State => {
+const reducer = (state = INITIAL_VALUE, action) => {
 
   switch (action.type) {
 

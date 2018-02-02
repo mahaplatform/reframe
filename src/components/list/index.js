@@ -1,15 +1,10 @@
-// @flow
-
-import type { Node } from '../../types'
-import type { ListProps as Props } from './types'
-
 import Section from './section'
 import React from 'react'
 import _ from 'lodash'
 
-class List extends React.Component<Props, void> {
+class List extends React.Component {
 
-  render(): Node {
+  render() {
     const { alert, empty, footer, header, items, sections } = this.props
     return (
       <div className="reframe-list">

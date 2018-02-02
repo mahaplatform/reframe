@@ -1,25 +1,20 @@
-// @flow
-
-import type { DynamicProps as Props, OptionsProps, Option } from './types'
-import type { Node } from '../../types'
-
 import React from 'react'
 import Options from './options'
 import _ from 'lodash'
 
-class Dynamic extends React.Component<Props, void> {
+class Dynamic extends React.Component {
 
-  render(): Node {
+  render() {
     return (this.props.records) ? <Options { ...this._getOptions() } /> : null
   }
 
-  _getOptions(): OptionsProps {
+  _getOptions() {
     const { format, multiple, name, records, results, status, onUpdate } = this.props
     const options = records.map(this._getOption.bind(this))
     return { name, format, multiple, options, results, status, onUpdate }
   }
 
-  _getOption(record: any): Option {
+  _getOption(record: any) {
     const { text, value } = this.props
     return {
       value: _.get(record, value),

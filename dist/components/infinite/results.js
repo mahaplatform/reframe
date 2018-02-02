@@ -47,10 +47,6 @@ var Timeout = exports.Timeout = function Timeout() {
     icon: 'hourglass-end',
     title: 'Your request timed out',
     text: 'It took too long to complete your request'
-    // button: {
-    //   label: 'Try Again',
-    //   handler: () => this._handleFetch.bind(this, 0)
-    // }
   };
 
   return _react2.default.createElement(_message2.default, message);

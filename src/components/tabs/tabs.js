@@ -1,13 +1,8 @@
-// @flow
-
-import type { Node } from '../../types'
-import type { Props, ComponentState } from './types'
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-class Tabs extends React.Component<Props, ComponentState> {
+class Tabs extends React.Component {
 
   static contextTypes = {
     stack: PropTypes.object
@@ -27,7 +22,7 @@ class Tabs extends React.Component<Props, ComponentState> {
     transitioning: false
   }
 
-  render(): Node {
+  render() {
     const { header, items } = this.props
     return (
       <div className="reframe-tabs">
@@ -58,18 +53,18 @@ class Tabs extends React.Component<Props, ComponentState> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.props.onChoose(0)
   }
 
-  _getItemClass(index: number): string {
+  _getItemClass(index) {
     const { chosen } = this.props
     const classes = ['reframe-tabs-item']
     if(index === chosen) classes.push('active')
     return classes.join(' ')
   }
 
-  _getTabClass(index: number): string {
+  _getTabClass(index) {
     const { transitioning } = this.state
     const { chosen } = this.props
     const classes = ['reframe-tab']
@@ -97,17 +92,17 @@ class Tabs extends React.Component<Props, ComponentState> {
     }
   }
 
-  _handleTouchStart(e: any): void {
+  _handleTouchStart(e) {
     this._swipe = { x: e.touches[0].clientX }
   }
 
-  _handleTouchMove(e: any): void {
+  _handleTouchMove(e) {
     if (e.changedTouches && e.changedTouches.length) {
       this._swipe.swiping = true
     }
   }
 
-  _handleTouchEnd(e: any): void {
+  _handleTouchEnd(e) {
     const { chosen, items } = this.props
     const touch = e.changedTouches[0]
     const dist = touch.clientX - this._swipe.x

@@ -1,10 +1,6 @@
-// @flow
-
-import type { Props, State } from './types'
-
 import React from 'react'
 
-class Checkbox extends React.Component<Props, State> {
+class Checkbox extends React.Component {
 
   static defaultProps = {
     defaultValue: false,
@@ -15,7 +11,7 @@ class Checkbox extends React.Component<Props, State> {
     onReady: () => {}
   }
 
-  state: State = {
+  state = {
     value: false
   }
 
@@ -30,29 +26,29 @@ class Checkbox extends React.Component<Props, State> {
     )
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     const { defaultValue, onReady } = this.props
     const value = defaultValue || false
     this.setValue(value)
     if(onReady) onReady()
   }
 
-  _getClass(): string {
+  _getClass() {
     const { disabled } = this.props
     return disabled ? 'ui disabled checkbox' : 'ui checkbox'
   }
 
-  _getToggleClass(): string {
+  _getToggleClass() {
     return `toggle ${this.state.value ? 'on' : 'off'} icon`
   }
 
-  _handleChange(value: boolean): void {
+  _handleChange(value) {
     const { onClick } = this.props
     if(onClick) onClick()
     this.setValue(!this.state.value)
   }
 
-  setValue(value: boolean): void {
+  setValue(value) {
     const { onChange } = this.props
     this.setState({ value })
     if(onChange) onChange(value)

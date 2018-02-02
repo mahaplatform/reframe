@@ -1,8 +1,4 @@
-// @flow
-
-import type { Choose } from './types'
-
-export const choose = (index: number): Choose => ({
+export const choose = (index) => ({
   type: 'CHOOSE',
   index
 })

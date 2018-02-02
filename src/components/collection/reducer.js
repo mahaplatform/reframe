@@ -1,8 +1,4 @@
-// @flow
-
-import type { SetParams, Sort, Filter, SetRecords, SetFilter, SetQuery, ToggleTasks, AddPanel, RemovePanel, ClearPanel, SetColumns, SetSelected, Actions, State } from './types'
-
-const INITIAL_STATE: State = {
+const INITIAL_STATE = {
   columns: [],
   filter: {},
   managing: false,
@@ -17,28 +13,28 @@ const INITIAL_STATE: State = {
   }
 }
 
-const setParams = (state: State, action: SetParams): State => ({
+const setParams = (state, action) => ({
   ...state,
   filter: action.filter,
   sort: action.sort
 })
 
-const setColumns = (state: State, action: SetColumns): State => ({
+const setColumns = (state, action) => ({
   ...state,
   columns: action.columns
 })
 
-const setSelected = (state: State, action: SetSelected): State => ({
+const setSelected = (state, action) => ({
   ...state,
   selected: action.selected
 })
 
-const filter = (state: State, action: Filter): State => ({
+const filter = (state, action) => ({
   ...state,
   filter: action.filter
 })
 
-const sort = (state: State, action: Sort): State => ({
+const sort = (state, action) => ({
   ...state,
   sort: {
     key: action.key,
@@ -46,43 +42,43 @@ const sort = (state: State, action: Sort): State => ({
   }
 })
 
-const setRecords = (state: State, action: SetRecords): State => ({
+const setRecords = (state, action) => ({
   ...state,
   records: action.records
 })
 
-const setFilter = (state: State, action: SetFilter): State => ({
+const setFilter = (state, action) => ({
   ...state,
   filter: action.filter
 })
 
-const setQuery = (state: State, action: SetQuery): State => ({
+const setQuery = (state, action) => ({
   ...state,
   q: action.q
 })
 
-const toggleTasks = (state: State, action: ToggleTasks): State => ({
+const toggleTasks = (state, action) => ({
   ...state,
   managing: !state.managing
 })
 
-const addPanel = (state: State, action: AddPanel): State => ({
+const addPanel = (state, action) => ({
   ...state,
   open: true,
   panel: action.panel
 })
 
-const removePanel = (state: State, action: RemovePanel): State => ({
+const removePanel = (state, action) => ({
   ...state,
   open: false
 })
 
-const clearPanel = (state: State, action: ClearPanel): State => ({
+const clearPanel = (state, action) => ({
   ...state,
   panel: null
 })
 
-const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
+const reducer = (state = INITIAL_STATE, action)=> {
 
   switch (action.type) {
 
