@@ -8,6 +8,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _reactTransitionGroup = require('react-transition-group');
+
 var _modal_panel = require('../modal_panel');
 
 var _modal_panel2 = _interopRequireDefault(_modal_panel);
@@ -63,6 +65,7 @@ var Form = function (_React$Component) {
           before = _props.before,
           config = _props.config,
           instructions = _props.instructions,
+          panels = _props.panels,
           status = _props.status;
 
       var configuring = _lodash2.default.includes(['pending', 'loading_sections', 'sections_loaded', 'loading_data'], status);
@@ -103,7 +106,25 @@ var Form = function (_React$Component) {
             )
           )
         ),
-        _react2.default.createElement(_modal_panel2.default, this._getPanel())
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-form-panels' },
+          _react2.default.createElement(
+            _reactTransitionGroup.TransitionGroup,
+            null,
+            panels.map(function (panel, index) {
+              return _react2.default.createElement(
+                _reactTransitionGroup.CSSTransition,
+                { classNames: 'stack', timeout: 500, key: 'panel_' + index },
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _lodash2.default.isFunction(panel) ? _react2.default.createElement(panel) : panel
+                )
+              );
+            })
+          )
+        )
       );
     }
   }, {
@@ -133,12 +154,12 @@ var Form = function (_React$Component) {
       if (prevProps.data != data) this._handleChange(prevProps.data, data);
     }
   }, {
-    key: 'childContextTypes',
-    value: function childContextTypes() {
+    key: 'getChildContext',
+    value: function getChildContext() {
       return {
         form: {
-          push: this._hanldePush.bind(this),
-          pop: this._hanldePop.bind(this)
+          push: this._handlePush.bind(this),
+          pop: this._handlePop.bind(this)
         }
       };
     }
@@ -197,6 +218,18 @@ var Form = function (_React$Component) {
         onSubmit: this._handleSubmit.bind(this),
         onUpdateData: this._handleUpdateData.bind(this)
       });
+    }
+  }, {
+    key: '_handlePop',
+    value: function _handlePop() {
+      var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      this.props.onPop(num);
+    }
+  }, {
+    key: '_handlePush',
+    value: function _handlePush(component) {
+      this.props.onPush(component);
     }
   }, {
     key: '_handleCancel',
@@ -298,9 +331,6 @@ var Form = function (_React$Component) {
 Form.childContextTypes = {
   form: _propTypes2.default.object
 };
-Form.contextTypes = {
-  modal: _propTypes2.default.object
-};
 Form.propTypes = {
   action: _propTypes2.default.string,
   after: _propTypes2.default.string,
@@ -318,6 +348,7 @@ Form.propTypes = {
   isReady: _propTypes2.default.bool,
   isBusy: _propTypes2.default.bool,
   method: _propTypes2.default.string,
+  panels: _propTypes2.default.array,
   ready: _propTypes2.default.array,
   saveText: _propTypes2.default.string,
   sections: _propTypes2.default.array,

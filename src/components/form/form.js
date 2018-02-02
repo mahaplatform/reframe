@@ -1,3 +1,4 @@
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import ModalPanel from '../modal_panel'
 import PropTypes from 'prop-types'
 import Section from './section'
@@ -8,10 +9,6 @@ class Form extends React.Component {
 
   static childContextTypes = {
     form: PropTypes.object
-  }
-
-  static contextTypes = {
-    modal: PropTypes.object
   }
 
   static propTypes = {
@@ -31,6 +28,7 @@ class Form extends React.Component {
     isReady: PropTypes.bool,
     isBusy: PropTypes.bool,
     method: PropTypes.string,
+    panels: PropTypes.array,
     ready: PropTypes.array,
     saveText: PropTypes.string,
     sections: PropTypes.array,
@@ -69,7 +67,7 @@ class Form extends React.Component {
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, status } = this.props
+    const { after, before, config, instructions, panels, status } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
       <div className="reframe-form">
@@ -93,8 +91,17 @@ class Form extends React.Component {
             </div>
           }
         </ModalPanel>
-        <ModalPanel { ...this._getPanel() }>
-        </ModalPanel>
+        <div className="reframe-form-panels">
+          <TransitionGroup>
+            { panels.map((panel, index) => (
+              <CSSTransition classNames="stack" timeout={ 500 } key={ `panel_${index}` }>
+                <div>
+                  { _.isFunction(panel) ? React.createElement(panel) : panel }
+                </div>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </div>
       </div>
     )
   }
@@ -116,11 +123,11 @@ class Form extends React.Component {
     if(prevProps.data != data) this._handleChange(prevProps.data, data)
   }
 
-  childContextTypes() {
+  getChildContext() {
     return {
       form: {
-        push: this._hanldePush.bind(this),
-        pop: this._hanldePop.bind(this)
+        push: this._handlePush.bind(this),
+        pop: this._handlePop.bind(this)
       }
     }
   }
@@ -170,6 +177,14 @@ class Form extends React.Component {
       onSubmit: this._handleSubmit.bind(this),
       onUpdateData: this._handleUpdateData.bind(this)
     }
+  }
+  
+  _handlePop(num = 1) {
+    this.props.onPop(num)
+  }
+
+  _handlePush(component) {
+    this.props.onPush(component)
   }
 
   _handleCancel() {

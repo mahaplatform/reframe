@@ -6,7 +6,7 @@ import React from 'react'
 class Datefield extends React.Component {
 
   static contextTypes = {
-    modal: PropTypes.object
+    form: PropTypes.object
   }
 
   static propTypes = {
@@ -69,7 +69,7 @@ class Datefield extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { active, value, onChange } = this.props
-    const { modal } = this.context
+    const { form } = this.context
     if(prevProps.value !== value) {
       if(value) {
         onChange(value.format('YYYY-MM-DD'))
@@ -79,9 +79,9 @@ class Datefield extends React.Component {
     }
     if(active !== prevProps.active) {
       if(active) {
-        modal.push(<Chooser { ...this._getChooser() } />)
+        form.push(<Chooser { ...this._getChooser() } />)
       } else  {
-        modal.pop()
+        form.pop()
       }
     }
   }

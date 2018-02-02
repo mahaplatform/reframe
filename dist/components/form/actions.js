@@ -32,6 +32,21 @@ var fetchData = exports.fetchData = function fetchData(endpoint) {
   };
 };
 
+var pop = exports.pop = function pop() {
+  var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  return {
+    type: 'POP',
+    num: num
+  };
+};
+
+var push = exports.push = function push(component) {
+  return {
+    type: 'PUSH',
+    component: component
+  };
+};
+
 var setData = exports.setData = function setData(data) {
   return {
     type: 'SET_DATA',

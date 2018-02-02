@@ -1,4 +1,3 @@
-import { CSSTransition } from 'react-transition-group'
 import ValueToken from './value_token'
 import PropTypes from 'prop-types'
 import Format from '../../utils/format'
@@ -10,7 +9,7 @@ import _ from 'lodash'
 class Lookup extends React.Component {
 
   static contextTypes = {
-    modal: PropTypes.object
+    form: PropTypes.object
   }
 
   static propTypes = {
@@ -97,12 +96,12 @@ class Lookup extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { modal } = this.context
+    const { form } = this.context
     const { active, adding, disabled, status, onClear, onReady } = this.props
     if(prevProps.status !== status && status === 'success') onReady()
     if(prevProps.disabled !== disabled) onClear()
-    if(!prevProps.active && active) modal.push(<Search { ...this._getSearch() } />)
-    if(!prevProps.adding && adding) modal.push(<Form { ...this._getForm() } />)
+    if(!prevProps.active && active) form.push(<Search { ...this._getSearch() } />)
+    if(!prevProps.adding && adding) form.push(<Form { ...this._getForm() } />)
   }
 
   _getSearch() {
@@ -120,19 +119,19 @@ class Lookup extends React.Component {
   }
 
   _getForm() {
-    const { modal } = this.context
-    const { form, value, onChoose, onChange, onHideForm } = this.props
+    const { form } = this.context
+    const { value, onChoose, onChange, onHideForm } = this.props
     return {
-      ...form,
+      ...this.props.form,
       onCancel: () => {
         onHideForm()
-        modal.pop()
+        form.pop()
       },
       onSuccess: (chosen) => {
         onChoose(chosen)
         onHideForm()
         onChange(_.get(chosen, value))
-        modal.pop(2)
+        form.pop(2)
       }
     }
   }

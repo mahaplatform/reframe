@@ -1,13 +1,14 @@
 import _ from 'lodash'
 
 const INITIAL_STATE = {
-  status: 'pending',
+  busy: [],
   config: [],
-  entity: {},
   data: {},
+  entity: {},
   errors: {},
+  panels: [],
   ready: [],
-  busy: []
+  status: 'pending'
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,6 +35,21 @@ export default (state = INITIAL_STATE, action) => {
       config: action.result.data
     }
 
+  case 'POP':
+    return {
+      ...state,
+      panels: state.panels.slice(0, 0 - action.num)
+    }
+
+  case 'PUSH':
+    return {
+      ...state,
+      panels: [
+        ...state.panels,
+        action.component
+      ]
+    }
+    
   case 'SET_DATA':
     return {
       ...state,

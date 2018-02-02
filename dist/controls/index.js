@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.Select = exports.Password = exports.MoneyField = exports.Lookup = exports.FileField = exports.Hidden = exports.DateField = exports.ColorField = exports.Checkbox = undefined;
+exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.Select = exports.Password = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.DateField = exports.ColorField = exports.Checkbox = undefined;
 
 var _checkbox = require('./checkbox');
 
@@ -28,6 +28,10 @@ var _filefield2 = _interopRequireDefault(_filefield);
 var _lookup = require('./lookup');
 
 var _lookup2 = _interopRequireDefault(_lookup);
+
+var _lookup3 = require('./lookup2');
+
+var _lookup4 = _interopRequireDefault(_lookup3);
 
 var _moneyfield = require('./moneyfield');
 
@@ -77,6 +81,7 @@ exports.DateField = _datefield2.default;
 exports.Hidden = _hidden2.default;
 exports.FileField = _filefield2.default;
 exports.Lookup = _lookup2.default;
+exports.Lookup2 = _lookup4.default;
 exports.MoneyField = _moneyfield2.default;
 exports.Password = _password2.default;
 exports.Select = _select2.default;

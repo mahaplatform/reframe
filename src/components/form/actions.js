@@ -21,6 +21,16 @@ export const fetchData = (endpoint) => ({
   failure: 'FETCH_DATA_FAILURE'
 })
 
+export const pop = (num = 1) => ({
+  type: 'POP',
+  num
+})
+
+export const push = (component) => ({
+  type: 'PUSH',
+  component
+})
+
 export const setData = (data) => ({
   type: 'SET_DATA',
   data

@@ -17,13 +17,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = {
-  status: 'pending',
+  busy: [],
   config: [],
-  entity: {},
   data: {},
+  entity: {},
   errors: {},
+  panels: [],
   ready: [],
-  busy: []
+  status: 'pending'
 };
 
 exports.default = function () {
@@ -48,6 +49,16 @@ exports.default = function () {
       return _extends({}, state, {
         status: 'sections_loaded',
         config: action.result.data
+      });
+
+    case 'POP':
+      return _extends({}, state, {
+        panels: state.panels.slice(0, 0 - action.num)
+      });
+
+    case 'PUSH':
+      return _extends({}, state, {
+        panels: [].concat(_toConsumableArray(state.panels), [action.component])
       });
 
     case 'SET_DATA':

@@ -91,7 +91,7 @@ var Datefield = function (_React$Component) {
           active = _props3.active,
           value = _props3.value,
           onChange = _props3.onChange;
-      var modal = this.context.modal;
+      var form = this.context.form;
 
       if (prevProps.value !== value) {
         if (value) {
@@ -102,9 +102,9 @@ var Datefield = function (_React$Component) {
       }
       if (active !== prevProps.active) {
         if (active) {
-          modal.push(_react2.default.createElement(_chooser2.default, this._getChooser()));
+          form.push(_react2.default.createElement(_chooser2.default, this._getChooser()));
         } else {
-          modal.pop();
+          form.pop();
         }
       }
     }
@@ -143,7 +143,7 @@ var Datefield = function (_React$Component) {
 }(_react2.default.Component);
 
 Datefield.contextTypes = {
-  modal: _propTypes2.default.object
+  form: _propTypes2.default.object
 };
 Datefield.propTypes = {
   active: _propTypes2.default.bool,

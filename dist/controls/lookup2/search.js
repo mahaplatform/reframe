@@ -10,15 +10,15 @@ var _modal_panel = require('../../components/modal_panel');
 
 var _modal_panel2 = _interopRequireDefault(_modal_panel);
 
+var _toggle_list = require('../toggle_list');
+
+var _toggle_list2 = _interopRequireDefault(_toggle_list);
+
 var _reactRedux = require('react-redux');
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _options = require('./options');
-
-var _options2 = _interopRequireDefault(_options);
 
 var _react = require('react');
 
@@ -47,24 +47,65 @@ var Search = function (_React$Component) {
       return _react2.default.createElement(
         _modal_panel2.default,
         this._getPanel(),
-        _react2.default.createElement(_options2.default, this.props)
+        _react2.default.createElement(_toggle_list2.default, this._getToggleList())
       );
     }
   }, {
     key: '_getPanel',
     value: function _getPanel() {
-      var label = this.props.label;
+      var _props = this.props,
+          label = _props.label,
+          multiple = _props.multiple;
 
       return {
         title: 'Choose ' + label,
-        leftItems: [{ label: 'Cancel', handler: this._handleCancel.bind(this) }]
+        leftItems: [{ label: 'Cancel', handler: this._handleCancel.bind(this) }],
+        rightItems: multiple ? [{ label: 'Done', handler: this._handleDone.bind(this) }] : null
       };
+    }
+  }, {
+    key: '_getToggleList',
+    value: function _getToggleList() {
+      var _props2 = this.props,
+          endpoint = _props2.endpoint,
+          format = _props2.format,
+          multiple = _props2.multiple,
+          selected = _props2.selected,
+          text = _props2.text;
+
+      var defaultValue = selected.map(function (item) {
+        return item.id;
+      });
+      return {
+        defaultValue: defaultValue,
+        endpoint: endpoint,
+        format: format,
+        multiple: multiple,
+        text: text,
+        onChange: this._handleSelect.bind(this)
+      };
+    }
+  }, {
+    key: '_handleSelect',
+    value: function _handleSelect(items) {
+      var _props3 = this.props,
+          multiple = _props3.multiple,
+          selected = _props3.selected,
+          onDone = _props3.onDone,
+          onSelect = _props3.onSelect;
+
+      onSelect(items);
+      if (!multiple && !_.isEqual(items, selected)) onDone();
     }
   }, {
     key: '_handleCancel',
     value: function _handleCancel() {
-      this.props.onEnd();
-      this.context.form.pop();
+      this.props.onCancel();
+    }
+  }, {
+    key: '_handleDone',
+    value: function _handleDone() {
+      this.props.onDone();
     }
   }]);
 
@@ -75,19 +116,20 @@ var Search = function (_React$Component) {
 // back with the parent
 
 
-Search.contextTypes = {
-  form: _propTypes2.default.object
-};
+Search.contextTypes = {};
 Search.propTypes = {
+  endpoint: _propTypes2.default.string,
+  format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   label: _propTypes2.default.string,
-  selected: _propTypes2.default.number,
-  onCancel: _propTypes2.default.func,
-  onEnd: _propTypes2.default.func
+  multiple: _propTypes2.default.bool,
+  selected: _propTypes2.default.array,
+  text: _propTypes2.default.string,
+  onCanel: _propTypes2.default.func,
+  onDone: _propTypes2.default.func,
+  onSelect: _propTypes2.default.func
 };
 var mapStateToProps = function mapStateToProps(state, props) {
-  return {
-    q: state.reframe.lookup[props.cid].q
-  };
+  return {};
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Search);

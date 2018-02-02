@@ -8,8 +8,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _reactTransitionGroup = require('react-transition-group');
-
 var _value_token = require('./value_token');
 
 var _value_token2 = _interopRequireDefault(_value_token);
@@ -108,7 +106,7 @@ var Lookup = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var modal = this.context.modal;
+      var form = this.context.form;
       var _props3 = this.props,
           active = _props3.active,
           adding = _props3.adding,
@@ -119,8 +117,8 @@ var Lookup = function (_React$Component) {
 
       if (prevProps.status !== status && status === 'success') onReady();
       if (prevProps.disabled !== disabled) onClear();
-      if (!prevProps.active && active) modal.push(_react2.default.createElement(_search2.default, this._getSearch()));
-      if (!prevProps.adding && adding) modal.push(_react2.default.createElement(_form2.default, this._getForm()));
+      if (!prevProps.active && active) form.push(_react2.default.createElement(_search2.default, this._getSearch()));
+      if (!prevProps.adding && adding) form.push(_react2.default.createElement(_form2.default, this._getForm()));
     }
   }, {
     key: '_getSearch',
@@ -145,24 +143,23 @@ var Lookup = function (_React$Component) {
   }, {
     key: '_getForm',
     value: function _getForm() {
-      var modal = this.context.modal;
+      var form = this.context.form;
       var _props5 = this.props,
-          form = _props5.form,
           value = _props5.value,
           onChoose = _props5.onChoose,
           onChange = _props5.onChange,
           onHideForm = _props5.onHideForm;
 
-      return _extends({}, form, {
+      return _extends({}, this.props.form, {
         onCancel: function onCancel() {
           onHideForm();
-          modal.pop();
+          form.pop();
         },
         onSuccess: function onSuccess(chosen) {
           onChoose(chosen);
           onHideForm();
           onChange(_lodash2.default.get(chosen, value));
-          modal.pop(2);
+          form.pop(2);
         }
       });
     }
@@ -172,7 +169,7 @@ var Lookup = function (_React$Component) {
 }(_react2.default.Component);
 
 Lookup.contextTypes = {
-  modal: _propTypes2.default.object
+  form: _propTypes2.default.object
 };
 Lookup.propTypes = {
   active: _propTypes2.default.bool,

@@ -7,7 +7,7 @@ import React from 'react'
 class Search extends React.Component {
 
   static contextTypes = {
-    modal: PropTypes.object
+    form: PropTypes.object
   }
 
   static propTypes = {
@@ -37,7 +37,7 @@ class Search extends React.Component {
 
   _handleCancel() {
     this.props.onEnd()
-    this.context.modal.pop()
+    this.context.form.pop()
   }
 
 }
