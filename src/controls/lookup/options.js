@@ -8,7 +8,7 @@ import Format from '../../utils/format'
 class Options extends React.Component {
 
   static contextTypes = {
-    modal: PropTypes.object
+    form: PropTypes.object
   }
 
   static propTypes = {
@@ -47,7 +47,7 @@ class Options extends React.Component {
     const { onChoose, onChange, value } = this.props
     onChoose(chosen)
     onChange(_.get(chosen, value))
-    this.context.modal.pop()
+    this.context.form.pop()
 
   }
 

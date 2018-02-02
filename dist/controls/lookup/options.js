@@ -91,7 +91,7 @@ var Options = function (_React$Component) {
 
       onChoose(chosen);
       onChange(_lodash2.default.get(chosen, value));
-      this.context.modal.pop();
+      this.context.form.pop();
     }
   }]);
 
@@ -99,7 +99,7 @@ var Options = function (_React$Component) {
 }(_react2.default.Component);
 
 Options.contextTypes = {
-  modal: _propTypes2.default.object
+  form: _propTypes2.default.object
 };
 Options.propTypes = {
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),

@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _format = require('../../utils/format');
 
-var _react2 = _interopRequireDefault(_react);
+var _format2 = _interopRequireDefault(_format);
 
 var _propTypes = require('prop-types');
 
@@ -17,6 +17,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _search = require('./search');
 
 var _search2 = _interopRequireDefault(_search);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -46,7 +50,8 @@ var Lookup = function (_React$Component) {
 
       var _props = this.props,
           selected = _props.selected,
-          tabIndex = _props.tabIndex;
+          tabIndex = _props.tabIndex,
+          text = _props.text;
 
       return _react2.default.createElement(
         'div',
@@ -67,7 +72,7 @@ var Lookup = function (_React$Component) {
                   _react2.default.createElement(
                     'div',
                     { className: 'reframe-lookup2-token' },
-                    _lodash2.default.get(item, 'full_name')
+                    _lodash2.default.get(item, text)
                   )
                 ),
                 _react2.default.createElement(
@@ -190,6 +195,7 @@ Lookup.propTypes = {
   selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
   tabIndex: _propTypes2.default.number,
+  value: _propTypes2.default.string,
   onFetch: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onRemove: _propTypes2.default.func,

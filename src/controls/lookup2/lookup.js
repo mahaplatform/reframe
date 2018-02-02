@@ -1,6 +1,7 @@
-import React from 'react'
+import Format from '../../utils/format'
 import PropTypes from 'prop-types'
 import Search from './search'
+import React from 'react'
 import _ from 'lodash'
 
 class Lookup extends React.Component {
@@ -20,6 +21,7 @@ class Lookup extends React.Component {
     selected: PropTypes.array,
     text: PropTypes.string,
     tabIndex: PropTypes.number,
+    value: PropTypes.string,
     onFetch: PropTypes.func,
     onReady: PropTypes.func,
     onRemove: PropTypes.func,
@@ -32,7 +34,7 @@ class Lookup extends React.Component {
   }
 
   render() {
-    const { selected, tabIndex } = this.props
+    const { selected, tabIndex, text } = this.props
     return (
       <div className={ this._getClass() } tabIndex={ tabIndex }>
         <div className="reframe-lookup2-items" onClick={ this._handleBegin.bind(this) }>
@@ -41,7 +43,7 @@ class Lookup extends React.Component {
               <div className="reframe-lookup2-item-content">
                 <div className="reframe-lookup2-item-token">
                   <div className="reframe-lookup2-token">
-                    { _.get(item, 'full_name') }
+                    { _.get(item, text) }
                   </div>
                 </div>
                 <div className="reframe-lookup2-item-remove" onClick={ this._handleRemove.bind(this, index) }>
