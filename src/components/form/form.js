@@ -16,7 +16,9 @@ class Form extends React.Component {
     after: PropTypes.string,
     before: PropTypes.string,
     busy: PropTypes.array,
+    buttonPosition: PropTypes.string,
     defaults: PropTypes.object,
+    cancelText: PropTypes.string,
     config: PropTypes.array,
     data: PropTypes.object,
     errors: PropTypes.object,
@@ -55,6 +57,8 @@ class Form extends React.Component {
 
   static defaultProps = {
     method: 'GET',
+    buttonPosition: 'top',
+    cancelText: 'Cancel',
     saveText: 'Save',
     onCancel: () => {},
     onChange: () => {},
@@ -133,15 +137,16 @@ class Form extends React.Component {
   }
 
   _getPanel() {
-    const { saveText, title } = this.props
+    const { buttonPosition, cancelText, saveText, title } = this.props
     return {
+      position: buttonPosition,
       title,
-      leftItems: [
+      leftItems: (cancelText) ? [
         { label: 'Cancel', handler: this._handleCancel.bind(this) }
-      ],
-      rightItems: [
+      ] : null,
+      rightItems: (saveText) ? [
         { label: saveText, handler: this._debouncedSubmit , className: this._getButtonClasses() }
-      ]
+      ] : null
     }
   }
 
@@ -178,7 +183,7 @@ class Form extends React.Component {
       onUpdateData: this._handleUpdateData.bind(this)
     }
   }
-  
+
   _handlePop(num = 1) {
     this.props.onPop(num)
   }

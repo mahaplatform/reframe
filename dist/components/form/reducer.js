@@ -40,6 +40,11 @@ exports.default = function () {
         status: 'sections_loaded'
       });
 
+    case 'RESET':
+      return _extends({}, state, {
+        data: {}
+      });
+
     case 'FETCH_SECTIONS_REQUEST':
       return _extends({}, state, {
         status: 'loading_sections'

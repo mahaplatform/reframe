@@ -42,13 +42,14 @@ var ModalPanel = function (_React$Component) {
 
       var _props = this.props,
           leftItems = _props.leftItems,
+          position = _props.position,
           rightItems = _props.rightItems,
           title = _props.title;
 
       return _react2.default.createElement(
         'div',
         { className: this._getClass() },
-        _react2.default.createElement(
+        position === 'top' && _react2.default.createElement(
           'div',
           { className: 'reframe-modal-panel-header' },
           leftItems && _react2.default.createElement(
@@ -62,7 +63,7 @@ var ModalPanel = function (_React$Component) {
               );
             })
           ),
-          title && _react2.default.createElement(
+          _react2.default.createElement(
             'div',
             { className: 'reframe-modal-panel-header-title' },
             title
@@ -83,6 +84,32 @@ var ModalPanel = function (_React$Component) {
           'div',
           { className: 'reframe-modal-panel-body' },
           this.props.children
+        ),
+        position === 'bottom' && _react2.default.createElement(
+          'div',
+          { className: 'reframe-modal-panel-footer' },
+          leftItems && _react2.default.createElement(
+            'div',
+            { className: 'reframe-modal-panel-footer-navigation' },
+            leftItems.map(function (item, index) {
+              return _react2.default.createElement(
+                'div',
+                { key: 'left_' + index, className: 'ui button', onClick: item.handler },
+                _this2._getElement(item)
+              );
+            })
+          ),
+          rightItems && _react2.default.createElement(
+            'div',
+            { className: 'reframe-modal-panel-footer-navigation' },
+            rightItems.map(function (item, index) {
+              return _react2.default.createElement(
+                'div',
+                { key: 'right_' + index, className: 'ui red button', onClick: item.handler },
+                _this2._getElement(item)
+              );
+            })
+          )
         )
       );
     }
@@ -142,6 +169,10 @@ ModalPanel.propTypes = {
   className: _propTypes2.default.string,
   leftItems: _propTypes2.default.array,
   rightItems: _propTypes2.default.array,
+  position: _propTypes2.default.string,
   title: _propTypes2.default.string
+};
+ModalPanel.defaultProps = {
+  position: 'top'
 };
 exports.default = ModalPanel;

@@ -22,6 +22,12 @@ export default (state = INITIAL_STATE, action) => {
       status: 'sections_loaded'
     }
 
+  case 'RESET':
+    return {
+      ...state,
+      data: {}
+    }
+
   case 'FETCH_SECTIONS_REQUEST':
     return {
       ...state,
@@ -49,7 +55,7 @@ export default (state = INITIAL_STATE, action) => {
         action.component
       ]
     }
-    
+
   case 'SET_DATA':
     return {
       ...state,

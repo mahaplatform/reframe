@@ -68,3 +68,7 @@ export const submitForm = (method, endpoint, body) => ({
   success: 'SUBMIT_SUCCESS',
   failure: 'SUBMIT_FAILURE'
 })
+
+export const reset = () => ({
+  type: 'RESET'
+})

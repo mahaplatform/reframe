@@ -9,41 +9,68 @@ class ModalPanel extends React.Component {
     className: PropTypes.string,
     leftItems: PropTypes.array,
     rightItems: PropTypes.array,
+    position: PropTypes.string,
     title: PropTypes.string
   }
 
+  static defaultProps = {
+    position: 'top'
+  }
+
   render() {
-    const { leftItems, rightItems, title } = this.props
+    const { leftItems, position, rightItems, title } = this.props
     return (
       <div className={ this._getClass() }>
-        <div className="reframe-modal-panel-header">
-          { leftItems &&
-            <div className="reframe-modal-panel-header-navigation">
-              { leftItems.map((item,index) => (
-                <div key={`left_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
-                  { this._getElement(item) }
-                </div>
-              )) }
-            </div>
-          }
-          { title &&
+        { position === 'top' &&
+          <div className="reframe-modal-panel-header">
+            { leftItems &&
+              <div className="reframe-modal-panel-header-navigation">
+                { leftItems.map((item,index) => (
+                  <div key={`left_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
+                    { this._getElement(item) }
+                  </div>
+                )) }
+              </div>
+            }
             <div className="reframe-modal-panel-header-title">
               { title }
             </div>
-          }
-          { rightItems &&
-            <div className="reframe-modal-panel-header-navigation">
-              { rightItems.map((item,index) => (
-                <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
-                { this._getElement(item) }
-                </div>
-              )) }
-            </div>
-          }
-        </div>
+            { rightItems &&
+              <div className="reframe-modal-panel-header-navigation">
+                { rightItems.map((item,index) => (
+                  <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
+                  { this._getElement(item) }
+                  </div>
+                )) }
+              </div>
+            }
+          </div>
+        }
         <div className="reframe-modal-panel-body">
           { this.props.children }
         </div>
+        { position === 'bottom' &&
+          <div className="reframe-modal-panel-footer">
+            { leftItems &&
+              <div className="reframe-modal-panel-footer-navigation">
+                { leftItems.map((item,index) => (
+                  <div key={`left_${index}`} className="ui button" onClick={ item.handler }>
+                    { this._getElement(item) }
+                  </div>
+                )) }
+              </div>
+            }
+            { rightItems &&
+              <div className="reframe-modal-panel-footer-navigation">
+                { rightItems.map((item,index) => (
+                  <div key={`right_${index}`} className="ui red button" onClick={ item.handler }>
+                    { this._getElement(item) }
+                  </div>
+                )) }
+              </div>
+            }
+          </div>
+        }
       </div>
     )
   }

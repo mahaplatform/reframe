@@ -96,3 +96,9 @@ var submitForm = exports.submitForm = function submitForm(method, endpoint, body
     failure: 'SUBMIT_FAILURE'
   };
 };
+
+var reset = exports.reset = function reset() {
+  return {
+    type: 'RESET'
+  };
+};

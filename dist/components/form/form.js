@@ -167,13 +167,16 @@ var Form = function (_React$Component) {
     key: '_getPanel',
     value: function _getPanel() {
       var _props4 = this.props,
+          buttonPosition = _props4.buttonPosition,
+          cancelText = _props4.cancelText,
           saveText = _props4.saveText,
           title = _props4.title;
 
       return {
+        position: buttonPosition,
         title: title,
-        leftItems: [{ label: 'Cancel', handler: this._handleCancel.bind(this) }],
-        rightItems: [{ label: saveText, handler: this._debouncedSubmit, className: this._getButtonClasses() }]
+        leftItems: cancelText ? [{ label: 'Cancel', handler: this._handleCancel.bind(this) }] : null,
+        rightItems: saveText ? [{ label: saveText, handler: this._debouncedSubmit, className: this._getButtonClasses() }] : null
       };
     }
   }, {
@@ -336,7 +339,9 @@ Form.propTypes = {
   after: _propTypes2.default.string,
   before: _propTypes2.default.string,
   busy: _propTypes2.default.array,
+  buttonPosition: _propTypes2.default.string,
   defaults: _propTypes2.default.object,
+  cancelText: _propTypes2.default.string,
   config: _propTypes2.default.array,
   data: _propTypes2.default.object,
   errors: _propTypes2.default.object,
@@ -374,6 +379,8 @@ Form.propTypes = {
 };
 Form.defaultProps = {
   method: 'GET',
+  buttonPosition: 'top',
+  cancelText: 'Cancel',
   saveText: 'Save',
   onCancel: function onCancel() {},
   onChange: function onChange() {},
