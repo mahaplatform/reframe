@@ -25,7 +25,7 @@ class Infinite extends React.Component {
     onUpdateSelected: (ids) => {}
   }
 
-  render(): Node {
+  render() {
     const { all, delayed, empty, failure, footer, header, layout, loading, notFound, records, status, timeout, total } = this.props
     return (
       <div className="reframe-infinite">
@@ -55,7 +55,7 @@ class Infinite extends React.Component {
     )
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.timeout = null
     this._handleFetch(0)
   }
@@ -66,7 +66,7 @@ class Infinite extends React.Component {
   //   }, false)
   // }
 
-  componentDidUpdate(prevProps: Props): void {
+  componentDidUpdate(prevProps) {
     const { cacheKey, exclude_ids, filter, records, selected, sort, status, onUpdateSelected } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
       clearTimeout(this.timeout)

@@ -35,7 +35,7 @@ class Task extends React.Component {
     return classes.join(' ')
   }
 
-  _handleChoose(index: number) {
+  _handleChoose(index) {
     const { confirm, disabled, drawer, handler, location, modal, request, route, onDone } = this.props
     if(disabled) return
     const yesHandler = () => {
@@ -50,7 +50,7 @@ class Task extends React.Component {
     yesHandler()
   }
 
-  _handleRoute(route: string) {
+  _handleRoute(route) {
     const { router } = this.context
     router.history.push(route)
   }
