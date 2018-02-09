@@ -1,6 +1,10 @@
 .reframe-form {
+  display: flex;
   flex: 1;
   position: relative;
+  .reframe-modal-panel-body {
+    .scrollable();
+  }
 }
 .reframe-form-panels > div > div {
   position: absolute;
@@ -18,12 +22,7 @@
   bottom: 0;
   left: 0;
   background-color: fadeout(@black, 98);
-  .scrollable();
 }
-
-
-
-
 
 .ui.form,
 .ui.segment {
