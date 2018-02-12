@@ -15,16 +15,17 @@ class Stack extends React.Component {
     super(props)
     this.state = {
       cards: props.cards,
-      mounted: 0
+      mounted: props.cards.length
     }
   }
 
   render() {
     const { cards } = this.state
+    if(cards.length === 0) return null
     return (
       <div className="reframe-stack">
         { cards.map((card, index) => (
-          <div key={ `card_${card.pathname}` } className={ this._getClass(index) }>
+          <div key={ `card_${index}` } className={ this._getClass(index) }>
             <card.component params={ card.params } pathname={ card.pathname } />
           </div>
         )) }

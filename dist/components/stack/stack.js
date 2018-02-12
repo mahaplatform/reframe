@@ -32,7 +32,7 @@ var Stack = function (_React$Component) {
 
     _this.state = {
       cards: props.cards,
-      mounted: 0
+      mounted: props.cards.length
     };
     return _this;
   }
@@ -44,13 +44,14 @@ var Stack = function (_React$Component) {
 
       var cards = this.state.cards;
 
+      if (cards.length === 0) return null;
       return _react2.default.createElement(
         'div',
         { className: 'reframe-stack' },
         cards.map(function (card, index) {
           return _react2.default.createElement(
             'div',
-            { key: 'card_' + card.pathname, className: _this2._getClass(index) },
+            { key: 'card_' + index, className: _this2._getClass(index) },
             _react2.default.createElement(card.component, { params: card.params, pathname: card.pathname })
           );
         })
