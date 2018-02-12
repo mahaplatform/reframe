@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tasks = exports.Task = exports.Tabs = exports.Table = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = undefined;
+exports.Tasks = exports.Task = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = undefined;
 
 var _carousel = require('./carousel');
 
@@ -73,9 +73,13 @@ var _searchbox = require('./searchbox');
 
 var _searchbox2 = _interopRequireDefault(_searchbox);
 
-var _stack = require('./stack');
+var _stack = require('./stack/stack');
 
 var _stack2 = _interopRequireDefault(_stack);
+
+var _router = require('./stack/router');
+
+var _router2 = _interopRequireDefault(_router);
 
 var _table = require('./table');
 
@@ -113,6 +117,7 @@ exports.Search2 = _search2.default;
 exports.Search = _search4.default;
 exports.Searchbox = _searchbox2.default;
 exports.Stack = _stack2.default;
+exports.RouterStack = _router2.default;
 exports.Table = _table2.default;
 exports.Tabs = _tabs2.default;
 exports.Task = _task2.default;

@@ -1,7 +1,3 @@
-.reframe-stack {
-  flex: 1;
-  position: relative;
-}
 .reframe-stack-card {
   position: absolute;
   top: 0;
@@ -11,12 +7,11 @@
   display: flex;
   background-color: @white;
   transition: transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  .reframe-stack-card-cover {
+  &:after {
     transition: opacity .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
-  }
-  .reframe-stack-card-cover {
     background-color: @black;
     .opacity(0);
+    content: " ";
   }
   &.active {
     .translateX(0);
@@ -24,17 +19,14 @@
   &.mounting {
     .translateX(100%);
   }
-  &.unmounting {
-    .translateX(100%);
-  }
   &.covered {
     .translateX(-25%);
-    .reframe-stack-card-cover {
+    &:after {
       .opacity(.2);
     }
   }
-  &.covered, &.covering, &.uncovering {
-    .reframe-stack-card-cover {
+  &.covered, &.covering {
+    &:after {
       position: absolute;
       top: 0;
       left: 0;
