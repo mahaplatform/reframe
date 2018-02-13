@@ -50,7 +50,7 @@ var List = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-list' },
+        { className: this._getClasses() },
         header && _react2.default.createElement(
           'div',
           { className: 'reframe-list-header' },
@@ -71,6 +71,15 @@ var List = function (_React$Component) {
           _lodash2.default.isFunction(footer) ? _react2.default.createElement(footer) : footer
         )
       );
+    }
+  }, {
+    key: '_getClasses',
+    value: function _getClasses() {
+      var className = this.props.className;
+
+      var classes = ['reframe-list'];
+      if (className) classes.push(className);
+      return classes.join(' ');
     }
   }]);
 

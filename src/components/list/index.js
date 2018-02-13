@@ -7,7 +7,7 @@ class List extends React.Component {
   render() {
     const { alert, empty, footer, header, items, sections } = this.props
     return (
-      <div className="reframe-list">
+      <div className={ this._getClasses() }>
         { header &&
           <div className="reframe-list-header">
             { _.isFunction(header) ? React.createElement(header) : header }
@@ -33,6 +33,13 @@ class List extends React.Component {
         }
       </div>
     )
+  }
+  
+  _getClasses() {
+    const { className } = this.props
+    const classes = ['reframe-list']
+    if(className) classes.push(className)
+    return classes.join(' ')
   }
 
 }
