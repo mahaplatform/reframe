@@ -28,6 +28,8 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -101,10 +103,12 @@ var Lookup = function (_React$Component) {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
           endpoint = _props2.endpoint,
+          value = _props2.value,
           onFetch = _props2.onFetch,
           onReady = _props2.onReady;
 
-      if (defaultValue) onFetch(endpoint, { $ids: defaultValue });
+      var query = value === 'id' ? { $ids: defaultValue } : { $filter: _defineProperty({}, value, { $in: defaultValue }) };
+      if (defaultValue) return onFetch(endpoint, query);
       onReady();
     }
   }, {
@@ -114,11 +118,17 @@ var Lookup = function (_React$Component) {
       var _props3 = this.props,
           active = _props3.active,
           selected = _props3.selected,
-          onChange = _props3.onChange;
+          onChange = _props3.onChange,
+          onReady = _props3.onReady;
 
       if (!prevProps.active && active) form.push(_react2.default.createElement(_search2.default, this._getSearch()));
       if (prevProps.active && !active) form.pop();
-      if (!_lodash2.default.isEqual(selected, prevProps.selected)) this._handleChange();
+      if (prevProps.status !== status && prevProps.status === 'pending') {
+        onReady();
+      }
+      if (!_lodash2.default.isEqual(selected, prevProps.selected)) {
+        this._handleChange();
+      }
     }
   }, {
     key: '_getSearch',
@@ -173,10 +183,11 @@ var Lookup = function (_React$Component) {
     value: function _handleChange() {
       var _props6 = this.props,
           selected = _props6.selected,
+          value = _props6.value,
           onChange = _props6.onChange;
 
       return onChange(selected.map(function (item) {
-        return _lodash2.default.get(item, 'id');
+        return _lodash2.default.get(item, value);
       }));
     }
   }]);

@@ -5,11 +5,18 @@ import Format from '../../utils/format'
 import React from 'react'
 import _ from 'lodash'
 
+const Token = ({ value }) => (
+  <div className="token">
+    { value }
+  </div>
+)
+
 class ToggleList extends React.Component{
 
   static defaultProps = {
     defaultFilters: [],
     exclude_ids: [],
+    format: Token,
     multiple: false,
     onReady: () => {},
     onChange: (value) => {}
@@ -108,7 +115,7 @@ class ToggleList extends React.Component{
   }
 
   _getLayout() {
-    const { format, multiple } = this.props
+    const { format, multiple, text } = this.props
     return ({ records }) => (
       <div className="reframe-search-results">
         { records.map((record, index) => (
@@ -118,7 +125,7 @@ class ToggleList extends React.Component{
                 <i className={ `fa fa-fw fa-${this._getIcon(record)}` } />
               </div>
             }
-            <Format format={ format } { ...record } />
+            <Format format={ format } { ...record } value={ _.get(record, text) } />
             { !multiple &&
               <div className="reframe-search-item-icon">
                 { this._getChecked(record) &&

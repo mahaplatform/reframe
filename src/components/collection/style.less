@@ -63,11 +63,22 @@
 .reframe-collection-tasks-panel-footer {
   border-top: 1px solid fadeout(@black, 90);
   background-color: fadeout(@black, 95);
-  padding: 0.8em;
   text-align: center;
   cursor: pointer;
   color: fadeout(@black, 50);
+  display: flex;
+  padding: 0.5em 0;
 }
+.reframe-collection-tasks-panel-footer-item {
+  flex: 1;
+  display: flex;
+  padding: 0 0.5em;
+  & > * {
+    margin: auto !important;
+  }
+}
+
+
 .reframe-collection-tasks-panel .reframe-task,
 .reframe-collection-tasks-panel-item {
   .hover(background-color, fadeout(@black, 95));

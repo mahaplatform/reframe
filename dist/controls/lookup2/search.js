@@ -14,8 +14,6 @@ var _toggle_list = require('../toggle_list');
 
 var _toggle_list2 = _interopRequireDefault(_toggle_list);
 
-var _reactRedux = require('react-redux');
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -23,6 +21,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71,7 +73,8 @@ var Search = function (_React$Component) {
           format = _props2.format,
           multiple = _props2.multiple,
           selected = _props2.selected,
-          text = _props2.text;
+          text = _props2.text,
+          value = _props2.value;
 
       var defaultValue = selected.map(function (item) {
         return item.id;
@@ -82,6 +85,7 @@ var Search = function (_React$Component) {
         format: format,
         multiple: multiple,
         text: text,
+        value: value,
         onChange: this._handleSelect.bind(this)
       };
     }
@@ -95,7 +99,7 @@ var Search = function (_React$Component) {
           onSelect = _props3.onSelect;
 
       onSelect(items);
-      if (!multiple && !_.isEqual(items, selected)) onDone();
+      if (!multiple && !_lodash2.default.isEqual(items, selected)) onDone();
     }
   }, {
     key: '_handleCancel',
@@ -112,10 +116,6 @@ var Search = function (_React$Component) {
   return Search;
 }(_react2.default.Component);
 
-// since we sent this component up to the modal, we need this to communicate
-// back with the parent
-
-
 Search.contextTypes = {};
 Search.propTypes = {
   endpoint: _propTypes2.default.string,
@@ -124,12 +124,8 @@ Search.propTypes = {
   multiple: _propTypes2.default.bool,
   selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
-  onCanel: _propTypes2.default.func,
+  onCancel: _propTypes2.default.func,
   onDone: _propTypes2.default.func,
   onSelect: _propTypes2.default.func
 };
-var mapStateToProps = function mapStateToProps(state, props) {
-  return {};
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Search);
+exports.default = Search;

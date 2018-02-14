@@ -11,7 +11,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var INITIAL_STATE = exports.INITIAL_STATE = {
   active: false,
   selected: [],
-  status: status
+  status: 'pending'
 };
 
 var reducer = function reducer() {

@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   active: false,
   selected: [],
-  status
+  status: 'pending'
 }
 
 const reducer = (state = INITIAL_STATE, action) => {

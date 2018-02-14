@@ -26,8 +26,15 @@ class Export extends React.Component {
           <SortableList { ...this._getSortableList() } />
         </div>
         <div className="reframe-collection-tasks-panel-footer">
-          <div className="ui fluid red button" onClick={ this._handleClick.bind(this) }>
-            Download Data
+          <div className="reframe-collection-tasks-panel-footer-item">
+            <div className="ui fluid red button" onClick={ this._handleDownload.bind(this, 'csv') }>
+              Download CSV
+            </div>
+          </div>
+          <div className="reframe-collection-tasks-panel-footer-item">
+            <div className="ui fluid red button" onClick={ this._handleDownload.bind(this, 'xlsx') }>
+              Download XLSX
+            </div>
           </div>
         </div>
       </div>
@@ -42,7 +49,7 @@ class Export extends React.Component {
     }
   }
 
-  _handleClick() {
+  _handleDownload(extension) {
     const { items } = this.state
     const { endpoint, entity, filter, sort, token } = this.props
     const query = {
@@ -55,7 +62,7 @@ class Export extends React.Component {
     }
     const entities = pluralize(entity)
     const enclosure = encodeURIComponent('"')
-    const url = `${endpoint}.csv?enclosure=${enclosure}&filename=${entities}&token=${token}&download=true&${qs.stringify(query)}`
+    const url = `${endpoint}.${extension}?enclosure=${enclosure}&filename=${entities}&token=${token}&download=true&${qs.stringify(query)}`
     window.location.href = url
   }
 

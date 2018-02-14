@@ -86,8 +86,21 @@ var Export = function (_React$Component) {
           { className: 'reframe-collection-tasks-panel-footer' },
           _react2.default.createElement(
             'div',
-            { className: 'ui fluid red button', onClick: this._handleClick.bind(this) },
-            'Download Data'
+            { className: 'reframe-collection-tasks-panel-footer-item' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui fluid red button', onClick: this._handleDownload.bind(this, 'csv') },
+              'Download CSV'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'reframe-collection-tasks-panel-footer-item' },
+            _react2.default.createElement(
+              'div',
+              { className: 'ui fluid red button', onClick: this._handleDownload.bind(this, 'xlsx') },
+              'Download XLSX'
+            )
           )
         )
       );
@@ -107,8 +120,8 @@ var Export = function (_React$Component) {
       };
     }
   }, {
-    key: '_handleClick',
-    value: function _handleClick() {
+    key: '_handleDownload',
+    value: function _handleDownload(extension) {
       var items = this.state.items;
       var _props = this.props,
           endpoint = _props.endpoint,
@@ -128,7 +141,7 @@ var Export = function (_React$Component) {
       };
       var entities = (0, _pluralize2.default)(entity);
       var enclosure = encodeURIComponent('"');
-      var url = endpoint + '.csv?enclosure=' + enclosure + '&filename=' + entities + '&token=' + token + '&download=true&' + _qs2.default.stringify(query);
+      var url = endpoint + '.' + extension + '?enclosure=' + enclosure + '&filename=' + entities + '&token=' + token + '&download=true&' + _qs2.default.stringify(query);
       window.location.href = url;
     }
   }, {

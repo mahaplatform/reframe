@@ -42,6 +42,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Token = function Token(_ref) {
+  var value = _ref.value;
+  return _react2.default.createElement(
+    'div',
+    { className: 'token' },
+    value
+  );
+};
+
 var ToggleList = function (_React$Component) {
   _inherits(ToggleList, _React$Component);
 
@@ -195,10 +204,11 @@ var ToggleList = function (_React$Component) {
 
       var _props6 = this.props,
           format = _props6.format,
-          multiple = _props6.multiple;
+          multiple = _props6.multiple,
+          text = _props6.text;
 
-      return function (_ref) {
-        var records = _ref.records;
+      return function (_ref2) {
+        var records = _ref2.records;
         return _react2.default.createElement(
           'div',
           { className: 'reframe-search-results' },
@@ -211,7 +221,7 @@ var ToggleList = function (_React$Component) {
                 { className: 'reframe-search-item-icon' },
                 _react2.default.createElement('i', { className: 'fa fa-fw fa-' + _this3._getIcon(record) })
               ),
-              _react2.default.createElement(_format2.default, _extends({ format: format }, record)),
+              _react2.default.createElement(_format2.default, _extends({ format: format }, record, { value: _lodash2.default.get(record, text) })),
               !multiple && _react2.default.createElement(
                 'div',
                 { className: 'reframe-search-item-icon' },
@@ -268,6 +278,7 @@ var ToggleList = function (_React$Component) {
 ToggleList.defaultProps = {
   defaultFilters: [],
   exclude_ids: [],
+  format: Token,
   multiple: false,
   onReady: function onReady() {},
   onChange: function onChange(value) {}

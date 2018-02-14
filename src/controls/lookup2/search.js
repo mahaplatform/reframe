@@ -1,8 +1,8 @@
 import ModalPanel from '../../components/modal_panel'
 import ToggleList from '../toggle_list'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import React from 'react'
+import _ from 'lodash'
 
 class Search extends React.Component {
 
@@ -19,7 +19,7 @@ class Search extends React.Component {
     multiple: PropTypes.bool,
     selected: PropTypes.array,
     text: PropTypes.string,
-    onCanel: PropTypes.func,
+    onCancel: PropTypes.func,
     onDone: PropTypes.func,
     onSelect: PropTypes.func
   }
@@ -46,7 +46,7 @@ class Search extends React.Component {
   }
 
   _getToggleList() {
-    const { endpoint, format, multiple, selected, text } = this.props
+    const { endpoint, format, multiple, selected, text, value } = this.props
     const defaultValue = selected.map(item => item.id)
     return {
       defaultValue,
@@ -54,6 +54,7 @@ class Search extends React.Component {
       format,
       multiple,
       text,
+      value,
       onChange: this._handleSelect.bind(this)
     }
   }
@@ -74,9 +75,4 @@ class Search extends React.Component {
 
 }
 
-// since we sent this component up to the modal, we need this to communicate
-// back with the parent
-const mapStateToProps = (state, props) => ({
-})
-
-export default connect(mapStateToProps)(Search)
+export default Search
