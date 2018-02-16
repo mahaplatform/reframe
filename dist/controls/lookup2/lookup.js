@@ -6,10 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _format = require('../../utils/format');
-
-var _format2 = _interopRequireDefault(_format);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -103,12 +99,13 @@ var Lookup = function (_React$Component) {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
           endpoint = _props2.endpoint,
+          multiple = _props2.multiple,
           value = _props2.value,
           onFetch = _props2.onFetch,
           onReady = _props2.onReady;
 
       var query = value === 'id' ? { $ids: defaultValue } : { $filter: _defineProperty({}, value, { $in: defaultValue }) };
-      if (defaultValue) onFetch(endpoint, query);
+      if (!multiple && defaultValue || multiple && defaultValue.length > 0) onFetch(endpoint, query);
       onReady();
     }
   }, {
@@ -117,9 +114,7 @@ var Lookup = function (_React$Component) {
       var form = this.context.form;
       var _props3 = this.props,
           active = _props3.active,
-          selected = _props3.selected,
-          onChange = _props3.onChange,
-          onReady = _props3.onReady;
+          selected = _props3.selected;
 
       if (!prevProps.active && active) form.push(_react2.default.createElement(_search2.default, this._getSearch()));
       if (prevProps.active && !active) form.pop();
@@ -169,19 +164,17 @@ var Lookup = function (_React$Component) {
   }, {
     key: '_handleSelect',
     value: function _handleSelect(items) {
-      var _props5 = this.props,
-          onEnd = _props5.onEnd,
-          onSelect = _props5.onSelect;
+      var onSelect = this.props.onSelect;
 
       onSelect(items);
     }
   }, {
     key: '_handleChange',
     value: function _handleChange() {
-      var _props6 = this.props,
-          selected = _props6.selected,
-          value = _props6.value,
-          onChange = _props6.onChange;
+      var _props5 = this.props,
+          selected = _props5.selected,
+          value = _props5.value,
+          onChange = _props5.onChange;
 
       return onChange(selected.map(function (item) {
         return _lodash2.default.get(item, value);
@@ -196,6 +189,8 @@ Lookup.contextTypes = {
   form: _propTypes2.default.object
 };
 Lookup.propTypes = {
+  active: _propTypes2.default.any,
+  defaultValue: _propTypes2.default.any,
   endpoint: _propTypes2.default.string,
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   label: _propTypes2.default.string,
@@ -204,6 +199,9 @@ Lookup.propTypes = {
   text: _propTypes2.default.string,
   tabIndex: _propTypes2.default.number,
   value: _propTypes2.default.string,
+  onBegin: _propTypes2.default.func,
+  onChange: _propTypes2.default.func,
+  onEnd: _propTypes2.default.func,
   onFetch: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onRemove: _propTypes2.default.func,

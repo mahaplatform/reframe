@@ -1,4 +1,3 @@
-import Format from '../../utils/format'
 import PropTypes from 'prop-types'
 import Search from './search'
 import React from 'react'
@@ -11,6 +10,8 @@ class Lookup extends React.Component {
   }
 
   static propTypes = {
+    active: PropTypes.any,
+    defaultValue: PropTypes.any,
     endpoint: PropTypes.string,
     format: PropTypes.oneOfType([
       PropTypes.element,
@@ -22,6 +23,9 @@ class Lookup extends React.Component {
     text: PropTypes.string,
     tabIndex: PropTypes.number,
     value: PropTypes.string,
+    onBegin: PropTypes.func,
+    onChange: PropTypes.func,
+    onEnd: PropTypes.func,
     onFetch: PropTypes.func,
     onReady: PropTypes.func,
     onRemove: PropTypes.func,
@@ -65,15 +69,15 @@ class Lookup extends React.Component {
   }
 
   componentDidMount() {
-    const { defaultValue, endpoint, value, onFetch, onReady } = this.props
+    const { defaultValue, endpoint, multiple, value, onFetch, onReady } = this.props
     const query = value === 'id' ? { $ids: defaultValue } : { $filter: { [value]: { $in: defaultValue } } }
-    if(defaultValue) onFetch(endpoint, query)
+    if((!multiple && defaultValue) || (multiple && defaultValue.length > 0)) onFetch(endpoint, query)
     onReady()
   }
 
   componentDidUpdate(prevProps) {
     const { form } = this.context
-    const { active, selected, onChange, onReady } = this.props
+    const { active, selected } = this.props
     if(!prevProps.active && active) form.push(<Search { ...this._getSearch() } />)
     if(prevProps.active && !active) form.pop()
     if(!_.isEqual(selected, prevProps.selected)) {
@@ -110,7 +114,7 @@ class Lookup extends React.Component {
   }
 
   _handleSelect(items) {
-    const { onEnd, onSelect } = this.props
+    const { onSelect } = this.props
     onSelect(items)
   }
 
