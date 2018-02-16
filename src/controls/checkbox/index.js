@@ -20,7 +20,7 @@ class Checkbox extends React.Component {
     return (
       <div className="reframe-checkbox">
         <div className={ this._getClass() } tabIndex={ tabIndex }>
-          <i className={ this._getToggleClass() } onClick={ this._handleChange.bind(this) } />
+          <i className={ `fa fa-fw fa-${this._getIcon()}` } onClick={ this._handleChange.bind(this) } />
         </div>
       </div>
     )
@@ -38,8 +38,8 @@ class Checkbox extends React.Component {
     return disabled ? 'ui disabled checkbox' : 'ui checkbox'
   }
 
-  _getToggleClass() {
-    return `toggle ${this.state.value ? 'on' : 'off'} icon`
+  _getIcon() {
+    return `toggle-${this.state.value ? 'on' : 'off'}`
   }
 
   _handleChange(value) {

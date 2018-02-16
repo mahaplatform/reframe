@@ -30,13 +30,13 @@ class Chooser extends React.Component {
           <div className="reframe-datefield-month">
             <div className="reframe-datefield-header">
               <div className="reframe-datefield-previous" onClick={ this._handlePrevious.bind(this)}>
-                <i className="left chevron icon" />
+                <i className="fa fa-fw fa-chevron-left" />
               </div>
               <div className="reframe-datefield-title">
                 { moment(current).format('MMMM YYYY').toUpperCase() }
               </div>
               <div className="reframe-datefield-next" onClick={ this._handleNext.bind(this)}>
-                <i className="right chevron icon" />
+                <i className="fa fa-fw fa-chevron-right" />
               </div>
             </div>
             <div className="reframe-datefield-weekdays">

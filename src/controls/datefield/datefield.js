@@ -51,7 +51,7 @@ class Datefield extends React.Component {
           </div>
           { value  &&
             <div className="reframe-datefield-remove" onClick={ this._handleClear.bind(this) }>
-              <i className="remove circle icon" />
+              <i className="fa fa-times-circle" />
             </div>
           }
         </div>

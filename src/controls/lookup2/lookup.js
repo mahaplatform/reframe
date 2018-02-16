@@ -67,7 +67,7 @@ class Lookup extends React.Component {
   componentDidMount() {
     const { defaultValue, endpoint, value, onFetch, onReady } = this.props
     const query = value === 'id' ? { $ids: defaultValue } : { $filter: { [value]: { $in: defaultValue } } }
-    if(defaultValue) return onFetch(endpoint, query)
+    if(defaultValue) onFetch(endpoint, query)
     onReady()
   }
 
@@ -76,9 +76,6 @@ class Lookup extends React.Component {
     const { active, selected, onChange, onReady } = this.props
     if(!prevProps.active && active) form.push(<Search { ...this._getSearch() } />)
     if(prevProps.active && !active) form.pop()
-    if(prevProps.status !== status && prevProps.status === 'pending') {
-      onReady()
-    }
     if(!_.isEqual(selected, prevProps.selected)) {
       this._handleChange()
     }

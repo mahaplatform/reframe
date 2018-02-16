@@ -14,7 +14,7 @@ class Options extends React.Component{
               <Format { ...option.record } format={ format } value={ option.text } />
             </div>
             <div className="reframe-search-item-icon">
-              { this._getChecked(option) ? <i className="green check icon" /> : null }
+              { this._getChecked(option) ? <i className="fa fa-fw fa-check" /> : null }
             </div>
           </div>
         )) }

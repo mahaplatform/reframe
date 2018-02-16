@@ -48,7 +48,7 @@ var Checkbox = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: this._getClass(), tabIndex: tabIndex },
-          _react2.default.createElement('i', { className: this._getToggleClass(), onClick: this._handleChange.bind(this) })
+          _react2.default.createElement('i', { className: 'fa fa-fw fa-' + this._getIcon(), onClick: this._handleChange.bind(this) })
         )
       );
     }
@@ -71,9 +71,9 @@ var Checkbox = function (_React$Component) {
       return disabled ? 'ui disabled checkbox' : 'ui checkbox';
     }
   }, {
-    key: '_getToggleClass',
-    value: function _getToggleClass() {
-      return 'toggle ' + (this.state.value ? 'on' : 'off') + ' icon';
+    key: '_getIcon',
+    value: function _getIcon() {
+      return 'toggle-' + (this.state.value ? 'on' : 'off');
     }
   }, {
     key: '_handleChange',

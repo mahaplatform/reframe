@@ -90,7 +90,7 @@ var Table = function (_React$Component) {
                   'td',
                   { key: 'header-' + columnIndex, className: _this2._getHeaderClass(column), style: _this2._getHeadStyle(columnIndex + (selectable ? 1 : 0)), onClick: _this2._handleSort.bind(_this2, column) },
                   column.label,
-                  sort && (column.key === sort.key || column.sort === sort.key) && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
+                  sort && (column.key === sort.key || column.sort === sort.key) && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-up' }) : _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-down' }))
                 );
               }),
               (link || recordTasks) && _react2.default.createElement('td', { className: 'reframe-table-head-cell mobile collapsing next', style: this._getHeadStyle() })
@@ -120,7 +120,7 @@ var Table = function (_React$Component) {
                   'td',
                   { key: 'header-' + columnIndex, className: _this2._getHeaderClass(column), style: _this2._getHeadStyle(columnIndex + (selectable ? 1 : 0)), onClick: _this2._handleSort.bind(_this2, column) },
                   column.label,
-                  sort && (column.key === sort.key || column.sort === sort.key) && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'chevron up icon' }) : _react2.default.createElement('i', { className: 'chevron down icon' }))
+                  sort && (column.key === sort.key || column.sort === sort.key) && (sort.order === 'asc' ? _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-up' }) : _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-down' }))
                 );
               }),
               (link || recordTasks) && _react2.default.createElement('td', { className: 'reframe-table-head-cell mobile collapsing next', style: this._getHeadStyle() })
@@ -150,12 +150,12 @@ var Table = function (_React$Component) {
                 recordTasks && _react2.default.createElement(
                   'td',
                   { className: 'icon mobile collapsing centered', onClick: _this2._handleTasks.bind(_this2, record.id) },
-                  _react2.default.createElement('i', { className: 'ellipsis vertical icon' })
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v' })
                 ),
                 link && _react2.default.createElement(
                   'td',
                   { className: 'reframe-table-body-cell icon mobile collapsing centered' },
-                  _react2.default.createElement('i', { className: 'chevron right icon' })
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-right' })
                 )
               );
             })

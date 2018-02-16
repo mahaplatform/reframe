@@ -35,7 +35,7 @@ class Options extends React.Component {
               <Format { ...option } format={ format } value={ _.get(option, text) } />
             </div>
             <div className="reframe-lookup-panel-result-icon">
-              { index === selected ? <i className="green check icon" /> : null }
+              { index === selected ? <i className="fa fa-fw fa-check" /> : null }
             </div>
           </div>
         ))}

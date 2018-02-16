@@ -43,7 +43,7 @@ var ColorField = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             { key: 'color_' + index, className: 'reframe-color', style: { backgroundColor: color.value }, onClick: _this2._handleSet.bind(_this2, color.name) },
-            color.name === _this2.props.color && _react2.default.createElement('i', { className: 'check icon' })
+            color.name === _this2.props.color && _react2.default.createElement('i', { className: 'fa fa-fw fa-check' })
           );
         })
       );

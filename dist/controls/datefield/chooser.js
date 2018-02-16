@@ -73,7 +73,7 @@ var Chooser = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'reframe-datefield-previous', onClick: this._handlePrevious.bind(this) },
-                _react2.default.createElement('i', { className: 'left chevron icon' })
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-left' })
               ),
               _react2.default.createElement(
                 'div',
@@ -83,7 +83,7 @@ var Chooser = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'reframe-datefield-next', onClick: this._handleNext.bind(this) },
-                _react2.default.createElement('i', { className: 'right chevron icon' })
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-right' })
               )
             ),
             _react2.default.createElement(

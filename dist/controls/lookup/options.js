@@ -75,7 +75,7 @@ var Options = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-lookup-panel-result-icon' },
-              index === selected ? _react2.default.createElement('i', { className: 'green check icon' }) : null
+              index === selected ? _react2.default.createElement('i', { className: 'fa fa-fw fa-check' }) : null
             )
           );
         })

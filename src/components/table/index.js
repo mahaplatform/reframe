@@ -40,7 +40,7 @@ class Table extends React.Component {
                 <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex + (selectable ? 1 : 0)) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
                   { sort && (column.key === sort.key || column.sort === sort.key) &&
-                    (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                    (sort.order === 'asc' ? <i className="fa fa-fw fa-chevron-up" /> : <i className="fa fa-fw fa-chevron-down" />)
                   }
                 </td>
               ))}
@@ -62,7 +62,7 @@ class Table extends React.Component {
                 <td key={`header-${columnIndex}`} className={ this._getHeaderClass(column) } style={ this._getHeadStyle(columnIndex + (selectable ? 1 : 0)) } onClick={ this._handleSort.bind(this, column) }>
                   { column.label }
                   { sort && (column.key === sort.key || column.sort === sort.key) &&
-                    (sort.order === 'asc' ? <i className="chevron up icon" /> : <i className="chevron down icon" />)
+                    (sort.order === 'asc' ? <i className="fa fa-fw fa-chevron-up" /> : <i className="fa fa-fw fa-chevron-down" />)
                   }
                 </td>
               ))}
@@ -86,12 +86,12 @@ class Table extends React.Component {
                 )) }
                 { recordTasks &&
                   <td className="icon mobile collapsing centered" onClick={ this._handleTasks.bind(this, record.id) }>
-                    <i className="ellipsis vertical icon" />
+                    <i className="fa fa-fw fa-ellipsis-v" />
                   </td>
                 }
                 { link &&
                   <td className="reframe-table-body-cell icon mobile collapsing centered">
-                    <i className="chevron right icon" />
+                    <i className="fa fa-fw fa-chevron-right" />
                   </td>
                 }
               </tr>

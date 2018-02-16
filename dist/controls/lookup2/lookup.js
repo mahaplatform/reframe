@@ -108,7 +108,7 @@ var Lookup = function (_React$Component) {
           onReady = _props2.onReady;
 
       var query = value === 'id' ? { $ids: defaultValue } : { $filter: _defineProperty({}, value, { $in: defaultValue }) };
-      if (defaultValue) return onFetch(endpoint, query);
+      if (defaultValue) onFetch(endpoint, query);
       onReady();
     }
   }, {
@@ -123,9 +123,6 @@ var Lookup = function (_React$Component) {
 
       if (!prevProps.active && active) form.push(_react2.default.createElement(_search2.default, this._getSearch()));
       if (prevProps.active && !active) form.pop();
-      if (prevProps.status !== status && prevProps.status === 'pending') {
-        onReady();
-      }
       if (!_lodash2.default.isEqual(selected, prevProps.selected)) {
         this._handleChange();
       }

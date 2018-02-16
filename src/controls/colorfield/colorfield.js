@@ -30,7 +30,7 @@ class ColorField extends React.Component {
       <div className="reframe-colorfield" tabIndex={ tabIndex }>
         { colors.map((color, index) => (
           <div key={`color_${index}`} className="reframe-color" style={{ backgroundColor: color.value }} onClick={ this._handleSet.bind(this, color.name) }>
-            { color.name === this.props.color && <i className="check icon" /> }
+            { color.name === this.props.color && <i className="fa fa-fw fa-check" /> }
           </div>
         )) }
       </div>

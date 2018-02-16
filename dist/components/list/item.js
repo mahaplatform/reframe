@@ -67,7 +67,7 @@ var Item = function (_React$Component) {
         icon && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item-icon' },
-          _react2.default.createElement('i', { className: icon + ' icon' })
+          _react2.default.createElement('i', { className: 'fa fa-fw fa-' + icon })
         ),
         component && _react2.default.createElement(
           'div',
@@ -107,12 +107,12 @@ var Item = function (_React$Component) {
         (handler || link) && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item-proceed' },
-          _react2.default.createElement('i', { className: 'chevron right icon' })
+          _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-right' })
         ),
         tasks && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item-proceed', onClick: this._handleTasks.bind(this) },
-          _react2.default.createElement('i', { className: 'ellipsis vertical icon' })
+          _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v' })
         )
       );
       if (link) return _react2.default.createElement(

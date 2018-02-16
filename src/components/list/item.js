@@ -17,7 +17,7 @@ class Item extends React.Component {
       <div className={ this._getClass() }>
         { icon &&
           <div className="reframe-list-item-icon">
-            <i className={`${icon} icon`} />
+            <i className={`fa fa-fw fa-${icon}`} />
           </div>
         }
         { component &&
@@ -43,12 +43,12 @@ class Item extends React.Component {
         }
         { (handler || link) &&
           <div className="reframe-list-item-proceed">
-            <i className="chevron right icon" />
+            <i className="fa fa-fw fa-chevron-right" />
           </div>
         }
         { tasks &&
           <div className="reframe-list-item-proceed" onClick={ this._handleTasks.bind(this) }>
-            <i className="ellipsis vertical icon" />
+            <i className="fa fa-fw fa-ellipsis-v" />
           </div>
         }
       </div>

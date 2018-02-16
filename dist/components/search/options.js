@@ -63,7 +63,7 @@ var Options = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-search-item-icon' },
-              _this2._getChecked(option) ? _react2.default.createElement('i', { className: 'green check icon' }) : null
+              _this2._getChecked(option) ? _react2.default.createElement('i', { className: 'fa fa-fw fa-check' }) : null
             )
           );
         })

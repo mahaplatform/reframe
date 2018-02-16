@@ -65,7 +65,7 @@ var Datefield = function (_React$Component) {
           value && _react2.default.createElement(
             'div',
             { className: 'reframe-datefield-remove', onClick: this._handleClear.bind(this) },
-            _react2.default.createElement('i', { className: 'remove circle icon' })
+            _react2.default.createElement('i', { className: 'fa fa-times-circle' })
           )
         )
       );
