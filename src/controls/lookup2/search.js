@@ -19,6 +19,7 @@ class Search extends React.Component {
     multiple: PropTypes.bool,
     selected: PropTypes.array,
     text: PropTypes.string,
+    value: PropTypes.string,
     onCancel: PropTypes.func,
     onDone: PropTypes.func,
     onSelect: PropTypes.func

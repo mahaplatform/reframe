@@ -2,6 +2,7 @@ import Searchbox from '../../components/searchbox'
 import Infinite from '../../components/infinite'
 import Filters from '../../components/filters'
 import Format from '../../utils/format'
+import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
 
@@ -12,6 +13,23 @@ const Token = ({ value }) => (
 )
 
 class ToggleList extends React.Component{
+
+  static propTypes = {
+    chosen: PropTypes.any,
+    endpoint: PropTypes.string,
+    filtering: PropTypes.bool,
+    filters: PropTypes.array,
+    format: PropTypes.any,
+    multiple: PropTypes.bool,
+    text: PropTypes.string,
+    value: PropTypes.string,
+    onLoad: PropTypes.func,
+    onReady: PropTypes.func,
+    onChange: PropTypes.func,
+    onSetQuery: PropTypes.func,
+    onToggleFilter: PropTypes.func,
+    onToggleRecord: PropTypes.func
+  }
 
   static defaultProps = {
     defaultFilters: [],
@@ -34,14 +52,7 @@ class ToggleList extends React.Component{
         }
         <div className="reframe-toggle-list-body">
           <div className="reframe-toggle-list-header">
-            <div className="reframe-toggle-list-header-search">
-              <Searchbox { ...this._getSearchbox() } />
-            </div>
-            { filters &&
-              <div className="reframe-toggle-list-header-icon" onClick={ this._handleToggleFilter.bind(this) }>
-                <i className="fa fa-sliders" />
-              </div>
-            }
+            <Searchbox { ...this._getSearchbox() } />
           </div>
           { multiple && chosen &&
             <div className="reframe-toggle-list-summary">
@@ -93,8 +104,10 @@ class ToggleList extends React.Component{
   }
 
   _getSearchbox() {
-    const { onSetQuery } = this.props
+    const { filters, filtering, onSetQuery } = this.props
     return {
+      icon: filters ? (filtering ? 'times' : 'sliders') : null,
+      onIcon: this._handleToggleFilter.bind(this),
       onChange: onSetQuery
     }
   }

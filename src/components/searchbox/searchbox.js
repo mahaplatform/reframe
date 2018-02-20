@@ -6,12 +6,14 @@ class Searchbox extends React.Component {
 
   static propTypes = {
     active: PropTypes.bool,
+    icon: PropTypes.string,
     prompt: PropTypes.string,
     q: PropTypes.string,
     onAbort: PropTypes.func,
     onBegin: PropTypes.func,
     onChange: PropTypes.func,
     onEnd: PropTypes.func,
+    onIcon: PropTypes.func,
     onType: PropTypes.func
   }
 
@@ -22,21 +24,28 @@ class Searchbox extends React.Component {
   }
 
   render() {
-    const { q } = this.props
+    const { icon, q } = this.props
     return (
       <div className={ this._getClass() }>
-        <div className="reframe-searchbox-input">
-          <div className="reframe-searchbox-icon">
-            <i className="fa fa-search" />
-          </div>
-          <div className="reframe-searchbox-field">
-            <input { ...this._getInput() } />
-          </div>
-          { q.length > 0 &&
-            <div className="reframe-searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
-              <i className="fa fa-times-circle" />
+        <div className="reframe-searchbox-container">
+          { icon && 
+            <div className="reframe-searchbox-extra" onClick={ this._handleIcon.bind(this) }>
+              <i className={ `fa fa-fw fa-${icon}` } />
             </div>
           }
+          <div className="reframe-searchbox-input">
+            <div className="reframe-searchbox-icon">
+              <i className="fa fa-search" />
+            </div>
+            <div className="reframe-searchbox-field">
+              <input { ...this._getInput() } />
+            </div>
+            { q.length > 0 &&
+              <div className="reframe-searchbox-remove-icon" onClick={ this._handleAbort.bind(this) }>
+                <i className="fa fa-times-circle" />
+              </div>
+            }
+          </div>
         </div>
       </div>
     )
@@ -67,6 +76,10 @@ class Searchbox extends React.Component {
   componentDidUpdate(prevProps) {
     const { q } = this.props
     if(q !== prevProps.q) this._handleChange(q)
+  }
+  
+  _handleIcon() {
+    this.props.onIcon()
   }
 
   _handleBegin() {

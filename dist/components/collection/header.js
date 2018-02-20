@@ -41,40 +41,35 @@ var Header = function (_React$Component) {
       var _props = this.props,
           filters = _props.filters,
           filter = _props.filter,
-          managing = _props.managing,
           search = _props.search,
           tasks = _props.tasks;
 
       if (!filters && !this.props.export && !search && !tasks) return null;
-      var count = Object.keys(filter).reduce(function (count, key) {
-        if (filter[key].$eq) return count + 1;
-        if (filter[key].$in) return count + filter[key].$in.length;
-        return count;
-      }, 0);
+      // const count = Object.keys(filter).reduce((count, key) => {
+      //   if(filter[key].$eq) return count + 1
+      //   if(filter[key].$in) return count + filter[key].$in.length
+      //   return count
+      // }, 0)
       return _react2.default.createElement(
         'div',
         { className: 'reframe-collection-header' },
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-collection-header-container' },
-          (filters || this.props.export || tasks) && _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection-header-tasks', onClick: this._handleToggleTasks.bind(this) },
-            managing ? _react2.default.createElement('i', { className: 'fa fa-times' }) : _react2.default.createElement('i', { className: 'fa fa-sliders' })
-          ),
-          search && _react2.default.createElement(
-            'div',
-            { className: 'reframe-collection-header-search' },
-            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
-          )
-        )
+        search && _react2.default.createElement(_searchbox2.default, this._getSearchbox())
       );
     }
   }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
-      var onChange = this.props.onSetQuery;
-      return { onChange: onChange };
+      var _props2 = this.props,
+          filters = _props2.filters,
+          managing = _props2.managing,
+          tasks = _props2.tasks,
+          onSetQuery = _props2.onSetQuery;
+
+      return {
+        icon: filters || this.props.export || tasks ? managing ? 'times' : 'sliders' : null,
+        onIcon: this._handleToggleTasks.bind(this),
+        onChange: onSetQuery
+      };
     }
   }, {
     key: '_handleToggleTasks',

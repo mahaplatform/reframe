@@ -24,6 +24,10 @@ var _format = require('../../utils/format');
 
 var _format2 = _interopRequireDefault(_format);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -86,16 +90,7 @@ var ToggleList = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'reframe-toggle-list-header' },
-            _react2.default.createElement(
-              'div',
-              { className: 'reframe-toggle-list-header-search' },
-              _react2.default.createElement(_searchbox2.default, this._getSearchbox())
-            ),
-            filters && _react2.default.createElement(
-              'div',
-              { className: 'reframe-toggle-list-header-icon', onClick: this._handleToggleFilter.bind(this) },
-              _react2.default.createElement('i', { className: 'fa fa-sliders' })
-            )
+            _react2.default.createElement(_searchbox2.default, this._getSearchbox())
           ),
           multiple && chosen && _react2.default.createElement(
             'div',
@@ -172,20 +167,25 @@ var ToggleList = function (_React$Component) {
   }, {
     key: '_getSearchbox',
     value: function _getSearchbox() {
-      var onSetQuery = this.props.onSetQuery;
+      var _props5 = this.props,
+          filters = _props5.filters,
+          filtering = _props5.filtering,
+          onSetQuery = _props5.onSetQuery;
 
       return {
+        icon: filters ? filtering ? 'times' : 'sliders' : null,
+        onIcon: this._handleToggleFilter.bind(this),
         onChange: onSetQuery
       };
     }
   }, {
     key: '_getInfinite',
     value: function _getInfinite() {
-      var _props5 = this.props,
-          defaultFilters = _props5.defaultFilters,
-          endpoint = _props5.endpoint,
-          exclude_ids = _props5.exclude_ids,
-          query = _props5.query;
+      var _props6 = this.props,
+          defaultFilters = _props6.defaultFilters,
+          endpoint = _props6.endpoint,
+          exclude_ids = _props6.exclude_ids,
+          query = _props6.query;
 
       var filter = _extends({}, defaultFilters, this.props.filter, {
         q: query
@@ -202,10 +202,10 @@ var ToggleList = function (_React$Component) {
     value: function _getLayout() {
       var _this3 = this;
 
-      var _props6 = this.props,
-          format = _props6.format,
-          multiple = _props6.multiple,
-          text = _props6.text;
+      var _props7 = this.props,
+          format = _props7.format,
+          multiple = _props7.multiple,
+          text = _props7.text;
 
       return function (_ref2) {
         var records = _ref2.records;
@@ -264,9 +264,9 @@ var ToggleList = function (_React$Component) {
   }, {
     key: '_handleToggleRecord',
     value: function _handleToggleRecord(record) {
-      var _props7 = this.props,
-          multiple = _props7.multiple,
-          onToggleRecord = _props7.onToggleRecord;
+      var _props8 = this.props,
+          multiple = _props8.multiple,
+          onToggleRecord = _props8.onToggleRecord;
 
       if (onToggleRecord) onToggleRecord(multiple, record);
     }
@@ -275,6 +275,22 @@ var ToggleList = function (_React$Component) {
   return ToggleList;
 }(_react2.default.Component);
 
+ToggleList.propTypes = {
+  chosen: _propTypes2.default.any,
+  endpoint: _propTypes2.default.string,
+  filtering: _propTypes2.default.bool,
+  filters: _propTypes2.default.array,
+  format: _propTypes2.default.any,
+  multiple: _propTypes2.default.bool,
+  text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
+  onLoad: _propTypes2.default.func,
+  onReady: _propTypes2.default.func,
+  onChange: _propTypes2.default.func,
+  onSetQuery: _propTypes2.default.func,
+  onToggleFilter: _propTypes2.default.func,
+  onToggleRecord: _propTypes2.default.func
+};
 ToggleList.defaultProps = {
   defaultFilters: [],
   exclude_ids: [],

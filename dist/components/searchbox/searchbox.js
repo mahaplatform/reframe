@@ -38,28 +38,39 @@ var Searchbox = function (_React$Component) {
   _createClass(Searchbox, [{
     key: 'render',
     value: function render() {
-      var q = this.props.q;
+      var _props = this.props,
+          icon = _props.icon,
+          q = _props.q;
 
       return _react2.default.createElement(
         'div',
         { className: this._getClass() },
         _react2.default.createElement(
           'div',
-          { className: 'reframe-searchbox-input' },
-          _react2.default.createElement(
+          { className: 'reframe-searchbox-container' },
+          icon && _react2.default.createElement(
             'div',
-            { className: 'reframe-searchbox-icon' },
-            _react2.default.createElement('i', { className: 'fa fa-search' })
+            { className: 'reframe-searchbox-extra', onClick: this._handleIcon.bind(this) },
+            _react2.default.createElement('i', { className: 'fa fa-fw fa-' + icon })
           ),
           _react2.default.createElement(
             'div',
-            { className: 'reframe-searchbox-field' },
-            _react2.default.createElement('input', this._getInput())
-          ),
-          q.length > 0 && _react2.default.createElement(
-            'div',
-            { className: 'reframe-searchbox-remove-icon', onClick: this._handleAbort.bind(this) },
-            _react2.default.createElement('i', { className: 'fa fa-times-circle' })
+            { className: 'reframe-searchbox-input' },
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-searchbox-icon' },
+              _react2.default.createElement('i', { className: 'fa fa-search' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-searchbox-field' },
+              _react2.default.createElement('input', this._getInput())
+            ),
+            q.length > 0 && _react2.default.createElement(
+              'div',
+              { className: 'reframe-searchbox-remove-icon', onClick: this._handleAbort.bind(this) },
+              _react2.default.createElement('i', { className: 'fa fa-times-circle' })
+            )
           )
         )
       );
@@ -79,9 +90,9 @@ var Searchbox = function (_React$Component) {
   }, {
     key: '_getInput',
     value: function _getInput() {
-      var _props = this.props,
-          prompt = _props.prompt,
-          q = _props.q;
+      var _props2 = this.props,
+          prompt = _props2.prompt,
+          q = _props2.q;
 
       return {
         type: 'text',
@@ -98,6 +109,11 @@ var Searchbox = function (_React$Component) {
       var q = this.props.q;
 
       if (q !== prevProps.q) this._handleChange(q);
+    }
+  }, {
+    key: '_handleIcon',
+    value: function _handleIcon() {
+      this.props.onIcon();
     }
   }, {
     key: '_handleBegin',
@@ -128,12 +144,14 @@ var Searchbox = function (_React$Component) {
 
 Searchbox.propTypes = {
   active: _propTypes2.default.bool,
+  icon: _propTypes2.default.string,
   prompt: _propTypes2.default.string,
   q: _propTypes2.default.string,
   onAbort: _propTypes2.default.func,
   onBegin: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onEnd: _propTypes2.default.func,
+  onIcon: _propTypes2.default.func,
   onType: _propTypes2.default.func
 };
 Searchbox.defaultProps = {

@@ -124,6 +124,7 @@ Search.propTypes = {
   multiple: _propTypes2.default.bool,
   selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
+  value: _propTypes2.default.string,
   onCancel: _propTypes2.default.func,
   onDone: _propTypes2.default.func,
   onSelect: _propTypes2.default.func

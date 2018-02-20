@@ -16,34 +16,27 @@ class Header extends React.Component {
   }
 
   render() {
-    const { filters, filter, managing, search, tasks } = this.props
+    const { filters, filter, search, tasks } = this.props
     if(!filters && !this.props.export && !search && !tasks) return null
-    const count = Object.keys(filter).reduce((count, key) => {
-      if(filter[key].$eq) return count + 1
-      if(filter[key].$in) return count + filter[key].$in.length
-      return count
-    }, 0)
+    // const count = Object.keys(filter).reduce((count, key) => {
+    //   if(filter[key].$eq) return count + 1
+    //   if(filter[key].$in) return count + filter[key].$in.length
+    //   return count
+    // }, 0)
     return (
       <div className="reframe-collection-header">
-        <div className="reframe-collection-header-container">
-          { (filters || this.props.export || tasks) &&
-            <div className="reframe-collection-header-tasks" onClick={ this._handleToggleTasks.bind(this) }>
-              { managing ? <i className="fa fa-times" /> : <i className="fa fa-sliders" /> }
-            </div>
-          }
-          { search &&
-            <div className="reframe-collection-header-search">
-              <Searchbox { ...this._getSearchbox() } />
-            </div>
-          }
-        </div>
+        { search && <Searchbox { ...this._getSearchbox() } /> }
       </div>
     )
   }
 
   _getSearchbox() {
-    const onChange = this.props.onSetQuery
-    return { onChange }
+    const { filters, managing, tasks, onSetQuery } = this.props
+    return { 
+      icon: (filters || this.props.export || tasks) ? (managing ? 'times' : 'sliders') : null,
+      onIcon: this._handleToggleTasks.bind(this),
+      onChange: onSetQuery
+    }
   }
 
   _handleToggleTasks() {
