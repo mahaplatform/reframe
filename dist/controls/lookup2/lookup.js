@@ -105,7 +105,7 @@ var Lookup = function (_React$Component) {
           onReady = _props2.onReady;
 
       var query = value === 'id' ? { $ids: defaultValue } : { $filter: _defineProperty({}, value, { $in: defaultValue }) };
-      if (!multiple && defaultValue || multiple && defaultValue.length > 0) onFetch(endpoint, query);
+      if (defaultValue && (!multiple || defaultValue.length > 0)) onFetch(endpoint, query);
       onReady();
     }
   }, {
