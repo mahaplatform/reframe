@@ -15,6 +15,13 @@ var fetch = exports.fetch = function fetch(endpoint, query) {
   };
 };
 
+var set = exports.set = function set(records) {
+  return {
+    type: 'SET',
+    records: records
+  };
+};
+
 var begin = exports.begin = function begin() {
   return {
     type: 'BEGIN'

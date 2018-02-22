@@ -17,6 +17,7 @@ class Search extends React.Component {
     ]),
     label: PropTypes.string,
     multiple: PropTypes.bool,
+    options: PropTypes.array,
     selected: PropTypes.array,
     text: PropTypes.string,
     value: PropTypes.string,
@@ -47,12 +48,14 @@ class Search extends React.Component {
   }
 
   _getToggleList() {
-    const { endpoint, format, multiple, selected, text, value } = this.props
-    const defaultValue = selected.map(item => item.id)
+    const { endpoint, format, multiple, options, selected, text, value } = this.props
+    const defaultValue = selected.map(item => _.get(item, value))
     return {
       defaultValue,
       endpoint,
+      options,
       format,
+      full: true,
       multiple,
       text,
       value,

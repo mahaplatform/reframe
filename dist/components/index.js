@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tasks = exports.Task = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = undefined;
+exports.Token = exports.Tasks = exports.Task = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = undefined;
 
 var _carousel = require('./carousel');
 
@@ -97,6 +97,10 @@ var _tasks = require('./tasks');
 
 var _tasks2 = _interopRequireDefault(_tasks);
 
+var _token = require('./token');
+
+var _token2 = _interopRequireDefault(_token);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Carousel = _carousel2.default;
@@ -122,3 +126,4 @@ exports.Table = _table2.default;
 exports.Tabs = _tabs2.default;
 exports.Task = _task2.default;
 exports.Tasks = _tasks2.default;
+exports.Token = _token2.default;

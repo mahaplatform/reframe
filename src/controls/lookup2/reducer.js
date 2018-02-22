@@ -1,5 +1,6 @@
 export const INITIAL_STATE = {
   active: false,
+  records: null,
   selected: [],
   status: 'pending'
 }
@@ -25,6 +26,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       ...state,
       selected: action.result.data,
       status: 'success'
+    }
+
+  case 'SET':
+    return {
+      ...state,
+      records: action.records
     }
 
   case 'BEGIN':

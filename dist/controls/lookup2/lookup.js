@@ -4,7 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _format = require('../../utils/format');
+
+var _format2 = _interopRequireDefault(_format);
 
 var _propTypes = require('prop-types');
 
@@ -49,6 +55,7 @@ var Lookup = function (_React$Component) {
       var _props = this.props,
           selected = _props.selected,
           tabIndex = _props.tabIndex,
+          format = _props.format,
           text = _props.text;
 
       return _react2.default.createElement(
@@ -67,11 +74,7 @@ var Lookup = function (_React$Component) {
                 _react2.default.createElement(
                   'div',
                   { className: 'reframe-lookup2-item-token' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'reframe-lookup2-token' },
-                    _lodash2.default.get(item, text)
-                  )
+                  _react2.default.createElement(_format2.default, _extends({}, item, { format: format, value: _lodash2.default.get(item, text) }))
                 ),
                 _react2.default.createElement(
                   'div',
@@ -83,15 +86,6 @@ var Lookup = function (_React$Component) {
           })
         )
       );
-    }
-  }, {
-    key: '_getClass',
-    value: function _getClass() {
-      var multiple = this.props.multiple;
-
-      var classes = ['reframe-lookup2-field'];
-      if (multiple) classes.push('multiple');
-      return classes.join(' ');
     }
   }, {
     key: 'componentDidMount',
@@ -123,6 +117,15 @@ var Lookup = function (_React$Component) {
       }
     }
   }, {
+    key: '_getClass',
+    value: function _getClass() {
+      var multiple = this.props.multiple;
+
+      var classes = ['reframe-lookup2-field'];
+      if (multiple) classes.push('multiple');
+      return classes.join(' ');
+    }
+  }, {
     key: '_getSearch',
     value: function _getSearch() {
       var _props4 = this.props,
@@ -130,20 +133,37 @@ var Lookup = function (_React$Component) {
           format = _props4.format,
           label = _props4.label,
           multiple = _props4.multiple,
+          options = _props4.options,
           selected = _props4.selected,
-          text = _props4.text;
+          text = _props4.text,
+          value = _props4.value;
 
       return {
         endpoint: endpoint,
         format: format,
         label: label,
         multiple: multiple,
+        options: options,
         selected: selected,
         text: text,
+        value: value,
         onCancel: this._handleEnd.bind(this),
         onDone: this._handleEnd.bind(this),
         onSelect: this._handleSelect.bind(this)
       };
+    }
+  }, {
+    key: '_getValue',
+    value: function _getValue() {
+      var _props5 = this.props,
+          multiple = _props5.multiple,
+          selected = _props5.selected,
+          value = _props5.value;
+
+      var values = selected.map(function (item) {
+        return _lodash2.default.get(item, value);
+      });
+      return multiple ? values : values[0];
     }
   }, {
     key: '_handleBegin',
@@ -171,14 +191,9 @@ var Lookup = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange() {
-      var _props5 = this.props,
-          selected = _props5.selected,
-          value = _props5.value,
-          onChange = _props5.onChange;
+      var onChange = this.props.onChange;
 
-      return onChange(selected.map(function (item) {
-        return _lodash2.default.get(item, value);
-      }));
+      return onChange(this._getValue());
     }
   }]);
 
@@ -195,6 +210,7 @@ Lookup.propTypes = {
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   label: _propTypes2.default.string,
   multiple: _propTypes2.default.bool,
+  options: _propTypes2.default.array,
   selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
   tabIndex: _propTypes2.default.number,
@@ -208,7 +224,17 @@ Lookup.propTypes = {
   onSelect: _propTypes2.default.func
 };
 Lookup.defaultProps = {
+  format: function format(_ref) {
+    var value = _ref.value;
+    return _react2.default.createElement(
+      'div',
+      { className: 'reframe-lookup2-token' },
+      value
+    );
+  },
   label: 'Record',
-  multiple: false
+  multiple: false,
+  value: 'value',
+  text: 'text'
 };
 exports.default = Lookup;

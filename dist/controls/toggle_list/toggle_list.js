@@ -20,13 +20,17 @@ var _filters = require('../../components/filters');
 
 var _filters2 = _interopRequireDefault(_filters);
 
-var _format = require('../../utils/format');
+var _token = require('../../components/token');
 
-var _format2 = _interopRequireDefault(_format);
+var _token2 = _interopRequireDefault(_token);
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _results = require('./results');
+
+var _results2 = _interopRequireDefault(_results);
 
 var _react = require('react');
 
@@ -38,22 +42,11 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Token = function Token(_ref) {
-  var value = _ref.value;
-  return _react2.default.createElement(
-    'div',
-    { className: 'token' },
-    value
-  );
-};
 
 var ToggleList = function (_React$Component) {
   _inherits(ToggleList, _React$Component);
@@ -71,8 +64,10 @@ var ToggleList = function (_React$Component) {
 
       var _props = this.props,
           chosen = _props.chosen,
+          endpoint = _props.endpoint,
           filters = _props.filters,
           multiple = _props.multiple,
+          options = _props.options,
           text = _props.text;
 
       return _react2.default.createElement(
@@ -112,7 +107,8 @@ var ToggleList = function (_React$Component) {
               );
             })
           ),
-          _react2.default.createElement(_infinite2.default, this._getInfinite())
+          endpoint && _react2.default.createElement(_infinite2.default, this._getInfinite()),
+          options && _react2.default.createElement(_results2.default, _extends({ records: options }, this._getResults()))
         )
       );
     }
@@ -121,11 +117,9 @@ var ToggleList = function (_React$Component) {
     value: function componentDidMount() {
       var _props2 = this.props,
           defaultValue = _props2.defaultValue,
-          endpoint = _props2.endpoint,
-          onLoad = _props2.onLoad,
           onReady = _props2.onReady;
 
-      if (onLoad && defaultValue && defaultValue.length > 0) onLoad(endpoint, { $ids: defaultValue });
+      if (defaultValue && defaultValue.length > 0) this._handleLoad();
       if (onReady) onReady();
     }
   }, {
@@ -133,12 +127,13 @@ var ToggleList = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _props3 = this.props,
           chosen = _props3.chosen,
+          full = _props3.full,
           value = _props3.value,
           onChange = _props3.onChange;
 
       if (onChange && chosen && !_lodash2.default.isEqual(prevProps.chosen, chosen)) {
         var items = chosen.map(function (record) {
-          return value ? _lodash2.default.get(record, value) : record;
+          return full ? record : _lodash2.default.get(record, value);
         });
         onChange(items);
       }
@@ -181,6 +176,8 @@ var ToggleList = function (_React$Component) {
   }, {
     key: '_getInfinite',
     value: function _getInfinite() {
+      var _this3 = this;
+
       var _props6 = this.props,
           defaultFilters = _props6.defaultFilters,
           endpoint = _props6.endpoint,
@@ -194,65 +191,47 @@ var ToggleList = function (_React$Component) {
         endpoint: endpoint,
         exclude_ids: exclude_ids,
         filter: filter,
-        layout: this._getLayout()
+        layout: function layout(props) {
+          return _react2.default.createElement(_results2.default, _extends({}, _this3._getResults(), props));
+        }
       };
     }
   }, {
-    key: '_getLayout',
-    value: function _getLayout() {
-      var _this3 = this;
-
+    key: '_getResults',
+    value: function _getResults() {
       var _props7 = this.props,
           format = _props7.format,
+          chosen = _props7.chosen,
           multiple = _props7.multiple,
-          text = _props7.text;
+          text = _props7.text,
+          value = _props7.value;
 
-      return function (_ref2) {
-        var records = _ref2.records;
-        return _react2.default.createElement(
-          'div',
-          { className: 'reframe-search-results' },
-          records.map(function (record, index) {
-            return _react2.default.createElement(
-              'div',
-              { key: 'record_' + index, className: _this3._getRecordClass(record), onClick: _this3._handleToggleRecord.bind(_this3, record) },
-              multiple && _react2.default.createElement(
-                'div',
-                { className: 'reframe-search-item-icon' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-' + _this3._getIcon(record) })
-              ),
-              _react2.default.createElement(_format2.default, _extends({ format: format }, record, { value: _lodash2.default.get(record, text) })),
-              !multiple && _react2.default.createElement(
-                'div',
-                { className: 'reframe-search-item-icon' },
-                _this3._getChecked(record) && _react2.default.createElement('i', { className: 'fa fa-fw fa-check' })
-              )
-            );
-          })
-        );
+      return {
+        format: format,
+        chosen: chosen,
+        multiple: multiple,
+        text: text,
+        value: value,
+        onToggleRecord: this._handleToggleRecord.bind(this)
       };
     }
   }, {
-    key: '_getRecordClass',
-    value: function _getRecordClass(record) {
-      var classes = ['reframe-search-item'];
-      if (this._getChecked(record)) classes.push('checked');
-      return classes.join(' ');
-    }
-  }, {
-    key: '_getChecked',
-    value: function _getChecked(record) {
-      var chosen = this.props.chosen;
+    key: '_handleLoad',
+    value: function _handleLoad() {
+      var _props8 = this.props,
+          defaultValue = _props8.defaultValue,
+          endpoint = _props8.endpoint,
+          options = _props8.options,
+          value = _props8.value,
+          onLoad = _props8.onLoad,
+          onSetChosen = _props8.onSetChosen;
 
-      var value = this.props.value || 'id';
-      return _lodash2.default.find(chosen, _defineProperty({}, value, _lodash2.default.get(record, value)));
-    }
-  }, {
-    key: '_getIcon',
-    value: function _getIcon(record) {
-      var checked = this._getChecked(record);
-      if (checked) return 'check-circle';
-      return 'circle-o';
+      if (endpoint) return onLoad(endpoint, { $ids: defaultValue });
+      if (!options) return;
+      var chosen = options.filter(function (option) {
+        return _lodash2.default.includes(defaultValue, _lodash2.default.get(option, value));
+      });
+      onSetChosen(chosen);
     }
   }, {
     key: '_handleToggleFilter',
@@ -264,9 +243,9 @@ var ToggleList = function (_React$Component) {
   }, {
     key: '_handleToggleRecord',
     value: function _handleToggleRecord(record) {
-      var _props8 = this.props,
-          multiple = _props8.multiple,
-          onToggleRecord = _props8.onToggleRecord;
+      var _props9 = this.props,
+          multiple = _props9.multiple,
+          onToggleRecord = _props9.onToggleRecord;
 
       if (onToggleRecord) onToggleRecord(multiple, record);
     }
@@ -277,16 +256,23 @@ var ToggleList = function (_React$Component) {
 
 ToggleList.propTypes = {
   chosen: _propTypes2.default.any,
+  defaultFilters: _propTypes2.default.array,
+  defaultValue: _propTypes2.default.array,
   endpoint: _propTypes2.default.string,
+  exclude_ids: _propTypes2.default.array,
   filtering: _propTypes2.default.bool,
   filters: _propTypes2.default.array,
+  full: _propTypes2.default.bool,
   format: _propTypes2.default.any,
   multiple: _propTypes2.default.bool,
+  options: _propTypes2.default.array,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onLoad: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
+  onSetChosen: _propTypes2.default.func,
+  onSetFilter: _propTypes2.default.func,
   onSetQuery: _propTypes2.default.func,
   onToggleFilter: _propTypes2.default.func,
   onToggleRecord: _propTypes2.default.func
@@ -294,8 +280,11 @@ ToggleList.propTypes = {
 ToggleList.defaultProps = {
   defaultFilters: [],
   exclude_ids: [],
-  format: Token,
+  format: _token2.default,
+  full: false,
   multiple: false,
+  value: 'value',
+  text: 'text',
   onReady: function onReady() {},
   onChange: function onChange(value) {}
 };

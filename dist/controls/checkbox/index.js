@@ -44,12 +44,8 @@ var Checkbox = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-checkbox' },
-        _react2.default.createElement(
-          'div',
-          { className: this._getClass(), tabIndex: tabIndex },
-          _react2.default.createElement('i', { className: 'fa fa-fw fa-' + this._getIcon(), onClick: this._handleChange.bind(this) })
-        )
+        { className: 'reframe-checkbox', tabIndex: tabIndex },
+        _react2.default.createElement('i', { className: 'fa fa-fw fa-' + this._getIcon(), onClick: this._handleChange.bind(this) })
       );
     }
   }, {

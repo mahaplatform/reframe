@@ -1,7 +1,8 @@
 .reframe-lookup2-field {
   &.multiple {
     .reframe-lookup2-item {
-      display: inline-block;
+      display: block;
+      float: left;
     }
   }
 
@@ -19,11 +20,11 @@
   border-radius: 0.5em;
   background-color: @white;
   min-height: ~"calc(3.4em + 4px)";
+  overflow: hidden;
 }
 .reframe-lookup2-item {
   border: 1px solid fadeout(@black, 90);
-  margin-right: 0.4em;
-  margin-bottom: 0.4em;
+  margin: 0 0.4em 0.4em 0;
   border-radius: 0.5em;
   background-color: fadeout(@black, 98);
 }
@@ -32,7 +33,9 @@
 }
 .reframe-lookup2-item-token {
   flex: 1;
-  padding-left: 0.4em;
+  .reframe-lookup2-token {
+    padding: 0.4em;
+  }
 }
 .reframe-lookup2-item-remove {
   padding: 0.4em 0.4em 0.4em 0;
@@ -47,5 +50,5 @@
   }
 }
 .reframe-lookup2-token {
-  padding: 0.4em;
+  padding: 0.8em;
 }

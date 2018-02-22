@@ -18,10 +18,8 @@ class Checkbox extends React.Component {
   render() {
     const { tabIndex } = this.props
     return (
-      <div className="reframe-checkbox">
-        <div className={ this._getClass() } tabIndex={ tabIndex }>
-          <i className={ `fa fa-fw fa-${this._getIcon()}` } onClick={ this._handleChange.bind(this) } />
-        </div>
+      <div className="reframe-checkbox" tabIndex={ tabIndex }>
+        <i className={ `fa fa-fw fa-${this._getIcon()}` } onClick={ this._handleChange.bind(this) } />
       </div>
     )
   }

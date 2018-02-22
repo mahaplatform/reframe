@@ -8,6 +8,11 @@ export const fetch = (endpoint, query) => ({
   failure: 'FETCH_FAILURE'
 })
 
+export const set = (records) => ({
+  type: 'SET',
+  records
+})
+
 export const begin = () => ({
   type: 'BEGIN'
 })

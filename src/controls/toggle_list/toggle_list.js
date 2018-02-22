@@ -1,31 +1,33 @@
 import Searchbox from '../../components/searchbox'
 import Infinite from '../../components/infinite'
 import Filters from '../../components/filters'
-import Format from '../../utils/format'
+import Token from '../../components/token'
 import PropTypes from 'prop-types'
+import Result from './results'
 import React from 'react'
 import _ from 'lodash'
-
-const Token = ({ value }) => (
-  <div className="token">
-    { value }
-  </div>
-)
 
 class ToggleList extends React.Component{
 
   static propTypes = {
     chosen: PropTypes.any,
+    defaultFilters: PropTypes.array,
+    defaultValue: PropTypes.array,
     endpoint: PropTypes.string,
+    exclude_ids: PropTypes.array,
     filtering: PropTypes.bool,
     filters: PropTypes.array,
+    full: PropTypes.bool,
     format: PropTypes.any,
     multiple: PropTypes.bool,
+    options: PropTypes.array,
     text: PropTypes.string,
     value: PropTypes.string,
     onLoad: PropTypes.func,
     onReady: PropTypes.func,
     onChange: PropTypes.func,
+    onSetChosen: PropTypes.func,
+    onSetFilter: PropTypes.func,
     onSetQuery: PropTypes.func,
     onToggleFilter: PropTypes.func,
     onToggleRecord: PropTypes.func
@@ -35,13 +37,16 @@ class ToggleList extends React.Component{
     defaultFilters: [],
     exclude_ids: [],
     format: Token,
+    full: false,
     multiple: false,
+    value: 'value',
+    text: 'text',
     onReady: () => {},
     onChange: (value) => {}
   }
 
   render() {
-    const { chosen, filters, multiple, text } = this.props
+    const { chosen, endpoint, filters, multiple, options, text } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-toggle-list-overlay" onClick={ this._handleToggleFilter.bind(this) } />
@@ -68,22 +73,23 @@ class ToggleList extends React.Component{
               )) }
             </div>
           }
-          <Infinite { ...this._getInfinite() } />
+          { endpoint && <Infinite { ...this._getInfinite() } /> }
+          { options && <Result records={ options } { ...this._getResults() } /> }          
         </div>
       </div>
     )
   }
 
   componentDidMount() {
-    const { defaultValue, endpoint, onLoad, onReady } = this.props
-    if(onLoad && defaultValue && defaultValue.length > 0) onLoad(endpoint, { $ids: defaultValue })
+    const { defaultValue, onReady } = this.props
+    if(defaultValue && defaultValue.length > 0) this._handleLoad()
     if(onReady) onReady()
   }
 
   componentDidUpdate(prevProps) {
-    const { chosen, value, onChange } = this.props
+    const { chosen, full, value, onChange } = this.props
     if(onChange && chosen && !_.isEqual(prevProps.chosen, chosen)) {
-      const items = chosen.map(record => value ? _.get(record, value) : record)
+      const items = chosen.map(record => full ? record : _.get(record, value))
       onChange(items)
     }
   }
@@ -123,53 +129,30 @@ class ToggleList extends React.Component{
       endpoint,
       exclude_ids,
       filter,
-      layout: this._getLayout()
+      layout: (props) => <Result { ...this._getResults() } { ...props } />
     }
   }
-
-  _getLayout() {
-    const { format, multiple, text } = this.props
-    return ({ records }) => (
-      <div className="reframe-search-results">
-        { records.map((record, index) => (
-          <div key={`record_${index}`} className={ this._getRecordClass(record) } onClick={ this._handleToggleRecord.bind(this, record) }>
-            { multiple &&
-              <div className="reframe-search-item-icon">
-                <i className={ `fa fa-fw fa-${this._getIcon(record)}` } />
-              </div>
-            }
-            <Format format={ format } { ...record } value={ _.get(record, text) } />
-            { !multiple &&
-              <div className="reframe-search-item-icon">
-                { this._getChecked(record) &&
-                  <i className="fa fa-fw fa-check" />
-                }
-              </div>
-            }
-          </div>
-        )) }
-      </div>
-    )
+  
+  _getResults() {
+    const { format, chosen, multiple, text, value } = this.props
+    return {
+      format,
+      chosen,
+      multiple,
+      text,
+      value,
+      onToggleRecord: this._handleToggleRecord.bind(this)
+    }
   }
-
-  _getRecordClass(record) {
-    const classes = ['reframe-search-item']
-    if(this._getChecked(record)) classes.push('checked')
-    return classes.join(' ')
+  
+  _handleLoad() {
+    const { defaultValue, endpoint, options, value, onLoad, onSetChosen } = this.props
+    if(endpoint) return onLoad(endpoint, { $ids: defaultValue })
+    if(!options) return
+    const chosen = options.filter(option => _.includes(defaultValue, _.get(option, value)))
+    onSetChosen(chosen)
   }
-
-  _getChecked(record) {
-    const { chosen } = this.props
-    const value = this.props.value || 'id'
-    return _.find(chosen, { [value]: _.get(record, value) })
-  }
-
-  _getIcon(record) {
-    const checked = this._getChecked(record)
-    if(checked) return 'check-circle'
-    return 'circle-o'
-  }
-
+  
   _handleToggleFilter() {
     const { onToggleFilter } = this.props
     if(onToggleFilter) onToggleFilter()

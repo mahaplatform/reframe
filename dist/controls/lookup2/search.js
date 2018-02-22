@@ -72,17 +72,20 @@ var Search = function (_React$Component) {
           endpoint = _props2.endpoint,
           format = _props2.format,
           multiple = _props2.multiple,
+          options = _props2.options,
           selected = _props2.selected,
           text = _props2.text,
           value = _props2.value;
 
       var defaultValue = selected.map(function (item) {
-        return item.id;
+        return _lodash2.default.get(item, value);
       });
       return {
         defaultValue: defaultValue,
         endpoint: endpoint,
+        options: options,
         format: format,
+        full: true,
         multiple: multiple,
         text: text,
         value: value,
@@ -122,6 +125,7 @@ Search.propTypes = {
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
   label: _propTypes2.default.string,
   multiple: _propTypes2.default.bool,
+  options: _propTypes2.default.array,
   selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,

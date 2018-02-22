@@ -1,3 +1,4 @@
+import Format from '../../utils/format'
 import PropTypes from 'prop-types'
 import Search from './search'
 import React from 'react'
@@ -19,6 +20,7 @@ class Lookup extends React.Component {
     ]),
     label: PropTypes.string,
     multiple: PropTypes.bool,
+    options: PropTypes.array,
     selected: PropTypes.array,
     text: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -33,12 +35,15 @@ class Lookup extends React.Component {
   }
 
   static defaultProps = {
+    format: ({ value }) => <div className="reframe-lookup2-token">{ value }</div>,
     label: 'Record',
-    multiple: false
+    multiple: false,
+    value: 'value',
+    text: 'text'
   }
 
   render() {
-    const { selected, tabIndex, text } = this.props
+    const { selected, tabIndex, format, text } = this.props
     return (
       <div className={ this._getClass() } tabIndex={ tabIndex }>
         <div className="reframe-lookup2-items" onClick={ this._handleBegin.bind(this) }>
@@ -46,9 +51,7 @@ class Lookup extends React.Component {
             <div className="reframe-lookup2-item" key={ `selected_${index}` }>
               <div className="reframe-lookup2-item-content">
                 <div className="reframe-lookup2-item-token">
-                  <div className="reframe-lookup2-token">
-                    { _.get(item, text) }
-                  </div>
+                  <Format { ...item } format={ format } value={ _.get(item, text) } />
                 </div>
                 <div className="reframe-lookup2-item-remove" onClick={ this._handleRemove.bind(this, index) }>
                   <i className="fa fa-fw fa-times-circle" />
@@ -59,13 +62,6 @@ class Lookup extends React.Component {
         </div>
       </div>
     )
-  }
-
-  _getClass() {
-    const { multiple } = this.props
-    const classes = ['reframe-lookup2-field']
-    if(multiple) classes.push('multiple')
-    return classes.join(' ')
   }
 
   componentDidMount() {
@@ -85,19 +81,34 @@ class Lookup extends React.Component {
     }
   }
 
+  _getClass() {
+    const { multiple } = this.props
+    const classes = ['reframe-lookup2-field']
+    if(multiple) classes.push('multiple')
+    return classes.join(' ')
+  }
+
   _getSearch() {
-    const { endpoint, format, label, multiple, selected, text } = this.props
+    const { endpoint, format, label, multiple, options, selected, text, value } = this.props
     return {
       endpoint,
       format,
       label,
       multiple,
+      options,
       selected,
       text,
+      value,
       onCancel: this._handleEnd.bind(this),
       onDone: this._handleEnd.bind(this),
       onSelect: this._handleSelect.bind(this)
     }
+  }
+  
+  _getValue() {
+    const { multiple, selected, value } = this.props
+    const values = selected.map(item => _.get(item, value))
+    return multiple ? values : values[0]    
   }
 
   _handleBegin() {
@@ -119,8 +130,8 @@ class Lookup extends React.Component {
   }
 
   _handleChange() {
-    const { selected, value, onChange } = this.props
-    return onChange(selected.map(item => _.get(item, value)))
+    const { onChange } = this.props
+    return onChange(this._getValue())
   }
 
 }

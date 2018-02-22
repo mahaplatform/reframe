@@ -10,6 +10,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
   active: false,
+  records: null,
   selected: [],
   status: 'pending'
 };
@@ -35,6 +36,11 @@ var reducer = function reducer() {
       return _extends({}, state, {
         selected: action.result.data,
         status: 'success'
+      });
+
+    case 'SET':
+      return _extends({}, state, {
+        records: action.records
       });
 
     case 'BEGIN':
