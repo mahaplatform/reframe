@@ -48,7 +48,6 @@ class Options extends React.Component {
     onChoose(chosen)
     onChange(_.get(chosen, value))
     this.context.form.pop()
-
   }
 
 }

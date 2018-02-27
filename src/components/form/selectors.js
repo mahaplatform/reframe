@@ -42,7 +42,7 @@ export const filtered = createSelector(
     if(field.include === false || field.type == 'text') return entity
     return {
       ...entity,
-      [field.name]: !_.isNil(data[field.name]) ? data[field.name] : null
+      [field.name]: !_.isNil(_.get(data, field.name)) ? _.get(data, field.name) : null
     }
   }, {}))
 )

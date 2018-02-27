@@ -57,7 +57,7 @@ var defaults = exports.defaults = (0, _reselect.createSelector)(fields, function
 var filtered = exports.filtered = (0, _reselect.createSelector)(fields, data, function (fields, data) {
   return (0, _flat.unflatten)(fields.reduce(function (entity, field) {
     if (field.include === false || field.type == 'text') return entity;
-    return _extends({}, entity, _defineProperty({}, field.name, !_lodash2.default.isNil(data[field.name]) ? data[field.name] : null));
+    return _extends({}, entity, _defineProperty({}, field.name, !_lodash2.default.isNil(_lodash2.default.get(data, field.name)) ? _lodash2.default.get(data, field.name) : null));
   }, {}));
 });
 
