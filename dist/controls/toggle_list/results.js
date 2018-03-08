@@ -71,7 +71,7 @@ var Results = function (_React$Component) {
               { className: 'reframe-search-item-label' },
               _react2.default.createElement(_format2.default, _extends({ format: format }, record, { value: _lodash2.default.get(record, text) }))
             ),
-            _react2.default.createElement(
+            !multiple && _react2.default.createElement(
               'div',
               { className: 'reframe-search-item-icon' },
               _this2._getChecked(record) && _react2.default.createElement('i', { className: 'fa fa-fw fa-check' })

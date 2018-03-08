@@ -29,9 +29,11 @@ class Results extends React.Component {
             <div className="reframe-search-item-label">
               <Format format={ format } { ...record } value={ _.get(record, text) } />
             </div>
-            <div className="reframe-search-item-icon">
-              { this._getChecked(record) && <i className="fa fa-fw fa-check" /> }
-            </div>
+            { !multiple &&
+              <div className="reframe-search-item-icon">
+                { this._getChecked(record) && <i className="fa fa-fw fa-check" /> }
+              </div>
+            }
           </div>
         )) }
       </div>
