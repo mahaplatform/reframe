@@ -1,5 +1,6 @@
-import React from 'react'
+import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
 class Scrollpane extends React.Component {
@@ -15,17 +16,27 @@ class Scrollpane extends React.Component {
     onReachBottom: null
   }
 
+  state = {
+    signpost: false
+  }
+
   headers = []
 
   notified = false
 
   render() {
     const { children } = this.props
+    const { signpost } = this.state
     return (
       <div className="reframe-scrollpane">
         <div className="reframe-scrollpane-inner" ref={ (node) => this.scrollpane = node }>
           { children }
         </div>
+        <CSSTransition in={ signpost } classNames="popin" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
+          <div className="chat-signpost-bottom" onClick={ this._handleScrollToTop.bind(this) }>
+            <i className="fa fa-chevron-up" />
+          </div>
+        </CSSTransition>
       </div>
     )
   }
@@ -72,9 +83,14 @@ class Scrollpane extends React.Component {
   }
 
   _scrollListener() {
+    const { signpost } = this.state
     const { notificationPercent, onReachBottom } = this.props
     const bottomPosition = this.scrollpane.scrollHeight - (this.scrollpane.scrollTop + this.scrollpane.offsetHeight)
     const percentRemaining = (bottomPosition / this.scrollpane.scrollHeight) * 100
+    const showSignpost = this.scrollpane.scrollTop > 100
+    if(signpost !== showSignpost) this.setState({
+      signpost: showSignpost
+    })
     if(!this.notified && percentRemaining <= notificationPercent) {
       if(onReachBottom) onReachBottom()
       this.notified = true
@@ -99,6 +115,10 @@ class Scrollpane extends React.Component {
         }
       })
     }
+  }
+
+  _handleScrollToTop() {
+    this.scrollpane.scrollTop = 0
   }
 
 }

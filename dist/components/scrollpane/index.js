@@ -6,13 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
+var _reactTransitionGroup = require('react-transition-group');
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -42,7 +44,9 @@ var Scrollpane = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Scrollpane.__proto__ || Object.getPrototypeOf(Scrollpane)).call.apply(_ref, [this].concat(args))), _this), _this.headers = [], _this.notified = false, _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Scrollpane.__proto__ || Object.getPrototypeOf(Scrollpane)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      signpost: false
+    }, _this.headers = [], _this.notified = false, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Scrollpane, [{
@@ -51,6 +55,7 @@ var Scrollpane = function (_React$Component) {
       var _this2 = this;
 
       var children = this.props.children;
+      var signpost = this.state.signpost;
 
       return _react2.default.createElement(
         'div',
@@ -61,6 +66,15 @@ var Scrollpane = function (_React$Component) {
               return _this2.scrollpane = node;
             } },
           children
+        ),
+        _react2.default.createElement(
+          _reactTransitionGroup.CSSTransition,
+          { 'in': signpost, classNames: 'popin', timeout: 250, mountOnEnter: true, unmountOnExit: true },
+          _react2.default.createElement(
+            'div',
+            { className: 'chat-signpost-bottom', onClick: this._handleScrollToTop.bind(this) },
+            _react2.default.createElement('i', { className: 'fa fa-chevron-up' })
+          )
         )
       );
     }
@@ -115,12 +129,17 @@ var Scrollpane = function (_React$Component) {
     value: function _scrollListener() {
       var _this4 = this;
 
+      var signpost = this.state.signpost;
       var _props = this.props,
           notificationPercent = _props.notificationPercent,
           onReachBottom = _props.onReachBottom;
 
       var bottomPosition = this.scrollpane.scrollHeight - (this.scrollpane.scrollTop + this.scrollpane.offsetHeight);
       var percentRemaining = bottomPosition / this.scrollpane.scrollHeight * 100;
+      var showSignpost = this.scrollpane.scrollTop > 100;
+      if (signpost !== showSignpost) this.setState({
+        signpost: showSignpost
+      });
       if (!this.notified && percentRemaining <= notificationPercent) {
         if (onReachBottom) onReachBottom();
         this.notified = true;
@@ -145,6 +164,11 @@ var Scrollpane = function (_React$Component) {
           }
         });
       }
+    }
+  }, {
+    key: '_handleScrollToTop',
+    value: function _handleScrollToTop() {
+      this.scrollpane.scrollTop = 0;
     }
   }]);
 
