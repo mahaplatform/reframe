@@ -41,15 +41,15 @@ body {
 	z-index: 0 !important;
 }
 
-::-webkit-scrollbar,
-::-webkit-scrollbar-button,
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track-piece,
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-corner,
-::-webkit-resizer {
-	width: 0;
-	display: none;
+*::-webkit-scrollbar-track {
+  background: fadeout(@black, 92) !important;
+}
+*::-webkit-scrollbar-thumb {
+  background: fadeout(@black, 80) !important;
+}
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
 }
 
 .hover(@property, @value) {
