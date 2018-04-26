@@ -14,11 +14,13 @@ class Message extends React.Component {
     title: PropTypes.string,
     component: PropTypes.object,
     button: PropTypes.shape({
+      handler: PropTypes.func,
       label: PropTypes.string,
       modal: PropTypes.oneOfType([
         PropTypes.element,
         PropTypes.func
-      ])
+      ]),
+      request: PropTypes.object
     })
   }
 

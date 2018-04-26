@@ -102,8 +102,10 @@ Message.propTypes = {
   title: _propTypes2.default.string,
   component: _propTypes2.default.object,
   button: _propTypes2.default.shape({
+    handler: _propTypes2.default.func,
     label: _propTypes2.default.string,
-    modal: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func])
+    modal: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
+    request: _propTypes2.default.object
   })
 };
 exports.default = Message;
