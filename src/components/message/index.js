@@ -10,6 +10,7 @@ class Message extends React.Component {
 
   static propTypes = {
     icon: PropTypes.string,
+    image: PropTypes.string,
     text: PropTypes.string,
     title: PropTypes.string,
     component: PropTypes.object,
@@ -25,7 +26,7 @@ class Message extends React.Component {
   }
 
   render() {
-    const { button, component, icon, text, title } = this.props
+    const { button, component, icon, image, text, title } = this.props
     return (
       <div className="reframe-message">
         <div className="reframe-message-panel">
@@ -34,6 +35,11 @@ class Message extends React.Component {
               <h2>
                 <i className={`fa fa-${icon}`} />
               </h2>
+            </div>
+          }
+          { image &&
+            <div className="reframe-message-panel-icon">
+              <img src={ image } />
             </div>
           }
           { title && <h3>{ title }</h3> }

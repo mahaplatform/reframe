@@ -42,6 +42,7 @@ var Message = function (_React$Component) {
           button = _props.button,
           component = _props.component,
           icon = _props.icon,
+          image = _props.image,
           text = _props.text,
           title = _props.title;
 
@@ -59,6 +60,11 @@ var Message = function (_React$Component) {
               null,
               _react2.default.createElement('i', { className: 'fa fa-' + icon })
             )
+          ),
+          image && _react2.default.createElement(
+            'div',
+            { className: 'reframe-message-panel-icon' },
+            _react2.default.createElement('img', { src: image })
           ),
           title && _react2.default.createElement(
             'h3',
@@ -98,6 +104,7 @@ Message.contextTypes = {
 };
 Message.propTypes = {
   icon: _propTypes2.default.string,
+  image: _propTypes2.default.string,
   text: _propTypes2.default.string,
   title: _propTypes2.default.string,
   component: _propTypes2.default.object,
