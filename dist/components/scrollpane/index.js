@@ -153,7 +153,6 @@ var Scrollpane = function (_React$Component) {
             node.style.top = 0;
             node.style.left = 0;
             node.style.right = 0;
-            node.style.zIndex = 2;
             _this4.fixed = index;
             _this4.headers[index].fixed = true;
           } else if (header.fixed && index <= _this4.fixed && _this4.scrollpane.scrollTop < header.top) {

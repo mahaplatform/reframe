@@ -104,7 +104,6 @@ class Scrollpane extends React.Component {
           node.style.top = 0
           node.style.left = 0
           node.style.right = 0
-          node.style.zIndex = 2
           this.fixed = index
           this.headers[index].fixed = true
         } else if(header.fixed && index <= this.fixed && this.scrollpane.scrollTop < header.top) {
