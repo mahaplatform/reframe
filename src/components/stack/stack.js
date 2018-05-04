@@ -26,7 +26,7 @@ class Stack extends React.Component {
       <div className="reframe-stack">
         { cards.map((card, index) => (
           <div key={ `card_${index}` } className={ this._getClass(index) }>
-            <card.component params={ card.params } pathname={ card.pathname } />
+            <card.component { ...card.props } params={ card.params } pathname={ card.pathname } />
           </div>
         )) }
       </div>
@@ -44,7 +44,7 @@ class Stack extends React.Component {
     classes.push(this._getStatus(index))
     return classes.join(' ')
   }
-  
+
   _getStatus(index) {
     const mountedIndexes = this.state.mounted - 1
     const cardIndexes = this.state.cards.length - 1
@@ -53,19 +53,19 @@ class Stack extends React.Component {
     if(index === mountedIndexes && index < cardIndexes) return 'covering'
     if(index < cardIndexes ) return 'covered'
   }
-  
+
   _handlePush() {
     const { cards } = this.props
     this.setState({ cards })
-    setTimeout(() => this.setState({ mounted: this.state.mounted + 1 }), 100)    
+    setTimeout(() => this.setState({ mounted: this.state.mounted + 1 }), 100)
   }
-  
+
   _handlePop() {
     const { cards } = this.props
     this.setState({ mounted: this.state.mounted - 1 })
     setTimeout(() => this.setState({ cards }), 500)
   }
-  
+
 }
 
 export default Stack
