@@ -3,13 +3,11 @@ import type { FetchRequest, FetchSuccess, FetchFailure, FetchDelay, FetchTimeout
 import _ from 'lodash'
 
 const INITIAL_STATE: State = {
-  all: null,
   records: null,
   request_id: null,
   selectAll: false,
   selected: [],
-  status: 'pending',
-  total: null
+  status: 'pending'
 }
 
 const fetchRequest = (state: State, action: FetchRequest): State => ({
@@ -22,16 +20,29 @@ const fetchSuccess = (state: State, action: FetchSuccess): State => {
   if(action.request_id !== state.request_id) return state
   if(!_.includes(['loading','refreshing','delayed'], state.status)) return state
   const loaded = state.records ? state.records.length : 0
-  return {
-    ...state,
-    all: action.result.pagination.all,
-    request_id: null,
-    records: (action.result.pagination.skip > 0) ? [
-      ...state.records || [],
-      ...action.result.data
-    ] : action.result.data,
-    total: action.result.pagination.total,
-    status: (loaded + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
+  if(action.result.pagination.all !== undefined) {
+    return {
+      ...state,
+      all: action.result.pagination.all,
+      request_id: null,
+      records: (action.result.pagination.skip > 0) ? [
+        ...state.records || [],
+        ...action.result.data
+      ] : action.result.data,
+      total: action.result.pagination.total,
+      status: (loaded + action.result.data.length >= action.result.pagination.total) ? 'completed' : 'loaded'
+    }
+  } else if(action.result.pagination.next !== undefined) {
+    return {
+      ...state,
+      next: action.result.pagination.next,
+      request_id: null,
+      records: (action.result.pagination.skip > 0) ? [
+        ...state.records || [],
+        ...action.result.data
+      ] : action.result.data,
+      status: action.result.pagination.next === null ? 'completed' : 'loaded'
+    }
   }
 }
 

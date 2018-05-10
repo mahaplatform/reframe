@@ -77,6 +77,7 @@ class Collection extends React.Component {
     onSetFilter: PropTypes.func,
     onSetParams: PropTypes.func,
     onSetQuery: PropTypes.func,
+    onSetSelected: PropTypes.func,
     onSetRecords: PropTypes.func,
     onToggleTasks: PropTypes.func
   }

@@ -296,6 +296,7 @@ Collection.propTypes = {
   onSetFilter: _propTypes2.default.func,
   onSetParams: _propTypes2.default.func,
   onSetQuery: _propTypes2.default.func,
+  onSetSelected: _propTypes2.default.func,
   onSetRecords: _propTypes2.default.func,
   onToggleTasks: _propTypes2.default.func
 };

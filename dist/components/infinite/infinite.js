@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -96,15 +100,8 @@ var Infinite = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.timeout = null;
-      this._handleFetch(0);
+      this._handleFetch(0, true);
     }
-
-    // shouldComponentUpdate(nextProps: any, nextState: any): boolean {
-    //   return ['all','cacheKey','exclude_ids','filter','records','sort','status','selected','total'].reduce((update, key) => {
-    //     return update || !_.isEqual(this.props[key], nextProps[key])
-    //   }, false)
-    // }
-
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
@@ -122,7 +119,7 @@ var Infinite = function (_React$Component) {
         clearTimeout(this.timeout);
       }
       if (cacheKey !== prevProps.cacheKey || !_lodash2.default.isEqual(prevProps.exclude_ids, exclude_ids) || !_lodash2.default.isEqual(prevProps.filter, filter) || !_lodash2.default.isEqual(prevProps.sort, sort)) {
-        this._handleFetch(0);
+        this._handleFetch(0, true);
       }
       if (selected !== prevProps.selected && selected && records) {
         var selectedRecords = records.filter(function (record) {
@@ -147,10 +144,12 @@ var Infinite = function (_React$Component) {
     key: '_handleFetch',
     value: function _handleFetch() {
       var skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var reload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var _props3 = this.props,
           endpoint = _props3.endpoint,
           exclude_ids = _props3.exclude_ids,
           filter = _props3.filter,
+          next = _props3.next,
           records = _props3.records,
           sort = _props3.sort,
           total = _props3.total,
@@ -158,28 +157,47 @@ var Infinite = function (_React$Component) {
 
       var loaded = records ? records.length : 0;
       var query = _extends({
-        $page: { skip: skip !== null ? skip : loaded }
+        $page: this._getPagination(skip)
       }, filter ? { $filter: filter } : {}, sort && sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {}, exclude_ids ? { $exclude_ids: exclude_ids } : {});
-      if (onFetch && (skip === 0 || total === null || total === undefined || loaded < total)) onFetch(endpoint, query);
-      this.timeout = setTimeout(this._handleDelay.bind(this), 3000);
+      if (onFetch && this._getMore(next, skip, reload, loaded, total)) onFetch(endpoint, query);
+      this.timeout = setTimeout(this._handleDelay.bind(this), 5000);
+    }
+  }, {
+    key: '_getMore',
+    value: function _getMore(next, skip, reload, loaded, total) {
+      if (reload) return true;
+      if (next !== undefined) return next !== null;
+      if (total === undefined && skip === 0) return true;
+      if (total !== undefined) return loaded < total;
+    }
+  }, {
+    key: '_getPagination',
+    value: function _getPagination(skip) {
+      var _props4 = this.props,
+          next = _props4.next,
+          records = _props4.records;
+
+      var loaded = records ? records.length : 0;
+      if (next) return { next: next };
+      return { skip: skip !== null ? skip : loaded };
     }
   }, {
     key: '_handleDelay',
     value: function _handleDelay() {
-      var _props4 = this.props,
-          status = _props4.status,
-          onFetchDelay = _props4.onFetchDelay;
+      var _props5 = this.props,
+          status = _props5.status,
+          onFetchDelay = _props5.onFetchDelay;
 
       if (status !== 'loading') return;
       if (onFetchDelay) onFetchDelay();
-      this.timeout = setTimeout(this._handleTimeout.bind(this), 3000);
+      this.timeout = setTimeout(this._handleTimeout.bind(this), 5000);
     }
   }, {
     key: '_handleTimeout',
     value: function _handleTimeout() {
-      var _props5 = this.props,
-          status = _props5.status,
-          onFetchTimeout = _props5.onFetchTimeout;
+      var _props6 = this.props,
+          status = _props6.status,
+          onFetchTimeout = _props6.onFetchTimeout;
 
       if (status !== 'delyed') return;
       if (onFetchTimeout) onFetchTimeout();
@@ -196,6 +214,32 @@ var Infinite = function (_React$Component) {
   return Infinite;
 }(_react2.default.Component);
 
+Infinite.propTypes = {
+  all: _propTypes2.default.number,
+  cacheKey: _propTypes2.default.string,
+  delayed: _propTypes2.default.any,
+  endpoint: _propTypes2.default.any,
+  empty: _propTypes2.default.any,
+  exclude_ids: _propTypes2.default.any,
+  failure: _propTypes2.default.any,
+  filter: _propTypes2.default.object,
+  footer: _propTypes2.default.any,
+  header: _propTypes2.default.any,
+  layout: _propTypes2.default.any,
+  loading: _propTypes2.default.any,
+  next: _propTypes2.default.string,
+  notFound: _propTypes2.default.any,
+  records: _propTypes2.default.array,
+  selected: _propTypes2.default.array,
+  sort: _propTypes2.default.object,
+  status: _propTypes2.default.string,
+  timeout: _propTypes2.default.any,
+  total: _propTypes2.default.number,
+  onFetch: _propTypes2.default.func,
+  onFetchDelay: _propTypes2.default.func,
+  onFetchTimeout: _propTypes2.default.func,
+  onUpdateSelected: _propTypes2.default.func
+};
 Infinite.defaultProps = {
   cacheKey: null,
   delayed: _results.Delayed,

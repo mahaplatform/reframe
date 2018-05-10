@@ -15,13 +15,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = {
-  all: null,
   records: null,
   request_id: null,
   selectAll: false,
   selected: [],
-  status: 'pending',
-  total: null
+  status: 'pending'
 };
 
 var fetchRequest = function fetchRequest(state, action) {
@@ -35,13 +33,22 @@ var fetchSuccess = function fetchSuccess(state, action) {
   if (action.request_id !== state.request_id) return state;
   if (!_lodash2.default.includes(['loading', 'refreshing', 'delayed'], state.status)) return state;
   var loaded = state.records ? state.records.length : 0;
-  return _extends({}, state, {
-    all: action.result.pagination.all,
-    request_id: null,
-    records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records || []), _toConsumableArray(action.result.data)) : action.result.data,
-    total: action.result.pagination.total,
-    status: loaded + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'
-  });
+  if (action.result.pagination.all !== undefined) {
+    return _extends({}, state, {
+      all: action.result.pagination.all,
+      request_id: null,
+      records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records || []), _toConsumableArray(action.result.data)) : action.result.data,
+      total: action.result.pagination.total,
+      status: loaded + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'
+    });
+  } else if (action.result.pagination.next !== undefined) {
+    return _extends({}, state, {
+      next: action.result.pagination.next,
+      request_id: null,
+      records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records || []), _toConsumableArray(action.result.data)) : action.result.data,
+      status: action.result.pagination.next === null ? 'completed' : 'loaded'
+    });
+  }
 };
 
 var fetchFailure = function fetchFailure(state, action) {
