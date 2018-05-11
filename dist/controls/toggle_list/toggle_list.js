@@ -87,7 +87,7 @@ var ToggleList = function (_React$Component) {
             { className: 'reframe-toggle-list-header' },
             _react2.default.createElement(_searchbox2.default, this._getSearchbox())
           ),
-          multiple && chosen && _react2.default.createElement(
+          multiple && chosen && chosen.length > 0 && _react2.default.createElement(
             'div',
             { className: 'reframe-toggle-list-summary' },
             chosen.map(function (record, index) {

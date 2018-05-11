@@ -25,7 +25,7 @@ var INITIAL_STATE = {
 var fetchRequest = function fetchRequest(state, action) {
   return _extends({}, state, {
     request_id: action.request_id,
-    status: status !== 'pending' && action.request.params.$page.skip === 0 ? 'refreshing' : 'loading'
+    status: status !== 'pending' && action.request.params.$page.skip === 0 ? 'loading' : 'refreshing'
   });
 };
 

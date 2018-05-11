@@ -59,7 +59,7 @@ class ToggleList extends React.Component{
           <div className="reframe-toggle-list-header">
             <Searchbox { ...this._getSearchbox() } />
           </div>
-          { multiple && chosen &&
+          { multiple && chosen && chosen.length > 0 &&
             <div className="reframe-toggle-list-summary">
               { chosen.map((record, index) => (
                 <div key={`summary_token_${index}`} className="reframe-toggle-list-summary-token">

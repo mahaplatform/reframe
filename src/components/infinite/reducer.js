@@ -13,7 +13,7 @@ const INITIAL_STATE: State = {
 const fetchRequest = (state: State, action: FetchRequest): State => ({
   ...state,
   request_id: action.request_id,
-  status: (status !== 'pending' && action.request.params.$page.skip === 0) ? 'refreshing' : 'loading'
+  status: (status !== 'pending' && action.request.params.$page.skip === 0) ? 'loading' : 'refreshing'
 })
 
 const fetchSuccess = (state: State, action: FetchSuccess): State => {
