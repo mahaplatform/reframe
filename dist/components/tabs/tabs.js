@@ -187,6 +187,12 @@ var Tabs = function (_React$Component) {
 Tabs.contextTypes = {
   stack: _propTypes2.default.object
 };
+Tabs.propTypes = {
+  chosen: _propTypes2.default.number,
+  header: _propTypes2.default.any,
+  items: _propTypes2.default.array,
+  onChoose: _propTypes2.default.func
+};
 Tabs.defaultProps = {
   chosen: null,
   header: null,

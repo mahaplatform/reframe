@@ -59,7 +59,7 @@ class ToggleList extends React.Component{
           <div className="reframe-toggle-list-header">
             <Searchbox { ...this._getSearchbox() } />
           </div>
-          { multiple && chosen && chosen.length > 0 &&
+          { multiple && chosen &&
             <div className="reframe-toggle-list-summary">
               { chosen.map((record, index) => (
                 <div key={`summary_token_${index}`} className="reframe-toggle-list-summary-token">
@@ -74,7 +74,7 @@ class ToggleList extends React.Component{
             </div>
           }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
-          { options && <Result records={ options } { ...this._getResults() } /> }          
+          { options && <Result records={ options } { ...this._getResults() } /> }
         </div>
       </div>
     )
@@ -132,7 +132,7 @@ class ToggleList extends React.Component{
       layout: (props) => <Result { ...this._getResults() } { ...props } />
     }
   }
-  
+
   _getResults() {
     const { format, chosen, multiple, text, value } = this.props
     return {
@@ -144,7 +144,7 @@ class ToggleList extends React.Component{
       onToggleRecord: this._handleToggleRecord.bind(this)
     }
   }
-  
+
   _handleLoad() {
     const { defaultValue, endpoint, options, value, onLoad, onSetChosen } = this.props
     if(endpoint) return onLoad(endpoint, { $ids: defaultValue })
@@ -152,7 +152,7 @@ class ToggleList extends React.Component{
     const chosen = options.filter(option => _.includes(defaultValue, _.get(option, value)))
     onSetChosen(chosen)
   }
-  
+
   _handleToggleFilter() {
     const { onToggleFilter } = this.props
     if(onToggleFilter) onToggleFilter()
