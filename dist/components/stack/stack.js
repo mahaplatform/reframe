@@ -79,6 +79,7 @@ var Stack = function (_React$Component) {
     value: function _getStatus(index) {
       var mountedIndexes = this.state.mounted - 1;
       var cardIndexes = this.state.cards.length - 1;
+      if (mountedIndexes === -1) return 'active';
       if (index > mountedIndexes && index === cardIndexes) return 'mounting';
       if (index === mountedIndexes && index === cardIndexes) return 'active';
       if (index === mountedIndexes && index < cardIndexes) return 'covering';
