@@ -14,14 +14,14 @@ class RouterStack extends React.Component {
     pathname: PropTypes.string,
     routes: PropTypes.object
   }
-  
+
   state = {
     cards: []
   }
 
   render() {
     const { cards } = this.state
-    return <Stack cards={ cards }/>
+    return <Stack cards={ cards } />
   }
 
   componentDidMount() {
@@ -29,7 +29,7 @@ class RouterStack extends React.Component {
     if(pathname === '/') return
     const card = this._matchRoute(pathname)
     this.setState({
-      cards: [ card ] 
+      cards: [ card ]
     })
   }
 
@@ -57,10 +57,10 @@ class RouterStack extends React.Component {
       }
     }
   }
-  
+
   _handlePush(card) {
     this.setState({
-      cards: [ 
+      cards: [
         ...this.state.cards,
         card
       ]
@@ -106,7 +106,7 @@ class RouterStackWrapper extends React.Component {
       </RouterStack>
     )
   }
-  
+
   _getRouter() {
     const { history } = this.context.router
     return {

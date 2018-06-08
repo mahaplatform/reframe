@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 class Stack extends React.Component {
 
   static propTypes = {
-    cards: PropTypes.array
+    cards: PropTypes.array,
+    slideFirst: PropTypes.bool
   }
 
   static defaultProps = {
+    slideFirst: true,
     cards: []
   }
 
@@ -46,9 +48,10 @@ class Stack extends React.Component {
   }
 
   _getStatus(index) {
+    const { slideFirst } = this.props
     const mountedIndexes = this.state.mounted - 1
     const cardIndexes = this.state.cards.length - 1
-    if(mountedIndexes === -1) return 'active'
+    if(!slideFirst && mountedIndexes === -1) return 'active'
     if(index > mountedIndexes && index === cardIndexes) return 'mounting'
     if(index === mountedIndexes && index === cardIndexes ) return 'active'
     if(index === mountedIndexes && index < cardIndexes) return 'covering'

@@ -77,9 +77,11 @@ var Stack = function (_React$Component) {
   }, {
     key: '_getStatus',
     value: function _getStatus(index) {
+      var slideFirst = this.props.slideFirst;
+
       var mountedIndexes = this.state.mounted - 1;
       var cardIndexes = this.state.cards.length - 1;
-      if (mountedIndexes === -1) return 'active';
+      if (!slideFirst && mountedIndexes === -1) return 'active';
       if (index > mountedIndexes && index === cardIndexes) return 'mounting';
       if (index === mountedIndexes && index === cardIndexes) return 'active';
       if (index === mountedIndexes && index < cardIndexes) return 'covering';
@@ -115,9 +117,11 @@ var Stack = function (_React$Component) {
 }(_react2.default.Component);
 
 Stack.propTypes = {
-  cards: _propTypes2.default.array
+  cards: _propTypes2.default.array,
+  slideFirst: _propTypes2.default.bool
 };
 Stack.defaultProps = {
+  slideFirst: true,
   cards: []
 };
 exports.default = Stack;
