@@ -5,20 +5,37 @@ import React from 'react'
 
 class Table extends React.Component {
 
-  _handleResize: any = _.debounce(this._resizeColumns, 100)
-
-  head: any
-
   static contextTypes = {
     modal: PropTypes.object,
     router: PropTypes.object,
     tasks: PropTypes.object
   }
 
+  static propTypes = {
+    columns: PropTypes.array,
+    handler: PropTypes.func,
+    link: PropTypes.string,
+    modal: PropTypes.any,
+    records: PropTypes.array,
+    recordTasks: PropTypes.array,
+    rowClass: PropTypes.string,
+    selectable: PropTypes.bool,
+    selected: PropTypes.array,
+    selectAll: PropTypes.bool,
+    sort: PropTypes.object,
+    onSelect: PropTypes.func,
+    onSelectAll: PropTypes.func,
+    onSort: PropTypes.func
+  }
+
   static defaultProps = {
     onSelect: (id) => {},
     onSelectAll: () => {}
   }
+
+  _handleResize: any = _.debounce(this._resizeColumns, 100)
+
+  head: any
 
   state = {
     widths: []
@@ -80,7 +97,7 @@ class Table extends React.Component {
                   </td>
                 }
                 { columns.filter(column => column.visible !== false).map((column, columnIndex) => (
-                  <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) } onClick={ this._handleClick.bind(this, record) }>
+                  <td key={ `cell_${rowIndex}_${columnIndex}` } className={ this._getBodyClass(column) } onClick={ this._handleClick.bind(this, record, rowIndex) }>
                     <Format { ...record } format={ column.format } value={ _.get(record, column.key) } />
                   </td>
                 )) }
@@ -155,11 +172,11 @@ class Table extends React.Component {
     this.setState({ widths })
   }
 
-  _handleClick(record) {
+  _handleClick(record, index) {
     const { link, modal, handler } = this.props
-    if(link) return this._handleLink(record)
-    if(modal) return this._handleModal(record)
-    if(handler) return this._handleHandler(record)
+    if(link) return this._handleLink(record, index)
+    if(modal) return this._handleModal(record, index)
+    if(handler) return this._handleHandler(record, index)
   }
 
   _handleSelect(id) {
@@ -170,24 +187,24 @@ class Table extends React.Component {
     this.props.onSelectAll()
   }
 
-  _handleLink(record) {
+  _handleLink(record, index) {
     const { link } = this.props
     _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const path = _.template(link)(record)
     this.context.router.history.push(path)
   }
 
-  _handleSort(column) {
-    const key = column.sort || column.key
-    this.props.onSort(key)
+  _handleModal(record, index) {
+    this.context.model.open(() => <this.props.modal record={ record }/>)
   }
 
-  _handleHandler(record) {
+  _handleHandler(record, index) {
     this.props.handler(record)
   }
 
-  _handleModal(record) {
-    this.context.model.open(() => <this.props.modal record={ record }/>)
+  _handleSort(column) {
+    const key = column.sort || column.key
+    this.props.onSort(key)
   }
 
   _handleTasks(id) {
