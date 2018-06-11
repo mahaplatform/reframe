@@ -1,5 +1,6 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+import _ from 'lodash'
 
 class Task extends React.Component {
 
@@ -11,15 +12,36 @@ class Task extends React.Component {
     router: PropTypes.object
   }
 
+  static propTypes = {
+    confirm: PropTypes.any,
+    className: PropTypes.string,
+    component: PropTypes.any,
+    disabled: PropTypes.bool,
+    drawer: PropTypes.any,
+    handler: PropTypes.func,
+    location: PropTypes.string,
+    icon: PropTypes.string,
+    label: PropTypes.string,
+    mobile: PropTypes.bool,
+    modal: PropTypes.any,
+    request: PropTypes.object,
+    route: PropTypes.string,
+    onDone: PropTypes.func,
+    onRequest: PropTypes.func
+  }
+
   static defaultProps = {
     disabled: false,
+    mobile: true,
     onDone: () => {}
   }
 
+  _handleChoose = _.debounce(this._handleChoose.bind(this))
+
   render() {
-    const { icon, component, label } = this.props
+    const { component, icon, label } = this.props
     return (
-      <div className={ this._getClass() } onClick={ this._handleChoose.bind(this) }>
+      <div className={ this._getClass() } onClick={ this._handleChoose }>
         { icon && <i className={`fa fa-fw fa-${icon}`} /> }
         { label }
         { component }

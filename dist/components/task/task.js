@@ -8,13 +8,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _lodash = require('lodash');
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,22 +32,30 @@ var Task = function (_React$Component) {
   _inherits(Task, _React$Component);
 
   function Task() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Task);
 
-    return _possibleConstructorReturn(this, (Task.__proto__ || Object.getPrototypeOf(Task)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Task.__proto__ || Object.getPrototypeOf(Task)).call.apply(_ref, [this].concat(args))), _this), _this._handleChoose = _lodash2.default.debounce(_this._handleChoose.bind(_this)), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Task, [{
     key: 'render',
     value: function render() {
       var _props = this.props,
-          icon = _props.icon,
           component = _props.component,
+          icon = _props.icon,
           label = _props.label;
 
       return _react2.default.createElement(
         'div',
-        { className: this._getClass(), onClick: this._handleChoose.bind(this) },
+        { className: this._getClass(), onClick: this._handleChoose },
         icon && _react2.default.createElement('i', { className: 'fa fa-fw fa-' + icon }),
         label,
         component
@@ -147,8 +159,26 @@ Task.contextTypes = {
   modal: _propTypes2.default.object,
   router: _propTypes2.default.object
 };
+Task.propTypes = {
+  confirm: _propTypes2.default.any,
+  className: _propTypes2.default.string,
+  component: _propTypes2.default.any,
+  disabled: _propTypes2.default.bool,
+  drawer: _propTypes2.default.any,
+  handler: _propTypes2.default.func,
+  location: _propTypes2.default.string,
+  icon: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  mobile: _propTypes2.default.bool,
+  modal: _propTypes2.default.any,
+  request: _propTypes2.default.object,
+  route: _propTypes2.default.string,
+  onDone: _propTypes2.default.func,
+  onRequest: _propTypes2.default.func
+};
 Task.defaultProps = {
   disabled: false,
+  mobile: true,
   onDone: function onDone() {}
 };
 exports.default = Task;
