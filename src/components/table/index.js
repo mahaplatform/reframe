@@ -158,8 +158,8 @@ class Table extends React.Component {
   _handleClick(record) {
     const { link, modal, handler } = this.props
     if(link) return this._handleLink(record)
-    if(modal) return this._handleModal(record.id)
-    if(handler) return this._handleHandler(record.id)
+    if(modal) return this._handleModal(record)
+    if(handler) return this._handleHandler(record)
   }
 
   _handleSelect(id) {
@@ -182,13 +182,12 @@ class Table extends React.Component {
     this.props.onSort(key)
   }
 
-  _handleHandler(id) {
-    this.props.handler(id)
+  _handleHandler(record) {
+    this.props.handler(record)
   }
 
-  _handleModal(id) {
-    const { modal } = this.props
-    this.context.model.open(modal)
+  _handleModal(record) {
+    this.context.model.open(() => <this.props.modal record={ record }/>)
   }
 
   _handleTasks(id) {

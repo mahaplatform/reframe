@@ -246,8 +246,8 @@ var Table = function (_React$Component) {
           handler = _props3.handler;
 
       if (link) return this._handleLink(record);
-      if (modal) return this._handleModal(record.id);
-      if (handler) return this._handleHandler(record.id);
+      if (modal) return this._handleModal(record);
+      if (handler) return this._handleHandler(record);
     }
   }, {
     key: '_handleSelect',
@@ -276,15 +276,17 @@ var Table = function (_React$Component) {
     }
   }, {
     key: '_handleHandler',
-    value: function _handleHandler(id) {
-      this.props.handler(id);
+    value: function _handleHandler(record) {
+      this.props.handler(record);
     }
   }, {
     key: '_handleModal',
-    value: function _handleModal(id) {
-      var modal = this.props.modal;
+    value: function _handleModal(record) {
+      var _this4 = this;
 
-      this.context.model.open(modal);
+      this.context.model.open(function () {
+        return _react2.default.createElement(_this4.props.modal, { record: record });
+      });
     }
   }, {
     key: '_handleTasks',
