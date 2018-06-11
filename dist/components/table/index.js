@@ -143,7 +143,7 @@ var Table = function (_React$Component) {
                 }).map(function (column, columnIndex) {
                   return _react2.default.createElement(
                     'td',
-                    { key: 'cell_' + rowIndex + '_' + columnIndex, className: _this2._getBodyClass(column), onClick: _this2._handleClick.bind(_this2, record) },
+                    { key: 'cell_' + rowIndex + '_' + columnIndex, className: _this2._getBodyClass(column), onClick: _this2._handleClick.bind(_this2, record, rowIndex) },
                     _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: _lodash2.default.get(record, column.key) }))
                   );
                 }),
@@ -239,15 +239,15 @@ var Table = function (_React$Component) {
     }
   }, {
     key: '_handleClick',
-    value: function _handleClick(record) {
+    value: function _handleClick(record, index) {
       var _props3 = this.props,
           link = _props3.link,
           modal = _props3.modal,
           handler = _props3.handler;
 
-      if (link) return this._handleLink(record);
-      if (modal) return this._handleModal(record);
-      if (handler) return this._handleHandler(record);
+      if (link) return this._handleLink(record, index);
+      if (modal) return this._handleModal(record, index);
+      if (handler) return this._handleHandler(record, index);
     }
   }, {
     key: '_handleSelect',
@@ -261,7 +261,7 @@ var Table = function (_React$Component) {
     }
   }, {
     key: '_handleLink',
-    value: function _handleLink(record) {
+    value: function _handleLink(record, index) {
       var link = this.props.link;
 
       _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
@@ -269,24 +269,24 @@ var Table = function (_React$Component) {
       this.context.router.history.push(path);
     }
   }, {
+    key: '_handleModal',
+    value: function _handleModal(record, index) {
+      var _this4 = this;
+
+      this.context.model.open(function () {
+        return _react2.default.createElement(_this4.props.modal, { record: record, index: index });
+      });
+    }
+  }, {
+    key: '_handleHandler',
+    value: function _handleHandler(record, index) {
+      this.props.handler(record, index);
+    }
+  }, {
     key: '_handleSort',
     value: function _handleSort(column) {
       var key = column.sort || column.key;
       this.props.onSort(key);
-    }
-  }, {
-    key: '_handleHandler',
-    value: function _handleHandler(record) {
-      this.props.handler(record);
-    }
-  }, {
-    key: '_handleModal',
-    value: function _handleModal(record) {
-      var _this4 = this;
-
-      this.context.model.open(function () {
-        return _react2.default.createElement(_this4.props.modal, { record: record });
-      });
     }
   }, {
     key: '_handleTasks',
@@ -319,6 +319,22 @@ Table.contextTypes = {
   modal: _propTypes2.default.object,
   router: _propTypes2.default.object,
   tasks: _propTypes2.default.object
+};
+Table.propTypes = {
+  columns: _propTypes2.default.array,
+  handler: _propTypes2.default.func,
+  link: _propTypes2.default.string,
+  modal: _propTypes2.default.any,
+  records: _propTypes2.default.array,
+  recordTasks: _propTypes2.default.array,
+  rowClass: _propTypes2.default.string,
+  selectable: _propTypes2.default.bool,
+  selected: _propTypes2.default.array,
+  selectAll: _propTypes2.default.bool,
+  sort: _propTypes2.default.object,
+  onSelect: _propTypes2.default.func,
+  onSelectAll: _propTypes2.default.func,
+  onSort: _propTypes2.default.func
 };
 Table.defaultProps = {
   onSelect: function onSelect(id) {},

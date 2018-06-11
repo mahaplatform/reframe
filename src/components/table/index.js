@@ -195,11 +195,11 @@ class Table extends React.Component {
   }
 
   _handleModal(record, index) {
-    this.context.model.open(() => <this.props.modal record={ record }/>)
+    this.context.model.open(() => <this.props.modal record={ record } index={ index } />)
   }
 
   _handleHandler(record, index) {
-    this.props.handler(record)
+    this.props.handler(record, index)
   }
 
   _handleSort(column) {
