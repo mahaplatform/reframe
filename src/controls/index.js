@@ -1,6 +1,7 @@
 export Checkbox from './checkbox'
 export ColorField from './colorfield'
 export DateField from './datefield'
+export Dropdown from './dropdown'
 export Hidden from './hidden'
 export FileField from './filefield'
 export Lookup from './lookup'

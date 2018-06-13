@@ -280,7 +280,11 @@ var Table = function (_React$Component) {
   }, {
     key: '_handleHandler',
     value: function _handleHandler(record, index) {
+<<<<<<< Updated upstream
       this.props.handler(record, index);
+=======
+      this.props.handler(record);
+>>>>>>> Stashed changes
     }
   }, {
     key: '_handleSort',
