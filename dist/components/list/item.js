@@ -12,8 +12,6 @@ var _format = require('../../utils/format');
 
 var _format2 = _interopRequireDefault(_format);
 
-var _reactRouterDom = require('react-router-dom');
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -115,25 +113,29 @@ var Item = function (_React$Component) {
           _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v' })
         )
       );
-      if (link) return _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: link },
-        item
-      );
-      if (handler) return _react2.default.createElement(
+      return _react2.default.createElement(
         'div',
-        { onClick: handler },
+        { onClick: this._handleClick.bind(this) },
         item
       );
-      return item;
+    }
+  }, {
+    key: '_handleClick',
+    value: function _handleClick() {
+      var _props2 = this.props,
+          link = _props2.link,
+          handler = _props2.handler;
+
+      if (link) this.context.router.push(link);
+      if (handler) handler();
     }
   }, {
     key: '_getClass',
     value: function _getClass() {
-      var _props2 = this.props,
-          className = _props2.className,
-          handler = _props2.handler,
-          link = _props2.link;
+      var _props3 = this.props,
+          className = _props3.className,
+          handler = _props3.handler,
+          link = _props3.link;
 
       var classes = ['reframe-list-item'];
       if (className) classes.push(className);

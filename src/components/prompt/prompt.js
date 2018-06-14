@@ -73,56 +73,41 @@ class Prompt extends React.Component {
 
   getChildContext() {
     return {
-      ...this._getAlertChildContext(),
-      ...this._getConfirmChildContext(),
-      ...this._getPromptChildContext()
+      alert: this._getAlertChildContext(),
+      confirm: this._getConfirmChildContext(),
+      prompt: this._getPromptChildContext()
     }
   }
 
   _getAlertChildContext() {
     const { onOpen, onClose } = this.props
     return {
-      alert: {
-        open: (message) => onOpen('ALERT', message),
-        close: onClose
-      }
+      open: (message) => onOpen('ALERT', message),
+      close: onClose
     }
   }
 
   _getConfirmChildContext() {
     const { onOpen, onClose } = this.props
     return {
-      confirm: {
-        open: (message, yes = null, no = null) => {
-          const options = [
-            {
-              label: 'Yes',
-              handler: () => {
-                if(yes) yes()
-                onClose()
-              }
-            }, {
-              label: 'No',
-              handler: () => {
-                if(no) no()
-                onClose()
-              }
-            }
-          ]
-          onOpen(message, null, options)
-        },
-        close: onClose
-      }
+      open: (message, yes = null, no = null) => onOpen(message, null, [
+        {
+          label: 'Yes',
+          handler: () => yes ? yes() : onClose()
+        }, {
+          label: 'No',
+          handler: () => no ? no() : onClose()
+        }
+      ]),
+      close: onClose
     }
   }
 
   _getPromptChildContext() {
     const { onOpen, onClose } = this.props
     return {
-      prompt: {
-        open: (title, options) => onOpen(title, null, options),
-        close: onClose
-      }
+      open: (title, options) => onOpen(title, null, options),
+      close: onClose
     }
   }
 

@@ -97,7 +97,11 @@ var Prompt = function (_React$Component) {
   }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      return _extends({}, this._getAlertChildContext(), this._getConfirmChildContext(), this._getPromptChildContext());
+      return {
+        alert: this._getAlertChildContext(),
+        confirm: this._getConfirmChildContext(),
+        prompt: this._getPromptChildContext()
+      };
     }
   }, {
     key: '_getAlertChildContext',
@@ -107,12 +111,10 @@ var Prompt = function (_React$Component) {
           onClose = _props3.onClose;
 
       return {
-        alert: {
-          open: function open(message) {
-            return onOpen('ALERT', message);
-          },
-          close: onClose
-        }
+        open: function open(message) {
+          return onOpen('ALERT', message);
+        },
+        close: onClose
       };
     }
   }, {
@@ -123,28 +125,22 @@ var Prompt = function (_React$Component) {
           onClose = _props4.onClose;
 
       return {
-        confirm: {
-          open: function open(message) {
-            var yes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-            var no = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-            var options = [{
-              label: 'Yes',
-              handler: function handler() {
-                if (yes) yes();
-                onClose();
-              }
-            }, {
-              label: 'No',
-              handler: function handler() {
-                if (no) no();
-                onClose();
-              }
-            }];
-            onOpen(message, null, options);
-          },
-          close: onClose
-        }
+        open: function open(message) {
+          var yes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+          var no = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+          return onOpen(message, null, [{
+            label: 'Yes',
+            handler: function handler() {
+              return yes ? yes() : onClose();
+            }
+          }, {
+            label: 'No',
+            handler: function handler() {
+              return no ? no() : onClose();
+            }
+          }]);
+        },
+        close: onClose
       };
     }
   }, {
@@ -155,12 +151,10 @@ var Prompt = function (_React$Component) {
           onClose = _props5.onClose;
 
       return {
-        prompt: {
-          open: function open(title, options) {
-            return onOpen(title, null, options);
-          },
-          close: onClose
-        }
+        open: function open(title, options) {
+          return onOpen(title, null, options);
+        },
+        close: onClose
       };
     }
   }, {

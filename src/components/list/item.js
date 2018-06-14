@@ -1,5 +1,4 @@
 import Format from '../../utils/format'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
@@ -53,9 +52,13 @@ class Item extends React.Component {
         }
       </div>
     )
-    if(link) return <Link to={ link }>{ item }</Link>
-    if(handler) return <div onClick={ handler }>{ item }</div>
-    return item
+    return <div onClick={ this._handleClick.bind(this) }>{ item }</div>
+  }
+
+  _handleClick() {
+    const { link, handler } = this.props
+    if(link) this.context.router.push(link)
+    if(handler) handler()
   }
 
   _getClass() {
