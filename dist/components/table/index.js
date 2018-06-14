@@ -293,19 +293,14 @@ var Table = function (_React$Component) {
       var recordTasks = this.props.recordTasks;
 
       var tasks = recordTasks.map(function (task) {
-        if (task.modal) {
-          return _extends({}, task, {
-            modal: function modal() {
-              return _react2.default.createElement(task.modal, { id: id });
-            }
-          });
-        } else if (task.handler) {
-          return _extends({}, task, {
-            handler: function handler() {
-              return task.handler(id);
-            }
-          });
-        }
+        return _extends({}, task, {
+          handler: task.handler ? function () {
+            return task.handler(id);
+          } : null,
+          modal: task.modal ? function () {
+            return _react2.default.createElement(task.modal, { id: id });
+          } : null
+        });
       });
       this.context.tasks.open(tasks);
     }

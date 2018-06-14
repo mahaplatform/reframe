@@ -103,6 +103,16 @@ var Infinite = function (_React$Component) {
       this._handleFetch(0, true);
     }
   }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      var _this2 = this;
+
+      var ignored = ['con', 'empty', 'layout', 'footer', 'router'];
+      return Object.keys(_lodash2.default.omit(this.props, ignored)).reduce(function (update, key) {
+        return update || !_lodash2.default.isEqual(_this2.props[key], nextProps[key]);
+      }, false);
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       var _props2 = this.props,

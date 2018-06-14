@@ -69,6 +69,7 @@ var Button = function (_React$Component) {
     key: '_getClass',
     value: function _getClass() {
       var _props3 = this.props,
+          component = _props3.component,
           basic = _props3.basic,
           className = _props3.className,
           color = _props3.color,
@@ -76,6 +77,7 @@ var Button = function (_React$Component) {
           mobile = _props3.mobile,
           status = _props3.status;
 
+      if (component) return '';
       if (className) return className;
       var classes = ['ui', color, 'fluid', 'button', 'reframe-button'];
       if (mobile !== false) classes.push('mobile');

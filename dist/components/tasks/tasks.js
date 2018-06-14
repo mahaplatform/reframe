@@ -60,7 +60,8 @@ var Tasks = function (_React$Component) {
           'div',
           { className: 'reframe-tasks-list' },
           items && items.map(function (item, index) {
-            if (item.show !== false) return _react2.default.createElement(_button2.default, _extends({ key: 'task_' + index }, _this2._getButton(item)));
+            if (item.show === false) return;
+            return _react2.default.createElement(_button2.default, _extends({ key: 'task_' + index }, _this2._getButton(item)));
           }),
           _react2.default.createElement(
             'div',
@@ -119,5 +120,13 @@ Tasks.childContextTypes = {
 Tasks.contextTypes = {
   drawer: _propTypes2.default.object,
   modal: _propTypes2.default.object
+};
+Tasks.propTypes = {
+  children: _propTypes2.default.any,
+  items: _propTypes2.default.array,
+  open: _propTypes2.default.bool,
+  onClear: _propTypes2.default.func,
+  onClose: _propTypes2.default.func,
+  onOpen: _propTypes2.default.func
 };
 exports.default = Tasks;

@@ -73,7 +73,8 @@ class Button extends React.Component {
   }
 
   _getClass() {
-    const { basic, className, color, disabled, mobile, status } = this.props
+    const { component, basic, className, color, disabled, mobile, status } = this.props
+    if(component) return ''
     if(className) return className
     const classes = ['ui', color, 'fluid', 'button','reframe-button']
     if(mobile !== false) classes.push('mobile')

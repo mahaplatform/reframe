@@ -208,19 +208,11 @@ class Table extends React.Component {
 
   _handleTasks(id) {
     const { recordTasks } = this.props
-    const tasks = recordTasks.map(task => {
-      if(task.modal) {
-        return {
-          ...task,
-          modal: () => <task.modal id={ id } />
-        }
-      } else if(task.handler) {
-        return {
-          ...task,
-          handler: () => task.handler(id)
-        }
-      }
-    })
+    const tasks = recordTasks.map(task => ({
+      ...task,
+      handler: task.handler ? () => task.handler(id) : null,
+      modal: task.modal ? () => <task.modal id={ id } /> : null
+    }))
     this.context.tasks.open(tasks)
   }
 

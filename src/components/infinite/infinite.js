@@ -88,6 +88,13 @@ class Infinite extends React.Component {
     this._handleFetch(0, true)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const ignored = ['con','empty','layout','footer','router']
+    return Object.keys(_.omit(this.props, ignored)).reduce((update, key) => {
+      return update || !_.isEqual(this.props[key], nextProps[key])
+    }, false)
+  }
+
   componentDidUpdate(prevProps) {
     const { cacheKey, exclude_ids, filter, records, selected, sort, status, onUpdateSelected } = this.props
     if(this.timeout && status !== prevProps.status && prevProps.status === 'loading') {
