@@ -131,7 +131,10 @@ var RouterStack = function (_React$Component) {
         return {
           pathname: pathname,
           component: routes[path],
-          params: matched.params
+          props: {
+            pathname: pathname,
+            params: matched.params
+          }
         };
       }, null);
     }
@@ -170,11 +173,13 @@ var RouterStackWrapper = function (_React$Component2) {
   }, {
     key: '_getRouter',
     value: function _getRouter() {
-      var history = this.context.router.history;
+      var _context$router = this.context.router,
+          action = _context$router.action,
+          pathname = _context$router.pathname;
 
       return _extends({}, this.props, {
-        pathname: history.location.pathname,
-        action: history.action.toLowerCase()
+        pathname: pathname,
+        action: action.toLowerCase()
       });
     }
   }]);

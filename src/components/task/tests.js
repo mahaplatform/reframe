@@ -32,8 +32,8 @@ describe('task component', () => {
 
       const task = shallow(<Task label="Foo" route="/a/b/c" onDone={ onDone } />, { context })
       task.simulate('click')
-      expect(context.router.history.push.calledOnce).to.be.true
-      expect(context.router.history.push.calledWith('/a/b/c')).to.be.true
+      expect(context.router.push.calledOnce).to.be.true
+      expect(context.router.push.calledWith('/a/b/c')).to.be.true
       expect(onDone.calledOnce).to.be.true
 
     })

@@ -11,8 +11,7 @@ class Tasks extends React.Component {
 
   static contextTypes = {
     drawer: PropTypes.object,
-    modal: PropTypes.object,
-    router: PropTypes.object
+    modal: PropTypes.object
   }
 
   render() {

@@ -13,8 +13,7 @@ class Prompt extends React.Component {
 
   static contextTypes = {
     drawer: PropTypes.object,
-    modal: PropTypes.object,
-    history: PropTypes.object
+    modal: PropTypes.object
   }
 
   static propTypes = {

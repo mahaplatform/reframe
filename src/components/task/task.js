@@ -74,7 +74,7 @@ class Task extends React.Component {
 
   _handleRoute(route) {
     const { router } = this.context
-    router.history.push(route)
+    router.push(route)
   }
 
   _handleModal(component) {

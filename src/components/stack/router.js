@@ -81,7 +81,10 @@ class RouterStack extends React.Component {
       return {
         pathname,
         component: routes[path],
-        params: matched.params
+        props: {
+          pathname,
+          params: matched.params
+        }
       }
     }, null)
   }
@@ -108,11 +111,11 @@ class RouterStackWrapper extends React.Component {
   }
 
   _getRouter() {
-    const { history } = this.context.router
+    const { action, pathname } = this.context.router
     return {
       ...this.props,
-      pathname: history.location.pathname,
-      action: history.action.toLowerCase()
+      pathname,
+      action: action.toLowerCase()
     }
   }
 

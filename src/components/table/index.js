@@ -191,7 +191,7 @@ class Table extends React.Component {
     const { link } = this.props
     _.templateSettings.interpolate = /#{([\s\S]+?)}/g
     const path = _.template(link)(record)
-    this.context.router.history.push(path)
+    this.context.router.push(path)
   }
 
   _handleModal(record, index) {

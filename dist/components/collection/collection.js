@@ -113,16 +113,16 @@ var Collection = function (_React$Component) {
 
       if (!_lodash2.default.isEqual(filter, prevProps.filter)) {
         var query = _qs2.default.stringify({ $filter: filter }, { encode: false });
-        router.history.replace(router.route.location.pathname + '?' + query);
+        router.replace(router.pathname + '?' + query);
       }
     }
   }, {
     key: '_getFilterFromUrl',
     value: function _getFilterFromUrl() {
-      var location = this.context.router.route.location;
+      var search = this.context.router.search;
 
-      if (_lodash2.default.isEmpty(location.search)) return null;
-      var query = _qs2.default.parse(location.search.substr(1));
+      if (_lodash2.default.isEmpty(search)) return null;
+      var query = _qs2.default.parse(search.substr(1));
       if (!query.$filter) return null;
       return query.$filter;
     }

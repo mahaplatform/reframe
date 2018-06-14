@@ -122,14 +122,14 @@ class Collection extends React.Component {
     const { router } = this.context
     if(!_.isEqual(filter, prevProps.filter)) {
       const query = qs.stringify({ $filter: filter }, { encode: false })
-      router.history.replace(router.route.location.pathname+'?'+query)
+      router.replace(router.pathname+'?'+query)
     }
   }
 
   _getFilterFromUrl() {
-    const { location } = this.context.router.route
-    if(_.isEmpty(location.search)) return null
-    const query = qs.parse(location.search.substr(1))
+    const { search } = this.context.router
+    if(_.isEmpty(search)) return null
+    const query = qs.parse(search.substr(1))
     if(!query.$filter) return null
     return query.$filter
   }

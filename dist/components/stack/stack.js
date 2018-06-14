@@ -54,7 +54,7 @@ var Stack = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             { key: 'card_' + index, className: _this2._getClass(index) },
-            _react2.default.createElement(card.component, _extends({}, card.props, { params: card.params, pathname: card.pathname, active: index === cards.length - 1 }))
+            _react2.default.createElement(card.component, _extends({}, card.props, { active: index === cards.length - 1 }))
           );
         })
       );

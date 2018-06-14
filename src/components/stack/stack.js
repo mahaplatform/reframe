@@ -28,7 +28,7 @@ class Stack extends React.Component {
       <div className="reframe-stack">
         { cards.map((card, index) => (
           <div key={ `card_${index}` } className={ this._getClass(index) }>
-            <card.component { ...card.props } params={ card.params } pathname={ card.pathname } active={ index === cards.length - 1} />
+            <card.component { ...card.props } active={ index === cards.length - 1} />
           </div>
         )) }
       </div>

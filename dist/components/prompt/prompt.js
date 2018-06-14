@@ -180,8 +180,7 @@ Prompt.childContextTypes = {
 };
 Prompt.contextTypes = {
   drawer: _propTypes2.default.object,
-  modal: _propTypes2.default.object,
-  history: _propTypes2.default.object
+  modal: _propTypes2.default.object
 };
 Prompt.propTypes = {
   cancel: _propTypes2.default.bool,

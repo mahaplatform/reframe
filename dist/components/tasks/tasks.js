@@ -118,7 +118,6 @@ Tasks.childContextTypes = {
 };
 Tasks.contextTypes = {
   drawer: _propTypes2.default.object,
-  modal: _propTypes2.default.object,
-  router: _propTypes2.default.object
+  modal: _propTypes2.default.object
 };
 exports.default = Tasks;

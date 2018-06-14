@@ -266,7 +266,7 @@ var Table = function (_React$Component) {
 
       _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
       var path = _lodash2.default.template(link)(record);
-      this.context.router.history.push(path);
+      this.context.router.push(path);
     }
   }, {
     key: '_handleModal',

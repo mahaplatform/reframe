@@ -48,8 +48,8 @@ describe('task component', function () {
 
       var task = (0, _enzyme.shallow)(_react2.default.createElement(_task2.default, { label: 'Foo', route: '/a/b/c', onDone: onDone }), { context: context });
       task.simulate('click');
-      (0, _chai.expect)(context.router.history.push.calledOnce).to.be.true;
-      (0, _chai.expect)(context.router.history.push.calledWith('/a/b/c')).to.be.true;
+      (0, _chai.expect)(context.router.push.calledOnce).to.be.true;
+      (0, _chai.expect)(context.router.push.calledWith('/a/b/c')).to.be.true;
       (0, _chai.expect)(onDone.calledOnce).to.be.true;
     });
 

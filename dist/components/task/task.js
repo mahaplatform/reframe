@@ -107,7 +107,7 @@ var Task = function (_React$Component) {
     value: function _handleRoute(route) {
       var router = this.context.router;
 
-      router.history.push(route);
+      router.push(route);
     }
   }, {
     key: '_handleModal',
