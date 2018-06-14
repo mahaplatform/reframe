@@ -2,7 +2,7 @@ import { CSSTransition } from 'react-transition-group'
 import { Empty, Results } from './results'
 import Infinite from '../infinite'
 import PropTypes from 'prop-types'
-import Buttons from './buttons'
+import Buttons from '../buttons'
 import Header from './header'
 import Tasks from './tasks'
 import React from 'react'
@@ -47,7 +47,7 @@ class Collection extends React.Component {
       PropTypes.func,
       PropTypes.element
     ]),
-    link: PropTypes.string,
+    link: PropTypes.func,
     managing: PropTypes.bool,
     modal: PropTypes.string,
     new: PropTypes.func,
@@ -56,10 +56,7 @@ class Collection extends React.Component {
     q: PropTypes.string,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
-    rowClass: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func
-    ]),
+    rowClass: PropTypes.func,
     search: PropTypes.bool,
     selected: PropTypes.array,
     selectable: PropTypes.bool,
@@ -101,7 +98,11 @@ class Collection extends React.Component {
           { records && <Results { ...this._getResults() } /> }
           { endpoint && <Infinite { ...this._getInfinite() } /> }
           <CSSTransition in={ !_.isNil(buttons) && !_.isNil(buttons(this.props)) } classNames="expanded" timeout={ 150 } mountOnEnter={ true } unmountOnExit={ true }>
-            <Buttons { ...this._getButtons() } />
+            <div className="reframe-collection-footer">
+              <div className="reframe-collection-footer-items">
+                <Buttons { ...this._getButtons() } />
+              </div>
+            </div>
           </CSSTransition>
         </div>
       </div>

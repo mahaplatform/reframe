@@ -264,8 +264,7 @@ var Table = function (_React$Component) {
     value: function _handleLink(record, index) {
       var link = this.props.link;
 
-      _lodash2.default.templateSettings.interpolate = /#{([\s\S]+?)}/g;
-      var path = _lodash2.default.template(link)(record);
+      var path = link(record);
       this.context.router.push(path);
     }
   }, {
@@ -323,11 +322,11 @@ Table.contextTypes = {
 Table.propTypes = {
   columns: _propTypes2.default.array,
   handler: _propTypes2.default.func,
-  link: _propTypes2.default.string,
+  link: _propTypes2.default.func,
   modal: _propTypes2.default.any,
   records: _propTypes2.default.array,
   recordTasks: _propTypes2.default.array,
-  rowClass: _propTypes2.default.string,
+  rowClass: _propTypes2.default.func,
   selectable: _propTypes2.default.bool,
   selected: _propTypes2.default.array,
   selectAll: _propTypes2.default.bool,

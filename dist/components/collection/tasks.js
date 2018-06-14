@@ -26,9 +26,9 @@ var _export = require('./export');
 
 var _export2 = _interopRequireDefault(_export);
 
-var _task = require('../task');
+var _button = require('../button');
 
-var _task2 = _interopRequireDefault(_task);
+var _button2 = _interopRequireDefault(_button);
 
 var _react = require('react');
 
@@ -116,7 +116,7 @@ var Tasks = function (_React$Component) {
                   'Export Records'
                 ),
                 tasks && tasks.map(function (task, index) {
-                  return _react2.default.createElement(_task2.default, _extends({ key: 'task_' + index }, _this2._getTask(task)));
+                  return _react2.default.createElement(_button2.default, _extends({ key: 'task_' + index }, _this2._getTask(task)));
                 })
               )
             )
@@ -145,6 +145,44 @@ var Tasks = function (_React$Component) {
       }
     }
   }, {
+    key: '_getTask',
+    value: function _getTask(task) {
+      return _extends({
+        className: 'reframe-collection-tasks-panel-item',
+        label: task.label,
+        mobile: task.mobile,
+        icon: task.icon,
+        rights: task.rights
+      }, this._getTaskAction(task));
+    }
+  }, {
+    key: '_getTaskAction',
+    value: function _getTaskAction(task) {
+      var _this3 = this;
+
+      if (task.panel) {
+        return {
+          handler: function handler() {
+            return _this3.props.onAddPanel(task.panel);
+          }
+        };
+      }
+      if (task.handler) {
+        return {
+          handler: function handler() {
+            return task.handler(_this3.props);
+          }
+        };
+      }
+      if (task.request) {
+        return {
+          request: function request() {
+            return task.request(_this3.props);
+          }
+        };
+      }
+    }
+  }, {
     key: '_handleToggleTasks',
     value: function _handleToggleTasks() {
       this.props.onToggleTasks();
@@ -152,7 +190,7 @@ var Tasks = function (_React$Component) {
   }, {
     key: '_handleColumns',
     value: function _handleColumns() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.props.onAddPanel(function (props) {
         var table = props.table,
@@ -164,7 +202,7 @@ var Tasks = function (_React$Component) {
           columns: columns,
           onSetColumns: onSetColumns,
           onDone: function onDone() {
-            return _this3.props.onRemovePanel();
+            return _this4.props.onRemovePanel();
           }
         });
       });
@@ -172,7 +210,7 @@ var Tasks = function (_React$Component) {
   }, {
     key: '_handleFilter',
     value: function _handleFilter() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.props.onAddPanel(function (props) {
         var entity = props.entity,
@@ -187,7 +225,7 @@ var Tasks = function (_React$Component) {
           prompt: 'Find ' + article + ' ' + entity,
           onUpdate: onSetFilter,
           onDone: function onDone() {
-            return _this4.props.onRemovePanel();
+            return _this5.props.onRemovePanel();
           }
         });
       });
@@ -195,7 +233,7 @@ var Tasks = function (_React$Component) {
   }, {
     key: '_handleExport',
     value: function _handleExport() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.props.onAddPanel(function (props) {
         var endpoint = props.endpoint,
@@ -205,55 +243,17 @@ var Tasks = function (_React$Component) {
             token = props.token;
 
         return _react2.default.createElement(_export2.default, {
-          defaultValue: _this5.props.export,
+          defaultValue: _this6.props.export,
           endpoint: endpoint,
           entity: entity,
           filter: filter,
           sort: sort.key ? (sort.order === 'desc' ? '-' : '') + sort.key : null,
           token: token,
           onDone: function onDone() {
-            return _this5.props.onRemovePanel();
+            return _this6.props.onRemovePanel();
           }
         });
       });
-    }
-  }, {
-    key: '_getTask',
-    value: function _getTask(task) {
-      return _extends({
-        className: 'reframe-collection-tasks-panel-item',
-        label: task.label,
-        mobile: task.mobile,
-        icon: task.icon,
-        rights: task.rights
-      }, this._getTaskAction(task));
-    }
-  }, {
-    key: '_getTaskAction',
-    value: function _getTaskAction(task) {
-      var _this6 = this;
-
-      if (task.panel) {
-        return {
-          handler: function handler() {
-            return _this6.props.onAddPanel(task.panel);
-          }
-        };
-      }
-      if (task.handler) {
-        return {
-          handler: function handler() {
-            return task.handler(_this6.props);
-          }
-        };
-      }
-      if (task.request) {
-        return {
-          request: function request() {
-            return task.request(_this6.props);
-          }
-        };
-      }
     }
   }]);
 

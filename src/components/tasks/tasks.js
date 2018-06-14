@@ -1,6 +1,6 @@
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
-import Task from '../task'
+import Button from '../button'
 import React from 'react'
 
 class Tasks extends React.Component {
@@ -25,7 +25,7 @@ class Tasks extends React.Component {
         <div className="reframe-tasks-list">
           { items && items.map((item, index) => {
             if(item.show !== false) return (
-              <Task key={`task_${index}`} { ...this._getTask(item) }/>
+              <Button key={`task_${index}`} { ...this._getButton(item) }/>
             )
           }) }
           <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
@@ -53,7 +53,7 @@ class Tasks extends React.Component {
     }
   }
 
-  _getTask(item){
+  _getButton(item){
     return {
       ...item,
       className: 'reframe-task',

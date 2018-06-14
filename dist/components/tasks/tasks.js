@@ -14,9 +14,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _task = require('../task');
+var _button = require('../button');
 
-var _task2 = _interopRequireDefault(_task);
+var _button2 = _interopRequireDefault(_button);
 
 var _react = require('react');
 
@@ -60,7 +60,7 @@ var Tasks = function (_React$Component) {
           'div',
           { className: 'reframe-tasks-list' },
           items && items.map(function (item, index) {
-            if (item.show !== false) return _react2.default.createElement(_task2.default, _extends({ key: 'task_' + index }, _this2._getTask(item)));
+            if (item.show !== false) return _react2.default.createElement(_button2.default, _extends({ key: 'task_' + index }, _this2._getButton(item)));
           }),
           _react2.default.createElement(
             'div',
@@ -96,8 +96,8 @@ var Tasks = function (_React$Component) {
       };
     }
   }, {
-    key: '_getTask',
-    value: function _getTask(item) {
+    key: '_getButton',
+    value: function _getButton(item) {
       return _extends({}, item, {
         className: 'reframe-task',
         onDone: this._handleClose.bind(this)

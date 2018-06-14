@@ -14,9 +14,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _task = require('../task');
+var _button = require('../button');
 
-var _task2 = _interopRequireDefault(_task);
+var _button2 = _interopRequireDefault(_button);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77,17 +77,18 @@ var Message = function (_React$Component) {
             text
           ),
           component,
-          button && _react2.default.createElement(_task2.default, this._getTask())
+          button && _react2.default.createElement(_button2.default, this._getButton())
         )
       );
     }
   }, {
-    key: '_getTask',
-    value: function _getTask() {
+    key: '_getButton',
+    value: function _getButton() {
       var button = this.props.button;
 
       return {
-        className: 'ui basic red button',
+        basic: true,
+        color: 'red',
         label: button.label,
         modal: button.modal,
         handler: button.handler,
@@ -108,11 +109,6 @@ Message.propTypes = {
   text: _propTypes2.default.string,
   title: _propTypes2.default.string,
   component: _propTypes2.default.object,
-  button: _propTypes2.default.shape({
-    handler: _propTypes2.default.func,
-    label: _propTypes2.default.string,
-    modal: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func]),
-    request: _propTypes2.default.object
-  })
+  button: _propTypes2.default.object
 };
 exports.default = Message;

@@ -14,9 +14,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _task = require('../task');
+var _button = require('../button');
 
-var _task2 = _interopRequireDefault(_task);
+var _button2 = _interopRequireDefault(_button);
 
 var _react = require('react');
 
@@ -73,7 +73,7 @@ var Prompt = function (_React$Component) {
             message
           ),
           options && options.map(function (option, index) {
-            return _react2.default.createElement(_task2.default, _extends({ key: 'option_' + index }, option, { className: 'reframe-prompt-item', onDone: _this2._handleClose.bind(_this2) }));
+            return _react2.default.createElement(_button2.default, _extends({ key: 'option_' + index }, _this2._getButton(options)));
           }),
           cancel && _react2.default.createElement(
             'div',
@@ -102,6 +102,14 @@ var Prompt = function (_React$Component) {
         confirm: this._getConfirmChildContext(),
         prompt: this._getPromptChildContext()
       };
+    }
+  }, {
+    key: '_getButton',
+    value: function _getButton(option) {
+      return _extends({}, option, {
+        className: 'reframe-prompt-item',
+        onDone: this._handleClose.bind(this)
+      });
     }
   }, {
     key: '_getAlertChildContext',

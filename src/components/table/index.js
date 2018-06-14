@@ -14,11 +14,11 @@ class Table extends React.Component {
   static propTypes = {
     columns: PropTypes.array,
     handler: PropTypes.func,
-    link: PropTypes.string,
+    link: PropTypes.func,
     modal: PropTypes.any,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
-    rowClass: PropTypes.string,
+    rowClass: PropTypes.func,
     selectable: PropTypes.bool,
     selected: PropTypes.array,
     selectAll: PropTypes.bool,
@@ -189,8 +189,7 @@ class Table extends React.Component {
 
   _handleLink(record, index) {
     const { link } = this.props
-    _.templateSettings.interpolate = /#{([\s\S]+?)}/g
-    const path = _.template(link)(record)
+    const path = link(record)
     this.context.router.push(path)
   }
 

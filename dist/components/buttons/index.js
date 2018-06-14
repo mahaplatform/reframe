@@ -16,9 +16,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _task = require('../task');
+var _button = require('../button');
 
-var _task2 = _interopRequireDefault(_task);
+var _button2 = _interopRequireDefault(_button);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,38 +40,15 @@ var Buttons = function (_React$Component) {
   _createClass(Buttons, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var buttons = this.props.buttons;
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-collection-footer' },
-        _react2.default.createElement(
-          'div',
-          { className: 'reframe-collection-footer-items' },
-          buttons && buttons.map(function (button, index) {
-            return _react2.default.createElement(
-              'div',
-              { key: 'collection_footer_' + index, className: 'reframe-collection-footer-item' },
-              _react2.default.createElement(_task2.default, _this2._getTask(index))
-            );
-          })
-        )
+        { className: 'reframe-buttons' },
+        buttons && buttons.map(function (button, index) {
+          return _react2.default.createElement(_button2.default, _extends({}, buttons[index], { key: 'button_' + index }));
+        })
       );
-    }
-  }, {
-    key: '_getTask',
-    value: function _getTask(index) {
-      var buttons = this.props.buttons;
-
-      var button = buttons[index];
-      var color = button.color || 'blue';
-      var classes = ['ui', color, 'fluid', 'button'];
-      if (button.disabled) classes.push('disabled');
-      return _extends({
-        className: classes.join(' ')
-      }, button);
     }
   }]);
 

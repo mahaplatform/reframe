@@ -1,6 +1,6 @@
 import { CSSTransition } from 'react-transition-group'
 import PropTypes from 'prop-types'
-import Task from '../task'
+import Button from '../button'
 import React from 'react'
 
 class Prompt extends React.Component {
@@ -51,9 +51,9 @@ class Prompt extends React.Component {
               { message }
             </div>
           }
-          { options && options.map((option, index) => {
-            return <Task key={`option_${index}`} { ...option } className="reframe-prompt-item" onDone={ this._handleClose.bind(this) } />
-          }) }
+          { options && options.map((option, index) => (
+            <Button key={ `option_${index}` } { ...this._getButton(options) }  />
+          ))}
           { cancel &&
             <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>
               Cancel
@@ -76,6 +76,14 @@ class Prompt extends React.Component {
       alert: this._getAlertChildContext(),
       confirm: this._getConfirmChildContext(),
       prompt: this._getPromptChildContext()
+    }
+  }
+
+  _getButton(option) {
+    return {
+      ...option,
+      className: 'reframe-prompt-item',
+      onDone: this._handleClose.bind(this)
     }
   }
 

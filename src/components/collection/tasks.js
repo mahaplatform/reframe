@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Columns from './columns'
 import Filters from '../filters'
 import Export from './export'
-import Task from '../task'
+import Button from '../button'
 import React from 'react'
 import _ from 'lodash'
 
@@ -58,7 +58,7 @@ class Tasks extends React.Component {
                   </div>
                 }
                 { tasks && tasks.map((task, index) => (
-                  <Task key={`task_${index}`} { ...this._getTask(task) } />
+                  <Button key={`task_${index}`} { ...this._getTask(task) } />
                 )) }
               </div>
             </div>
@@ -78,6 +78,35 @@ class Tasks extends React.Component {
     const { open, onClearPanel } = this.props
     if(open !== prevProps.open && !open) {
       setTimeout(onClearPanel, 500)
+    }
+  }
+
+  _getTask(task) {
+    return {
+      className: 'reframe-collection-tasks-panel-item',
+      label: task.label,
+      mobile: task.mobile,
+      icon: task.icon,
+      rights: task.rights,
+      ...this._getTaskAction(task)
+    }
+  }
+
+  _getTaskAction(task) {
+    if(task.panel) {
+      return {
+        handler: () => this.props.onAddPanel(task.panel)
+      }
+    }
+    if(task.handler) {
+      return {
+        handler: () => task.handler(this.props)
+      }
+    }
+    if(task.request) {
+      return {
+        request: () => task.request(this.props)
+      }
     }
   }
 
@@ -127,34 +156,6 @@ class Tasks extends React.Component {
     })
   }
 
-  _getTask(task) {
-    return {
-      className: 'reframe-collection-tasks-panel-item',
-      label: task.label,
-      mobile: task.mobile,
-      icon: task.icon,
-      rights: task.rights,
-      ...this._getTaskAction(task)
-    }
-  }
-
-  _getTaskAction(task) {
-    if(task.panel) {
-      return {
-        handler: () => this.props.onAddPanel(task.panel)
-      }
-    }
-    if(task.handler) {
-      return {
-        handler: () => task.handler(this.props)
-      }
-    }
-    if(task.request) {
-      return {
-        request: () => task.request(this.props)
-      }
-    }
-  }
 
 }
 

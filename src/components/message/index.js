@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Task from '../task'
+import Button from '../button'
 
 class Message extends React.Component {
 
@@ -14,15 +14,7 @@ class Message extends React.Component {
     text: PropTypes.string,
     title: PropTypes.string,
     component: PropTypes.object,
-    button: PropTypes.shape({
-      handler: PropTypes.func,
-      label: PropTypes.string,
-      modal: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.func
-      ]),
-      request: PropTypes.object
-    })
+    button: PropTypes.object
   }
 
   render() {
@@ -45,16 +37,17 @@ class Message extends React.Component {
           { title && <h3>{ title }</h3> }
           { text && <p>{ text }</p> }
           { component }
-          { button && <Task { ...this._getTask() } /> }
+          { button && <Button { ...this._getButton() } /> }
         </div>
       </div>
     )
   }
 
-  _getTask() {
+  _getButton() {
     const { button } = this.props
     return {
-      className: 'ui basic red button',
+      basic: true,
+      color: 'red',
       label: button.label,
       modal: button.modal,
       handler: button.handler,

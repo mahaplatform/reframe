@@ -35,14 +35,11 @@ export class Results extends React.Component {
     columns: PropTypes.array,
     handler: PropTypes.func,
     layout: PropTypes.any,
-    link: PropTypes.string,
+    link: PropTypes.func,
     modal: PropTypes.func,
     records: PropTypes.array,
     recordTasks: PropTypes.array,
-    rowClass: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func
-    ]),
+    rowClass: PropTypes.func,
     selectable: PropTypes.bool,
     selectAll: PropTypes.bool,
     selected: PropTypes.array,

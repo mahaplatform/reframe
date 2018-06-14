@@ -20,7 +20,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _buttons = require('./buttons');
+var _buttons = require('../buttons');
 
 var _buttons2 = _interopRequireDefault(_buttons);
 
@@ -83,7 +83,15 @@ var Collection = function (_React$Component) {
           _react2.default.createElement(
             _reactTransitionGroup.CSSTransition,
             { 'in': !_lodash2.default.isNil(buttons) && !_lodash2.default.isNil(buttons(this.props)), classNames: 'expanded', timeout: 150, mountOnEnter: true, unmountOnExit: true },
-            _react2.default.createElement(_buttons2.default, this._getButtons())
+            _react2.default.createElement(
+              'div',
+              { className: 'reframe-collection-footer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-collection-footer-items' },
+                _react2.default.createElement(_buttons2.default, this._getButtons())
+              )
+            )
           )
         )
       );
@@ -269,7 +277,7 @@ Collection.propTypes = {
   icon: _propTypes2.default.string,
   layout: _propTypes2.default.func,
   loading: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.element]),
-  link: _propTypes2.default.string,
+  link: _propTypes2.default.func,
   managing: _propTypes2.default.bool,
   modal: _propTypes2.default.string,
   new: _propTypes2.default.func,
@@ -278,7 +286,7 @@ Collection.propTypes = {
   q: _propTypes2.default.string,
   records: _propTypes2.default.array,
   recordTasks: _propTypes2.default.array,
-  rowClass: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
+  rowClass: _propTypes2.default.func,
   search: _propTypes2.default.bool,
   selected: _propTypes2.default.array,
   selectable: _propTypes2.default.bool,
