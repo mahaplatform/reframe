@@ -46,7 +46,8 @@ class Button extends React.Component {
   static defaultProps = {
     basic: false,
     mobile: true,
-    disabled: false
+    disabled: false,
+    onDone: () => {}
   }
 
   render() {
