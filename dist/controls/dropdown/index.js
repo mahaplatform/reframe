@@ -128,7 +128,7 @@ var Dropdown = function (_React$Component) {
           animating = _state2.animating,
           active = _state2.active;
 
-      var classes = ['ui', 'selection', 'dropdown'];
+      var classes = ['ui', 'fluid', 'selection', 'dropdown'];
       if (active) classes.push('active');
       if (active && !animating) classes.push('visible');
       if (!active && animating) classes.push('visible');

@@ -52,7 +52,7 @@ class Prompt extends React.Component {
             </div>
           }
           { options && options.map((option, index) => (
-            <Button key={ `option_${index}` } { ...this._getButton(options) }  />
+            <Button key={ `option_${index}` } { ...this._getButton(option) }  />
           ))}
           { cancel &&
             <div className="reframe-prompt-cancel" onClick={ this._handleClose.bind(this) }>
@@ -100,10 +100,10 @@ class Prompt extends React.Component {
     return {
       open: (message, yes = null, no = null) => onOpen(message, null, [
         {
-          label: 'Yes',
+          text: 'Yes',
           handler: () => yes ? yes() : onClose()
         }, {
-          label: 'No',
+          text: 'No',
           handler: () => no ? no() : onClose()
         }
       ]),

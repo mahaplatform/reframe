@@ -76,8 +76,7 @@ class Button extends React.Component {
   _getClass() {
     const { component, basic, className, color, disabled, mobile, status } = this.props
     if(component) return ''
-    if(className) return className
-    const classes = ['ui', color, 'fluid', 'button','reframe-button']
+    const classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button','reframe-button']
     if(mobile !== false) classes.push('mobile')
     if(basic) classes.push('basic')
     if(disabled) classes.push('disabled')

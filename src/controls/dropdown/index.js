@@ -78,7 +78,7 @@ class Dropdown extends React.Component {
 
   _getDropdownClass() {
     const { animating, active } = this.state
-    const classes = ['ui','selection','dropdown']
+    const classes = ['ui','fluid','selection','dropdown']
     if(active) classes.push('active')
     if(active && !animating) classes.push('visible')
     if(!active && animating) classes.push('visible')

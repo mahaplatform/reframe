@@ -78,8 +78,7 @@ var Button = function (_React$Component) {
           status = _props3.status;
 
       if (component) return '';
-      if (className) return className;
-      var classes = ['ui', color, 'fluid', 'button', 'reframe-button'];
+      var classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button', 'reframe-button'];
       if (mobile !== false) classes.push('mobile');
       if (basic) classes.push('basic');
       if (disabled) classes.push('disabled');

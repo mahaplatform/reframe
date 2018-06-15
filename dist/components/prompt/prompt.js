@@ -73,7 +73,7 @@ var Prompt = function (_React$Component) {
             message
           ),
           options && options.map(function (option, index) {
-            return _react2.default.createElement(_button2.default, _extends({ key: 'option_' + index }, _this2._getButton(options)));
+            return _react2.default.createElement(_button2.default, _extends({ key: 'option_' + index }, _this2._getButton(option)));
           }),
           cancel && _react2.default.createElement(
             'div',
@@ -137,12 +137,12 @@ var Prompt = function (_React$Component) {
           var yes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
           var no = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
           return onOpen(message, null, [{
-            label: 'Yes',
+            text: 'Yes',
             handler: function handler() {
               return yes ? yes() : onClose();
             }
           }, {
-            label: 'No',
+            text: 'No',
             handler: function handler() {
               return no ? no() : onClose();
             }
