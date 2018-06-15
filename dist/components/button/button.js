@@ -199,6 +199,7 @@ Button.propTypes = {
 Button.defaultProps = {
   basic: false,
   mobile: true,
-  disabled: false
+  disabled: false,
+  onDone: function onDone() {}
 };
 exports.default = Button;
