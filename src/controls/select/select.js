@@ -25,6 +25,7 @@ class Select extends React.Component {
 
   static defaultProps = {
     tabIndex: 0,
+    value: 'value',
     onBusy: () => {},
     onChange: () => {},
     onReady: () => {},
@@ -34,12 +35,15 @@ class Select extends React.Component {
   render() {
     const { items, tabIndex } = this.props
     return (
-      <div className="reframe-select" tabIndex={ tabIndex }>
+      <div className="reframe-select ui field" tabIndex={ tabIndex }>
         { items.map((option, index) => (
           <div className={ this._getClass(option) } key={`option_${index}`} onClick={ this._handleClick.bind(this, option) }>
-            { option.icon &&
+            { option.icon ?
               <div className="reframe-select-option-icon">
                 <i className={`fa fa-fw fa-${option.icon}`} />
+              </div> :
+              <div className="reframe-select-option-icon">
+                { this._getSelected(option) ? <i className="fa fa-fw fa-check-circle" /> : <i className="fa fa-fw fa-circle-o" /> }
               </div>
             }
             <div className="reframe-select-option-label">
@@ -68,11 +72,15 @@ class Select extends React.Component {
     if(status !== prevProps.status && status === 'success') onReady()
   }
 
-  _getClass(option) {
+  _getSelected(option) {
     const { selected } = this.props
     const value = _.get(option, this.props.value)
+    return value === selected
+  }
+
+  _getClass(option) {
     const classes = ['reframe-select-option']
-    if(value === selected) classes.push('selected')
+    if(this._getSelected(option)) classes.push('selected')
     return classes.join(' ')
   }
 

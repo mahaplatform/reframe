@@ -43,34 +43,19 @@ var TextField = function (_React$Component) {
   _createClass(TextField, [{
     key: 'render',
     value: function render() {
-      var input = _react2.default.createElement('input', this._getControl());
-      if (!this.props.prefix && !this.props.suffix) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'textfield' },
-          input
-        );
-      }
-      var classes = ['ui', 'input'];
-      if (this.props.prefix) classes.push('left labeled');
-      if (this.props.suffix) classes.push('right labeled');
       return _react2.default.createElement(
         'div',
-        { className: 'textfield' },
-        _react2.default.createElement(
+        { className: this._getClass() },
+        this.props.prefix && _react2.default.createElement(
           'div',
-          { className: classes.join(' ') },
-          this.props.prefix && _react2.default.createElement(
-            'div',
-            { className: 'ui label' },
-            this.props.prefix
-          ),
-          input,
-          this.props.suffix && _react2.default.createElement(
-            'div',
-            { className: 'ui label' },
-            this.props.suffix
-          )
+          { className: 'ui label' },
+          this.props.prefix
+        ),
+        _react2.default.createElement('input', this._getControl()),
+        this.props.suffix && _react2.default.createElement(
+          'div',
+          { className: 'ui label' },
+          this.props.suffix
         )
       );
     }
@@ -87,17 +72,29 @@ var TextField = function (_React$Component) {
       }
     }
   }, {
+    key: '_getClass',
+    value: function _getClass() {
+      var _props = this.props,
+          prefix = _props.prefix,
+          suffix = _props.suffix;
+
+      var classes = ['reframe-textfield', 'ui', 'fluid', 'input'];
+      if (prefix) classes.push('left labeled');
+      if (suffix) classes.push('right labeled');
+      return classes.join(' ');
+    }
+  }, {
     key: '_getControl',
     value: function _getControl() {
-      var _props = this.props,
-          autoComplete = _props.autoComplete,
-          disabled = _props.disabled,
-          placeholder = _props.placeholder,
-          tabIndex = _props.tabIndex,
-          onBlur = _props.onBlur,
-          onFocus = _props.onFocus,
-          onKeyPress = _props.onKeyPress,
-          onKeyDown = _props.onKeyDown;
+      var _props2 = this.props,
+          autoComplete = _props2.autoComplete,
+          disabled = _props2.disabled,
+          placeholder = _props2.placeholder,
+          tabIndex = _props2.tabIndex,
+          onBlur = _props2.onBlur,
+          onFocus = _props2.onFocus,
+          onKeyPress = _props2.onKeyPress,
+          onKeyDown = _props2.onKeyDown;
       var value = this.state.value;
 
       return {

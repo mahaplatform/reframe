@@ -46,15 +46,19 @@ var Select = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-select', tabIndex: tabIndex },
+        { className: 'reframe-select ui field', tabIndex: tabIndex },
         items.map(function (option, index) {
           return _react2.default.createElement(
             'div',
             { className: _this2._getClass(option), key: 'option_' + index, onClick: _this2._handleClick.bind(_this2, option) },
-            option.icon && _react2.default.createElement(
+            option.icon ? _react2.default.createElement(
               'div',
               { className: 'reframe-select-option-icon' },
               _react2.default.createElement('i', { className: 'fa fa-fw fa-' + option.icon })
+            ) : _react2.default.createElement(
+              'div',
+              { className: 'reframe-select-option-icon' },
+              _this2._getSelected(option) ? _react2.default.createElement('i', { className: 'fa fa-fw fa-check-circle' }) : _react2.default.createElement('i', { className: 'fa fa-fw fa-circle-o' })
             ),
             _react2.default.createElement(
               'div',
@@ -103,13 +107,18 @@ var Select = function (_React$Component) {
       if (status !== prevProps.status && status === 'success') onReady();
     }
   }, {
-    key: '_getClass',
-    value: function _getClass(option) {
+    key: '_getSelected',
+    value: function _getSelected(option) {
       var selected = this.props.selected;
 
       var value = _lodash2.default.get(option, this.props.value);
+      return value === selected;
+    }
+  }, {
+    key: '_getClass',
+    value: function _getClass(option) {
       var classes = ['reframe-select-option'];
-      if (value === selected) classes.push('selected');
+      if (this._getSelected(option)) classes.push('selected');
       return classes.join(' ');
     }
   }, {
@@ -143,6 +152,7 @@ Select.propTypes = {
 };
 Select.defaultProps = {
   tabIndex: 0,
+  value: 'value',
   onBusy: function onBusy() {},
   onChange: function onChange() {},
   onReady: function onReady() {},

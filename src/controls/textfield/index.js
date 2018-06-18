@@ -58,20 +58,11 @@ class TextField extends React.Component {
   }
 
   render() {
-    const input = <input { ...this._getControl() } />
-    if(!this.props.prefix && !this.props.suffix) {
-      return <div className="textfield">{ input }</div>
-    }
-    const classes = ['ui','input']
-    if(this.props.prefix) classes.push('left labeled')
-    if(this.props.suffix) classes.push('right labeled')
     return (
-      <div className="textfield">
-        <div className={classes.join(' ')}>
-          { this.props.prefix && <div className="ui label">{this.props.prefix}</div> }
-          {input}
-          { this.props.suffix && <div className="ui label">{this.props.suffix}</div> }
-        </div>
+      <div className={ this._getClass() }>
+        { this.props.prefix && <div className="ui label">{this.props.prefix}</div> }
+        <input { ...this._getControl() } />
+        { this.props.suffix && <div className="ui label">{this.props.suffix}</div> }
       </div>
     )
   }
@@ -84,6 +75,14 @@ class TextField extends React.Component {
     if(prevProps.defaultValue != this.props.defaultValue) {
       this.setValue(this.props.defaultValue)
     }
+  }
+
+  _getClass() {
+    const { prefix, suffix } = this.props
+    const classes = ['reframe-textfield','ui','fluid','input']
+    if(prefix) classes.push('left labeled')
+    if(suffix) classes.push('right labeled')
+    return classes.join(' ')
   }
 
   _getControl() {
