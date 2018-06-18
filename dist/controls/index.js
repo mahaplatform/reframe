@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.Select = exports.Password = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.Dropdown = exports.DateField = exports.ColorField = exports.Checkbox = undefined;
+exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.RadioGroup = exports.Password = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.Dropdown = exports.DateField = exports.ColorField = exports.CheckboxGroup = exports.Checkbox = undefined;
 
 var _checkbox = require('./checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
+
+var _checkbox_group = require('./select/checkbox_group');
+
+var _checkbox_group2 = _interopRequireDefault(_checkbox_group);
 
 var _colorfield = require('./colorfield');
 
@@ -45,9 +49,9 @@ var _password = require('./password');
 
 var _password2 = _interopRequireDefault(_password);
 
-var _select = require('./select');
+var _radio_group = require('./select/radio_group');
 
-var _select2 = _interopRequireDefault(_select);
+var _radio_group2 = _interopRequireDefault(_radio_group);
 
 var _text = require('./text');
 
@@ -80,6 +84,7 @@ var _image_file_token2 = _interopRequireDefault(_image_file_token);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Checkbox = _checkbox2.default;
+exports.CheckboxGroup = _checkbox_group2.default;
 exports.ColorField = _colorfield2.default;
 exports.DateField = _datefield2.default;
 exports.Dropdown = _dropdown2.default;
@@ -89,7 +94,7 @@ exports.Lookup = _lookup2.default;
 exports.Lookup2 = _lookup4.default;
 exports.MoneyField = _moneyfield2.default;
 exports.Password = _password2.default;
-exports.Select = _select2.default;
+exports.RadioGroup = _radio_group2.default;
 exports.Text = _text2.default;
 exports.TextArea = _textarea2.default;
 exports.TextField = _textfield2.default;

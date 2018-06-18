@@ -12,12 +12,13 @@ export const setItems = (items) => ({
   items
 })
 
-export const setSelected = (value) => ({
+export const setSelected = (values) => ({
   type: 'SET_SELECTED',
-  value
+  values
 })
 
-export const choose = (value) => ({
+export const choose = (multiple, value) => ({
   type: 'CHOOSE',
+  multiple,
   value
 })

@@ -1,6 +1,8 @@
+import _ from 'lodash'
+
 const INITIAL_VALUE = {
   items: [],
-  selected: null,
+  selected: [],
   status: 'pending'
 }
 
@@ -36,13 +38,16 @@ export default (state = INITIAL_VALUE, action) => {
   case 'SET_SELECTED':
     return {
       ...state,
-      selected: action.value
+      selected: action.values
     }
 
   case 'CHOOSE':
     return {
       ...state,
-      selected: action.value
+      selected: _.includes(state.selected, action.value) ?
+        (action.multiple ? _.without(state.selected, action.value) : [ ...state.selected ]) :
+        (action.multiple ? [ ...state.selected, action.value ] : [action.value])
+
     }
 
   default:

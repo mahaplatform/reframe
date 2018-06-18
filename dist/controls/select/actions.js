@@ -21,16 +21,17 @@ var setItems = exports.setItems = function setItems(items) {
   };
 };
 
-var setSelected = exports.setSelected = function setSelected(value) {
+var setSelected = exports.setSelected = function setSelected(values) {
   return {
     type: 'SET_SELECTED',
-    value: value
+    values: values
   };
 };
 
-var choose = exports.choose = function choose(value) {
+var choose = exports.choose = function choose(multiple, value) {
   return {
     type: 'CHOOSE',
+    multiple: multiple,
     value: value
   };
 };
