@@ -50,6 +50,8 @@ var Carousel = function (_React$Component) {
       var _this2 = this;
 
       var _props = this.props,
+          active = _props.active,
+          infinite = _props.infinite,
           slides = _props.slides,
           total = _props.total;
 
@@ -59,7 +61,7 @@ var Carousel = function (_React$Component) {
         total > 0 && _react2.default.createElement(
           'div',
           this._getTheatre(),
-          total > 1 && _react2.default.createElement(
+          total > 1 && (infinite || active > 0) && _react2.default.createElement(
             'div',
             { className: 'reframe-carousel-previous', onClick: this._handlePrevious.bind(this) },
             _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-left' })
@@ -75,7 +77,7 @@ var Carousel = function (_React$Component) {
               );
             })
           ),
-          total > 1 && _react2.default.createElement(
+          total > 1 && (infinite || active < total - 1) && _react2.default.createElement(
             'div',
             { className: 'reframe-carousel-next', onClick: this._handleNext.bind(this) },
             _react2.default.createElement('i', { className: 'fa fa-fw fa-chevron-right' })
@@ -204,6 +206,7 @@ var Carousel = function (_React$Component) {
 Carousel.propTypes = {
   active: _propTypes2.default.number,
   direction: _propTypes2.default.string,
+  infinite: _propTypes2.default.string,
   slides: _propTypes2.default.array,
   total: _propTypes2.default.number,
   onSetTotal: _propTypes2.default.func,
@@ -212,6 +215,7 @@ Carousel.propTypes = {
   onPrevious: _propTypes2.default.func
 };
 Carousel.defaultProps = {
+  infinite: true,
   slides: []
 };
 exports.default = Carousel;

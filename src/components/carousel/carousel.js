@@ -6,6 +6,7 @@ class Carousel extends React.Component {
   static propTypes = {
     active: PropTypes.number,
     direction: PropTypes.string,
+    infinite: PropTypes.string,
     slides: PropTypes.array,
     total: PropTypes.number,
     onSetTotal: PropTypes.func,
@@ -15,6 +16,7 @@ class Carousel extends React.Component {
   }
 
   static defaultProps = {
+    infinite: true,
     slides: []
   }
 
@@ -26,12 +28,12 @@ class Carousel extends React.Component {
   }
 
   render() {
-    const { slides, total } = this.props
+    const { active, infinite, slides, total } = this.props
     return (
       <div className="reframe-carousel">
         { total > 0 &&
           <div { ...this._getTheatre() }>
-            { total > 1 &&
+            { total > 1 && (infinite || active > 0) &&
               <div className="reframe-carousel-previous" onClick={ this._handlePrevious.bind(this) }>
                 <i className="fa fa-fw fa-chevron-left" />
               </div>
@@ -43,7 +45,7 @@ class Carousel extends React.Component {
                 </div>
               ))}
             </div>
-            { total > 1 &&
+            { total > 1 && (infinite || active < total - 1) &&
               <div className="reframe-carousel-next" onClick={ this._handleNext.bind(this) }>
                 <i className="fa fa-fw fa-chevron-right" />
               </div>

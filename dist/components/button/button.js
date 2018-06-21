@@ -37,6 +37,7 @@ var Button = function (_React$Component) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          children = _props.children,
           component = _props.component,
           icon = _props.icon,
           label = _props.label,
@@ -46,7 +47,7 @@ var Button = function (_React$Component) {
         'a',
         this._getButton(),
         icon && _react2.default.createElement('i', { className: 'fa fa-fw fa-' + icon }),
-        label || text,
+        label || text || children,
         component
       );
     }
@@ -173,6 +174,7 @@ Button.propTypes = {
   color: _propTypes2.default.string,
   component: _propTypes2.default.any,
   confirm: _propTypes2.default.any,
+  children: _propTypes2.default.any,
   disabled: _propTypes2.default.bool,
   drawer: _propTypes2.default.any,
   error: _propTypes2.default.string,

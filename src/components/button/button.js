@@ -17,6 +17,7 @@ class Button extends React.Component {
     color: PropTypes.string,
     component: PropTypes.any,
     confirm: PropTypes.any,
+    children: PropTypes.any,
     disabled: PropTypes.bool,
     drawer: PropTypes.any,
     error: PropTypes.string,
@@ -51,11 +52,11 @@ class Button extends React.Component {
   }
 
   render() {
-    const { component, icon, label, text } = this.props
+    const { children, component, icon, label, text } = this.props
     return (
       <a { ...this._getButton() }>
         { icon && <i className={`fa fa-fw fa-${icon}`} /> }
-        { label || text }
+        { label || text || children }
         { component }
       </a>
     )
