@@ -21,6 +21,7 @@ class ToggleList extends React.Component{
     format: PropTypes.any,
     multiple: PropTypes.bool,
     options: PropTypes.array,
+    query: PropTypes.string,
     text: PropTypes.string,
     value: PropTypes.string,
     onLoad: PropTypes.func,
@@ -119,7 +120,7 @@ class ToggleList extends React.Component{
   }
 
   _getInfinite() {
-    const { defaultFilters, endpoint, exclude_ids, query } = this.props
+    const { defaultFilters, endpoint, exclude_ids, chosen, query } = this.props
     const filter = {
       ...defaultFilters,
       ...this.props.filter,
@@ -129,6 +130,7 @@ class ToggleList extends React.Component{
       endpoint,
       exclude_ids,
       filter,
+      chosen,
       layout: (props) => <Result { ...this._getResults() } { ...props } />
     }
   }

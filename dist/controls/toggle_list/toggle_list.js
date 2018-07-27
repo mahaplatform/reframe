@@ -182,6 +182,7 @@ var ToggleList = function (_React$Component) {
           defaultFilters = _props6.defaultFilters,
           endpoint = _props6.endpoint,
           exclude_ids = _props6.exclude_ids,
+          chosen = _props6.chosen,
           query = _props6.query;
 
       var filter = _extends({}, defaultFilters, this.props.filter, {
@@ -191,6 +192,7 @@ var ToggleList = function (_React$Component) {
         endpoint: endpoint,
         exclude_ids: exclude_ids,
         filter: filter,
+        chosen: chosen,
         layout: function layout(props) {
           return _react2.default.createElement(_results2.default, _extends({}, _this3._getResults(), props));
         }
@@ -266,6 +268,7 @@ ToggleList.propTypes = {
   format: _propTypes2.default.any,
   multiple: _propTypes2.default.bool,
   options: _propTypes2.default.array,
+  query: _propTypes2.default.string,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onLoad: _propTypes2.default.func,
