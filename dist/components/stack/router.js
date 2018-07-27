@@ -173,14 +173,24 @@ var RouterStackWrapper = function (_React$Component2) {
   }, {
     key: '_getRouter',
     value: function _getRouter() {
-      var _context$router = this.context.router,
-          action = _context$router.action,
-          pathname = _context$router.pathname;
+      var _getHistory2 = this._getHistory(),
+          action = _getHistory2.action,
+          pathname = _getHistory2.pathname;
 
       return _extends({}, this.props, {
         pathname: pathname,
         action: action.toLowerCase()
       });
+    }
+  }, {
+    key: '_getHistory',
+    value: function _getHistory() {
+      var router = this.context.router;
+
+      return router.history ? {
+        action: router.history.action,
+        pathname: router.history.location.pathname
+      } : router;
     }
   }]);
 

@@ -111,12 +111,20 @@ class RouterStackWrapper extends React.Component {
   }
 
   _getRouter() {
-    const { action, pathname } = this.context.router
+    const { action, pathname } = this._getHistory()
     return {
       ...this.props,
       pathname,
       action: action.toLowerCase()
     }
+  }
+
+  _getHistory() {
+    const { router } = this.context
+    return router.history ? {
+      action: router.history.action,
+      pathname: router.history.location.pathname
+    } : router
   }
 
 }
