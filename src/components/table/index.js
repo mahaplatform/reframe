@@ -211,7 +211,8 @@ class Table extends React.Component {
     const tasks = recordTasks.map(task => ({
       ...task,
       handler: task.handler ? () => task.handler(id) : null,
-      modal: task.modal ? () => <task.modal id={ id } /> : null
+      modal: task.modal ? () => <task.modal id={ id } /> : null,
+      request: task.request ? task.request(id): null
     }))
     this.context.tasks.open(tasks)
   }

@@ -299,7 +299,8 @@ var Table = function (_React$Component) {
           } : null,
           modal: task.modal ? function () {
             return _react2.default.createElement(task.modal, { id: id });
-          } : null
+          } : null,
+          request: task.request ? task.request(id) : null
         });
       });
       this.context.tasks.open(tasks);
