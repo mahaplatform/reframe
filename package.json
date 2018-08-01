@@ -26,7 +26,6 @@
     "react-transition-group": "2.x",
     "redux": "^3.x",
     "redux-api-request": "*",
-    "redux-rubberstamp": "^1.10.0",
     "reselect": "^2.x || ^3.x"
   },
   "devDependencies": {
@@ -60,6 +59,7 @@
     "prop-types": "^15.5.8",
     "react-dnd": "^2.5.3",
     "react-dnd-html5-backend": "^2.5.3",
+    "redux-rubberstamp": "1.11.0",
     "resumablejs": "^1.0.2"
   }
 }
