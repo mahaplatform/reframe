@@ -1,0 +1,18 @@
+.reframe-panel {
+  flex: 1;
+  .scrollable();
+}
+.reframe-panel-inner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  padding: 0.8em;
+}
+.reframe-panel-header {
+  background-color: @primary_background_color;
+}
+@media (max-width: 768px) {
+  .reframe-panel .reframe-panel-inner {
+    padding: 0;
+  }
+}

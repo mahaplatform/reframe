@@ -1,0 +1,46 @@
+.reframe-search {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.reframe-search-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: lighten(@black, 97);
+}
+.reframe-search-item {
+  .hover(background-color, fadeout(@black, 95));
+  display: flex;
+  cursor: pointer;
+  border-bottom: 1px solid fadeout(@black, 95);
+  .reframe-search-item-icon {
+    &:first-child {
+      padding: 0.8em 0 0.8em 0.8em;
+    }
+    &:last-child {
+      padding: 0.8em 0.8em 0.8em 0;
+    }
+    .fa-check-cricle {
+      color: @green;
+    }
+  }
+}
+.reframe-search-item-label {
+  align-items: center;
+  flex: 1;
+  color: fadeout(@black, 40);
+  &.padded {
+    padding: 0.8em;
+  }
+}
+.reframe-search-item-icon {
+  flex: 0 0 2.5em;
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  line-height: 1em;
+  .icon {
+    color: #BBB;
+  }
+}

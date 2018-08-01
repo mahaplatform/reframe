@@ -1,0 +1,19 @@
+.reframe-popup {
+  flex: 1;
+  display: flex;
+}
+.reframe-popup-panel {
+  .translate-y-transition(-100%, 0, .25s);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+}
+.reframe-popup-panel-item {
+  display: flex;
+  width: 100%;
+  max-width: ~"calc(800px - 2em)";
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,149 @@
+.reframe-filefield {
+  &:focus {
+    outline: none !important;
+  }
+}
+.reframe-filefield-tokens {
+  overflow: hidden;
+}
+
+.field .reframe-filefield-tokens .reframe-filefield-token {
+  margin-bottom: 0.8em;
+  position: relative;
+  max-width: 414px;
+  .reframe-filefield-file-preview {
+    background: @white;
+  }
+  &.plain {
+    width: 100%;
+    clear: both;
+    .reframe-filefield-file-preview-details {
+      margin-right: 2.4em;
+    }
+    .reframe-filefield-file-preview {
+      max-width: 550px;
+    }
+    .reframe-filefield-remove {
+      color: fadeout(@black, 70);
+      &:hover {
+        color: fadeout(@black, 50);
+      }
+    }
+  }
+  &.image {
+    .border-radius(5px);
+    display: flex;
+    float: left;
+    margin-right: 0.8em;
+    .reframe-filefield-remove {
+      color: @white;
+    }
+    @media (max-width: 414px) {
+      width: 100%;
+      margin-right: none;
+    }
+    @media (min-width: 415px) and (max-width: 768px) {
+      width: ~"calc(100% / 2 - 0.8em)";
+      &:nth-child(2n+2) {
+        margin-right: none;
+      }
+    }
+    @media (min-width: 769px) {
+      width: ~"calc(100% / 3 - 0.8em * 2)";
+      &:nth-child(3n+3) {
+        margin-right: none;
+      }
+    }
+  }
+}
+
+
+.reframe-filefield-details {
+  flex: 1;
+  margin: 0;
+  vertical-align: middle;
+  position: relative;
+}
+.reframe-filefield-preview-image {
+  .border-radius(5px);
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  display: block;
+  overflow: hidden;
+  background-color: #CCC;
+  img {
+    width: 100%;
+  }
+}
+.reframe-filefield-preview-image-cache {
+  display: none;
+}
+.reframe-filefield-preview-image-asset {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  display: block;
+  background: #333;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.reframe-filefield-remove {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  font-size: 1em;
+  line-height: 1em;
+  cursor: pointer;
+  i {
+    margin: auto;
+  }
+}
+
+.reframe-filefield-progress {
+  margin: 0;
+  .ui.progress {
+    margin: 0 !important;
+    background: #333;
+    position: absolute;
+    bottom: ~"calc(50% - 12px)";
+    left: 1em;
+    right: 1em;
+  }
+  .bar {
+    transition-duration: 300ms;
+  }
+}
+.reframe-filefield-file-preview {
+  border: 1px solid fadeout(@black, 90);
+  border-radius: 0.5em;
+  display: flex;
+  width: 100%;
+  &.pdf i { color: @red; }
+  &.xls i { color: @green; }
+  &.doc i { color: @blue; }
+  &.ppt i { color: @orange; }
+}
+.reframe-filefield-file-preview-icon {
+  flex: 0 0 3em;
+  padding: 0.8em 0.2em;
+  i {
+    font-size: 2.8em;
+  }
+}
+.reframe-filefield-file-preview-details {
+  flex: 1;
+  padding: 0.8em 0.8em 0.8em 0;
+}
+.reframe-filefield-file-preview-filename {
+  color: @black;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.6em;
+}
+.reframe-filefield-file-preview-filesize {
+  color: fadeout(@black, 60);
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
