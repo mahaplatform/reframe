@@ -5,19 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.INITIAL_STATE = undefined;
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
   filtering: false,
@@ -27,31 +23,31 @@ var INITIAL_STATE = exports.INITIAL_STATE = {
 };
 
 var loadSuccess = function loadSuccess(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     chosen: action.result.data
   });
 };
 
 var setChosen = function setChosen(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     chosen: action.chosen
   });
 };
 
 var setQuery = function setQuery(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     query: action.query
   });
 };
 
 var setFilter = function setFilter(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     filter: action.filter
   });
 };
 
 var toggleFilter = function toggleFilter(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     filtering: !state.filtering
   });
 };
@@ -65,10 +61,10 @@ var toggleRecord = function toggleRecord(state, action) {
         return record.id !== action.record.id;
       });
     }
-    return [].concat((0, _toConsumableArray3.default)(state.chosen), [action.record]);
+    return [].concat(_toConsumableArray(state.chosen), [action.record]);
   };
 
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     chosen: getChosen()
   });
 };

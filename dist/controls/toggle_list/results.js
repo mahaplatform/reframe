@@ -4,29 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _format = require('../../utils/format');
 
@@ -46,15 +26,24 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Results = function (_React$Component) {
-  (0, _inherits3.default)(Results, _React$Component);
+  _inherits(Results, _React$Component);
 
   function Results() {
-    (0, _classCallCheck3.default)(this, Results);
-    return (0, _possibleConstructorReturn3.default)(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
+    _classCallCheck(this, Results);
+
+    return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(Results, [{
+  _createClass(Results, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -80,7 +69,7 @@ var Results = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-search-item-label' },
-              _react2.default.createElement(_format2.default, (0, _extends3.default)({ format: format }, record, { value: _lodash2.default.get(record, text) }))
+              _react2.default.createElement(_format2.default, _extends({ format: format }, record, { value: _lodash2.default.get(record, text) }))
             ),
             !multiple && _react2.default.createElement(
               'div',
@@ -104,7 +93,7 @@ var Results = function (_React$Component) {
       var chosen = this.props.chosen;
 
       var value = this.props.value || 'id';
-      return _lodash2.default.find(chosen, (0, _defineProperty3.default)({}, value, _lodash2.default.get(record, value)));
+      return _lodash2.default.find(chosen, _defineProperty({}, value, _lodash2.default.get(record, value)));
     }
   }, {
     key: '_getIcon',
@@ -119,6 +108,7 @@ var Results = function (_React$Component) {
       this.props.onToggleRecord(record);
     }
   }]);
+
   return Results;
 }(_react2.default.Component);
 

@@ -4,25 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _modal_panel = require('../../components/modal_panel');
 
@@ -44,15 +26,24 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Chooser = function (_React$Component) {
-  (0, _inherits3.default)(Chooser, _React$Component);
+  _inherits(Chooser, _React$Component);
 
   function Chooser() {
-    (0, _classCallCheck3.default)(this, Chooser);
-    return (0, _possibleConstructorReturn3.default)(this, (Chooser.__proto__ || Object.getPrototypeOf(Chooser)).apply(this, arguments));
+    _classCallCheck(this, Chooser);
+
+    return _possibleConstructorReturn(this, (Chooser.__proto__ || Object.getPrototypeOf(Chooser)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(Chooser, [{
+  _createClass(Chooser, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -134,11 +125,11 @@ var Chooser = function (_React$Component) {
                 'Sat'
               )
             ),
-            [].concat((0, _toConsumableArray3.default)(Array(6))).map(function (week, i) {
+            [].concat(_toConsumableArray(Array(6))).map(function (week, i) {
               return _react2.default.createElement(
                 'div',
                 { key: 'datefield_week_' + i, className: 'reframe-datefield-week' },
-                [].concat((0, _toConsumableArray3.default)(Array(7))).map(function (day, j) {
+                [].concat(_toConsumableArray(Array(7))).map(function (day, j) {
                   date.add('1', 'days');
                   var classes = ['reframe-datefield-day'];
                   if (date.isBefore(start, 'day') || date.isAfter(end, 'day')) classes.push('notmonth');
@@ -190,6 +181,7 @@ var Chooser = function (_React$Component) {
       this.props.onNext();
     }
   }]);
+
   return Chooser;
 }(_react2.default.Component);
 

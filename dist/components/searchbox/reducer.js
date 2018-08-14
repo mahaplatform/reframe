@@ -3,13 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.INITIAL_STATE = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
   active: false,
@@ -17,25 +12,25 @@ var INITIAL_STATE = exports.INITIAL_STATE = {
 };
 
 var begin = function begin(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     active: true
   });
 };
 
 var end = function end(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     active: false
   });
 };
 
 var type = function type(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     q: action.q
   });
 };
 
 var abort = function abort(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     q: ''
   });
 };
