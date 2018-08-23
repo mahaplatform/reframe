@@ -4,9 +4,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _react = require('react');
 
@@ -34,22 +50,15 @@ var _format2 = _interopRequireDefault(_format);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Options = function (_React$Component) {
-  _inherits(Options, _React$Component);
+  (0, _inherits3.default)(Options, _React$Component);
 
   function Options() {
-    _classCallCheck(this, Options);
-
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, Options);
+    return (0, _possibleConstructorReturn3.default)(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
   }
 
-  _createClass(Options, [{
+  (0, _createClass3.default)(Options, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -70,7 +79,7 @@ var Options = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'reframe-lookup-panel-result-label' },
-              _react2.default.createElement(_format2.default, _extends({}, option, { format: format, value: _lodash2.default.get(option, text) }))
+              _react2.default.createElement(_format2.default, (0, _extends3.default)({}, option, { format: format, value: _lodash2.default.get(option, text) }))
             ),
             _react2.default.createElement(
               'div',
@@ -94,7 +103,6 @@ var Options = function (_React$Component) {
       this.context.form.pop();
     }
   }]);
-
   return Options;
 }(_react2.default.Component);
 
@@ -112,15 +120,14 @@ Options.propTypes = {
 };
 
 var Dynamic = function (_React$Component2) {
-  _inherits(Dynamic, _React$Component2);
+  (0, _inherits3.default)(Dynamic, _React$Component2);
 
   function Dynamic() {
-    _classCallCheck(this, Dynamic);
-
-    return _possibleConstructorReturn(this, (Dynamic.__proto__ || Object.getPrototypeOf(Dynamic)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, Dynamic);
+    return (0, _possibleConstructorReturn3.default)(this, (Dynamic.__proto__ || Object.getPrototypeOf(Dynamic)).apply(this, arguments));
   }
 
-  _createClass(Dynamic, [{
+  (0, _createClass3.default)(Dynamic, [{
     key: 'render',
     value: function render() {
       var records = this.props.records;
@@ -150,7 +157,6 @@ var Dynamic = function (_React$Component2) {
       };
     }
   }]);
-
   return Dynamic;
 }(_react2.default.Component);
 
@@ -165,15 +171,14 @@ Dynamic.propTypes = {
 };
 
 var Container = function (_React$Component3) {
-  _inherits(Container, _React$Component3);
+  (0, _inherits3.default)(Container, _React$Component3);
 
   function Container() {
-    _classCallCheck(this, Container);
-
-    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, Container);
+    return (0, _possibleConstructorReturn3.default)(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
   }
 
-  _createClass(Container, [{
+  (0, _createClass3.default)(Container, [{
     key: 'render',
     value: function render() {
       var _props4 = this.props,
@@ -234,7 +239,7 @@ var Container = function (_React$Component3) {
         endpoint: endpoint,
         filter: { q: q },
         layout: function layout(props) {
-          return _react2.default.createElement(Dynamic, _extends({}, _this5.props, props));
+          return _react2.default.createElement(Dynamic, (0, _extends3.default)({}, _this5.props, props));
         },
         sort: sort,
         text: text,
@@ -253,14 +258,13 @@ var Container = function (_React$Component3) {
           options = _props7.options,
           q = _props7.q;
 
-      return _extends({}, this.props, {
+      return (0, _extends3.default)({}, this.props, {
         options: options.filter(function (options) {
           return q === null || options.text.search(q) >= 0;
         })
       });
     }
   }]);
-
   return Container;
 }(_react2.default.Component);
 

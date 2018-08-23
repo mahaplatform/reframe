@@ -4,7 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var INITIAL_VALUE = {
   active: false,
@@ -22,49 +26,49 @@ exports.default = function () {
   switch (action.type) {
 
     case 'BEGIN':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         active: true
       });
 
     case 'END':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         active: false
       });
 
     case 'CLEAR':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         chosen: null
       });
 
     case 'CANCEL':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         active: false
       });
 
     case 'CHOOSE':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         active: false,
         chosen: action.chosen
       });
 
     case 'QUERY':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         q: action.q
       });
 
     case 'LOAD_SUCCESS':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         chosen: action.result.data[0],
         status: 'success'
       });
 
     case 'SHOW_FORM':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         adding: true
       });
 
     case 'HIDE_FORM':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         active: false,
         adding: false
       });

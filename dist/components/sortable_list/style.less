@@ -1,0 +1,32 @@
+.reframe-sortable-list-drag-layer {
+  box-shadow: 0 0 5px fadeout(@black, 50);
+}
+.reframe-sortable-list {
+  margin: 0.8em;
+}
+.reframe-sortable-list-item {
+  .transition(opacity .25s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  display: flex;
+  background-color: lighten(@black, 90);
+  margin-bottom: 1px;
+  color: lighten(@black, 60);
+  &.disabled {
+    opacity: 0.5;
+  }
+  &.hidden {
+    opacity: 0;
+  }
+}
+.reframe-sortable-list-label {
+  padding: 1em;
+  flex: 1;
+  cursor: pointer;
+  i {
+    margin-right: 0.5em;
+  }
+}
+.reframe-sortable-list-icon {
+  padding: 1em;
+  flex: 0 0 2em;
+  cursor: grab;
+}

@@ -1,0 +1,110 @@
+.reframe-searchbox {
+  flex: 1;
+  line-height: 1em;
+  display: flex;
+  overflow: hidden;
+  padding: 0.55em;
+  &.active .reframe-searchbox-icon {
+    margin-left: -1.35em;
+  }
+}
+.reframe-searchbox-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  border-radius: 0.5em;
+}
+.reframe-searchbox-input {
+  overflow: hidden;
+  @media (max-width: 768px) { order: 1; margin-right: 1px; }
+  @media (min-width: 769px) { order: 2; }
+  display: flex;
+  flex: 1;
+}
+.reframe-searchbox-extra {
+  @media (max-width: 768px) { order: 2; }
+  @media (min-width: 769px) { order: 1; margin-right: 1px; }
+  flex: 0 0 2em;  
+  font-size: 1.25em;
+  line-height: 1em;
+  color: @white;
+  cursor: pointer;
+  display: flex;
+  color: #FFF;
+  i {
+    margin: auto;
+  }
+}
+.reframe-searchbox-remove-icon {
+  .hover(color, fadeout(@black, 70));
+  padding: 0.4em 0.4em 0.4em 0;
+  font-size: 1.25em;
+  line-height: 1em;
+  color: fadeout(@black, 80);
+  overflow: hidden;
+  cursor: pointer;
+}
+.reframe-searchbox-icon {
+  .transition(margin .1s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  padding: 0.4em 0 0.4em .4em;
+  font-size: 1.25em;
+  line-height: 1em;
+  color: fadeout(@black, 80);
+  overflow: hidden;
+}
+.ui.form .reframe-searchbox-field,
+.reframe-searchbox-field {
+  flex: 1;
+  input {
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0.5em;
+    width: 100%;
+    outline: none!important;
+    font-size: 1em!important;
+    line-height: 1.3em !important;
+    color: fadeout(@black, 60) !important;
+  }
+}
+.reframe-toggle-list-header,
+.reframe-collection-header {
+  display: flex;
+  .reframe-searchbox {
+    padding-top: 0;
+  }
+  .reframe-searchbox-input {
+    background-color: fadeout(@white, 50);    
+  }
+  .reframe-searchbox-extra {
+    background-color: fadeout(@white, 50);
+    &:hover {
+      background-color: fadeout(@white, 40);
+    }
+  }
+  .reframe-searchbox-remove-icon {
+    .hover(color, fadeout(@white, 30));
+    color: fadeout(@white, 50);
+  }
+  .reframe-searchbox-icon {
+    color: @white;
+  }
+  input {
+    color: @white !important;
+    &::-webkit-input-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &:-moz-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &::-moz-placeholder {
+      color: fadeout(@white, 20);
+    }
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder {
+      color: fadeout(@white, 20);
+    }
+  }
+}

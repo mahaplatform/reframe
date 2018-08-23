@@ -1,0 +1,112 @@
+.reframe-filters {
+  flex: 1;
+  position: relative;
+  overflow:hidden;
+}
+.reframe-filters-panel {
+  background-color: lighten(@black, 97);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  &.slide-enter, &.slide-exit {
+  	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  }
+  &.slide-exit.slide-exit-active, &.slide-enter {
+  	.translateX(100%);
+  }
+  &.slide-enter.slide-enter-active, &.slide-exit {
+  	.translateX(0);
+  }
+}
+.reframe-filters-header {
+  background-color: fadeout(@black, 95);
+  text-align: center;
+  display: flex;
+}
+.reframe-filters-item-description {
+  flex: 0 0 2em;
+  display: flex;
+  .reframe-filters-item-count {
+    margin: auto;
+    background-color: fadeout(@black, 85);
+    border-radius: 50%;
+    color: @white;
+    text-align: center;
+    display: inline-block;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: .7em;
+    line-height: 2em;
+  }
+}
+.reframe-filters-header-icon {
+  flex: 0 0 3em;
+  display: flex;
+  color: fadeout(@black, 80);
+  cursor: pointer;
+  i {
+    margin: auto;
+  }
+}
+.reframe-filters-header-title {
+  flex: 1;
+  padding: 0.8em 0;
+  color: fadeout(@black, 50)
+}
+.reframe-filters-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  .reframe-search-header,
+  .reframe-searchbox-input {
+    background-color: fadeout(@black, 95);
+  }
+  .reframe-searchbox {
+    padding-top: 0;
+  }
+}
+.reframe-filters-overview {
+  flex: 1;
+  .scrollable();
+}
+.reframe-filters-footer {
+  .hover(background-color, fadeout(@black, 90));
+  text-align: center;
+  padding: 0.4em;
+  cursor: pointer;
+  color: fadeout(@black, 50);
+}
+.reframe-filters-item {
+  .hover(background-color, fadeout(@black, 95));
+  display: flex;
+  line-height: 1.57em;
+  cursor: pointer;
+}
+.reframe-filters-item-content {
+  flex: 1;
+  display: flex;
+}
+.reframe-filters-item-title {
+  flex: 1;
+  padding: 0.8em;
+}
+.reframe-filters-item-icon {
+  flex: 0 0 2em;
+  display: flex;
+  .fa {
+    margin: auto;
+  }
+  .fa-chevron-right {
+    color: fadeout(@black, 90);
+  }
+  .fa-check {
+    color: @green;
+  }
+  .fa-times {
+    color: @red;
+  }
+}

@@ -4,9 +4,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _propTypes = require('prop-types');
 
@@ -34,22 +50,15 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Overview = function (_React$Component) {
-  _inherits(Overview, _React$Component);
+  (0, _inherits3.default)(Overview, _React$Component);
 
   function Overview() {
-    _classCallCheck(this, Overview);
-
-    return _possibleConstructorReturn(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, Overview);
+    return (0, _possibleConstructorReturn3.default)(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).apply(this, arguments));
   }
 
-  _createClass(Overview, [{
+  (0, _createClass3.default)(Overview, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -83,10 +92,10 @@ var Overview = function (_React$Component) {
             'div',
             { className: 'reframe-filters-overview' },
             filters.map(function (filter, index) {
-              if (filter.type === 'toggle') return _react2.default.createElement(_toggle2.default, _extends({}, _this2._getToggle(filter), { key: 'filter_' + index }));
-              if (filter.type === 'lookup') return _react2.default.createElement(_lookup2.default, _extends({}, _this2._getLookup(filter), { key: 'filter_' + index }));
-              if (filter.type === 'select') return _react2.default.createElement(_select2.default, _extends({}, _this2._getSelect(filter), { key: 'filter_' + index }));
-              if (filter.type === 'daterange') return _react2.default.createElement(_daterange2.default, _extends({}, _this2._getDaterange(filter), { key: 'filter_' + index }));
+              if (filter.type === 'toggle') return _react2.default.createElement(_toggle2.default, (0, _extends3.default)({}, _this2._getToggle(filter), { key: 'filter_' + index }));
+              if (filter.type === 'lookup') return _react2.default.createElement(_lookup2.default, (0, _extends3.default)({}, _this2._getLookup(filter), { key: 'filter_' + index }));
+              if (filter.type === 'select') return _react2.default.createElement(_select2.default, (0, _extends3.default)({}, _this2._getSelect(filter), { key: 'filter_' + index }));
+              if (filter.type === 'daterange') return _react2.default.createElement(_daterange2.default, (0, _extends3.default)({}, _this2._getDaterange(filter), { key: 'filter_' + index }));
             })
           )
         ),
@@ -153,7 +162,7 @@ var Overview = function (_React$Component) {
           onChange = _props4.onChange,
           onRemovePanel = _props4.onRemovePanel;
 
-      return _extends({}, filter, {
+      return (0, _extends3.default)({}, filter, {
         results: results,
         onAddPanel: onAddPanel,
         onChange: onChange,
@@ -169,7 +178,7 @@ var Overview = function (_React$Component) {
           onChange = _props5.onChange,
           onRemovePanel = _props5.onRemovePanel;
 
-      return _extends({}, filter, {
+      return (0, _extends3.default)({}, filter, {
         results: results,
         onAddPanel: onAddPanel,
         onChange: onChange,
@@ -187,7 +196,6 @@ var Overview = function (_React$Component) {
       this.props.onReset();
     }
   }]);
-
   return Overview;
 }(_react2.default.Component);
 
