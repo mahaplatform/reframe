@@ -76,6 +76,7 @@ var Form = function (_React$Component) {
           config = _props.config,
           instructions = _props.instructions,
           panels = _props.panels,
+          showModal = _props.showModal,
           status = _props.status;
 
       var configuring = _lodash2.default.includes(['pending', 'loading_sections', 'sections_loaded', 'loading_data'], status);
@@ -260,7 +261,7 @@ var Form = function (_React$Component) {
           onSetData = _props7.onSetData;
 
       if (Object.keys(data).length > 1) return onSetData(data);
-      if (endpoint) return onFetchData(endpoint);
+      if (endpoint) return onFetchData(endpoint, defaults);
       onSetData(defaults);
     }
   }, {
@@ -366,6 +367,7 @@ Form.propTypes = {
   ready: _propTypes2.default.array,
   saveText: _propTypes2.default.string,
   sections: _propTypes2.default.array,
+  showModal: _propTypes2.default.bool,
   status: _propTypes2.default.string,
   title: _propTypes2.default.string,
   onCancel: _propTypes2.default.func,
@@ -391,6 +393,7 @@ Form.defaultProps = {
   buttonPosition: 'top',
   cancelText: 'Cancel',
   saveText: 'Save',
+  showModal: true,
   onCancel: function onCancel() {},
   onChange: function onChange() {},
   onChangeField: function onChangeField() {},

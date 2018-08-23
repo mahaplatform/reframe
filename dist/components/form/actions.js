@@ -21,11 +21,12 @@ var fetchSections = exports.fetchSections = function fetchSections(endpoint) {
   };
 };
 
-var fetchData = exports.fetchData = function fetchData(endpoint) {
+var fetchData = exports.fetchData = function fetchData(endpoint, defaults) {
   return {
     type: 'API_REQUEST',
     method: 'GET',
     endpoint: endpoint,
+    meta: { defaults: defaults },
     request: 'FETCH_DATA_REQUEST',
     success: 'FETCH_DATA_SUCCESS',
     failure: 'FETCH_DATA_FAILURE'

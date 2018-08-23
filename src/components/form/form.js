@@ -34,6 +34,7 @@ class Form extends React.Component {
     ready: PropTypes.array,
     saveText: PropTypes.string,
     sections: PropTypes.array,
+    showModal: PropTypes.bool,
     status: PropTypes.string,
     title: PropTypes.string,
     onCancel: PropTypes.func,
@@ -60,6 +61,7 @@ class Form extends React.Component {
     buttonPosition: 'top',
     cancelText: 'Cancel',
     saveText: 'Save',
+    showModal: true,
     onCancel: () => {},
     onChange: () => {},
     onChangeField: () => {},
@@ -71,7 +73,7 @@ class Form extends React.Component {
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, panels, status } = this.props
+    const { after, before, config, instructions, panels, showModal, status } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
       <div className="reframe-form">
@@ -199,7 +201,7 @@ class Form extends React.Component {
   _handleLoadData() {
     const { data, defaults, endpoint, onFetchData, onSetData } = this.props
     if(Object.keys(data).length > 1) return onSetData(data)
-    if(endpoint) return onFetchData(endpoint)
+    if(endpoint) return onFetchData(endpoint, defaults)
     onSetData(defaults)
   }
 

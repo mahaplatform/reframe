@@ -12,10 +12,11 @@ export const fetchSections = (endpoint) => ({
   failure: 'FETCH_SECTIONS_FAILURE'
 })
 
-export const fetchData = (endpoint) => ({
+export const fetchData = (endpoint, defaults) => ({
   type: 'API_REQUEST',
   method: 'GET',
   endpoint,
+  meta: { defaults },
   request: 'FETCH_DATA_REQUEST',
   success: 'FETCH_DATA_SUCCESS',
   failure: 'FETCH_DATA_FAILURE'

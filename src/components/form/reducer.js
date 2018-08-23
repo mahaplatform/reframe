@@ -85,7 +85,10 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       status: 'data_loaded',
-      data: action.result.data
+      data: Object.keys(action.defaults).reduce((data, key) => ({
+        ...data,
+        [key]: _.get(action.result.data, key) || action.defaults[key] || null
+      }), {})
     }
 
   case 'TOGGLE_BUSY':
