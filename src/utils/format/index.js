@@ -18,7 +18,7 @@ class Format extends React.Component {
   render() {
     const { format } = this.props
     if(_.isString(format)) {
-      const [,style,details] = format.match(/([^\|]*)\|?(.*)/)
+      const [,style,details] = format.match(/([^|]*)\|?(.*)/)
       if(style === 'status') {
         return Status(this.props)
       } else if(style === 'currency') {

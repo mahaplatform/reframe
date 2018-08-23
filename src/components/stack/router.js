@@ -12,7 +12,12 @@ class RouterStack extends React.Component {
   static propTypes = {
     action: PropTypes.string,
     pathname: PropTypes.string,
+    rootPath: PropTypes.string,
     routes: PropTypes.object
+  }
+
+  static defaultProps = {
+    rootPath: '/'
   }
 
   state = {
@@ -25,8 +30,8 @@ class RouterStack extends React.Component {
   }
 
   componentDidMount() {
-    const { pathname } = this.props
-    if(pathname === '/') return
+    const { pathname, rootPath } = this.props
+    if(pathname === rootPath) return
     const card = this._matchRoute(pathname)
     this.setState({
       cards: [ card ]

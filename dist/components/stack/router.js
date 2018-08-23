@@ -75,9 +75,11 @@ var RouterStack = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var pathname = this.props.pathname;
+      var _props = this.props,
+          pathname = _props.pathname,
+          rootPath = _props.rootPath;
 
-      if (pathname === '/') return;
+      if (pathname === rootPath) return;
       var card = this._matchRoute(pathname);
       this.setState({
         cards: [card]
@@ -88,9 +90,9 @@ var RouterStack = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this2 = this;
 
-      var _props = this.props,
-          action = _props.action,
-          pathname = _props.pathname;
+      var _props2 = this.props,
+          action = _props2.action,
+          pathname = _props2.pathname;
       var mounted = this.state.mounted;
 
       if (prevProps.pathname !== pathname) {
@@ -160,7 +162,11 @@ RouterStack.childContextTypes = {
 RouterStack.propTypes = {
   action: _propTypes2.default.string,
   pathname: _propTypes2.default.string,
+  rootPath: _propTypes2.default.string,
   routes: _propTypes2.default.object
+};
+RouterStack.defaultProps = {
+  rootPath: '/'
 };
 
 var RouterStackWrapper = function (_React$Component2) {

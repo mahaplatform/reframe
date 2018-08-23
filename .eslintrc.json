@@ -6,10 +6,14 @@
     "es6": true,
     "mocha": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 8,
     "ecmaFeatures": {
+      "classes": true,
       "experimentalObjectRestSpread": true,
       "jsx": true
     },
@@ -18,12 +22,12 @@
   "plugins": [
     "react"
   ],
-  "settings": {
-    "flowVersion": "0.55"
-  },
   "globals": {
-    "$": true,
-    "process": true
+    "Buffer": true,
+    "__dirname": true,
+    "process": true,
+    "before": true,
+    "after": true
    },
   "rules": {
     "strict": 0,
@@ -52,6 +56,9 @@
       "error",
       "single"
     ],
+    "react/jsx-uses-react":  "error",
+    "react/jsx-uses-vars":  "error",
+    "react/display-name": "off",
     "semi": [
       "error",
       "never"

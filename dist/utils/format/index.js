@@ -60,7 +60,7 @@ var Format = function (_React$Component) {
       var format = this.props.format;
 
       if (_lodash2.default.isString(format)) {
-        var _format$match = format.match(/([^\|]*)\|?(.*)/),
+        var _format$match = format.match(/([^|]*)\|?(.*)/),
             _format$match2 = (0, _slicedToArray3.default)(_format$match, 3),
             style = _format$match2[1],
             details = _format$match2[2];
