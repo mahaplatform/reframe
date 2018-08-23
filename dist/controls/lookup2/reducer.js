@@ -3,17 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.INITIAL_STATE = undefined;
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = exports.INITIAL_STATE = {
   active: false,
@@ -30,44 +23,44 @@ var reducer = function reducer() {
   switch (action.type) {
 
     case 'FETCH_REQUEST':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         status: 'loading'
       });
 
     case 'FETCH_FAILURE':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         status: 'failure'
       });
 
     case 'FETCH_SUCCESS':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         selected: action.result.data,
         status: 'success'
       });
 
     case 'SET':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         records: action.records
       });
 
     case 'BEGIN':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         active: true
       });
 
     case 'END':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         active: false
       });
 
     case 'SELECT':
-      return (0, _extends3.default)({}, state, {
+      return _extends({}, state, {
         selected: action.selected
       });
 
     case 'REMOVE':
-      return (0, _extends3.default)({}, state, {
-        selected: [].concat((0, _toConsumableArray3.default)(state.selected.slice(0, action.index)), (0, _toConsumableArray3.default)(state.selected.slice(action.index + 1)))
+      return _extends({}, state, {
+        selected: [].concat(_toConsumableArray(state.selected.slice(0, action.index)), _toConsumableArray(state.selected.slice(action.index + 1)))
       });
 
     default:

@@ -4,29 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -42,27 +22,35 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Tabs = function (_React$Component) {
-  (0, _inherits3.default)(Tabs, _React$Component);
+  _inherits(Tabs, _React$Component);
 
   function Tabs() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, Tabs);
+    _classCallCheck(this, Tabs);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call.apply(_ref, [this].concat(args))), _this), _this._swipe = {}, _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call.apply(_ref, [this].concat(args))), _this), _this._swipe = {}, _this.state = {
       visited: [],
       transitioning: false
-    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  (0, _createClass3.default)(Tabs, [{
+  _createClass(Tabs, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -96,7 +84,7 @@ var Tabs = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          (0, _extends3.default)({ className: 'reframe-tabs-body' }, this._getTabsBody()),
+          _extends({ className: 'reframe-tabs-body' }, this._getTabsBody()),
           items.map(function (item, index) {
             return _react2.default.createElement(
               'div',
@@ -145,7 +133,7 @@ var Tabs = function (_React$Component) {
 
       var onChoose = this.props.onChoose;
 
-      var visited = _lodash2.default.uniq([].concat((0, _toConsumableArray3.default)(this.state.visited), [index]));
+      var visited = _lodash2.default.uniq([].concat(_toConsumableArray(this.state.visited), [index]));
       this.setState({ visited: visited, transitioning: true });
       setTimeout(function () {
         return onChoose(index);
@@ -192,6 +180,7 @@ var Tabs = function (_React$Component) {
       this._swipe = {};
     }
   }]);
+
   return Tabs;
 }(_react2.default.Component);
 
