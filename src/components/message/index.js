@@ -9,12 +9,19 @@ class Message extends React.Component {
   }
 
   static propTypes = {
+    animation: PropTypes.string,
     icon: PropTypes.string,
     image: PropTypes.string,
     text: PropTypes.string,
     title: PropTypes.string,
+    color: PropTypes.object,
     component: PropTypes.object,
     button: PropTypes.object
+  }
+
+  static defaultProps = {
+    animation: null,
+    color: null
   }
 
   render() {
@@ -25,7 +32,7 @@ class Message extends React.Component {
           { icon &&
             <div className="reframe-message-panel-icon">
               <h2>
-                <i className={`fa fa-${icon}`} />
+                <i className={ this._getIconClass() } />
               </h2>
             </div>
           }
@@ -41,6 +48,14 @@ class Message extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _getIconClass() {
+    const { animation, color, icon } = this.props
+    const classes = ['fa', `fa-${icon}`]
+    if(animation) classes.push(`animated ${animation}`)
+    if(color) classes.push(color)
+    return classes.join(' ')
   }
 
   _getButton() {

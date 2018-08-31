@@ -65,7 +65,7 @@ var Message = function (_React$Component) {
             _react2.default.createElement(
               'h2',
               null,
-              _react2.default.createElement('i', { className: 'fa fa-' + icon })
+              _react2.default.createElement('i', { className: this._getIconClass() })
             )
           ),
           image && _react2.default.createElement(
@@ -89,6 +89,19 @@ var Message = function (_React$Component) {
       );
     }
   }, {
+    key: '_getIconClass',
+    value: function _getIconClass() {
+      var _props2 = this.props,
+          animation = _props2.animation,
+          color = _props2.color,
+          icon = _props2.icon;
+
+      var classes = ['fa', 'fa-' + icon];
+      if (animation) classes.push('animated ' + animation);
+      if (color) classes.push(color);
+      return classes.join(' ');
+    }
+  }, {
     key: '_getButton',
     value: function _getButton() {
       var button = this.props.button;
@@ -110,11 +123,17 @@ Message.contextTypes = {
   modal: _propTypes2.default.object
 };
 Message.propTypes = {
+  animation: _propTypes2.default.string,
   icon: _propTypes2.default.string,
   image: _propTypes2.default.string,
   text: _propTypes2.default.string,
   title: _propTypes2.default.string,
+  color: _propTypes2.default.object,
   component: _propTypes2.default.object,
   button: _propTypes2.default.object
+};
+Message.defaultProps = {
+  animation: null,
+  color: null
 };
 exports.default = Message;

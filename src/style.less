@@ -52,6 +52,22 @@ body {
   height: 6px !important;
 }
 
+.colorize(@property) {
+	&.red { @{property}: @red; }
+	&.orange { @{property}: @orange; }
+	&.yellow { @{property}: @yellow; }
+	&.olive { @{property}: @olive; }
+	&.green { @{property}: @green; }
+	&.teal { @{property}: @teal; }
+	&.blue { @{property}: @blue; }
+	&.purple { @{property}: @purple; }
+	&.violet { @{property}: @violet; }
+	&.pink { @{property}: @pink; }
+	&.brown { @{property}: @brown; }
+	&.grey { @{property}: @grey; }
+	&.black { @{property}: @black; }
+}
+
 .hover(@property, @value) {
   &:hover {
     @media (min-width: 1025px) {
@@ -270,6 +286,7 @@ body {
 	.scale(1, 1);
 	.opacity(1);
 }
+@import './animate';
 @import './components/style';
 @import './containers/style';
 @import './controls/style';
