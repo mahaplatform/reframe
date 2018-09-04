@@ -4,9 +4,25 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _format = require('../../utils/format');
 
@@ -26,32 +42,26 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Table = function (_React$Component) {
-  _inherits(Table, _React$Component);
+  (0, _inherits3.default)(Table, _React$Component);
 
   function Table() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, Table);
+    (0, _classCallCheck3.default)(this, Table);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this._handleResize = _lodash2.default.debounce(_this._resizeColumns, 100), _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this._handleResize = _lodash2.default.debounce(_this._resizeColumns, 100), _this.state = {
       widths: []
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
   }
 
-  _createClass(Table, [{
+  (0, _createClass3.default)(Table, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -144,7 +154,7 @@ var Table = function (_React$Component) {
                   return _react2.default.createElement(
                     'td',
                     { key: 'cell_' + rowIndex + '_' + columnIndex, className: _this2._getBodyClass(column), onClick: _this2._handleClick.bind(_this2, record, rowIndex) },
-                    _react2.default.createElement(_format2.default, _extends({}, record, { format: column.format, value: _lodash2.default.get(record, column.key) }))
+                    _react2.default.createElement(_format2.default, (0, _extends3.default)({}, record, { format: column.format, value: _lodash2.default.get(record, column.key) }))
                   );
                 }),
                 recordTasks && _react2.default.createElement(
@@ -293,7 +303,7 @@ var Table = function (_React$Component) {
       var recordTasks = this.props.recordTasks;
 
       var tasks = recordTasks.map(function (task) {
-        return _extends({}, task, {
+        return (0, _extends3.default)({}, task, {
           handler: task.handler ? function () {
             return task.handler(id);
           } : null,
@@ -306,7 +316,6 @@ var Table = function (_React$Component) {
       this.context.tasks.open(tasks);
     }
   }]);
-
   return Table;
 }(_react2.default.Component);
 

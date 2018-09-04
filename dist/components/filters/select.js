@@ -4,7 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = require('babel-runtime/helpers/inherits');
+
+var _inherits3 = _interopRequireDefault(_inherits2);
 
 var _propTypes = require('prop-types');
 
@@ -20,22 +34,15 @@ var _search2 = _interopRequireDefault(_search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var SelectPanel = function (_React$Component) {
-  _inherits(SelectPanel, _React$Component);
+  (0, _inherits3.default)(SelectPanel, _React$Component);
 
   function SelectPanel() {
-    _classCallCheck(this, SelectPanel);
-
-    return _possibleConstructorReturn(this, (SelectPanel.__proto__ || Object.getPrototypeOf(SelectPanel)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, SelectPanel);
+    return (0, _possibleConstructorReturn3.default)(this, (SelectPanel.__proto__ || Object.getPrototypeOf(SelectPanel)).apply(this, arguments));
   }
 
-  _createClass(SelectPanel, [{
+  (0, _createClass3.default)(SelectPanel, [{
     key: 'render',
     value: function render() {
       var label = this.props.label;
@@ -111,7 +118,6 @@ var SelectPanel = function (_React$Component) {
       onChange(name, value);
     }
   }]);
-
   return SelectPanel;
 }(_react2.default.Component);
 
@@ -132,15 +138,14 @@ SelectPanel.propTypes = {
 };
 
 var Select = function (_React$Component2) {
-  _inherits(Select, _React$Component2);
+  (0, _inherits3.default)(Select, _React$Component2);
 
   function Select() {
-    _classCallCheck(this, Select);
-
-    return _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).apply(this, arguments));
+    (0, _classCallCheck3.default)(this, Select);
+    return (0, _possibleConstructorReturn3.default)(this, (Select.__proto__ || Object.getPrototypeOf(Select)).apply(this, arguments));
   }
 
-  _createClass(Select, [{
+  (0, _createClass3.default)(Select, [{
     key: 'render',
     value: function render() {
       var _props3 = this.props,
@@ -179,7 +184,6 @@ var Select = function (_React$Component2) {
       this.props.onAddPanel(_react2.default.createElement(SelectPanel, this.props));
     }
   }]);
-
   return Select;
 }(_react2.default.Component);
 

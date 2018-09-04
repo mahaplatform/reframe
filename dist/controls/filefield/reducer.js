@@ -4,15 +4,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_VALUE = {
   files: [],
@@ -27,12 +31,12 @@ exports.default = function () {
   switch (action.type) {
 
     case 'SET_READY':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'ready'
       });
 
     case 'LOAD_FILES_SUCCESS':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'ready',
         files: action.result.data.map(function (file) {
           return {
@@ -49,10 +53,10 @@ exports.default = function () {
       });
 
     case 'ADD_FILE':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         files: _lodash2.default.find(state.files, function (file) {
           return file.uniqueIdentifier === action.uniqueIdentifier;
-        }) ? state.files : [].concat(_toConsumableArray(state.files), [{
+        }) ? state.files : [].concat((0, _toConsumableArray3.default)(state.files), [{
           uniqueIdentifier: action.uniqueIdentifier,
           fileName: action.fileName,
           fileSize: action.fileSize,
@@ -65,14 +69,14 @@ exports.default = function () {
       });
 
     case 'UPLOAD_BEGIN':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'uploading'
       });
 
     case 'UPLOAD_PROGRESS':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         files: state.files.map(function (file) {
-          return file.uniqueIdentifier === action.uniqueIdentifier ? _extends({}, file, {
+          return file.uniqueIdentifier === action.uniqueIdentifier ? (0, _extends3.default)({}, file, {
             status: 'uploading',
             progress: Math.floor(action.progress * 100),
             uploadedChunks: state.uploadedChunks + 1
@@ -81,19 +85,19 @@ exports.default = function () {
       });
 
     case 'UPLOAD_PROCESS_REQUEST':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'processing'
       });
 
     case 'UPLOAD_PROCESS_SUCCESS':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'success'
       });
 
     case 'UPLOAD_SUCCESS':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         files: state.files.map(function (file) {
-          return _extends({}, file, {
+          return (0, _extends3.default)({}, file, {
             asset: file.uniqueIdentifier === action.uniqueIdentifier ? action.asset : file.asset,
             status: file.uniqueIdentifier === action.uniqueIdentifier ? 'success' : file.status
           });
@@ -102,17 +106,17 @@ exports.default = function () {
 
     case 'UPLOAD_PROCESS_FAILURE':
     case 'UPLOAD_FAILED':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'failed'
       });
 
     case 'REMOVE_FILE':
-      return _extends({}, state, {
-        files: [].concat(_toConsumableArray(state.files.slice(0, action.index)), _toConsumableArray(state.files.slice(action.index + 1)))
+      return (0, _extends3.default)({}, state, {
+        files: [].concat((0, _toConsumableArray3.default)(state.files.slice(0, action.index)), (0, _toConsumableArray3.default)(state.files.slice(action.index + 1)))
       });
 
     case 'UPLOAD_COMPLETE':
-      return _extends({}, state, {
+      return (0, _extends3.default)({}, state, {
         status: 'ready'
       });
 

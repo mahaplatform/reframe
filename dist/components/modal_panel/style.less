@@ -1,0 +1,71 @@
+.reframe-modal-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+}
+.reframe-modal-panel-header {
+  flex: 0 0 3.5em;
+  background-color: @primary_background_color;
+  position: relative;
+  .reframe-modal-panel-header-navigation:first-child {
+    left: 0;
+  }
+  .reframe-modal-panel-header-navigation:last-child {
+    right: 0;
+  }
+}
+.reframe-modal-panel-header-navigation {
+  position: absolute;
+  top: 0;
+}
+.reframe-modal-panel-header-navigation-item {
+  .hover(color, @white);
+  cursor: pointer;
+  display: inline-block;
+  color: fadeout(@white, 10);
+  padding: 0.8em;
+  min-width: 3.5em;
+  height: 3.5em;
+  position: relative;
+  line-height: 1.8em;
+  .fa {
+    font-size: 1.3em;
+    line-height: 1.5em;
+  }
+  &.disabled {
+    color: fadeout(@white, 40);
+  }
+}
+.reframe-modal-panel-header-navigation-button {
+  display: flex;
+  span,
+  .fa {
+    margin: auto;
+  }
+}
+.reframe-modal-panel-header-title {
+  flex: 1;
+  color: @white;
+  padding: 0.8em 0;
+  text-align: center;
+  line-height: 1.8em;
+}
+.reframe-modal-panel-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  position: relative;
+}
+.reframe-modal-panel-footer {
+  border-top: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 97);
+  display: flex;
+  .reframe-modal-panel-footer-navigation:last-child {
+    text-align: right;
+  }
+}
+.reframe-modal-panel-footer-navigation {
+  padding: 0.8em;
+  flex: 1;
+}

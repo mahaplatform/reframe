@@ -4,7 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var INITIAL_VALUE = {
   active: false,
@@ -14,53 +18,53 @@ var INITIAL_VALUE = {
 };
 
 var setCurrent = function setCurrent(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     month: action.month,
     year: action.year
   });
 };
 
 var setValue = function setValue(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     value: action.value
   });
 };
 
 var previous = function previous(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     month: state.month !== null ? state.month === 0 ? 11 : state.month - 1 : null,
     year: state.year !== null ? state.month === 0 ? state.year - 1 : state.year : null
   });
 };
 
 var next = function next(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     month: state.month !== null ? state.month === 11 ? 0 : state.month + 1 : null,
     year: state.year !== null ? state.month === 11 ? state.year + 1 : state.year : null
   });
 };
 
 var begin = function begin(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     active: true
   });
 };
 
 var cancel = function cancel(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     active: false
   });
 };
 
 var choose = function choose(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     value: action.value,
     active: false
   });
 };
 
 var clear = function clear(state, action) {
-  return _extends({}, state, {
+  return (0, _extends3.default)({}, state, {
     value: null
   });
 };
