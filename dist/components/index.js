@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Token = exports.Tasks = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = exports.Button = exports.Buttons = undefined;
+exports.Token = exports.Tasks = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.Progress = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = exports.Button = exports.Buttons = undefined;
 
 var _button = require('./button');
 
@@ -48,6 +48,10 @@ var _message2 = _interopRequireDefault(_message);
 var _modal_panel = require('./modal_panel');
 
 var _modal_panel2 = _interopRequireDefault(_modal_panel);
+
+var _progress = require('./progress');
+
+var _progress2 = _interopRequireDefault(_progress);
 
 var _panel = require('./panel');
 
@@ -115,6 +119,7 @@ exports.Loader = _loader2.default;
 exports.List = _list2.default;
 exports.Message = _message2.default;
 exports.ModalPanel = _modal_panel2.default;
+exports.Progress = _progress2.default;
 exports.Panel = _panel2.default;
 exports.Prompt = _prompt2.default;
 exports.SortableList = _sortable_list2.default;

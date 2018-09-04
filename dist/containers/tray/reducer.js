@@ -4,11 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var INITIAL_STATE = {
   component: null,
@@ -23,13 +19,13 @@ var open = function open(state, action) {
 };
 
 var close = function close(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     open: false
   });
 };
 
 var clear = function clear(state, action) {
-  return (0, _extends3.default)({}, INITIAL_STATE);
+  return _extends({}, INITIAL_STATE);
 };
 
 var reducer = function reducer() {
