@@ -1,11 +1,20 @@
 import Searchbox from '../searchbox'
 import Infinite from '../infinite'
 import { digest } from 'json-hash'
+import PropTypes from 'prop-types'
 import Dynamic from './dynamic'
 import Options from './options'
 import React from 'react'
 
 class Search extends React.Component {
+
+  static propTypes = {
+    filter: PropTypes.object
+  }
+
+  static defaultProps = {
+    filter: {}
+  }
 
   render() {
     if(!this.props.endpoint) return <Options { ...this._getOptions() }  />
@@ -35,12 +44,15 @@ class Search extends React.Component {
   }
 
   _getInfinite(){
-    const { endpoint, q, results, sort } = this.props
+    const { endpoint, filter, q, results, sort } = this.props
     const cacheKey = digest(results)
     return {
       cacheKey,
       endpoint,
-      filter: { q },
+      filter: {
+        ...filter,
+        q
+      },
       layout: (props) => <Dynamic { ...this._getDynamic() } { ...props } />,
       sort
     }

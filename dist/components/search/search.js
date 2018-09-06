@@ -34,6 +34,10 @@ var _infinite2 = _interopRequireDefault(_infinite);
 
 var _jsonHash = require('json-hash');
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _dynamic = require('./dynamic');
 
 var _dynamic2 = _interopRequireDefault(_dynamic);
@@ -108,6 +112,7 @@ var Search = function (_React$Component) {
 
       var _props3 = this.props,
           endpoint = _props3.endpoint,
+          filter = _props3.filter,
           q = _props3.q,
           results = _props3.results,
           sort = _props3.sort;
@@ -116,7 +121,9 @@ var Search = function (_React$Component) {
       return {
         cacheKey: cacheKey,
         endpoint: endpoint,
-        filter: { q: q },
+        filter: (0, _extends3.default)({}, filter, {
+          q: q
+        }),
         layout: function layout(props) {
           return _react2.default.createElement(_dynamic2.default, (0, _extends3.default)({}, _this2._getDynamic(), props));
         },
@@ -132,4 +139,10 @@ var Search = function (_React$Component) {
   return Search;
 }(_react2.default.Component);
 
+Search.propTypes = {
+  filter: _propTypes2.default.object
+};
+Search.defaultProps = {
+  filter: {}
+};
 exports.default = Search;

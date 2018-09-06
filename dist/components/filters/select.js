@@ -87,6 +87,7 @@ var SelectPanel = function (_React$Component) {
     value: function _getSearch() {
       var _props = this.props,
           endpoint = _props.endpoint,
+          filter = _props.filter,
           format = _props.format,
           label = _props.label,
           name = _props.name,
@@ -99,7 +100,7 @@ var SelectPanel = function (_React$Component) {
           onChange = _props.onChange;
 
       var onUpdate = onChange;
-      return { endpoint: endpoint, format: format, label: label, name: name, multiple: multiple, options: options, results: results, sort: sort, text: text, value: value, onUpdate: onUpdate };
+      return { endpoint: endpoint, filter: filter, format: format, label: label, name: name, multiple: multiple, options: options, results: results, sort: sort, text: text, value: value, onUpdate: onUpdate };
     }
   }, {
     key: '_handleRemovePanel',
@@ -123,6 +124,7 @@ var SelectPanel = function (_React$Component) {
 
 SelectPanel.propTypes = {
   endpoint: _propTypes2.default.string,
+  filter: _propTypes2.default.object,
   format: _propTypes2.default.any,
   label: _propTypes2.default.string,
   multiple: _propTypes2.default.bool,
@@ -188,6 +190,7 @@ var Select = function (_React$Component2) {
 }(_react2.default.Component);
 
 Select.propTypes = {
+  filter: _propTypes2.default.object,
   format: _propTypes2.default.func,
   label: _propTypes2.default.string,
   mutiple: _propTypes2.default.bool,

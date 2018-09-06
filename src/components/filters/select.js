@@ -6,6 +6,7 @@ class SelectPanel extends React.Component {
 
   static propTypes = {
     endpoint: PropTypes.string,
+    filter: PropTypes.object,
     format: PropTypes.any,
     label: PropTypes.string,
     multiple: PropTypes.bool,
@@ -46,9 +47,9 @@ class SelectPanel extends React.Component {
   }
 
   _getSearch() {
-    const { endpoint, format, label, name, multiple, options, sort, text, value, results, onChange } = this.props
+    const { endpoint, filter, format, label, name, multiple, options, sort, text, value, results, onChange } = this.props
     const onUpdate = onChange
-    return { endpoint, format, label, name, multiple, options, results, sort, text, value, onUpdate }
+    return { endpoint, filter, format, label, name, multiple, options, results, sort, text, value, onUpdate }
   }
 
   _handleRemovePanel() {
@@ -66,6 +67,7 @@ class SelectPanel extends React.Component {
 class Select extends React.Component {
 
   static propTypes = {
+    filter: PropTypes.object,
     format: PropTypes.func,
     label: PropTypes.string,
     mutiple: PropTypes.bool,
