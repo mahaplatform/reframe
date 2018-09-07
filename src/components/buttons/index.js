@@ -13,7 +13,9 @@ class Buttons extends React.Component {
     return (
       <div className="reframe-buttons">
         { buttons && buttons.map((button, index) => (
-          <Button { ...buttons[index] } key={`button_${index}`} />
+          <div className="reframe-buttons-item">
+            <Button { ...buttons[index] } key={`button_${index}`} />
+          </div>
         )) }
       </div>
     )

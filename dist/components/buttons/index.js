@@ -55,7 +55,11 @@ var Buttons = function (_React$Component) {
         'div',
         { className: 'reframe-buttons' },
         buttons && buttons.map(function (button, index) {
-          return _react2.default.createElement(_button2.default, (0, _extends3.default)({}, buttons[index], { key: 'button_' + index }));
+          return _react2.default.createElement(
+            'div',
+            { className: 'reframe-buttons-item' },
+            _react2.default.createElement(_button2.default, (0, _extends3.default)({}, buttons[index], { key: 'button_' + index }))
+          );
         })
       );
     }
