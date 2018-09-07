@@ -1,4 +1,4 @@
-export Buttons from './button'
+export Buttons from './buttons'
 export Button from './button'
 export Carousel from './carousel'
 export Collection from './collection'

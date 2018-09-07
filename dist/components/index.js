@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Token = exports.Tasks = exports.Tabs = exports.Table = exports.RouterStack = exports.Stack = exports.Searchbox = exports.Search = exports.Search2 = exports.Scrollpane = exports.SortableList = exports.Prompt = exports.Panel = exports.Progress = exports.ModalPanel = exports.Message = exports.List = exports.Loader = exports.Infinite = exports.Form = exports.Filters = exports.Control = exports.Collection = exports.Carousel = exports.Button = exports.Buttons = undefined;
 
+var _buttons = require('./buttons');
+
+var _buttons2 = _interopRequireDefault(_buttons);
+
 var _button = require('./button');
 
 var _button2 = _interopRequireDefault(_button);
@@ -107,7 +111,7 @@ var _token2 = _interopRequireDefault(_token);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.Buttons = _button2.default;
+exports.Buttons = _buttons2.default;
 exports.Button = _button2.default;
 exports.Carousel = _carousel2.default;
 exports.Collection = _collection2.default;
