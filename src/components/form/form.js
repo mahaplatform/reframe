@@ -144,7 +144,7 @@ class Form extends React.Component {
       position: buttonPosition,
       title,
       leftItems: (cancelText) ? [
-        { label: 'Cancel', handler: this._handleCancel.bind(this) }
+        { label: cancelText, handler: this._handleCancel.bind(this) }
       ] : null,
       rightItems: (saveText) ? [
         { label: saveText, handler: this._debouncedSubmit , className: this._getButtonClasses() }

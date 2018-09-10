@@ -186,7 +186,7 @@ var Form = function (_React$Component) {
       return {
         position: buttonPosition,
         title: title,
-        leftItems: cancelText ? [{ label: 'Cancel', handler: this._handleCancel.bind(this) }] : null,
+        leftItems: cancelText ? [{ label: cancelText, handler: this._handleCancel.bind(this) }] : null,
         rightItems: saveText ? [{ label: saveText, handler: this._debouncedSubmit, className: this._getButtonClasses() }] : null
       };
     }
