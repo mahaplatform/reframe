@@ -163,6 +163,7 @@ var Item = function (_React$Component) {
 }(_react2.default.Component);
 
 Item.contextTypes = {
+  router: _propTypes2.default.object,
   tasks: _propTypes2.default.object
 };
 exports.default = Item;

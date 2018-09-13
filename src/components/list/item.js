@@ -6,6 +6,7 @@ import _ from 'lodash'
 class Item extends React.Component {
 
   static contextTypes = {
+    router: PropTypes.object,
     tasks: PropTypes.object
   }
 
