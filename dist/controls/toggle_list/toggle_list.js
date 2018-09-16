@@ -266,7 +266,7 @@ var ToggleList = function (_React$Component) {
 
 ToggleList.propTypes = {
   chosen: _propTypes2.default.any,
-  defaultFilters: _propTypes2.default.array,
+  defaultFilters: _propTypes2.default.object,
   defaultValue: _propTypes2.default.array,
   endpoint: _propTypes2.default.string,
   exclude_ids: _propTypes2.default.array,

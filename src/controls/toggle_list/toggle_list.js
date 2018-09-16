@@ -11,7 +11,7 @@ class ToggleList extends React.Component{
 
   static propTypes = {
     chosen: PropTypes.any,
-    defaultFilters: PropTypes.array,
+    defaultFilters: PropTypes.object,
     defaultValue: PropTypes.array,
     endpoint: PropTypes.string,
     exclude_ids: PropTypes.array,
