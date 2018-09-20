@@ -4,9 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _extends3 = require('babel-runtime/helpers/extends');
+
+var _extends4 = _interopRequireDefault(_extends3);
 
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
@@ -41,6 +45,8 @@ var _scrollpane = require('../scrollpane');
 var _scrollpane2 = _interopRequireDefault(_scrollpane);
 
 var _results = require('./results');
+
+var _reactRedux = require('react-redux');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -176,7 +182,7 @@ var Infinite = function (_React$Component) {
           onFetch = _props3.onFetch;
 
       var loaded = records ? records.length : 0;
-      var query = (0, _extends3.default)({
+      var query = (0, _extends4.default)({
         $page: this._getPagination(skip)
       }, filter ? { $filter: filter } : {}, sort && sort.key ? { $sort: (sort.order === 'desc' ? '-' : '') + sort.key } : {}, exclude_ids ? { $exclude_ids: exclude_ids } : {});
       if (onFetch && this._getMore(next, skip, reload, loaded, total)) onFetch(endpoint, query);
@@ -276,4 +282,12 @@ Infinite.defaultProps = {
   timeout: _results.Timeout,
   onUpdateSelected: function onUpdateSelected(ids) {}
 };
-exports.default = Infinite;
+
+
+var mapStateToProps = function mapStateToProps(state, props) {
+  return props.selectors ? Object.keys(props.selectors).reduce(function (mapped, key) {
+    return (0, _extends4.default)({}, mapped, (0, _defineProperty3.default)({}, key, props.selectors[key](state, props)));
+  }, {}) : {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Infinite);

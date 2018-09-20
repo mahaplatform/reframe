@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import Scrollpane from '../scrollpane'
 import { Appending, Delayed, Empty, Failure, Loader, NotFound, Timeout } from './results'
+import { connect } from 'react-redux'
 
 class Infinite extends React.Component {
 
@@ -166,4 +167,9 @@ class Infinite extends React.Component {
 
 }
 
-export default Infinite
+const mapStateToProps = (state, props) => props.selectors ? Object.keys(props.selectors).reduce((mapped, key) => ({
+  ...mapped,
+  [key]: props.selectors[key](state, props)
+}), {}) : {}
+
+export default connect(mapStateToProps)(Infinite)

@@ -53,7 +53,7 @@ var Button = function (_React$Component) {
           text = _props.text;
 
       return _react2.default.createElement(
-        'a',
+        'div',
         this._getButton(),
         icon && _react2.default.createElement('i', { className: 'fa fa-fw fa-' + icon }),
         label || text || children,
@@ -88,7 +88,8 @@ var Button = function (_React$Component) {
           status = _props3.status;
 
       if (component) return '';
-      var classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button', 'reframe-button'];
+      var classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button'];
+      classes.push('reframe-button');
       if (mobile !== false) classes.push('mobile');
       if (basic) classes.push('basic');
       if (disabled) classes.push('disabled');

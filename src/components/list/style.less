@@ -43,9 +43,10 @@
 .reframe-list-item-link {
   cursor: pointer;
   color: @blue;
-  &:hover {
-    background-color: fadeout(@black, 97);
+  .fa {
+    color: fadeout(@black, 40);
   }
+  .hover(background-color, fadeout(@black, 97));
 }
 .reframe-list-item-unit {
   margin-left: 3px;

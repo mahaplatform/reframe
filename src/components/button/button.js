@@ -54,11 +54,11 @@ class Button extends React.Component {
   render() {
     const { children, component, icon, label, text } = this.props
     return (
-      <a { ...this._getButton() }>
+      <div { ...this._getButton() }>
         { icon && <i className={`fa fa-fw fa-${icon}`} /> }
         { label || text || children }
         { component }
-      </a>
+      </div>
     )
 
   }
@@ -77,7 +77,8 @@ class Button extends React.Component {
   _getClass() {
     const { component, basic, className, color, disabled, mobile, status } = this.props
     if(component) return ''
-    const classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button','reframe-button']
+    const classes = className ? className.split(' ') : ['ui', color, 'fluid', 'button']
+    classes.push('reframe-button')
     if(mobile !== false) classes.push('mobile')
     if(basic) classes.push('basic')
     if(disabled) classes.push('disabled')
