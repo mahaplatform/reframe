@@ -56,7 +56,8 @@ var Tasks = function (_React$Component) {
       var _props = this.props,
           children = _props.children,
           items = _props.items,
-          open = _props.open;
+          open = _props.open,
+          title = _props.title;
 
       return [children, _react2.default.createElement(
         _reactTransitionGroup.CSSTransition,
@@ -132,6 +133,7 @@ Tasks.contextTypes = {
 Tasks.propTypes = {
   children: _propTypes2.default.any,
   items: _propTypes2.default.array,
+  title: _propTypes2.default.string,
   open: _propTypes2.default.bool,
   onClear: _propTypes2.default.func,
   onClose: _propTypes2.default.func,

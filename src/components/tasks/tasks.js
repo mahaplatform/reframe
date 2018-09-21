@@ -17,6 +17,7 @@ class Tasks extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     items: PropTypes.array,
+    title: PropTypes.string,
     open: PropTypes.bool,
     onClear: PropTypes.func,
     onClose: PropTypes.func,
@@ -24,7 +25,7 @@ class Tasks extends React.Component {
   }
 
   render() {
-    const { children, items, open } = this.props
+    const { children, items, open, title } = this.props
     return ([
       children,
       <CSSTransition key="reframe-tasks-overlay" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>

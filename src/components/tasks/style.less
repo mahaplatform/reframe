@@ -12,6 +12,23 @@
   right: 0;
   background-color: rgb(0, 0, 0);
 }
+.reframe-tasks-title {
+  border-bottom: 1px solid fadeout(@black, 90);
+  background-color: fadeout(@black, 92);
+  color: fadeout(@black, 50);
+  display: flex;
+}
+.reframe-tasks-title-icon {
+  padding: 0.8em 0 0.8em 0.8em;
+}
+.reframe-tasks-title-label {
+  padding: 0.8em;
+  flex: 1;
+  word-break: break-all;
+  height: 2em;
+  overflow: hidden;
+}
+
 .reframe-tasks-list {
   position: fixed;
   .border-radius(5px);
