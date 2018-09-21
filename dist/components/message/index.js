@@ -128,7 +128,7 @@ Message.propTypes = {
   image: _propTypes2.default.string,
   text: _propTypes2.default.string,
   title: _propTypes2.default.string,
-  color: _propTypes2.default.object,
+  color: _propTypes2.default.string,
   component: _propTypes2.default.object,
   button: _propTypes2.default.object
 };
