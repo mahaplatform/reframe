@@ -14,7 +14,7 @@ class Message extends React.Component {
     image: PropTypes.string,
     text: PropTypes.string,
     title: PropTypes.string,
-    color: PropTypes.object,
+    color: PropTypes.string,
     component: PropTypes.object,
     button: PropTypes.object
   }
