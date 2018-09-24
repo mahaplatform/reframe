@@ -16,10 +16,10 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    const { tabIndex } = this.props
+    const { disabled, tabIndex } = this.props
     return (
-      <div className="reframe-checkbox" tabIndex={ tabIndex }>
-        <i className={ `fa fa-fw fa-${this._getIcon()}` } onClick={ this._handleChange.bind(this) } />
+      <div className={ `reframe-checkbox ${(disabled) ? 'toggle-disabled' : ''}` } tabIndex={ tabIndex }>
+        <i className={ `fa fa-fw fa-${this._getIcon()} ${(disabled) ? 'disabled' : ''}` } onClick={ this._handleChange.bind(this) } />
       </div>
     )
   }
@@ -31,19 +31,16 @@ class Checkbox extends React.Component {
     if(onReady) onReady()
   }
 
-  _getClass() {
-    const { disabled } = this.props
-    return disabled ? 'ui disabled checkbox' : 'ui checkbox'
-  }
-
   _getIcon() {
     return `toggle-${this.state.value ? 'on' : 'off'}`
   }
 
   _handleChange(value) {
-    const { onClick } = this.props
-    if(onClick) onClick()
-    this.setValue(!this.state.value)
+    const { disabled, onClick } = this.props
+    if(!disabled){
+      if(onClick) onClick()
+      this.setValue(!this.state.value)
+    }
   }
 
   setValue(value) {

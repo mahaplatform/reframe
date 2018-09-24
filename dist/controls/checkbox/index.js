@@ -48,31 +48,26 @@ var Checkbox = function (_React$Component) {
   (0, _createClass3.default)(Checkbox, [{
     key: 'render',
     value: function render() {
-      var tabIndex = this.props.tabIndex;
+      var _props = this.props,
+          disabled = _props.disabled,
+          tabIndex = _props.tabIndex;
 
       return _react2.default.createElement(
         'div',
-        { className: 'reframe-checkbox', tabIndex: tabIndex },
-        _react2.default.createElement('i', { className: 'fa fa-fw fa-' + this._getIcon(), onClick: this._handleChange.bind(this) })
+        { className: 'reframe-checkbox ' + (disabled ? 'toggle-disabled' : ''), tabIndex: tabIndex },
+        _react2.default.createElement('i', { className: 'fa fa-fw fa-' + this._getIcon() + ' ' + (disabled ? 'disabled' : ''), onClick: this._handleChange.bind(this) })
       );
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props = this.props,
-          defaultValue = _props.defaultValue,
-          onReady = _props.onReady;
+      var _props2 = this.props,
+          defaultValue = _props2.defaultValue,
+          onReady = _props2.onReady;
 
       var value = defaultValue || false;
       this.setValue(value);
       if (onReady) onReady();
-    }
-  }, {
-    key: '_getClass',
-    value: function _getClass() {
-      var disabled = this.props.disabled;
-
-      return disabled ? 'ui disabled checkbox' : 'ui checkbox';
     }
   }, {
     key: '_getIcon',
@@ -82,10 +77,14 @@ var Checkbox = function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange(value) {
-      var onClick = this.props.onClick;
+      var _props3 = this.props,
+          disabled = _props3.disabled,
+          onClick = _props3.onClick;
 
-      if (onClick) onClick();
-      this.setValue(!this.state.value);
+      if (!disabled) {
+        if (onClick) onClick();
+        this.setValue(!this.state.value);
+      }
     }
   }, {
     key: 'setValue',
