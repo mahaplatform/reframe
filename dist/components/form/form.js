@@ -86,34 +86,34 @@ var Form = function (_React$Component) {
         _react2.default.createElement(
           _modal_panel2.default,
           this._getPanel(),
-          (before || instructions) && _react2.default.createElement(
-            'div',
-            { className: 'reframe-form-header' },
-            before && _react2.default.createElement(
-              'div',
-              { className: 'reframe-form-before' },
-              before
-            ),
-            instructions && _react2.default.createElement(
-              'div',
-              { className: 'instructions' },
-              instructions
-            )
-          ),
           _react2.default.createElement(
             'div',
             { className: this._getFormClasses() },
+            (before || instructions) && _react2.default.createElement(
+              'div',
+              { className: 'reframe-form-header' },
+              before && _react2.default.createElement(
+                'div',
+                { className: 'reframe-form-before' },
+                before
+              ),
+              instructions && _react2.default.createElement(
+                'div',
+                { className: 'instructions' },
+                instructions
+              )
+            ),
             !configuring && config.map(function (section, index) {
               return _react2.default.createElement(_section2.default, (0, _extends3.default)({ key: 'section_' + index }, _this2._getSection(config, section, index)));
-            })
-          ),
-          after && _react2.default.createElement(
-            'div',
-            { className: 'reframe-form-footer' },
-            _react2.default.createElement(
+            }),
+            after && _react2.default.createElement(
               'div',
-              { className: 'reframe-form-after' },
-              after
+              { className: 'reframe-form-footer' },
+              _react2.default.createElement(
+                'div',
+                { className: 'reframe-form-after' },
+                after
+              )
             )
           )
         ),

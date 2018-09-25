@@ -78,24 +78,24 @@ class Form extends React.Component {
     return (
       <div className="reframe-form">
         <ModalPanel { ...this._getPanel() }>
-          { (before || instructions) &&
-            <div className="reframe-form-header">
-              { before && <div className="reframe-form-before">{ before }</div> }
-              { instructions && <div className="instructions">{ instructions }</div> }
-            </div>
-          }
           <div className={ this._getFormClasses() }>
+            { (before || instructions) &&
+              <div className="reframe-form-header">
+                { before && <div className="reframe-form-before">{ before }</div> }
+                { instructions && <div className="instructions">{ instructions }</div> }
+              </div>
+            }
             { !configuring &&
               config.map((section, index) => (
                 <Section key={`section_${index}`} { ...this._getSection(config, section, index) } />
               ))
             }
+            { after &&
+              <div className="reframe-form-footer">
+                <div className="reframe-form-after">{ after }</div>
+              </div>
+            }
           </div>
-          { after &&
-            <div className="reframe-form-footer">
-              <div className="reframe-form-after">{ after }</div>
-            </div>
-          }
         </ModalPanel>
         <div className="reframe-form-panels">
           <TransitionGroup>
