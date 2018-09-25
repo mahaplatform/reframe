@@ -75,7 +75,7 @@ var Options = function (_React$Component) {
         options.map(function (option, index) {
           return _react2.default.createElement(
             'div',
-            { key: 'result_' + index, className: 'reframe-lookup-panel-result', onClick: _this2._handleChoose.bind(_this2, option) },
+            { key: 'result_' + (option.id || index), className: 'reframe-lookup-panel-result', onClick: _this2._handleChoose.bind(_this2, option) },
             _react2.default.createElement(
               'div',
               { className: 'reframe-lookup-panel-result-label' },

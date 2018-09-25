@@ -30,7 +30,7 @@ class Options extends React.Component {
     return (
       <div className="reframe-lookup-panel-results">
         { options.map((option, index) => (
-          <div key={`result_${index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, option) }>
+          <div key={`result_${option.id || index}`} className="reframe-lookup-panel-result" onClick={ this._handleChoose.bind(this, option) }>
             <div className="reframe-lookup-panel-result-label">
               <Format { ...option } format={ format } value={ _.get(option, text) } />
             </div>

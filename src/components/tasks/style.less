@@ -17,9 +17,17 @@
   background-color: fadeout(@black, 92);
   color: fadeout(@black, 50);
   display: flex;
-}
-.reframe-tasks-title-icon {
-  padding: 0.8em 0 0.8em 0.8em;
+  .reframe-tasks-title-icon {
+    &:first-child {
+      padding: 0.8em 0 0.8em 0.8em;
+    }
+    &:last-child {
+      padding: 0.8em 0.8em 0.8em 0;
+    }
+    .fa {
+      font-size: 1.2em;
+    }
+  }
 }
 .reframe-tasks-title-label {
   padding: 0.8em;
