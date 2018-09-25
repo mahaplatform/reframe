@@ -14,7 +14,7 @@ class Form extends React.Component {
   static propTypes = {
     action: PropTypes.string,
     after: PropTypes.string,
-    before: PropTypes.string,
+    before: PropTypes.any,
     busy: PropTypes.array,
     buttonPosition: PropTypes.string,
     defaults: PropTypes.object,
@@ -26,7 +26,7 @@ class Form extends React.Component {
     entity: PropTypes.object,
     fields: PropTypes.array,
     filtered: PropTypes.object,
-    instructions: PropTypes.string,
+    instructions: PropTypes.any,
     isReady: PropTypes.bool,
     isBusy: PropTypes.bool,
     method: PropTypes.string,

@@ -347,7 +347,7 @@ Form.childContextTypes = {
 Form.propTypes = {
   action: _propTypes2.default.string,
   after: _propTypes2.default.string,
-  before: _propTypes2.default.string,
+  before: _propTypes2.default.any,
   busy: _propTypes2.default.array,
   buttonPosition: _propTypes2.default.string,
   defaults: _propTypes2.default.object,
@@ -359,7 +359,7 @@ Form.propTypes = {
   entity: _propTypes2.default.object,
   fields: _propTypes2.default.array,
   filtered: _propTypes2.default.object,
-  instructions: _propTypes2.default.string,
+  instructions: _propTypes2.default.any,
   isReady: _propTypes2.default.bool,
   isBusy: _propTypes2.default.bool,
   method: _propTypes2.default.string,
