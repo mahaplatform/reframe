@@ -68,7 +68,9 @@ var TimeField = function (_React$Component) {
     value: function _getLookup() {
       var _this2 = this;
 
+      var standardized = (0, _moment2.default)('2018-01-01 ' + this.props.defaultValue.replace(/\s?(am|pm)/i, ' $1')).format('HH:mm:ss');
       return (0, _extends3.default)({}, this.props, {
+        defaultValue: standardized,
         type: 'lookup',
         options: this._getOptions(),
         format: function format(_ref) {

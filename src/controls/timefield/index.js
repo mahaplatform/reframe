@@ -37,9 +37,10 @@ class TimeField extends React.Component {
   }
 
   _getLookup() {
-
+    const standardized = moment('2018-01-01 ' + this.props.defaultValue.replace(/\s?(am|pm)/i, ' $1')).format('HH:mm:ss')
     return {
       ...this.props,
+      defaultValue: standardized,
       type: 'lookup',
       options: this._getOptions(),
       format: ({ text, duration }) => (
@@ -62,7 +63,7 @@ class TimeField extends React.Component {
     const today = moment().format('YYYY-MM-DD')
 
     const startTime = moment(`${today} ${start}`, 'YYYY-MM-DD HH:mm')
-    
+
     const endTime = moment(`${today} 24:00`, 'YYYY-MM-DD HH:mm')
 
     const steps = (endTime.diff(startTime) / 1000 / 60 / 60)  * (60 / increment)
