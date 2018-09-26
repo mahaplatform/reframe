@@ -215,7 +215,7 @@ var Carousel = function (_React$Component) {
 Carousel.propTypes = {
   active: _propTypes2.default.number,
   direction: _propTypes2.default.string,
-  infinite: _propTypes2.default.string,
+  infinite: _propTypes2.default.bool,
   slides: _propTypes2.default.array,
   total: _propTypes2.default.number,
   onSetTotal: _propTypes2.default.func,

@@ -6,7 +6,7 @@ class Carousel extends React.Component {
   static propTypes = {
     active: PropTypes.number,
     direction: PropTypes.string,
-    infinite: PropTypes.string,
+    infinite: PropTypes.bool,
     slides: PropTypes.array,
     total: PropTypes.number,
     onSetTotal: PropTypes.func,
