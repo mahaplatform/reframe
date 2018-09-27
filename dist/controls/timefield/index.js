@@ -50,6 +50,28 @@ var _pluralize2 = _interopRequireDefault(_pluralize);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TimeFieldToken = function TimeFieldToken(_ref) {
+  var text = _ref.text,
+      duration = _ref.duration;
+  return _react2.default.createElement(
+    'div',
+    { className: 'reframe-timefield-token' },
+    text,
+    duration && _react2.default.createElement(
+      'span',
+      { className: 'reframe-timefield-token-duration' },
+      '(',
+      duration >= 1 ? (0, _pluralize2.default)('hour', duration, true) : (0, _pluralize2.default)('mins', duration * 60, true),
+      ')'
+    )
+  );
+};
+
+TimeFieldToken.propTypes = {
+  text: _propTypes2.default.string,
+  duration: _propTypes2.default.number
+};
+
 var TimeField = function (_React$Component) {
   (0, _inherits3.default)(TimeField, _React$Component);
 
@@ -66,30 +88,17 @@ var TimeField = function (_React$Component) {
   }, {
     key: '_getLookup',
     value: function _getLookup() {
-      var _this2 = this;
-
-      var standardized = (0, _moment2.default)('2018-01-01 ' + this.props.defaultValue.replace(/\s?(am|pm)/i, ' $1')).format('HH:mm:ss');
       return (0, _extends3.default)({}, this.props, {
-        defaultValue: standardized,
+        defaultValue: this._getStandardized(this.props.defaultValue),
         type: 'lookup',
         options: this._getOptions(),
-        format: function format(_ref) {
-          var text = _ref.text,
-              duration = _ref.duration;
-          return _react2.default.createElement(
-            'div',
-            { className: 'reframe-timefield-token' },
-            text,
-            _this2.props.duration && _react2.default.createElement(
-              'span',
-              { className: 'reframe-timefield-token-duration' },
-              '(',
-              duration >= 1 ? (0, _pluralize2.default)('hour', duration, true) : (0, _pluralize2.default)('mins', duration * 60, true),
-              ')'
-            )
-          );
-        }
+        format: TimeFieldToken
       });
+    }
+  }, {
+    key: '_getStandardized',
+    value: function _getStandardized(value) {
+      return value ? (0, _moment2.default)('2018-01-01 ' + value.replace(/\s?(am|pm)/i, ' $1')).format('HH:mm:ss') : null;
     }
   }, {
     key: '_getOptions',
@@ -98,27 +107,18 @@ var TimeField = function (_React$Component) {
           increment = _props.increment,
           start = _props.start;
 
-
       var today = (0, _moment2.default)().format('YYYY-MM-DD');
-
       var startTime = (0, _moment2.default)(today + ' ' + start, 'YYYY-MM-DD HH:mm');
-
       var endTime = (0, _moment2.default)(today + ' 24:00', 'YYYY-MM-DD HH:mm');
-
       var steps = endTime.diff(startTime) / 1000 / 60 / 60 * (60 / increment);
-
       var currTime = (0, _moment2.default)(today + ' ' + start, 'YYYY-MM-DD HH:mm');
-
       return Array.apply(null, { length: steps }).reduce(function (times, i) {
-
         var value = {
           value: currTime.format('HH:mm:ss'),
           text: currTime.format('hh:mm A'),
           duration: currTime.diff(startTime) / 1000 / 60 / 60
         };
-
         currTime.add(increment, 'minutes');
-
         return [].concat((0, _toConsumableArray3.default)(times), [value]);
       }, []);
     }

@@ -63,7 +63,10 @@ class Dynamic extends React.Component {
     records: PropTypes.array,
     text: PropTypes.string,
     value: PropTypes.string,
-    selected: PropTypes.number,
+    selected: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
     onChoose: PropTypes.func
   }

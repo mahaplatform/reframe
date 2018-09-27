@@ -165,7 +165,7 @@ Dynamic.propTypes = {
   records: _propTypes2.default.array,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
-  selected: _propTypes2.default.number,
+  selected: _propTypes2.default.oneOfType([_propTypes2.default.array, _propTypes2.default.number]),
   onChange: _propTypes2.default.func,
   onChoose: _propTypes2.default.func
 };
