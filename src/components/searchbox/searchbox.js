@@ -23,12 +23,15 @@ class Searchbox extends React.Component {
     onChange: (value) => {}
   }
 
+  _handleChange = _.throttle(this._handleChange, 500)
+
+
   render() {
     const { icon, q } = this.props
     return (
       <div className={ this._getClass() }>
         <div className="reframe-searchbox-container">
-          { icon && 
+          { icon &&
             <div className="reframe-searchbox-extra" onClick={ this._handleIcon.bind(this) }>
               <i className={ `fa fa-fw fa-${icon}` } />
             </div>
@@ -51,10 +54,6 @@ class Searchbox extends React.Component {
     )
   }
 
-  componentDidMount() {
-    this._handleChange = _.throttle(this.props.onChange, 500)
-  }
-
   _getClass() {
     const classes = ['reframe-searchbox']
     if(this.props.active) classes.push('active')
@@ -74,16 +73,20 @@ class Searchbox extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { q } = this.props
-    if(q !== prevProps.q) this._handleChange(q)
+    // const { q } = this.props
+    // if(q !== prevProps.q) this._handleChange(q)
   }
-  
+
   _handleIcon() {
     this.props.onIcon()
   }
 
   _handleBegin() {
     this.props.onBegin()
+  }
+
+  _handleChange(q) {
+    this.props.onChange(q)
   }
 
   _handleEnd() {

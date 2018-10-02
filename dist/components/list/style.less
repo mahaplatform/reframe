@@ -42,9 +42,11 @@
 }
 .reframe-list-item-link {
   cursor: pointer;
-  &:hover {
-    background-color: fadeout(@black, 97);
+  color: @blue;
+  .fa {
+    color: fadeout(@black, 40);
   }
+  .hover(background-color, fadeout(@black, 97));
 }
 .reframe-list-item-unit {
   margin-left: 3px;
@@ -68,14 +70,11 @@
   @media (max-width: 768px) { padding: 0.8em; }
   @media (min-width: 769px) { display: flex; }
 }
-.reframe-list-item-content-link {
+.reframe-list-item-link {
   padding: 0.8em;
-  color: @blue;
+  display: block;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-    color: darken(@blue, 20);
-  }
+  .hover(background-color, fadeout(@black, 97));
 }
 .reframe-list-item-content-label {
   @media (min-width: 769px) {

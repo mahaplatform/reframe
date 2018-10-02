@@ -1,5 +1,8 @@
 .reframe-checkbox {
   display: inline-block;
+  &.toggle-disabled {
+    cursor: default;
+  }
   .fa {
     font-size: 30px;
     height: auto;
@@ -10,5 +13,8 @@
   }
   .fa-toggle-on {
     color: @green;
+  }
+  .disabled {
+    color:#cccccc;
   }
 }
