@@ -73,8 +73,8 @@ class Searchbox extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // const { q } = this.props
-    // if(q !== prevProps.q) this._handleChange(q)
+    const { q } = this.props
+    if(q !== prevProps.q) this._handleChange(q)
   }
 
   _handleIcon() {

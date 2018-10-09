@@ -41,17 +41,6 @@ body {
 	z-index: 0 !important;
 }
 
-*::-webkit-scrollbar-track {
-  background: fadeout(@black, 92) !important;
-}
-*::-webkit-scrollbar-thumb {
-  background: fadeout(@black, 80) !important;
-}
-*::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
 .colorize(@property) {
 	&.red { @{property}: @red; }
 	&.orange { @{property}: @orange; }
@@ -99,6 +88,16 @@ body {
 .scrollable {
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar-track {
+	  background: fadeout(@black, 92) !important;
+	}
+	&::-webkit-scrollbar-thumb {
+	  background: fadeout(@black, 80) !important;
+	}
+	&::-webkit-scrollbar {
+	  width: 6px !important;
+	  height: 6px !important;
+	}
 }
 .scrollable-x {
 	overflow-x: scroll;
