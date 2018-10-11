@@ -33,10 +33,12 @@ class Tasks extends React.Component {
       </CSSTransition>,
       <CSSTransition key="reframe-tasks-list" in={ open } classNames="expanded" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-tasks-list">
-          { items && items.map((item, index) => {
-            if(item.show === false) return
-            return <Button key={`task_${index}`} { ...this._getButton(item) }/>
-          }) }
+          <div className="reframe-tasks-list-body">
+            { items && items.map((item, index) => {
+              if(item.show === false) return
+              return <Button key={`task_${index}`} { ...this._getButton(item) }/>
+            }) }
+          </div>
           <div className="reframe-tasks-cancel" onClick={ this._handleClose.bind(this) }>
             Cancel
           </div>

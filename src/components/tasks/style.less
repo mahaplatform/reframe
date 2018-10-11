@@ -36,13 +36,15 @@
   height: 3em;
   overflow: hidden;
 }
-
 .reframe-tasks-list {
   position: fixed;
+  display: flex;
+  flex-direction: column;
   .border-radius(5px);
   background-color: #FFFFFF;
   @media only screen and (max-width: 768px) {
     .translate-y-transition(100%, 0, .25s);
+    max-height: calc(100vh - 1.6em);
     bottom: 0;
     left: 0;
     right: 0;
@@ -73,6 +75,11 @@
     }
   }
 }
+.reframe-tasks-list-body {
+  .scrollable();
+}
+
+
 
 @media (max-width: 768px) {
   .reframe-task {

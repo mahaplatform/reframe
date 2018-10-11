@@ -35,7 +35,7 @@ class ToggleList extends React.Component{
   }
 
   static defaultProps = {
-    defaultFilters: [],
+    defaultFilters: {},
     exclude_ids: [],
     format: Token,
     full: false,

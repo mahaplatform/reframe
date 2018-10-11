@@ -21,6 +21,7 @@ class Lookup extends React.Component {
     label: PropTypes.string,
     multiple: PropTypes.bool,
     options: PropTypes.array,
+    placeholder: PropTypes.string,
     selected: PropTypes.array,
     text: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -38,12 +39,13 @@ class Lookup extends React.Component {
     format: ({ value }) => <div className="reframe-lookup2-token">{ value }</div>,
     label: 'Record',
     multiple: false,
+    placeholder: null,
     value: 'value',
     text: 'text'
   }
 
   render() {
-    const { selected, tabIndex, format, text } = this.props
+    const { placeholder, selected, tabIndex, format, text } = this.props
     return (
       <div className={ this._getClass() } tabIndex={ tabIndex }>
         <div className="reframe-lookup2-items" onClick={ this._handleBegin.bind(this) }>
@@ -59,6 +61,9 @@ class Lookup extends React.Component {
               </div>
             </div>
           )) }
+          { selected.length === 0 && placeholder &&
+            <div className="reframe-lookup2-placeholder">{ placeholder }</div>
+          }
         </div>
       </div>
     )
@@ -104,11 +109,11 @@ class Lookup extends React.Component {
       onSelect: this._handleSelect.bind(this)
     }
   }
-  
+
   _getValue() {
     const { multiple, selected, value } = this.props
     const values = selected.map(item => _.get(item, value))
-    return multiple ? values : values[0]    
+    return multiple ? values : values[0]
   }
 
   _handleBegin() {
