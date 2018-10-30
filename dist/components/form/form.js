@@ -4,25 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _reactTransitionGroup = require('react-transition-group');
 
@@ -48,24 +32,30 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var Form = function (_React$Component) {
-  (0, _inherits3.default)(Form, _React$Component);
+  _inherits(Form, _React$Component);
 
   function Form() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3.default)(this, Form);
+    _classCallCheck(this, Form);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Form.__proto__ || Object.getPrototypeOf(Form)).call.apply(_ref, [this].concat(args))), _this), _this._debouncedSubmit = _lodash2.default.debounce(_this._handleSubmit.bind(_this), 2500, { leading: true }), _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Form.__proto__ || Object.getPrototypeOf(Form)).call.apply(_ref, [this].concat(args))), _this), _this._debouncedSubmit = _lodash2.default.debounce(_this._handleSubmit.bind(_this), 2500, { leading: true }), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  (0, _createClass3.default)(Form, [{
+  _createClass(Form, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -104,7 +94,7 @@ var Form = function (_React$Component) {
               )
             ),
             !configuring && config.map(function (section, index) {
-              return _react2.default.createElement(_section2.default, (0, _extends3.default)({ key: 'section_' + index }, _this2._getSection(config, section, index)));
+              return _react2.default.createElement(_section2.default, _extends({ key: 'section_' + index }, _this2._getSection(config, section, index)));
             }),
             after && _react2.default.createElement(
               'div',
@@ -223,7 +213,7 @@ var Form = function (_React$Component) {
         if (i >= index) return start;
         return start + section.fields.length;
       }, 1);
-      return (0, _extends3.default)({}, section, {
+      return _extends({}, section, {
         data: data,
         errors: errors,
         tabIndexStart: tabIndexStart,
@@ -315,11 +305,15 @@ var Form = function (_React$Component) {
           action = _props10.action,
           filtered = _props10.filtered,
           isBusy = _props10.isBusy,
+          isValid = _props10.isValid,
           method = _props10.method,
           onSubmit = _props10.onSubmit,
-          onSubmitForm = _props10.onSubmitForm;
+          onSubmitForm = _props10.onSubmitForm,
+          onValidateForm = _props10.onValidateForm,
+          validateResults = _props10.validateResults;
 
       if (isBusy) return;
+      if (!isValid) return onValidateForm(validateResults);
       if (action) return onSubmitForm(method, action, filtered);
       if (onSubmit) {
         if (onSubmit(filtered)) return this._handleSuccess();
@@ -338,6 +332,7 @@ var Form = function (_React$Component) {
       this.props.onFailure();
     }
   }]);
+
   return Form;
 }(_react2.default.Component);
 
@@ -362,6 +357,7 @@ Form.propTypes = {
   instructions: _propTypes2.default.any,
   isReady: _propTypes2.default.bool,
   isBusy: _propTypes2.default.bool,
+  isValid: _propTypes2.default.bool,
   method: _propTypes2.default.string,
   panels: _propTypes2.default.array,
   ready: _propTypes2.default.array,
@@ -370,6 +366,7 @@ Form.propTypes = {
   showModal: _propTypes2.default.bool,
   status: _propTypes2.default.string,
   title: _propTypes2.default.string,
+  validateResults: _propTypes2.default.object,
   onCancel: _propTypes2.default.func,
   onChange: _propTypes2.default.func,
   onChangeField: _propTypes2.default.func,

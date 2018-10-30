@@ -29,6 +29,7 @@ class Form extends React.Component {
     instructions: PropTypes.any,
     isReady: PropTypes.bool,
     isBusy: PropTypes.bool,
+    isValid: PropTypes.bool,
     method: PropTypes.string,
     panels: PropTypes.array,
     ready: PropTypes.array,
@@ -37,6 +38,7 @@ class Form extends React.Component {
     showModal: PropTypes.bool,
     status: PropTypes.string,
     title: PropTypes.string,
+    validateResults: PropTypes.object,
     onCancel: PropTypes.func,
     onChange: PropTypes.func,
     onChangeField: PropTypes.func,
@@ -239,8 +241,9 @@ class Form extends React.Component {
   }
 
   _handleSubmit() {
-    const { action, filtered, isBusy, method, onSubmit, onSubmitForm } = this.props
+    const { action, filtered, isBusy, isValid, method, onSubmit, onSubmitForm, onValidateForm, validateResults } = this.props
     if(isBusy) return
+    if(!isValid) return onValidateForm(validateResults)
     if(action) return onSubmitForm(method, action, filtered)
     if(onSubmit) {
       if(onSubmit(filtered)) return this._handleSuccess()

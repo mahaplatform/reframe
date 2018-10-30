@@ -4,11 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var INITIAL_STATE = {
   direction: 'left',
@@ -17,27 +13,27 @@ var INITIAL_STATE = {
 };
 
 var setTotal = function setTotal(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     total: action.total
   });
 };
 
 var previous = function previous(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     direction: 'right',
     active: state.active === 0 ? state.total - 1 : state.active - 1
   });
 };
 
 var next = function next(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     direction: 'left',
     active: state.active === state.total - 1 ? 0 : state.active + 1
   });
 };
 
 var goto = function goto(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     direction: action.index > state.index || state.index === state.total && action.index === 0 ? 'left' : 'right',
     active: action.index
   });

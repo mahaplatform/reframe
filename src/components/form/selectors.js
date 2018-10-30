@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
-import _ from 'lodash'
 import { unflatten } from 'flat'
+import Checkit from 'checkit'
+import _ from 'lodash'
 
 const sections = state => state.config
 
@@ -59,4 +60,30 @@ export const isReady = createSelector(
 export const isBusy = createSelector(
   busy,
   (busy) => busy.length > 0
+)
+
+export const rules = createSelector(
+  fields,
+  (fields) => fields.reduce((rules,field) => ({
+    ...rules,
+    [field.name]: [
+      ...field.required ? ['required'] : [],
+      ...field.rules || []
+    ]
+  }), {})
+)
+
+
+export const validateResults = createSelector(
+  rules,
+  filtered,
+  (rules, filtered) => {
+    const results = Checkit(rules).validateSync(filtered)
+    return results[0] ? results[0].toJSON() : null
+  }
+)
+
+export const isValid = createSelector(
+  validateResults,
+  (validateResults) => validateResults === null
 )

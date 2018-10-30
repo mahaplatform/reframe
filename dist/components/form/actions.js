@@ -98,6 +98,13 @@ var submitForm = exports.submitForm = function submitForm(method, endpoint, body
   };
 };
 
+var validateForm = exports.validateForm = function validateForm(validateResults) {
+  return {
+    type: 'VALIDATE_FORM',
+    validateResults: validateResults
+  };
+};
+
 var reset = exports.reset = function reset() {
   return {
     type: 'RESET'

@@ -4,19 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var INITIAL_STATE = {
   records: null,
@@ -27,7 +23,7 @@ var INITIAL_STATE = {
 };
 
 var fetchRequest = function fetchRequest(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     request_id: action.request_id,
     status: status !== 'pending' && action.request.params.$page.skip === 0 ? 'loading' : 'refreshing'
   });
@@ -38,50 +34,50 @@ var fetchSuccess = function fetchSuccess(state, action) {
   if (!_lodash2.default.includes(['loading', 'refreshing', 'delayed'], state.status)) return state;
   var loaded = state.records ? state.records.length : 0;
   if (action.result.pagination.all !== undefined) {
-    return (0, _extends3.default)({}, state, {
+    return _extends({}, state, {
       all: action.result.pagination.all,
       request_id: null,
-      records: action.result.pagination.skip > 0 ? [].concat((0, _toConsumableArray3.default)(state.records || []), (0, _toConsumableArray3.default)(action.result.data)) : action.result.data,
+      records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records || []), _toConsumableArray(action.result.data)) : action.result.data,
       total: action.result.pagination.total,
       status: loaded + action.result.data.length >= action.result.pagination.total ? 'completed' : 'loaded'
     });
   } else if (action.result.pagination.next !== undefined) {
-    return (0, _extends3.default)({}, state, {
+    return _extends({}, state, {
       next: action.result.pagination.next,
       request_id: null,
-      records: action.result.pagination.skip > 0 ? [].concat((0, _toConsumableArray3.default)(state.records || []), (0, _toConsumableArray3.default)(action.result.data)) : action.result.data,
+      records: action.result.pagination.skip > 0 ? [].concat(_toConsumableArray(state.records || []), _toConsumableArray(action.result.data)) : action.result.data,
       status: action.result.pagination.next === null ? 'completed' : 'loaded'
     });
   }
 };
 
 var fetchFailure = function fetchFailure(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     status: 'failed'
   });
 };
 
 var fetchDelay = function fetchDelay(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     status: 'delayed'
   });
 };
 
 var fetchTimeout = function fetchTimeout(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     status: 'timeout'
   });
 };
 
 var select = function select(state, action) {
-  var selected = !_lodash2.default.includes(state.selected, action.id) ? [].concat((0, _toConsumableArray3.default)(state.selected), [action.id]) : state.selected.filter(function (id) {
+  var selected = !_lodash2.default.includes(state.selected, action.id) ? [].concat(_toConsumableArray(state.selected), [action.id]) : state.selected.filter(function (id) {
     return id !== action.id;
   });
   var all = state.records ? state.records.map(function (record) {
     return record.id;
   }) : [];
   var selectAll = _lodash2.default.isEqual(all.sort(), selected.sort());
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     selectAll: selectAll,
     selected: selected
   });
@@ -92,7 +88,7 @@ var selectAll = function selectAll(state, action) {
     return record.id;
   }) : [];
   var selectAll = !_lodash2.default.isEqual(all.sort(), state.selected.sort());
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     selectAll: selectAll,
     selected: selectAll ? all : []
   });

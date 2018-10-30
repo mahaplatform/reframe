@@ -4,11 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var INITIAL_STATE = {
   columns: [],
@@ -26,32 +22,32 @@ var INITIAL_STATE = {
 };
 
 var setParams = function setParams(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     filter: action.filter,
     sort: action.sort
   });
 };
 
 var setColumns = function setColumns(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     columns: action.columns
   });
 };
 
 var setSelected = function setSelected(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     selected: action.selected
   });
 };
 
 var filter = function filter(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     filter: action.filter
   });
 };
 
 var sort = function sort(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     sort: {
       key: action.key,
       order: state.sort.key == action.key && state.sort.order == 'asc' ? 'desc' : 'asc'
@@ -60,44 +56,44 @@ var sort = function sort(state, action) {
 };
 
 var setRecords = function setRecords(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     records: action.records
   });
 };
 
 var setFilter = function setFilter(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     filter: action.filter
   });
 };
 
 var setQuery = function setQuery(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     q: action.q
   });
 };
 
 var toggleTasks = function toggleTasks(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     managing: !state.managing
   });
 };
 
 var addPanel = function addPanel(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     open: true,
     panel: action.panel
   });
 };
 
 var removePanel = function removePanel(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     open: false
   });
 };
 
 var clearPanel = function clearPanel(state, action) {
-  return (0, _extends3.default)({}, state, {
+  return _extends({}, state, {
     panel: null
   });
 };

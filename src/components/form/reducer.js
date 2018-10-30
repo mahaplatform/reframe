@@ -136,6 +136,14 @@ export default (state = INITIAL_STATE, action) => {
       message: action.result.meta.message
     }
 
+  case 'VALIDATE_FORM':
+    return {
+      ...state,
+      status: 'failure',
+      errors: action.validateResults,
+      message: 'The form has not passed validation.'
+    }
+
   default:
     return state
   }

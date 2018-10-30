@@ -70,6 +70,11 @@ export const submitForm = (method, endpoint, body) => ({
   failure: 'SUBMIT_FAILURE'
 })
 
+export const validateForm = (validateResults) => ({
+  type: 'VALIDATE_FORM',
+  validateResults
+})
+
 export const reset = () => ({
   type: 'RESET'
 })

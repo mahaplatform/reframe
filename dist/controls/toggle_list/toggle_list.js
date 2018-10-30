@@ -4,25 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _searchbox = require('../../components/searchbox');
 
@@ -58,15 +42,22 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var ToggleList = function (_React$Component) {
-  (0, _inherits3.default)(ToggleList, _React$Component);
+  _inherits(ToggleList, _React$Component);
 
   function ToggleList() {
-    (0, _classCallCheck3.default)(this, ToggleList);
-    return (0, _possibleConstructorReturn3.default)(this, (ToggleList.__proto__ || Object.getPrototypeOf(ToggleList)).apply(this, arguments));
+    _classCallCheck(this, ToggleList);
+
+    return _possibleConstructorReturn(this, (ToggleList.__proto__ || Object.getPrototypeOf(ToggleList)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(ToggleList, [{
+  _createClass(ToggleList, [{
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -117,7 +108,7 @@ var ToggleList = function (_React$Component) {
             })
           ),
           endpoint && _react2.default.createElement(_infinite2.default, this._getInfinite()),
-          options && _react2.default.createElement(_results2.default, (0, _extends3.default)({ records: options }, this._getResults()))
+          options && _react2.default.createElement(_results2.default, _extends({ records: options }, this._getResults()))
         )
       );
     }
@@ -194,7 +185,7 @@ var ToggleList = function (_React$Component) {
           chosen = _props6.chosen,
           query = _props6.query;
 
-      var filter = (0, _extends3.default)({}, defaultFilters, this.props.filter, {
+      var filter = _extends({}, defaultFilters, this.props.filter, {
         q: query
       });
       return {
@@ -203,7 +194,7 @@ var ToggleList = function (_React$Component) {
         filter: filter,
         chosen: chosen,
         layout: function layout(props) {
-          return _react2.default.createElement(_results2.default, (0, _extends3.default)({}, _this3._getResults(), props));
+          return _react2.default.createElement(_results2.default, _extends({}, _this3._getResults(), props));
         }
       };
     }
@@ -261,6 +252,7 @@ var ToggleList = function (_React$Component) {
       if (onToggleRecord) onToggleRecord(multiple, record);
     }
   }]);
+
   return ToggleList;
 }(_react2.default.Component);
 
