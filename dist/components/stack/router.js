@@ -92,15 +92,13 @@ var RouterStack = function (_React$Component) {
           }, 50);
         } else if (action === 'pop') {
           this.setState({ mounted: mounted - 1 });
-          setTimeout(this._handlePop.bind(this), 500);
+          setTimeout(this._handlePop.bind(this), 50);
         }
       }
     }
   }, {
     key: 'getChildContext',
     value: function getChildContext() {
-      var cards = this.state.cards;
-
       return {
         stack: {
           push: this._handlePush.bind(this),

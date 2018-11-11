@@ -48,13 +48,12 @@ class RouterStack extends React.Component {
         setTimeout(() => this.setState({ mounted: mounted + 1 }), 50)
       } else if(action === 'pop') {
         this.setState({ mounted: mounted - 1 })
-        setTimeout(this._handlePop.bind(this), 500)
+        setTimeout(this._handlePop.bind(this), 50)
       }
     }
   }
 
   getChildContext() {
-    const { cards } = this.state
     return {
       stack: {
         push: this._handlePush.bind(this),
