@@ -85,9 +85,13 @@ body {
 .scale(@x) {
   transform: scale(@x);
 }
-.scrollable {
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
+
+.scrollable() {
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
 	&::-webkit-scrollbar-track {
 	  background: fadeout(@black, 92) !important;
 	}
@@ -98,6 +102,13 @@ body {
 	  width: 6px !important;
 	  height: 6px !important;
 	}
+}
+
+.unselectable() {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .scrollable-x {
 	overflow-x: scroll;

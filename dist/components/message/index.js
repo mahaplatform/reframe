@@ -30,9 +30,19 @@ var Message = function (_React$Component) {
   _inherits(Message, _React$Component);
 
   function Message() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Message);
 
-    return _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Message.__proto__ || Object.getPrototypeOf(Message)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      animate: false
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Message, [{
@@ -82,15 +92,29 @@ var Message = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (!this.props.animation) return;
+      setTimeout(function () {
+        _this2.setState({ animate: true });
+        setTimeout(function () {
+          _this2.setState({ animate: false });
+        }, 500);
+      }, 500);
+    }
+  }, {
     key: '_getIconClass',
     value: function _getIconClass() {
+      var animate = this.state.animate;
       var _props2 = this.props,
           animation = _props2.animation,
           color = _props2.color,
           icon = _props2.icon;
 
       var classes = ['fa', 'fa-' + icon];
-      if (animation) classes.push('animated ' + animation);
+      if (animate && animation) classes.push('animated ' + animation);
       if (color) classes.push(color);
       return classes.join(' ');
     }

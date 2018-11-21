@@ -24,6 +24,10 @@ class Message extends React.Component {
     color: null
   }
 
+  state = {
+    animate: false
+  }
+
   render() {
     const { button, component, icon, image, text, title } = this.props
     return (
@@ -50,10 +54,21 @@ class Message extends React.Component {
     )
   }
 
+  componentDidMount() {
+    if(!this.props.animation) return
+    setTimeout(() => {
+      this.setState({ animate: true })
+      setTimeout(() => {
+        this.setState({ animate: false })
+      }, 500)
+    }, 500)
+  }
+
   _getIconClass() {
+    const { animate } = this.state
     const { animation, color, icon } = this.props
     const classes = ['fa', `fa-${icon}`]
-    if(animation) classes.push(`animated ${animation}`)
+    if(animate && animation) classes.push(`animated ${animation}`)
     if(color) classes.push(color)
     return classes.join(' ')
   }
