@@ -7,7 +7,10 @@ class ModalPanel extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     className: PropTypes.string,
+    color: PropTypes.string,
+    leftEnabled: PropTypes.bool,
     leftItems: PropTypes.array,
+    rightEnabled: PropTypes.bool,
     rightItems: PropTypes.array,
     position: PropTypes.string,
     title: PropTypes.string
@@ -22,7 +25,7 @@ class ModalPanel extends React.Component {
     return (
       <div className={ this._getClass() }>
         { position === 'top' &&
-          <div className="reframe-modal-panel-header">
+          <div className={ this._getHeaderClass() }>
             { leftItems &&
               <div className="reframe-modal-panel-header-navigation">
                 { leftItems.map((item,index) => (
@@ -39,7 +42,7 @@ class ModalPanel extends React.Component {
               <div className="reframe-modal-panel-header-navigation">
                 { rightItems.map((item,index) => (
                   <div key={`right_${index}`} className="reframe-modal-panel-header-navigation-item" onClick={ item.handler }>
-                  { this._getElement(item) }
+                    { this._getElement(item) }
                   </div>
                 )) }
               </div>
@@ -79,6 +82,13 @@ class ModalPanel extends React.Component {
     const { className } = this.props
     const classes = ['reframe-modal-panel']
     if(className) classes.push(className)
+    return classes.join(' ')
+  }
+
+  _getHeaderClass() {
+    const { color } = this.props
+    const classes = ['reframe-modal-panel-header']
+    if(color) classes.push(color)
     return classes.join(' ')
   }
 
