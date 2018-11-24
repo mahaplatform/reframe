@@ -51,7 +51,7 @@ var ModalPanel = function (_React$Component) {
         { className: this._getClass() },
         position === 'top' && _react2.default.createElement(
           'div',
-          { className: this._getHeaderClass() },
+          { className: 'reframe-modal-panel-header' },
           leftItems && _react2.default.createElement(
             'div',
             { className: 'reframe-modal-panel-header-navigation' },
@@ -116,18 +116,12 @@ var ModalPanel = function (_React$Component) {
   }, {
     key: '_getClass',
     value: function _getClass() {
-      var className = this.props.className;
+      var _props2 = this.props,
+          className = _props2.className,
+          color = _props2.color;
 
       var classes = ['reframe-modal-panel'];
       if (className) classes.push(className);
-      return classes.join(' ');
-    }
-  }, {
-    key: '_getHeaderClass',
-    value: function _getHeaderClass() {
-      var color = this.props.color;
-
-      var classes = ['reframe-modal-panel-header'];
       if (color) classes.push(color);
       return classes.join(' ');
     }
