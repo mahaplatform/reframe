@@ -33,7 +33,7 @@ class EmailField extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.value !== prevState.value) {
-      this.props.onChange(this.state)
+      this.props.onChange(this.state.value)
     }
   }
 

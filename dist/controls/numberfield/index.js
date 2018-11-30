@@ -72,7 +72,7 @@ var NumberField = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       if (this.state.value !== prevState.value) {
-        this.props.onChange(this.state);
+        this.props.onChange(this.state.value);
       }
     }
   }, {
