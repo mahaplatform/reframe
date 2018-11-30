@@ -59,9 +59,9 @@ var Item = function (_React$Component) {
           units = _props.units;
 
       if (this.props.if === false) return null;
-      var item = _react2.default.createElement(
+      return _react2.default.createElement(
         'div',
-        { className: this._getClass() },
+        { className: this._getClass(), onClick: this._handleClick.bind(this) },
         icon && _react2.default.createElement(
           'div',
           { className: 'reframe-list-item-icon' },
@@ -112,11 +112,6 @@ var Item = function (_React$Component) {
           { className: 'reframe-list-item-proceed', onClick: this._handleTasks.bind(this) },
           _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v' })
         )
-      );
-      return _react2.default.createElement(
-        'div',
-        { onClick: this._handleClick.bind(this) },
-        item
       );
     }
   }, {

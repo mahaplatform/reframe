@@ -13,8 +13,8 @@ class Item extends React.Component {
   render() {
     const { alt, component, content, empty, extra, format, handler, icon, label, link, tasks, units } = this.props
     if(this.props.if === false) return null
-    const item = (
-      <div className={ this._getClass() }>
+    return (
+      <div className={ this._getClass() } onClick={ this._handleClick.bind(this) }>
         { icon &&
           <div className="reframe-list-item-icon">
             <i className={`fa fa-fw fa-${icon}`} />
@@ -53,7 +53,6 @@ class Item extends React.Component {
         }
       </div>
     )
-    return <div onClick={ this._handleClick.bind(this) }>{ item }</div>
   }
 
   _handleClick() {
