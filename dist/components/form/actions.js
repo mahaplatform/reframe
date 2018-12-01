@@ -10,6 +10,13 @@ var setSections = exports.setSections = function setSections(sections) {
   };
 };
 
+var updateSections = exports.updateSections = function updateSections(sections) {
+  return {
+    type: 'UPDATE_SECTIONS',
+    sections: sections
+  };
+};
+
 var fetchSections = exports.fetchSections = function fetchSections(endpoint) {
   return {
     type: 'API_REQUEST',
@@ -74,15 +81,6 @@ var updateData = exports.updateData = function updateData(key, value) {
     type: 'UPDATE_DATA',
     key: key,
     value: value
-  };
-};
-
-var updateField = exports.updateField = function updateField(sectionIndex, fieldIndex, field) {
-  return {
-    type: 'UPDATE_FIELD',
-    sectionIndex: sectionIndex,
-    fieldIndex: fieldIndex,
-    field: field
   };
 };
 

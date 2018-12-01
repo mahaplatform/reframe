@@ -34,6 +34,10 @@ class Fields extends React.Component {
     )
   }
 
+  componentDidMount() {
+    this.props.onReady()
+  }
+
   _getField(field) {
     const { onChange, onReady, onSubmit, onUpdateData } = this.props
     return {

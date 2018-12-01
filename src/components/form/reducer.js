@@ -22,6 +22,12 @@ export default (state = INITIAL_STATE, action) => {
       status: 'sections_loaded'
     }
 
+  case 'UPDATE_SECTIONS':
+    return {
+      ...state,
+      config: action.sections
+    }
+
   case 'RESET':
     return {
       ...state,

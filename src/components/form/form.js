@@ -35,7 +35,6 @@ class Form extends React.Component {
     ready: PropTypes.array,
     saveText: PropTypes.string,
     sections: PropTypes.array,
-    showModal: PropTypes.bool,
     status: PropTypes.string,
     title: PropTypes.string,
     validateResults: PropTypes.object,
@@ -54,8 +53,7 @@ class Form extends React.Component {
     onSuccess: PropTypes.func,
     onToggleBusy: PropTypes.func,
     onValidateForm: PropTypes.func,
-    onUpdateData: PropTypes.func,
-    onUpdateField: PropTypes.func
+    onUpdateData: PropTypes.func
   }
 
   static defaultProps = {
@@ -63,7 +61,6 @@ class Form extends React.Component {
     buttonPosition: 'top',
     cancelText: 'Cancel',
     saveText: 'Save',
-    showModal: true,
     onCancel: () => {},
     onChange: () => {},
     onChangeField: () => {},
@@ -75,7 +72,7 @@ class Form extends React.Component {
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
 
   render() {
-    const { after, before, config, instructions, panels, showModal, status } = this.props
+    const { after, before, config, instructions, panels, status } = this.props
     const configuring = _.includes(['pending', 'loading_sections','sections_loaded', 'loading_data'], status)
     return (
       <div className="reframe-form">
@@ -121,7 +118,9 @@ class Form extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { data, sections, status } = this.props
-    if(!_.isEqual(prevProps.sections, sections)) this._handleUpdateField(prevProps.sections)
+    if(!_.isEqual(prevProps.sections, sections)) {
+      this._handleUpdateSections()
+    }
     if(prevProps.status !== status) {
       if(status === 'sections_loaded') this._handleLoadData()
       if(status === 'validated') this._handleSubmit()
@@ -188,16 +187,22 @@ class Form extends React.Component {
     }
   }
 
-  _handlePop(num = 1) {
-    this.props.onPop(num)
-  }
-
-  _handlePush(component) {
-    this.props.onPush(component)
-  }
-
   _handleCancel() {
     this.props.onCancel()
+  }
+
+  _handleChange(previous, current) {
+    const { onChangeField, onChange } = this.props
+    if(onChangeField) {
+      _.forOwn(current, (value, code) => {
+        if(previous[code] != current[code]) onChangeField(code, value)
+      })
+    }
+    if(onChange) onChange(current)
+  }
+
+  _handleFailure() {
+    this.props.onFailure()
   }
 
   _handleLoadData() {
@@ -211,33 +216,16 @@ class Form extends React.Component {
     this.props.onSetReady(key)
   }
 
-  _handleUpdateField(prevSections) {
-    const { sections, onUpdateField } = this.props
-    sections.map((section, index) => {
-      if(_.isEqual(prevSections[index], sections[index])) return
-      sections[index].fields.map((field, fieldIndex) => {
-        if(_.isEqual(prevSections[index].fields[fieldIndex], sections[index].fields[fieldIndex])) return
-        onUpdateField(index, fieldIndex, field)
-      })
-    })
-  }
-
   _handleToggleBusy(key) {
     this.props.onToggleBusy(key)
   }
 
-  _handleUpdateData(key, value) {
-    this.props.onUpdateData(key, value)
+  _handlePop(num = 1) {
+    this.props.onPop(num)
   }
 
-  _handleChange(previous, current) {
-    const { onChangeField, onChange } = this.props
-    if(onChangeField) {
-      _.forOwn(current, (value, code) => {
-        if(previous[code] != current[code]) onChangeField(code, value)
-      })
-    }
-    if(onChange) onChange(current)
+  _handlePush(component) {
+    this.props.onPush(component)
   }
 
   _handleSubmit() {
@@ -256,10 +244,15 @@ class Form extends React.Component {
     this.props.onSuccess(this.props.entity)
   }
 
-  _handleFailure() {
-    this.props.onFailure()
+  _handleUpdateData(key, value) {
+    this.props.onUpdateData(key, value)
   }
 
+  _handleUpdateSections() {
+    const { sections, onUpdateSections } = this.props
+    onUpdateSections(sections)
+  }
+  
 }
 
 export default Form

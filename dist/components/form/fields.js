@@ -54,6 +54,11 @@ var Fields = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.onReady();
+    }
+  }, {
     key: '_getField',
     value: function _getField(field) {
       var _props = this.props,

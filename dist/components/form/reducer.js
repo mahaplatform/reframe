@@ -40,6 +40,11 @@ exports.default = function () {
         status: 'sections_loaded'
       });
 
+    case 'UPDATE_SECTIONS':
+      return _extends({}, state, {
+        config: action.sections
+      });
+
     case 'RESET':
       return _extends({}, state, {
         data: {}

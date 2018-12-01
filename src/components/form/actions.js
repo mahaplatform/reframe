@@ -3,6 +3,11 @@ export const setSections = (sections) => ({
   sections
 })
 
+export const updateSections = (sections) => ({
+  type: 'UPDATE_SECTIONS',
+  sections
+})
+
 export const fetchSections = (endpoint) => ({
   type: 'API_REQUEST',
   method: 'GET',
@@ -51,13 +56,6 @@ export const updateData = (key, value) => ({
   type: 'UPDATE_DATA',
   key,
   value
-})
-
-export const updateField = (sectionIndex, fieldIndex, field) => ({
-  type: 'UPDATE_FIELD',
-  sectionIndex,
-  fieldIndex,
-  field
 })
 
 export const submitForm = (method, endpoint, body) => ({

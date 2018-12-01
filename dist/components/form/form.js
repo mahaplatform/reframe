@@ -66,7 +66,6 @@ var Form = function (_React$Component) {
           config = _props.config,
           instructions = _props.instructions,
           panels = _props.panels,
-          showModal = _props.showModal,
           status = _props.status;
 
       var configuring = _lodash2.default.includes(['pending', 'loading_sections', 'sections_loaded', 'loading_data'], status);
@@ -145,7 +144,9 @@ var Form = function (_React$Component) {
           sections = _props3.sections,
           status = _props3.status;
 
-      if (!_lodash2.default.isEqual(prevProps.sections, sections)) this._handleUpdateField(prevProps.sections);
+      if (!_lodash2.default.isEqual(prevProps.sections, sections)) {
+        this._handleUpdateSections();
+      }
       if (prevProps.status !== status) {
         if (status === 'sections_loaded') this._handleLoadData();
         if (status === 'validated') this._handleSubmit();
@@ -224,6 +225,54 @@ var Form = function (_React$Component) {
       });
     }
   }, {
+    key: '_handleCancel',
+    value: function _handleCancel() {
+      this.props.onCancel();
+    }
+  }, {
+    key: '_handleChange',
+    value: function _handleChange(previous, current) {
+      var _props7 = this.props,
+          onChangeField = _props7.onChangeField,
+          onChange = _props7.onChange;
+
+      if (onChangeField) {
+        _lodash2.default.forOwn(current, function (value, code) {
+          if (previous[code] != current[code]) onChangeField(code, value);
+        });
+      }
+      if (onChange) onChange(current);
+    }
+  }, {
+    key: '_handleFailure',
+    value: function _handleFailure() {
+      this.props.onFailure();
+    }
+  }, {
+    key: '_handleLoadData',
+    value: function _handleLoadData() {
+      var _props8 = this.props,
+          data = _props8.data,
+          defaults = _props8.defaults,
+          endpoint = _props8.endpoint,
+          onFetchData = _props8.onFetchData,
+          onSetData = _props8.onSetData;
+
+      if (Object.keys(data).length > 1) return onSetData(data);
+      if (endpoint) return onFetchData(endpoint, defaults);
+      onSetData(defaults);
+    }
+  }, {
+    key: '_handleSetReady',
+    value: function _handleSetReady(key) {
+      this.props.onSetReady(key);
+    }
+  }, {
+    key: '_handleToggleBusy',
+    value: function _handleToggleBusy(key) {
+      this.props.onToggleBusy(key);
+    }
+  }, {
     key: '_handlePop',
     value: function _handlePop() {
       var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
@@ -236,81 +285,18 @@ var Form = function (_React$Component) {
       this.props.onPush(component);
     }
   }, {
-    key: '_handleCancel',
-    value: function _handleCancel() {
-      this.props.onCancel();
-    }
-  }, {
-    key: '_handleLoadData',
-    value: function _handleLoadData() {
-      var _props7 = this.props,
-          data = _props7.data,
-          defaults = _props7.defaults,
-          endpoint = _props7.endpoint,
-          onFetchData = _props7.onFetchData,
-          onSetData = _props7.onSetData;
-
-      if (Object.keys(data).length > 1) return onSetData(data);
-      if (endpoint) return onFetchData(endpoint, defaults);
-      onSetData(defaults);
-    }
-  }, {
-    key: '_handleSetReady',
-    value: function _handleSetReady(key) {
-      this.props.onSetReady(key);
-    }
-  }, {
-    key: '_handleUpdateField',
-    value: function _handleUpdateField(prevSections) {
-      var _props8 = this.props,
-          sections = _props8.sections,
-          onUpdateField = _props8.onUpdateField;
-
-      sections.map(function (section, index) {
-        if (_lodash2.default.isEqual(prevSections[index], sections[index])) return;
-        sections[index].fields.map(function (field, fieldIndex) {
-          if (_lodash2.default.isEqual(prevSections[index].fields[fieldIndex], sections[index].fields[fieldIndex])) return;
-          onUpdateField(index, fieldIndex, field);
-        });
-      });
-    }
-  }, {
-    key: '_handleToggleBusy',
-    value: function _handleToggleBusy(key) {
-      this.props.onToggleBusy(key);
-    }
-  }, {
-    key: '_handleUpdateData',
-    value: function _handleUpdateData(key, value) {
-      this.props.onUpdateData(key, value);
-    }
-  }, {
-    key: '_handleChange',
-    value: function _handleChange(previous, current) {
-      var _props9 = this.props,
-          onChangeField = _props9.onChangeField,
-          onChange = _props9.onChange;
-
-      if (onChangeField) {
-        _lodash2.default.forOwn(current, function (value, code) {
-          if (previous[code] != current[code]) onChangeField(code, value);
-        });
-      }
-      if (onChange) onChange(current);
-    }
-  }, {
     key: '_handleSubmit',
     value: function _handleSubmit() {
-      var _props10 = this.props,
-          action = _props10.action,
-          filtered = _props10.filtered,
-          isBusy = _props10.isBusy,
-          isValid = _props10.isValid,
-          method = _props10.method,
-          onSubmit = _props10.onSubmit,
-          onSubmitForm = _props10.onSubmitForm,
-          onValidateForm = _props10.onValidateForm,
-          validateResults = _props10.validateResults;
+      var _props9 = this.props,
+          action = _props9.action,
+          filtered = _props9.filtered,
+          isBusy = _props9.isBusy,
+          isValid = _props9.isValid,
+          method = _props9.method,
+          onSubmit = _props9.onSubmit,
+          onSubmitForm = _props9.onSubmitForm,
+          onValidateForm = _props9.onValidateForm,
+          validateResults = _props9.validateResults;
 
       if (isBusy) return;
       if (!isValid) return onValidateForm(validateResults);
@@ -327,9 +313,18 @@ var Form = function (_React$Component) {
       this.props.onSuccess(this.props.entity);
     }
   }, {
-    key: '_handleFailure',
-    value: function _handleFailure() {
-      this.props.onFailure();
+    key: '_handleUpdateData',
+    value: function _handleUpdateData(key, value) {
+      this.props.onUpdateData(key, value);
+    }
+  }, {
+    key: '_handleUpdateSections',
+    value: function _handleUpdateSections() {
+      var _props10 = this.props,
+          sections = _props10.sections,
+          onUpdateSections = _props10.onUpdateSections;
+
+      onUpdateSections(sections);
     }
   }]);
 
@@ -363,7 +358,6 @@ Form.propTypes = {
   ready: _propTypes2.default.array,
   saveText: _propTypes2.default.string,
   sections: _propTypes2.default.array,
-  showModal: _propTypes2.default.bool,
   status: _propTypes2.default.string,
   title: _propTypes2.default.string,
   validateResults: _propTypes2.default.object,
@@ -382,15 +376,13 @@ Form.propTypes = {
   onSuccess: _propTypes2.default.func,
   onToggleBusy: _propTypes2.default.func,
   onValidateForm: _propTypes2.default.func,
-  onUpdateData: _propTypes2.default.func,
-  onUpdateField: _propTypes2.default.func
+  onUpdateData: _propTypes2.default.func
 };
 Form.defaultProps = {
   method: 'GET',
   buttonPosition: 'top',
   cancelText: 'Cancel',
   saveText: 'Save',
-  showModal: true,
   onCancel: function onCancel() {},
   onChange: function onChange() {},
   onChangeField: function onChangeField() {},
