@@ -8,15 +8,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _reactDndHtml5Backend = require('react-dnd-html5-backend');
-
-var _reactDndHtml5Backend2 = _interopRequireDefault(_reactDndHtml5Backend);
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactDnd = require('react-dnd');
 
 var _react = require('react');
 
@@ -111,4 +105,4 @@ var SortableList = function (_React$Component) {
   return SortableList;
 }(_react2.default.Component);
 
-exports.default = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default)(SortableList);
+exports.default = SortableList;

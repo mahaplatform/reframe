@@ -7,18 +7,14 @@ class Fields extends React.Component {
   static propTypes = {
     fields: PropTypes.array,
     onBusy: PropTypes.func,
-    onChange: PropTypes.func,
     onReady: PropTypes.func,
-    onSubmit: PropTypes.func,
     onUpdateData: PropTypes.func
   }
 
   static defaultProps = {
     fields: [],
     onBusy: () => {},
-    onChange: () => {},
     onReady: () => {},
-    onSubmit: () => {},
     onUpdateData: () => {}
   }
 
@@ -39,12 +35,11 @@ class Fields extends React.Component {
   }
 
   _getField(field) {
-    const { onChange, onReady, onSubmit, onUpdateData } = this.props
+    const { onBusy, onReady, onUpdateData } = this.props
     return {
       ...field,
-      onChange,
+      onBusy,
       onReady,
-      onSubmit,
       onUpdateData
     }
 

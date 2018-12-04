@@ -16,7 +16,7 @@ class Field extends React.Component {
     include: PropTypes.bool,
     instructions: PropTypes.string,
     label: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     options: PropTypes.array,
     required: PropTypes.bool,
     tabIndex: PropTypes.number,
@@ -27,7 +27,6 @@ class Field extends React.Component {
     show: PropTypes.bool,
     onBusy: PropTypes.func,
     onReady: PropTypes.func,
-    onSubmit: PropTypes.func,
     onUpdateData: PropTypes.func
   }
 
@@ -44,6 +43,10 @@ class Field extends React.Component {
     onReady: () => {},
     onUpdateData: () => {}
   }
+
+  _handleBusy = this._handleBusy.bind(this)
+  _handleReady = this._handleReady.bind(this)
+  _handleUpdateData = this._handleUpdateData.bind(this)
 
   render() {
     const { include, instructions, label, show, type } = this.props
@@ -77,11 +80,11 @@ class Field extends React.Component {
   }
 
   _getFields() {
-    const { fields, onSubmit, onUpdateData } = this.props
+    const { fields, onBusy, onReady, onUpdateData } = this.props
     return {
       fields,
-      onChange: this._handleUpdateData.bind(this),
-      onSubmit,
+      onBusy,
+      onReady,
       onUpdateData
     }
   }
@@ -92,9 +95,9 @@ class Field extends React.Component {
     return {
       ...this.props,
       defaultValue,
-      onBusy: this._handleBusy.bind(this),
-      onChange: this._handleUpdateData.bind(this),
-      onReady: this._handleReady.bind(this)
+      onBusy: this._handleBusy,
+      onChange: this._handleUpdateData,
+      onReady: this._handleReady
     }
   }
 

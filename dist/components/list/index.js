@@ -8,6 +8,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _buttons = require('../buttons');
+
+var _buttons2 = _interopRequireDefault(_buttons);
+
 var _section = require('./section');
 
 var _section2 = _interopRequireDefault(_section);
@@ -42,6 +46,7 @@ var List = function (_React$Component) {
     value: function render() {
       var _props = this.props,
           alert = _props.alert,
+          buttons = _props.buttons,
           empty = _props.empty,
           footer = _props.footer,
           header = _props.header,
@@ -69,6 +74,11 @@ var List = function (_React$Component) {
           'div',
           { className: 'reframe-list-footer' },
           _lodash2.default.isFunction(footer) ? _react2.default.createElement(footer) : footer
+        ),
+        buttons && _react2.default.createElement(
+          'div',
+          { className: 'reframe-list-buttons' },
+          _react2.default.createElement(_buttons2.default, { buttons: buttons })
         )
       );
     }

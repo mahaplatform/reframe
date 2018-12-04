@@ -1,7 +1,7 @@
 {
   "name": "reframe",
   "description": "A collection of react components for rapidly prototyping and building responsive web applications",
-  "version": "0.28.0",
+  "version": "0.31.0",
   "license": "ISC",
   "author": "Greg Kops <greg@thinktopography.com>",
   "repository": "mahaplatform/mahaplatform",
@@ -59,8 +59,7 @@
     "numeral": "^2.0.6",
     "pluralize": "^5.0.0",
     "prop-types": "^15.5.8",
-    "react-dnd": "^2.5.3",
-    "react-dnd-html5-backend": "^2.5.3",
+    "react-dnd": "^7.0.2",
     "redux-rubberstamp": "1.11.0",
     "resumablejs": "^1.0.2"
   }

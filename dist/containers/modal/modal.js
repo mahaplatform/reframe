@@ -6,15 +6,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _reactTransitionGroup = require('react-transition-group');
 
-var _react2 = _interopRequireDefault(_react);
+var _modal_panel = require('../../components/modal_panel');
+
+var _modal_panel2 = _interopRequireDefault(_modal_panel);
+
+var _loader = require('../../components/loader');
+
+var _loader2 = _interopRequireDefault(_loader);
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactTransitionGroup = require('react-transition-group');
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _lodash = require('lodash');
 
@@ -50,22 +58,27 @@ var Modal = function (_React$Component) {
   _createClass(Modal, [{
     key: 'render',
     value: function render() {
-      var panels = this.props.panels;
+      var panels = this.state.panels;
       var children = this.props.children;
 
       return [children, _react2.default.createElement(
         _reactTransitionGroup.CSSTransition,
-        { key: 'reframe-modal-overlay', 'in': panels.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+        { key: 'reframe-modal-overlay', 'in': this.props.panels.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
         _react2.default.createElement('div', { className: 'reframe-modal-overlay', onClick: this._handleClose.bind(this) })
       ), _react2.default.createElement(
         _reactTransitionGroup.CSSTransition,
-        { key: 'reframe-modal-window', 'in': panels.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
+        { key: 'reframe-modal-window', 'in': this.props.panels.length > 0, classNames: 'expanded', timeout: 500, mountOnEnter: true, unmountOnExit: true },
         _react2.default.createElement(
           'div',
           { className: 'reframe-modal-window' },
+          panels.length === 0 && _react2.default.createElement(
+            _modal_panel2.default,
+            null,
+            _react2.default.createElement(_loader2.default, null)
+          ),
           _react2.default.createElement(
             _reactTransitionGroup.TransitionGroup,
-            null,
+            { component: null },
             panels.map(function (panel, index) {
               return _react2.default.createElement(
                 _reactTransitionGroup.CSSTransition,
@@ -84,12 +97,21 @@ var Modal = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
+      var _this2 = this;
+
       var panels = this.props.panels;
-      // if(panels.length > prevProps.panels.length) {
-      //   this.setState({ panels })
-      // } else if(panels.length < prevProps.panels.length) {
-      //   setTimeout(() => this.setState({ panels }), 500)
-      // }
+
+      if (panels.length > prevProps.panels.length) {
+        var timeout = prevProps.panels.length === 0 ? 500 : 0;
+        setTimeout(function () {
+          return _this2.setState({ panels: panels });
+        }, timeout);
+      } else if (panels.length < prevProps.panels.length) {
+        var _timeout = panels.length === 0 ? 500 : 0;
+        setTimeout(function () {
+          return _this2.setState({ panels: panels });
+        }, _timeout);
+      }
     }
   }, {
     key: 'getChildContext',
@@ -134,6 +156,7 @@ Modal.childContextTypes = {
   modal: _propTypes2.default.object
 };
 Modal.propTypes = {
+  children: _propTypes2.default.any,
   panels: _propTypes2.default.array,
   onClose: _propTypes2.default.func,
   onOpen: _propTypes2.default.func,

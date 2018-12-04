@@ -1,3 +1,4 @@
+import Buttons from '../buttons'
 import Section from './section'
 import React from 'react'
 import _ from 'lodash'
@@ -5,7 +6,7 @@ import _ from 'lodash'
 class List extends React.Component {
 
   render() {
-    const { alert, empty, footer, header, items, sections } = this.props
+    const { alert, buttons, empty, footer, header, items, sections } = this.props
     return (
       <div className={ this._getClasses() }>
         { header &&
@@ -31,10 +32,15 @@ class List extends React.Component {
             { _.isFunction(footer) ? React.createElement(footer) : footer }
           </div>
         }
+        { buttons &&
+          <div className="reframe-list-buttons">
+            <Buttons buttons={ buttons } />
+          </div>
+        }
       </div>
     )
   }
-  
+
   _getClasses() {
     const { className } = this.props
     const classes = ['reframe-list']

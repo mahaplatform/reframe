@@ -50,7 +50,6 @@ var Results = function (_React$Component) {
 
       var _props = this.props,
           format = _props.format,
-          multiple = _props.multiple,
           records = _props.records,
           text = _props.text;
 
@@ -61,7 +60,7 @@ var Results = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             { key: 'record_' + index, className: _this2._getRecordClass(record), onClick: _this2._handleToggleRecord.bind(_this2, record) },
-            multiple && _react2.default.createElement(
+            _react2.default.createElement(
               'div',
               { className: 'reframe-search-item-icon' },
               _react2.default.createElement('i', { className: 'fa fa-fw fa-' + _this2._getIcon(record) })
@@ -70,11 +69,6 @@ var Results = function (_React$Component) {
               'div',
               { className: 'reframe-search-item-label' },
               _react2.default.createElement(_format2.default, _extends({ format: format }, record, { value: _lodash2.default.get(record, text) }))
-            ),
-            !multiple && _react2.default.createElement(
-              'div',
-              { className: 'reframe-search-item-icon' },
-              _this2._getChecked(record) && _react2.default.createElement('i', { className: 'fa fa-fw fa-check' })
             )
           );
         })

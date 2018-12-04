@@ -1,6 +1,4 @@
-import HTML5Backend from 'react-dnd-html5-backend'
 import PropTypes from 'prop-types'
-import { DragDropContext } from 'react-dnd'
 import React from 'react'
 import Item from './item'
 import _ from 'lodash'
@@ -49,4 +47,4 @@ class SortableList extends React.Component {
 
 }
 
-export default DragDropContext(HTML5Backend)(SortableList)
+export default SortableList

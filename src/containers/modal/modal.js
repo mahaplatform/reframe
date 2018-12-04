@@ -1,6 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import ModalPanel from '../../components/modal_panel'
+import Loader from '../../components/loader'
+import PropTypes from 'prop-types'
+import React from 'react'
 import _ from 'lodash'
 
 class Modal extends React.Component {
@@ -10,6 +12,7 @@ class Modal extends React.Component {
   }
 
   static propTypes = {
+    children: PropTypes.any,
     panels: PropTypes.array,
     onClose: PropTypes.func,
     onOpen: PropTypes.func,
@@ -22,16 +25,21 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { panels } = this.props
+    const { panels } = this.state
     const { children } = this.props
     return ([
       children,
-      <CSSTransition key="reframe-modal-overlay" in={ panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="reframe-modal-overlay" in={ this.props.panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-modal-overlay" onClick={this._handleClose.bind(this)} />
       </CSSTransition>,
-      <CSSTransition key="reframe-modal-window" in={ panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
+      <CSSTransition key="reframe-modal-window" in={ this.props.panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-modal-window">
-          <TransitionGroup>
+          { panels.length === 0 &&
+            <ModalPanel>
+              <Loader />
+            </ModalPanel>
+          }
+          <TransitionGroup component={ null }>
             { panels.map((panel, index) => (
               <CSSTransition classNames={ index > 0 ? 'stack' : ''} timeout={ 500 } key={ `panel_${index}` }>
                 <div>
@@ -47,11 +55,13 @@ class Modal extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { panels } = this.props
-    // if(panels.length > prevProps.panels.length) {
-    //   this.setState({ panels })
-    // } else if(panels.length < prevProps.panels.length) {
-    //   setTimeout(() => this.setState({ panels }), 500)
-    // }
+    if(panels.length > prevProps.panels.length) {
+      const timeout = prevProps.panels.length === 0 ? 500 : 0
+      setTimeout(() => this.setState({ panels }), timeout)
+    } else if(panels.length < prevProps.panels.length) {
+      const timeout = panels.length === 0 ? 500 : 0
+      setTimeout(() => this.setState({ panels }), timeout)
+    }
   }
 
   getChildContext() {

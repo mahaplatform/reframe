@@ -40,9 +40,17 @@ var Field = function (_React$Component) {
   _inherits(Field, _React$Component);
 
   function Field() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Field);
 
-    return _possibleConstructorReturn(this, (Field.__proto__ || Object.getPrototypeOf(Field)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Field.__proto__ || Object.getPrototypeOf(Field)).call.apply(_ref, [this].concat(args))), _this), _this._handleBusy = _this._handleBusy.bind(_this), _this._handleReady = _this._handleReady.bind(_this), _this._handleUpdateData = _this._handleUpdateData.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Field, [{
@@ -103,13 +111,14 @@ var Field = function (_React$Component) {
     value: function _getFields() {
       var _props3 = this.props,
           fields = _props3.fields,
-          onSubmit = _props3.onSubmit,
+          onBusy = _props3.onBusy,
+          onReady = _props3.onReady,
           onUpdateData = _props3.onUpdateData;
 
       return {
         fields: fields,
-        onChange: this._handleUpdateData.bind(this),
-        onSubmit: onSubmit,
+        onBusy: onBusy,
+        onReady: onReady,
         onUpdateData: onUpdateData
       };
     }
@@ -123,9 +132,9 @@ var Field = function (_React$Component) {
       var defaultValue = _lodash2.default.get(data, name);
       return _extends({}, this.props, {
         defaultValue: defaultValue,
-        onBusy: this._handleBusy.bind(this),
-        onChange: this._handleUpdateData.bind(this),
-        onReady: this._handleReady.bind(this)
+        onBusy: this._handleBusy,
+        onChange: this._handleUpdateData,
+        onReady: this._handleReady
       });
     }
   }, {
@@ -158,7 +167,7 @@ Field.propTypes = {
   include: _propTypes2.default.bool,
   instructions: _propTypes2.default.string,
   label: _propTypes2.default.string,
-  name: _propTypes2.default.string.isRequired,
+  name: _propTypes2.default.string,
   options: _propTypes2.default.array,
   required: _propTypes2.default.bool,
   tabIndex: _propTypes2.default.number,
@@ -166,7 +175,6 @@ Field.propTypes = {
   show: _propTypes2.default.bool,
   onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
-  onSubmit: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Field.defaultProps = {

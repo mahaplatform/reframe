@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.RadioGroup = exports.PhoneField = exports.Password = exports.NumberField = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.EmailField = exports.Dropdown = exports.DateField = exports.ColorField = exports.CheckboxGroup = exports.Checkbox = exports.AddressField = undefined;
+exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.TableField = exports.RadioGroup = exports.PhoneField = exports.Password = exports.NumberField = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.EmailField = exports.Dropdown = exports.DateField = exports.ColorField = exports.CheckboxGroup = exports.Checkbox = exports.AddressField = undefined;
 
 var _addressfield = require('./addressfield');
 
@@ -69,6 +69,10 @@ var _radio_group = require('./select/radio_group');
 
 var _radio_group2 = _interopRequireDefault(_radio_group);
 
+var _tablefield = require('./tablefield');
+
+var _tablefield2 = _interopRequireDefault(_tablefield);
+
 var _text = require('./text');
 
 var _text2 = _interopRequireDefault(_text);
@@ -115,6 +119,7 @@ exports.NumberField = _numberfield2.default;
 exports.Password = _password2.default;
 exports.PhoneField = _phonefield2.default;
 exports.RadioGroup = _radio_group2.default;
+exports.TableField = _tablefield2.default;
 exports.Text = _text2.default;
 exports.TextArea = _textarea2.default;
 exports.TextField = _textfield2.default;

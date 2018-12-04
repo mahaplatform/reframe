@@ -1,0 +1,60 @@
+.reframe-tablefield {
+  border: 1px solid fadeout(@black, 90);
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5em;
+  input {
+    border: none !important;
+    background: none !important;
+    padding: 0.8em !important;
+    line-height: 1.8em !important;
+  }
+}
+.reframe-tablefield-header {
+  .reframe-tablefield-row {
+    background-color: fadeout(@black, 97);
+  }
+  .reframe-tablefield-column {
+    padding: 0.8em;
+    font-weight: bold;
+  }
+}
+.reframe-tablefield-body {
+  .reframe-tablefield-row {
+    background-color: @white;
+  }
+}
+
+.reframe-tablefield-row {
+  flex: 1;
+  display: flex;
+  border-bottom: 1px solid fadeout(@black, 90);
+  &.dragging .reframe-tablefield-handle {
+    cursor: grabbing;
+  }
+}
+.reframe-tablefield-handle {
+  flex: 0 0 3em;
+  border-right: 1px solid fadeout(@black, 90);
+  padding: 0.8em;
+  cursor: grab;
+  color: fadeout(@black, 70);
+  .hover(color, fadeout(@black, 40));
+}
+.reframe-tablefield-actions {
+  flex: 0 0 3em;
+  padding: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  color: fadeout(@black, 70);
+  .hover(color, fadeout(@black, 40));
+}
+.reframe-tablefield-column {
+  flex: 1;
+  border-right: 1px solid fadeout(@black, 90);
+}
+.reframe-tablefield-footer {
+  .reframe-tablefield-row {
+    border: none;
+  }
+}
