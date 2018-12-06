@@ -1,0 +1,58 @@
+.reframe-videofield {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid fadeout(@black, 95);
+  border-radius: 0.5em;
+  background-color: fadeout(@black, 97);
+  overflow: hidden;
+}
+.reframe-videofield-body {
+  border-bottom: 1px solid fadeout(@black, 95);
+}
+.reframe-videofield-footer {
+  padding: 0.4em;
+}
+.reframe-videofield-player {
+  position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+  width: 100%;
+  iframe {
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  }
+}
+
+.reframe-videofield-picker {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.reframe-videofield-picker-header {
+  background-color: fadeout(@black, 97);
+  border-bottom: 1px solid fadeout(@black, 95);
+  input {
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0.8em;
+    width: 100%;
+    outline: none!important;
+    font-size: 1em!important;
+    line-height: 1.6em !important;
+    color: fadeout(@black, 60) !important;
+  }
+
+}
+.reframe-videofield-picker-body {
+  flex: 1;
+  display: flex;
+  .reframe-videofield-player {
+    margin: auto 0.8em;
+  }
+}

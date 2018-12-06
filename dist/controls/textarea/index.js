@@ -29,52 +29,87 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var TextArea = function (_React$Component) {
   _inherits(TextArea, _React$Component);
 
-  function TextArea(props) {
+  function TextArea() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, TextArea);
 
-    var _this = _possibleConstructorReturn(this, (TextArea.__proto__ || Object.getPrototypeOf(TextArea)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
-      value: props.defaultValue ? _lodash2.default.toString(props.defaultValue) : null
-    };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TextArea.__proto__ || Object.getPrototypeOf(TextArea)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: ''
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(TextArea, [{
     key: 'render',
     value: function render() {
+      var value = this.state.value;
+      var maxLength = this.props.maxLength;
+
       return _react2.default.createElement(
         'div',
-        { className: 'textarea' },
+        { className: 'reframe-textarea' },
+        maxLength && _react2.default.createElement(
+          'div',
+          { className: this._getMaxClass() },
+          value.length,
+          ' / ',
+          maxLength
+        ),
         _react2.default.createElement('textarea', this._getTextarea())
       );
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.onReady();
+      var _props = this.props,
+          defaultValue = _props.defaultValue,
+          onReady = _props.onReady;
+
+      if (defaultValue) this.setState({
+        value: _lodash2.default.toString(defaultValue)
+      });
+      onReady();
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.defaultValue != this.props.defaultValue) {
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (this.props.defaultValue !== prevProps.defaultValue) {
         this.setValue(this.props.defaultValue);
       }
+      if (this.state.value !== prevState.value) {
+        this.props.onChange(this.state.value);
+      }
+    }
+  }, {
+    key: '_getMaxClass',
+    value: function _getMaxClass() {
+      var value = this.state.value;
+      var maxLength = this.props.maxLength;
+
+      var classes = ['reframe-textarea-length'];
+      if (value.length >= maxLength) classes.push('max');
+      return classes.join(' ');
     }
   }, {
     key: '_getTextarea',
     value: function _getTextarea() {
-      var _props = this.props,
-          placeholder = _props.placeholder,
-          disabled = _props.disabled,
-          rows = _props.rows,
-          tabIndex = _props.tabIndex;
+      var _props2 = this.props,
+          placeholder = _props2.placeholder,
+          disabled = _props2.disabled,
+          rows = _props2.rows,
+          tabIndex = _props2.tabIndex;
       var value = this.state.value;
 
       return {
         placeholder: placeholder,
         disabled: disabled,
-        defaultValue: value,
+        value: value,
         rows: rows,
         tabIndex: tabIndex,
         onChange: this._handleChange.bind(this)
@@ -84,14 +119,12 @@ var TextArea = function (_React$Component) {
     key: '_handleChange',
     value: function _handleChange(event) {
       this.setValue(event.target.value);
-      this.props.onChange(event.target.value);
     }
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      if (this.props.maxLength && value.length <= this.props.maxLength) {
-        this.setState({ value: value });
-      }
+      if (this.props.maxLength && value.length > this.props.maxLength) return;
+      this.setState({ value: value });
     }
   }]);
 

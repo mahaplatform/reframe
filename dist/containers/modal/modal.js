@@ -71,25 +71,29 @@ var Modal = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'reframe-modal-window' },
-          panels.length === 0 && _react2.default.createElement(
-            _modal_panel2.default,
-            null,
-            _react2.default.createElement(_loader2.default, null)
-          ),
           _react2.default.createElement(
-            _reactTransitionGroup.TransitionGroup,
-            { component: null },
-            panels.map(function (panel, index) {
-              return _react2.default.createElement(
-                _reactTransitionGroup.CSSTransition,
-                { classNames: index > 0 ? 'stack' : '', timeout: 500, key: 'panel_' + index },
-                _react2.default.createElement(
-                  'div',
-                  null,
-                  _lodash2.default.isFunction(panel) ? _react2.default.createElement(panel) : panel
-                )
-              );
-            })
+            'div',
+            { className: 'reframe-modal-window-container' },
+            panels.length === 0 && _react2.default.createElement(
+              _modal_panel2.default,
+              null,
+              _react2.default.createElement(_loader2.default, null)
+            ),
+            _react2.default.createElement(
+              _reactTransitionGroup.TransitionGroup,
+              { component: null },
+              panels.map(function (panel, index) {
+                return _react2.default.createElement(
+                  _reactTransitionGroup.CSSTransition,
+                  { component: null, classNames: index > 0 ? 'stack' : '', timeout: 500, key: 'panel_' + index },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'reframe-modal-window-panel' },
+                    _lodash2.default.isFunction(panel) ? _react2.default.createElement(panel) : panel
+                  )
+                );
+              })
+            )
           )
         )
       )];
@@ -101,16 +105,11 @@ var Modal = function (_React$Component) {
 
       var panels = this.props.panels;
 
-      if (panels.length > prevProps.panels.length) {
+      if (panels.length !== prevProps.panels.length) {
         var timeout = prevProps.panels.length === 0 ? 500 : 0;
         setTimeout(function () {
           return _this2.setState({ panels: panels });
         }, timeout);
-      } else if (panels.length < prevProps.panels.length) {
-        var _timeout = panels.length === 0 ? 500 : 0;
-        setTimeout(function () {
-          return _this2.setState({ panels: panels });
-        }, _timeout);
       }
     }
   }, {

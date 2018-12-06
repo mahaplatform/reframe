@@ -51,8 +51,13 @@ class Password extends React.Component {
 
   render() {
     return (
-      <div className="password">
-        <input { ...this._getInput() } />
+      <div className="reframe-password">
+        <div className="reframe-password-input">
+          <input { ...this._getInput() } />
+        </div>
+        <div className="reframe-password-icon">
+          <i className="fa fa-fw fa-check-circle" />
+        </div>
       </div>
     )
   }

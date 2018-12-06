@@ -52,7 +52,7 @@ var Form = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Form.__proto__ || Object.getPrototypeOf(Form)).call.apply(_ref, [this].concat(args))), _this), _this._debouncedSubmit = _lodash2.default.debounce(_this._handleSubmit.bind(_this), 2500, { leading: true }), _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Form.__proto__ || Object.getPrototypeOf(Form)).call.apply(_ref, [this].concat(args))), _this), _this.form = null, _this._debouncedSubmit = _lodash2.default.debounce(_this._handleSubmit.bind(_this), 2500, { leading: true }), _this._handleScrollTo = _this._handleScrollTo.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Form, [{
@@ -77,7 +77,9 @@ var Form = function (_React$Component) {
           this._getPanel(),
           _react2.default.createElement(
             'div',
-            { className: this._getFormClasses() },
+            { className: this._getFormClasses(), ref: function ref(node) {
+                return _this2.form = node;
+              } },
             (before || instructions) && _react2.default.createElement(
               'div',
               { className: 'reframe-form-header' },
@@ -218,6 +220,7 @@ var Form = function (_React$Component) {
         data: data,
         errors: errors,
         tabIndexStart: tabIndexStart,
+        onScrollTo: this._handleScrollTo.bind(this),
         onBusy: this._handleToggleBusy.bind(this),
         onReady: this._handleSetReady.bind(this),
         onSubmit: this._handleSubmit.bind(this),
@@ -325,6 +328,13 @@ var Form = function (_React$Component) {
           onUpdateSections = _props10.onUpdateSections;
 
       onUpdateSections(sections);
+    }
+  }, {
+    key: '_handleScrollTo',
+    value: function _handleScrollTo(bottom) {
+      console.log(bottom, this.form.offsetHeight + this.form.scrollTop);
+      if (bottom <= this.form.offsetHeight + this.form.scrollTop) return;
+      this.form.scrollTop = bottom - this.form.offsetHeight + 16;
     }
   }]);
 

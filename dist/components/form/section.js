@@ -95,6 +95,7 @@ var Section = function (_React$Component) {
           tabIndexStart = _props2.tabIndexStart,
           onBusy = _props2.onBusy,
           onReady = _props2.onReady,
+          onScrollTo = _props2.onScrollTo,
           onSubmit = _props2.onSubmit,
           onUpdateData = _props2.onUpdateData;
 
@@ -104,6 +105,7 @@ var Section = function (_React$Component) {
         tabIndex: tabIndexStart + index,
         onBusy: onBusy,
         onReady: onReady,
+        onScrollTo: onScrollTo,
         onSubmit: onSubmit,
         onUpdateData: onUpdateData
       });
@@ -128,6 +130,7 @@ Section.propTypes = {
   errors: _propTypes2.default.object,
   tabIndexStart: _propTypes2.default.number,
   onBusy: _propTypes2.default.func,
+  onScrollTo: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func

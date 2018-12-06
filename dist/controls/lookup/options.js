@@ -104,7 +104,7 @@ Options.contextTypes = {
 Options.propTypes = {
   format: _propTypes2.default.oneOfType([_propTypes2.default.element, _propTypes2.default.func, _propTypes2.default.string]),
   options: _propTypes2.default.array,
-  selected: _propTypes2.default.number,
+  selected: _propTypes2.default.array,
   text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   onChange: _propTypes2.default.func,

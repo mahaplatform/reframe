@@ -64,11 +64,13 @@ var Fields = function (_React$Component) {
       var _props = this.props,
           onBusy = _props.onBusy,
           onReady = _props.onReady,
+          onScrollTo = _props.onScrollTo,
           onUpdateData = _props.onUpdateData;
 
       return _extends({}, field, {
         onBusy: onBusy,
         onReady: onReady,
+        onScrollTo: onScrollTo,
         onUpdateData: onUpdateData
       });
     }
@@ -78,9 +80,10 @@ var Fields = function (_React$Component) {
 }(_react2.default.Component);
 
 Fields.propTypes = {
-  fields: _propTypes2.default.array,
+  frame: _propTypes2.default.any,
   onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
+  onScrollTo: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Fields.defaultProps = {

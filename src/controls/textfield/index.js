@@ -50,11 +50,8 @@ class TextField extends React.Component {
     onSubmit: () => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: _.toString(props.defaultValue)
-    }
+  state = {
+    value: ''
   }
 
   render() {
@@ -68,14 +65,22 @@ class TextField extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onReady()
+    const { defaultValue, onReady } = this.props
+    if(defaultValue) this.setState({
+      value: _.toString(defaultValue)
+    })
+    onReady()
   }
 
-  componentDidUpdate(prevProps) {
-    if(prevProps.defaultValue != this.props.defaultValue) {
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.defaultValue !== prevProps.defaultValue) {
       this.setValue(this.props.defaultValue)
     }
+    if(this.state.value !== prevState.value) {
+      this.props.onChange(this.state.value )
+    }
   }
+
 
   _getClass() {
     const { prefix, suffix } = this.props
@@ -106,12 +111,8 @@ class TextField extends React.Component {
 
   _handleChange(event) {
     const sanitized = this.props.sanitize(event.target.value)
-    if(!this.props.validate(sanitized)) {
-      event.preventDefault()
-      return false
-    }
+    if(!this.props.validate(sanitized)) return event.preventDefault()
     this.setValue(sanitized)
-    this.props.onChange(sanitized)
   }
 
   _handleKeyUp(event) {
@@ -123,9 +124,8 @@ class TextField extends React.Component {
   }
 
   setValue(value) {
-    if(!(this.props.maxLength && value.length > this.props.maxLength)) {
-      this.setState({value})
-    }
+    if(this.props.maxLength && value.length > this.props.maxLength) return
+    this.setState({ value })
   }
 
 }

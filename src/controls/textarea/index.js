@@ -28,29 +28,49 @@ class TextArea extends React.Component {
     onReady: () => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: props.defaultValue ? _.toString(props.defaultValue) : null
-    }
+  state = {
+    value: ''
   }
 
   render() {
+    const { value } = this.state
+    const { maxLength } = this.props
     return (
-      <div className="textarea">
+      <div className="reframe-textarea">
+        { maxLength &&
+          <div className={ this._getMaxClass() }>
+            { value.length } / { maxLength }
+          </div>
+        }
         <textarea { ...this._getTextarea() } />
       </div>
     )
   }
 
   componentDidMount() {
-    this.props.onReady()
+    const { defaultValue, onReady } = this.props
+    if(defaultValue) this.setState({
+      value: _.toString(defaultValue)
+    })
+    onReady()
   }
 
-  componentDidUpdate(prevProps) {
-    if(prevProps.defaultValue != this.props.defaultValue) {
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.defaultValue !== prevProps.defaultValue) {
       this.setValue(this.props.defaultValue)
     }
+    if(this.state.value !== prevState.value) {
+      this.props.onChange(this.state.value )
+
+    }
+  }
+
+  _getMaxClass() {
+    const { value } = this.state
+    const { maxLength } = this.props
+    const classes = ['reframe-textarea-length']
+    if(value.length >= maxLength) classes.push('max')
+    return classes.join(' ')
   }
 
   _getTextarea() {
@@ -59,7 +79,7 @@ class TextArea extends React.Component {
     return {
       placeholder,
       disabled,
-      defaultValue: value,
+      value,
       rows,
       tabIndex,
       onChange: this._handleChange.bind(this)
@@ -68,13 +88,11 @@ class TextArea extends React.Component {
 
   _handleChange(event) {
     this.setValue(event.target.value)
-    this.props.onChange(event.target.value)
   }
 
   setValue(value) {
-    if(this.props.maxLength && value.length <= this.props.maxLength) {
-      this.setState({value})
-    }
+    if(this.props.maxLength && value.length > this.props.maxLength) return
+    this.setState({ value })
   }
 
 }

@@ -27,6 +27,7 @@ class Field extends React.Component {
     show: PropTypes.bool,
     onBusy: PropTypes.func,
     onReady: PropTypes.func,
+    onScrollTo: PropTypes.func,
     onUpdateData: PropTypes.func
   }
 
@@ -44,6 +45,8 @@ class Field extends React.Component {
     onUpdateData: () => {}
   }
 
+  control = null
+
   _handleBusy = this._handleBusy.bind(this)
   _handleReady = this._handleReady.bind(this)
   _handleUpdateData = this._handleUpdateData.bind(this)
@@ -53,7 +56,7 @@ class Field extends React.Component {
     const error = this._getError()
     if(!include || !show) return null
     return (
-      <div className={ this._getClass() }>
+      <div className={ this._getClass() } key="control" ref={ node => this.control = node }>
         { label && <label>{ label }</label> }
         { instructions && <div className="instructions">{ instructions }</div> }
         { type === 'fields' ?
@@ -63,6 +66,13 @@ class Field extends React.Component {
         { error && <div className="error-message">{ error }</div> }
       </div>
     )
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data, name } = this.props
+    if(!_.isEqual(_.get(data, name), _.get(prevProps.data, name))) {
+      setTimeout(this._handleScrollTo.bind(this), 150)
+    }
   }
 
   _getClass() {
@@ -80,9 +90,10 @@ class Field extends React.Component {
   }
 
   _getFields() {
-    const { fields, onBusy, onReady, onUpdateData } = this.props
+    const { fields, form, onBusy, onReady, onUpdateData } = this.props
     return {
       fields,
+      form,
       onBusy,
       onReady,
       onUpdateData
@@ -107,6 +118,12 @@ class Field extends React.Component {
 
   _handleReady() {
     this.props.onReady(this.props.name)
+  }
+
+  _handleScrollTo() {
+    console.log(this.control.offsetTop, this.control.offsetHeight)
+    const bottom = this.control.offsetTop + this.control.offsetHeight
+    this.props.onScrollTo(bottom)
   }
 
   _handleUpdateData(value) {

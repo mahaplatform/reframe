@@ -50,12 +50,14 @@ var Field = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Field.__proto__ || Object.getPrototypeOf(Field)).call.apply(_ref, [this].concat(args))), _this), _this._handleBusy = _this._handleBusy.bind(_this), _this._handleReady = _this._handleReady.bind(_this), _this._handleUpdateData = _this._handleUpdateData.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Field.__proto__ || Object.getPrototypeOf(Field)).call.apply(_ref, [this].concat(args))), _this), _this.control = null, _this._handleBusy = _this._handleBusy.bind(_this), _this._handleReady = _this._handleReady.bind(_this), _this._handleUpdateData = _this._handleUpdateData.bind(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Field, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
           include = _props.include,
           instructions = _props.instructions,
@@ -67,7 +69,9 @@ var Field = function (_React$Component) {
       if (!include || !show) return null;
       return _react2.default.createElement(
         'div',
-        { className: this._getClass() },
+        { className: this._getClass(), key: 'control', ref: function ref(node) {
+            return _this2.control = node;
+          } },
         label && _react2.default.createElement(
           'label',
           null,
@@ -87,6 +91,17 @@ var Field = function (_React$Component) {
       );
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var _props2 = this.props,
+          data = _props2.data,
+          name = _props2.name;
+
+      if (!_lodash2.default.isEqual(_lodash2.default.get(data, name), _lodash2.default.get(prevProps.data, name))) {
+        setTimeout(this._handleScrollTo.bind(this), 150);
+      }
+    }
+  }, {
     key: '_getClass',
     value: function _getClass() {
       var required = this.props.required;
@@ -100,23 +115,25 @@ var Field = function (_React$Component) {
   }, {
     key: '_getError',
     value: function _getError() {
-      var _props2 = this.props,
-          errors = _props2.errors,
-          name = _props2.name;
+      var _props3 = this.props,
+          errors = _props3.errors,
+          name = _props3.name;
 
       return errors && errors[name] ? errors[name][0] : null;
     }
   }, {
     key: '_getFields',
     value: function _getFields() {
-      var _props3 = this.props,
-          fields = _props3.fields,
-          onBusy = _props3.onBusy,
-          onReady = _props3.onReady,
-          onUpdateData = _props3.onUpdateData;
+      var _props4 = this.props,
+          fields = _props4.fields,
+          form = _props4.form,
+          onBusy = _props4.onBusy,
+          onReady = _props4.onReady,
+          onUpdateData = _props4.onUpdateData;
 
       return {
         fields: fields,
+        form: form,
         onBusy: onBusy,
         onReady: onReady,
         onUpdateData: onUpdateData
@@ -125,9 +142,9 @@ var Field = function (_React$Component) {
   }, {
     key: '_getControl',
     value: function _getControl() {
-      var _props4 = this.props,
-          data = _props4.data,
-          name = _props4.name;
+      var _props5 = this.props,
+          data = _props5.data,
+          name = _props5.name;
 
       var defaultValue = _lodash2.default.get(data, name);
       return _extends({}, this.props, {
@@ -146,6 +163,13 @@ var Field = function (_React$Component) {
     key: '_handleReady',
     value: function _handleReady() {
       this.props.onReady(this.props.name);
+    }
+  }, {
+    key: '_handleScrollTo',
+    value: function _handleScrollTo() {
+      console.log(this.control.offsetTop, this.control.offsetHeight);
+      var bottom = this.control.offsetTop + this.control.offsetHeight;
+      this.props.onScrollTo(bottom);
     }
   }, {
     key: '_handleUpdateData',
@@ -175,6 +199,7 @@ Field.propTypes = {
   show: _propTypes2.default.bool,
   onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
+  onScrollTo: _propTypes2.default.func,
   onUpdateData: _propTypes2.default.func
 };
 Field.defaultProps = {

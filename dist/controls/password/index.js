@@ -45,8 +45,17 @@ var Password = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'password' },
-        _react2.default.createElement('input', this._getInput())
+        { className: 'reframe-password' },
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-password-input' },
+          _react2.default.createElement('input', this._getInput())
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'reframe-password-icon' },
+          _react2.default.createElement('i', { className: 'fa fa-fw fa-check-circle' })
+        )
       );
     }
   }, {

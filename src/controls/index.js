@@ -20,6 +20,7 @@ export TextArea from './textarea'
 export TextField from './textfield'
 export TimeField from './timefield'
 export ToggleList from './toggle_list'
+export VideoField from './videofield'
 
 export PlainFileToken from './filefield/plain_file_token'
 export ImageFileToken from './filefield/image_file_token'

@@ -18,7 +18,7 @@ class Options extends React.Component {
       PropTypes.string
     ]),
     options: PropTypes.array,
-    selected: PropTypes.number,
+    selected: PropTypes.array,
     text: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,

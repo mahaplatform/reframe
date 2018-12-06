@@ -29,15 +29,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var TextField = function (_React$Component) {
   _inherits(TextField, _React$Component);
 
-  function TextField(props) {
+  function TextField() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, TextField);
 
-    var _this = _possibleConstructorReturn(this, (TextField.__proto__ || Object.getPrototypeOf(TextField)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
-      value: _lodash2.default.toString(props.defaultValue)
-    };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TextField.__proto__ || Object.getPrototypeOf(TextField)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: ''
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(TextField, [{
@@ -62,21 +67,31 @@ var TextField = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.onReady();
+      var _props = this.props,
+          defaultValue = _props.defaultValue,
+          onReady = _props.onReady;
+
+      if (defaultValue) this.setState({
+        value: _lodash2.default.toString(defaultValue)
+      });
+      onReady();
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.defaultValue != this.props.defaultValue) {
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (this.props.defaultValue !== prevProps.defaultValue) {
         this.setValue(this.props.defaultValue);
+      }
+      if (this.state.value !== prevState.value) {
+        this.props.onChange(this.state.value);
       }
     }
   }, {
     key: '_getClass',
     value: function _getClass() {
-      var _props = this.props,
-          prefix = _props.prefix,
-          suffix = _props.suffix;
+      var _props2 = this.props,
+          prefix = _props2.prefix,
+          suffix = _props2.suffix;
 
       var classes = ['reframe-textfield', 'ui', 'fluid', 'input'];
       if (prefix) classes.push('left labeled');
@@ -86,15 +101,15 @@ var TextField = function (_React$Component) {
   }, {
     key: '_getControl',
     value: function _getControl() {
-      var _props2 = this.props,
-          autoComplete = _props2.autoComplete,
-          disabled = _props2.disabled,
-          placeholder = _props2.placeholder,
-          tabIndex = _props2.tabIndex,
-          onBlur = _props2.onBlur,
-          onFocus = _props2.onFocus,
-          onKeyPress = _props2.onKeyPress,
-          onKeyDown = _props2.onKeyDown;
+      var _props3 = this.props,
+          autoComplete = _props3.autoComplete,
+          disabled = _props3.disabled,
+          placeholder = _props3.placeholder,
+          tabIndex = _props3.tabIndex,
+          onBlur = _props3.onBlur,
+          onFocus = _props3.onFocus,
+          onKeyPress = _props3.onKeyPress,
+          onKeyDown = _props3.onKeyDown;
       var value = this.state.value;
 
       return {
@@ -116,12 +131,8 @@ var TextField = function (_React$Component) {
     key: '_handleChange',
     value: function _handleChange(event) {
       var sanitized = this.props.sanitize(event.target.value);
-      if (!this.props.validate(sanitized)) {
-        event.preventDefault();
-        return false;
-      }
+      if (!this.props.validate(sanitized)) return event.preventDefault();
       this.setValue(sanitized);
-      this.props.onChange(sanitized);
     }
   }, {
     key: '_handleKeyUp',
@@ -135,9 +146,8 @@ var TextField = function (_React$Component) {
   }, {
     key: 'setValue',
     value: function setValue(value) {
-      if (!(this.props.maxLength && value.length > this.props.maxLength)) {
-        this.setState({ value: value });
-      }
+      if (this.props.maxLength && value.length > this.props.maxLength) return;
+      this.setState({ value: value });
     }
   }]);
 

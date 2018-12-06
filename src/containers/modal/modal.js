@@ -34,20 +34,22 @@ class Modal extends React.Component {
       </CSSTransition>,
       <CSSTransition key="reframe-modal-window" in={ this.props.panels.length > 0 } classNames="expanded" timeout={ 500 } mountOnEnter={ true } unmountOnExit={ true }>
         <div className="reframe-modal-window">
-          { panels.length === 0 &&
-            <ModalPanel>
-              <Loader />
-            </ModalPanel>
-          }
-          <TransitionGroup component={ null }>
-            { panels.map((panel, index) => (
-              <CSSTransition classNames={ index > 0 ? 'stack' : ''} timeout={ 500 } key={ `panel_${index}` }>
-                <div>
-                  { _.isFunction(panel) ? React.createElement(panel) : panel }
-                </div>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
+          <div className="reframe-modal-window-container">
+            { panels.length === 0 &&
+              <ModalPanel>
+                <Loader />
+              </ModalPanel>
+            }
+            <TransitionGroup component={ null }>
+              { panels.map((panel, index) => (
+                <CSSTransition component={ null } classNames={ index > 0 ? 'stack' : ''} timeout={ 500 } key={ `panel_${index}` }>
+                  <div className="reframe-modal-window-panel">
+                    { _.isFunction(panel) ? React.createElement(panel) : panel }
+                  </div>
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          </div>
         </div>
       </CSSTransition>
     ])
@@ -55,11 +57,8 @@ class Modal extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { panels } = this.props
-    if(panels.length > prevProps.panels.length) {
+    if(panels.length !== prevProps.panels.length) {
       const timeout = prevProps.panels.length === 0 ? 500 : 0
-      setTimeout(() => this.setState({ panels }), timeout)
-    } else if(panels.length < prevProps.panels.length) {
-      const timeout = panels.length === 0 ? 500 : 0
       setTimeout(() => this.setState({ panels }), timeout)
     }
   }

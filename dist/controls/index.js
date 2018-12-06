@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageFileToken = exports.PlainFileToken = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.TableField = exports.RadioGroup = exports.PhoneField = exports.Password = exports.NumberField = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.EmailField = exports.Dropdown = exports.DateField = exports.ColorField = exports.CheckboxGroup = exports.Checkbox = exports.AddressField = undefined;
+exports.ImageFileToken = exports.PlainFileToken = exports.VideoField = exports.ToggleList = exports.TimeField = exports.TextField = exports.TextArea = exports.Text = exports.TableField = exports.RadioGroup = exports.PhoneField = exports.Password = exports.NumberField = exports.MoneyField = exports.Lookup2 = exports.Lookup = exports.FileField = exports.Hidden = exports.EmailField = exports.Dropdown = exports.DateField = exports.ColorField = exports.CheckboxGroup = exports.Checkbox = exports.AddressField = undefined;
 
 var _addressfield = require('./addressfield');
 
@@ -93,6 +93,10 @@ var _toggle_list = require('./toggle_list');
 
 var _toggle_list2 = _interopRequireDefault(_toggle_list);
 
+var _videofield = require('./videofield');
+
+var _videofield2 = _interopRequireDefault(_videofield);
+
 var _plain_file_token = require('./filefield/plain_file_token');
 
 var _plain_file_token2 = _interopRequireDefault(_plain_file_token);
@@ -125,5 +129,6 @@ exports.TextArea = _textarea2.default;
 exports.TextField = _textfield2.default;
 exports.TimeField = _timefield2.default;
 exports.ToggleList = _toggle_list2.default;
+exports.VideoField = _videofield2.default;
 exports.PlainFileToken = _plain_file_token2.default;
 exports.ImageFileToken = _image_file_token2.default;

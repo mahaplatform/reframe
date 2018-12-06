@@ -69,7 +69,10 @@ class Form extends React.Component {
     onSuccess: (entity) => {}
   }
 
+  form = null
+
   _debouncedSubmit = _.debounce(this._handleSubmit.bind(this), 2500, { leading: true })
+  _handleScrollTo = this._handleScrollTo.bind(this)
 
   render() {
     const { after, before, config, instructions, panels, status } = this.props
@@ -77,7 +80,7 @@ class Form extends React.Component {
     return (
       <div className="reframe-form">
         <ModalPanel { ...this._getPanel() }>
-          <div className={ this._getFormClasses() }>
+          <div className={ this._getFormClasses() } ref={ node => this.form = node }>
             { (before || instructions) &&
               <div className="reframe-form-header">
                 { before && <div className="reframe-form-before">{ before }</div> }
@@ -180,6 +183,7 @@ class Form extends React.Component {
       data,
       errors,
       tabIndexStart,
+      onScrollTo: this._handleScrollTo.bind(this),
       onBusy: this._handleToggleBusy.bind(this),
       onReady: this._handleSetReady.bind(this),
       onSubmit: this._handleSubmit.bind(this),
@@ -252,7 +256,13 @@ class Form extends React.Component {
     const { sections, onUpdateSections } = this.props
     onUpdateSections(sections)
   }
-  
+
+  _handleScrollTo(bottom) {
+    console.log(bottom, this.form.offsetHeight + this.form.scrollTop)
+    if(bottom <= this.form.offsetHeight + this.form.scrollTop) return
+    this.form.scrollTop = bottom - this.form.offsetHeight + 16
+  }
+
 }
 
 export default Form
