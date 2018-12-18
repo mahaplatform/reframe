@@ -332,7 +332,6 @@ var Form = function (_React$Component) {
   }, {
     key: '_handleScrollTo',
     value: function _handleScrollTo(bottom) {
-      console.log(bottom, this.form.offsetHeight + this.form.scrollTop);
       if (bottom <= this.form.offsetHeight + this.form.scrollTop) return;
       this.form.scrollTop = bottom - this.form.offsetHeight + 16;
     }

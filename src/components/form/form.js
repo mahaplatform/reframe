@@ -258,7 +258,6 @@ class Form extends React.Component {
   }
 
   _handleScrollTo(bottom) {
-    console.log(bottom, this.form.offsetHeight + this.form.scrollTop)
     if(bottom <= this.form.offsetHeight + this.form.scrollTop) return
     this.form.scrollTop = bottom - this.form.offsetHeight + 16
   }

@@ -1,5 +1,4 @@
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import ModalPanel from '../../components/modal_panel'
 import Loader from '../../components/loader'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -36,9 +35,9 @@ class Modal extends React.Component {
         <div className="reframe-modal-window">
           <div className="reframe-modal-window-container">
             { panels.length === 0 &&
-              <ModalPanel>
+              <div className="reframe-modal-loader">
                 <Loader />
-              </ModalPanel>
+              </div>
             }
             <TransitionGroup component={ null }>
               { panels.map((panel, index) => (

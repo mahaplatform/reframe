@@ -121,7 +121,6 @@ class Field extends React.Component {
   }
 
   _handleScrollTo() {
-    console.log(this.control.offsetTop, this.control.offsetHeight)
     const bottom = this.control.offsetTop + this.control.offsetHeight
     this.props.onScrollTo(bottom)
   }

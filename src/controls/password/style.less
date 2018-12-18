@@ -14,11 +14,14 @@
 .reframe-password-icon {
   display: flex;
   padding: 0.4em;
+  &.weak .fa {
+    color: fadeout(@black, 95);
+  }
+  &.strong .fa {
+    color: @green;
+  }
   .fa {
     margin: auto;
     font-size: 1.4em;
-  }
-  .fa-check-circle {
-    color: @green;
   }
 }

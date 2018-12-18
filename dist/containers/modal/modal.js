@@ -8,10 +8,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _reactTransitionGroup = require('react-transition-group');
 
-var _modal_panel = require('../../components/modal_panel');
-
-var _modal_panel2 = _interopRequireDefault(_modal_panel);
-
 var _loader = require('../../components/loader');
 
 var _loader2 = _interopRequireDefault(_loader);
@@ -75,8 +71,8 @@ var Modal = function (_React$Component) {
             'div',
             { className: 'reframe-modal-window-container' },
             panels.length === 0 && _react2.default.createElement(
-              _modal_panel2.default,
-              null,
+              'div',
+              { className: 'reframe-modal-loader' },
               _react2.default.createElement(_loader2.default, null)
             ),
             _react2.default.createElement(

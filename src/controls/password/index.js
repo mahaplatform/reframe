@@ -1,3 +1,4 @@
+import validator from 'password-validator'
 import PropTypes from 'prop-types'
 import React from 'react'
 import _ from 'lodash'
@@ -6,12 +7,9 @@ class Password extends React.Component {
 
   static propTypes = {
     autoComplete: PropTypes.string,
-    maxLength: PropTypes.number,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string,
-    defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
+    schema: PropTypes.array,
     tabIndex: PropTypes.number,
     onBlur: PropTypes.func,
     onBusy: PropTypes.func,
@@ -26,11 +24,9 @@ class Password extends React.Component {
   static defaultProps = {
     autoComplete: 'off',
     maxLength: null,
-    prefix: null,
-    suffix: null,
     disabled: false,
     placeholder: '',
-    defaultValue: '',
+    schema: [],
     tabIndex: 0,
     onBlur: () => {},
     onBusy: () => {},
@@ -42,34 +38,49 @@ class Password extends React.Component {
     onReady: () => {}
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: _.toString(props.defaultValue)
-    }
+  state = {
+    strong: false,
+    value: ''
   }
 
   render() {
+    const { schema } = this.props
     return (
       <div className="reframe-password">
         <div className="reframe-password-input">
           <input { ...this._getInput() } />
         </div>
-        <div className="reframe-password-icon">
-          <i className="fa fa-fw fa-check-circle" />
-        </div>
+        { schema.length > 0 &&
+          <div className={ this._getClass() }>
+            <i className="fa fa-fw fa-check-circle" />
+          </div>
+        }
       </div>
     )
   }
 
   componentDidMount() {
+    this._handleConfigure()
     this.props.onReady()
   }
 
-  componentDidUpdate(prevProps) {
-    if(prevProps.defaultValue != this.props.defaultValue) {
-      this.setValue(this.props.defaultValue)
+  componentDidUpdate(prevProps, prevState) {
+    const { value } = this.state
+    const { schema } = this.props
+    if(value !== prevState.value) {
+      this._handleValidate()
     }
+    if(!_.isEqual(schema, prevProps.schema)) {
+      this._handleConfigure()
+    }
+  }
+
+  _getClass() {
+    const { strong } = this.state
+    const classes = ['reframe-password-icon']
+    if(strong) classes.push('strong')
+    if(!strong) classes.push('weak')
+    return classes.join(' ')
   }
 
   _getInput() {
@@ -93,6 +104,31 @@ class Password extends React.Component {
   _handleChange(event) {
     this.setValue(event.target.value)
     this.props.onChange(event.target.value)
+  }
+
+  _handleConfigure() {
+    this.schema = new validator()
+    this.props.schema.map(schema => {
+      const rule = _.isString(schema) ? { rule: schema } : schema
+      if(rule.rule === 'oneOf') this.schema.oneOf(rule.value)
+      if(rule.rule === 'notOneOf') this.schema.is().not().oneOf(rule.value)
+      if(rule.rule === 'min') this.schema.is().min(rule.value)
+      if(rule.rule === 'max') this.schema.is().max(rule.value)
+      if(rule.rule === 'digits') this.schema.has().digits()
+      if(rule.rule === 'letters') this.schema.has().letters()
+      if(rule.rule === 'nospaces') this.schema.has().not().spaces()
+      if(rule.rule === 'symbols') this.schema.has().symbols()
+      if(rule.rule === 'uppercase') this.schema.has().uppercase()
+      if(rule.rule === 'lowercase') this.schema.has().lowercase()
+    })
+    this._handleValidate()
+  }
+
+  _handleValidate() {
+    const { value } = this.state
+    this.setState({
+      strong: this.schema.validate(value)
+    })
   }
 
   setValue(value) {

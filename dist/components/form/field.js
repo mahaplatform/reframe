@@ -167,7 +167,6 @@ var Field = function (_React$Component) {
   }, {
     key: '_handleScrollTo',
     value: function _handleScrollTo() {
-      console.log(this.control.offsetTop, this.control.offsetHeight);
       var bottom = this.control.offsetTop + this.control.offsetHeight;
       this.props.onScrollTo(bottom);
     }

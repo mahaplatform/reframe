@@ -33,7 +33,7 @@ class Table extends React.Component {
     onSelectAll: () => {}
   }
 
-  _handleResize: any = _.debounce(this._resizeColumns, 100)
+  _handleResize: any = _.debounce(this._handleResize, 100)
 
   head: any
 
@@ -120,13 +120,13 @@ class Table extends React.Component {
   }
 
   componentDidMount(){
-    setTimeout(() => this._resizeColumns(), 250)
+    setTimeout(() => this._handleResize(), 250)
     window.addEventListener('resize', this._handleResize.bind(this))
   }
 
   componentDidUpdate(prevProps) {
     const { columns } = this.props
-    if(!_.isEqual(prevProps.columns, columns)) this._resizeColumns()
+    if(!_.isEqual(prevProps.columns, columns)) this._handleResize()
   }
 
   componentWillUnmount() {
@@ -165,13 +165,6 @@ class Table extends React.Component {
     return width ? { width: `${width}px` } : {}
   }
 
-  _resizeColumns() {
-    if(!this.head) return
-    const headerCells = Array.from(this.head.childNodes)
-    const widths = headerCells.map((cell, index) => cell.offsetWidth)
-    this.setState({ widths })
-  }
-
   _handleClick(record, index) {
     const { link, modal, handler } = this.props
     if(link) return this._handleLink(record, index)
@@ -179,12 +172,8 @@ class Table extends React.Component {
     if(handler) return this._handleHandler(record, index)
   }
 
-  _handleSelect(id) {
-    this.props.onSelect(id)
-  }
-
-  _handleSelectAll() {
-    this.props.onSelectAll()
+  _handleHandler(record, index) {
+    this.props.handler(record, index)
   }
 
   _handleLink(record, index) {
@@ -197,8 +186,19 @@ class Table extends React.Component {
     this.context.model.open(() => <this.props.modal record={ record } index={ index } />)
   }
 
-  _handleHandler(record, index) {
-    this.props.handler(record, index)
+  _handleResize() {
+    if(!this.head) return
+    const headerCells = Array.from(this.head.childNodes)
+    const widths = headerCells.map((cell, index) => cell.offsetWidth)
+    this.setState({ widths })
+  }
+
+  _handleSelect(id) {
+    this.props.onSelect(id)
+  }
+
+  _handleSelectAll() {
+    this.props.onSelectAll()
   }
 
   _handleSort(column) {

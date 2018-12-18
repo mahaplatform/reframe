@@ -52,8 +52,11 @@
   right: 0;
   display: none;
   .scrollable();
+  p {
+    color: fadeout(@black, 50);
+  }
   &.transitioning {
-    transition: transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s;
+    transition: transform .5s ease-in-out 0s;
     display: block;
   }
   &.right {

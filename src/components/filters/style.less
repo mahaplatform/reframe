@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   &.slide-enter, &.slide-exit {
-  	.transition(transform .5s cubic-bezier(0.7, 0, 0.175, 1) 0s);
+  	.transition(transform .5s ease-in-out 0s);
   }
   &.slide-exit.slide-exit-active, &.slide-enter {
   	.translateX(100%);

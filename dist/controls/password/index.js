@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _passwordValidator = require('password-validator');
+
+var _passwordValidator2 = _interopRequireDefault(_passwordValidator);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -29,20 +33,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Password = function (_React$Component) {
   _inherits(Password, _React$Component);
 
-  function Password(props) {
+  function Password() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Password);
 
-    var _this = _possibleConstructorReturn(this, (Password.__proto__ || Object.getPrototypeOf(Password)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
-      value: _lodash2.default.toString(props.defaultValue)
-    };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Password.__proto__ || Object.getPrototypeOf(Password)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      strong: false,
+      value: ''
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Password, [{
     key: 'render',
     value: function render() {
+      var schema = this.props.schema;
+
       return _react2.default.createElement(
         'div',
         { className: 'reframe-password' },
@@ -51,9 +63,9 @@ var Password = function (_React$Component) {
           { className: 'reframe-password-input' },
           _react2.default.createElement('input', this._getInput())
         ),
-        _react2.default.createElement(
+        schema.length > 0 && _react2.default.createElement(
           'div',
-          { className: 'reframe-password-icon' },
+          { className: this._getClass() },
           _react2.default.createElement('i', { className: 'fa fa-fw fa-check-circle' })
         )
       );
@@ -61,14 +73,31 @@ var Password = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this._handleConfigure();
       this.props.onReady();
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.defaultValue != this.props.defaultValue) {
-        this.setValue(this.props.defaultValue);
+    value: function componentDidUpdate(prevProps, prevState) {
+      var value = this.state.value;
+      var schema = this.props.schema;
+
+      if (value !== prevState.value) {
+        this._handleValidate();
       }
+      if (!_lodash2.default.isEqual(schema, prevProps.schema)) {
+        this._handleConfigure();
+      }
+    }
+  }, {
+    key: '_getClass',
+    value: function _getClass() {
+      var strong = this.state.strong;
+
+      var classes = ['reframe-password-icon'];
+      if (strong) classes.push('strong');
+      if (!strong) classes.push('weak');
+      return classes.join(' ');
     }
   }, {
     key: '_getInput',
@@ -105,6 +134,36 @@ var Password = function (_React$Component) {
       this.props.onChange(event.target.value);
     }
   }, {
+    key: '_handleConfigure',
+    value: function _handleConfigure() {
+      var _this2 = this;
+
+      this.schema = new _passwordValidator2.default();
+      this.props.schema.map(function (schema) {
+        var rule = _lodash2.default.isString(schema) ? { rule: schema } : schema;
+        if (rule.rule === 'oneOf') _this2.schema.oneOf(rule.value);
+        if (rule.rule === 'notOneOf') _this2.schema.is().not().oneOf(rule.value);
+        if (rule.rule === 'min') _this2.schema.is().min(rule.value);
+        if (rule.rule === 'max') _this2.schema.is().max(rule.value);
+        if (rule.rule === 'digits') _this2.schema.has().digits();
+        if (rule.rule === 'letters') _this2.schema.has().letters();
+        if (rule.rule === 'nospaces') _this2.schema.has().not().spaces();
+        if (rule.rule === 'symbols') _this2.schema.has().symbols();
+        if (rule.rule === 'uppercase') _this2.schema.has().uppercase();
+        if (rule.rule === 'lowercase') _this2.schema.has().lowercase();
+      });
+      this._handleValidate();
+    }
+  }, {
+    key: '_handleValidate',
+    value: function _handleValidate() {
+      var value = this.state.value;
+
+      this.setState({
+        strong: this.schema.validate(value)
+      });
+    }
+  }, {
     key: 'setValue',
     value: function setValue(value) {
       if (!(this.props.maxLength && value.length > this.props.maxLength)) {
@@ -118,12 +177,9 @@ var Password = function (_React$Component) {
 
 Password.propTypes = {
   autoComplete: _propTypes2.default.string,
-  maxLength: _propTypes2.default.number,
-  prefix: _propTypes2.default.string,
-  suffix: _propTypes2.default.string,
-  defaultValue: _propTypes2.default.string,
   disabled: _propTypes2.default.bool,
   placeholder: _propTypes2.default.string,
+  schema: _propTypes2.default.array,
   tabIndex: _propTypes2.default.number,
   onBlur: _propTypes2.default.func,
   onBusy: _propTypes2.default.func,
@@ -137,11 +193,9 @@ Password.propTypes = {
 Password.defaultProps = {
   autoComplete: 'off',
   maxLength: null,
-  prefix: null,
-  suffix: null,
   disabled: false,
   placeholder: '',
-  defaultValue: '',
+  schema: [],
   tabIndex: 0,
   onBlur: function onBlur() {},
   onBusy: function onBusy() {},
