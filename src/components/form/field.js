@@ -24,6 +24,7 @@ class Field extends React.Component {
       PropTypes.string,
       PropTypes.func
     ]).isRequired,
+    scroll: PropTypes.bool,
     show: PropTypes.bool,
     onBusy: PropTypes.func,
     onReady: PropTypes.func,
@@ -39,6 +40,7 @@ class Field extends React.Component {
     include: true,
     options: [],
     required: false,
+    scroll: true,
     show: true,
     onBusy: () => {},
     onReady: () => {},
@@ -69,8 +71,8 @@ class Field extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { data, name } = this.props
-    if(!_.isEqual(_.get(data, name), _.get(prevProps.data, name))) {
+    const { scroll, data, name } = this.props
+    if(!_.isEqual(_.get(data, name), _.get(prevProps.data, name)) && scroll) {
       setTimeout(this._handleScrollTo.bind(this), 150)
     }
   }

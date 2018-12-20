@@ -1,7 +1,7 @@
 {
   "name": "reframe",
   "description": "A collection of react components for rapidly prototyping and building responsive web applications",
-  "version": "0.33.0",
+  "version": "0.34.0",
   "license": "ISC",
   "author": "Greg Kops <greg@thinktopography.com>",
   "repository": "mahaplatform/mahaplatform",

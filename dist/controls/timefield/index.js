@@ -40,12 +40,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var TimeFieldToken = function TimeFieldToken(_ref) {
   var text = _ref.text,
-      duration = _ref.duration;
+      duration = _ref.duration,
+      withDuration = _ref.withDuration;
   return _react2.default.createElement(
     'div',
     { className: 'reframe-timefield-token' },
     text,
-    duration && _react2.default.createElement(
+    withDuration && duration > 0 && _react2.default.createElement(
       'span',
       { className: 'reframe-timefield-token-duration' },
       '(',
@@ -57,7 +58,8 @@ var TimeFieldToken = function TimeFieldToken(_ref) {
 
 TimeFieldToken.propTypes = {
   text: _propTypes2.default.string,
-  duration: _propTypes2.default.number
+  duration: _propTypes2.default.number,
+  withDuration: _propTypes2.default.bool
 };
 
 var TimeField = function (_React$Component) {
@@ -77,11 +79,15 @@ var TimeField = function (_React$Component) {
   }, {
     key: '_getLookup',
     value: function _getLookup() {
+      var duration = this.props.duration;
+
       return _extends({}, this.props, {
         defaultValue: this._getStandardized(this.props.defaultValue),
         type: 'lookup',
         options: this._getOptions(),
-        format: TimeFieldToken
+        format: function format(props) {
+          return _react2.default.createElement(TimeFieldToken, _extends({}, props, { withDuration: duration }));
+        }
       });
     }
   }, {

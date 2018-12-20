@@ -94,10 +94,11 @@ var Field = function (_React$Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
       var _props2 = this.props,
+          scroll = _props2.scroll,
           data = _props2.data,
           name = _props2.name;
 
-      if (!_lodash2.default.isEqual(_lodash2.default.get(data, name), _lodash2.default.get(prevProps.data, name))) {
+      if (!_lodash2.default.isEqual(_lodash2.default.get(data, name), _lodash2.default.get(prevProps.data, name)) && scroll) {
         setTimeout(this._handleScrollTo.bind(this), 150);
       }
     }
@@ -195,6 +196,7 @@ Field.propTypes = {
   required: _propTypes2.default.bool,
   tabIndex: _propTypes2.default.number,
   type: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]).isRequired,
+  scroll: _propTypes2.default.bool,
   show: _propTypes2.default.bool,
   onBusy: _propTypes2.default.func,
   onReady: _propTypes2.default.func,
@@ -209,6 +211,7 @@ Field.defaultProps = {
   include: true,
   options: [],
   required: false,
+  scroll: true,
   show: true,
   onBusy: function onBusy() {},
   onReady: function onReady() {},

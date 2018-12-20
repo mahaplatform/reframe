@@ -4,10 +4,10 @@ import Lookup from '../lookup'
 import moment from 'moment'
 import pluralize from 'pluralize'
 
-const TimeFieldToken = ({ text, duration }) => (
+const TimeFieldToken = ({ text, duration, withDuration }) => (
   <div className="reframe-timefield-token">
     { text }
-    { duration &&
+    { withDuration && duration > 0 &&
       <span className="reframe-timefield-token-duration">
         ({ duration >= 1 ? pluralize('hour', duration, true) : pluralize('mins', duration * 60, true) })
       </span>
@@ -17,7 +17,8 @@ const TimeFieldToken = ({ text, duration }) => (
 
 TimeFieldToken.propTypes = {
   text: PropTypes.string,
-  duration: PropTypes.number
+  duration: PropTypes.number,
+  withDuration: PropTypes.bool
 }
 
 class TimeField extends React.Component {
@@ -53,12 +54,13 @@ class TimeField extends React.Component {
   }
 
   _getLookup() {
+    const { duration } = this.props
     return {
       ...this.props,
       defaultValue: this._getStandardized(this.props.defaultValue),
       type: 'lookup',
       options: this._getOptions(),
-      format: TimeFieldToken
+      format: (props) => <TimeFieldToken { ...props } withDuration={ duration } />
     }
   }
 

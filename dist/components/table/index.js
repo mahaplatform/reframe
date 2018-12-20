@@ -46,7 +46,7 @@ var Table = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this._handleResize = _lodash2.default.debounce(_this._resizeColumns, 100), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this._handleResize = _lodash2.default.debounce(_this._handleResize, 100), _this.state = {
       widths: []
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -169,7 +169,7 @@ var Table = function (_React$Component) {
       var _this3 = this;
 
       setTimeout(function () {
-        return _this3._resizeColumns();
+        return _this3._handleResize();
       }, 250);
       window.addEventListener('resize', this._handleResize.bind(this));
     }
@@ -178,7 +178,7 @@ var Table = function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var columns = this.props.columns;
 
-      if (!_lodash2.default.isEqual(prevProps.columns, columns)) this._resizeColumns();
+      if (!_lodash2.default.isEqual(prevProps.columns, columns)) this._handleResize();
     }
   }, {
     key: 'componentWillUnmount',
@@ -228,16 +228,6 @@ var Table = function (_React$Component) {
       return width ? { width: width + 'px' } : {};
     }
   }, {
-    key: '_resizeColumns',
-    value: function _resizeColumns() {
-      if (!this.head) return;
-      var headerCells = Array.from(this.head.childNodes);
-      var widths = headerCells.map(function (cell, index) {
-        return cell.offsetWidth;
-      });
-      this.setState({ widths: widths });
-    }
-  }, {
     key: '_handleClick',
     value: function _handleClick(record, index) {
       var _props3 = this.props,
@@ -250,14 +240,9 @@ var Table = function (_React$Component) {
       if (handler) return this._handleHandler(record, index);
     }
   }, {
-    key: '_handleSelect',
-    value: function _handleSelect(id) {
-      this.props.onSelect(id);
-    }
-  }, {
-    key: '_handleSelectAll',
-    value: function _handleSelectAll() {
-      this.props.onSelectAll();
+    key: '_handleHandler',
+    value: function _handleHandler(record, index) {
+      this.props.handler(record, index);
     }
   }, {
     key: '_handleLink',
@@ -277,9 +262,24 @@ var Table = function (_React$Component) {
       });
     }
   }, {
-    key: '_handleHandler',
-    value: function _handleHandler(record, index) {
-      this.props.handler(record, index);
+    key: '_handleResize',
+    value: function _handleResize() {
+      if (!this.head) return;
+      var headerCells = Array.from(this.head.childNodes);
+      var widths = headerCells.map(function (cell, index) {
+        return cell.offsetWidth;
+      });
+      this.setState({ widths: widths });
+    }
+  }, {
+    key: '_handleSelect',
+    value: function _handleSelect(id) {
+      this.props.onSelect(id);
+    }
+  }, {
+    key: '_handleSelectAll',
+    value: function _handleSelectAll() {
+      this.props.onSelectAll();
     }
   }, {
     key: '_handleSort',
