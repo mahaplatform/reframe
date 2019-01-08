@@ -130,7 +130,7 @@ class Collection extends React.Component {
   _getFilterFromUrl() {
     const { search } = this.context.router
     if(_.isEmpty(search)) return null
-    const query = qs.parse(search.substr(1))
+    const query = qs.parse(search.replace('?',''))
     if(!query.$filter) return null
     return query.$filter
   }

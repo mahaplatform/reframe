@@ -130,7 +130,7 @@ var Collection = function (_React$Component) {
       var search = this.context.router.search;
 
       if (_lodash2.default.isEmpty(search)) return null;
-      var query = _qs2.default.parse(search.substr(1));
+      var query = _qs2.default.parse(search.replace('?', ''));
       if (!query.$filter) return null;
       return query.$filter;
     }
