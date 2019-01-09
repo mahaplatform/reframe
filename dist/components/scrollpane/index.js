@@ -72,7 +72,7 @@ var Scrollpane = function (_React$Component) {
           { 'in': signpost, classNames: 'popin', timeout: 250, mountOnEnter: true, unmountOnExit: true },
           _react2.default.createElement(
             'div',
-            { className: 'chat-signpost-bottom', onClick: this._handleScrollToTop.bind(this) },
+            { className: 'reframe-scrollpane-signpost', onClick: this._handleScrollToTop.bind(this) },
             _react2.default.createElement('i', { className: 'fa fa-chevron-up' })
           )
         )

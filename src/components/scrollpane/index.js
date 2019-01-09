@@ -33,7 +33,7 @@ class Scrollpane extends React.Component {
           { children }
         </div>
         <CSSTransition in={ signpost } classNames="popin" timeout={ 250 } mountOnEnter={ true } unmountOnExit={ true }>
-          <div className="chat-signpost-bottom" onClick={ this._handleScrollToTop.bind(this) }>
+          <div className="reframe-scrollpane-signpost" onClick={ this._handleScrollToTop.bind(this) }>
             <i className="fa fa-chevron-up" />
           </div>
         </CSSTransition>

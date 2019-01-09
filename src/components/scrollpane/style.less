@@ -7,3 +7,20 @@
   flex: 1;
   .scrollable;
 }
+.reframe-scrollpane-signpost {
+  position: absolute;
+  bottom: 0.5em;
+  right: ~"calc(0.5em + 17px)";
+  padding: 0.5em;
+  background-color: @black;
+  border-radius: 50%;
+  width: 2.5em;
+  height: 2.5em;
+  text-align: center;
+  color: @white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px 0 fadeout(@black, 75);
+  &:hover {
+    background-color: lighten(@black, 25);
+  }
+}
